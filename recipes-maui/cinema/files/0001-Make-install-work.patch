@@ -1,0 +1,27 @@
+From 39d0534a47ade0b83348ad789d3a75fbaf8fb868 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 8 Jan 2014 22:36:35 +0100
+Subject: [PATCH] Make install work
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/src.pro | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/src.pro b/src/src.pro
+index 8045652..9ad4e2f 100644
+--- a/src/src.pro
++++ b/src/src.pro
+@@ -19,3 +19,6 @@ OTHER_FILES += \
+     qml/ControlBar.qml \
+     qml/Utils.js \
+     qml/SeekControl.qml
++
++target.path = /usr/bin
++INSTALLS += target
+-- 
+1.8.3.1
+

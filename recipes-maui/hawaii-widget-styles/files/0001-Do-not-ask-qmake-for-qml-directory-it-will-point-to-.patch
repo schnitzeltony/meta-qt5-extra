@@ -1,0 +1,34 @@
+From 9ea08a712776f97431ee1a653307bd5cfa42b9fe Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 9 Jan 2014 10:30:04 +0100
+Subject: [PATCH] Do not ask qmake for qml directory - it will point to native
+ sysroot
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d87493c..01bb4e2 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -40,8 +40,8 @@ add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
+ 
+ # Find Qt5
+ find_package(Qt5 5.2 REQUIRED COMPONENTS Quick)
+-get_target_property(QMAKE_EXECUTABLE Qt5::qmake LOCATION)
+-exec_program(${QMAKE_EXECUTABLE} ARGS "-query QT_INSTALL_QML" RETURN_VALUE return_code OUTPUT_VARIABLE QT_IMPORTS_DIR)
++
++set(QT_IMPORTS_DIR "${OE_QMAKE_PATH_QML}")
+ 
+ # Subdirectories
+ add_subdirectory(src)
+-- 
+1.8.3.1
+
