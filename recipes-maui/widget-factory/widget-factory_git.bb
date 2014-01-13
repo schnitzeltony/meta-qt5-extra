@@ -6,7 +6,7 @@ inherit cmake_qt5
 
 DEPENDS = "qtbase qtdeclarative qtquickcontrols hawaii-widget-styles"
 
-SRC_URI = "git://github.com/mauios/widget-factory.git;protocol=git;branch=stable"
+SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=stable"
 SRCREV = "9b82c2dfb265a02da660cec47df48897c039af78"
 PV = "0.1.90+git${SRCPV}"
 

@@ -6,7 +6,7 @@ inherit cmake_qt5
 
 DEPENDS = "qtbase qtdeclarative qtquickcontrols qttools-native fluid"
 
-SRC_URI = "git://github.com/mauios/swordfish.git;protocol=git;branch=dev"
+SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
 SRCREV = "cbe827869119b7b53bd18c7fce24cd7d4de99b8e"
 PV = "0.1.90+git${SRCPV}"
 

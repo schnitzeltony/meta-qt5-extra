@@ -1,0 +1,33 @@
+From 1bbd4f25c3edffecbb9f1579691c2a74f82a04ae Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 13 Jan 2014 13:56:33 +0100
+Subject: [PATCH 1/2] Make packages EGL and GLES2 optional
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Some board supports do not support pkgconfig
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fcc56b2..3d3a911 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -64,8 +64,8 @@ find_package(Qt5 5.2 REQUIRED COMPONENTS DBus Gui Qml Quick Compositor)
+ find_package(PkgConfig "0.22" REQUIRED)
+ 
+ # Find EGL and GLESv2 libraries
+-pkg_check_modules(EGL egl REQUIRED)
+-pkg_check_modules(GLESV2 glesv2 REQUIRED)
++pkg_check_modules(EGL egl)
++pkg_check_modules(GLESV2 glesv2)
+ 
+ # Find Wayland libraries
+ pkg_check_modules(WAYLAND_CLIENT wayland-client REQUIRED)
+-- 
+1.8.3.1
+

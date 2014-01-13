@@ -7,7 +7,7 @@ inherit qmake5
 DEPENDS = "qtbase qtdeclarative qtquickcontrols qtmultimedia fluid"
 
 SRC_URI = " \
-	git://github.com/mauios/cinema.git;protocol=git;branch=dev \
+	git://github.com/mauios/${BPN}.git;protocol=git;branch=dev \
 	file://0001-Make-install-work.patch \
 "
 SRCREV = "ad3ac6952aca6854b6df7e01e48f10a858dd2529"

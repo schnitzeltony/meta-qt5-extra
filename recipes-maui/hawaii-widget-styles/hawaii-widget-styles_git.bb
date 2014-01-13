@@ -7,7 +7,7 @@ inherit cmake_qt5
 DEPENDS = "qtbase qtdeclarative qtquickcontrols fluid"
 
 SRC_URI = " \
-	git://github.com/mauios/hawaii-widget-styles.git;protocol=git;branch=stable \
+	git://github.com/mauios/${BPN}.git;protocol=git;branch=stable \
 	file://0001-Do-not-ask-qmake-for-qml-directory-it-will-point-to-.patch \
 "
 SRCREV = "55d1b2ecc4b3728eeccc634a4ef319ca7cc54e56"

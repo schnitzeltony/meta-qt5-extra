@@ -6,7 +6,7 @@ inherit cmake_qt5
 
 DEPENDS = "qtbase qtdeclarative qtquickcontrols"
 
-SRC_URI = "git://github.com/mauios/fluid.git;protocol=git;branch=stable"
+SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=stable"
 SRCREV = "d1635c16ee031e8e846db5fd6506417f1f4c975e"
 PV = "0.2.0+git${SRCPV}"
 
