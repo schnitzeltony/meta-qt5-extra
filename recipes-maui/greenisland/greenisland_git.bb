@@ -1,5 +1,5 @@
 DESCRIPTION = "Support library to make Qt-based Wayland compositors development easier"
-LICENSE = "LGPLv2+"
+LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
 
 inherit cmake_qt5

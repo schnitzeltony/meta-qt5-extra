@@ -1,5 +1,5 @@
 DESCRIPTION = "WSEGL plugin for SGX drivers"
-LICENSE = "LGPLv2+ & proprietary"
+LICENSE = "LGPLv2.1 & proprietary"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86515e83f3ce1048848e1122b9b1ef9c \
                     file://LICENSE.LGPL;md5=24a4036de5c39ff01ad4986c4870d8c0"
 
