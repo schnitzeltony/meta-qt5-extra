@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
 
 inherit cmake_qt5 pkgconfig
 
-DEPENDS = "qtbase"
+DEPENDS = "qtbase qtdeclarative"
 
 SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=stable"
 SRCREV = "2e919a648434bcf1391b244b09b469020094cf68"
