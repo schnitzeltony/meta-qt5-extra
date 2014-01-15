@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=4b54a1fd55a448865a0b32d41598759d \
 "
 
-inherit cmake_qt5
+inherit cmake_qt5 hawaii-git-submodule
 
 DEPENDS = "qtbase qtdeclarative qtwayland qtwayland-native fluid greenisland polkit-qt-1 qtconfiguration qtaccountsservice pixman weston"
 RRECOMMENDS_${PN} += "hawaii-wallpapers"
@@ -19,9 +19,6 @@ SRC_URI = " \
 SRCREV = "efc18add78e292f9afb7167314b58286162281dc"
 PV = "0.2.0.2+git${SRCPV}"
 
-EXT-SRC-URI-libqtxdg = "git://github.com/plfiorini/libqtxdg.git"
-EXT-SRCREV-libqtxdg = "b889f2b71cd79ef67cecd7e0415525ad959c50cd"
-
 S = "${WORKDIR}/git"
 
 # make it find qtwaylandscanner / use our libexdir
@@ -29,18 +26,6 @@ EXTRA_OECMAKE += " \
 	-DCMAKE_PROGRAM_PATH=${STAGING_DIR_NATIVE}/$bindir/qt5 \
 	-DCMAKE_INSTALL_LIBEXECDIR=${libexecdir} \
 "
-
-do_configure_prepend() {
-	OLD_PATH=`pwd`
-	# hack to extract git sub module manually
-	cd ${S}/3rdparty
-	rm -rf libqtxdg
-	git clone ${EXT-SRC-URI-libqtxdg}
-	cd libqtxdg
-	git checkout ${EXT-SRCREV-libqtxdg}
-
-	cd $OLD_PATH
-}
 
 FILES_${PN} += " \
 	${datadir}/hawaii \
