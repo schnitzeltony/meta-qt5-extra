@@ -1,0 +1,32 @@
+From 6ccf0df1c66cef4ea07e169f550c7e3ab62d50ae Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 15 Jan 2014 19:11:44 +0100
+Subject: [PATCH] compositor/CMakeLists.txt: : avoid dragging in host libdir
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/compositor/CMakeLists.txt | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/src/compositor/CMakeLists.txt b/src/compositor/CMakeLists.txt
+index 28fd3bf..4389aea 100644
+--- a/src/compositor/CMakeLists.txt
++++ b/src/compositor/CMakeLists.txt
+@@ -75,9 +75,6 @@ qt5_add_resources(RESOURCES hawaii-shell.qrc)
+ 
+ add_executable(hawaii-shell ${SOURCES} ${RESOURCES})
+ qt5_use_modules(hawaii-shell Quick Compositor)
+-set_target_properties(hawaii-shell PROPERTIES
+-    LINK_FLAGS -L${WaylandServer_LIBDIR}
+-)
+ target_link_libraries(hawaii-shell
+     ${GreenIsland_LIBRARIES}
+     ${WaylandServer_LIBRARIES}
+-- 
+1.8.3.1
+

@@ -13,6 +13,8 @@ RRECOMMENDS_${PN} += "hawaii-wallpapers"
 SRC_URI = " \
 	git://github.com/mauios/${BPN}.git;protocol=git;branch=stable \
 	file://0001-GetGitRevision.cmake-call-git-directly-it-is-not-fou.patch \
+	file://0002-client-CMakeLists.txt-avoid-dragging-in-host-libdir.patch \
+	file://0003-compositor-CMakeLists.txt-avoid-dragging-in-host-lib.patch \
 "
 SRCREV = "efc18add78e292f9afb7167314b58286162281dc"
 PV = "0.2.0.2+git${SRCPV}"
@@ -22,11 +24,11 @@ EXT-SRCREV-libqtxdg = "b889f2b71cd79ef67cecd7e0415525ad959c50cd"
 
 S = "${WORKDIR}/git"
 
-FILES_${PN} += "${libdir}/hawaii/qml/Fluid*"
-FILES_${PN}-dbg += "${libdir}/hawaii/qml/FluidExtra/.debug"
-
-# make it find qtwaylandscanner
-EXTRA_OECMAKE += "-DCMAKE_PROGRAM_PATH=${STAGING_DIR_NATIVE}/$bindir/qt5"
+# make it find qtwaylandscanner / use our libexdir
+EXTRA_OECMAKE += " \
+	-DCMAKE_PROGRAM_PATH=${STAGING_DIR_NATIVE}/$bindir/qt5 \
+	-DCMAKE_INSTALL_LIBEXECDIR=${libexecdir} \
+"
 
 do_configure_prepend() {
 	OLD_PATH=`pwd`
@@ -39,3 +41,15 @@ do_configure_prepend() {
 
 	cd $OLD_PATH
 }
+
+FILES_${PN} += " \
+	${datadir}/hawaii \
+	${libdir}/hawaii \
+	${libdir}/weston \
+"
+FILES_${PN}-dbg += " \
+	${libdir}/hawaii/*/*/.debug \
+	${libdir}/hawaii/*/*/*/.debug \
+	${libdir}/hawaii/*/*/*/*/.debug \
+	${libdir}/weston/.debug \
+"
