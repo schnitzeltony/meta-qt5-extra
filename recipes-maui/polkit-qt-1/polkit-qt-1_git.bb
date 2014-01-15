@@ -13,3 +13,9 @@ PV = "0.103.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 FILES_${PN}-dev += "${libdir}/cmake"
+
+# make others find me
+do_install_append() {
+	sed -i 's:\/usr:${STAGING_DIR_TARGET}/usr:g' ${D}${libdir}/cmake/PolkitQt-1/PolkitQt-1Config.cmake
+}
+
