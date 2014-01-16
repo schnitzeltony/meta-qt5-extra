@@ -1,4 +1,4 @@
-OE layer to build maui
+OE layer to build hawaii desktop [1]
 
 This layer depends on:
 
@@ -11,3 +11,5 @@ branch: jansa/qt5-5.2.0
 revision: HEAD
 
 Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
+
+[1] http://www.maui-project.org
