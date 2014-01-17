@@ -21,10 +21,11 @@ PV = "0.2.0.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-# make it find qtwaylandscanner / use our libexdir
+# make it find qtwaylandscanner / install starter scripts in bindir
 EXTRA_OECMAKE += " \
 	-DCMAKE_PROGRAM_PATH=${STAGING_DIR_NATIVE}/$bindir/qt5 \
-	-DCMAKE_INSTALL_LIBEXECDIR=${libexecdir} \
+	-DCMAKE_INSTALL_LIBEXECDIR=${bindir} \
+	-DADDITIONAL_PATH=${bindir}/${QT_DIR_NAME} \
 "
 
 FILES_${PN} += " \
@@ -38,3 +39,6 @@ FILES_${PN}-dbg += " \
 	${libdir}/hawaii/*/*/*/*/.debug \
 	${libdir}/weston/.debug \
 "
+
+# starter scripts rely on bash and qdbus
+RDEPENDS_${PN} = "bash qttools-tools"
