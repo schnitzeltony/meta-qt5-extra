@@ -41,4 +41,4 @@ FILES_${PN}-dbg += " \
 "
 
 # starter scripts rely on bash and qdbus
-RDEPENDS_${PN} = "bash qttools-tools qtwayland-plugins"
+RDEPENDS_${PN} = "bash qttools-tools qtwayland-plugins weston"
