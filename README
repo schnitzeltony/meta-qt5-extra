@@ -7,7 +7,7 @@ branch: master
 revision: HEAD
 
 URI: git://github.com/meta-qt5/meta-qt5.git
-branch: jansa/qt5-5.2.0
+branch: master
 revision: HEAD
 
 Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
