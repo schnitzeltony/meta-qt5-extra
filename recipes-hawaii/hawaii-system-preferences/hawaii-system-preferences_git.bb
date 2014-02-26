@@ -9,8 +9,8 @@ inherit cmake_qt5 hawaii-git-submodule
 
 DEPENDS = "qtbase qtdeclarative qtquickcontrols polkit-qt-1 qtconfiguration qtaccountsservice qttools-native"
 
-SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=stable"
-SRCREV = "55aa08a1d9bb9ad5f35138dceabcd6fea6895a81"
+SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
+SRCREV = "8341fd6313967240f6f60fae03b3bf433c7a2977"
 PV = "0.2.0.git${SRCPV}"
 
 S = "${WORKDIR}/git"
