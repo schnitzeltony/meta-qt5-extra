@@ -11,8 +11,8 @@ inherit cmake_qt5 pkgconfig
 
 DEPENDS = "qtbase dconf"
 
-SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=stable"
-SRCREV = "e8d9a818af49357e9fb764bdc90d45ad1426f997"
+SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
+SRCREV = "abe92ec0d4c51be2c07690c50030b9eba8081da6"
 PV = "0.2.1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
