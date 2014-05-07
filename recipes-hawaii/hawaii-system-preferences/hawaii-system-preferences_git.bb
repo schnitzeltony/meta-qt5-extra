@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit cmake_qt5 hawaii-git-submodule
+inherit cmake_qt5
 
 DEPENDS = "qtbase qtdeclarative qtquickcontrols polkit-qt-1 qtconfiguration qtaccountsservice qttools-native"
 
 SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
-SRCREV = "8341fd6313967240f6f60fae03b3bf433c7a2977"
+SRCREV = "71e2f960ad254e065c2c10fe034443ca34bb9bd4"
 PV = "0.2.0.git${SRCPV}"
 
 S = "${WORKDIR}/git"
