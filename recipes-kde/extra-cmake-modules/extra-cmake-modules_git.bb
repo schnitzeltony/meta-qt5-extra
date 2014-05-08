@@ -6,10 +6,9 @@ inherit cmake
 
 SRC_URI = " \
 	git://anongit.kde.org/extra-cmake-modules;protocol=git \
-	file://0001-do-not-use-KDE-default-dirs.patch \
 "
-SRCREV = "6e5dd4943be1200f9f7f6620d69f140428abff45"
-PV = "0.0.9+git${SRCPV}"
+SRCREV = "dea1b8759f37d1462236ddd43ee9dfb47670817a"
+PV = "0.0.13+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

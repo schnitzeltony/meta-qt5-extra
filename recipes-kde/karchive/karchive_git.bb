@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit cmake_qt5
 
-DEPENDS = "qtbase kde-extra-cmake-modules-native bzip2 xz"
+DEPENDS = "qtbase extra-cmake-modules-native bzip2 xz"
 
 SRC_URI = " \
 	git://anongit.kde.org/karchive;protocol=git;branch=master \
