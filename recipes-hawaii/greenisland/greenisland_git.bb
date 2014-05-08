@@ -7,11 +7,11 @@ inherit cmake_qt5
 DEPENDS = "qtbase qtdeclarative qtwayland"
 
 SRC_URI = " \
-	git://github.com/mauios/${BPN}.git;protocol=git;branch=stable \
+	git://github.com/mauios/${BPN}.git;protocol=git;branch=dev \
 	file://0001-greenislandcompositor-fix-build.patch \
 "
-SRCREV = "3c26239ce213c1a029ba3cf3b6e8006dc3593018"
-PV = "0.2.0.1+git${SRCPV}"
+SRCREV = "0fe1296b51ac6633c7c5072c8ed2f74556e4b96e"
+PV = "0.2.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
