@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit cmake_qt5 pkgconfig hawaii-target
 
-DEPENDS = "qtbase dconf"
+DEPENDS = "qtbase qtdeclarative dconf"
 
 SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
 SRCREV = "804739d73de982fc144ff45653c243cefcfa79cb"
