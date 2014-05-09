@@ -2,7 +2,7 @@ DESCRIPTION = "Library shared among Hawaii Shell and other applications"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4b54a1fd55a448865a0b32d41598759d"
 
-inherit cmake_qt5
+inherit cmake_qt5 hawaii-target
 
 DEPENDS = "qtbase extra-cmake-modules-native"
 
