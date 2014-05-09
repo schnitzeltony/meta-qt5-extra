@@ -7,14 +7,16 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit cmake_qt5 pkgconfig
+inherit cmake_qt5 pkgconfig hawaii-target
 
 DEPENDS = "qtbase dconf"
 
 SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
-SRCREV = "abe92ec0d4c51be2c07690c50030b9eba8081da6"
-PV = "0.2.1+git${SRCPV}"
+SRCREV = "804739d73de982fc144ff45653c243cefcfa79cb"
+PV = "0.3.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
+FILES_${PN} += "${libdir}/hawaii/qml/Hawaii/Configuration"
+FILES_${PN}-dbg += "${libdir}/hawaii/qml/Hawaii/Configuration/.debug"
 FILES_${PN}-dev += "${libdir}/cmake"
