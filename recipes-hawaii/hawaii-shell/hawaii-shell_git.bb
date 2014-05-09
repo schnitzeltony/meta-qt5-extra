@@ -5,19 +5,17 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=4b54a1fd55a448865a0b32d41598759d \
 "
 
-inherit cmake_qt5 hawaii-git-submodule
+inherit cmake_qt5
 
-DEPENDS = "qtbase qtdeclarative qtwayland qtwayland-native fluid greenisland polkit-qt-1 qtconfiguration qtaccountsservice pixman weston"
+DEPENDS = "qtbase qtdeclarative qtwayland qtwayland-native libhawaii fluid greenisland polkit-qt-1 qtconfiguration qtaccountsservice pixman wayland weston systemd alsa-lib"
 RRECOMMENDS_${PN} += "hawaii-wallpapers"
 
 SRC_URI = " \
-	git://github.com/mauios/${BPN}.git;protocol=git;branch=stable \
+	git://github.com/mauios/${BPN}.git;protocol=git;branch=dev \
 	file://0001-GetGitRevision.cmake-call-git-directly-it-is-not-fou.patch \
-	file://0002-client-CMakeLists.txt-avoid-dragging-in-host-libdir.patch \
-	file://0003-compositor-CMakeLists.txt-avoid-dragging-in-host-lib.patch \
 "
-SRCREV = "efc18add78e292f9afb7167314b58286162281dc"
-PV = "0.2.0.2+git${SRCPV}"
+SRCREV = "9627beb93b92386d8d5004463e968fa9dc3d190c"
+PV = "0.2.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
