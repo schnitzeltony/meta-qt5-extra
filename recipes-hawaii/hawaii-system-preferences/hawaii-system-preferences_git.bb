@@ -17,5 +17,5 @@ S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DQt5LinguistTools_DIR=${STAGING_LIBDIR_NATIVE}/cmake/Qt5LinguistTools"
 
-FILES_${PN} += "${libdir}/hawaii"
-FILES_${PN}-dbg += "${libdir}/hawaii/plugins/preferences/.debug"
+FILES_${PN} += "${libdir}/hawaii ${datadir}/hawaii"
+FILES_${PN}-dbg += "${libdir}/hawaii/qml/Hawaii/SystemPreferences/Background/.debug"
