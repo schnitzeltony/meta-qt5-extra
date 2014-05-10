@@ -12,4 +12,15 @@ PV = "0.103.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
+EXTRA_OECMAKE += "-DLIB_INSTALL_DIR=${libdir}"
+
+# REVISIT: dirty hack to avoid libraries using me to fail at configuraton/compilation
+do_install_append() {
+	# libpath
+	for file in $(find ${D}${libdir}/cmake -name '*Config.cmake') ; do
+		sed -i 's:\"${libdir}:\"${STAGING_DIR_TARGET}${libdir}:' $file
+		sed -i 's:\"include/polkit-qt5-1:\"${STAGING_DIR_TARGET}/include/polkit-qt5-1:' $file
+	done
+}
+
 FILES_${PN}-dev += "${libdir}/cmake"
