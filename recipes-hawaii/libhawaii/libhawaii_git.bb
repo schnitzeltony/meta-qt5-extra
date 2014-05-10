@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4b54a1fd55a448865a0b32d41598759d"
 
 inherit cmake_qt5 hawaii-target
 
-DEPENDS = "qtbase extra-cmake-modules-native"
+DEPENDS = "qtbase qtdeclarative extra-cmake-modules-native"
 
 SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
 SRCREV = "bfa0935cd39ea157b21fc42d9e8ad7df35ddc137"
