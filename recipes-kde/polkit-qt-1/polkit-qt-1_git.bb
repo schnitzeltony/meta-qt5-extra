@@ -19,7 +19,7 @@ do_install_append() {
 	# libpath
 	for file in $(find ${D}${libdir}/cmake -name '*Config.cmake') ; do
 		sed -i 's:\"${libdir}:\"${STAGING_DIR_TARGET}${libdir}:' $file
-		sed -i 's:\"include/polkit-qt5-1:\"${STAGING_DIR_TARGET}/include/polkit-qt5-1:' $file
+		sed -i 's:\"include/polkit-qt5-1:\"${STAGING_DIR_TARGET}/usr/include/polkit-qt5-1:' $file
 	done
 }
 
