@@ -14,7 +14,7 @@ SRC_URI = " \
 	git://github.com/mauios/${BPN}.git;protocol=git;branch=dev \
 	file://0001-GetGitRevision.cmake-call-git-directly-it-is-not-fou.patch \
 "
-SRCREV = "9627beb93b92386d8d5004463e968fa9dc3d190c"
+SRCREV = "868343b10164621d01dc1a5d26da4a5e6abcc4fe"
 PV = "0.2.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
