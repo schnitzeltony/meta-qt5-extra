@@ -6,14 +6,11 @@ inherit cmake_qt5
 
 DEPENDS = "qtbase qtdeclarative qtquickcontrols fluid"
 
-SRC_URI = " \
-	git://github.com/mauios/${BPN}.git;protocol=git;branch=dev \
-	file://0001-Do-not-ask-qmake-for-qml-directory-it-will-point-to-.patch \
-"
-SRCREV = "881d6887d506dd1eac13d9faa77050c3ff337817"
-PV = "0.2.0+git${SRCPV}"
+SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
+SRCREV = "138fffab7cc60bd6e910ac257a338f1c5e1670e2"
+PV = "0.2.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-FILES_${PN} += "${libdir}/${QT_DIR_NAME}"
+FILES_${PN} += "${libdir}/hawaii"
 
