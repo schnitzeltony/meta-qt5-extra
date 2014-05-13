@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit cmake_qt5
 
-DEPENDS = "qtbase qtdeclarative qtwayland qtwayland-native libhawaii fluid greenisland polkit-qt-1 qtconfiguration qtaccountsservice pixman wayland weston systemd alsa-lib"
+DEPENDS = "qtbase qtdeclarative qtwayland qtwayland-native qtscript libhawaii fluid greenisland polkit-qt-1 qtconfiguration qtaccountsservice pixman wayland weston systemd alsa-lib"
 RRECOMMENDS_${PN} += "hawaii-wallpapers"
 
 SRC_URI = " \
