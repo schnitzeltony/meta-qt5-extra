@@ -13,6 +13,7 @@ RRECOMMENDS_${PN} += "hawaii-wallpapers"
 SRC_URI = " \
 	git://github.com/mauios/${BPN}.git;protocol=git;branch=dev \
 	file://0001-GetGitRevision.cmake-call-git-directly-it-is-not-fou.patch \
+	file://0002-add-hawaii_-prefix-to-autogenrated-member-functions.patch \
 "
 SRCREV = "868343b10164621d01dc1a5d26da4a5e6abcc4fe"
 PV = "0.2.90+git${SRCPV}"
@@ -32,9 +33,9 @@ FILES_${PN} += " \
 	${libdir}/weston \
 "
 FILES_${PN}-dbg += " \
-	${libdir}/hawaii/*/*/.debug \
-	${libdir}/hawaii/*/*/*/.debug \
-	${libdir}/hawaii/*/*/*/*/.debug \
+	${libdir}/hawaii/plugins/*/.debug \
+	${libdir}/hawaii/qml/Hawaii/Shell/*/.debug \
+	${libdir}/hawaii/qml/Hawaii/Shell/*/*/.debug \
 	${libdir}/weston/.debug \
 "
 

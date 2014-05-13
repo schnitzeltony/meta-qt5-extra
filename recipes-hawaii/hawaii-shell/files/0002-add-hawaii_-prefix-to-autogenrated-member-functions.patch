@@ -1,0 +1,548 @@
+From 230bcbfe35349ce791ee3733103109f959553853 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 13 May 2014 03:48:56 +0200
+Subject: [PATCH] add hawaii_ prefix to autogenrated member functions
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+really fix many errors like:
+
+| git/src/compositor/shell.h:66:10: error: 'void Shell::shell_bind_resource(QtWaylandServer::hawaii_shell::Resource*)' marked override, but does not override void shell_bind_re
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/client/shellclient.cpp           | 18 +++++++++---------
+ src/client/shellclient.h             | 20 ++++++++++----------
+ src/client/wayland/panelsurface.cpp  |  2 +-
+ src/client/wayland/panelsurface.h    |  2 +-
+ src/compositor/clientwindow.cpp      |  4 ++--
+ src/compositor/clientwindow.h        |  2 +-
+ src/compositor/panelmanager.cpp      |  2 +-
+ src/compositor/panelmanager.h        |  2 +-
+ src/compositor/shell.cpp             | 32 ++++++++++++++++----------------
+ src/compositor/shell.h               | 32 ++++++++++++++++----------------
+ src/compositor/shellpanelsurface.cpp | 14 +++++++-------
+ src/compositor/shellpanelsurface.h   | 14 +++++++-------
+ src/compositor/shellsurface.cpp      |  4 ++--
+ src/compositor/shellsurface.h        |  4 ++--
+ 14 files changed, 76 insertions(+), 76 deletions(-)
+
+diff --git a/src/client/shellclient.cpp b/src/client/shellclient.cpp
+index 3c0e789..e744f01 100644
+--- a/src/client/shellclient.cpp
++++ b/src/client/shellclient.cpp
+@@ -44,12 +44,12 @@ ShellClient::ShellClient(QObject *parent)
+ {
+ }
+ 
+-void ShellClient::shell_loaded()
++void ShellClient::hawaii_shell_loaded()
+ {
+     Q_EMIT loaded();
+ }
+ 
+-void ShellClient::shell_configure(struct ::wl_surface *target,
++void ShellClient::hawaii_shell_configure(struct ::wl_surface *target,
+                                          int32_t width,
+                                          int32_t height)
+ {
+@@ -68,12 +68,12 @@ void ShellClient::shell_configure(struct ::wl_surface *target,
+     }
+ }
+ 
+-void ShellClient::shell_prepare_lock_surface()
++void ShellClient::hawaii_shell_prepare_lock_surface()
+ {
+     Q_EMIT prepareLockSurface();
+ }
+ 
+-void ShellClient::shell_grab_cursor(uint32_t cursor)
++void ShellClient::hawaii_shell_grab_cursor(uint32_t cursor)
+ {
+     QCursor qcursor;
+ 
+@@ -119,7 +119,7 @@ void ShellClient::shell_grab_cursor(uint32_t cursor)
+     Q_EMIT cursorChanged(qcursor);
+ }
+ 
+-void ShellClient::shell_window_mapped(struct ::hawaii_window *id,
++void ShellClient::hawaii_shell_window_mapped(struct ::hawaii_window *id,
+                                              const QString &title,
+                                              const QString &identifier,
+                                              int32_t state)
+@@ -131,17 +131,17 @@ void ShellClient::shell_window_mapped(struct ::hawaii_window *id,
+     Q_EMIT windowAdded(window);
+ }
+ 
+-void ShellClient::shell_window_switching_started()
++void ShellClient::hawaii_shell_window_switching_started()
+ {
+     Q_EMIT windowSwitchingStarted();
+ }
+ 
+-void ShellClient::shell_window_switching_finished()
++void ShellClient::hawaii_shell_window_switching_finished()
+ {
+     Q_EMIT windowSwitchingFinished();
+ }
+ 
+-void ShellClient::shell_window_switched(struct ::hawaii_window *window)
++void ShellClient::hawaii_shell_window_switched(struct ::hawaii_window *window)
+ {
+     QList<Window *> list = ShellManager::instance()->controller()->d_ptr->windowsList;
+ 
+@@ -154,7 +154,7 @@ void ShellClient::shell_window_switched(struct ::hawaii_window *window)
+     }
+ }
+ 
+-void ShellClient::shell_workspace_added(struct ::hawaii_workspace *id,
++void ShellClient::hawaii_shell_workspace_added(struct ::hawaii_workspace *id,
+                                                int32_t active)
+ {
+     Workspace *workspace = new Workspace(active != 0);
+diff --git a/src/client/shellclient.h b/src/client/shellclient.h
+index 9eaefbe..46a7cbe 100644
+--- a/src/client/shellclient.h
++++ b/src/client/shellclient.h
+@@ -52,20 +52,20 @@ Q_SIGNALS:
+     void workspaceAdded(Workspace *workspace);
+ 
+ protected:
+-    void shell_loaded() Q_DECL_OVERRIDE;
+-    void shell_configure(struct ::wl_surface *target,
++    void hawaii_shell_loaded() Q_DECL_OVERRIDE;
++    void hawaii_shell_configure(struct ::wl_surface *target,
+                          int32_t width,
+-                         int32_t height);
+-    void shell_prepare_lock_surface() Q_DECL_OVERRIDE;
+-    void shell_grab_cursor(uint32_t cursor) Q_DECL_OVERRIDE;
+-    void shell_window_mapped(struct ::hawaii_window *id,
++                         int32_t height) Q_DECL_OVERRIDE;
++    void hawaii_shell_prepare_lock_surface() Q_DECL_OVERRIDE;
++    void hawaii_shell_grab_cursor(uint32_t cursor) Q_DECL_OVERRIDE;
++    void hawaii_shell_window_mapped(struct ::hawaii_window *id,
+                              const QString &title,
+                              const QString &identifier,
+                              int32_t state) Q_DECL_OVERRIDE;
+-    void shell_window_switching_started() Q_DECL_OVERRIDE;
+-    void shell_window_switching_finished() Q_DECL_OVERRIDE;
+-    void shell_window_switched(struct ::hawaii_window *window);
+-    void shell_workspace_added(struct ::hawaii_workspace *workspace,
++    void hawaii_shell_window_switching_started() Q_DECL_OVERRIDE;
++    void hawaii_shell_window_switching_finished() Q_DECL_OVERRIDE;
++    void hawaii_shell_window_switched(struct ::hawaii_window *window);
++    void hawaii_shell_workspace_added(struct ::hawaii_workspace *workspace,
+                                int32_t active) Q_DECL_OVERRIDE;
+ };
+ 
+diff --git a/src/client/wayland/panelsurface.cpp b/src/client/wayland/panelsurface.cpp
+index 6e23684..b3c852a 100644
+--- a/src/client/wayland/panelsurface.cpp
++++ b/src/client/wayland/panelsurface.cpp
+@@ -39,7 +39,7 @@ PanelSurface::~PanelSurface()
+         hawaii_panel_destroy(object());
+ }
+ 
+-void PanelSurface::panel_docked()
++void PanelSurface::hawaii_panel_docked()
+ {
+     qDebug() << "Panel docked";
+ }
+diff --git a/src/client/wayland/panelsurface.h b/src/client/wayland/panelsurface.h
+index 423cf15..3c90c14 100644
+--- a/src/client/wayland/panelsurface.h
++++ b/src/client/wayland/panelsurface.h
+@@ -36,7 +36,7 @@ public:
+     virtual ~PanelSurface();
+ 
+ protected:
+-    void panel_docked() Q_DECL_OVERRIDE;
++    void hawaii_panel_docked() Q_DECL_OVERRIDE;
+ };
+ 
+ #endif // PANELSURFACE_H
+diff --git a/src/compositor/clientwindow.cpp b/src/compositor/clientwindow.cpp
+index 69926be..ff91b6c 100644
+--- a/src/compositor/clientwindow.cpp
++++ b/src/compositor/clientwindow.cpp
+@@ -180,9 +180,9 @@ void ClientWindow::unminimize()
+     }
+ }
+ 
+-void ClientWindow::window_set_state(Resource *resource, int32_t newState)
++void ClientWindow::hawaii_window_set_state(Resource *resource, int32_t newState)
+ {
+-    ClientWindow *window = static_cast<ClientWindow *>(resource->window);
++    ClientWindow *window = static_cast<ClientWindow *>(resource->hawaii_window);
+     int32_t state = window->state();
+ 
+     if (state & HAWAII_SHELL_WINDOW_STATE_MINIMIZED && !(newState & HAWAII_SHELL_WINDOW_STATE_MINIMIZED)) {
+diff --git a/src/compositor/clientwindow.h b/src/compositor/clientwindow.h
+index b589645..7da7c5b 100644
+--- a/src/compositor/clientwindow.h
++++ b/src/compositor/clientwindow.h
+@@ -52,7 +52,7 @@ public:
+     void unminimize();
+ 
+ protected:
+-    void window_set_state(Resource *resource,
++    void hawaii_window_set_state(Resource *resource,
+                           int32_t newState) Q_DECL_OVERRIDE;
+ 
+ private:
+diff --git a/src/compositor/panelmanager.cpp b/src/compositor/panelmanager.cpp
+index 91acb1e..897d75a 100644
+--- a/src/compositor/panelmanager.cpp
++++ b/src/compositor/panelmanager.cpp
+@@ -38,7 +38,7 @@ PanelManager::PanelManager(struct ::wl_display *display, QObject *parent)
+ {
+ }
+ 
+-void PanelManager::panel_manager_set_panel(Resource *resource,
++void PanelManager::hawaii_panel_manager_set_panel(Resource *resource,
+                                            uint32_t id,
+                                            struct ::wl_resource *surface_resource)
+ {
+diff --git a/src/compositor/panelmanager.h b/src/compositor/panelmanager.h
+index 42d1ea8..00388bb 100644
+--- a/src/compositor/panelmanager.h
++++ b/src/compositor/panelmanager.h
+@@ -37,7 +37,7 @@ public:
+                  QObject *parent = 0);
+ 
+ protected:
+-    void panel_manager_set_panel(Resource *resource,
++    void hawaii_panel_manager_set_panel(Resource *resource,
+                                  uint32_t id,
+                                  struct ::wl_resource *surface_resource) Q_DECL_OVERRIDE;
+ };
+diff --git a/src/compositor/shell.cpp b/src/compositor/shell.cpp
+index ae86c0e..c2540d4 100644
+--- a/src/compositor/shell.cpp
++++ b/src/compositor/shell.cpp
+@@ -108,12 +108,12 @@ void Shell::unlockSession()
+     m_prepareEventSent = true;
+ }
+ 
+-void Shell::shell_bind_resource(Resource *resource)
++void Shell::hawaii_shell_bind_resource(Resource *resource)
+ {
+     send_loaded(resource->handle);
+ }
+ 
+-void Shell::shell_add_key_binding(Resource *resource, uint32_t id,
++void Shell::hawaii_shell_add_key_binding(Resource *resource, uint32_t id,
+                                   uint32_t key, uint32_t modifiers)
+ {
+     Q_UNUSED(resource);
+@@ -124,7 +124,7 @@ void Shell::shell_add_key_binding(Resource *resource, uint32_t id,
+     m_keyBindings.append(keyBinding);
+ }
+ 
+-void Shell::shell_set_position(Resource *resource,
++void Shell::hawaii_shell_set_position(Resource *resource,
+                                struct ::wl_resource *surface_resource,
+                                int32_t x, int32_t y)
+ {
+@@ -135,7 +135,7 @@ void Shell::shell_set_position(Resource *resource,
+     surface->setWindowProperty(QStringLiteral("position"), QPointF(x, y));
+ }
+ 
+-void Shell::shell_set_lock_surface(Resource *resource,
++void Shell::hawaii_shell_set_lock_surface(Resource *resource,
+                                    struct ::wl_resource *surface_resource)
+ {
+     Q_UNUSED(resource);
+@@ -163,12 +163,12 @@ void Shell::shell_set_lock_surface(Resource *resource,
+     });
+ }
+ 
+-void Shell::shell_quit(Resource *resource)
++void Shell::hawaii_shell_quit(Resource *resource)
+ {
+     Q_UNUSED(resource);
+ }
+ 
+-void Shell::shell_lock(Resource *resource)
++void Shell::hawaii_shell_lock(Resource *resource)
+ {
+     Q_UNUSED(resource);
+ 
+@@ -179,7 +179,7 @@ void Shell::shell_lock(Resource *resource)
+     m_compositor->setState(Compositor::Idle);
+ }
+ 
+-void Shell::shell_unlock(Resource *resource)
++void Shell::hawaii_shell_unlock(Resource *resource)
+ {
+     Q_UNUSED(resource);
+ 
+@@ -191,7 +191,7 @@ void Shell::shell_unlock(Resource *resource)
+         resumeDesktop();
+ }
+ 
+-void Shell::shell_set_background(Resource *resource,
++void Shell::hawaii_shell_set_background(Resource *resource,
+                                  struct ::wl_resource *output_resource,
+                                  struct ::wl_resource *surface_resource)
+ {
+@@ -207,7 +207,7 @@ void Shell::shell_set_background(Resource *resource,
+     surface->setWindowProperty(QStringLiteral("position"), coords);
+ }
+ 
+-void Shell::shell_set_overlay(Resource *resource,
++void Shell::hawaii_shell_set_overlay(Resource *resource,
+                               struct ::wl_resource *surface_resource)
+ {
+     Q_UNUSED(resource);
+@@ -221,7 +221,7 @@ void Shell::shell_set_overlay(Resource *resource,
+     surface->setWindowProperty(QStringLiteral("position"), coords);
+ }
+ 
+-void Shell::shell_set_desktop(Resource *resource,
++void Shell::hawaii_shell_set_desktop(Resource *resource,
+                               struct ::wl_resource *output_resource,
+                               struct ::wl_resource *surface_resource)
+ {
+@@ -237,35 +237,35 @@ void Shell::shell_set_desktop(Resource *resource,
+     surface->setWindowProperty(QStringLiteral("position"), coords);
+ }
+ 
+-void Shell::shell_set_grab_surface(Resource *resource,
++void Shell::hawaii_shell_set_grab_surface(Resource *resource,
+                                    struct ::wl_resource *surface_resource)
+ {
+     Q_UNUSED(resource);
+ }
+ 
+-void Shell::shell_desktop_ready(Resource *resource)
++void Shell::hawaii_shell_desktop_ready(Resource *resource)
+ {
+     Q_UNUSED(resource);
+     Q_EMIT ready();
+ }
+ 
+-void Shell::shell_minimize_windows(Resource *resource)
++void Shell::hawaii_shell_minimize_windows(Resource *resource)
+ {
+     Q_UNUSED(resource);
+ }
+ 
+-void Shell::shell_restore_windows(Resource *resource)
++void Shell::hawaii_shell_restore_windows(Resource *resource)
+ {
+     Q_UNUSED(resource);
+ }
+ 
+-void Shell::shell_add_workspace(Resource *resource)
++void Shell::hawaii_shell_add_workspace(Resource *resource)
+ {
+     Q_UNUSED(resource);
+     Q_EMIT workspaceAdded();
+ }
+ 
+-void Shell::shell_select_workspace(Resource *resource,
++void Shell::hawaii_shell_select_workspace(Resource *resource,
+                                    struct ::wl_resource *workspace)
+ {
+     Q_UNUSED(resource);
+diff --git a/src/compositor/shell.h b/src/compositor/shell.h
+index f12be7c..aa67f8e 100644
+--- a/src/compositor/shell.h
++++ b/src/compositor/shell.h
+@@ -63,43 +63,43 @@ Q_SIGNALS:
+     void workspaceAdded();
+ 
+ protected:
+-    void shell_bind_resource(Resource *resource) Q_DECL_OVERRIDE;
++    void hawaii_shell_bind_resource(Resource *resource) Q_DECL_OVERRIDE;
+ 
+-    void shell_add_key_binding(Resource *resource, uint32_t id,
++    void hawaii_shell_add_key_binding(Resource *resource, uint32_t id,
+                                uint32_t key, uint32_t modifiers) Q_DECL_OVERRIDE;
+ 
+-    void shell_set_position(Resource *resource,
++    void hawaii_shell_set_position(Resource *resource,
+                             struct ::wl_resource *surface,
+                             int32_t x, int32_t y) Q_DECL_OVERRIDE;
+ 
+-    void shell_set_lock_surface(Resource *resource,
++    void hawaii_shell_set_lock_surface(Resource *resource,
+                                 struct ::wl_resource *surface_resource) Q_DECL_OVERRIDE;
+ 
+-    void shell_quit(Resource *resource) Q_DECL_OVERRIDE;
++    void hawaii_shell_quit(Resource *resource) Q_DECL_OVERRIDE;
+ 
+-    void shell_lock(Resource *resource) Q_DECL_OVERRIDE;
+-    void shell_unlock(Resource *resource) Q_DECL_OVERRIDE;
++    void hawaii_shell_lock(Resource *resource) Q_DECL_OVERRIDE;
++    void hawaii_shell_unlock(Resource *resource) Q_DECL_OVERRIDE;
+ 
+-    void shell_set_background(Resource *resource,
++    void hawaii_shell_set_background(Resource *resource,
+                               struct ::wl_resource *output_resource,
+                               struct ::wl_resource *surface) Q_DECL_OVERRIDE;
+-    void shell_set_desktop(Resource *resource,
++    void hawaii_shell_set_desktop(Resource *resource,
+                            struct ::wl_resource *output_resource,
+                            struct ::wl_resource *surface) Q_DECL_OVERRIDE;
+ 
+-    void shell_set_overlay(Resource *resource,
++    void hawaii_shell_set_overlay(Resource *resource,
+                            struct ::wl_resource *surface) Q_DECL_OVERRIDE;
+ 
+-    void shell_set_grab_surface(Resource *resource,
++    void hawaii_shell_set_grab_surface(Resource *resource,
+                                 struct ::wl_resource *surface_resource) Q_DECL_OVERRIDE;
+ 
+-    void shell_desktop_ready(Resource *resource) Q_DECL_OVERRIDE;
++    void hawaii_shell_desktop_ready(Resource *resource) Q_DECL_OVERRIDE;
+ 
+-    void shell_minimize_windows(Resource *resource) Q_DECL_OVERRIDE;
+-    void shell_restore_windows(Resource *resource) Q_DECL_OVERRIDE;
++    void hawaii_shell_minimize_windows(Resource *resource) Q_DECL_OVERRIDE;
++    void hawaii_shell_restore_windows(Resource *resource) Q_DECL_OVERRIDE;
+ 
+-    void shell_add_workspace(Resource *resource) Q_DECL_OVERRIDE;
+-    void shell_select_workspace(Resource *resource,
++    void hawaii_shell_add_workspace(Resource *resource) Q_DECL_OVERRIDE;
++    void hawaii_shell_select_workspace(Resource *resource,
+                                 struct ::wl_resource *workspace) Q_DECL_OVERRIDE;
+ 
+ private:
+diff --git a/src/compositor/shellpanelsurface.cpp b/src/compositor/shellpanelsurface.cpp
+index 4a38a75..bbc8303 100644
+--- a/src/compositor/shellpanelsurface.cpp
++++ b/src/compositor/shellpanelsurface.cpp
+@@ -44,49 +44,49 @@ ShellPanelSurface::ShellPanelSurface(QWaylandSurface *surface)
+     m_compositor = static_cast<Compositor *>(surface->compositor());
+ }
+ 
+-void ShellPanelSurface::panel_set_alignment(Resource *resource,
++void ShellPanelSurface::hawaii_panel_set_alignment(Resource *resource,
+                                             uint32_t alignment)
+ {
+     Q_UNUSED(resource);
+     m_alignment = alignment;
+ }
+ 
+-void ShellPanelSurface::panel_set_offset(Resource *resource,
++void ShellPanelSurface::hawaii_panel_set_offset(Resource *resource,
+                                          uint32_t offset)
+ {
+     Q_UNUSED(resource);
+     m_offset = offset;
+ }
+ 
+-void ShellPanelSurface::panel_set_thickness(Resource *resource,
++void ShellPanelSurface::hawaii_panel_set_thickness(Resource *resource,
+                                             uint32_t thickness)
+ {
+     Q_UNUSED(resource);
+     m_thickness = thickness;
+ }
+ 
+-void ShellPanelSurface::panel_set_length(Resource *resource,
++void ShellPanelSurface::hawaii_panel_set_length(Resource *resource,
+                                          uint32_t length)
+ {
+     Q_UNUSED(resource);
+     m_length = length;
+ }
+ 
+-void ShellPanelSurface::panel_set_min_length(Resource *resource,
++void ShellPanelSurface::hawaii_panel_set_min_length(Resource *resource,
+                                              uint32_t min_length)
+ {
+     Q_UNUSED(resource);
+     m_minLength = min_length;
+ }
+ 
+-void ShellPanelSurface::panel_set_max_length(Resource *resource,
++void ShellPanelSurface::hawaii_panel_set_max_length(Resource *resource,
+                                              uint32_t max_length)
+ {
+     Q_UNUSED(resource);
+     m_maxLength = max_length;
+ }
+ 
+-void ShellPanelSurface::panel_dock(Resource *resource,
++void ShellPanelSurface::hawaii_panel_dock(Resource *resource,
+                                    uint32_t edge,
+                                    struct ::wl_resource *output)
+ {
+diff --git a/src/compositor/shellpanelsurface.h b/src/compositor/shellpanelsurface.h
+index 66f5664..41ec5c6 100644
+--- a/src/compositor/shellpanelsurface.h
++++ b/src/compositor/shellpanelsurface.h
+@@ -38,19 +38,19 @@ public:
+     ShellPanelSurface(QWaylandSurface *surface);
+ 
+ protected:
+-    void panel_set_alignment(Resource *resource,
++    void hawaii_panel_set_alignment(Resource *resource,
+                              uint32_t alignment) Q_DECL_OVERRIDE;
+-    void panel_set_offset(Resource *resource,
++    void hawaii_panel_set_offset(Resource *resource,
+                           uint32_t offset) Q_DECL_OVERRIDE;
+-    void panel_set_thickness(Resource *resource,
++    void hawaii_panel_set_thickness(Resource *resource,
+                              uint32_t thickness) Q_DECL_OVERRIDE;
+-    void panel_set_length(Resource *resource,
++    void hawaii_panel_set_length(Resource *resource,
+                           uint32_t length) Q_DECL_OVERRIDE;
+-    void panel_set_min_length(Resource *resource,
++    void hawaii_panel_set_min_length(Resource *resource,
+                               uint32_t min_length) Q_DECL_OVERRIDE;
+-    void panel_set_max_length(Resource *resource,
++    void hawaii_panel_set_max_length(Resource *resource,
+                               uint32_t max_length) Q_DECL_OVERRIDE;
+-    void panel_dock(Resource *resource, uint32_t edge,
++    void hawaii_panel_dock(Resource *resource, uint32_t edge,
+                     struct ::wl_resource *output) Q_DECL_OVERRIDE;
+ 
+ private:
+diff --git a/src/compositor/shellsurface.cpp b/src/compositor/shellsurface.cpp
+index 4249373..24a47a9 100644
+--- a/src/compositor/shellsurface.cpp
++++ b/src/compositor/shellsurface.cpp
+@@ -72,7 +72,7 @@ QWaylandSurface *ShellSurface::surfaceAt(const QPointF &point, QPointF *local)
+     return 0;
+ }
+ 
+-void ShellSurface::shell_surface_set_popup(Resource *resource,
++void ShellSurface::hawaii_shell_surface_set_popup(Resource *resource,
+                                            uint32_t id,
+                                            struct ::wl_resource *parent_resource,
+                                            struct ::wl_resource *surface_resource,
+@@ -107,7 +107,7 @@ void ShellSurface::shell_surface_set_popup(Resource *resource,
+     });
+ }
+ 
+-void ShellSurface::shell_surface_set_dialog(Resource *resource,
++void ShellSurface::hawaii_shell_surface_set_dialog(Resource *resource,
+                                             struct ::wl_resource *output_resource,
+                                             struct ::wl_resource *surface_resource)
+ {
+diff --git a/src/compositor/shellsurface.h b/src/compositor/shellsurface.h
+index 4e13b49..846d586 100644
+--- a/src/compositor/shellsurface.h
++++ b/src/compositor/shellsurface.h
+@@ -46,11 +46,11 @@ public:
+     QWaylandSurface *surfaceAt(const QPointF &point, QPointF *local);
+ 
+ protected:
+-    void shell_surface_set_popup(Resource *resource, uint32_t id,
++    void hawaii_shell_surface_set_popup(Resource *resource, uint32_t id,
+                                  struct ::wl_resource *parent_resource,
+                                  struct ::wl_resource *surface_resource,
+                                  int32_t x, int32_t y) Q_DECL_OVERRIDE;
+-    void shell_surface_set_dialog(Resource *resource,
++    void hawaii_shell_surface_set_dialog(Resource *resource,
+                                   struct ::wl_resource *output_resource,
+                                   struct ::wl_resource *surface) Q_DECL_OVERRIDE;
+ 
+-- 
+1.8.3.1
+
