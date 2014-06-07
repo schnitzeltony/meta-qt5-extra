@@ -15,7 +15,7 @@ SRC_URI = " \
 	file://0001-GetGitRevision.cmake-call-git-directly-it-is-not-fou.patch \
 	file://0002-add-hawaii_-prefix-to-autogenrated-member-functions.patch \
 "
-SRCREV = "868343b10164621d01dc1a5d26da4a5e6abcc4fe"
+SRCREV = "2785c40dccbef8bd7e26da997e600bb7a186944c"
 PV = "0.2.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
