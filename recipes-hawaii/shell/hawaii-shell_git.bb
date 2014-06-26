@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=4b54a1fd55a448865a0b32d41598759d \
 "
 
-inherit cmake_qt5
+inherit cmake_qt5 systemd
 
 DEPENDS = "qtbase qtdeclarative qtwayland qtwayland-native qtscript libhawaii fluid greenisland polkit-qt-1 qtconfiguration qtaccountsservice pixman wayland weston systemd alsa-lib"
 RRECOMMENDS_${PN} += "hawaii-wallpapers"
@@ -28,8 +28,10 @@ EXTRA_OECMAKE += " \
 
 FILES_${PN} += " \
 	${datadir}/hawaii \
+	${datadir}/wayland-sessions \
 	${libdir}/hawaii \
 	${libdir}/weston \
+	${libdir}/systemd \
 "
 FILES_${PN}-dbg += " \
 	${libdir}/hawaii/plugins/*/.debug \
