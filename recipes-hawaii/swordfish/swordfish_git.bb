@@ -12,6 +12,7 @@ PV = "0.1.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
+CXXFLAGS += "-fPIC"
 EXTRA_OECMAKE += "-DQt5LinguistTools_DIR=${STAGING_LIBDIR_NATIVE}/cmake/Qt5LinguistTools"
 
 FILES_${PN} += "${libdir}/hawaii/qml ${datadir}"
