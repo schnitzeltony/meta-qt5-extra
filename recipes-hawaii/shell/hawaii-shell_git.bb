@@ -13,9 +13,8 @@ RRECOMMENDS_${PN} += "hawaii-wallpapers"
 SRC_URI = " \
 	git://github.com/mauios/${BPN}.git;protocol=git;branch=dev \
 	file://0001-GetGitRevision.cmake-call-git-directly-it-is-not-fou.patch \
-	file://0002-add-hawaii_-prefix-to-autogenrated-member-functions.patch \
 "
-SRCREV = "2785c40dccbef8bd7e26da997e600bb7a186944c"
+SRCREV = "2edcfa2c2118104367429c317e848e59f4b033e2"
 PV = "0.2.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
