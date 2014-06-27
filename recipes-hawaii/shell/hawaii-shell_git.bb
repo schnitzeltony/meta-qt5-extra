@@ -40,5 +40,5 @@ FILES_${PN}-dbg += " \
 	${libdir}/weston/.debug \
 "
 
-# starter scripts rely on bash and qdbus
-RDEPENDS_${PN} = "bash qttools-tools qtwayland-plugins weston"
+# starter scripts rely on bash qdbus catchsegv
+RDEPENDS_${PN} = "bash qttools-tools qtwayland-plugins weston catchsegv"
