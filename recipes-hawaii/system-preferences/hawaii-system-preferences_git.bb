@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM = " \
 
 inherit cmake_qt5
 
-DEPENDS = "qtbase qtdeclarative qtquickcontrols polkit-qt-1 qtconfiguration libhawaii qtaccountsservice qttools-native extra-cmake-modules-native"
+DEPENDS = "qtbase qtdeclarative qtquickcontrols polkit-qt-1 qtconfiguration libhawaii hawaii-shell qtaccountsservice qttools-native extra-cmake-modules-native"
 
-SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
-SRCREV = "71e2f960ad254e065c2c10fe034443ca34bb9bd4"
-PV = "0.2.0.git${SRCPV}"
+SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=master"
+SRCREV = "4f7aaed8fe5ace9d5efcdec160c963ff101c845f"
+PV = "0.3.0.git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

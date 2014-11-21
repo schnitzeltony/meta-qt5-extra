@@ -2,7 +2,7 @@ DESCRIPTION = "Qt-style API to use freedesktop.org's AccountsService DBus servic
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
 
-inherit cmake_qt5 pkgconfig hawaii-target
+inherit cmake_qt5 pkgconfig
 
 DEPENDS = "qtbase qtdeclarative"
 

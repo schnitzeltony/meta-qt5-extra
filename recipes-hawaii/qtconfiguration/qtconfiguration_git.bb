@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit cmake_qt5 pkgconfig hawaii-target
+inherit cmake_qt5 pkgconfig cmake-lib
 
 DEPENDS = "qtbase qtdeclarative dconf"
 
@@ -17,6 +17,10 @@ PV = "0.3.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
+CMAKE_HIDE_ERROR[dir1] = "QtConfiguration/QtConfigurationTargets.cmake, -cccoutforoe filecheckloop"
+
 FILES_${PN} += "${libdir}/hawaii/qml/Hawaii/Configuration"
 FILES_${PN}-dbg += "${libdir}/hawaii/qml/Hawaii/Configuration/.debug"
 FILES_${PN}-dev += "${libdir}/cmake"
+
+

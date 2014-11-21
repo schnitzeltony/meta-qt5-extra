@@ -1,0 +1,91 @@
+From 5df7b81d8908f5d745d248d859d14a482637808a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 21 Nov 2014 09:25:11 +0100
+Subject: [PATCH] fix configuration on x-less systems
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt          | 31 +++++++++++++++----------------
+ backends/CMakeLists.txt |  9 +++++----
+ 2 files changed, 20 insertions(+), 20 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 93c1f1e..4d9387b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -14,9 +14,6 @@ include(ECMGenerateHeaders)
+ include(FeatureSummary)
+ include(CheckCXXCompilerFlag)
+ 
+-set(REQUIRED_QT_VERSION 5.2.0)
+-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui Test X11Extras)
+-
+ find_package(Wayland 1.2 COMPONENTS Client Cursor)
+ set_package_properties(Wayland PROPERTIES
+                        TYPE OPTIONAL
+@@ -30,25 +27,27 @@ set_package_properties(KF5Wayland PROPERTIES
+                       )
+ add_feature_info("KF5Wayland" KF5Wayland_FOUND "Required for building libkscreen's Wayland backend")
+ 
++set(REQUIRED_QT_VERSION 5.2.0)
+ if(Wayland_Client_FOUND AND KF5Wayland_FOUND)
++    find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui Test)
+     set(ENABLE_WAYLAND TRUE)
+ else()
++    find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui Test X11Extras)
+     set(ENABLE_WAYLAND FALSE)
++    find_package(XCB COMPONENTS XCB RANDR)
++    set_package_properties(XCB PROPERTIES
++                           TYPE OPTIONAL
++                           PURPOSE "Required for building XRandR 1.1 backend"
++    )
++
++    find_package(X11)
++    set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
++                            URL "http://www.x.org"
++                            TYPE OPTIONAL
++                            PURPOSE "Required for building XRandR 1.2 backend"
++    )
+ endif()
+ 
+-find_package(XCB COMPONENTS XCB RANDR)
+-set_package_properties(XCB PROPERTIES
+-                       TYPE OPTIONAL
+-                       PURPOSE "Required for building XRandR 1.1 backend"
+-)
+-
+-find_package(X11)
+-set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
+-                        URL "http://www.x.org"
+-                        TYPE OPTIONAL
+-                        PURPOSE "Required for building XRandR 1.2 backend"
+-)
+-
+ set(KF5_VERSION "5.0.91") #When we are happy with the api, we can sync with frameworks
+ ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KSCREEN
+                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kscreen_version.h"
+diff --git a/backends/CMakeLists.txt b/backends/CMakeLists.txt
+index ba0cc74..a4e0faa 100644
+--- a/backends/CMakeLists.txt
++++ b/backends/CMakeLists.txt
+@@ -6,9 +6,10 @@ if(ENABLE_WAYLAND)
+     add_subdirectory(wayland)
+ else()
+     message(STATUS "Not building Wayland backend")
++    add_subdirectory(xrandr)
++    # if (XCB_FOUND AND X11_XCB_FOUND)
++        add_subdirectory(xrandr1.1)
++    # endif(XCB_FOUND AND X11_XCB_FOUND)
+ endif()
+ 
+-add_subdirectory(xrandr)
+-# if (XCB_FOUND AND X11_XCB_FOUND)
+-    add_subdirectory(xrandr1.1)
+-# endif(XCB_FOUND AND X11_XCB_FOUND)
++
+-- 
+1.8.3.1
+

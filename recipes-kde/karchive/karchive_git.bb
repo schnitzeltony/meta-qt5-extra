@@ -16,13 +16,10 @@ SRC_URI = " \
 SRCREV = "f7901cf4201a603fef641d6266578c9447f7d40b"
 PV = "4.95.0+git${SRCPV}"
 
-S = "${WORKDIR}/git"
-
 EXTRA_OECMAKE += " \
 	-DQt5LinguistTools_DIR=${STAGING_LIBDIR_NATIVE}/cmake/Qt5LinguistTools \
 	-DCMAKE_INSTALL_PREFIX=${prefix}"
 
 FILES_${PN}-dev += " \
-	${libdir}/cmake \
 	${libdir}/qt5 \
 "
