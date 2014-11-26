@@ -1,4 +1,4 @@
-DESCRIPTION = "Modules for fluid and dynamic applications development with QtQuick"
+SUMMARY = "Modules for fluid and dynamic applications development with QtQuick"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 

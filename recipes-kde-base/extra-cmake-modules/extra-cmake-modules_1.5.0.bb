@@ -1,4 +1,4 @@
-DESCRIPTION = "Extra modules and scripts for CMake"
+SUMMARY = "Extra modules and scripts for CMake"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING-CMAKE-SCRIPTS;md5=54c7042be62e169199200bc6477f04d1"
 

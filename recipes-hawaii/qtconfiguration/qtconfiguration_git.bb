@@ -1,4 +1,4 @@
-DESCRIPTION = "Modules for fluid and dynamic applications development with QtQuick"
+SUMMARY = "Modules for fluid and dynamic applications development with QtQuick"
 LICENSE = "BSD GFDL-1.3 GPLv3 LGPLv2.1"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE.BSD;md5=5bd3079664b3473c826ea30fd8d55687 \
@@ -17,7 +17,7 @@ PV = "0.3.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-CMAKE_HIDE_ERROR[dir1] = "QtConfiguration/QtConfigurationTargets.cmake, -cccoutforoe filecheckloop"
+CMAKE_HIDE_ERROR[1] = "QtConfiguration/QtConfigurationTargets.cmake, -cccoutforoe filecheckloop, -cccoutforoe filecheckloop"
 
 FILES_${PN} += "${libdir}/hawaii/qml/Hawaii/Configuration"
 FILES_${PN}-dbg += "${libdir}/hawaii/qml/Hawaii/Configuration/.debug"

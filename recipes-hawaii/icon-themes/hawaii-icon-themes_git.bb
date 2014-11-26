@@ -1,4 +1,4 @@
-DESCRIPTION = "Icon themes for the Hawaii desktop environment"
+SUMMARY = "Icon themes for the Hawaii desktop environment"
 LICENSE = "GPLv2 LGPLv2.1 CC-BY-SA-3.0"
 LIC_FILES_CHKSUM = " \
 	file://icons/elegant/COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \

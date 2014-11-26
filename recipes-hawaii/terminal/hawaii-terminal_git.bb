@@ -1,4 +1,4 @@
-DESCRIPTION = "Terminal emulator for the Hawaii desktop environment"
+SUMMARY = "Terminal emulator for the Hawaii desktop environment"
 LICENSE = "GPLv2 MIT"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE;md5=414fa9eab8935f538d25474667060bd1 \

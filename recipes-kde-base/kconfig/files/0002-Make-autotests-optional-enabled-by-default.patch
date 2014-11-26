@@ -1,0 +1,35 @@
+From cdfcbda963ba7281efe0f52d0c9f643ab2d71978 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 26 Nov 2014 15:07:26 +0100
+Subject: [PATCH 2/2] Make autotests optional - enabled by default
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6d0a350..b59aa10 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -28,9 +28,13 @@ ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KCONFIG
+ 
+ # unset in x-less environments as wayland
+ option(SESSION_MANAGEMENT "Build with session management" ON)
++# unset for cross environments
++option(AUTOTESTS "Perform autotests" ON)
+ 
+ add_subdirectory(src)
+-add_subdirectory(autotests)
++if(AUTOTESTS)
++    add_subdirectory(autotests)
++endif()
+ 
+ include (ECMPoQmTools)
+ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+-- 
+1.8.3.1
+

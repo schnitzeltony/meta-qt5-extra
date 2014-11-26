@@ -1,0 +1,64 @@
+From 551f7b06a5533a6d7ea2f8cd70f6da8f884f26a8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 26 Nov 2014 14:40:28 +0100
+Subject: [PATCH 1/2] Make sessionConfig optional
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+this is required for pure wayland environments
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt         | 4 +++-
+ src/gui/CMakeLists.txt | 4 +++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 588def5..6d0a350 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -6,8 +6,8 @@ find_package(ECM 1.4.0 REQUIRED NO_MODULE)
+ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+ 
+ set(REQUIRED_QT_VERSION 5.2.0)
+-
+ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Gui Xml)
++
+ include(KDEInstallDirs)
+ include(KDEFrameworkCompilerSettings)
+ include(KDECMakeSettings)
+@@ -26,6 +26,8 @@ ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KCONFIG
+                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5ConfigConfigVersion.cmake"
+                         SOVERSION 5)
+ 
++# unset in x-less environments as wayland
++option(SESSION_MANAGEMENT "Build with session management" ON)
+ 
+ add_subdirectory(src)
+ add_subdirectory(autotests)
+diff --git a/src/gui/CMakeLists.txt b/src/gui/CMakeLists.txt
+index 5d340af..91ebd38 100644
+--- a/src/gui/CMakeLists.txt
++++ b/src/gui/CMakeLists.txt
+@@ -3,7 +3,6 @@ find_package(Qt5Gui ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE)
+ find_package(Qt5Xml ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE)
+ 
+ set(libkconfiggui_SRCS
+-   kconfiggui.cpp
+    kconfiggroupgui.cpp
+    kconfigloader.cpp
+    kconfigskeleton.cpp
+@@ -11,6 +10,9 @@ set(libkconfiggui_SRCS
+    kwindowconfig.cpp
+    ${kconfig_QM_LOADER}
+ )
++if(SESSION_MANAGEMENT)
++   set(libkconfiggui_SRCS "${libkconfiggui_SRCS} kconfiggui.cpp")
++endif()
+ 
+ add_library(KF5ConfigGui ${libkconfiggui_SRCS})
+ generate_export_header(KF5ConfigGui BASE_NAME KConfigGui)
+-- 
+1.8.3.1
+

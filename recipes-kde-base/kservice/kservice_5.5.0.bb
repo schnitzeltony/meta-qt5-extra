@@ -1,4 +1,4 @@
-DESCRIPTION = "Reading, creating, and manipulating file archives"
+SUMMARY = "Advanced plugin and service introspection"
 LICENSE = "BSD & LGPLv2.1"
 LIC_FILES_CHKSUM = " \
 	file://COPYING-CMAKE-SCRIPTS;md5=3775480a712fc46a69647678acb234cb \

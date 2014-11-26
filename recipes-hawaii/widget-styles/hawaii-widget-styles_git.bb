@@ -1,4 +1,4 @@
-DESCRIPTION = "Styles for applications using QtQuick Controls"
+SUMMARY = "Styles for applications using QtQuick Controls"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c"
 

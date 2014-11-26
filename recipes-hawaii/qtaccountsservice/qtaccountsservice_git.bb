@@ -1,4 +1,4 @@
-DESCRIPTION = "Qt-style API to use freedesktop.org's AccountsService DBus service"
+SUMMARY = "Qt-style API to use freedesktop.org's AccountsService DBus service"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
 

@@ -1,4 +1,4 @@
-DESCRIPTION = "Hawaii desktop environment shell"
+SUMMARY = "Hawaii desktop environment shell"
 LICENSE = "LGPLv2 LGPLv2.1"
 LIC_FILES_CHKSUM = " \
 	file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit cmake_qt5 systemd cmake-lib
 
-DEPENDS = "qtbase qtdeclarative qtwayland qtwayland-native qtscript libhawaii fluid greenisland polkit-qt-1 qtconfiguration qtaccountsservice pixman wayland weston systemd alsa-lib"
+DEPENDS = "qtscript libhawaii fluid greenisland polkit-qt-1 qtconfiguration qtaccountsservice pixman wayland weston systemd alsa-lib solid krunner"
 RRECOMMENDS_${PN} += "hawaii-wallpapers"
 
 SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=master"
@@ -23,7 +23,7 @@ EXTRA_OECMAKE += " \
 	-DADDITIONAL_PATH=${bindir}/${QT_DIR_NAME} \
 "
 
-CMAKE_HIDE_ERROR[dir1] = "HawaiiShell/HawaiiShellTargets.cmake, -cccoutforoe filecheckloop"
+CMAKE_HIDE_ERROR[1] = "HawaiiShell/HawaiiShellTargets.cmake, -cccoutforoe filecheckloop, -cccoutforoe filecheckloop"
 
 FILES_${PN} += " \
 	${datadir}/hawaii \

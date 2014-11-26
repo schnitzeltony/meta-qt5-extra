@@ -1,4 +1,4 @@
-DESCRIPTION = "Reading, creating, and manipulating file archives"
+SUMMARY = "Advanced internationalization framework"
 LICENSE = "BSD & LGPLv2.1"
 LIC_FILES_CHKSUM = " \
 	file://COPYING-CMAKE-SCRIPTS;md5=3775480a712fc46a69647678acb234cb \
@@ -7,7 +7,10 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-CMAKE_HIDE_ERROR[dir1] = "KF5I18n/KF5I18nTargets.cmake, -cccoutforoe filecheckloop"
+# cross libs / headers
+CMAKE_HIDE_ERROR[1] = "KF5I18n, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_HIDE_ERROR[2] = "KF5I18n, -S${includedir}, -S${STAGING_INCDIR}"
+# revisit python?
 
 DEPENDS += "qtscript"
 

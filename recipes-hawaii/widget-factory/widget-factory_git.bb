@@ -1,4 +1,4 @@
-DESCRIPTION = "Showcase tool for Qt widgets styles, designed for testing new themes"
+SUMMARY = "Showcase tool for Qt widgets styles, designed for testing new themes"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING.BSD;md5=9e96e13a1a76211bcdb0255a5d42b01d"
 

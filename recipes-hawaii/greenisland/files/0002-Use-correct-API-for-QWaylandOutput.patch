@@ -1,0 +1,45 @@
+From af912a6bb0032cf0bec015883f7baa1e530c8891 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 26 Nov 2014 09:55:07 +0100
+Subject: [PATCH] Use correct API for QWaylandOutput
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The last patch-series sent mainline [1] differs from from mauii-qtwayland [2].
+Since we decided to use upstream, we have to follow different API.
+
+[1] https://codereview.qt-project.org/#/c/90881/
+[2] https://github.com/maui-project/qtwayland/blob/maui-5.3/src/compositor/compositor_api/qwaylandoutput.h
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/compositor/output.cpp | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/src/compositor/output.cpp b/src/compositor/output.cpp
+index f7bce60..498af0b 100644
+--- a/src/compositor/output.cpp
++++ b/src/compositor/output.cpp
+@@ -110,8 +110,7 @@ void OutputPrivate::_q_posChanged()
+  */
+ 
+ Output::Output(Compositor *compositor, KScreen::Output *output)
+-    : QWaylandOutput(compositor, new OutputWindow(compositor),
+-                     output->edid()->vendor(), output->edid()->serial())
++    : QWaylandOutput(compositor, new OutputWindow(compositor))
+     , d_ptr(new OutputPrivate(this))
+ {
+     Q_D(Output);
+@@ -124,6 +123,8 @@ Output::Output(Compositor *compositor, KScreen::Output *output)
+     setPhysicalSize(d->output->sizeMm());
+     d->_q_currentModeIdChanged();
+     d->_q_posChanged();
++    setManufacturer(output->edid()->vendor());
++    setModel(output->edid()->serial());
+ 
+     // React to output changes
+     connect(output, &KScreen::Output::isPrimaryChanged,
+-- 
+1.8.3.1
+

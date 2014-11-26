@@ -1,1 +1,0 @@
-INTERFACE_INCLUDE_DIRECTORIES "${includedir}/KF5/KWayland/Client;${includedir}/KF5;${includedir}/KF5"
