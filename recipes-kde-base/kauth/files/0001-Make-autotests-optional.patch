@@ -1,0 +1,43 @@
+From 3418e7c05012cf9cf5058132b12418e739bf62fb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 27 Nov 2014 09:19:51 +0100
+Subject: [PATCH] Make autotests optional
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [config]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e047a94..30edce6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -28,6 +28,9 @@ ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KAUTH
+                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5AuthConfigVersion.cmake"
+                         SOVERSION 5)
+ 
++# unset for cross environments
++option(AUTOTESTS "Perform autotests" ON)
++
+ find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
+ 
+ set(KAUTH_HELPER_INSTALL_DIR "${LIBEXEC_INSTALL_DIR}/kauth")
+@@ -37,7 +40,9 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+ endif()
+ 
+ add_subdirectory(src)
+-add_subdirectory(autotests)
++if(AUTOTESTS)
++    add_subdirectory(autotests)
++endif()
+ 
+ # create a Config.cmake and a ConfigVersion.cmake file and install them
+ set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Auth")
+-- 
+1.8.3.1
+
