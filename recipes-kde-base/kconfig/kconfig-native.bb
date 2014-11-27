@@ -1,5 +1,3 @@
 require ${BPN}.inc
 
 inherit native
-
-EXTRA_OECMAKE += "-DAUTOTESTS=OFF -DSESSION_MANAGEMENT=OFF"

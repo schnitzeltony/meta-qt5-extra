@@ -8,6 +8,8 @@ Content-Transfer-Encoding: 8bit
 
 this is required for pure wayland environments
 
+Upstream-Status: Inappropriate [config]
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
  CMakeLists.txt         | 4 +++-
