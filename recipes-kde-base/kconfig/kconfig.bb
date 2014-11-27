@@ -1,5 +1,7 @@
 require ${BPN}.inc
 
+inherit cmake-lib
+
 DEPENDS += "${BPN}-native"
 
 EXTRA_OECMAKE += "-DAUTOTESTS=OFF -DSESSION_MANAGEMENT=${@base_contains("DISTRO_FEATURES", "x11", "ON", "OFF", d)}"

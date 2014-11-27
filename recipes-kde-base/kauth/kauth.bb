@@ -1,5 +1,7 @@
 require ${BPN}.inc
 
+inherit cmake-lib
+
 DEPENDS += "${BPN}-native kcoreaddons"
 
 # cross libs / headers
