@@ -5,11 +5,9 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde cmake-lib
+inherit kde
 
 DEPENDS += "bzip2 xz zlib"
 
 SRCREV = "b75c77a2ba78755de25c08bb9532292b5ceb4d2d"
-
-CMAKE_HIDE_ERROR[1] = "KF5Archive, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Archive, -S${includedir}, -S${STAGING_INCDIR}"
+PV = "5.5.0"
