@@ -16,5 +16,7 @@ do_configure_append() {
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5DocTools, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5DocTools, -S${includedir}, -S${STAGING_INCDIR}"
+# native binaries
+CMAKE_HIDE_ERROR[3] = "KF5DocTools, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
 
 FILES_${PN}-dev += "${datadir}/kf5/kdoctools/customization"
