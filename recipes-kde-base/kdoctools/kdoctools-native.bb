@@ -4,5 +4,7 @@ inherit native
 
 DEPENDS += "libxslt-native libxml2-native karchive-native ki18n-native"
 
-# allarch packages do only install into host sysroot
-OECMAKE_EXTRA_ROOT_PATH = "${STAGING_DIR}/${MACHINE}"
+SRC_URI += " \
+	file://0003-install-docbookl10nhelper-we-need-the-native-one-for.patch \
+	file://0004-don-t-build-documentation.patch \
+"

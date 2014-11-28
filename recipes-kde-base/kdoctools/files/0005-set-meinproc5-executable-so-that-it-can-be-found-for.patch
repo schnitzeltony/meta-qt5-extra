@@ -1,0 +1,31 @@
+From f312d35d8430656d6fdabafc37073864afe1fcda Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 28 Nov 2014 11:16:49 +0100
+Subject: [PATCH 3/5] set meinproc5 executable so that it can be found for us
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [config]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ KF5DocToolsMacros.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/KF5DocToolsMacros.cmake b/KF5DocToolsMacros.cmake
+index f9c0d07..0df144e 100644
+--- a/KF5DocToolsMacros.cmake
++++ b/KF5DocToolsMacros.cmake
+@@ -60,7 +60,7 @@
+ #
+ 
+ set(KDOCTOOLS_SERIALIZE_TOOL "" CACHE STRING "Tool to serialize resource-intensive commands in parallel builds")
+-set(KDOCTOOLS_MEINPROC_EXECUTABLE "KF5::meinproc5")
++set(KDOCTOOLS_MEINPROC_EXECUTABLE "meinproc5")
+ 
+ if(KDOCTOOLS_SERIALIZE_TOOL)
+     # parallel build with many meinproc invocations can consume a huge amount of memory
+-- 
+1.8.3.1
+

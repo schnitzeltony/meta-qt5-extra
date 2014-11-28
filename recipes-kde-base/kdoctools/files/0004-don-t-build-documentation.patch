@@ -1,0 +1,30 @@
+From 760e76e826f935c72b4874f104773c954def532e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 28 Nov 2014 12:21:41 +0100
+Subject: [PATCH 4/4] don't build documentation
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 425c688..3adbd7e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -81,7 +81,6 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po" AND KF5I18n_FOUND)
+     kdoctools_install(po)
+ endif()
+ add_subdirectory(common)
+-add_subdirectory(docs)
+ add_subdirectory(src)
+ add_subdirectory(autotests)
+ 
+-- 
+1.8.3.1
+
