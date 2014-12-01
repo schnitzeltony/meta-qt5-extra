@@ -1,0 +1,32 @@
+From 8c6887cd57e862b919f7aa359a6721435c55ceae Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 1 Dec 2014 17:15:46 +0100
+Subject: [PATCH] install parsetrigrams - we need the native one for cross
+ compilation
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ data/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/data/CMakeLists.txt b/data/CMakeLists.txt
+index edf4b9a..4d41737 100644
+--- a/data/CMakeLists.txt
++++ b/data/CMakeLists.txt
+@@ -3,7 +3,7 @@ project(sonnetdata)
+ add_executable(parsetrigrams parsetrigrams.cpp)
+ 
+ TARGET_LINK_LIBRARIES(parsetrigrams PUBLIC Qt5::Core)
+-#INSTALL(TARGETS parsetrigrams DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
++install(TARGETS parsetrigrams EXPORT KF5SonnetTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+ 
+ macro(create_trigrams_map _target_name _in_DIR _out_FILE)
+     get_target_property(PARSETRIGRAMS_EXECUTABLE parsetrigrams LOCATION)
+-- 
+1.8.3.1
+

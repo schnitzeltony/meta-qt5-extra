@@ -6,10 +6,12 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-DEPENDS += "kauth kcodecs kdoctools"
-
-# cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5I18n, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5I18n, -S${includedir}, -S${STAGING_INCDIR}"
+DEPENDS += "kauth kcodecs kdoctools kguiaddons kwidgetsaddons"
 
 SRCREV = "c2e6bc012e801d4911deead21730ea5c7f0df651"
+
+# cross libs / headers
+CMAKE_HIDE_ERROR[1] = "KF5ConfigWidgets, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_HIDE_ERROR[2] = "KF5ConfigWidgets, -S${includedir}, -S${STAGING_INCDIR}"
+
+RDEPENDS_${PN} += "perl"

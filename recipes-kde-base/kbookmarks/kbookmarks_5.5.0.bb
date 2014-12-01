@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-DEPENDS += "kconfigwidgets"
+DEPENDS += "kconfigwidgets kconfig kiconthemes kxmlgui"
+
+SRCREV = "ccbd27549aad8a5efefe2c0b0e1473238451b471"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5I18n, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5I18n, -S${includedir}, -S${STAGING_INCDIR}"
-
-SRCREV = "ccbd27549aad8a5efefe2c0b0e1473238451b471"

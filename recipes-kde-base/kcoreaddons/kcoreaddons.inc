@@ -11,6 +11,6 @@ PV = "5.5.0"
 
 PACKAGES =+ "${PN}-bin"
 
-FILES_${PN} += "${datadir}"
+FILES_${PN} += "${datadir}/mime"
 FILES_${PN}-bin = "${bindir}/desktoptojson"
 

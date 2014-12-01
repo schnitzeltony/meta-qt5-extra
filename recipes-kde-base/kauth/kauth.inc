@@ -14,5 +14,5 @@ PV = "5.5.0"
 
 EXTRA_OECMAKE += "-DAUTOTESTS=OFF"
 
-FILES_${PN} += "${datadir} ${libdir}/plugins"
+FILES_${PN} += "${libdir}/plugins"
 FILES_${PN}-dbg += "${libdir}/plugins/*/*/.debug"
