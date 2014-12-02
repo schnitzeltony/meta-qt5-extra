@@ -6,14 +6,14 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde
 
+# REVISIT remove ugly hack for wayland-only environments
 SRC_URI += " \
 	file://0001-Make-sessionConfig-optional.patch \
-	file://0002-Make-autotests-optional-enabled-by-default.patch \
 "
 SRCREV = "f844f6a85e4bce35d0802eed11b19916d34ed78c"
 PV = "5.5.0"
 
-EXTRA_OECMAKE += "-DAUTOTESTS=OFF -DSESSION_MANAGEMENT=${@base_contains("DISTRO_FEATURES", "x11", "ON", "OFF", d)}"
+EXTRA_OECMAKE += "-DBUILD_TESTING=OFF -DSESSION_MANAGEMENT=${@bb.utils.contains("DISTRO_FEATURES", "x11", "ON", "OFF", d)}"
 
 PACKAGES =+ "${PN}-bin"
 
