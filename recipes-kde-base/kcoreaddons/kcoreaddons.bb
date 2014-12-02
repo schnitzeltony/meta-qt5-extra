@@ -2,7 +2,7 @@ require ${BPN}.inc
 
 inherit cmake-lib
 
-DEPENDS += "${BPN}-native"
+DEPENDS += "${BPN}-native shared-mime-info"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5CoreAddons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
