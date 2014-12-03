@@ -88,7 +88,8 @@ python do_populate_sysroot_append() {
             bb.fatal("Parameter %s is too short for CMAKE_HIDE_ERROR[%s] in %s" % (param, flag, pn))
 
     # first check if cmake files were installed to sysroot
-    if os.path.getsize(d.getVar('CMAKEINSTALLED', True)) == 0:
+    tmpfile = d.getVar('CMAKEINSTALLED', True)
+    if (not os.path.isfile(tmpfile)) or os.path.getsize(tmpfile) == 0:
         bb.warn("There were no cmake files installed by %s" % pn)
     else:
         # parse CMAKE_HIDE_ERROR[..]
