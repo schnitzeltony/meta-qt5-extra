@@ -9,7 +9,7 @@ inherit kde
 
 SRCREV = "174472e8aae63899dbf09c9c07ba249d84d4a4c0"
 
-DEPENDS += "qtdeclarative kconfig kcoreaddons ki18n kio"
+DEPENDS += "qtdeclarative kconfig kcoreaddons ki18n kio kservice solid"
 
 #CMAKE_HIDE_ERROR[1] = "KF5Solid, -S${libdir}, -S${STAGING_LIBDIR}"
 

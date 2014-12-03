@@ -6,7 +6,28 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-DEPENDS += "karchive kbookmarks"
+DEPENDS += " \
+	karchive \
+	kbookmarks \
+	kcodecs \
+	kcompletion \
+	kconfig \
+	kconfigwidgets \
+	kcoreaddons \
+	kdbusaddons \
+	kdoctools \
+	ki18n \
+	kiconthemes \
+	kitemviews \
+	kjobwidgets \
+	knotifications \
+	kservice \
+	solid \
+	kwidgetsaddons \
+	kwindowsystem \
+	kxmlgui \
+	kwallet \
+"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5I18n, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
