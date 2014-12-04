@@ -11,6 +11,7 @@ SRCREV = "1424bccf5b6772c072612c72f2db8e0ce50cd1d3"
 DEPENDS += "qtdeclarative"
 
 CMAKE_HIDE_ERROR[1] = "KF5Solid, -S${libdir}, -S${STAGING_LIBDIR}"
+CMAKE_HIDE_ERROR[2] = "KF5Solid, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${libdir}/qml"
 FILES_${PN}-dbg += "${libdir}/qml/org/kde/${BPN}/.debug"
