@@ -1,0 +1,85 @@
+From b296208cc206a502b462452b6b5bc5b2c6f64feb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 4 Dec 2014 09:34:39 +0100
+Subject: [PATCH] workaround session-less qtbase - required for pure wayland
+ environments
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/kmainwindow.cpp | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/src/kmainwindow.cpp b/src/kmainwindow.cpp
+index 9562318..b40d18e 100644
+--- a/src/kmainwindow.cpp
++++ b/src/kmainwindow.cpp
+@@ -127,6 +127,7 @@ KMWSessionManager::~KMWSessionManager()
+ 
+ bool KMWSessionManager::saveState(QSessionManager &)
+ {
++#ifndef QT_NO_SESSIONMANAGER
+     KConfig *config = KConfigGui::sessionConfig();
+     if (KMainWindow::memberList().count()) {
+         // According to Jochen Wilhelmy <digisnap@cs.tu-berlin.de>, this
+@@ -142,6 +143,7 @@ bool KMWSessionManager::saveState(QSessionManager &)
+ 
+     KConfigGroup group(config, "Number");
+     group.writeEntry("NumberOfWindows", n);
++#endif
+     return true;
+ }
+ 
+@@ -370,6 +372,9 @@ QMenu *KMainWindow::customHelpMenu(bool showWhatsThis)
+ 
+ bool KMainWindow::canBeRestored(int number)
+ {
++#ifdef QT_NO_SESSIONMANAGER
++    return false;
++#else    
+     if (!qApp->isSessionRestored()) {
+         return false;
+     }
+@@ -381,10 +386,14 @@ bool KMainWindow::canBeRestored(int number)
+     KConfigGroup group(config, QStringLiteral("Number"));
+     const int n = group.readEntry(QStringLiteral("NumberOfWindows"), 1);
+     return number >= 1 && number <= n;
++#endif
+ }
+ 
+ const QString KMainWindow::classNameOfToplevel(int number)
+ {
++#ifdef QT_NO_SESSIONMANAGER
++    return QString();
++#else
+     if (!qApp->isSessionRestored()) {
+         return QString();
+     }
+@@ -402,10 +411,12 @@ const QString KMainWindow::classNameOfToplevel(int number)
+     } else {
+         return group.readEntry(QStringLiteral("ClassName"));
+     }
++#endif
+ }
+ 
+ bool KMainWindow::restore(int number, bool show)
+ {
++#ifndef QT_NO_SESSIONMANAGER
+     if (!canBeRestored(number)) {
+         return false;
+     }
+@@ -416,6 +427,7 @@ bool KMainWindow::restore(int number, bool show)
+         }
+         return false;
+     }
++#endif
+     return false;
+ }
+ 
+-- 
+1.8.3.1
+
