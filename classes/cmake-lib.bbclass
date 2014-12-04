@@ -124,20 +124,28 @@ python do_populate_sysroot_append() {
             # Now do the replacements
             if len(matching_files) > 0:
                 replacement_performed = False
+                # HACK/REVISIT: do_siteconfig causes double replacement.
+                # Add a marker to detect that we already replaced
+                replace_key = "#CMAKE_HIDE_ERROR[%s]-%s replaced" % (flag, pn)
                 for filename in matching_files:
                     filename = filename.replace('\n','')
                     f = open(filename, 'r')
                     cmakestr = f.read()
                     f.close()
-                    cmakestr_new = cmakestr.replace(search, replace)
-                    # Only overwrite if necessary
-                    if cmakestr_new != cmakestr:
-                        f = open(filename, 'w')
-                        f.write(cmakestr_new)
-                        f.close()
+                    if cmakestr.find(replace_key) == -1:
+                        cmakestr_new = cmakestr.replace(search, replace)
+                        # Only overwrite if necessary
+                        if cmakestr_new != cmakestr:
+                            f = open(filename, 'w')
+                            f.write(cmakestr_new)
+                            f.write("\n")
+                            f.write(replace_key)
+                            f.close()
+                            replacement_performed = True
+                    else:
                         replacement_performed = True
                 if not replacement_performed:
-                   bb.warn("No cmake replacements performed in %s for CMAKE_HIDE_ERROR[%s]" % (pn, flag))
+                    bb.warn("No cmake replacements performed in %s for CMAKE_HIDE_ERROR[%s]" % (pn, flag))
 }
 
 do_populate_sysroot[vardeps] += "CMAKE_HIDE_ERROR"
