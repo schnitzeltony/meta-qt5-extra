@@ -1,0 +1,35 @@
+From 184ac153212ef545434ec56c3d414b636c11e6d3 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 4 Dec 2014 14:44:29 +0100
+Subject: [PATCH] add NO_CMAKE_FIND_ROOT_PATH in find to org.kde.KWallet.xml
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+in sysrooted environment build ended up in:
+
+| make[2]: *** No rule to make target '/home/a.mueller/tmp/oe-core-glibc/work/cortexa9hf-vfp-neon-angstrom-linux-gnueabi/kwallet/5.5.0-r0/git/src/runtime/kwalletd/kwallet_xml-NOTFOUND', needed by 'src/runtime/kwalletd/home/a.mueller/tmp/oe-core-glibc/work/cortexa9hf-vfp-neon-angstrom-linux-gnueabi/kwallet/5.5.0-r0/git/src/runtime/kwalletd/kwallet_xml-notfound.cpp'.  Stop.
+
+Upstream-Status: pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/runtime/kwalletd/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/runtime/kwalletd/CMakeLists.txt b/src/runtime/kwalletd/CMakeLists.txt
+index 907ef19..4b71d85 100644
+--- a/src/runtime/kwalletd/CMakeLists.txt
++++ b/src/runtime/kwalletd/CMakeLists.txt
+@@ -79,7 +79,7 @@ if (KF5Gpgmepp_FOUND)
+     )
+ endif(KF5Gpgmepp_FOUND)
+ 
+-find_file(kwallet_xml org.kde.KWallet.xml HINTS ${CMAKE_CURRENT_SOURCE_DIR}/../../api/KWallet)
++find_file(kwallet_xml org.kde.KWallet.xml HINTS ${CMAKE_CURRENT_SOURCE_DIR}/../../api/KWallet NO_CMAKE_FIND_ROOT_PATH)
+ 
+ qt5_add_dbus_adaptor( kwalletd_SRCS ${kwallet_xml} kwalletd.h KWalletD )
+ 
+-- 
+1.8.3.1
+

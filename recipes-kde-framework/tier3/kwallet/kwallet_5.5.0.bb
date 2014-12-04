@@ -6,12 +6,27 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-DEPENDS += "libgcrypt gpgme kconfig kwindowsystem ki18n"
+DEPENDS += " \
+	libgcrypt \
+	gpgme-native gpgme \
+	kconfig \
+	kcoreaddons \
+	kdbusaddons \
+	kiconthemes \
+	ki18n \
+	knotifications \
+	kservice \
+	kwidgetsaddons \
+	kwindowsystem \
+"
 
+# TBD: add KF5Gpgmepp with PACKAGECONFIG??
+
+SRC_URI += "file://0001-add-NO_CMAKE_FIND_ROOT_PATH-in-find-to-org.kde.KWall.patch"
 SRCREV = "85723c9c84a1a47e4e108de812183ac07656859b"
 
-#EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
-
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5XmlGui, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5XmlGui, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_HIDE_ERROR[1] = "KF5Wallet, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_HIDE_ERROR[2] = "KF5Wallet, -S${includedir}, -S${STAGING_INCDIR}"
+
+FILES_${PN} += "${datadir}"
