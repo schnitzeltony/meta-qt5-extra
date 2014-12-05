@@ -7,12 +7,13 @@ inherit cmake_qt5 cmake-lib
 DEPENDS = "qtbase qtdeclarative extra-cmake-modules-native"
 
 SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
-SRCREV = "bfa0935cd39ea157b21fc42d9e8ad7df35ddc137"
-PV = "0.2.90+git${SRCPV}"
+SRCREV = "20f7fcf49c90108c42f3ce0b7357775a846dfc2d"
 
 S = "${WORKDIR}/git"
 
-CMAKE_HIDE_ERROR[1] = "Hawaii/HawaiiTargets.cmake, -cccoutforoe filecheckloop, -cccoutforoe filecheckloop"
+CMAKE_HIDE_ERROR[1] = "Hawaii, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_HIDE_ERROR[2] = "Hawaii, -S${includedir}, -S${STAGING_INCDIR}"
+
 
 FILES_${PN} += "${libdir}/hawaii"
 FILES_${PN}-dev += "${libdir}/cmake"
