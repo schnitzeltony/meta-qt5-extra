@@ -13,11 +13,10 @@ DEPENDS = "qtbase qtdeclarative dconf"
 
 SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
 SRCREV = "804739d73de982fc144ff45653c243cefcfa79cb"
-PV = "0.3.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-CMAKE_HIDE_ERROR[1] = "QtConfiguration/QtConfigurationTargets.cmake, -cccoutforoe filecheckloop, -cccoutforoe filecheckloop"
+CMAKE_HIDE_ERROR[1] = "QtConfiguration, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 
 FILES_${PN} += "${libdir}/hawaii/qml/Hawaii/Configuration"
 FILES_${PN}-dbg += "${libdir}/hawaii/qml/Hawaii/Configuration/.debug"
