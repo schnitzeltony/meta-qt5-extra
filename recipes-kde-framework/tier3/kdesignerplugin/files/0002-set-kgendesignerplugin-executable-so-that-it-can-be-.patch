@@ -1,0 +1,55 @@
+From 20b5f1474e4b2b3ad3b492b8f5323e6d4e2656b3 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 5 Dec 2014 19:19:24 +0100
+Subject: [PATCH 2/2] set kgendesignerplugin executable so that it can be found
+ for us
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ KF5DesignerPluginConfig.cmake | 2 +-
+ KF5DesignerPluginMacros.cmake | 2 +-
+ src/CMakeLists.txt            | 1 -
+ 3 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/KF5DesignerPluginConfig.cmake b/KF5DesignerPluginConfig.cmake
+index df6ca1f..c264b26 100644
+--- a/KF5DesignerPluginConfig.cmake
++++ b/KF5DesignerPluginConfig.cmake
+@@ -1,3 +1,3 @@
+ include(${CMAKE_CURRENT_LIST_DIR}/KF5DesignerPluginTargets.cmake)
+ include(${CMAKE_CURRENT_LIST_DIR}/KF5DesignerPluginMacros.cmake)
+-set(KF5DESIGNERPLUGIN_GENERATOR_EXECUTABLE KF5::kgendesignerplugin)
++set(KF5DESIGNERPLUGIN_GENERATOR_EXECUTABLE kgendesignerplugin)
+diff --git a/KF5DesignerPluginMacros.cmake b/KF5DesignerPluginMacros.cmake
+index 15db23d..5a4d044 100644
+--- a/KF5DesignerPluginMacros.cmake
++++ b/KF5DesignerPluginMacros.cmake
+@@ -53,7 +53,7 @@ function(kf5designerplugin_generate_plugin outvar widgetfile)
+ 
+     # create source file from the .widgets file
+     add_custom_command(OUTPUT ${source}
+-        COMMAND KF5::kgendesignerplugin
++        COMMAND kgendesignerplugin
+         ARGS -o ${source} ${input}
+         MAIN_DEPENDENCY ${input})
+ 
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index a3fc29b..3ec8c39 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -13,7 +13,6 @@ set(kgendesignerplugin_SRCS
+   ${kdesignerplugin_QM_LOADER}
+ )
+ add_executable(kgendesignerplugin ${kgendesignerplugin_SRCS})
+-add_executable(KF5::kgendesignerplugin ALIAS kgendesignerplugin)
+ ecm_mark_nongui_executable(kgendesignerplugin)
+ 
+ target_link_libraries(kgendesignerplugin KF5::ConfigCore # KConfig + KConfigGroup
+-- 
+1.8.3.1
+
