@@ -35,8 +35,6 @@ SRCREV = "c2f140fae7c37dad38b6834be7cd8075cd9116cf"
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Plasma, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5Plasma, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_HIDE_ERROR[3] = "KF5PlasmaQuick, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[4] = "KF5PlasmaQuick, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
 	${datadir}/k*5 \
