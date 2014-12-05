@@ -4,10 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7dbc59dc445b2261c4fb2f9466e3446a"
 
 inherit kde cmake-lib
 
-CMAKE_HIDE_ERROR[1] = "PolkitQt5-1, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "PolkitQt5-1, -S${includedir}, -S${STAGING_INCDIR}"
-
 DEPENDS += "polkit glib-2.0"
 
 SRCREV = "40afa675bfa4cacd95487ce8b0544654c5f34e21"
-PV = "0.112.0+git${SRCPV}"
+
+CMAKE_HIDE_ERROR[1] = "PolkitQt5-1, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_HIDE_ERROR[2] = "PolkitQt5-1, -S${includedir}, -S${STAGING_INCDIR}"
