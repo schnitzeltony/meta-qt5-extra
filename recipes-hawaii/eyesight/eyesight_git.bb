@@ -6,8 +6,8 @@ inherit cmake_qt5
 
 DEPENDS = "qtbase qttools-native"
 
-SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
-SRCREV = "6438ca8bd17ebbad98e6ed146cac7ed423f739bb"
+SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=master"
+SRCREV = "a39cbf9d5f18dac29ec0116b317a238433793411"
 PV = "0.1.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
