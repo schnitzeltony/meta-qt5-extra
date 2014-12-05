@@ -9,7 +9,7 @@ SRC_URI = "git://anongit.kde.org/extra-cmake-modules;protocol=git"
 SRCREV = "7e535b93cdbb7420d241c00cb9c0abf462ff59d8"
 S = "${WORKDIR}/git"
 
-DEPENDS = "qttools-native"
+DEPENDS = "qttools"
 
 FILES_${PN} += "${datadir}/ECM"
 
