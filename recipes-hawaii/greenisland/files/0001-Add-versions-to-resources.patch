@@ -90,9 +90,9 @@ index 8de2f24..d24db01 100644
  QuickSurface::QuickSurface(wl_client *client, quint32 id, Compositor *compositor)
 -    : QWaylandQuickSurface(client, id, compositor)
 +    : QWaylandQuickSurface(client, id, 2, compositor)
+     , m_state(Normal)
+     , m_globalPos(-1, -1)
  {
- }
- 
 -- 
 1.8.3.1
 

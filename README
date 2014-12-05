@@ -1,4 +1,4 @@
-OE layer to build hawaii desktop [1]
+OE layer to desktop environments based on qt5
 
 This layer depends on:
 
@@ -11,5 +11,3 @@ branch: master
 revision: HEAD
 
 Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
-
-[1] http://www.maui-project.org
