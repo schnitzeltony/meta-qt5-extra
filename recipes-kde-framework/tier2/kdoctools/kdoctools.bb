@@ -20,6 +20,6 @@ CMAKE_HIDE_ERROR[2] = "KF5DocTools, -S${includedir}, -S${STAGING_INCDIR}"
 CMAKE_HIDE_ERROR[3] = "KF5DocTools, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
 
 # make meinproc5 find kdoctools data
-CMAKE_HIDE_ERROR[4] = "KF5DocToolsMacros.cmake, -s--stylesheet, -S--srcdir ${STAGING_DATADIR}/kf5/kdoctools --stylesheet"
+CMAKE_HIDE_ERROR[4] = "KF5DocToolsMacros.cmake, -sCOMMAND ${KDOCTOOLS_MEINPROC_EXECUTABLE}, -SCOMMAND ${KDOCTOOLS_MEINPROC_EXECUTABLE} --srcdir ${STAGING_DATADIR}/kf5/kdoctools"
 
 FILES_${PN}-dev += "${datadir}/kf5/kdoctools/customization"
