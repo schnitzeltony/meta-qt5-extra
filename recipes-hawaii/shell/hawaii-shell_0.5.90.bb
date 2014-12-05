@@ -12,7 +12,6 @@ RRECOMMENDS_${PN} += "hawaii-wallpapers"
 
 SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=master"
 SRCREV = "55bb4e9f5b861eff7e552cc27b61969fb1f7b728"
-PV = "0.5.90"
 
 S = "${WORKDIR}/git"
 
