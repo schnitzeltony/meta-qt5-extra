@@ -2,7 +2,7 @@ SUMMARY = "Support library to make Qt-based Wayland compositors development easi
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
 
-inherit kde pkgconfig
+inherit cmake_qt5 pythonnative pkgconfig
 
 DEPENDS = "extra-cmake-modules-native qtbase qtdeclarative qtwayland ki18n libkscreen kservice kpackage virtual/egl"
 
