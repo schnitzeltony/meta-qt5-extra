@@ -11,3 +11,5 @@ SRCREV = "a39cbf9d5f18dac29ec0116b317a238433793411"
 PV = "0.1.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
+
+FILES_${PN} += "${datadir}/appdata"
