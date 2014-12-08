@@ -1,0 +1,442 @@
+From 777d0012423a4cce76230b22c422fb20bb77c25a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 8 Dec 2014 13:37:14 +0100
+Subject: [PATCH 3/3] only build kf5-config for native
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt                |  21 +---
+ src/CMakeLists.txt            | 222 ------------------------------------------
+ src/kdecore/kglobal.cpp       |  18 ----
+ src/kdecore/klocale_kde.cpp   |   4 -
+ src/kdecore/kstandarddirs.cpp |   1 -
+ 5 files changed, 2 insertions(+), 264 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 493d309..127fafd 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -16,27 +16,11 @@ include(CMakeFindFrameworks)
+ set(KF5_VERSION "5.5.0") # handled by release scripts
+ set(KF5_DEP_VERSION "5.5.0") # handled by release scripts
+ set(REQUIRED_QT_VERSION 5.2.0)
+-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network Widgets DBus Test Svg PrintSupport Designer)
++find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network Widgets DBus Test)
+ 
+-find_package(KF5Completion ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5Config ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5ConfigWidgets ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5Crash ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5DesignerPlugin ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5GlobalAccel ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5GuiAddons ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5IconThemes ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5KIO ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5Notifications ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5Parts ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5Service ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5TextWidgets ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5UnitConversion ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5WidgetsAddons ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5WindowSystem ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5XmlGui ${KF5_DEP_VERSION} REQUIRED)
++find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
+ 
+ if(WIN32)
+     find_package(KDEWin REQUIRED)
+@@ -149,7 +133,6 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+ endif()
+ add_subdirectory(cmake)
+ add_subdirectory(data)
+-add_subdirectory(docs)
+ add_subdirectory(src)
+ 
+ if (BUILD_TESTING)
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 4a1d80d..f9b4b35 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1,6 +1,4 @@
+ add_subdirectory(includes)
+-add_subdirectory(kdebugdialog)
+-add_subdirectory(solid-networkstatus)
+ add_subdirectory(l10n)
+ if(NOT HAVE_NEPOMUK)
+    set(KIO_NO_NEPOMUK TRUE)
+@@ -21,30 +19,6 @@ if(NOT KIO_NO_NEPOMUK)
+ endif()
+ 
+ 
+-find_package(OpenSSL)
+-set_package_properties(OpenSSL PROPERTIES DESCRIPTION "Support for secure network communications (SSL and TLS)"
+-                       URL "http://openssl.org"
+-                       TYPE RECOMMENDED
+-                       PURPOSE "KDE uses OpenSSL for the bulk of secure communications, including secure web browsing via HTTPS"
+-                      )
+-if(OPENSSL_FOUND)
+-   set(KSSL_HAVE_SSL 1)
+-   include_directories(${OPENSSL_INCLUDE_DIR})
+-endif()
+-
+-add_subdirectory( kioslave )
+-add_subdirectory( kssl/kssl )
+-add_subdirectory( kssl/kcm )
+-add_subdirectory( kio/imageformats )
+-
+-if(WIN32)
+-   set(libkdelibs4support_SRCS solid/networking_win.cpp
+-                               kdeui/kapplication_win.cpp)
+-else()
+-   set(libkdelibs4support_SRCS solid/networking.cpp)
+-endif()
+-
+-
+ set(libkdelibs4support_SRCS
+     ${libkdelibs4support_SRCS}
+     kdecore/k4aboutdata.cpp
+@@ -52,39 +26,9 @@ set(libkdelibs4support_SRCS
+     kdecore/kcurrencycode.cpp
+     kdecore/kdebug.cpp
+     kdecore/kdebugdbusiface.cpp
+-    kdecore/kdeversion.cpp
+-    kdecore/kkernel_mac.cpp
+-    kdecore/kkernel_win.cpp
+-    kdecore/klibloader.cpp
+-    kdecore/klibrary.cpp
+-    kdecore/ktemporaryfile.cpp
+-    kdecore/ktempdir.cpp
+-    kdecore/kmd5.cpp
+-    kdecore/kmimetype.cpp
+-    kdecore/kmimetyperepository.cpp
+-    kdecore/ksavefile.cpp
+-    kdecore/ksocketfactory.cpp
+-    kdecore/k3socketdevice.cpp
+-    kdecore/k3bufferedsocket.cpp
+-    kdecore/k3clientsocketbase.cpp
+-    kdecore/k3resolver.cpp
+-    kdecore/k3resolvermanager.cpp
+-    kdecore/k3resolverworkerbase.cpp
+-    kdecore/k3resolverstandardworkers.cpp
+-    kdecore/k3reverseresolver.cpp
+-    kdecore/k3serversocket.cpp
+-    kdecore/k3socketaddress.cpp
+-    kdecore/k3socketbase.cpp
+-    kdecore/k3streamsocket.cpp
+-    kdecore/k3socketbuffer.cpp
+-    kdecore/netsupp.cpp
+-    kdecore/kascii.cpp
+-    kdecore/qtest_kde.cpp
+     kdecore/kstandarddirs.cpp
+     kdecore/kglobal.cpp
+     kdecore/kcmdlineargs.cpp
+-    kdecore/kurl.cpp
+-    kdecore/kstringhandler_deprecated.cpp
+     kdecore/kcalendarera.cpp
+     kdecore/kcalendarsystem.cpp
+     kdecore/kcalendarsystemcoptic.cpp
+@@ -108,96 +52,6 @@ set(libkdelibs4support_SRCS
+     kdecore/ktzfiletimezone.cpp
+     kdecore/klocale.cpp
+     kdecore/klocale_kde.cpp
+-
+-    kdeui/k3icon.cpp
+-    kdeui/k4style.cpp
+-    kdeui/kaction.cpp
+-    kdeui/kapplication.cpp
+-    kdeui/kbuttongroup.cpp
+-    kdeui/kcolorchoosermode.cpp
+-    kdeui/kcolordialog.cpp
+-    kdeui/kcolorhelpers.cpp
+-    kdeui/kcolorvalueselector.cpp
+-    kdeui/kdeuiwidgetsproxystyle.cpp
+-    kdeui/kdialog.cpp
+-    kdeui/kdialogqueue.cpp
+-    kdeui/kfontcombobox.cpp
+-    kdeui/fonthelpers.cpp
+-    kdeui/kfontdialog.cpp
+-    kdeui/khuesaturationselect.cpp
+-    kdeui/kpassivepopupmessagehandler.cpp
+-    kdeui/ksessionmanager.cpp
+-    kdeui/kfadewidgeteffect.cpp
+-    kdeui/kicon.cpp
+-    kdeui/kinputdialog.cpp
+-    kdeui/knumvalidator.cpp
+-    kdeui/karrowbutton.cpp
+-    kdeui/ksplashscreen.cpp
+-    kdeui/kstringvalidator.cpp
+-    kdeui/kdialogbuttonbox.cpp
+-    kdeui/kpixmapcache.cpp
+-    kdeui/kprogressdialog.cpp
+-    kdeui/kmenu.cpp
+-    kdeui/kmenubar.cpp
+-    kdeui/kshortcut.cpp
+-    kdeui/kstatusbar.cpp
+-    kdeui/ksystemtrayicon.cpp
+-    kdeui/ktabbar.cpp
+-    kdeui/ktabwidget.cpp
+-    kdeui/kuniqueapplication.cpp
+-    kdeui/khbox.cpp
+-    kdeui/kvbox.cpp
+-    kdeui/kmessagebox_queued.cpp
+-    kdeui/kmessageboxmessagehandler.cpp
+-    kdeui/kpushbutton.cpp
+-    kdeui/kundostack.cpp
+-    kdeui/krestrictedline.cpp
+-    kdeui/klistwidget.cpp
+-    kdeui/ktextbrowser.cpp
+-    kdeui/keditlistbox.cpp
+-    kdeui/knuminput.cpp
+-    kdeui/kglobalsettings.cpp
+-    kdeui/kdatetimewidget.cpp
+-    kdeui/kdatewidget.cpp
+-    kdeui/k4timezonewidget.cpp
+-    kdeui/kdeprintdialog.cpp
+-    kdeui/kprintpreview.cpp
+-
+-    kio/kfilemetainfowidget.cpp
+-    kio/kdiskfreespace.cpp
+-    kio/metainfojob.cpp
+-    kio/kdevicelistmodel.cpp
+-    kio/kdevicelistitem.cpp
+-    kio/kfiledialog.cpp
+-    kssl/ksslx509v3.cpp
+-    kssl/kssl.cpp
+-    kssl/ksslutils.cpp
+-    kssl/ksslcertchain.cpp
+-    kssl/ksslcertificate.cpp
+-    kssl/kopenssl.cpp
+-    kio/kfileshare.cpp
+-    kio/kfileitemactionplugin.cpp
+-    kio/passworddialog.cpp
+-    kio/kdatatool.cpp
+-    kio/kfilemetadataconfigurationwidget.cpp
+-    kio/kfilemetadatawidget.cpp
+-    kio/kfilemetainfowidget.cpp
+-    kio/kmetaprops.cpp
+-    kio/knfotranslator.cpp
+-    kio/kfilemetainfo.cpp
+-    kio/kfilemetainfoitem.cpp
+-    kio/kcommentwidget.cpp
+-    kio/predicateproperties.cpp
+-    kio/kfilewriteplugin.cpp
+-#     kio/kpreviewprops.cpp
+-    kio/kscan.cpp
+-    kio/netaccess.cpp
+-    kio/kdirselectdialog.cpp
+-    kio/kimageio.cpp
+-    kio/kfiletreeview.cpp
+-
+-    kparts/factory.cpp
+-    solid/powermanagement.cpp
+ )
+ 
+ set_source_files_properties( solid/org.freedesktop.PowerManagement.xml
+@@ -205,36 +59,6 @@ set_source_files_properties( solid/org.freedesktop.PowerManagement.xml
+                              solid/org.kde.Solid.PowerManagement.PolicyAgent.xml
+                              PROPERTIES NO_NAMESPACE TRUE)
+ 
+-qt5_add_dbus_interface(libkdelibs4support_SRCS solid/org.kde.Solid.Networking.Client.xml
+-                       org_kde_solid_networking_client)
+-
+-qt5_add_dbus_interfaces(libkdelibs4support_SRCS solid/org.freedesktop.PowerManagement.xml
+-                        solid/org.freedesktop.PowerManagement.Inhibit.xml
+-                        solid/org.kde.Solid.PowerManagement.PolicyAgent.xml)
+-
+-if (NOT KIO_NO_NEPOMUK)
+-    set(libkdelibs4support_SRCS ${libkdelibs4support_SRCS}
+-        kio/kfilemetadatareader.cpp
+-        kio/kfilemetadatareaderprocess.cpp
+-        kio/kfilemetadataprovider.cpp
+-    )
+-endif ()
+-
+-if (X11_FOUND)
+-   set(libkdelibs4support_SRCS ${libkdelibs4support_SRCS} kdeui/kxerrorhandler.cpp )
+-   list(APPEND libkdelibs4support_OPTIONAL_LIBS Qt5::X11Extras ${X11_LIBRARIES})
+-endif ()
+-
+-if (WIN32)
+-    set(libkdelibs4support_SRCS ${libkdelibs4support_SRCS}
+-                            kdecore/klockfile_win.cpp
+-                            kdecore/kde_file_win.cpp
+-                            kdecore/ktimezone_win.cpp
+-                            kdecore/klocale_win.cpp
+-                            )
+-else()
+-    set(libkdelibs4support_SRCS ${libkdelibs4support_SRCS} kdecore/klockfile_unix.cpp)
+-endif ()
+ 
+ if (APPLE)
+     set(libkdelibs4support_SRCS ${libkdelibs4support_SRCS}
+@@ -260,10 +84,6 @@ configure_file(kdecore/config-date.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-da
+ configure_file(kdecore/config-localization.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-localization.h)
+ 
+ 
+-# Configure checks for network/ but also for netsupp.*
+-include(ConfigureChecks.cmake)
+-configure_file(config-network.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-network.h )
+-
+ check_function_exists(mmap HAVE_MMAP)
+ check_symbol_exists(posix_madvise "sys/mman.h" HAVE_MADVISE)
+ configure_file(config-kdelibs4support.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kdelibs4support.h )
+@@ -311,30 +131,11 @@ target_link_libraries(KF5KDELibs4Support
+ PUBLIC
+    Qt5::Widgets
+    Qt5::DBus
+-   Qt5::PrintSupport
+    KF5::CoreAddons
+-   KF5::Crash
+-   KF5::WidgetsAddons
+    KF5::ConfigCore # KSharedConfig in kcomponentdata.h
+-   KF5::ConfigWidgets
+-   KF5::KIOCore
+-   KF5::KIOFileWidgets
+    KF5::I18n
+-   KF5::Completion
+-   KF5::Notifications
+-   KF5::IconThemes
+-   KF5::WindowSystem
+-   KF5::GuiAddons
+-   KF5::UnitConversion
+-   KF5::TextWidgets
+-   KF5::Parts
+ PRIVATE
+-   KF5::UnitConversion
+-   KF5::GlobalAccel
+-   Qt5::Svg
+    Qt5::Test # for qtest_kde.cpp
+-   ${KIO_EXTRA_LIBS}
+-   ${libkdelibs4support_OPTIONAL_LIBS}
+    ${platformLinkLibraries}
+ )
+ 
+@@ -362,29 +163,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
+ )
+ 
+ 
+-########## Designer plugin
+-
+-kf5designerplugin_add_plugin(kf5deprecatedwidgets
+-    kdedeprecated.widgets
+-    kdedeprecated.qrc
+-    classpreviews.cpp
+-)
+-
+-target_link_libraries(kf5deprecatedwidgets KF5::KDELibs4Support
+-                                    Qt5::Widgets
+-                                    Qt5::Designer
+-                                    KF5::ConfigCore
+-                                    KF5::Completion
+-                                    KF5::WidgetsAddons
+-                                    KF5::Auth
+-                                    )
+-
+-install(TARGETS kf5deprecatedwidgets DESTINATION ${QT_PLUGIN_INSTALL_DIR}/designer)
+-
+-##########
+-
+-add_subdirectory(pics)
+-
+ install(TARGETS KF5KDELibs4Support
+         EXPORT KF5KDELibs4SupportTargets
+         ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+diff --git a/src/kdecore/kglobal.cpp b/src/kdecore/kglobal.cpp
+index d493314..5373b4e 100644
+--- a/src/kdecore/kglobal.cpp
++++ b/src/kdecore/kglobal.cpp
+@@ -42,7 +42,6 @@
+ #include <kconfig.h>
+ #include <klocale.h>
+ #include <klocalizedstring.h>
+-#include <kcharsets.h>
+ #include "kstandarddirs.h"
+ #include <kcomponentdata.h>
+ #undef QT_NO_TRANSLATION
+@@ -50,14 +49,12 @@
+ #define QT_NO_TRANSLATION
+ #include <QtCore/QDebug>
+ #include <QtCore/QTextCodec>
+-#include <unistd.h> // umask
+ 
+ // ~KConfig needs qrand(). qrand() depends on a Q_GLOBAL_STATIC. With this Q_CONSTRUCTOR_FUNCTION we
+ // try to make qrand() live longer than any KConfig object.
+ Q_CONSTRUCTOR_FUNCTION(qrand)
+ 
+ typedef QSet<QString> KStringDict;
+-mode_t s_umsk;
+ 
+ class KGlobalPrivate
+ {
+@@ -66,10 +63,6 @@ public:
+         : dirs(0),
+           stringDict(0)
+     {
+-        // the umask is read here before any threads are created to avoid race conditions
+-        mode_t tmp = 0;
+-        s_umsk = umask(tmp);
+-        umask(s_umsk);
+     }
+ 
+     inline ~KGlobalPrivate()
+@@ -126,17 +119,6 @@ bool KGlobal::hasLocale()
+     return QCoreApplication::instance() != 0;
+ }
+ 
+-KCharsets *KGlobal::charsets()
+-{
+-    return KCharsets::charsets();
+-}
+-
+-mode_t KGlobal::umask()
+-{
+-    // Don't use PRIVATE_DATA here. This is called by ~KGlobalPrivate -> ~KConfig -> sync -> KSaveFile, so there's no KGlobalPrivate anymore.
+-    return s_umsk;
+-}
+-
+ KComponentData KGlobal::activeComponent()
+ {
+     return KComponentData::activeComponent();
+diff --git a/src/kdecore/klocale_kde.cpp b/src/kdecore/klocale_kde.cpp
+index 8203855..2c571f4 100644
+--- a/src/kdecore/klocale_kde.cpp
++++ b/src/kdecore/klocale_kde.cpp
+@@ -42,7 +42,6 @@
+ #include <QtCore/QTextCodec>
+ #include <QtCore/QFile>
+ #include <QtCore/QDebug>
+-#include <QPrinter>
+ #include <QtCore/QRegExp>
+ #include <QtCore/QLocale>
+ #include <QtCore/QHash>
+@@ -485,9 +484,6 @@ void KLocalePrivate::initFormat()
+                        m_weekNumberSystem, KLocale::WeekNumberSystem);
+ 
+     // other
+-#ifndef QT_NO_PRINTER
+-    readConfigNumEntry("PageSize", QPrinter::A4, m_pageSize, QPrinter::PageSize);
+-#endif
+     readConfigNumEntry("MeasureSystem", KLocale::Metric, m_measureSystem, KLocale::MeasureSystem);
+     QString calendarType;
+     readConfigEntry("CalendarSystem", "gregorian", calendarType);
+diff --git a/src/kdecore/kstandarddirs.cpp b/src/kdecore/kstandarddirs.cpp
+index 4161425..6bb6a69 100644
+--- a/src/kdecore/kstandarddirs.cpp
++++ b/src/kdecore/kstandarddirs.cpp
+@@ -35,7 +35,6 @@
+ #include "kkernel_win.h"
+ #include "kkernel_mac.h"
+ #include "klocalizedstring.h"
+-#include <kservice_export.h>
+ 
+ #include <config-kstandarddirs.h>
+ #include <config-kdelibs4support.h>
+-- 
+1.8.3.1
+
