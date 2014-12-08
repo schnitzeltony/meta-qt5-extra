@@ -8,12 +8,12 @@ inherit kde
 
 # REVISIT remove ugly hack for wayland-only environments
 SRC_URI += " \
-	file://0001-Make-sessionConfig-optional.patch \
+	file://0001-kconfiggui-do-only-compile-in-case-sessions-are-aval.patch \
 "
 SRCREV = "f844f6a85e4bce35d0802eed11b19916d34ed78c"
 PV = "5.5.0"
 
-EXTRA_OECMAKE += "-DBUILD_TESTING=OFF -DSESSION_MANAGEMENT=${@bb.utils.contains("DISTRO_FEATURES", "x11", "ON", "OFF", d)}"
+EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 PACKAGES =+ "${PN}-bin"
 

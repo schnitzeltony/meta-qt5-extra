@@ -1,0 +1,36 @@
+From 937afec57c851536b0a3a798dece2c81c594402f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 8 Dec 2014 10:53:07 +0100
+Subject: [PATCH] kconfiggui: do only compile in case sessions are avaliable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/gui/kconfiggui.cpp | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/gui/kconfiggui.cpp b/src/gui/kconfiggui.cpp
+index 0048c60..a16f8f3 100644
+--- a/src/gui/kconfiggui.cpp
++++ b/src/gui/kconfiggui.cpp
+@@ -25,6 +25,8 @@
+ 
+ #include <kconfig.h>
+ 
++#ifndef QT_NO_SESSIONMANAGER
++
+ static KConfig *s_sessionConfig = Q_NULLPTR;
+ 
+ KConfig *KConfigGui::sessionConfig()
+@@ -50,3 +52,4 @@ QString KConfigGui::sessionConfigName()
+     return QString(QLatin1String("session/%1_%2_%3")).arg(QGuiApplication::applicationName()).arg(sessionId).arg(sessionKey);
+ }
+ 
++#endif // QT_NO_SESSIONMANAGER
+-- 
+1.8.3.1
+
