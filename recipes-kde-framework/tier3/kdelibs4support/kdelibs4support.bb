@@ -36,4 +36,4 @@ CMAKE_HIDE_ERROR[1] = "KDELibs4, -S${includedir}, -S${STAGING_INCDIR}"
 CMAKE_HIDE_ERROR[2] = "KDELibs4, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 
 # native executables
-CMAKE_HIDE_ERROR[5] = "KF5KDELibs4Support, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
+CMAKE_HIDE_ERROR[3] = "KF5KDELibs4Support, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
