@@ -27,6 +27,7 @@ DEPENDS += " \
 	kwindowsystem \
 	kxmlgui \
 	kwallet \
+	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)} \
 "
 
 SRCREV = "72b971ef5618b41452e709819b217be4ba5a200e"
