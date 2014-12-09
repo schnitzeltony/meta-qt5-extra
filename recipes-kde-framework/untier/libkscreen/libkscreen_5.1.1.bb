@@ -11,7 +11,10 @@ inherit kde cmake-lib
 
 SRC_URI += "file://0001-fix-configuration-build-on-x-less-systems.patch"
 
-DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "wayland", "kwayland", "qtx11extras", d)}"
+DEPENDS += " \
+	${@bb.utils.contains("DISTRO_FEATURES", "wayland", "kwayland", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
+"
 
 FILES_${PN}-dbg += "${libdir}/plugins/kf5/kscreen/.debug"
 
