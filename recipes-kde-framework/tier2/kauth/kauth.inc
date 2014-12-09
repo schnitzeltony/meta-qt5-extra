@@ -8,6 +8,7 @@ inherit kde
 
 SRC_URI += " \
 	file://0001-Make-autotests-optional.patch \
+	file://0003-align-installation-location-for-helpers.patch \
 "
 SRCREV = "4f6d10cdc59aca6819e4189e81ff65150559bc10"
 PV = "5.5.0"

@@ -1,0 +1,31 @@
+From 53e5bcaf4d30c4837ea048e99bcc627d48c40d2b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 9 Dec 2014 08:49:14 +0100
+Subject: [PATCH 3/3] align installation location for helpers
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4dc666f..0353292 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -33,7 +33,7 @@ option(AUTOTESTS "Perform autotests" ON)
+ 
+ find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
+ 
+-set(KAUTH_HELPER_INSTALL_DIR "${LIBEXEC_INSTALL_DIR}/kauth")
++set(KAUTH_HELPER_INSTALL_DIR "${LIBEXEC_INSTALL_DIR}")
+ 
+ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+     ecm_install_po_files_as_qm(po)
+-- 
+1.8.3.1
+
