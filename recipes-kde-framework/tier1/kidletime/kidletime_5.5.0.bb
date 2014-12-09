@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
+DEPENDS += " \
+	${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb qtx11extras", "", d)} \
+"
 
 SRC_URI += "file://0001-Do-not-search-for-Qt5X11Extras-in-x-less-environment.patch"
 SRCREV = "31e0bc0429000c93da91cba8df79b08e1afd6a9b"
