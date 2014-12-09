@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
+DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)}"
 
 SRCREV = "7a614f29db3a0fbdcf6fe7ce2897c83ed505c11c"
 
