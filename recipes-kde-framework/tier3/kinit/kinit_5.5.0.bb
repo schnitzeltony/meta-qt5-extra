@@ -6,7 +6,17 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde
 
-DEPENDS += "libcap kservice kio ki18n kwindowsystem kcrash kconfig kdoctools"
+DEPENDS += " \
+	libcap \
+	kservice \
+	kio \
+	ki18n \
+	kwindowsystem \
+	kcrash \
+	kconfig \
+	kdoctools \
+	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)} \
+"
 
 SRCREV = "14620f5d142ebc4f24fb29f3277489627226e6ce"
 SRC_URI += "file://0001-return-WAYLAND_DISPLAY-if-all-known-options-fail.patch"
