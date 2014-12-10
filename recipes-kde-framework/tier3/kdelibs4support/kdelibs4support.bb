@@ -37,3 +37,15 @@ CMAKE_HIDE_ERROR[2] = "KDELibs4, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 
 # native executables
 CMAKE_HIDE_ERROR[3] = "KF5KDELibs4Support, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
+
+FILES_${PN} += " \
+	${datadir}/k*5 \
+	${datadir}/dbus-1 \
+	${libdir}/plugins \
+"
+
+FILES_${PN}-dbg += " \
+	${libdir}/plugins/.debug \
+	${libdir}/plugins/kf5/*/.debug \
+	${libdir}/plugins/*/.debug \
+"

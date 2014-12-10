@@ -13,15 +13,3 @@ SRC_URI += " \
 "
 SRCREV = "eab967901725ce9e553f768cf549a2b5cc26b351"
 PV = "5.5.0"
-
-FILES_${PN} += " \
-	${datadir}/k*5 \
-	${datadir}/dbus-1 \
-	${libdir}/plugins \
-"
-
-FILES_${PN}-dbg += " \
-	${libdir}/plugins/.debug \
-	${libdir}/plugins/kf5/*/.debug \
-	${libdir}/plugins/*/.debug \
-"
