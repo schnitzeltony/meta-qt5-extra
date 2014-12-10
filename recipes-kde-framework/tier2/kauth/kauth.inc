@@ -14,6 +14,3 @@ SRCREV = "4f6d10cdc59aca6819e4189e81ff65150559bc10"
 PV = "5.5.0"
 
 EXTRA_OECMAKE += "-DAUTOTESTS=OFF"
-
-FILES_${PN} += "${libdir}/plugins"
-FILES_${PN}-dbg += "${libdir}/plugins/*/*/.debug"

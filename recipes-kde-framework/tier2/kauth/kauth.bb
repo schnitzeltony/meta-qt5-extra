@@ -12,3 +12,6 @@ CMAKE_HIDE_ERROR[2] = "KF5Auth, -S${includedir}, -S${STAGING_INCDIR}"
 
 # executables
 CMAKE_HIDE_ERROR[3] = "KF5Auth, -S${libexecdir}/kauth-policy-gen, -S${STAGING_LIBDIR_NATIVE}/${BPN}/kauth-policy-gen"
+
+FILES_${PN} += "${libdir}/plugins"
+FILES_${PN}-dbg += "${libdir}/plugins/*/*/.debug"
