@@ -1,8 +1,8 @@
 require recipes-qt/qt5/qt5-${PV}.inc
-require ${PN}.inc
+require qt-native-ext.inc
 
-SRC_URI[md5sum] = "f7972e80970ff26a908c43defb3d10e6"
-SRC_URI[sha256sum] = "1ec5c2f307ee55740cc8c82dc2ca4037dbc0ca398b4e32abbd967535e71ae30f"
+SRC_URI[md5sum] = "857e8040b2bf45c114a7d75ec6ef94ee"
+SRC_URI[sha256sum] = "acab0307039e117475caf2c95e425ead09ab5ee08ce15205fb3c0af7d7ec1abb"
 
 # older copyright year than what e.g. qtbase is using now
 LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
