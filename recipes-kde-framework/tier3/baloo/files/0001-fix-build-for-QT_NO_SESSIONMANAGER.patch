@@ -1,0 +1,47 @@
+From 432cefd14f0056c5c81587079fe93c9244f59b5e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 9 Dec 2014 14:48:36 +0100
+Subject: [PATCH] fix build for QT_NO_SESSIONMANAGER
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/file/main.cpp | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/file/main.cpp b/src/file/main.cpp
+index e46ce47..c8b0c8b 100644
+--- a/src/file/main.cpp
++++ b/src/file/main.cpp
+@@ -38,7 +38,10 @@
+ 
+ #include <QDBusConnection>
+ #include <QApplication>
++
++#ifndef QT_NO_SESSIONMANAGER
+ #include <QSessionManager>
++#endif
+ 
+ int main(int argc, char** argv)
+ {
+@@ -57,11 +60,13 @@ int main(int argc, char** argv)
+     QApplication app(argc, argv);
+     app.setQuitOnLastWindowClosed(false);
+ 
++#ifndef QT_NO_SESSIONMANAGER
+     auto disableSessionManagement = [](QSessionManager &sm) {
+         sm.setRestartHint(QSessionManager::RestartNever);
+     };
+     QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
+     QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
++#endif
+ 
+     KConfig config(QLatin1String("baloofilerc"));
+     KConfigGroup group = config.group("Basic Settings");
+-- 
+1.8.3.1
+
