@@ -14,9 +14,3 @@ SRCREV = "f844f6a85e4bce35d0802eed11b19916d34ed78c"
 PV = "5.5.0"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
-
-PACKAGES =+ "${PN}-bin"
-
-FILES_${PN}-dbg += "${libdir}/kconfig/kf5/.debug"
-FILES_${PN}-bin = "${bindir}/k*"
-
