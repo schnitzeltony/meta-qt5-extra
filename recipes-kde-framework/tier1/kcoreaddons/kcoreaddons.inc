@@ -8,9 +8,3 @@ inherit kde
 
 SRCREV = "cdc7f71a4072ec540618116c02bab0cd4ea4061e"
 PV = "5.5.0"
-
-PACKAGES =+ "${PN}-bin"
-
-FILES_${PN} += "${datadir}/mime"
-FILES_${PN}-bin = "${bindir}/desktoptojson"
-
