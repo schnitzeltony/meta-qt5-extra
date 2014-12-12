@@ -1,0 +1,71 @@
+From 3a6f33573dc8a15d7b283f546352ae9423257a55 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 1 Dec 2014 17:15:46 +0100
+Subject: [PATCH] build and install parsetrigrams only - we need the native one
+ for cross compilation
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt      | 10 +++-------
+ data/CMakeLists.txt |  2 +-
+ 2 files changed, 4 insertions(+), 8 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b7d1d70..1c7a32e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -12,7 +12,7 @@ include(KDEFrameworkCompilerSettings)
+ include(KDECMakeSettings)
+ 
+ set(REQUIRED_QT_VERSION 5.2.0)
+-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Widgets)
++find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
+ 
+ include(FeatureSummary)
+ include(GenerateExportHeader)
+@@ -33,12 +33,9 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+     ecm_install_po_files_as_qm(po)
+ endif()
+ 
+-add_subdirectory(src)
+-add_subdirectory(autotests)
+ add_subdirectory(data)
+-add_subdirectory(examples)
+-
+ 
++if(False)
+ # create a Config.cmake and a ConfigVersion.cmake file and install them
+ set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Sonnet")
+ 
+@@ -52,9 +49,8 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/KF5SonnetConfig.cmake"
+               "${CMAKE_CURRENT_BINARY_DIR}/KF5SonnetConfigVersion.cmake"
+         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"  COMPONENT Devel )
+ 
+-install(EXPORT KF5SonnetTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5SonnetTargets.cmake NAMESPACE KF5:: )
+-
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/sonnet_version.h
+         DESTINATION ${KF5_INCLUDE_INSTALL_DIR} COMPONENT Devel )
+ 
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
++endif()
+diff --git a/data/CMakeLists.txt b/data/CMakeLists.txt
+index edf4b9a..bd82228 100644
+--- a/data/CMakeLists.txt
++++ b/data/CMakeLists.txt
+@@ -3,7 +3,7 @@ project(sonnetdata)
+ add_executable(parsetrigrams parsetrigrams.cpp)
+ 
+ TARGET_LINK_LIBRARIES(parsetrigrams PUBLIC Qt5::Core)
+-#INSTALL(TARGETS parsetrigrams DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
++INSTALL(TARGETS parsetrigrams DESTINATION ${BIN_INSTALL_DIR})
+ 
+ macro(create_trigrams_map _target_name _in_DIR _out_FILE)
+     get_target_property(PARSETRIGRAMS_EXECUTABLE parsetrigrams LOCATION)
+-- 
+1.8.3.1
+
