@@ -1,0 +1,128 @@
+From 8c46905e3a2183fef583adb28f92c8b2d16d0698 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 12 Dec 2014 12:32:55 +0100
+Subject: [PATCH 3/3] build kauth-policy-gen only with for polkit-qt-1 backend
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+we need that for native build
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt            |  4 +++-
+ src/CMakeLists.txt        | 12 ++++++++----
+ src/ConfigureChecks.cmake | 17 ++++-------------
+ 3 files changed, 15 insertions(+), 18 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5e37f30..360ab24 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -6,7 +6,7 @@ find_package(ECM 1.5.0 REQUIRED NO_MODULE)
+ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+ 
+ set(REQUIRED_QT_VERSION 5.2.0)
+-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Widgets DBus)
++find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED DBus)
+ include(KDEInstallDirs)
+ include(KDEFrameworkCompilerSettings)
+ include(KDECMakeSettings)
+@@ -44,6 +44,7 @@ if(AUTOTESTS)
+     add_subdirectory(autotests)
+ endif()
+ 
++if(False)
+ # create a Config.cmake and a ConfigVersion.cmake file and install them
+ set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Auth")
+ 
+@@ -69,3 +70,4 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kauth_version.h
+ 
+ 
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
++endif()
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 946d042..e6fab04 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ 
+-find_package(Qt5 5.2.0 CONFIG REQUIRED Widgets DBus)
++find_package(Qt5 5.2.0 CONFIG REQUIRED DBus)
+ 
+ # This file handles all the logic for compiling KAuth's backends
+ include(ConfigureChecks.cmake)
+@@ -9,6 +9,7 @@ configure_file(BackendsConfig.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/BackendsConfig
+ 
+ ecm_create_qm_loader(KAuth_QM_LOADER kauth5_qt)
+ 
++if(False)
+ set(libkauth_SRCS
+     kauthaction.cpp
+     kauthactionreply.cpp
+@@ -47,12 +48,13 @@ ecm_generate_headers(KAuth_HEADERS
+ 
+   REQUIRED_HEADERS KAuth_HEADERS
+ )
++endif()
+ 
+ # KAuth policy generator executable
+ 
+ # Compile only if fake backend has not been selected
+ 
+-if (NOT "${KAUTH_BACKEND_NAME}" STREQUAL "FAKE")
++#if (NOT "${KAUTH_BACKEND_NAME}" STREQUAL "FAKE")
+     # KAUTH_POLICY_GEN_SRCS has been generated from ConfigureChecks.cmake
+     add_executable(kauth-policy-gen ${KAUTH_POLICY_GEN_SRCS})
+     add_executable(KF5::kauth-policy-gen ALIAS kauth-policy-gen)
+@@ -60,9 +62,10 @@ if (NOT "${KAUTH_BACKEND_NAME}" STREQUAL "FAKE")
+     # KAUTH_POLICY_GEN_LIBRARIES has been generated from ConfigureChecks.cmake
+     target_link_libraries( kauth-policy-gen PRIVATE ${KAUTH_POLICY_GEN_LIBRARIES} )
+ 
+-    install( TARGETS kauth-policy-gen EXPORT KF5AuthTargets DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
+-endif ()
++    install( TARGETS kauth-policy-gen DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
++#endif ()
+ 
++if(False)
+ # KAuth backend plugin
+ 
+ if (NOT "${KAUTH_BACKEND_NAME}" STREQUAL "FAKE")
+@@ -111,3 +114,4 @@ string(REPLACE "-pedantic" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+ include(ECMGeneratePriFile)
+ ecm_generate_pri_file(BASE_NAME KAuth LIB_NAME KF5Auth DEPS "core KCoreAddons" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KF5_INCLUDE_INSTALL_DIR}/KAuth)
+ install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
++endif()
+diff --git a/src/ConfigureChecks.cmake b/src/ConfigureChecks.cmake
+index d46761a..48f33a2 100644
+--- a/src/ConfigureChecks.cmake
++++ b/src/ConfigureChecks.cmake
+@@ -169,19 +169,10 @@ set(KAUTH_POLICY_GEN_SRCS
+     policy-gen/policy-gen.cpp )
+ set(KAUTH_POLICY_GEN_LIBRARIES)
+ 
+-if(KAUTH_BACKEND_NAME STREQUAL "OSX")
+-   set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
+-       backends/mac/kauth-policy-gen-mac.cpp)
+-   set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES} ${CORE_FOUNDATION_LIBRARY} ${SECURITY_LIBRARY} Qt5::Core)
+-elseif(KAUTH_BACKEND_NAME STREQUAL "POLKITQT")
+-   set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
+-       backends/policykit/kauth-policy-gen-polkit.cpp )
+-elseif(KAUTH_BACKEND_NAME STREQUAL "POLKITQT5-1")
+-  set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
+-      backends/polkit-1/kauth-policy-gen-polkit1.cpp )
+-  set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES}
+-      Qt5::Core)
+-endif()
++set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
++    backends/polkit-1/kauth-policy-gen-polkit1.cpp )
++set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES}
++    Qt5::Core)
+ 
+ ########################
+ # Helper backend probing
+-- 
+1.8.3.1
+

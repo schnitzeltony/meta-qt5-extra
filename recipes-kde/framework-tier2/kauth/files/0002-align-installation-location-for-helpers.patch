@@ -1,7 +1,7 @@
-From 53e5bcaf4d30c4837ea048e99bcc627d48c40d2b Mon Sep 17 00:00:00 2001
+From 013bd6451624d6deb23e64485a552ce92d09a4ee Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Tue, 9 Dec 2014 08:49:14 +0100
-Subject: [PATCH 3/3] align installation location for helpers
+Subject: [PATCH 2/3] align installation location for helpers
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -14,7 +14,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 4dc666f..0353292 100644
+index 98248c7..5e37f30 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -33,7 +33,7 @@ option(AUTOTESTS "Perform autotests" ON)
