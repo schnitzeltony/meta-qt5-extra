@@ -1,0 +1,44 @@
+From 5dbf63f820aac695f093f42722e5b312bb3b7834 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 12 Dec 2014 11:26:14 +0100
+Subject: [PATCH 2/2] keep gui stuff out of native build
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt     | 2 +-
+ src/CMakeLists.txt | 1 -
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3cd0863..17c1279 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -7,7 +7,7 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+ 
+ set(REQUIRED_QT_VERSION 5.2.0)
+ 
+-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Gui Xml)
++find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Xml)
+ include(KDEInstallDirs)
+ include(KDEFrameworkCompilerSettings)
+ include(KDECMakeSettings)
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index f7c79ce..464ae2b 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1,7 +1,6 @@
+ ecm_create_qm_loader(kconfig_QM_LOADER kconfig5_qt)
+ 
+ add_subdirectory(core)
+-add_subdirectory(gui)
+ add_subdirectory(kconfig_compiler)
+ add_subdirectory(kconf_update)
+ add_subdirectory(kreadconfig)
+-- 
+1.8.3.1
+

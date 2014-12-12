@@ -1,7 +1,8 @@
-From 937afec57c851536b0a3a798dece2c81c594402f Mon Sep 17 00:00:00 2001
+From d372a1593e1d22e84034ac3ea14d401d5ae4ef71 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Mon, 8 Dec 2014 10:53:07 +0100
-Subject: [PATCH] kconfiggui: do only compile in case sessions are avaliable
+Subject: [PATCH 1/2] kconfiggui: do only compile in case sessions are
+ avaliable
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
