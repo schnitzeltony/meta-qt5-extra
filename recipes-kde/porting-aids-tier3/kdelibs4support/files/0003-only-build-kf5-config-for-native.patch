@@ -1,4 +1,4 @@
-From 777d0012423a4cce76230b22c422fb20bb77c25a Mon Sep 17 00:00:00 2001
+From c3c9d326fffcdda31086f307c49c4de11668ad35 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Mon, 8 Dec 2014 13:37:14 +0100
 Subject: [PATCH 3/3] only build kf5-config for native
@@ -11,14 +11,14 @@ Upstream-Status: Inappropriate [cross-specific]
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
  CMakeLists.txt                |  21 +---
- src/CMakeLists.txt            | 222 ------------------------------------------
+ src/CMakeLists.txt            | 223 ------------------------------------------
  src/kdecore/kglobal.cpp       |  18 ----
  src/kdecore/klocale_kde.cpp   |   4 -
  src/kdecore/kstandarddirs.cpp |   1 -
- 5 files changed, 2 insertions(+), 264 deletions(-)
+ 5 files changed, 2 insertions(+), 265 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 493d309..127fafd 100644
+index 493d309..3eca192 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -16,27 +16,11 @@ include(CMakeFindFrameworks)
@@ -26,7 +26,7 @@ index 493d309..127fafd 100644
  set(KF5_DEP_VERSION "5.5.0") # handled by release scripts
  set(REQUIRED_QT_VERSION 5.2.0)
 -find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network Widgets DBus Test Svg PrintSupport Designer)
-+find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network Widgets DBus Test)
++find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network DBus Test)
  
 -find_package(KF5Completion ${KF5_DEP_VERSION} REQUIRED)
  find_package(KF5Config ${KF5_DEP_VERSION} REQUIRED)
@@ -60,7 +60,7 @@ index 493d309..127fafd 100644
  
  if (BUILD_TESTING)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 4a1d80d..f9b4b35 100644
+index 4a1d80d..5543fb2 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -1,6 +1,4 @@
@@ -286,9 +286,11 @@ index 4a1d80d..f9b4b35 100644
  check_function_exists(mmap HAVE_MMAP)
  check_symbol_exists(posix_madvise "sys/mman.h" HAVE_MADVISE)
  configure_file(config-kdelibs4support.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kdelibs4support.h )
-@@ -311,30 +131,11 @@ target_link_libraries(KF5KDELibs4Support
+@@ -309,32 +129,12 @@ endif()
+ 
+ target_link_libraries(KF5KDELibs4Support
  PUBLIC
-    Qt5::Widgets
+-   Qt5::Widgets
     Qt5::DBus
 -   Qt5::PrintSupport
     KF5::CoreAddons
@@ -317,7 +319,7 @@ index 4a1d80d..f9b4b35 100644
     ${platformLinkLibraries}
  )
  
-@@ -362,29 +163,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
+@@ -362,29 +162,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
  )
  
  
