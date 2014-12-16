@@ -1,0 +1,2681 @@
+From 075f70fe0a537f46425d9445f8df9d034a13257d Mon Sep 17 00:00:00 2001
+From: Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+Date: Mon, 26 Aug 2013 08:18:56 +0200
+Subject: [PATCH] Add QWaylandOutput to support multiple outputs
+
+Add a new QWaylandOutput class to support multiple outputs.
+
+A window is no longer passed to QWaylandCompositor constructor
+and all output related methods are removed, however one or more
+outputs are required for hardware integration.
+
+QWaylandCompositor returns a list of outputs and emits signals when
+outputs are added or removed.
+
+The QWaylandOutput constructor and destructor automatically manage
+the list of outpus and emit signals.
+
+QWaylandOutputs are created by compositor implementations after
+QWaylandCompositor is instantiated.
+
+Hardware integration is initialized when the first output
+is created and it is deleted when no output is left.
+
+Compositors are encouraged to inherit QWaylandOutput to support high
+level concepts such as primary output.
+They will also send wl_surface.enter and wl_surface.leave events
+themselves when a surface view enters or leaves an output.
+
+Each QWaylandOutput need a window for rendering.
+
+Rename OutputGlobal to Output and Output to OutputResource.
+
+Add support for physical size and available geometry.
+
+Use better defaults for geometry and refreshRate from the QWindow
+if available.
+
+Change-Id: I742996571ddb78328f7bfa4f79b25a81995279e1
+Done-with: Jan Arne Petersen <jan.petersen@kdab.com>
+---
+ examples/wayland/qml-compositor/main.cpp                   |  81 ++++---
+ examples/wayland/qwindow-compositor/main.cpp               |   9 +-
+ examples/wayland/qwindow-compositor/qwindowcompositor.cpp  |  57 +++--
+ examples/wayland/qwindow-compositor/qwindowcompositor.h    |   5 +-
+ examples/wayland/server-buffer/compositor/main.cpp         |  55 +++--
+ src/compositor/compositor_api/compositor_api.pri   |   5 +-
+ .../compositor_api/qwaylandcompositor.cpp          |  45 +---
+ src/compositor/compositor_api/qwaylandcompositor.h |  27 +--
+ src/compositor/compositor_api/qwaylandoutput.cpp   | 265 +++++++++++++++++++++
+ src/compositor/compositor_api/qwaylandoutput.h     | 149 ++++++++++++
+ src/compositor/compositor_api/qwaylandoutput_p.h   |  65 +++++
+ .../compositor_api/qwaylandquickcompositor.cpp     | 117 ++++++---
+ .../compositor_api/qwaylandquickcompositor.h       |  18 +-
+ .../compositor_api/qwaylandquickcompositor_p.h     |  73 ++++++
+ .../compositor_api/qwaylandquicksurface.cpp        |  38 ++-
+ .../compositor_api/qwaylandquicksurface.h          |   5 +
+ src/compositor/wayland_wrapper/qwlcompositor.cpp   | 115 ++++-----
+ src/compositor/wayland_wrapper/qwlcompositor_p.h   |  20 +-
+ .../wayland_wrapper/qwlextendedoutput.cpp          |   2 +-
+ .../wayland_wrapper/qwlextendedoutput_p.h          |   4 +-
+ .../wayland_wrapper/qwlinputpanelsurface.cpp       |   5 +-
+ src/compositor/wayland_wrapper/qwloutput.cpp       | 228 ++++++++++++++----
+ src/compositor/wayland_wrapper/qwloutput_p.h       |  85 ++++---
+ src/compositor/wayland_wrapper/qwlshellsurface.cpp |  57 ++++-
+ .../drmeglserverbufferintegration.cpp              |   9 +-
+ .../libhybriseglserverbufferintegration.cpp        |   9 +-
+ .../waylandeglclientbufferintegration.cpp          |   8 +-
+ .../xcomposite-egl/xcompositeeglintegration.cpp    |   8 +-
+ .../xcomposite-glx/xcompositeglxintegration.cpp    |   7 +-
+ .../xcomposite_share/xcompositehandler.cpp         |   9 +-
+ tests/auto/compositor/testcompositor.cpp           |   2 +-
+ tests/auto/compositor/tst_compositor.cpp           |  20 +-
+ 32 files changed, 1258 insertions(+), 344 deletions(-)
+ create mode 100644 src/compositor/compositor_api/qwaylandoutput.cpp
+ create mode 100644 src/compositor/compositor_api/qwaylandoutput.h
+ create mode 100644 src/compositor/compositor_api/qwaylandoutput_p.h
+ create mode 100644 src/compositor/compositor_api/qwaylandquickcompositor_p.h
+
+diff --git a/examples/wayland/qml-compositor/main.cpp b/examples/wayland/qml-compositor/main.cpp
+index 26e730d..6ca3b0b 100644
+--- a/examples/wayland/qml-compositor/main.cpp
++++ b/examples/wayland/qml-compositor/main.cpp
+@@ -1,5 +1,6 @@
+ /****************************************************************************
+ **
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ ** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+ ** Contact: http://www.qt-project.org/legal
+ **
+@@ -41,35 +42,31 @@
+ #include "qwaylandquickcompositor.h"
+ #include "qwaylandquicksurface.h"
+ 
++#include <QtCompositor/qwaylandoutput.h>
+ #include <QtCompositor/qwaylandsurfaceitem.h>
+ 
+ #include <QGuiApplication>
+ #include <QTimer>
+ #include <QPainter>
+ #include <QMouseEvent>
++#include <QScreen>
+ 
+ #include <QQmlContext>
+ 
+ #include <QQuickItem>
+ #include <QQuickView>
+ 
+-class QmlCompositor : public QQuickView, public QWaylandQuickCompositor
++class QmlCompositor : public QWaylandQuickCompositor
+ {
+     Q_OBJECT
+     Q_PROPERTY(QWaylandQuickSurface* fullscreenSurface READ fullscreenSurface WRITE setFullscreenSurface NOTIFY fullscreenSurfaceChanged)
+ 
+ public:
+     QmlCompositor()
+-        : QWaylandQuickCompositor(this, 0, DefaultExtensions | SubSurfaceExtension)
++        : QWaylandQuickCompositor(0, DefaultExtensions | SubSurfaceExtension)
+         , m_fullscreenSurface(0)
+     {
+-        setSource(QUrl("main.qml"));
+-        setResizeMode(QQuickView::SizeRootObjectToView);
+-        setColor(Qt::black);
+-        winId();
+         addDefaultShell();
+-
+-        connect(this, SIGNAL(afterRendering()), this, SLOT(sendCallbacks()));
+     }
+ 
+     QWaylandQuickSurface *fullscreenSurface() const
+@@ -100,6 +97,13 @@ public slots:
+         emit fullscreenSurfaceChanged();
+     }
+ 
++    void sendCallbacks() {
++        if (m_fullscreenSurface)
++            sendFrameCallbacks(QList<QWaylandSurface *>() << m_fullscreenSurface);
++        else
++            sendFrameCallbacks(surfaces());
++    }
++
+ private slots:
+     void surfaceMapped() {
+         QWaylandQuickSurface *surface = qobject_cast<QWaylandQuickSurface *>(sender());
+@@ -119,20 +123,7 @@ private slots:
+         emit windowDestroyed(QVariant::fromValue(surface));
+     }
+ 
+-    void sendCallbacks() {
+-        if (m_fullscreenSurface)
+-            sendFrameCallbacks(QList<QWaylandSurface *>() << m_fullscreenSurface);
+-        else
+-            sendFrameCallbacks(surfaces());
+-    }
+-
+ protected:
+-    void resizeEvent(QResizeEvent *event)
+-    {
+-        QQuickView::resizeEvent(event);
+-        QWaylandCompositor::setOutputGeometry(QRect(0, 0, width(), height()));
+-    }
+-
+     void surfaceCreated(QWaylandSurface *surface) {
+         connect(surface, SIGNAL(destroyed(QObject *)), this, SLOT(surfaceDestroyed(QObject *)));
+         connect(surface, SIGNAL(mapped()), this, SLOT(surfaceMapped()));
+@@ -143,19 +134,53 @@ private:
+     QWaylandQuickSurface *m_fullscreenSurface;
+ };
+ 
++class QmlWindow : public QQuickView
++{
++    Q_OBJECT
++
++public:
++    QmlWindow(QmlCompositor *compositor)
++        : QQuickView()
++        , m_compositor(compositor)
++    {
++        setSource(QUrl("main.qml"));
++        setResizeMode(QQuickView::SizeRootObjectToView);
++        setColor(Qt::black);
++        winId();
++
++        connect(this, SIGNAL(afterRendering()), m_compositor, SLOT(sendCallbacks()));
++    }
++
++private:
++    QmlCompositor *m_compositor;
++};
++
+ int main(int argc, char *argv[])
+ {
+     QGuiApplication app(argc, argv);
+ 
+-    QmlCompositor compositor;
+-    compositor.setTitle(QLatin1String("QML Compositor"));
+-    compositor.setGeometry(0, 0, 1024, 768);
+-    compositor.show();
++    QmlCompositor *compositor = new QmlCompositor();
++
++    QmlWindow *window = new QmlWindow(compositor);
++    window->setTitle(QLatin1String("QML Compositor"));
++    window->setGeometry(QRect(0, 0, 1024, 768));
++    window->setMinimumSize(window->geometry().size());
++    window->setMaximumSize(window->minimumSize());
++    window->rootContext()->setContextProperty("compositor", compositor);
++
++    QObject::connect(compositor, SIGNAL(windowAdded(QVariant)),
++                     window->rootObject(), SLOT(windowAdded(QVariant)));
++    QObject::connect(compositor, SIGNAL(windowResized(QVariant)),
++                     window->rootObject(), SLOT(windowResized(QVariant)));
++
++    QWaylandOutput *output = new QWaylandOutput(compositor, window);
++    output->setManufacturer(QStringLiteral("QtCompositor"));
++    output->setModel(QStringLiteral("QmlCompositor Output"));
++    output->setRefreshRate(60000);
+ 
+-    compositor.rootContext()->setContextProperty("compositor", &compositor);
++    window->rootContext()->setContextProperty("output", output);
+ 
+-    QObject::connect(&compositor, SIGNAL(windowAdded(QVariant)), compositor.rootObject(), SLOT(windowAdded(QVariant)));
+-    QObject::connect(&compositor, SIGNAL(windowResized(QVariant)), compositor.rootObject(), SLOT(windowResized(QVariant)));
++    window->show();
+ 
+     return app.exec();
+ }
+diff --git a/examples/wayland/qwindow-compositor/main.cpp b/examples/wayland/qwindow-compositor/main.cpp
+index e82ec6e..8034b23 100644
+--- a/examples/wayland/qwindow-compositor/main.cpp
++++ b/examples/wayland/qwindow-compositor/main.cpp
+@@ -45,6 +45,7 @@
+ #include <QStringList>
+ #include <QScreen>
+ #include <QSurfaceFormat>
++#include <QtCompositor/QWaylandOutput>
+ 
+ int main(int argc, char *argv[])
+ {
+@@ -65,10 +66,12 @@ int main(int argc, char *argv[])
+         geom = QRect(screenGeometry.width() / 4, screenGeometry.height() / 4,
+                      screenGeometry.width() / 2, screenGeometry.height() / 2);
+ 
+-    CompositorWindow window(format, geom);
+-    QWindowCompositor compositor(&window);
++    QWindowCompositor *compositor = new QWindowCompositor();
+ 
+-    window.show();
++    CompositorWindow *window = new CompositorWindow(format, geom);
++    QWaylandOutput *output = new QWaylandOutput(compositor, window);
++    output->setRefreshRate(qRound(screen->refreshRate() * 1000.0));
++    window->show();
+ 
+     return app.exec();
+ }
+diff --git a/examples/wayland/qwindow-compositor/qwindowcompositor.cpp b/examples/wayland/qwindow-compositor/qwindowcompositor.cpp
+index 712beaf..06c74c0 100644
+--- a/examples/wayland/qwindow-compositor/qwindowcompositor.cpp
++++ b/examples/wayland/qwindow-compositor/qwindowcompositor.cpp
+@@ -53,6 +53,7 @@
+ #include <QPainter>
+ 
+ #include <QtCompositor/qwaylandinput.h>
++#include <QtCompositor/qwaylandoutput.h>
+ #include <QtCompositor/qwaylandbufferref.h>
+ #include <QtCompositor/qwaylandsurfaceview.h>
+ 
+@@ -107,9 +108,9 @@ public:
+     GLuint texture;
+ };
+ 
+-QWindowCompositor::QWindowCompositor(CompositorWindow *window)
+-    : QWaylandCompositor(window, 0, DefaultExtensions | SubSurfaceExtension)
+-    , m_window(window)
++QWindowCompositor::QWindowCompositor()
++    : QWaylandCompositor(0, DefaultExtensions | SubSurfaceExtension)
++    , m_window(0)
+     , m_backgroundTexture(0)
+     , m_textureBlitter(0)
+     , m_renderScheduler(this)
+@@ -120,23 +121,8 @@ QWindowCompositor::QWindowCompositor(CompositorWindow *window)
+     , m_cursorHotspotY(0)
+     , m_modifiers(Qt::NoModifier)
+ {
+-    m_window->makeCurrent();
+-
+-    m_textureBlitter = new TextureBlitter();
+-    m_backgroundImage = makeBackgroundImage(QLatin1String(":/background.jpg"));
+-    m_renderScheduler.setSingleShot(true);
+-    connect(&m_renderScheduler,SIGNAL(timeout()),this,SLOT(render()));
+-
+-    QOpenGLFunctions *functions = m_window->context()->functions();
+-    functions->glGenFramebuffers(1, &m_surface_fbo);
+-
+-    window->installEventFilter(this);
+-
+-    setRetainedSelectionEnabled(true);
+-
+-    setOutputGeometry(QRect(QPoint(0, 0), window->size()));
+-    setOutputRefreshRate(qRound(qGuiApp->primaryScreen()->refreshRate() * 1000.0));
+-    addDefaultShell();
++    connect(this, SIGNAL(outputAdded(QWaylandOutput*)),
++            this, SLOT(addOutput(QWaylandOutput*)));
+ }
+ 
+ QWindowCompositor::~QWindowCompositor()
+@@ -250,6 +236,35 @@ void QWindowCompositor::surfaceCreated(QWaylandSurface *surface)
+     surface->setBufferAttacher(new BufferAttacher);
+ }
+ 
++void QWindowCompositor::addOutput(QWaylandOutput *output)
++{
++    if (!output)
++        return;
++
++    if (m_window)
++        return;
++
++    m_window = static_cast<CompositorWindow *>(output->window());
++    if (!m_window)
++        return;
++
++    m_window->makeCurrent();
++
++    m_textureBlitter = new TextureBlitter();
++    m_backgroundImage = makeBackgroundImage(QLatin1String(":/background.jpg"));
++    m_renderScheduler.setSingleShot(true);
++    connect(&m_renderScheduler,SIGNAL(timeout()),this,SLOT(render()));
++
++    QOpenGLFunctions *functions = m_window->context()->functions();
++    functions->glGenFramebuffers(1, &m_surface_fbo);
++
++    m_window->installEventFilter(this);
++
++    setRetainedSelectionEnabled(true);
++
++    addDefaultShell();
++}
++
+ void QWindowCompositor::sendExpose()
+ {
+     QWaylandSurface *surface = qobject_cast<QWaylandSurface *>(sender());
+@@ -321,7 +336,7 @@ void QWindowCompositor::render()
+     // Draw the background image texture
+     m_textureBlitter->drawTexture(m_backgroundTexture->textureId(),
+                                   QRect(QPoint(0, 0), m_backgroundImage.size()),
+-                                  window()->size(),
++                                  m_window->size(),
+                                   0, false, true);
+ 
+     foreach (QWaylandSurface *surface, m_surfaces) {
+diff --git a/examples/wayland/qwindow-compositor/qwindowcompositor.h b/examples/wayland/qwindow-compositor/qwindowcompositor.h
+index f075c15..5546f66 100644
+--- a/examples/wayland/qwindow-compositor/qwindowcompositor.h
++++ b/examples/wayland/qwindow-compositor/qwindowcompositor.h
+@@ -55,11 +55,11 @@ QT_BEGIN_NAMESPACE
+ class QWaylandSurfaceView;
+ class QOpenGLTexture;
+ 
+-class QWindowCompositor : public QObject, public QWaylandCompositor
++class QWindowCompositor : public QWaylandCompositor
+ {
+     Q_OBJECT
+ public:
+-    QWindowCompositor(CompositorWindow *window);
++    QWindowCompositor();
+     ~QWindowCompositor();
+ 
+ private slots:
+@@ -85,6 +85,7 @@ protected:
+     QImage makeBackgroundImage(const QString &fileName);
+ 
+ private slots:
++    void addOutput(QWaylandOutput *output);
+     void sendExpose();
+     void updateCursor(bool hasBuffer);
+ 
+diff --git a/examples/wayland/server-buffer/compositor/main.cpp b/examples/wayland/server-buffer/compositor/main.cpp
+index 85503c6..716342c 100644
+--- a/examples/wayland/server-buffer/compositor/main.cpp
++++ b/examples/wayland/server-buffer/compositor/main.cpp
+@@ -1,5 +1,6 @@
+ /****************************************************************************
+ **
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+ ** Contact: http://www.qt-project.org/legal
+ **
+@@ -54,6 +55,7 @@
+ #include <QQuickView>
+ 
+ #include "qwayland-server-share-buffer.h"
++#include <QtCompositor/qwaylandoutput.h>
+ #include <QtCompositor/private/qwlcompositor_p.h>
+ #include <QtCompositor/private/qwlserverbufferintegration_p.h>
+ 
+@@ -62,31 +62,32 @@
+ #include <QtGui/private/qdistancefield_p.h>
+ 
+ class QmlCompositor
+-    : public QQuickView
+-    , public QWaylandQuickCompositor
++    : public QWaylandQuickCompositor
+     , public QtWaylandServer::qt_share_buffer
+ {
+     Q_OBJECT
+ 
+ public:
+-    QmlCompositor()
+-        : QWaylandQuickCompositor(this, 0, DefaultExtensions | SubSurfaceExtension)
++    QmlCompositor(QQuickView *window)
++        : QWaylandQuickCompositor(0, DefaultExtensions | SubSurfaceExtension)
+         , QtWaylandServer::qt_share_buffer(QWaylandCompositor::handle()->wl_display(), 1)
++        , m_window(window)
+         , m_server_buffer_32_bit(0)
+         , m_server_buffer_item_32_bit(0)
+         , m_server_buffer_8_bit(0)
+         , m_server_buffer_item_8_bit(0)
+     {
+-        setSource(QUrl("qrc:/qml/main.qml"));
+-        setResizeMode(QQuickView::SizeRootObjectToView);
+-        setColor(Qt::black);
+-        create();
+-        grabWindow();
++        window->setSource(QUrl("qrc:/qml/main.qml"));
++        window->setResizeMode(QQuickView::SizeRootObjectToView);
++        window->setColor(Qt::black);
++        window->create();
++        window->grabWindow();
+         addDefaultShell();
+ 
+-        connect(this, SIGNAL(afterRendering()), this, SLOT(sendCallbacks()));
++        new QWaylandOutput(this, window);
+ 
+-        connect(this, SIGNAL(sceneGraphInitialized()), this, SLOT(initiateServerBuffer()),Qt::DirectConnection);
++        connect(window, SIGNAL(afterRendering()), this, SLOT(sendCallbacks()));
++        connect(window, SIGNAL(sceneGraphInitialized()), this, SLOT(initiateServerBuffer()),Qt::DirectConnection);
+         connect(this, SIGNAL(serverBuffersCreated()), this, SLOT(createServerBufferItems()));
+     }
+ 
+@@ -134,7 +138,7 @@ private slots:
+         if (!QWaylandCompositor::handle()->serverBufferIntegration())
+             return;
+ 
+-        openglContext()->makeCurrent(this);
++        m_window->openglContext()->makeCurrent(m_window);
+ 
+         QtWayland::ServerBufferIntegration *sbi = QWaylandCompositor::handle()->serverBufferIntegration();
+         if (!sbi) {
+@@ -205,12 +209,6 @@ private slots:
+         }
+     }
+ protected:
+-    void resizeEvent(QResizeEvent *event)
+-    {
+-        QQuickView::resizeEvent(event);
+-        QWaylandCompositor::setOutputGeometry(QRect(0, 0, width(), height()));
+-    }
+-
+     void surfaceCreated(QWaylandSurface *surface) {
+         connect(surface, SIGNAL(mapped()), this, SLOT(surfaceMapped()));
+         connect(surface,SIGNAL(unmapped()), this,SLOT(surfaceUnmapped()));
+@@ -233,6 +231,7 @@ protected:
+     }
+ 
+ private:
++    QQuickView *m_window;
+     QtWayland::ServerBuffer *m_server_buffer_32_bit;
+     ServerBufferItem *m_server_buffer_item_32_bit;
+     QtWayland::ServerBuffer *m_server_buffer_8_bit;
+@@ -250,16 +249,20 @@ int main(int argc, char *argv[])
+ 
+     qmlRegisterType<ServerBufferItem>();
+ 
+-    QmlCompositor compositor;
+-    compositor.setTitle(QLatin1String("QML Compositor"));
+-    compositor.setGeometry(0, 0, 1024, 768);
+-    compositor.show();
++    QQuickView window;
++    window.setTitle(QLatin1String("QML Compositor"));
++    window.setGeometry(0, 0, 1024, 768);
++    window.setMinimumSize(window.geometry().size());
++    window.setMaximumSize(window.minimumSize());
++
++    QmlCompositor compositor(&window);
++    window.show();
+ 
+-    compositor.rootContext()->setContextProperty("compositor", &compositor);
++    window.rootContext()->setContextProperty("compositor", &compositor);
+ 
+-    QObject::connect(&compositor, SIGNAL(windowAdded(QVariant)), compositor.rootObject(), SLOT(windowAdded(QVariant)));
+-    QObject::connect(&compositor, SIGNAL(windowResized(QVariant)), compositor.rootObject(), SLOT(windowResized(QVariant)));
+-    QObject::connect(&compositor, SIGNAL(serverBufferItemCreated(QVariant)), compositor.rootObject(), SLOT(serverBufferItemCreated(QVariant)));
++    QObject::connect(&compositor, SIGNAL(windowAdded(QVariant)), window.rootObject(), SLOT(windowAdded(QVariant)));
++    QObject::connect(&compositor, SIGNAL(windowResized(QVariant)), window.rootObject(), SLOT(windowResized(QVariant)));
++    QObject::connect(&compositor, SIGNAL(serverBufferItemCreated(QVariant)), window.rootObject(), SLOT(serverBufferItemCreated(QVariant)));
+ 
+     app.exec();
+     qDebug() << "ending" << glGetError();
+diff --git a/src/compositor/compositor_api/compositor_api.pri b/src/compositor/compositor_api/compositor_api.pri
+index bc46def..0c2af1b 100644
+--- a/src/compositor/compositor_api/compositor_api.pri
++++ b/src/compositor/compositor_api/compositor_api.pri
+@@ -6,6 +6,8 @@ HEADERS += \
+     compositor_api/qwaylandsurface_p.h \
+     compositor_api/qwaylandinput.h \
+     compositor_api/qwaylandinputpanel.h \
++    compositor_api/qwaylandoutput.h \
++    compositor_api/qwaylandoutput_p.h \
+     compositor_api/qwaylanddrag.h \
+     compositor_api/qwaylandbufferref.h \
+     compositor_api/qwaylandsurfaceview.h \
+@@ -17,6 +19,7 @@ SOURCES += \
+     compositor_api/qwaylandsurface.cpp \
+     compositor_api/qwaylandinput.cpp \
+     compositor_api/qwaylandinputpanel.cpp \
++    compositor_api/qwaylandoutput.cpp \
+     compositor_api/qwaylanddrag.cpp \
+     compositor_api/qwaylandbufferref.cpp \
+     compositor_api/qwaylandsurfaceview.cpp \
+@@ -33,6 +36,7 @@ qtHaveModule(quick) {
+ 
+     HEADERS += \
+         compositor_api/qwaylandquickcompositor.h \
++        compositor_api/qwaylandquickcompositor_p.h \
+         compositor_api/qwaylandquicksurface.h \
+         compositor_api/qwaylandsurfaceitem.h
+ 
+diff --git a/src/compositor/compositor_api/qwaylandcompositor.cpp b/src/compositor/compositor_api/qwaylandcompositor.cpp
+index 2e84657..db0d3d1 100644
+--- a/src/compositor/compositor_api/qwaylandcompositor.cpp
++++ b/src/compositor/compositor_api/qwaylandcompositor.cpp
+@@ -49,6 +49,7 @@
+ #include "wayland_wrapper/qwlsurface_p.h"
+ #include "wayland_wrapper/qwlinputdevice_p.h"
+ #include "wayland_wrapper/qwlinputpanel_p.h"
++#include "wayland_wrapper/qwloutput_p.h"
+ #include "wayland_wrapper/qwlshellsurface_p.h"
+ 
+ #include <QtCore/QCoreApplication>
+@@ -60,9 +61,8 @@
+ 
+ QT_BEGIN_NAMESPACE
+ 
+-QWaylandCompositor::QWaylandCompositor(QWindow *window, const char *socketName, ExtensionFlags extensions)
++QWaylandCompositor::QWaylandCompositor(const char *socketName, ExtensionFlags extensions)
+     : m_compositor(new QtWayland::Compositor(this, extensions))
+-    , m_toplevel_window(window)
+ {
+     m_compositor->m_socket_name = socketName;
+     m_compositor->init();
+@@ -72,9 +72,8 @@ QWaylandCompositor::QWaylandCompositor(QWindow *window, const char *socketName,
+ #endif
+ }
+ 
+-QWaylandCompositor::QWaylandCompositor(QWindow *window, const char *socketName, QtWayland::Compositor *dptr)
++QWaylandCompositor::QWaylandCompositor(const char *socketName, QtWayland::Compositor *dptr)
+     : m_compositor(dptr)
+-    , m_toplevel_window(window)
+ {
+     m_compositor->m_socket_name = socketName;
+     m_compositor->init();
+@@ -102,6 +101,11 @@ struct wl_display *QWaylandCompositor::waylandDisplay() const
+     return m_compositor->wl_display();
+ }
+ 
++QList<QWaylandOutput *> QWaylandCompositor::outputs() const
++{
++    return m_compositor->m_outputs;
++}
++
+ void QWaylandCompositor::sendFrameCallbacks(QList<QWaylandSurface *> visibleSurfaces)
+ {
+     m_compositor->sendFrameCallbacks(visibleSurfaces);
+@@ -147,11 +151,6 @@ QList<QWaylandSurface *> QWaylandCompositor::surfaces() const
+     return surfs;
+ }
+ 
+-QWindow * QWaylandCompositor::window() const
+-{
+-    return m_toplevel_window;
+-}
+-
+ void QWaylandCompositor::cleanupGraphicsResources()
+ {
+     m_compositor->cleanupGraphicsResources();
+@@ -225,34 +224,6 @@ const char *QWaylandCompositor::socketName() const
+     return m_compositor->m_socket_name.constData();
+ }
+ 
+-/*!
+-  Set the screen orientation based on accelerometer data or similar.
+-*/
+-void QWaylandCompositor::setScreenOrientation(Qt::ScreenOrientation orientation)
+-{
+-    m_compositor->setScreenOrientation(orientation);
+-}
+-
+-void QWaylandCompositor::setOutputGeometry(const QRect &geometry)
+-{
+-    m_compositor->setOutputGeometry(geometry);
+-}
+-
+-QRect QWaylandCompositor::outputGeometry() const
+-{
+-    return m_compositor->outputGeometry();
+-}
+-
+-void QWaylandCompositor::setOutputRefreshRate(int rate)
+-{
+-    m_compositor->setOutputRefreshRate(rate);
+-}
+-
+-int QWaylandCompositor::outputRefreshRate() const
+-{
+-    return m_compositor->outputRefreshRate();
+-}
+-
+ QWaylandInputDevice *QWaylandCompositor::defaultInputDevice() const
+ {
+     return m_compositor->defaultInputDevice()->handle();
+diff --git a/src/compositor/compositor_api/qwaylandcompositor.h b/src/compositor/compositor_api/qwaylandcompositor.h
+index 751fc42..7677a2d 100644
+--- a/src/compositor/compositor_api/qwaylandcompositor.h
++++ b/src/compositor/compositor_api/qwaylandcompositor.h
+@@ -60,6 +60,7 @@ class QWaylandInputDevice;
+ class QWaylandInputPanel;
+ class QWaylandDrag;
+ class QWaylandGlobalInterface;
++class QWaylandOutput;
+ class QWaylandSurfaceView;
+ 
+ namespace QtWayland
+@@ -67,8 +68,9 @@ namespace QtWayland
+     class Compositor;
+ }
+ 
+-class Q_COMPOSITOR_EXPORT QWaylandCompositor
++class Q_COMPOSITOR_EXPORT QWaylandCompositor : public QObject
+ {
++    Q_OBJECT
+ public:
+     enum ExtensionFlag {
+         WindowManagerExtension = 0x01,
+@@ -84,13 +86,15 @@ public:
+     };
+     Q_DECLARE_FLAGS(ExtensionFlags, ExtensionFlag)
+ 
+-    QWaylandCompositor(QWindow *window = 0, const char *socketName = 0, ExtensionFlags extensions = DefaultExtensions);
++    QWaylandCompositor(const char *socketName = 0, ExtensionFlags extensions = DefaultExtensions);
+     virtual ~QWaylandCompositor();
+ 
+     void addGlobalInterface(QWaylandGlobalInterface *interface);
+     void addDefaultShell();
+     ::wl_display *waylandDisplay() const;
+ 
++    QList<QWaylandOutput *> outputs() const;
++
+     void frameStarted();
+     void sendFrameCallbacks(QList<QWaylandSurface *> visibleSurfaces);
+ 
+@@ -100,8 +104,6 @@ public:
+     QList<QWaylandSurface *> surfacesForClient(QWaylandClient* client) const;
+     QList<QWaylandSurface *> surfaces() const;
+ 
+-    QWindow *window()const;
+-
+     virtual void surfaceCreated(QWaylandSurface *surface) = 0;
+     virtual void surfaceAboutToBeDestroyed(QWaylandSurface *surface);
+ 
+@@ -120,14 +122,6 @@ public:
+ 
+     const char *socketName() const;
+ 
+-    void setScreenOrientation(Qt::ScreenOrientation orientation);
+-
+-    void setOutputGeometry(const QRect &outputGeometry);
+-    QRect outputGeometry() const;
+-
+-    void setOutputRefreshRate(int refreshRate);
+-    int outputRefreshRate() const;
+-
+     QWaylandInputDevice *defaultInputDevice() const;
+ 
+     QWaylandInputPanel *inputPanel() const;
+@@ -149,15 +143,16 @@ public:
+ 
+     virtual QWaylandSurfaceView *createView(QWaylandSurface *surface);
+ 
++Q_SIGNALS:
++    void outputAdded(QWaylandOutput *output);
++    void outputRemoved(QWaylandOutput *output);
++
+ protected:
+-    QWaylandCompositor(QWindow *window, const char *socketName, QtWayland::Compositor *dptr);
++    QWaylandCompositor(const char *socketName, QtWayland::Compositor *dptr);
+     virtual void retainedSelectionReceived(QMimeData *mimeData);
+ 
+     friend class QtWayland::Compositor;
+     QtWayland::Compositor *m_compositor;
+-
+-private:
+-    QWindow  *m_toplevel_window;
+ };
+ 
+ Q_DECLARE_OPERATORS_FOR_FLAGS(QWaylandCompositor::ExtensionFlags)
+diff --git a/src/compositor/compositor_api/qwaylandoutput.cpp b/src/compositor/compositor_api/qwaylandoutput.cpp
+new file mode 100644
+index 0000000..51a6c7a
+--- /dev/null
++++ b/src/compositor/compositor_api/qwaylandoutput.cpp
+@@ -0,0 +1,265 @@
++/****************************************************************************
++**
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++** Copyright (C) 2013 Klarälvdalens Datakonsult AB (KDAB).
++** Contact: http://www.qt-project.org/legal
++**
++** This file is part of the Qt Compositor.
++**
++** $QT_BEGIN_LICENSE:BSD$
++** You may use this file under the terms of the BSD license as follows:
++**
++** "Redistribution and use in source and binary forms, with or without
++** modification, are permitted provided that the following conditions are
++** met:
++**   * Redistributions of source code must retain the above copyright
++**     notice, this list of conditions and the following disclaimer.
++**   * Redistributions in binary form must reproduce the above copyright
++**     notice, this list of conditions and the following disclaimer in
++**     the documentation and/or other materials provided with the
++**     distribution.
++**   * Neither the name of Digia Plc and its Subsidiary(-ies) nor the names
++**     of its contributors may be used to endorse or promote products derived
++**     from this software without specific prior written permission.
++**
++**
++** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
++** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
++** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#include <private/qobject_p.h>
++
++#include "wayland_wrapper/qwlcompositor_p.h"
++#include "wayland_wrapper/qwloutput_p.h"
++#include "qwaylandcompositor.h"
++#include "qwaylandoutput.h"
++#include "qwaylandoutput_p.h"
++
++QWaylandOutputPrivate::QWaylandOutputPrivate(QWaylandCompositor *compositor, QWindow *window)
++    : QtWayland::Output(compositor->handle(), window)
++{
++}
++
++
++QWaylandOutput::QWaylandOutput(QWaylandCompositor *compositor, QWindow *window)
++    : QObject(*new QWaylandOutputPrivate(compositor, window))
++{
++    Q_D(QWaylandOutput);
++    d->m_output = this;
++    d->compositor()->addOutput(this);
++}
++
++QWaylandOutput::~QWaylandOutput()
++{
++    Q_D(QWaylandOutput);
++    d->compositor()->removeOutput(this);
++}
++
++QWaylandOutput *QWaylandOutput::fromResource(wl_resource *resource)
++{
++    if (!resource)
++        return Q_NULLPTR;
++
++    QtWayland::OutputResource *outputResource = static_cast<QtWayland::OutputResource *>(
++        QtWayland::Output::Resource::fromResource(resource));
++    if (!outputResource)
++        return Q_NULLPTR;
++
++    QtWayland::Output *output = static_cast<QtWayland::Output *>(outputResource->output_object);
++    if (!output)
++        return Q_NULLPTR;
++
++    return output->output();
++}
++
++QString QWaylandOutput::manufacturer() const
++{
++    Q_D(const QWaylandOutput);
++
++    return d->manufacturer();
++}
++
++void QWaylandOutput::setManufacturer(const QString &manufacturer)
++{
++    Q_D(QWaylandOutput);
++
++    if (d->manufacturer() == manufacturer)
++        return;
++
++    d->setManufacturer(manufacturer);
++    Q_EMIT manufacturerChanged();
++}
++
++QString QWaylandOutput::model() const
++{
++    Q_D(const QWaylandOutput);
++
++    return d->model();
++}
++
++void QWaylandOutput::setModel(const QString &model)
++{
++    Q_D(QWaylandOutput);
++
++    if (d->model() == model)
++        return;
++
++    d->setModel(model);
++    Q_EMIT modelChanged();
++}
++
++QRect QWaylandOutput::geometry() const
++{
++    Q_D(const QWaylandOutput);
++
++    return d->geometry();
++}
++
++void QWaylandOutput::setGeometry(const QRect &geometry)
++{
++    Q_D(QWaylandOutput);
++
++    if (d->geometry() == geometry)
++        return;
++
++    d->setGeometry(geometry);
++    Q_EMIT geometryChanged();
++}
++
++QRect QWaylandOutput::availableGeometry() const
++{
++    Q_D(const QWaylandOutput);
++
++    if (!d->availableGeometry().isValid())
++        return d->geometry();
++
++    return d->availableGeometry();
++}
++
++void QWaylandOutput::setAvailableGeometry(const QRect &availableGeometry)
++{
++    Q_D(QWaylandOutput);
++
++    if (d->availableGeometry() == availableGeometry)
++        return;
++
++    d->setAvailableGeometry(availableGeometry);
++    Q_EMIT availableGeometryChanged();
++}
++
++QSize QWaylandOutput::physicalSize() const
++{
++    Q_D(const QWaylandOutput);
++
++    return d->physicalSize();
++}
++
++void QWaylandOutput::setPhysicalSize(const QSize &size)
++{
++    Q_D(QWaylandOutput);
++
++    if (d->physicalSize() == size)
++        return;
++
++    d->setPhysicalSize(size);
++    Q_EMIT physicalSizeChanged();
++}
++
++int QWaylandOutput::refreshRate() const
++{
++    Q_D(const QWaylandOutput);
++
++    return d->refreshRate();
++}
++
++void QWaylandOutput::setRefreshRate(int refreshRate)
++{
++    Q_D(QWaylandOutput);
++
++    if (d->refreshRate() == refreshRate)
++        return;
++
++    d->setRefreshRate(refreshRate);
++    Q_EMIT refreshRateChanged();
++}
++
++QWaylandOutput::Subpixel QWaylandOutput::subpixel() const
++{
++    Q_D(const QWaylandOutput);
++
++    return d->subpixel();
++}
++
++void QWaylandOutput::setSubpixel(const Subpixel &subpixel)
++{
++    Q_D(QWaylandOutput);
++
++    if (d->subpixel() == subpixel)
++        return;
++
++    d->setSubpixel(subpixel);
++    Q_EMIT subpixelChanged();
++}
++
++QWaylandOutput::Transform QWaylandOutput::transform() const
++{
++    Q_D(const QWaylandOutput);
++
++    return d->transform();
++}
++
++void QWaylandOutput::setTransform(const Transform &transform)
++{
++    Q_D(QWaylandOutput);
++
++    if (d->transform() == transform)
++        return;
++
++    d->setTransform(transform);
++    Q_EMIT transformChanged();
++}
++
++int QWaylandOutput::scaleFactor() const
++{
++    Q_D(const QWaylandOutput);
++
++    return d->scaleFactor();
++}
++
++void QWaylandOutput::setScaleFactor(int scale)
++{
++    Q_D(QWaylandOutput);
++
++    if (d->scaleFactor() == scale)
++        return;
++
++    d->setScaleFactor(scale);
++    Q_EMIT scaleFactorChanged();
++
++}
++
++QWindow *QWaylandOutput::window() const
++{
++    Q_D(const QWaylandOutput);
++
++    return d->window();
++}
++
++QtWayland::Output *QWaylandOutput::handle()
++{
++    Q_D(QWaylandOutput);
++
++    return d;
++}
+diff --git a/src/compositor/compositor_api/qwaylandoutput.h b/src/compositor/compositor_api/qwaylandoutput.h
+new file mode 100644
+index 0000000..4c30802
+--- /dev/null
++++ b/src/compositor/compositor_api/qwaylandoutput.h
+@@ -0,0 +1,149 @@
++/****************************************************************************
++**
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++** Copyright (C) 2013 Klarälvdalens Datakonsult AB (KDAB).
++** Contact: http://www.qt-project.org/legal
++**
++** This file is part of the Qt Compositor.
++**
++** $QT_BEGIN_LICENSE:BSD$
++** You may use this file under the terms of the BSD license as follows:
++**
++** "Redistribution and use in source and binary forms, with or without
++** modification, are permitted provided that the following conditions are
++** met:
++**   * Redistributions of source code must retain the above copyright
++**     notice, this list of conditions and the following disclaimer.
++**   * Redistributions in binary form must reproduce the above copyright
++**     notice, this list of conditions and the following disclaimer in
++**     the documentation and/or other materials provided with the
++**     distribution.
++**   * Neither the name of Digia Plc and its Subsidiary(-ies) nor the names
++**     of its contributors may be used to endorse or promote products derived
++**     from this software without specific prior written permission.
++**
++**
++** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
++** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
++** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#ifndef QWAYLANDOUTPUT_H
++#define QWAYLANDOUTPUT_H
++
++#include <QtCompositor/qwaylandexport.h>
++
++#include <QObject>
++#include <QRect>
++#include <QSize>
++
++QT_BEGIN_NAMESPACE
++
++struct wl_resource;
++
++class QWaylandCompositor;
++class QWindow;
++class QWaylandOutputPrivate;
++
++namespace QtWayland {
++    class Output;
++}
++
++class Q_COMPOSITOR_EXPORT QWaylandOutput : public QObject
++{
++    Q_OBJECT
++    Q_DECLARE_PRIVATE(QWaylandOutput)
++    Q_PROPERTY(QString manufacturer READ manufacturer WRITE setManufacturer NOTIFY manufacturerChanged)
++    Q_PROPERTY(QString model READ model WRITE setModel NOTIFY modelChanged)
++    Q_PROPERTY(QRect geometry READ geometry WRITE setGeometry NOTIFY geometryChanged)
++    Q_PROPERTY(QRect availableGeometry READ availableGeometry WRITE setAvailableGeometry NOTIFY availableGeometryChanged)
++    Q_PROPERTY(QSize physicalSize READ physicalSize WRITE setPhysicalSize NOTIFY physicalSizeChanged)
++    Q_PROPERTY(int refreshRate READ refreshRate WRITE setRefreshRate NOTIFY refreshRateChanged)
++    Q_PROPERTY(QWaylandOutput::Subpixel subpixel READ subpixel WRITE setSubpixel NOTIFY subpixelChanged)
++    Q_PROPERTY(QWaylandOutput::Transform transform READ transform WRITE setTransform NOTIFY transformChanged)
++    Q_PROPERTY(int scaleFactor READ scaleFactor WRITE setScaleFactor NOTIFY scaleFactorChanged)
++    Q_PROPERTY(QWindow *window READ window CONSTANT)
++    Q_ENUMS(Subpixel Transform)
++public:
++    enum Subpixel {
++      SubpixelUnknown = 0,
++      SubpixelNone,
++      SubpixelHorizontalRgb,
++      SubpixelHorizontalBgr,
++      SubpixelVerticalRgb,
++      SubpixelVerticalBgr
++    };
++
++    enum Transform {
++        TransformNormal = 0,
++        Transform90,
++        Transform180,
++        Transform270,
++        TransformFlipped,
++        TransformFlipped90,
++        TransformFlipped180,
++        TransformFlipped270
++    };
++
++    explicit QWaylandOutput(QWaylandCompositor *compositor, QWindow *window);
++    ~QWaylandOutput();
++
++    static QWaylandOutput *fromResource(wl_resource *resource);
++
++    QString manufacturer() const;
++    void setManufacturer(const QString &manufacturer);
++
++    QString model() const;
++    void setModel(const QString &model);
++
++    QRect geometry() const;
++    void setGeometry(const QRect &geometry);
++
++    QRect availableGeometry() const;
++    void setAvailableGeometry(const QRect &availableGeometry);
++
++    QSize physicalSize() const;
++    void setPhysicalSize(const QSize &size);
++
++    int refreshRate() const;
++    void setRefreshRate(int refreshRate);
++
++    Subpixel subpixel() const;
++    void setSubpixel(const Subpixel &subpixel);
++
++    Transform transform() const;
++    void setTransform(const Transform &transform);
++
++    int scaleFactor() const;
++    void setScaleFactor(int scale);
++
++    QWindow *window() const;
++
++    QtWayland::Output *handle();
++
++Q_SIGNALS:
++    void manufacturerChanged();
++    void modelChanged();
++    void geometryChanged();
++    void availableGeometryChanged();
++    void physicalSizeChanged();
++    void refreshRateChanged();
++    void scaleFactorChanged();
++    void subpixelChanged();
++    void transformChanged();
++};
++
++QT_END_NAMESPACE
++
++#endif // QWAYLANDOUTPUT_H
+diff --git a/src/compositor/compositor_api/qwaylandoutput_p.h b/src/compositor/compositor_api/qwaylandoutput_p.h
+new file mode 100644
+index 0000000..7ee6ca6
+--- /dev/null
++++ b/src/compositor/compositor_api/qwaylandoutput_p.h
+@@ -0,0 +1,65 @@
++/****************************************************************************
++**
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++** Contact: http://www.qt-project.org/legal
++**
++** This file is part of the Qt Compositor.
++**
++** $QT_BEGIN_LICENSE:BSD$
++** You may use this file under the terms of the BSD license as follows:
++**
++** "Redistribution and use in source and binary forms, with or without
++** modification, are permitted provided that the following conditions are
++** met:
++**   * Redistributions of source code must retain the above copyright
++**     notice, this list of conditions and the following disclaimer.
++**   * Redistributions in binary form must reproduce the above copyright
++**     notice, this list of conditions and the following disclaimer in
++**     the documentation and/or other materials provided with the
++**     distribution.
++**   * Neither the name of Digia Plc and its Subsidiary(-ies) nor the names
++**     of its contributors may be used to endorse or promote products derived
++**     from this software without specific prior written permission.
++**
++**
++** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
++** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
++** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#ifndef QWAYLANDOUTPUT_P_H
++#define QWAYLANDOUTPUT_P_H
++
++#include <QtCompositor/qwaylandexport.h>
++#include <private/qobject_p.h>
++
++#include "wayland_wrapper/qwlcompositor_p.h"
++#include "wayland_wrapper/qwloutput_p.h"
++
++QT_BEGIN_NAMESPACE
++
++class QWaylandCompositor;
++class QWaylandOutput;
++class QWindow;
++
++class Q_COMPOSITOR_EXPORT QWaylandOutputPrivate : public QObjectPrivate, public QtWayland::Output
++{
++    Q_DECLARE_PUBLIC(QWaylandOutput)
++public:
++    QWaylandOutputPrivate(QWaylandCompositor *compositor, QWindow *window);
++};
++
++QT_END_NAMESPACE
++
++#endif // QWAYLANDOUTPUT_P_H
+diff --git a/src/compositor/compositor_api/qwaylandquickcompositor.cpp b/src/compositor/compositor_api/qwaylandquickcompositor.cpp
+index cccca2e..53a2759 100644
+--- a/src/compositor/compositor_api/qwaylandquickcompositor.cpp
++++ b/src/compositor/compositor_api/qwaylandquickcompositor.cpp
+@@ -1,5 +1,6 @@
+ /****************************************************************************
+ **
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ ** Copyright (C) 2014 Jolla Ltd, author: <giulio.camuffo@jollamobile.com>
+ ** Contact: http://www.qt-project.org/legal
+ **
+@@ -41,49 +42,80 @@
+ 
+ #include <QQuickWindow>
+ 
+-#include <QtCompositor/private/qwlcompositor_p.h>
+-
+ #include "qwaylandquickcompositor.h"
++#include "qwaylandquickcompositor_p.h"
+ #include "qwaylandquicksurface.h"
+ #include "qwaylandsurfaceitem.h"
++#include "qwaylandoutput.h"
++#include "wayland_wrapper/qwlsurface_p.h"
+ 
+ QT_BEGIN_NAMESPACE
+ 
+-class QWaylandQuickCompositorPrivate : public QtWayland::Compositor
++QWaylandQuickCompositorPrivate::QWaylandQuickCompositorPrivate(QWaylandQuickCompositor *compositor, QWaylandCompositor::ExtensionFlags extensions)
++    : QtWayland::Compositor(compositor, extensions)
++    , updateScheduled(false)
+ {
+-public:
+-    QWaylandQuickCompositorPrivate(QWaylandQuickCompositor *compositor, QWaylandCompositor::ExtensionFlags extensions)
+-        : QtWayland::Compositor(compositor, extensions)
+-        , updateScheduled(false)
+-    {
+-    }
++}
+ 
+-    void compositor_create_surface(Resource *resource, uint32_t id) Q_DECL_OVERRIDE
+-    {
+-        QWaylandQuickSurface *surface = new QWaylandQuickSurface(resource->client(), id, wl_resource_get_version(resource->handle), static_cast<QWaylandQuickCompositor *>(m_qt_compositor));
+-        m_surfaces << surface->handle();
+-        //BUG: This may not be an on-screen window surface though
+-        m_qt_compositor->surfaceCreated(surface);
+-    }
++void QWaylandQuickCompositorPrivate::compositor_create_surface(Resource *resource, uint32_t id)
++{
++    // Ask the compositor to create a surface, it may want to create a custom
++    // surface object with some output management logic or non standard
++    // features
++    QWaylandQuickSurface *surface = static_cast<QWaylandQuickCompositor *>(m_qt_compositor)->createSurface(resource->client(), wl_resource_get_version(resource->handle), id);
++    m_surfaces << surface->handle();
++    //BUG: This may not be an on-screen window surface though
++    m_qt_compositor->surfaceCreated(surface);
++}
+ 
+-    void updateStarted()
+-    {
+-        updateScheduled = false;
+-        m_qt_compositor->frameStarted();
+-        m_qt_compositor->cleanupGraphicsResources();
+-    }
++void QWaylandQuickCompositorPrivate::updateStarted()
++{
++    updateScheduled = false;
++    m_qt_compositor->frameStarted();
++    m_qt_compositor->cleanupGraphicsResources();
++}
++
++void QWaylandQuickCompositorPrivate::outputAdded(QWaylandOutput *output)
++{
++    if (!output->window())
++        return;
++
++    QQuickWindow *window = qobject_cast<QQuickWindow *>(output->window());
++    if (!window)
++        return;
+ 
+-    bool updateScheduled;
+-};
++    connect(window, &QQuickWindow::beforeSynchronizing,
++            this, &QWaylandQuickCompositorPrivate::updateStarted,
++            Qt::DirectConnection);
++ 
++    QWaylandQuickCompositor *compositor = static_cast<QWaylandQuickCompositor *>(m_qt_compositor);
++    if (compositor)
++        Q_EMIT compositor->outputsChanged();
++}
+ 
+ 
+-QWaylandQuickCompositor::QWaylandQuickCompositor(QQuickWindow *window, const char *socketName, ExtensionFlags extensions)
+-                       : QWaylandCompositor(window, socketName, new QWaylandQuickCompositorPrivate(this, extensions))
++void QWaylandQuickCompositorPrivate::outputRemoved(QWaylandOutput *output)
++{
++    Q_UNUSED(output);
++
++    QWaylandQuickCompositor *compositor = static_cast<QWaylandQuickCompositor *>(m_qt_compositor);
++    if (compositor)
++        Q_EMIT compositor->outputsChanged();
++}
++
++ 
++QWaylandQuickCompositor::QWaylandQuickCompositor(const char *socketName, ExtensionFlags extensions)
++                       : QWaylandCompositor(socketName, new QWaylandQuickCompositorPrivate(this, extensions))
+ {
+-    window->connect(window, &QQuickWindow::beforeSynchronizing, d_ptr(), &QWaylandQuickCompositorPrivate::updateStarted, Qt::DirectConnection);
+ 
+     qmlRegisterUncreatableType<QWaylandSurfaceItem>("QtCompositor", 1, 0, "WaylandSurfaceItem", QObject::tr("Cannot create instance of WaylandSurfaceItem"));
+     qmlRegisterUncreatableType<QWaylandQuickSurface>("QtCompositor", 1, 0, "WaylandQuickSurface", QObject::tr("Cannot create instance of WaylandQuickSurface"));
++    qmlRegisterUncreatableType<QWaylandOutput>("QtCompositor", 1, 0, "WaylandOutput", QObject::tr("Cannot create instance of WaylandOutput"));
++
++    connect(this, &QWaylandQuickCompositor::outputAdded,
++            d_ptr(), &QWaylandQuickCompositorPrivate::outputAdded);
++    connect(this, &QWaylandQuickCompositor::outputRemoved,
++            d_ptr(), &QWaylandQuickCompositorPrivate::outputRemoved);
+ }
+ 
+ QWaylandQuickCompositorPrivate *QWaylandQuickCompositor::d_ptr()
+@@ -94,14 +127,45 @@ QWaylandQuickCompositorPrivate *QWaylandQuickCompositor::d_ptr()
+ void QWaylandQuickCompositor::update()
+ {
+     if (!d_ptr()->updateScheduled) {
+-        static_cast<QQuickWindow *>(window())->update();
++        Q_FOREACH (QWaylandOutput *output, outputs()) {
++            QQuickWindow *window = qobject_cast<QQuickWindow *>(output->window());
++            if (window)
++                window->update();
++        }
++
+         d_ptr()->updateScheduled = true;
+     }
+ }
+ 
++QWaylandQuickSurface *QWaylandQuickCompositor::createSurface(wl_client *client, int version, quint32 id)
++{
++    return new QWaylandQuickSurface(client, version, id, this);
++}
++
+ QWaylandSurfaceView *QWaylandQuickCompositor::createView(QWaylandSurface *surf)
+ {
+     return new QWaylandSurfaceItem(static_cast<QWaylandQuickSurface *>(surf));
+ }
+ 
++QQmlListProperty<QWaylandOutput> QWaylandQuickCompositor::outputList()
++{
++    return QQmlListProperty<QWaylandOutput>(this, 0, outputsCount, outputAt);
++}
++
++int QWaylandQuickCompositor::outputsCount(QQmlListProperty<QWaylandOutput> *p)
++{
++    QWaylandQuickCompositor *parent = static_cast<QWaylandQuickCompositor *>(p->object);
++    if (!parent)
++        return 0;
++    return parent->outputs().count();
++}
++
++QWaylandOutput *QWaylandQuickCompositor::outputAt(QQmlListProperty<QWaylandOutput> *p, int index)
++{
++    QWaylandQuickCompositor *parent = static_cast<QWaylandQuickCompositor *>(p->object);
++    if (!parent)
++        return Q_NULLPTR;
++    return parent->outputs().at(index);
++}
++
+ QT_END_NAMESPACE
+diff --git a/src/compositor/compositor_api/qwaylandquickcompositor.h b/src/compositor/compositor_api/qwaylandquickcompositor.h
+index 0e252ba..2e8a1ca 100644
+--- a/src/compositor/compositor_api/qwaylandquickcompositor.h
++++ b/src/compositor/compositor_api/qwaylandquickcompositor.h
+@@ -1,5 +1,6 @@
+ /****************************************************************************
+ **
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ ** Copyright (C) 2014 Jolla Ltd, author: <giulio.camuffo@jollamobile.com>
+ ** Contact: http://www.qt-project.org/legal
+ **
+@@ -42,23 +43,38 @@
+ #ifndef QWAYLANDQUICKCOMPOSITOR_H
+ #define QWAYLANDQUICKCOMPOSITOR_H
+ 
++#include <QtQml/QQmlListProperty>
+ #include <QtCompositor/qwaylandcompositor.h>
+ 
+ QT_BEGIN_NAMESPACE
+ 
+ class QQuickWindow;
+ class QWaylandQuickCompositorPrivate;
++class QWaylandQuickSurface;
+ class QWaylandSurfaceView;
+ 
++struct wl_client;
++
+ class Q_COMPOSITOR_EXPORT QWaylandQuickCompositor : public QWaylandCompositor
+ {
++    Q_OBJECT
++    Q_PROPERTY(QQmlListProperty<QWaylandOutput> outputs READ outputList NOTIFY outputsChanged)
+ public:
+-    QWaylandQuickCompositor(QQuickWindow *window = 0, const char *socketName = 0, QWaylandCompositor::ExtensionFlags extensions = DefaultExtensions);
++    QWaylandQuickCompositor(const char *socketName = 0, QWaylandCompositor::ExtensionFlags extensions = DefaultExtensions);
+ 
+     void update();
+ 
++    virtual QWaylandQuickSurface *createSurface(wl_client *client, int version, quint32 id);
+     QWaylandSurfaceView *createView(QWaylandSurface *surf) Q_DECL_OVERRIDE;
+ 
++    QQmlListProperty<QWaylandOutput> outputList();
++
++    static int outputsCount(QQmlListProperty<QWaylandOutput> *p);
++    static QWaylandOutput *outputAt(QQmlListProperty<QWaylandOutput> *p, int index);
++
++Q_SIGNALS:
++    void outputsChanged();
++
+ private:
+     friend class QWaylandQuickCompositorPrivate;
+     QWaylandQuickCompositorPrivate *d_ptr();
+diff --git a/src/compositor/compositor_api/qwaylandquickcompositor_p.h b/src/compositor/compositor_api/qwaylandquickcompositor_p.h
+new file mode 100644
+index 0000000..071445c
+--- /dev/null
++++ b/src/compositor/compositor_api/qwaylandquickcompositor_p.h
+@@ -0,0 +1,73 @@
++/****************************************************************************
++**
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++** Copyright (C) 2014 Jolla Ltd, author: <giulio.camuffo@jollamobile.com>
++** Contact: http://www.qt-project.org/legal
++**
++** This file is part of the plugins of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:LGPL$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and Digia.  For licensing terms and
++** conditions see http://qt.digia.com/licensing.  For further information
++** use the contact form at http://qt.digia.com/contact-us.
++**
++** GNU Lesser General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU Lesser
++** General Public License version 2.1 as published by the Free Software
++** Foundation and appearing in the file LICENSE.LGPL included in the
++** packaging of this file.  Please review the following information to
++** ensure the GNU Lesser General Public License version 2.1 requirements
++** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
++**
++** In addition, as a special exception, Digia gives you certain additional
++** rights.  These rights are described in the Digia Qt LGPL Exception
++** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3.0 as published by the Free Software
++** Foundation and appearing in the file LICENSE.GPL included in the
++** packaging of this file.  Please review the following information to
++** ensure the GNU General Public License version 3.0 requirements will be
++** met: http://www.gnu.org/copyleft/gpl.html.
++**
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#ifndef QWAYLANDQUICKCOMPOSITOR_P_H
++#define QWAYLANDQUICKCOMPOSITOR_P_H
++
++#include <QtCompositor/qwaylandexport.h>
++#include <QtCompositor/private/qwlcompositor_p.h>
++
++QT_BEGIN_NAMESPACE
++
++class QWaylandOutput;
++class QWaylandQuickCompositor;
++
++class Q_COMPOSITOR_EXPORT QWaylandQuickCompositorPrivate : public QtWayland::Compositor
++{
++    Q_OBJECT
++public:
++    QWaylandQuickCompositorPrivate(QWaylandQuickCompositor *compositor, QWaylandCompositor::ExtensionFlags extensions);
++
++    void compositor_create_surface(Resource *resource, uint32_t id) Q_DECL_OVERRIDE;
++
++    void updateStarted();
++
++    bool updateScheduled;
++
++public Q_SLOTS:
++    void outputAdded(QWaylandOutput *output);
++    void outputRemoved(QWaylandOutput *output);
++};
++
++QT_END_NAMESPACE
++
++#endif // QWAYLANDQUICKCOMPOSITOR_P_H
+diff --git a/src/compositor/compositor_api/qwaylandquicksurface.cpp b/src/compositor/compositor_api/qwaylandquicksurface.cpp
+index 1ce229d..eea3e61 100644
+--- a/src/compositor/compositor_api/qwaylandquicksurface.cpp
++++ b/src/compositor/compositor_api/qwaylandquicksurface.cpp
+@@ -1,5 +1,6 @@
+ /****************************************************************************
+ **
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ ** Copyright (C) 2014 Jolla Ltd, author: <giulio.camuffo@jollamobile.com>
+ ** Contact: http://www.qt-project.org/legal
+ **
+@@ -49,6 +50,7 @@
+ #include "qwaylandquickcompositor.h"
+ #include "qwaylandsurfaceitem.h"
+ #include <QtCompositor/qwaylandbufferref.h>
++#include <QtCompositor/qwaylandoutput.h>
+ #include <QtCompositor/private/qwaylandsurface_p.h>
+ 
+ QT_BEGIN_NAMESPACE
+@@ -84,7 +86,17 @@ public:
+             bufferRef.destroyTexture();
+         bufferRef = nextBuffer;
+ 
+-        QQuickWindow *window = static_cast<QQuickWindow *>(surface->compositor()->window());
++        if (surface->compositor()->outputs().size() == 0) {
++            update = false;
++            return;
++        }
++
++        QQuickWindow *window = static_cast<QQuickWindow *>(surface->compositor()->outputs().at(0)->window());
++        if (!window) {
++            update = false;
++            return;
++        }
++
+         // If the next buffer is NULL do not delete the current texture. If the client called
+         // attach(0) the surface is going to be unmapped anyway, if instead the client attached
+         // a valid buffer but died before we got here we want to keep the old buffer around
+@@ -165,12 +177,13 @@ QWaylandQuickSurface::QWaylandQuickSurface(wl_client *client, quint32 id, QWayla
+     d->buffer->surface = this;
+     setBufferAttacher(d->buffer);
+ 
+-    QQuickWindow *window = static_cast<QQuickWindow *>(compositor->window());
+-    connect(window, &QQuickWindow::beforeSynchronizing, this, &QWaylandQuickSurface::updateTexture, Qt::DirectConnection);
+-    connect(window, &QQuickWindow::sceneGraphInvalidated, this, &QWaylandQuickSurface::invalidateTexture, Qt::DirectConnection);
+     connect(this, &QWaylandSurface::windowPropertyChanged, d->windowPropertyMap, &QQmlPropertyMap::insert);
+     connect(d->windowPropertyMap, &QQmlPropertyMap::valueChanged, this, &QWaylandSurface::setWindowProperty);
+ 
++    Q_FOREACH (QWaylandOutput *output, compositor->outputs())
++        outputAdded(output);
++
++    connect(compositor, &QWaylandQuickCompositor::outputAdded, this, &QWaylandQuickSurface::outputAdded);
+ }
+ 
+ QWaylandQuickSurface::~QWaylandQuickSurface()
+@@ -220,6 +233,23 @@ void QWaylandQuickSurface::invalidateTexture()
+     d->buffer->invalidateTexture();
+ }
+ 
++void QWaylandQuickSurface::outputAdded(QWaylandOutput *output)
++{
++    if (!output->window())
++        return;
++
++    QQuickWindow *window = qobject_cast<QQuickWindow *>(output->window());
++    if (!window)
++        return;
++
++    connect(window, &QQuickWindow::beforeSynchronizing,
++            this, &QWaylandQuickSurface::updateTexture,
++            Qt::DirectConnection);
++    connect(window, &QQuickWindow::sceneGraphInvalidated,
++            this, &QWaylandQuickSurface::invalidateTexture,
++            Qt::DirectConnection);
++}
++
+ bool QWaylandQuickSurface::clientRenderingEnabled() const
+ {
+     Q_D(const QWaylandQuickSurface);
+diff --git a/src/compositor/compositor_api/qwaylandquicksurface.h b/src/compositor/compositor_api/qwaylandquicksurface.h
+index 0773869..ead6a86 100644
+--- a/src/compositor/compositor_api/qwaylandquicksurface.h
++++ b/src/compositor/compositor_api/qwaylandquicksurface.h
+@@ -1,5 +1,6 @@
+ /****************************************************************************
+ **
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ ** Copyright (C) 2014 Jolla Ltd, author: <giulio.camuffo@jollamobile.com>
+ ** Contact: http://www.qt-project.org/legal
+ **
+@@ -53,6 +54,8 @@ class QSGTexture;
+ class QWaylandSurfaceItem;
+ class QWaylandQuickSurfacePrivate;
+ class QWaylandQuickCompositor;
++class QWaylandQuickCompositorPrivate;
++class QWaylandOutput;
+ 
+ class Q_COMPOSITOR_EXPORT QWaylandQuickSurface : public QWaylandSurface
+ {
+@@ -82,7 +85,9 @@ signals:
+ private:
+     void updateTexture();
+     void invalidateTexture();
++    void outputAdded(QWaylandOutput *output);
+ 
++    friend class QWaylandQuickCompositorPrivate;
+ };
+ 
+ QT_END_NAMESPACE
+diff --git a/src/compositor/wayland_wrapper/qwlcompositor.cpp b/src/compositor/wayland_wrapper/qwlcompositor.cpp
+index a733e33..2fe380f 100644
+--- a/src/compositor/wayland_wrapper/qwlcompositor.cpp
++++ b/src/compositor/wayland_wrapper/qwlcompositor.cpp
+@@ -42,8 +42,8 @@
+ #include "qwlcompositor_p.h"
+ 
+ #include "qwaylandinput.h"
++#include "qwaylandoutput.h"
+ #include "qwldisplay_p.h"
+-#include "qwloutput_p.h"
+ #include "qwlsurface_p.h"
+ #include "qwaylandclient.h"
+ #include "qwaylandcompositor.h"
+@@ -113,7 +113,6 @@ Compositor::Compositor(QWaylandCompositor *qt_compositor, QWaylandCompositor::Ex
+     , m_current_frame(0)
+     , m_last_queued_buf(-1)
+     , m_qt_compositor(qt_compositor)
+-    , m_orientation(Qt::PrimaryOrientation)
+ #if defined (QT_COMPOSITOR_WAYLAND_GL)
+     , m_hw_integration(0)
+     , m_client_buffer_integration(0)
+@@ -147,8 +146,6 @@ void Compositor::init()
+ 
+     wl_display_init_shm(m_display->handle());
+ 
+-    m_output_global = new OutputGlobal(m_display->handle());
+-
+     if (wl_display_add_socket(m_display->handle(), m_qt_compositor->socketName())) {
+         fprintf(stderr, "Fatal: Failed to open server socket\n");
+         exit(EXIT_FAILURE);
+@@ -170,7 +167,6 @@ void Compositor::init()
+     qRegisterMetaType<QWaylandSurfaceView*>("WaylandSurfaceView*");
+     //initialize distancefieldglyphcache here
+ 
+-    initializeHardwareIntegration();
+     initializeExtensions();
+     initializeDefaultInputDevice();
+ }
+@@ -188,7 +184,6 @@ Compositor::~Compositor()
+     delete m_default_wayland_input_device;
+     delete m_data_device_manager;
+ 
+-    delete m_output_global;
+     delete m_display;
+ }
+ 
+@@ -254,11 +249,6 @@ void Compositor::destroyClient(QWaylandClient *client)
+     wl_client_destroy(client->client());
+ }
+ 
+-QWindow *Compositor::window() const
+-{
+-    return m_qt_compositor->window();
+-}
+-
+ ClientBufferIntegration * Compositor::clientBufferIntegration() const
+ {
+ #ifdef QT_COMPOSITOR_WAYLAND_GL
+@@ -277,24 +267,6 @@ ServerBufferIntegration * Compositor::serverBufferIntegration() const
+ #endif
+ }
+ 
+-void Compositor::initializeHardwareIntegration()
+-{
+-#ifdef QT_COMPOSITOR_WAYLAND_GL
+-    if (m_extensions & QWaylandCompositor::HardwareIntegrationExtension)
+-        m_hw_integration.reset(new HardwareIntegration(this));
+-    QWindow *window = m_qt_compositor->window();
+-    if (window && window->surfaceType() != QWindow::RasterSurface) {
+-        loadClientBufferIntegration();
+-        loadServerBufferIntegration();
+-    }
+-
+-    if (m_client_buffer_integration)
+-        m_client_buffer_integration->initializeHardware(m_display);
+-    if (m_server_buffer_integration)
+-        m_server_buffer_integration->initializeHardware(m_qt_compositor);
+-#endif
+-}
+-
+ void Compositor::initializeExtensions()
+ {
+     if (m_extensions & QWaylandCompositor::OutputExtension)
+@@ -328,43 +300,6 @@ QList<QWaylandClient *> Compositor::clients() const
+     return m_clients;
+ }
+ 
+-void Compositor::setScreenOrientation(Qt::ScreenOrientation orientation)
+-{
+-    m_orientation = orientation;
+-    m_output_global->sendOutputOrientation(orientation);
+-}
+-
+-Qt::ScreenOrientation Compositor::screenOrientation() const
+-{
+-    return m_orientation;
+-}
+-
+-void Compositor::setOutputGeometry(const QRect &geometry)
+-{
+-    if (m_output_global)
+-        m_output_global->setGeometry(geometry);
+-}
+-
+-QRect Compositor::outputGeometry() const
+-{
+-    if (m_output_global)
+-        return m_output_global->geometry();
+-    return QRect();
+-}
+-
+-void Compositor::setOutputRefreshRate(int rate)
+-{
+-    if (m_output_global)
+-        m_output_global->setRefreshRate(rate);
+-}
+-
+-int Compositor::outputRefreshRate() const
+-{
+-    if (m_output_global)
+-        return m_output_global->refreshRate();
+-    return 0;
+-}
+-
+ void Compositor::setClientFullScreenHint(bool value)
+ {
+     if (m_windowManagerIntegration)
+@@ -496,6 +431,54 @@ void Compositor::loadServerBufferIntegration()
+     }
+ }
+ 
++void Compositor::addOutput(QWaylandOutput *output)
++{
++    if (!output)
++        return;
++
++    m_outputs.append(output);
++
++#ifdef QT_COMPOSITOR_WAYLAND_GL
++    if (output->window()) {
++        if (!m_hw_integration) {
++            if (m_extensions & QWaylandCompositor::HardwareIntegrationExtension)
++                m_hw_integration.reset(new HardwareIntegration(this));
++        }
++
++        if (output->window()->surfaceType() == QWindow::RasterSurface) {
++            qFatal("Using raster surface windows is not allowed when OpenGL is enabled");
++        } else {
++            if (!m_client_buffer_integration && !m_server_buffer_integration) {
++                loadClientBufferIntegration();
++                loadServerBufferIntegration();
++
++                if (m_client_buffer_integration)
++                    m_client_buffer_integration->initializeHardware(m_display);
++                if (m_server_buffer_integration)
++                    m_server_buffer_integration->initializeHardware(m_qt_compositor);
++            }
++        }
++    }
++#endif
++
++    Q_EMIT m_qt_compositor->outputAdded(output);
++}
++
++void Compositor::removeOutput(QWaylandOutput *output)
++{
++    m_outputs.removeOne(output);
++
++#ifdef QT_COMPOSITOR_WAYLAND_GL
++    if (m_outputs.size() == 0) {
++        m_client_buffer_integration.reset();
++        m_server_buffer_integration.reset();
++        m_hw_integration.reset();
++    }
++#endif
++
++    Q_EMIT m_qt_compositor->outputRemoved(output);
++}
++
+ } // namespace Wayland
+ 
+ QT_END_NAMESPACE
+diff --git a/src/compositor/wayland_wrapper/qwlcompositor_p.h b/src/compositor/wayland_wrapper/qwlcompositor_p.h
+index 9c6192f..c7c107e 100644
+--- a/src/compositor/wayland_wrapper/qwlcompositor_p.h
++++ b/src/compositor/wayland_wrapper/qwlcompositor_p.h
+@@ -61,6 +61,7 @@ class QWaylandClient;
+ class QWaylandClientPrivate;
+ class QWaylandCompositor;
+ class QWaylandInputDevice;
++class QWaylandOutput;
+ class WindowManagerServerIntegration;
+ class QMimeData;
+ class QPlatformScreenBuffer;
+@@ -72,7 +73,7 @@ class Surface;
+ class SurfaceBuffer;
+ class InputDevice;
+ class DataDeviceManager;
+-class OutputGlobal;
++class Output;
+ class OutputExtensionGlobal;
+ class SurfaceExtensionGlobal;
+ class SubSurfaceExtensionGlobal;
+@@ -104,11 +105,8 @@ public:
+ 
+     uint currentTimeMsecs() const;
+ 
+-    QWindow *window() const;
+-
+     ClientBufferIntegration *clientBufferIntegration() const;
+     ServerBufferIntegration *serverBufferIntegration() const;
+-    void initializeHardwareIntegration();
+     void initializeExtensions();
+     void initializeDefaultInputDevice();
+     void initializeWindowManagerProtocol();
+@@ -126,13 +124,6 @@ public:
+ 
+     WindowManagerServerIntegration *windowManagerIntegration() const { return m_windowManagerIntegration; }
+ 
+-    void setScreenOrientation(Qt::ScreenOrientation orientation);
+-    Qt::ScreenOrientation screenOrientation() const;
+-    void setOutputGeometry(const QRect &geometry);
+-    QRect outputGeometry() const;
+-    void setOutputRefreshRate(int rate);
+-    int outputRefreshRate() const;
+-
+     void setClientFullScreenHint(bool value);
+ 
+     QWaylandCompositor::ExtensionFlags extensions() const;
+@@ -179,8 +170,7 @@ protected:
+     InputDevice *m_default_input_device;
+ 
+     /* Output */
+-    //make this a list of the available screens
+-    OutputGlobal *m_output_global;
++    QList<QWaylandOutput *> m_outputs;
+ 
+     DataDeviceManager *m_data_device_manager;
+ 
+@@ -218,6 +218,10 @@ protected:
+     bool m_retainSelection;
+ 
+     friend class QT_PREPEND_NAMESPACE(QWaylandCompositor);
++    friend class QT_PREPEND_NAMESPACE(QWaylandOutput);
++
++    void addOutput(QWaylandOutput *output);
++    void removeOutput(QWaylandOutput *output);
+ };
+ 
+ }
+diff --git a/src/compositor/wayland_wrapper/qwlextendedoutput.cpp b/src/compositor/wayland_wrapper/qwlextendedoutput.cpp
+index 3517a99..593ba14 100644
+--- a/src/compositor/wayland_wrapper/qwlextendedoutput.cpp
++++ b/src/compositor/wayland_wrapper/qwlextendedoutput.cpp
+@@ -56,7 +56,7 @@ OutputExtensionGlobal::OutputExtensionGlobal(Compositor *compositor)
+ 
+ void OutputExtensionGlobal::output_extension_get_extended_output(qt_output_extension::Resource *resource, uint32_t id, wl_resource *output_resource)
+ {
+-    Output *output = static_cast<Output *>(OutputGlobal::Resource::fromResource(output_resource));
++    OutputResource *output = static_cast<OutputResource *>(Output::Resource::fromResource(output_resource));
+     Q_ASSERT(output->extendedOutput == 0);
+ 
+     ExtendedOutput *extendedOutput = static_cast<ExtendedOutput *>(qt_extended_output::add(resource->client(), id));
+diff --git a/src/compositor/wayland_wrapper/qwlextendedoutput_p.h b/src/compositor/wayland_wrapper/qwlextendedoutput_p.h
+index 5f620cd..f0772e1 100644
+--- a/src/compositor/wayland_wrapper/qwlextendedoutput_p.h
++++ b/src/compositor/wayland_wrapper/qwlextendedoutput_p.h
+@@ -54,14 +54,14 @@ QT_BEGIN_NAMESPACE
+ namespace QtWayland {
+ 
+ class Compositor;
+-class Output;
++class OutputResource;
+ 
+ class ExtendedOutput : public QtWaylandServer::qt_extended_output::Resource
+ {
+ public:
+     ExtendedOutput() : output(0) {}
+ 
+-    Output *output;
++    OutputResource *output;
+ };
+ 
+ class OutputExtensionGlobal : public QtWaylandServer::qt_output_extension, public QtWaylandServer::qt_extended_output
+diff --git a/src/compositor/wayland_wrapper/qwlinputpanelsurface.cpp b/src/compositor/wayland_wrapper/qwlinputpanelsurface.cpp
+index fd258bc..e318023 100644
+--- a/src/compositor/wayland_wrapper/qwlinputpanelsurface.cpp
++++ b/src/compositor/wayland_wrapper/qwlinputpanelsurface.cpp
+@@ -77,10 +77,11 @@ void InputPanelSurface::input_panel_surface_set_overlay_panel(Resource *)
+     m_type = OverlayPanel;
+ }
+ 
+-void InputPanelSurface::input_panel_surface_set_toplevel(Resource *, wl_resource *output, uint32_t position)
++void InputPanelSurface::input_panel_surface_set_toplevel(Resource *, wl_resource *output_resource, uint32_t position)
+ {
+     m_type = Toplevel;
+-    m_output = static_cast<Output *>(Output::Resource::fromResource(output));
++    OutputResource *output = static_cast<OutputResource *>(Output::Resource::fromResource(output_resource));
++    m_output = static_cast<Output *>(output->output_object);
+     m_position = static_cast<wl_input_panel_surface::position>(position);
+ }
+ 
+diff --git a/src/compositor/wayland_wrapper/qwloutput.cpp b/src/compositor/wayland_wrapper/qwloutput.cpp
+index b804521..0682545 100644
+--- a/src/compositor/wayland_wrapper/qwloutput.cpp
++++ b/src/compositor/wayland_wrapper/qwloutput.cpp
+@@ -1,5 +1,6 @@
+ /****************************************************************************
+ **
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ ** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+ ** Contact: http://www.qt-project.org/legal
+ **
+@@ -40,99 +40,219 @@
+ 
+ #include "qwloutput_p.h"
+ #include "qwlextendedoutput_p.h"
+-#include <QGuiApplication>
+-#include <QtGui/QScreen>
++#include "qwlcompositor_p.h"
+ #include <QRect>
+ 
++#include <QtGui/QWindow>
++
+ QT_BEGIN_NAMESPACE
+ 
+ namespace QtWayland {
+ 
+-OutputGlobal::OutputGlobal(struct ::wl_display *display)
+-    : QtWaylandServer::wl_output(display, 2)
+-    , m_displayId(-1)
+-    , m_numQueued(0)
+-    , m_transform(WL_OUTPUT_TRANSFORM_NORMAL)
++static QtWaylandServer::wl_output::subpixel toWlSubpixel(const QWaylandOutput::Subpixel &value)
++{
++    switch (value) {
++    case QWaylandOutput::SubpixelUnknown:
++        return QtWaylandServer::wl_output::subpixel_unknown;
++    case QWaylandOutput::SubpixelNone:
++        return QtWaylandServer::wl_output::subpixel_none;
++    case QWaylandOutput::SubpixelHorizontalRgb:
++        return QtWaylandServer::wl_output::subpixel_horizontal_rgb;
++    case QWaylandOutput::SubpixelHorizontalBgr:
++        return QtWaylandServer::wl_output::subpixel_horizontal_bgr;
++    case QWaylandOutput::SubpixelVerticalRgb:
++        return QtWaylandServer::wl_output::subpixel_vertical_rgb;
++    case QWaylandOutput::SubpixelVerticalBgr:
++        return QtWaylandServer::wl_output::subpixel_vertical_bgr;
++    default:
++        break;
++    }
++
++    return QtWaylandServer::wl_output::subpixel_unknown;
++}
++
++static QtWaylandServer::wl_output::transform toWlTransform(const QWaylandOutput::Transform &value)
+ {
+-    QScreen *screen = QGuiApplication::primaryScreen();
+-    m_geometry = QRect(QPoint(0, 0), screen->availableGeometry().size());
+-    m_refreshRate = qRound(screen->refreshRate() * 1000.0);
++    switch (value) {
++    case QWaylandOutput::Transform90:
++        return QtWaylandServer::wl_output::transform_90;
++    case QWaylandOutput::Transform180:
++        return QtWaylandServer::wl_output::transform_180;
++    case QWaylandOutput::Transform270:
++        return QtWaylandServer::wl_output::transform_270;
++    case QWaylandOutput::TransformFlipped:
++        return QtWaylandServer::wl_output::transform_flipped;
++    case QWaylandOutput::TransformFlipped90:
++        return QtWaylandServer::wl_output::transform_flipped_90;
++    case QWaylandOutput::TransformFlipped180:
++        return QtWaylandServer::wl_output::transform_flipped_180;
++    case QWaylandOutput::TransformFlipped270:
++        return QtWaylandServer::wl_output::transform_flipped_270;
++    default:
++        break;
++    }
++
++    return QtWaylandServer::wl_output::transform_normal;
+ }
+ 
+-OutputGlobal::~OutputGlobal()
++Output::Output(Compositor *compositor, QWindow *window)
++    : QtWaylandServer::wl_output(compositor->wl_display(), 2)
++    , m_compositor(compositor)
++    , m_window(window)
++    , m_output(Q_NULLPTR)
++    , m_geometry(QPoint(), window ? window->size() : QSize())
++    , m_availableGeometry(QRect())
++    , m_refreshRate(60000)
++    , m_physicalSize(QSize())
++    , m_subpixel(QWaylandOutput::SubpixelUnknown)
++    , m_transform(QWaylandOutput::TransformNormal)
++    , m_scaleFactor(1)
+ {
+ }
+ 
+-void OutputGlobal::output_bind_resource(Resource *resource)
++void Output::output_bind_resource(Resource *resource)
+ {
+-    wl_output_send_geometry(resource->handle, 0, 0,
+-                            m_physicalSize.width(), m_physicalSize.height(), 0, "", "", m_transform);
++    send_geometry(resource->handle,
++                  m_geometry.x(), m_geometry.y(),
++                  m_physicalSize.width(), m_physicalSize.height(),
++                  toWlSubpixel(m_subpixel), m_manufacturer, m_model,
++                  toWlTransform(m_transform));
+ 
+-    wl_output_send_mode(resource->handle, WL_OUTPUT_MODE_CURRENT|WL_OUTPUT_MODE_PREFERRED,
+-                        size().width(), size().height(), refreshRate());
++    send_mode(resource->handle, mode_current | mode_preferred,
++              m_geometry.width(), m_geometry.height(), m_refreshRate);
+ 
+-    if (resource->version() >= 2)
+-        wl_output_send_done(resource->handle);
++    send_scale(resource->handle, m_scaleFactor);
++
++    send_done(resource->handle);
+ }
+ 
+-void OutputGlobal::setPhysicalSize(const QSize &size)
++void Output::setManufacturer(const QString &manufacturer)
+ {
+-    if (m_physicalSize != size) {
+-        m_physicalSize = size;
++    if (m_manufacturer != manufacturer) {
++        Q_FOREACH (Resource *resource, resourceMap().values()) {
++            send_geometry(resource->handle,
++                          m_geometry.x(), m_geometry.x(),
++                          m_physicalSize.width(), m_physicalSize.height(),
++                          toWlSubpixel(m_subpixel), manufacturer, m_model,
++                          toWlTransform(m_transform));
++        }
++    }
+ 
+-        foreach (Resource *res, resourceMap()) {
+-            wl_output_send_geometry(res->handle, 0, 0,
+-                                    m_physicalSize.width(), m_physicalSize.height(), 0, "", "", m_transform);
++    m_manufacturer = manufacturer;
++}
+ 
+-            if (res->version() >= 2)
+-                wl_output_send_done(res->handle);
++void Output::setModel(const QString &model)
++{
++    if (m_model != model) {
++        Q_FOREACH (Resource *resource, resourceMap().values()) {
++            send_geometry(resource->handle,
++                          m_geometry.x(), m_geometry.x(),
++                          m_physicalSize.width(), m_physicalSize.height(),
++                          toWlSubpixel(m_subpixel), m_manufacturer, model,
++                          toWlTransform(m_transform));
++            send_done(resource->handle);
+         }
+     }
++    m_model = model;
+ }
+ 
+-void OutputGlobal::setGeometry(const QRect &geometry)
++void Output::setGeometry(const QRect &geometry)
+ {
++    if (m_geometry != geometry) {
++        Q_FOREACH (Resource *resource, resourceMap().values()) {
++            send_geometry(resource->handle,
++                          m_geometry.x(), m_geometry.y(),
++                          m_physicalSize.width(), m_physicalSize.height(),
++                          toWlSubpixel(m_subpixel), m_manufacturer, m_model,
++                          toWlTransform(m_transform));
++            send_mode(resource->handle, mode_current,
++                      geometry.width(), geometry.height(),
++                      m_refreshRate);
++            send_done(resource->handle);
++        }
++    }
++
+     m_geometry = geometry;
+ }
+ 
+-void OutputGlobal::setRefreshRate(int rate)
++void Output::setAvailableGeometry(const QRect &availableGeometry)
++{
++    m_availableGeometry = availableGeometry;
++}
++
++void Output::setRefreshRate(int rate)
+ {
++    if (m_refreshRate != rate) {
++        Q_FOREACH (Resource *resource, resourceMap().values()) {
++            send_mode(resource->handle, mode_current,
++                      m_geometry.width(), m_geometry.height(), rate);
++            send_done(resource->handle);
++        }
++    }
++
+     m_refreshRate = rate;
+ }
+ 
+-void OutputGlobal::sendOutputOrientation(Qt::ScreenOrientation orientation)
++void Output::setPhysicalSize(const QSize &physicalSize)
+ {
+-    QScreen *screen = QGuiApplication::primaryScreen();
+-    bool isPortrait = screen->primaryOrientation() == Qt::PortraitOrientation;
+-    switch (orientation) {
+-        case Qt::PrimaryOrientation:
+-            m_transform = WL_OUTPUT_TRANSFORM_NORMAL;
+-            break;
+-        case Qt::PortraitOrientation:
+-            m_transform = isPortrait ? WL_OUTPUT_TRANSFORM_NORMAL : WL_OUTPUT_TRANSFORM_90;
+-            break;
+-        case Qt::LandscapeOrientation:
+-            m_transform = isPortrait ? WL_OUTPUT_TRANSFORM_270 : WL_OUTPUT_TRANSFORM_NORMAL;
+-            break;
+-        case Qt::InvertedPortraitOrientation:
+-            m_transform = isPortrait ? WL_OUTPUT_TRANSFORM_180 : WL_OUTPUT_TRANSFORM_270;
+-            break;
+-        case Qt::InvertedLandscapeOrientation:
+-            m_transform = isPortrait ? WL_OUTPUT_TRANSFORM_90 : WL_OUTPUT_TRANSFORM_180;
+-            break;
++    if (m_physicalSize != physicalSize) {
++        Q_FOREACH (Resource *resource, resourceMap().values()) {
++            send_geometry(resource->handle,
++                          m_geometry.x(), m_geometry.x(),
++                          physicalSize.width(), physicalSize.height(),
++                          toWlSubpixel(m_subpixel), m_manufacturer, m_model,
++                          toWlTransform(m_transform));
++            send_done(resource->handle);
++        }
+     }
++    m_physicalSize = physicalSize;
++}
+ 
+-    foreach (Resource *res, resourceMap()) {
+-        wl_output_send_geometry(res->handle, 0, 0,
+-                                m_physicalSize.width(), m_physicalSize.height(), 0, "", "", m_transform);
+-        if (res->version() >= 2)
+-            wl_output_send_done(res->handle);
++void Output::setSubpixel(const QWaylandOutput::Subpixel &subpixel)
++{
++    if (m_subpixel != subpixel) {
++        Q_FOREACH (Resource *resource, resourceMap().values()) {
++            send_geometry(resource->handle,
++                          m_geometry.x(), m_geometry.x(),
++                          m_physicalSize.width(), m_physicalSize.height(),
++                          toWlSubpixel(subpixel), m_manufacturer, m_model,
++                          toWlTransform(m_transform));
++            send_done(resource->handle);
++        }
+     }
++
++    m_subpixel = subpixel;
++}
++
++void Output::setTransform(const QWaylandOutput::Transform &transform)
++{
++    if (m_transform != transform) {
++        Q_FOREACH (Resource *resource, resourceMap().values()) {
++            send_geometry(resource->handle,
++                          m_geometry.x(), m_geometry.x(),
++                          m_physicalSize.width(), m_physicalSize.height(),
++                          toWlSubpixel(m_subpixel), m_manufacturer, m_model,
++                          toWlTransform(transform));
++            send_done(resource->handle);
++        }
++    }
++
++    m_transform = transform;
++}
++
++void Output::setScaleFactor(int scale)
++{
++    if (m_scaleFactor != scale) {
++        Q_FOREACH (Resource *resource, resourceMap().values())
++            send_scale(resource->handle, scale);
++    }
++
++    m_scaleFactor = scale;
+ }
+ 
+-Output *OutputGlobal::outputForClient(wl_client *client) const
++OutputResource *Output::outputForClient(wl_client *client) const
+ {
+-    return static_cast<Output *>(resourceMap().value(client));
++    return static_cast<OutputResource *>(resourceMap().value(client));
+ }
+ 
+ } // namespace Wayland
+diff --git a/src/compositor/wayland_wrapper/qwloutput_p.h b/src/compositor/wayland_wrapper/qwloutput_p.h
+index 9184f87..c4de311 100644
+--- a/src/compositor/wayland_wrapper/qwloutput_p.h
++++ b/src/compositor/wayland_wrapper/qwloutput_p.h
+@@ -1,5 +1,6 @@
+ /****************************************************************************
+ **
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ ** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+ ** Contact: http://www.qt-project.org/legal
+ **
+@@ -41,74 +41,91 @@
+ #ifndef WL_OUTPUT_H
+ #define WL_OUTPUT_H
+ 
++#include <QtCompositor/qwaylandexport.h>
++
+ #include <QtCore/QRect>
+ #include <QtCore/QList>
+ 
+ #include <QtCompositor/private/qwayland-server-wayland.h>
++#include <QtCompositor/qwaylandoutput.h>
+ 
+ QT_BEGIN_NAMESPACE
+ 
++class QWindow;
++
+ namespace QtWayland {
+ 
++class Compositor;
+ class ExtendedOutput;
+ 
+-struct Output : public QtWaylandServer::wl_output::Resource
++struct OutputResource : public QtWaylandServer::wl_output::Resource
+ {
+-    Output() : extendedOutput(0) {}
++    OutputResource() : extendedOutput(0) {}
+     ExtendedOutput *extendedOutput;
+ };
+ 
+-class OutputGlobal : public QtWaylandServer::wl_output
++class Output : public QtWaylandServer::wl_output
+ {
+ public:
+-    OutputGlobal(struct ::wl_display *display);
+-    ~OutputGlobal();
++    explicit Output(Compositor *compositor, QWindow *window = 0);
++
++    Compositor *compositor() const { return m_compositor; }
++
++    QWaylandOutput *output() const { return m_output; }
++
++    QString manufacturer() const { return m_manufacturer; }
++    void setManufacturer(const QString &manufacturer);
++
++    QString model() const { return m_model; }
++    void setModel(const QString &model);
+ 
+     void setGeometry(const QRect &geometry);
+     QRect geometry() const { return m_geometry; }
+ 
++    QRect availableGeometry() const { return m_availableGeometry; }
++    void setAvailableGeometry(const QRect &availableGeometry);
++
+     int x() const { return m_geometry.x(); }
+     int y() const { return m_geometry.y(); }
+     QSize size() const { return m_geometry.size(); }
+ 
+-    void setPhysicalSize(const QSize &size);
+     void setRefreshRate(int rate);
+     int refreshRate() const { return m_refreshRate; }
+-    void sendOutputOrientation(Qt::ScreenOrientation orientation);
+ 
+-    Output *outputForClient(struct wl_client *client) const;
++    QSize physicalSize() const { return m_physicalSize; }
++    void setPhysicalSize(const QSize &physicalSize);
+ 
+-    void output_bind_resource(Resource *resource) Q_DECL_OVERRIDE;
+-    Resource *output_allocate() Q_DECL_OVERRIDE { return new Output; }
++    QWaylandOutput::Subpixel subpixel() const { return m_subpixel; }
++    void setSubpixel(const QWaylandOutput::Subpixel &subpixel);
+ 
+-private:
+-    QRect m_geometry;
+-    QSize m_physicalSize;
+-    int m_refreshRate;
+-    int m_displayId;
+-    int m_numQueued;
+-    wl_output_transform m_transform;
+-};
++    QWaylandOutput::Transform transform() const { return m_transform; }
++    void setTransform(const QWaylandOutput::Transform &transform);
+ 
+-#if 0
+-class Output
+-{
+-public:
+-    Output(OutputGlobal *outputGlobal, struct ::wl_resource *resource);
+-    ~Output();
++    int scaleFactor() const { return m_scaleFactor; }
++    void setScaleFactor(int scale);
+ 
+-    OutputGlobal *outputGlobal() const;
++    QWindow *window() const { return m_window; }
+ 
+-    ExtendedOutput *extendedOutput() const;
+-    void setExtendedOutput(ExtendedOutput *extendedOutput);
++    OutputResource *outputForClient(struct wl_client *client) const;
+ 
+-    struct wl_resource *handle() const;
++    void output_bind_resource(Resource *resource) Q_DECL_OVERRIDE;
++    Resource *output_allocate() Q_DECL_OVERRIDE { return new OutputResource; }
+ private:
+-    struct wl_resource *m_output_resource;
+-    OutputGlobal *m_output_global;
+-    ExtendedOutput *m_extended_output;
++    friend class QT_PREPEND_NAMESPACE(QWaylandOutput);
++
++    Compositor *m_compositor;
++    QWindow *m_window;
++    QWaylandOutput *m_output;
++    QString m_manufacturer;
++    QString m_model;
++    QRect m_geometry;
++    QRect m_availableGeometry;
++    int m_refreshRate;
++    QSize m_physicalSize;
++    QWaylandOutput::Subpixel m_subpixel;
++    QWaylandOutput::Transform m_transform;
++    int m_scaleFactor;
+ };
+-#endif
+ 
+ }
+ 
+diff --git a/src/compositor/wayland_wrapper/qwlshellsurface.cpp b/src/compositor/wayland_wrapper/qwlshellsurface.cpp
+index baae8b5..bb292fb 100644
+--- a/src/compositor/wayland_wrapper/qwlshellsurface.cpp
++++ b/src/compositor/wayland_wrapper/qwlshellsurface.cpp
+@@ -1,5 +1,6 @@
+ /****************************************************************************
+ **
++** Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ ** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+ ** Contact: http://www.qt-project.org/legal
+ **
+@@ -44,9 +45,11 @@
+ #include "qwlsurface_p.h"
+ #include "qwlinputdevice_p.h"
+ #include "qwlsubsurface_p.h"
++#include "qwloutput_p.h"
+ #include "qwlpointer_p.h"
+ #include "qwlextendedsurface_p.h"
+ 
++#include "qwaylandoutput.h"
+ #include "qwaylandsurfaceview.h"
+ 
+ #include <QtCore/qglobal.h>
+@@ -288,14 +291,33 @@ void ShellSurface::shell_surface_set_transient(Resource *resource,
+ void ShellSurface::shell_surface_set_fullscreen(Resource *resource,
+                        uint32_t method,
+                        uint32_t framerate,
+-                       struct wl_resource *output)
++                       struct wl_resource *output_resource)
+ {
+     Q_UNUSED(resource);
+     Q_UNUSED(method);
+     Q_UNUSED(framerate);
+-    Q_UNUSED(output);
+-    QSize defaultScreenSize = m_surface->compositor()->outputGeometry().size();
+-    send_configure(resize_bottom_right, defaultScreenSize.width(), defaultScreenSize.height());
++
++    QWaylandOutput *output = output_resource
++        ? QWaylandOutput::fromResource(output_resource)
++        : Q_NULLPTR;
++    if (!output) {
++        // Look for an output that can contain this surface
++        Q_FOREACH (QWaylandOutput *curOutput, m_surface->compositor()->waylandCompositor()->outputs()) {
++            if (curOutput->geometry().size().width() >= m_surface->size().width() &&
++                    curOutput->geometry().size().height() >= m_surface->size().height()) {
++                output = curOutput;
++                break;
++            }
++        }
++    }
++    if (!output) {
++        qWarning() << "Unable to resize surface full screen, cannot determine output";
++        return;
++    }
++    QSize outputSize = output->geometry().size();
++
++    m_view->setPos(output->geometry().topLeft());
++    send_configure(resize_bottom_right, outputSize.width(), outputSize.height());
+ 
+     if (m_surface->extendedSurface())
+         m_surface->extendedSurface()->setVisibility(QWindow::FullScreen, false);
+@@ -321,12 +343,31 @@ void ShellSurface::shell_surface_set_popup(Resource *resource, wl_resource *inpu
+ }
+ 
+ void ShellSurface::shell_surface_set_maximized(Resource *resource,
+-                       struct wl_resource *output)
++                       struct wl_resource *output_resource)
+ {
+     Q_UNUSED(resource);
+-    Q_UNUSED(output);
+-    QSize defaultScreenSize = m_surface->compositor()->outputGeometry().size();
+-    send_configure(resize_bottom_right, defaultScreenSize.width(), defaultScreenSize.height());
++
++    QWaylandOutput *output = output_resource
++        ? QWaylandOutput::fromResource(output_resource)
++        : Q_NULLPTR;
++    if (!output) {
++        // Look for an output that can contain this surface
++        Q_FOREACH (QWaylandOutput *curOutput, m_surface->compositor()->waylandCompositor()->outputs()) {
++            if (curOutput->geometry().size().width() >= m_surface->size().width() &&
++                    curOutput->geometry().size().height() >= m_surface->size().height()) {
++                output = curOutput;
++                break;
++            }
++        }
++    }
++    if (!output) {
++        qWarning() << "Unable to maximize surface, cannot determine output";
++        return;
++    }
++    QSize outputSize = output->availableGeometry().size();
++
++    m_view->setPos(output->availableGeometry().topLeft());
++    send_configure(resize_bottom_right, outputSize.width(), outputSize.height());
+ 
+     if (m_surface->extendedSurface())
+         m_surface->extendedSurface()->setVisibility(QWindow::Maximized, false);
+diff --git a/src/hardwareintegration/compositor/drm-egl-server/drmeglserverbufferintegration.cpp b/src/hardwareintegration/compositor/drm-egl-server/drmeglserverbufferintegration.cpp
+index 09588f6..6d3fd86 100644
+--- a/src/hardwareintegration/compositor/drm-egl-server/drmeglserverbufferintegration.cpp
++++ b/src/hardwareintegration/compositor/drm-egl-server/drmeglserverbufferintegration.cpp
+@@ -38,6 +38,8 @@
+ **
+ ****************************************************************************/
+ 
++#include <QtCompositor/qwaylandoutput.h>
++
+ #include "drmeglserverbufferintegration.h"
+ 
+ #include <QtGui/QOpenGLContext>
+@@ -127,7 +129,12 @@ DrmEglServerBufferIntegration::~DrmEglServerBufferIntegration()
+ 
+ void DrmEglServerBufferIntegration::initializeHardware(QWaylandCompositor *compositor)
+ {
+-    QWindow *window = compositor->window();
++    if (compositor->outputs().size() < 1) {
++        qWarning("No outputs were created by the compositor.\n");
++        return;
++    }
++
++    QWindow *window = compositor->outputs().at(0)->window();
+     Q_ASSERT(QGuiApplication::platformNativeInterface());
+ 
+     m_egl_display = static_cast<EGLDisplay>(QGuiApplication::platformNativeInterface()->nativeResourceForWindow("egldisplay", window));
+diff --git a/src/hardwareintegration/compositor/libhybris-egl-server/libhybriseglserverbufferintegration.cpp b/src/hardwareintegration/compositor/libhybris-egl-server/libhybriseglserverbufferintegration.cpp
+index c15f3d1..4b18037 100644
+--- a/src/hardwareintegration/compositor/libhybris-egl-server/libhybriseglserverbufferintegration.cpp
++++ b/src/hardwareintegration/compositor/libhybris-egl-server/libhybriseglserverbufferintegration.cpp
+@@ -38,6 +38,8 @@
+ **
+ ****************************************************************************/
+ 
++#include <QtCompositor/qwaylandoutput.h>
++
+ #include "libhybriseglserverbufferintegration.h"
+ 
+ #include <QtGui/QOpenGLContext>
+@@ -131,7 +133,12 @@ LibHybrisEglServerBufferIntegration::~LibHybrisEglServerBufferIntegration()
+ 
+ void LibHybrisEglServerBufferIntegration::initializeHardware(QWaylandCompositor *compositor)
+ {
+-    QWindow *window = compositor->window();
++    if (compositor->outputs().size() < 1) {
++        qWarning("No outputs were created by the compositor\n");
++        return;
++    }
++
++    QWindow *window = compositor->outputs().at(0)->window();
+     Q_ASSERT(QGuiApplication::platformNativeInterface());
+ 
+     m_egl_display = static_cast<EGLDisplay>(QGuiApplication::platformNativeInterface()->nativeResourceForWindow("egldisplay", window));
+diff --git a/src/hardwareintegration/compositor/wayland-egl/waylandeglclientbufferintegration.cpp b/src/hardwareintegration/compositor/wayland-egl/waylandeglclientbufferintegration.cpp
+index 37aa3ff..0eda05a 100644
+--- a/src/hardwareintegration/compositor/wayland-egl/waylandeglclientbufferintegration.cpp
++++ b/src/hardwareintegration/compositor/wayland-egl/waylandeglclientbufferintegration.cpp
+@@ -42,6 +42,7 @@
+ 
+ #include <QtCompositor/private/qwlcompositor_p.h>
+ #include <QtCompositor/private/qwlsurface_p.h>
++#include <QtCompositor/qwaylandoutput.h>
+ #include <qpa/qplatformnativeinterface.h>
+ #include <QtGui/QGuiApplication>
+ #include <QtGui/QOpenGLContext>
+@@ -119,7 +120,12 @@ void WaylandEglClientBufferIntegration::initializeHardware(QtWayland::Display *w
+         return;
+     }
+ 
+-    d->egl_display = nativeInterface->nativeResourceForWindow("EglDisplay", m_compositor->window());
++    if (m_compositor->outputs().size() < 1) {
++        qWarning("Failed to initialize egl display. No outputs were created by the compositor.\n");
++        return;
++    }
++
++    d->egl_display = nativeInterface->nativeResourceForWindow("EglDisplay", m_compositor->outputs().at(0)->window());
+     if (!d->egl_display) {
+         qWarning("Failed to initialize egl display. Could not get EglDisplay for window.\n");
+         return;
+diff --git a/src/hardwareintegration/compositor/xcomposite-egl/xcompositeeglintegration.cpp b/src/hardwareintegration/compositor/xcomposite-egl/xcompositeeglintegration.cpp
+index 2401d67..8c637bf 100644
+--- a/src/hardwareintegration/compositor/xcomposite-egl/xcompositeeglintegration.cpp
++++ b/src/hardwareintegration/compositor/xcomposite-egl/xcompositeeglintegration.cpp
+@@ -42,6 +42,7 @@
+ 
+ #include "wayland-xcomposite-server-protocol.h"
+ 
++#include <QtCompositor/qwaylandoutput.h>
+ #include <QtCompositor/private/qwlcompositor_p.h>
+ #include <QtGui/QGuiApplication>
+ #include <qpa/qplatformnativeinterface.h>
+@@ -78,10 +79,13 @@ void XCompositeEglClientBufferIntegration::initializeHardware(QtWayland::Display
+ {
+     QPlatformNativeInterface *nativeInterface = QGuiApplication::platformNativeInterface();
+     if (nativeInterface) {
+-        mDisplay = static_cast<Display *>(nativeInterface->nativeResourceForWindow("Display",m_compositor->window()));
++        if (m_compositor->outputs().size() < 1)
++            qFatal("No outputs were created by the compositor");
++
++        mDisplay = static_cast<Display *>(nativeInterface->nativeResourceForWindow("Display",m_compositor->outputs().at(0)->window()));
+         if (!mDisplay)
+             qFatal("could not retireve Display from platform integration");
+-        mEglDisplay = static_cast<EGLDisplay>(nativeInterface->nativeResourceForWindow("EGLDisplay",m_compositor->window()));
++        mEglDisplay = static_cast<EGLDisplay>(nativeInterface->nativeResourceForWindow("EGLDisplay",m_compositor->outputs().at(0)->window()));
+         if (!mEglDisplay)
+             qFatal("could not retrieve EGLDisplay from platform integration");
+     } else {
+diff --git a/src/hardwareintegration/compositor/xcomposite-glx/xcompositeglxintegration.cpp b/src/hardwareintegration/compositor/xcomposite-glx/xcompositeglxintegration.cpp
+index bd5ddef..799d8d2 100644
+--- a/src/hardwareintegration/compositor/xcomposite-glx/xcompositeglxintegration.cpp
++++ b/src/hardwareintegration/compositor/xcomposite-glx/xcompositeglxintegration.cpp
+@@ -40,6 +40,7 @@
+ 
+ #include "xcompositeglxintegration.h"
+ 
++#include <QtCompositor/qwaylandoutput.h>
+ #include <QtCompositor/private/qwlcompositor_p.h>
+ #include "wayland-xcomposite-server-protocol.h"
+ 
+@@ -87,9 +88,13 @@ XCompositeGLXClientBufferIntegration::~XCompositeGLXClientBufferIntegration()
+ void XCompositeGLXClientBufferIntegration::initializeHardware(QtWayland::Display *)
+ {
+     qDebug() << "Initializing GLX integration";
++
++    if (m_compositor->outputs().size() < 1)
++        qFatal("No outputs were created by the compositor");
++
+     QPlatformNativeInterface *nativeInterface = QGuiApplicationPrivate::platformIntegration()->nativeInterface();
+     if (nativeInterface) {
+-        mDisplay = static_cast<Display *>(nativeInterface->nativeResourceForWindow("Display",m_compositor->window()));
++        mDisplay = static_cast<Display *>(nativeInterface->nativeResourceForWindow("Display",m_compositor->outputs().at(0)->window()));
+         if (!mDisplay)
+             qFatal("could not retireve Display from platform integration");
+     } else {
+diff --git a/src/hardwareintegration/compositor/xcomposite_share/xcompositehandler.cpp b/src/hardwareintegration/compositor/xcomposite_share/xcompositehandler.cpp
+index 0f10d38..ec09e60 100644
+--- a/src/hardwareintegration/compositor/xcomposite_share/xcompositehandler.cpp
++++ b/src/hardwareintegration/compositor/xcomposite_share/xcompositehandler.cpp
+@@ -38,6 +38,8 @@
+ **
+ ****************************************************************************/
+ 
++#include <QtCompositor/qwaylandoutput.h>
++
+ #include "xcompositehandler.h"
+ 
+ #include "wayland-xcomposite-server-protocol.h"
+@@ -50,9 +52,12 @@ QT_BEGIN_NAMESPACE
+ XCompositeHandler::XCompositeHandler(QtWayland::Compositor *compositor, Display *display)
+     : QtWaylandServer::qt_xcomposite(compositor->wl_display())
+ {
+-    compositor->window()->create();
++    if (compositor->waylandCompositor()->outputs().size() < 1)
++        qFatal("No outputs were created by the compositor");
++
++    compositor->waylandCompositor()->outputs().at(0)->window()->create();
+ 
+-    mFakeRootWindow = new QWindow(compositor->window());
++    mFakeRootWindow = new QWindow(compositor->waylandCompositor()->outputs().at(0)->window());
+     mFakeRootWindow->setGeometry(QRect(-1,-1,1,1));
+     mFakeRootWindow->create();
+     mFakeRootWindow->show();
+diff --git a/tests/auto/compositor/testcompositor.cpp b/tests/auto/compositor/testcompositor.cpp
+index cf7c8eb..ee50a33 100644
+--- a/tests/auto/compositor/testcompositor.cpp
++++ b/tests/auto/compositor/testcompositor.cpp
+@@ -41,7 +41,7 @@
+ 
+ #include "testcompositor.h"
+ 
+-TestCompositor::TestCompositor(QWaylandCompositor::ExtensionFlag flags) : QWaylandCompositor(0, 0, flags)
++TestCompositor::TestCompositor(QWaylandCompositor::ExtensionFlag flags) : QWaylandCompositor(0, flags)
+ {
+     addDefaultShell();
+ }
+diff --git a/tests/auto/compositor/tst_compositor.cpp b/tests/auto/compositor/tst_compositor.cpp
+index 3a11d7b..e120d7d 100644
+--- a/tests/auto/compositor/tst_compositor.cpp
++++ b/tests/auto/compositor/tst_compositor.cpp
+@@ -75,6 +75,8 @@ void tst_WaylandCompositor::singleClient()
+ {
+     TestCompositor compositor;
+ 
++    QWaylandOutput output(&compositor, Q_NULLPTR);
++
+     MockClient client;
+ 
+     wl_surface *sa = client.createSurface();
+@@ -105,6 +107,8 @@ void tst_WaylandCompositor::multipleClients()
+ {
+     TestCompositor compositor;
+ 
++    QWaylandOutput output(&compositor, Q_NULLPTR);
++
+     MockClient a;
+     MockClient b;
+     MockClient c;
+@@ -143,9 +147,12 @@ void tst_WaylandCompositor::multipleClients()
+ void tst_WaylandCompositor::keyboardGrab()
+ {
+     TestCompositor compositor((QWaylandCompositor::ExtensionFlag)0);
+-    MockClient mc;
+ 
++    QWaylandOutput output(&compositor, Q_NULLPTR);
++
++    MockClient mc;
+     mc.createSurface();
++
+     // This is needed for timing purposes, otherwise the query for the
+     // compositor surfaces will return null
+     QTRY_COMPARE(compositor.surfaces.size(), 1);
+@@ -192,7 +199,9 @@ void tst_WaylandCompositor::geometry()
+     TestCompositor compositor;
+ 
+     QRect geometry(0, 0, 4096, 3072);
+-    compositor.setOutputGeometry(geometry);
++
++    QWaylandOutput output(&compositor, Q_NULLPTR);
++    output.setGeometry(geometry);
+ 
+     MockClient client;
+ 
+@@ -203,6 +212,8 @@ void tst_WaylandCompositor::mapSurface()
+ {
+     TestCompositor compositor;
+ 
++    QWaylandOutput output(&compositor, Q_NULLPTR);
++
+     MockClient client;
+ 
+     wl_surface *surface = client.createSurface();
+@@ -268,6 +279,8 @@ void tst_WaylandCompositor::frameCallback()
+ 
+     TestCompositor compositor;
+ 
++    QWaylandOutput output(&compositor, Q_NULLPTR);
++
+     MockClient client;
+ 
+     wl_surface *surface = client.createSurface();
+@@ -306,6 +319,9 @@ void tst_WaylandCompositor::frameCallback()
+ void tst_WaylandCompositor::inputDeviceCapabilities()
+ {
+     TestCompositor compositor;
++
++    QWaylandOutput output(&compositor, Q_NULLPTR);
++
+     QtWayland::InputDevice dev(NULL, compositor.handle(), QWaylandInputDevice::Pointer);
+ 
+     QTRY_VERIFY(dev.pointerDevice());
+-- 
+1.8.3.1
+
+
