@@ -2,13 +2,13 @@ require ${BPN}.inc
 
 inherit cmake-lib
 
-# some optional but very common -> no additional option
+# required
 DEPENDS += " \
 	${BPN}-native \
-	qttools \
-	kcoreaddons \
-	kconfig \
-	kdoctools \
+"
+
+# optional -> TBD packageconfig
+DEPENDS += " \
 	kcompletion \
 	kconfigwidgets \
 	kiconthemes \

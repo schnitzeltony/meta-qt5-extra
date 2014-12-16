@@ -8,3 +8,12 @@ inherit kde
 
 SRCREV = "64e6dfdeb206a2d0623ee1d54104c907625bcde4"
 PV = "5.5.0"
+
+# required
+DEPENDS += " \
+	qttools \
+	kcoreaddons \
+	kconfig \
+	kdoctools \
+"
+
