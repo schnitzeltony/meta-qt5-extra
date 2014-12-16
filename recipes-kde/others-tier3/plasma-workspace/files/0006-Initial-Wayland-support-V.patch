@@ -1,0 +1,114 @@
+From 1c52091870af571e2488f5ae0b94805130f24620 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 16 Dec 2014 21:02:35 +0100
+Subject: [PATCH 06/11] Initial Wayland support V
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Screensaver is part of ksmserver which is not build for x11 missing
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ containmentactions/contextmenu/CMakeLists.txt | 6 ++++--
+ containmentactions/contextmenu/menu.cpp       | 5 +++++
+ runners/sessions/CMakeLists.txt               | 6 ++++--
+ runners/sessions/sessionrunner.cpp            | 4 ++++
+ 4 files changed, 17 insertions(+), 4 deletions(-)
+
+diff --git a/containmentactions/contextmenu/CMakeLists.txt b/containmentactions/contextmenu/CMakeLists.txt
+index d85f8c6..980da6b 100644
+--- a/containmentactions/contextmenu/CMakeLists.txt
++++ b/containmentactions/contextmenu/CMakeLists.txt
+@@ -11,8 +11,10 @@ set(contextmenu_SRCS
+ set(krunner_xml ${plasma-workspace_SOURCE_DIR}/krunner/dbus/org.kde.krunner.App.xml)
+ qt5_add_dbus_interface(contextmenu_SRCS ${krunner_xml} krunner_interface)
+ 
+-set(screensaver_xml ${ksmserver_SOURCE_DIR}/screenlocker/dbus/org.freedesktop.ScreenSaver.xml)
+-qt5_add_dbus_interface(contextmenu_SRCS ${screensaver_xml} screensaver_interface)
++if(X11_FOUND)
++  set(screensaver_xml ${ksmserver_SOURCE_DIR}/screenlocker/dbus/org.freedesktop.ScreenSaver.xml)
++  qt5_add_dbus_interface(contextmenu_SRCS ${screensaver_xml} screensaver_interface)
++endif()
+ 
+ 
+ add_library(plasma_containmentactions_contextmenu MODULE ${contextmenu_SRCS})
+diff --git a/containmentactions/contextmenu/menu.cpp b/containmentactions/contextmenu/menu.cpp
+index 8e0d05a..fa7f58f 100644
+--- a/containmentactions/contextmenu/menu.cpp
++++ b/containmentactions/contextmenu/menu.cpp
+@@ -35,7 +35,10 @@
+ 
+ #include "kworkspace.h"
+ #include "krunner_interface.h"
++
++#if HAVE_X11
+ #include "screensaver_interface.h"
++#endif
+ 
+ #ifdef Q_OS_WIN
+ #define _WIN32_WINNT 0x0500 // require NT 5.0 (win 2k pro)
+@@ -199,12 +202,14 @@ void ContextMenu::lockScreen()
+     }
+ 
+ #ifndef Q_OS_WIN
++#if HAVE_X11
+     QString interface("org.freedesktop.ScreenSaver");
+     org::freedesktop::ScreenSaver screensaver(interface, "/ScreenSaver",
+                                               QDBusConnection::sessionBus());
+     if (screensaver.isValid()) {
+         screensaver.Lock();
+     }
++#endif // HAVE_X11
+ #else
+     LockWorkStation();
+ #endif // !Q_OS_WIN
+diff --git a/runners/sessions/CMakeLists.txt b/runners/sessions/CMakeLists.txt
+index 30dbe16..7c4dcc1 100644
+--- a/runners/sessions/CMakeLists.txt
++++ b/runners/sessions/CMakeLists.txt
+@@ -4,8 +4,10 @@ set(krunner_sessions_SRCS
+     sessionrunner.cpp
+ )
+ 
+-set(screensaver_xml ${ksmserver_SOURCE_DIR}/screenlocker/dbus/org.freedesktop.ScreenSaver.xml)
+-qt5_add_dbus_interface(krunner_sessions_SRCS ${screensaver_xml} screensaver_interface)
++if(X11_FOUND)
++  set(screensaver_xml ${ksmserver_SOURCE_DIR}/screenlocker/dbus/org.freedesktop.ScreenSaver.xml)
++  qt5_add_dbus_interface(krunner_sessions_SRCS ${screensaver_xml} screensaver_interface)
++endif()
+ 
+ add_library(krunner_sessions MODULE ${krunner_sessions_SRCS})
+ target_link_libraries(krunner_sessions Qt5::Widgets Qt5::DBus KF5::Runner KF5::I18n PW::KWorkspace)
+diff --git a/runners/sessions/sessionrunner.cpp b/runners/sessions/sessionrunner.cpp
+index 489e420..b408ff0 100644
+--- a/runners/sessions/sessionrunner.cpp
++++ b/runners/sessions/sessionrunner.cpp
+@@ -26,7 +26,9 @@
+ 
+ #include "kworkspace.h"
+ 
++#if HAVE_X11
+ #include "screensaver_interface.h"
++#endif
+ 
+ K_EXPORT_PLASMA_RUNNER(calculatorrunner, SessionRunner)
+ 
+@@ -271,12 +273,14 @@ void SessionRunner::run(const Plasma::RunnerContext &context, const Plasma::Quer
+ 
+ void SessionRunner::lock()
+ {
++#if HAVE_X11
+     QString interface("org.freedesktop.ScreenSaver");
+     org::freedesktop::ScreenSaver screensaver(interface, "/ScreenSaver",
+                                               QDBusConnection::sessionBus());
+     if (screensaver.isValid()) {
+         screensaver.Lock();
+     }
++#endif
+ }
+ 
+ #include "sessionrunner.moc"
+-- 
+1.8.3.1
+

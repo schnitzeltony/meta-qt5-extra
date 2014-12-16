@@ -1,0 +1,36 @@
+From 5133618013e0806e709a123e1f3bc20c8e51afc5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 11 Dec 2014 13:37:36 +0100
+Subject: [PATCH 02/11] Do check for kwin only in case X11 was found
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 582b58e..d86e815 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -21,7 +21,6 @@ find_package(KF5 REQUIRED COMPONENTS PlasmaQuick)
+ find_package(KF5 REQUIRED COMPONENTS SysGuard)
+ find_package(KF5 REQUIRED COMPONENTS Screen)
+ find_package(KF5TextEditor)
+-find_package(KWinDBusInterface CONFIG REQUIRED)
+ 
+ include(KDEInstallDirs)
+ include(KDECMakeSettings)
+@@ -121,6 +120,7 @@ add_subdirectory(freespacenotifier)
+ add_subdirectory(klipper)
+ add_subdirectory(krunner)
+ if(HAVE_X11)
++  find_package(KWinDBusInterface CONFIG REQUIRED)
+   add_subdirectory(ksmserver)
+ endif()
+ add_subdirectory(ksplash)
+-- 
+1.8.3.1
+

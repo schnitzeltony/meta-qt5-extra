@@ -1,0 +1,3794 @@
+From 0d22c828b7d8b73a1030e33af2aef21d033859d3 Mon Sep 17 00:00:00 2001
+From: Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+Date: Sun, 7 Sep 2014 18:01:36 +0200
+Subject: [PATCH 01/11] Initial Wayland support
+
+Add KF5Wayland check and port a few components.
+
+Components fully ported with this commit:
+
+  - ksplashqml
+  - plasmashell
+
+ksmserver is built only when X11 is found because it's not yet ready
+for Wayland and so is the windows runner.
+
+The remaining components will be ported in future commits.
+---
+ CMakeLists.txt                                 |  21 +-
+ kglobalaccel/config-kglobalaccel.h.cmake       |   1 +
+ ksplash/ksplashqml/CMakeLists.txt              |  24 ++
+ ksplash/ksplashqml/SplashApp.cpp               | 129 +++++---
+ ksplash/ksplashqml/SplashApp.h                 |  17 +-
+ ksplash/ksplashqml/SplashAppWayland.cpp        |  78 +++++
+ ksplash/ksplashqml/SplashAppWayland_p.h        |  47 +++
+ ksplash/ksplashqml/SplashAppX11.cpp            |  30 ++
+ ksplash/ksplashqml/SplashAppX11_p.h            |  33 ++
+ ksplash/ksplashqml/SplashApp_p.h               |  56 ++++
+ ksplash/ksplashqml/config-ksplashqml.h.cmake   |   2 +
+ libkworkspace/config-libkworkspace.h.cmake     |   7 +-
+ libtaskmanager/CMakeLists.txt                  |   8 +-
+ libtaskmanager/launcherproperties.cpp          |  16 +-
+ libtaskmanager/task_wayland.cpp                | 106 ++++++
+ libtaskmanager/taskactions.cpp                 |   7 +-
+ runners/CMakeLists.txt                         |   4 +-
+ runners/windows/config-windowsrunner.h.cmake   |   5 +-
+ shell/CMakeLists.txt                           |  33 ++
+ shell/config-plasma.h.cmake                    |   1 +
+ shell/desktopview.cpp                          |  67 ++--
+ shell/desktopview.h                            |   3 +
+ shell/panelshadows.cpp                         | 429 +------------------------
+ shell/panelshadows_p.h                         |   4 +-
+ shell/panelview.cpp                            | 248 ++------------
+ shell/panelview.h                              |  10 +
+ shell/platform/platformdesktopview.cpp         |  43 +++
+ shell/platform/platformdesktopview.h           |  38 +++
+ shell/platform/platformdesktopview_wayland.cpp |  89 +++++
+ shell/platform/platformdesktopview_wayland.h   |  44 +++
+ shell/platform/platformdesktopview_x11.cpp     |  72 +++++
+ shell/platform/platformdesktopview_x11.h       |  33 ++
+ shell/platform/platformpanelshadows.cpp        | 160 +++++++++
+ shell/platform/platformpanelshadows.h          |  62 ++++
+ shell/platform/platformpanelshadows_x11.cpp    | 247 ++++++++++++++
+ shell/platform/platformpanelshadows_x11.h      |  53 +++
+ shell/platform/platformpanelview.cpp           |  79 +++++
+ shell/platform/platformpanelview.h             |  51 +++
+ shell/platform/platformpanelview_wayland.cpp   | 114 +++++++
+ shell/platform/platformpanelview_wayland.h     |  47 +++
+ shell/platform/platformpanelview_x11.cpp       | 284 ++++++++++++++++
+ shell/platform/platformpanelview_x11.h         |  45 +++
+ shell/platform/waylandinterface.cpp            |  73 +++++
+ shell/platform/waylandinterface.h              |  47 +++
+ shell/shellmanager.cpp                         |  12 +
+ 45 files changed, 2236 insertions(+), 743 deletions(-)
+ create mode 100644 ksplash/ksplashqml/SplashAppWayland.cpp
+ create mode 100644 ksplash/ksplashqml/SplashAppWayland_p.h
+ create mode 100644 ksplash/ksplashqml/SplashAppX11.cpp
+ create mode 100644 ksplash/ksplashqml/SplashAppX11_p.h
+ create mode 100644 ksplash/ksplashqml/SplashApp_p.h
+ create mode 100644 ksplash/ksplashqml/config-ksplashqml.h.cmake
+ create mode 100644 libtaskmanager/task_wayland.cpp
+ create mode 100644 shell/platform/platformdesktopview.cpp
+ create mode 100644 shell/platform/platformdesktopview.h
+ create mode 100644 shell/platform/platformdesktopview_wayland.cpp
+ create mode 100644 shell/platform/platformdesktopview_wayland.h
+ create mode 100644 shell/platform/platformdesktopview_x11.cpp
+ create mode 100644 shell/platform/platformdesktopview_x11.h
+ create mode 100644 shell/platform/platformpanelshadows.cpp
+ create mode 100644 shell/platform/platformpanelshadows.h
+ create mode 100644 shell/platform/platformpanelshadows_x11.cpp
+ create mode 100644 shell/platform/platformpanelshadows_x11.h
+ create mode 100644 shell/platform/platformpanelview.cpp
+ create mode 100644 shell/platform/platformpanelview.h
+ create mode 100644 shell/platform/platformpanelview_wayland.cpp
+ create mode 100644 shell/platform/platformpanelview_wayland.h
+ create mode 100644 shell/platform/platformpanelview_x11.cpp
+ create mode 100644 shell/platform/platformpanelview_x11.h
+ create mode 100644 shell/platform/waylandinterface.cpp
+ create mode 100644 shell/platform/waylandinterface.h
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 620e250..582b58e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -53,9 +53,9 @@ set_package_properties(dbusmenu-qt5 PROPERTIES DESCRIPTION "Support for notifica
+ 
+ find_package(X11)
+ set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
+-                        URL "http://www.x.org"
+-                        TYPE OPTIONAL
+-                        PURPOSE "Required for building the X11 based workspace")
++                       URL "http://www.x.org"
++                       TYPE OPTIONAL
++                       PURPOSE "Required for building the X11 based workspace")
+ 
+ if(X11_FOUND)
+   find_package(XCB MODULE REQUIRED COMPONENTS XCB KEYSYMS)
+@@ -71,6 +71,16 @@ if(X11_FOUND AND XCB_XCB_FOUND)
+   set(HAVE_X11 1)
+ endif()
+ 
++find_package(KF5Wayland CONFIG REQUIRED COMPONENTS WaylandClient)
++set_package_properties(KF5Wayland PROPERTIES
++    TYPE OPTIONAL
++    PURPOSE "Required for the workspace on Wayland")
++add_feature_info("KF5Wayland" KF5Wayland_FOUND "Required for the workspace on Wayland")
++
++if(KF5Wayland_FOUND)
++    set(HAVE_WAYLAND 1)
++endif()
++
+ include(ConfigureChecks.cmake)
+ 
+ include_directories("${CMAKE_CURRENT_BINARY_DIR}")
+@@ -96,6 +106,7 @@ if (INSTALL_SDDM_THEME)
+ endif()
+ 
+ add_subdirectory(doc)
++
+ add_subdirectory(libkworkspace)
+ add_subdirectory(libtaskmanager)
+ add_subdirectory(components)
+@@ -109,7 +120,9 @@ add_subdirectory(shell)
+ add_subdirectory(freespacenotifier)
+ add_subdirectory(klipper)
+ add_subdirectory(krunner)
+-add_subdirectory(ksmserver)
++if(HAVE_X11)
++  add_subdirectory(ksmserver)
++endif()
+ add_subdirectory(ksplash)
+ add_subdirectory(systemmonitor)
+ add_subdirectory(statusnotifierwatcher)
+diff --git a/kglobalaccel/config-kglobalaccel.h.cmake b/kglobalaccel/config-kglobalaccel.h.cmake
+index 89858d1..1faeb1f 100644
+--- a/kglobalaccel/config-kglobalaccel.h.cmake
++++ b/kglobalaccel/config-kglobalaccel.h.cmake
+@@ -1 +1,2 @@
+ #cmakedefine01 HAVE_X11
++#cmakedefine01 HAVE_WAYLAND
+diff --git a/ksplash/ksplashqml/CMakeLists.txt b/ksplash/ksplashqml/CMakeLists.txt
+index 16c58a0..59a1a3c 100644
+--- a/ksplash/ksplashqml/CMakeLists.txt
++++ b/ksplash/ksplashqml/CMakeLists.txt
+@@ -2,12 +2,32 @@ project(ksplashqml)
+ 
+ add_subdirectory(themes)
+ 
++if(HAVE_WAYLAND)
++    include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
++endif()
++
++configure_file(config-ksplashqml.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-ksplashqml.h)
++
+ set(ksplashqml_SRCS
+     main.cpp
+     SplashApp.cpp
+     SplashWindow.cpp
+    )
+ 
++if(HAVE_X11)
++    set(ksplashqml_SRCS
++        ${ksplashqml_SRCS}
++        SplashAppX11.cpp
++    )
++endif()
++
++if(HAVE_WAYLAND)
++    set(ksplashqml_SRCS
++        ${ksplashqml_SRCS}
++        SplashAppWayland.cpp
++    )
++endif()
++
+ add_executable(ksplashqml ${ksplashqml_SRCS})
+ 
+ target_link_libraries(ksplashqml
+@@ -16,6 +36,10 @@ target_link_libraries(ksplashqml
+     KF5::PlasmaQuick
+    )
+ 
++if(HAVE_WAYLAND)
++    target_link_libraries(ksplashqml KF5::WaylandClient)
++endif()
++
+ install(TARGETS ksplashqml ${INSTALL_TARGETS_DEFAULT_ARGS})
+ install(FILES org.kde.KSplash.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR})
+ 
+diff --git a/ksplash/ksplashqml/SplashApp.cpp b/ksplash/ksplashqml/SplashApp.cpp
+index e68db1b..4e1ba55 100644
+--- a/ksplash/ksplashqml/SplashApp.cpp
++++ b/ksplash/ksplashqml/SplashApp.cpp
+@@ -1,6 +1,7 @@
+ /*
+  *   Copyright (C) 2010 Ivan Cukic <ivan.cukic(at)kde.org>
+  *   Copyright (C) 2013 Martin Klapetek <mklapetek(at)kde.org>
++ *   Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+  *
+  *   This program is free software; you can redistribute it and/or modify
+  *   it under the terms of the GNU General Public License version 2,
+@@ -20,6 +21,16 @@
+ 
+ #include "SplashWindow.h"
+ #include "SplashApp.h"
++#include "SplashApp_p.h"
++
++#include "config-ksplashqml.h"
++
++#if HAVE_X11
++#  include "SplashAppX11_p.h"
++#endif
++#if HAVE_WAYLAND
++#  include "SplashAppWayland_p.h"
++#endif
+ 
+ #include <QPixmap>
+ #include <QCursor>
+@@ -43,95 +54,133 @@
+  *  - desktop
+  */
+ 
+-SplashApp::SplashApp(int &argc, char ** argv)
+-    : QGuiApplication(argc, argv),
+-      m_stage(0),
+-      m_testing(false),
+-      m_window(false),
+-      m_startTime(QDateTime::currentDateTime())
++SplashAppPrivate::SplashAppPrivate(SplashApp *q)
++    : stage(0)
++    , testing(false)
++    , window(false)
++    , startTime(QDateTime::currentDateTime())
++    , q(q)
+ {
+-    QCommandLineParser parser;
+-    parser.addOption(QCommandLineOption("test", "Run in test mode"));
+-    parser.addOption(QCommandLineOption("window", "Run in windowed mode"));
+-    parser.addOption(QCommandLineOption("nofork", "Don't fork"));
+-    parser.addOption(QCommandLineOption("pid", "Print the pid of the child process"));
+-    parser.addHelpOption();
++}
+ 
+-    parser.process(*this);
+-    m_testing = parser.isSet("test");
+-    m_window = parser.isSet("window");
++SplashAppPrivate::~SplashAppPrivate()
++{
++    qDeleteAll(windows);
++}
+ 
+-    foreach(QScreen* screen, screens())
+-        adoptScreen(screen);
++void SplashAppPrivate::setup()
++{
++    foreach(QScreen* screen, q->screens())
++        q->adoptScreen(screen);
+ 
+-    setStage("initial");
++    q->setStage("initial");
+ 
+     QPixmap cursor(32, 32);
+     cursor.fill(Qt::transparent);
+-    setOverrideCursor(QCursor(cursor));
++    q->setOverrideCursor(QCursor(cursor));
+ 
+-    if (m_testing) {
+-        m_timer.start(TEST_STEP_INTERVAL, this);
++    if (testing) {
++        timer.start(TEST_STEP_INTERVAL, q);
+     }
+ 
+-    connect(this, SIGNAL(screenAdded(QScreen*)), this, SLOT(adoptScreen(QScreen*)));
++    q->connect(q, SIGNAL(screenAdded(QScreen*)), q, SLOT(adoptScreen(QScreen*)));
+ 
+     QDBusConnection dbus = QDBusConnection::sessionBus();
+-    dbus.registerObject(QStringLiteral("/KSplash"), this, QDBusConnection::ExportScriptableSlots);
++    dbus.registerObject(QStringLiteral("/KSplash"), q, QDBusConnection::ExportScriptableSlots);
+     dbus.registerService(QStringLiteral("org.kde.KSplash"));
++}
+ 
++void SplashAppPrivate::initialize()
++{
+ }
+ 
+-SplashApp::~SplashApp()
++void SplashAppPrivate::setupWindow(SplashWindow *w)
+ {
+-    qDeleteAll(m_windows);
++    Q_UNUSED(w);
++}
++
++void SplashAppPrivate::ready()
++{
++}
++
++SplashApp::SplashApp(int &argc, char ** argv)
++    : QGuiApplication(argc, argv)
++    , d()
++{
++    QCommandLineParser parser;
++    parser.addOption(QCommandLineOption("test", "Run in test mode"));
++    parser.addOption(QCommandLineOption("window", "Run in windowed mode"));
++    parser.addOption(QCommandLineOption("nofork", "Don't fork"));
++    parser.addOption(QCommandLineOption("pid", "Print the pid of the child process"));
++    parser.addHelpOption();
++
++#if HAVE_X11
++    if (d.isNull() && QGuiApplication::platformName() == QStringLiteral("xcb")) {
++        d.reset(new SplashAppX11(this));
++    }
++#endif
++#if HAVE_WAYLAND
++    if (d.isNull() && QGuiApplication::platformName().startsWith(QStringLiteral("wayland"))) {
++        d.reset(new SplashAppWayland(this));
++    }
++#endif
++
++    parser.process(*this);
++    d->testing = parser.isSet("test");
++    d->window = parser.isSet("window");
++
++    d->initialize();
+ }
+ 
+ void SplashApp::timerEvent(QTimerEvent * event)
+ {
+-    if (event->timerId() == m_timer.timerId()) {
+-        m_timer.stop();
++    if (event->timerId() == d->timer.timerId()) {
++        d->timer.stop();
+ 
+-        setStage(m_stage + 1);
++        setStage(d->stage + 1);
+ 
+-        m_timer.start(TEST_STEP_INTERVAL, this);
++        d->timer.start(TEST_STEP_INTERVAL, this);
+     }
+ }
+ 
+ void SplashApp::setStage(const QString &stage)
+ {
+-    qDebug() << "Loading stage " << stage << m_startTime.msecsTo(QDateTime::currentDateTime());
++    qDebug() << "Loading stage " << stage << d->startTime.msecsTo(QDateTime::currentDateTime());
+ 
+-    if (m_stages.contains(stage)) {
++    if (d->stages.contains(stage)) {
++        d->ready();
+         return;
+     }
+-    m_stages.append(stage);
+-    setStage(m_stages.count());
++    d->stages.append(stage);
++    setStage(d->stages.count());
+ }
+ 
+ void SplashApp::setStage(int stage)
+ {
+-    if (m_stage == 7) {
++    if (d->stage == 7) {
++        d->ready();
+         QGuiApplication::exit(EXIT_SUCCESS);
+     }
+ 
+-    m_stage = stage;
+-    foreach (SplashWindow *w, m_windows) {
++    d->stage = stage;
++    foreach (SplashWindow *w, d->windows) {
+         w->setStage(stage);
+     }
+ }
+ 
+ void SplashApp::adoptScreen(QScreen* screen)
+ {
+-    SplashWindow *w = new SplashWindow(m_testing, m_window);
++    SplashWindow *w = new SplashWindow(d->testing, d->window);
++    w->setScreen(screen);
++    d->setupWindow(w);
+     w->setGeometry(screen->availableGeometry());
+-    w->setStage(m_stage);
++    w->setStage(d->stage);
+     w->show();
+-    m_windows << w;
++    d->windows << w;
+ 
+     connect(screen, &QScreen::geometryChanged, w, &SplashWindow::setGeometry);
+     connect(screen, &QObject::destroyed, w, [this, w](){
+-        m_windows.removeAll(w);
++        d->windows.removeAll(w);
+         w->deleteLater();
+     });
+ }
+diff --git a/ksplash/ksplashqml/SplashApp.h b/ksplash/ksplashqml/SplashApp.h
+index 1be9d0b..86d86c7 100644
+--- a/ksplash/ksplashqml/SplashApp.h
++++ b/ksplash/ksplashqml/SplashApp.h
+@@ -1,6 +1,7 @@
+ /*
+  *   Copyright (C) 2010 Ivan Cukic <ivan.cukic(at)kde.org>
+  *   Copyright (C) 2013 Martin Klapetek <mklapetek(at)kde.org>
++ *   Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+  *
+  *   This program is free software; you can redistribute it and/or modify
+  *   it under the terms of the GNU General Public License version 2,
+@@ -23,10 +24,9 @@
+ 
+ #include <QObject>
+ #include <QGuiApplication>
+-#include <QBasicTimer>
+-#include <QDateTime>
++#include "SplashApp_p.h"
+ 
+-class SplashWindow;
++class SplashAppPrivate;
+ 
+ class SplashApp: public QGuiApplication
+ {
+@@ -35,7 +35,6 @@ class SplashApp: public QGuiApplication
+ 
+ public:
+     explicit SplashApp(int &argc, char ** argv);
+-    virtual ~SplashApp();
+ 
+ public Q_SLOTS:
+     Q_SCRIPTABLE void setStage(const QString &messgae);
+@@ -45,13 +44,9 @@ protected:
+     void setStage(int stage);
+ 
+ private:
+-    int m_stage;
+-    QList<SplashWindow *> m_windows;
+-    bool m_testing;
+-    bool m_window;
+-    QStringList m_stages;
+-    QBasicTimer m_timer;
+-    QDateTime m_startTime;
++    QScopedPointer<SplashAppPrivate> d;
++
++    friend class SplashAppPrivate;
+ 
+ private Q_SLOTS:
+     void adoptScreen(QScreen*);
+diff --git a/ksplash/ksplashqml/SplashAppWayland.cpp b/ksplash/ksplashqml/SplashAppWayland.cpp
+new file mode 100644
+index 0000000..aa21b8f
+--- /dev/null
++++ b/ksplash/ksplashqml/SplashAppWayland.cpp
+@@ -0,0 +1,78 @@
++/*
++ *   Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU General Public License version 2,
++ *   or (at your option) any later version, as published by the Free
++ *   Software Foundation
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU General Public License for more details
++ *
++ *   You should have received a copy of the GNU General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#include "SplashApp.h"
++#include "SplashAppWayland_p.h"
++#include "SplashWindow.h"
++
++#include <QGuiApplication>
++#include <qpa/qplatformnativeinterface.h>
++
++#include <KWayland/Client/registry.h>
++#include <KWayland/Client/plasma_shell.h>
++#include <KWayland/Client/plasma_surface.h>
++
++using namespace KWayland::Client;
++
++SplashAppWayland::SplashAppWayland(SplashApp *q)
++    : QObject(q)
++    , SplashAppPrivate(q)
++    , m_plasmaShell(Q_NULLPTR)
++{
++}
++
++void SplashAppWayland::initialize()
++{
++    // Reuse QPA connection to Wayland instead of ConnectionThread, otherwise
++    // wl_surface objects from the native interface won't be recognized by
++    // the compositor
++    // TODO: Add a static method to ConnectionThread to create it using
++    // wl_display from the native interface
++    QPlatformNativeInterface *native = QGuiApplication::platformNativeInterface();
++    wl_display *display = static_cast<wl_display *>(
++        native->nativeResourceForIntegration("display"));
++
++    Registry *registry = new Registry(this);
++    connect(registry, &Registry::plasmaShellAnnounced, this,
++        [this, registry](quint32 name, quint32 version) {
++            m_plasmaShell = registry->createPlasmaShell(name, version, registry);
++            setup();
++        }
++    );
++    registry->create(display);
++    registry->setup();
++}
++
++void SplashAppWayland::setupWindow(SplashWindow *w)
++{
++    if (m_plasmaShell && !window) {
++        KWayland::Client::PlasmaSurface *plasmaSurface = m_plasmaShell->createSurface(w, this);
++        plasmaSurface->setRole(KWayland::Client::PlasmaSurface::Role::Splash);
++        plasmaSurface->setOutput(w->screen());
++    }
++}
++
++void SplashAppWayland::ready()
++{
++    // Tell the compositor we are ready
++    if (m_plasmaShell)
++        m_plasmaShell->desktopReady();
++}
++
++#include "SplashAppWayland.moc"
+diff --git a/ksplash/ksplashqml/SplashAppWayland_p.h b/ksplash/ksplashqml/SplashAppWayland_p.h
+new file mode 100644
+index 0000000..24d9df8
+--- /dev/null
++++ b/ksplash/ksplashqml/SplashAppWayland_p.h
+@@ -0,0 +1,47 @@
++/*
++ *   Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU General Public License version 2,
++ *   or (at your option) any later version, as published by the Free
++ *   Software Foundation
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU General Public License for more details
++ *
++ *   You should have received a copy of the GNU General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#ifndef SPLASH_APP_WAYLAND_P_H
++#define SPLASH_APP_WAYLAND_P_H
++
++#include <QtCore/QObject>
++
++#include "SplashApp_p.h"
++
++namespace KWayland {
++  namespace Client {
++      class PlasmaShell;
++  }
++}
++
++class SplashAppWayland : public QObject, public SplashAppPrivate
++{
++    Q_OBJECT
++public:
++    SplashAppWayland(SplashApp *q);
++
++    void initialize();
++    void setupWindow(SplashWindow *w);
++    void ready();
++
++private:
++    KWayland::Client::PlasmaShell *m_plasmaShell;
++};
++
++#endif // SPLASH_APP_WAYLAND_P_H
+diff --git a/ksplash/ksplashqml/SplashAppX11.cpp b/ksplash/ksplashqml/SplashAppX11.cpp
+new file mode 100644
+index 0000000..3464eb3
+--- /dev/null
++++ b/ksplash/ksplashqml/SplashAppX11.cpp
+@@ -0,0 +1,30 @@
++/*
++ *   Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU General Public License version 2,
++ *   or (at your option) any later version, as published by the Free
++ *   Software Foundation
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU General Public License for more details
++ *
++ *   You should have received a copy of the GNU General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#include "SplashAppX11_p.h"
++
++SplashAppX11::SplashAppX11(SplashApp *q)
++    : SplashAppPrivate(q)
++{
++}
++
++void SplashAppX11::initialize()
++{
++    setup();
++}
+diff --git a/ksplash/ksplashqml/SplashAppX11_p.h b/ksplash/ksplashqml/SplashAppX11_p.h
+new file mode 100644
+index 0000000..4812082
+--- /dev/null
++++ b/ksplash/ksplashqml/SplashAppX11_p.h
+@@ -0,0 +1,33 @@
++/*
++ *   Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU General Public License version 2,
++ *   or (at your option) any later version, as published by the Free
++ *   Software Foundation
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU General Public License for more details
++ *
++ *   You should have received a copy of the GNU General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#ifndef SPLASH_APP_X11_P_H
++#define SPLASH_APP_X11_P_H
++
++#include "SplashApp_p.h"
++
++class SplashAppX11 : public SplashAppPrivate
++{
++public:
++    SplashAppX11(SplashApp *q);
++
++    void initialize();
++};
++
++#endif // SPLASH_APP_X11_P_H
+diff --git a/ksplash/ksplashqml/SplashApp_p.h b/ksplash/ksplashqml/SplashApp_p.h
+new file mode 100644
+index 0000000..c4a46a3
+--- /dev/null
++++ b/ksplash/ksplashqml/SplashApp_p.h
+@@ -0,0 +1,56 @@
++/*
++ *   Copyright (C) 2010 Ivan Cukic <ivan.cukic(at)kde.org>
++ *   Copyright (C) 2013 Martin Klapetek <mklapetek(at)kde.org>
++ *   Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU General Public License version 2,
++ *   or (at your option) any later version, as published by the Free
++ *   Software Foundation
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU General Public License for more details
++ *
++ *   You should have received a copy of the GNU General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#ifndef SPLASH_APP_P_H
++#define SPLASH_APP_P_H
++
++#include <QtCore/QBasicTimer>
++#include <QtCore/QDateTime>
++#include <QtCore/QStringList>
++
++class SplashApp;
++class SplashWindow;
++
++class SplashAppPrivate
++{
++public:
++    SplashAppPrivate(SplashApp *q);
++    virtual ~SplashAppPrivate();
++
++    void setup();
++
++    virtual void initialize();
++    virtual void setupWindow(SplashWindow *w);
++    virtual void ready();
++
++    int stage;
++    QList<SplashWindow *> windows;
++    bool testing;
++    bool window;
++    QStringList stages;
++    QBasicTimer timer;
++    QDateTime startTime;
++
++protected:
++    SplashApp *q;
++};
++
++#endif // SPLASH_APP_H
+diff --git a/ksplash/ksplashqml/config-ksplashqml.h.cmake b/ksplash/ksplashqml/config-ksplashqml.h.cmake
+new file mode 100644
+index 0000000..1faeb1f
+--- /dev/null
++++ b/ksplash/ksplashqml/config-ksplashqml.h.cmake
+@@ -0,0 +1,2 @@
++#cmakedefine01 HAVE_X11
++#cmakedefine01 HAVE_WAYLAND
+diff --git a/libkworkspace/config-libkworkspace.h.cmake b/libkworkspace/config-libkworkspace.h.cmake
+index d3d962f..aa9df64 100644
+--- a/libkworkspace/config-libkworkspace.h.cmake
++++ b/libkworkspace/config-libkworkspace.h.cmake
+@@ -1,2 +1,5 @@
+-/* Define if you have X11 at all */
+-#define HAVE_X11 ${X11_FOUND}
+\ No newline at end of file
++/* Define to 1 when we build for X11 */
++#cmakedefine01 HAVE_X11
++
++/* Define to 1 when we build for Wayland */
++#cmakedefine01 HAVE_WAYLAND
+diff --git a/libtaskmanager/CMakeLists.txt b/libtaskmanager/CMakeLists.txt
+index 92d0020..640f1fb 100644
+--- a/libtaskmanager/CMakeLists.txt
++++ b/libtaskmanager/CMakeLists.txt
+@@ -33,9 +33,13 @@ ki18n_wrap_ui(taskmanager_LIB_SRCS launcherconfig.ui launcherproperties.ui)
+ 
+ if(WIN32)
+     set(taskmanager_LIB_SRCS ${taskmanager_LIB_SRCS} task_win.cpp)
+-else()
++endif()
++if(HAVE_X11 AND NOT WIN32)
+     set(taskmanager_LIB_SRCS ${taskmanager_LIB_SRCS} task_x11.cpp)
+ endif()
++#if(HAVE_WAYLAND)
++#    set(taskmanager_LIB_SRCS ${taskmanager_LIB_SRCS} task_wayland.cpp)
++#endif()
+ 
+ add_library(taskmanager ${taskmanager_LIB_SRCS})
+ add_library(PW::LibTaskManager ALIAS taskmanager)
+@@ -57,7 +61,7 @@ target_link_libraries(taskmanager
+         KF5::KIOWidgets # KRun
+         KF5::Service
+ )
+-if (X11_FOUND)
++if (HAVE_X11)
+     target_link_libraries(taskmanager PRIVATE ${Qt5X11Extras_LIBRARIES} ${X11_LIBRARIES})
+     if (X11_Xfixes_FOUND)
+     target_link_libraries(taskmanager PRIVATE ${X11_Xfixes_LIB})
+diff --git a/libtaskmanager/launcherproperties.cpp b/libtaskmanager/launcherproperties.cpp
+index 3382913..4a00be4 100644
+--- a/libtaskmanager/launcherproperties.cpp
++++ b/libtaskmanager/launcherproperties.cpp
+@@ -28,12 +28,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ #include <KWindowSystem>
+ #include <KLocalizedString>
+ 
++#include <config-X11.h>
++
+ #include <QtGui/QMouseEvent>
+-#include <QtX11Extras/QX11Info>
+-#include <X11/Xlib.h>
+-#include <X11/Xatom.h>
+-#include <X11/Xutil.h>
+-#include <fixx11h.h>
++#if HAVE_X11
++#  include <QtX11Extras/QX11Info>
++#  include <X11/Xlib.h>
++#  include <X11/Xatom.h>
++#  include <X11/Xutil.h>
++#  include <fixx11h.h>
++#endif
+ #include <QDialogButtonBox>
+ 
+ namespace TaskManager
+@@ -174,6 +178,7 @@ bool LauncherProperties::eventFilter(QObject *o, QEvent *e)
+ 
+ WId LauncherProperties::findWindow()
+ {
++#if HAVE_X11
+     Window root;
+     Window child;
+     uint mask;
+@@ -197,6 +202,7 @@ WId LauncherProperties::findWindow()
+         }
+         parent = child;
+     }
++#endif
+ 
+     return 0;
+ }
+diff --git a/libtaskmanager/task_wayland.cpp b/libtaskmanager/task_wayland.cpp
+new file mode 100644
+index 0000000..3ea3e0b
+--- /dev/null
++++ b/libtaskmanager/task_wayland.cpp
+@@ -0,0 +1,106 @@
++/*****************************************************************
++
++Copyright (c) 2004 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of this software and associated documentation files (the "Software"), to deal
++in the Software without restriction, including without limitation the rights
++to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++copies of the Software, and to permit persons to whom the Software is
++furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in
++all copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
++AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++
++******************************************************************/
++
++#include "task_p.h"
++
++namespace TaskManager
++{
++
++bool Task::updateDemandsAttentionState(WId w)
++{
++    Q_UNUSED(w);
++    return false;
++}
++
++QString Task::className() const
++{
++    return QString();
++}
++
++QString Task::classClass() const
++{
++    return QString();
++}
++
++int Task::pid() const
++{
++    return 0;
++}
++
++void Task::move()
++{
++}
++
++void Task::resize()
++{
++}
++
++void Task::setMaximized(bool maximize)
++{
++    Q_UNUSED(maximize);
++}
++
++void Task::restore()
++{
++}
++
++void Task::close()
++{
++}
++
++void Task::toDesktop(int desk)
++{
++    Q_UNUSED(desk);
++}
++
++void Task::setAlwaysOnTop(bool stay)
++{
++    Q_UNUSED(stay);
++}
++
++void Task::setKeptBelowOthers(bool below)
++{
++    Q_UNUSED(below);
++}
++
++void Task::setFullScreen(bool fullscreen)
++{
++    Q_UNUSED(fullscreen);
++}
++
++void Task::setShaded(bool shade)
++{
++    Q_UNUSED(shade);
++}
++
++void Task::publishIconGeometry(QRect rect)
++{
++    Q_UNUSED(rect);
++}
++
++void Task::refreshActivities()
++{
++    return;
++}
++
++} // TaskManager namespace
+diff --git a/libtaskmanager/taskactions.cpp b/libtaskmanager/taskactions.cpp
+index 341fc0f..8bdfa94 100644
+--- a/libtaskmanager/taskactions.cpp
++++ b/libtaskmanager/taskactions.cpp
+@@ -43,7 +43,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ #include <QtCore/QMap>
+ #include <QtGui/QHelpEvent>
+ #include <QtWidgets/QToolTip>
+-#include <QX11Info>
++
++#if HAVE_X11
++#  include <QX11Info>
++#endif
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ // NOTE: if you change the menu, keep kde-workspace/kwin/useractions.cpp in sync
+@@ -303,6 +306,7 @@ ToNewDesktopActionImpl::ToNewDesktopActionImpl(QObject *parent, AbstractGroupabl
+ 
+ void ToNewDesktopActionImpl::slotToNewDesktop()
+ {
++#if HAVE_X11
+     NETRootInfo info(QX11Info::connection(), NET::NumberOfDesktops);
+     info.setNumberOfDesktops(m_newDesktop);
+ 
+@@ -311,6 +315,7 @@ void ToNewDesktopActionImpl::slotToNewDesktop()
+             task.data()->toDesktop(m_newDesktop);
+         }
+     }
++#endif
+ }
+ 
+ DesktopsMenu::DesktopsMenu(QWidget *parent, AbstractGroupableItem *item)
+diff --git a/runners/CMakeLists.txt b/runners/CMakeLists.txt
+index 48cc379..fb52453 100644
+--- a/runners/CMakeLists.txt
++++ b/runners/CMakeLists.txt
+@@ -14,7 +14,9 @@ add_subdirectory(windowedwidgets)
+ if(NOT WIN32)
+  add_subdirectory(powerdevil)
+  add_subdirectory(sessions)
+- add_subdirectory(windows)
++ if(HAVE_X11)
++  add_subdirectory(windows)
++ endif()
+  add_subdirectory(kill)
+ endif()
+ #
+diff --git a/runners/windows/config-windowsrunner.h.cmake b/runners/windows/config-windowsrunner.h.cmake
+index d3d962f..f53972b 100644
+--- a/runners/windows/config-windowsrunner.h.cmake
++++ b/runners/windows/config-windowsrunner.h.cmake
+@@ -1,2 +1,5 @@
+ /* Define if you have X11 at all */
+-#define HAVE_X11 ${X11_FOUND}
+\ No newline at end of file
++#define HAVE_X11 ${X11_FOUND}
++
++/* Define if you have Wayland at all */
++#define HAVE_WAYLAND ${WAYLAND_FOUND}
+diff --git a/shell/CMakeLists.txt b/shell/CMakeLists.txt
+index cb48ab8..ef26f78 100644
+--- a/shell/CMakeLists.txt
++++ b/shell/CMakeLists.txt
+@@ -24,6 +24,10 @@ configure_file(config-ktexteditor.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kte
+ 
+ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config-plasma.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-plasma.h)
+ 
++if(KF5Wayland_FOUND)
++    include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
++endif()
++
+ set(scripting_SRC
+     scripting/appinterface.cpp
+     scripting/applet.cpp
+@@ -36,6 +40,30 @@ set(scripting_SRC
+     scripting/widget.cpp
+ )
+ 
++set(platform_SRC
++    platform/platformdesktopview.cpp
++    platform/platformpanelview.cpp
++    platform/platformpanelshadows.cpp
++)
++
++if(HAVE_X11)
++    set(platform_SRC
++        ${platform_SRC}
++        platform/platformdesktopview_x11.cpp
++        platform/platformpanelview_x11.cpp
++        platform/platformpanelshadows_x11.cpp
++    )
++endif()
++
++if(HAVE_WAYLAND)
++    set(platform_SRC
++        ${platform_SRC}
++        platform/platformdesktopview_wayland.cpp
++        platform/platformpanelview_wayland.cpp
++        platform/waylandinterface.cpp
++    )
++endif()
++
+ set(plasmashell_dbusXML dbus/org.kde.PlasmaShell.xml)
+ qt5_add_dbus_adaptor(scripting_SRC ${plasmashell_dbusXML} shellcorona.h ShellCorona plasmashelladaptor)
+ 
+@@ -55,6 +83,7 @@ set (plasma_shell_SRCS
+     standaloneappcorona
+     osd.cpp
+     ${scripting_SRC}
++    ${platform_SRC}
+ )
+ 
+ set(krunner_xml ${plasma-workspace_SOURCE_DIR}/krunner/dbus/org.kde.krunner.App.xml)
+@@ -92,6 +121,10 @@ if(HAVE_X11)
+   target_link_libraries(plasmashell Qt5::X11Extras)
+ endif()
+ 
++if(HAVE_WAYLAND)
++  target_link_libraries(plasmashell KF5::WaylandClient)
++endif()
++
+ install(TARGETS plasmashell ${INSTALL_TARGETS_DEFAULT_ARGS})
+ install(FILES plasmashell.desktop DESTINATION ${AUTOSTART_INSTALL_DIR})
+ install( FILES dbus/org.kde.PlasmaShell.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} )
+diff --git a/shell/config-plasma.h.cmake b/shell/config-plasma.h.cmake
+index 1d59ae3..5959e0c 100644
+--- a/shell/config-plasma.h.cmake
++++ b/shell/config-plasma.h.cmake
+@@ -2,5 +2,6 @@
+ #cmakedefine01 PLASMA_NO_KIO
+ #cmakedefine01 PLASMA_NO_KUTILS
+ #cmakedefine01 HAVE_X11
++#cmakedefine01 HAVE_WAYLAND
+ #cmakedefine01 HAVE_GLX
+ #cmakedefine01 HAVE_EGL
+diff --git a/shell/desktopview.cpp b/shell/desktopview.cpp
+index ac50aed..270586f 100644
+--- a/shell/desktopview.cpp
++++ b/shell/desktopview.cpp
+@@ -1,4 +1,5 @@
+ /*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
+  *  Copyright 2013 Marco Martin <mart@kde.org>
+  *
+  *  This program is free software; you can redistribute it and/or modify
+@@ -17,11 +18,19 @@
+  */
+ 
+ #include "desktopview.h"
++#include "config-plasma.h"
+ #include "containmentconfigview.h"
+ #include "shellcorona.h"
+ #include "shellmanager.h"
+ #include "krunner_interface.h"
+ 
++#if HAVE_X11
++#  include "platform/platformdesktopview_x11.h"
++#endif
++#if HAVE_WAYLAND
++#  include "platform/platformdesktopview_wayland.h"
++#endif
++
+ #include <QQmlEngine>
+ #include <QQmlContext>
+ #include <QScreen>
+@@ -37,8 +46,19 @@ DesktopView::DesktopView(Plasma::Corona *corona, QScreen *targetScreen)
+       m_dashboardShown(false),
+       m_windowType(Desktop)
+ {
++#if HAVE_X11
++    if (m_impl.isNull() && QGuiApplication::platformName() == QStringLiteral("xcb")) {
++        m_impl.reset(new PlatformDesktopViewX11(this));
++    }
++#endif
++#if HAVE_WAYLAND
++    if (m_impl.isNull() && QGuiApplication::platformName().startsWith(QStringLiteral("wayland"))) {
++        m_impl.reset(new PlatformDesktopViewWayland(this));
++    }
++#endif
++
+     if (targetScreen) {
+-        setScreen(targetScreen);
++        m_impl->setScreen(targetScreen);
+     }
+ 
+     setTitle(corona->package().metadata().name());
+@@ -97,6 +117,8 @@ void DesktopView::adaptToScreen()
+     }
+ 
+     m_oldScreen = screen();
++
++    m_impl->setScreen(m_oldScreen);
+ }
+ 
+ DesktopView::WindowType DesktopView::windowType() const
+@@ -125,51 +147,12 @@ void DesktopView::ensureWindowType()
+         return;
+     }
+ 
+-    if (m_windowType == Window || ShellManager::s_forceWindowed) {
+-        setFlags(Qt::Window);
+-        KWindowSystem::setType(winId(), NET::Normal);
+-        KWindowSystem::clearState(winId(), NET::FullScreen);
+-
+-    } else if (m_windowType == Desktop) {
+-        setFlags(Qt::Window);
+-        KWindowSystem::setType(winId(), NET::Desktop);
+-        KWindowSystem::setState(winId(), NET::KeepBelow);
+-
+-    } else if (m_windowType == WindowedDesktop) {
+-        KWindowSystem::setType(winId(), NET::Normal);
+-        KWindowSystem::clearState(winId(), NET::FullScreen);
+-        setFlags(Qt::FramelessWindowHint | flags());
+-
+-    } else if (m_windowType == FullScreen) {
+-        setFlags(Qt::Window);
+-        KWindowSystem::setType(winId(), NET::Normal);
+-        KWindowSystem::setState(winId(), NET::FullScreen);
+-    }
++    m_impl->setWindowType(m_windowType);
+ }
+ 
+ void DesktopView::setDashboardShown(bool shown)
+ {
+-    if (shown) {
+-        if (m_windowType == Desktop) {
+-            KWindowSystem::setType(winId(), NET::Normal);
+-            KWindowSystem::clearState(winId(), NET::KeepBelow);
+-            KWindowSystem::setState(winId(), NET::SkipTaskbar|NET::SkipPager);
+-        }
+-        setFlags(Qt::FramelessWindowHint | Qt::CustomizeWindowHint);
+-
+-        raise();
+-        KWindowSystem::raiseWindow(winId());
+-        KWindowSystem::forceActiveWindow(winId());
+-
+-    } else {
+-        if (m_windowType == Desktop) {
+-            KWindowSystem::setType(winId(), NET::Desktop);
+-            KWindowSystem::setState(winId(), NET::SkipTaskbar|NET::SkipPager|NET::KeepBelow);
+-        }
+-        lower();
+-        KWindowSystem::lowerWindow(winId());
+-
+-    }
++    m_impl->setDashboardShown(shown);
+ 
+     m_dashboardShown = shown;
+     emit dashboardShownChanged();
+diff --git a/shell/desktopview.h b/shell/desktopview.h
+index 1b07261..480af49 100644
+--- a/shell/desktopview.h
++++ b/shell/desktopview.h
+@@ -1,4 +1,5 @@
+ /*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
+  *  Copyright 2013 Marco Martin <mart@kde.org>
+  *
+  *  This program is free software; you can redistribute it and/or modify
+@@ -25,6 +26,7 @@
+ #include <QtCore/qpointer.h>
+ 
+ class ShellCorona;
++class PlatformDesktopView;
+ 
+ class DesktopView : public PlasmaQuick::View
+ {
+@@ -79,6 +81,7 @@ private:
+     QPointer<QScreen> m_oldScreen;
+     bool m_dashboardShown : 1;
+     WindowType m_windowType;
++    QScopedPointer<PlatformDesktopView> m_impl;
+ };
+ 
+ #endif // DESKTOVIEW_H
+diff --git a/shell/panelshadows.cpp b/shell/panelshadows.cpp
+index c97564a..b4928ee 100644
+--- a/shell/panelshadows.cpp
++++ b/shell/panelshadows.cpp
+@@ -18,77 +18,18 @@
+ 
+ #include "panelshadows_p.h"
+ 
+-#include <QWindow>
+ #include <QPainter>
+ 
+ #include <config-plasma.h>
+ 
+ #if HAVE_X11
+-#include <QX11Info>
+-#include <X11/Xatom.h>
+-#include <X11/Xlib.h>
+-#include <X11/Xlib-xcb.h>
+-#include <fixx11h.h>
++#  include "platform/platformpanelshadows_x11.h"
++#else
++#  include "platform/platformpanelshadows.h"
+ #endif
+ 
+ #include <qdebug.h>
+ 
+-class PanelShadows::Private
+-{
+-public:
+-    Private(PanelShadows *shadows)
+-        : q(shadows)
+-#if HAVE_X11
+-        ,_connection( 0x0 ),
+-        _gc( 0x0 )
+-        , m_isX11(QX11Info::isPlatformX11())
+-#endif
+-    {
+-    }
+-
+-    ~Private()
+-    {
+-        // Do not call clearPixmaps() from here: it creates new QPixmap(),
+-        // which causes a crash when application is stopping.
+-        freeX11Pixmaps();
+-    }
+-
+-    void freeX11Pixmaps();
+-    void clearPixmaps();
+-    void setupPixmaps();
+-    Qt::HANDLE createPixmap(const QPixmap& source);
+-    void initPixmap(const QString &element);
+-    QPixmap initEmptyPixmap(const QSize &size);
+-    void updateShadow(const QWindow *window, Plasma::FrameSvg::EnabledBorders);
+-    void clearShadow(const QWindow *window);
+-    void updateShadows();
+-    void windowDestroyed(QObject *deletedObject);
+-    void setupData(Plasma::FrameSvg::EnabledBorders enabledBorders);
+-
+-    PanelShadows *q;
+-    QList<QPixmap> m_shadowPixmaps;
+-
+-    QPixmap m_emptyCornerPix;
+-    QPixmap m_emptyCornerLeftPix;
+-    QPixmap m_emptyCornerTopPix;
+-    QPixmap m_emptyCornerRightPix;
+-    QPixmap m_emptyCornerBottomPix;
+-    QPixmap m_emptyVerticalPix;
+-    QPixmap m_emptyHorizontalPix;
+-
+-#if HAVE_X11
+-    //! xcb connection
+-    xcb_connection_t* _connection;
+-
+-    //! graphical context
+-    xcb_gcontext_t _gc;
+-    bool m_isX11;
+-#endif
+-
+-    QHash<Plasma::FrameSvg::EnabledBorders, QVector<unsigned long> > data;
+-    QHash<const QWindow *, Plasma::FrameSvg::EnabledBorders> m_windows;
+-};
+-
+ class DialogShadowsSingleton
+ {
+ public:
+@@ -103,8 +44,18 @@ Q_GLOBAL_STATIC(DialogShadowsSingleton, privateDialogShadowsSelf)
+ 
+ PanelShadows::PanelShadows(QObject *parent, const QString &prefix)
+     : Plasma::Svg(parent),
+-      d(new Private(this))
++      d(Q_NULLPTR)
+ {
++#if HAVE_X11
++    if (QGuiApplication::platformName() == QStringLiteral("xcb")) {
++        d = new PlatformPanelShadowsX11(this);
++    }
++#endif
++
++    if (!d) {
++        d = new PlatformPanelShadows(this);
++    }
++
+     setImagePath(prefix);
+     connect(this, SIGNAL(repaintNeeded()), this, SLOT(updateShadows()));
+ }
+@@ -146,358 +97,6 @@ void PanelShadows::removeWindow(const QWindow *window)
+     }
+ }
+ 
+-void PanelShadows::Private::windowDestroyed(QObject *deletedObject)
+-{
+-    m_windows.remove(static_cast<QWindow *>(deletedObject));
+-
+-    if (m_windows.isEmpty()) {
+-        clearPixmaps();
+-    }
+-}
+-
+-void PanelShadows::Private::updateShadows()
+-{
+-    setupPixmaps();
+-    QHash<const QWindow *, Plasma::FrameSvg::EnabledBorders>::const_iterator i;
+-    for (i = m_windows.constBegin(); i != m_windows.constEnd(); ++i) {
+-        updateShadow(i.key(), i.value());
+-    }
+-}
+-
+-Qt::HANDLE PanelShadows::Private::createPixmap(const QPixmap& source)
+-{
+-
+-    // do nothing for invalid pixmaps
+-    if( source.isNull() ) return 0;
+-
+-    /*
+-    in some cases, pixmap handle is invalid. This is the case notably
+-    when Qt uses to RasterEngine. In this case, we create an X11 Pixmap
+-    explicitly and draw the source pixmap on it.
+-    */
+-
+-    #if HAVE_X11
+-    if (!m_isX11) {
+-        return 0;
+-    }
+-    
+-    // check connection 
+-    if( !_connection ) _connection = QX11Info::connection();
+-    
+-    const int width( source.width() );
+-    const int height( source.height() );
+-
+-    // create X11 pixmap
+-    Pixmap pixmap = XCreatePixmap( QX11Info::display(), QX11Info::appRootWindow(), width, height, 32 );
+-
+-    // check gc
+-    if( !_gc ) 
+-    {
+-        _gc = xcb_generate_id( _connection );
+-        xcb_create_gc( _connection, _gc, pixmap, 0, 0x0 );
+-    }
+-    
+-//         // create explicitly shared QPixmap from it
+-//         QPixmap dest( QPixmap::fromX11Pixmap( pixmap, QPixmap::ExplicitlyShared ) );
+-// 
+-//         // create surface for pixmap
+-//         {
+-//             QPainter painter( &dest );
+-//             painter.setCompositionMode( QPainter::CompositionMode_Source );
+-//             painter.drawPixmap( 0, 0, source );
+-//         }
+-// 
+-// 
+-//         return pixmap;
+-    QImage image( source.toImage() );
+-    xcb_put_image(
+-        _connection, XCB_IMAGE_FORMAT_Z_PIXMAP, pixmap, _gc,
+-        image.width(), image.height(), 0, 0,
+-        0, 32, 
+-        image.byteCount(), image.constBits());
+-    
+-    return (Qt::HANDLE)pixmap;
+-    
+-    #else
+-    return 0;
+-    #endif
+-
+-}
+-
+-void PanelShadows::Private::initPixmap(const QString &element)
+-{
+-    m_shadowPixmaps << q->pixmap(element);
+-}
+-
+-QPixmap PanelShadows::Private::initEmptyPixmap(const QSize &size)
+-{
+-#if HAVE_X11
+-    if (!m_isX11) {
+-        return QPixmap();
+-    }
+-    QPixmap tempEmptyPix(size);
+-    if (!size.isEmpty()) {
+-        tempEmptyPix.fill(Qt::transparent);
+-    }
+-    return tempEmptyPix;
+-#else
+-    Q_UNUSED(size)
+-    return QPixmap();
+-#endif
+-}
+-
+-void PanelShadows::Private::setupPixmaps()
+-{
+-    clearPixmaps();
+-    initPixmap("shadow-top");
+-    initPixmap("shadow-topright");
+-    initPixmap("shadow-right");
+-    initPixmap("shadow-bottomright");
+-    initPixmap("shadow-bottom");
+-    initPixmap("shadow-bottomleft");
+-    initPixmap("shadow-left");
+-    initPixmap("shadow-topleft");
+-
+-    m_emptyCornerPix = initEmptyPixmap(QSize(1,1));
+-    m_emptyCornerLeftPix = initEmptyPixmap(QSize(q->elementSize("shadow-topleft").width(), 1));
+-    m_emptyCornerTopPix = initEmptyPixmap(QSize(1, q->elementSize("shadow-topleft").height()));
+-    m_emptyCornerRightPix = initEmptyPixmap(QSize(q->elementSize("shadow-bottomright").width(), 1));
+-    m_emptyCornerBottomPix = initEmptyPixmap(QSize(1, q->elementSize("shadow-bottomright").height()));
+-    m_emptyVerticalPix = initEmptyPixmap(QSize(1, q->elementSize("shadow-left").height()));
+-    m_emptyHorizontalPix = initEmptyPixmap(QSize(q->elementSize("shadow-top").width(), 1));
+-
+-}
+-
+-
+-void PanelShadows::Private::setupData(Plasma::FrameSvg::EnabledBorders enabledBorders)
+-{
+-#if HAVE_X11
+-    if (!m_isX11) {
+-        return;
+-    }
+-    //shadow-top
+-    if (enabledBorders & Plasma::FrameSvg::TopBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[0]));
+-    } else {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyHorizontalPix));
+-    }
+-
+-    //shadow-topright
+-    if (enabledBorders & Plasma::FrameSvg::TopBorder &&
+-        enabledBorders & Plasma::FrameSvg::RightBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[1]));
+-    } else if (enabledBorders & Plasma::FrameSvg::TopBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerTopPix));
+-    } else if (enabledBorders & Plasma::FrameSvg::RightBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerRightPix));
+-    } else {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerPix));
+-    }
+-
+-    //shadow-right
+-    if (enabledBorders & Plasma::FrameSvg::RightBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[2]));
+-    } else {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyVerticalPix));
+-    }
+-
+-    //shadow-bottomright
+-    if (enabledBorders & Plasma::FrameSvg::BottomBorder &&
+-        enabledBorders & Plasma::FrameSvg::RightBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[3]));
+-    } else if (enabledBorders & Plasma::FrameSvg::BottomBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerBottomPix));
+-    } else if (enabledBorders & Plasma::FrameSvg::RightBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerRightPix));
+-    } else {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerPix));
+-    }
+-
+-    //shadow-bottom
+-    if (enabledBorders & Plasma::FrameSvg::BottomBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[4]));
+-    } else {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyHorizontalPix));
+-    }
+-
+-    //shadow-bottomleft
+-    if (enabledBorders & Plasma::FrameSvg::BottomBorder &&
+-        enabledBorders & Plasma::FrameSvg::LeftBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[5]));
+-    } else if (enabledBorders & Plasma::FrameSvg::BottomBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerBottomPix));
+-    } else if (enabledBorders & Plasma::FrameSvg::LeftBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerLeftPix));
+-    } else {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerPix));
+-    }
+-
+-    //shadow-left
+-    if (enabledBorders & Plasma::FrameSvg::LeftBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[6]));
+-    } else {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyVerticalPix));
+-    }
+-
+-    //shadow-topleft
+-    if (enabledBorders & Plasma::FrameSvg::TopBorder &&
+-        enabledBorders & Plasma::FrameSvg::LeftBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[7]));
+-    } else if (enabledBorders & Plasma::FrameSvg::TopBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerTopPix));
+-    } else if (enabledBorders & Plasma::FrameSvg::LeftBorder) {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerLeftPix));
+-    } else {
+-        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerPix));
+-    }
+-#endif
+-
+-    int left, top, right, bottom = 0;
+-
+-    QSize marginHint;
+-    if (enabledBorders & Plasma::FrameSvg::TopBorder) {
+-        marginHint = q->elementSize("shadow-hint-top-margin");
+-        if (marginHint.isValid()) {
+-            top = marginHint.height();
+-        } else {
+-            top = m_shadowPixmaps[0].height(); // top
+-        }
+-    } else {
+-        top = 1;
+-    }
+-
+-    if (enabledBorders & Plasma::FrameSvg::RightBorder) {
+-        marginHint = q->elementSize("shadow-hint-right-margin");
+-        if (marginHint.isValid()) {
+-            right = marginHint.width();
+-        } else {
+-            right = m_shadowPixmaps[2].width(); // right
+-        }
+-    } else {
+-        right = 1;
+-    }
+-
+-    if (enabledBorders & Plasma::FrameSvg::BottomBorder) {
+-        marginHint = q->elementSize("shadow-hint-bottom-margin");
+-        if (marginHint.isValid()) {
+-            bottom = marginHint.height();
+-        } else {
+-            bottom = m_shadowPixmaps[4].height(); // bottom
+-        }
+-    } else {
+-        bottom = 1;
+-    }
+-
+-    if (enabledBorders & Plasma::FrameSvg::LeftBorder) {
+-        marginHint = q->elementSize("shadow-hint-left-margin");
+-        if (marginHint.isValid()) {
+-            left = marginHint.width();
+-        } else {
+-            left = m_shadowPixmaps[6].width(); // left
+-        }
+-    } else {
+-        left = 1;
+-    }
+-
+-    data[enabledBorders] << top << right << bottom << left;
+-}
+-
+-void PanelShadows::Private::freeX11Pixmaps()
+-{
+-#if HAVE_X11
+-    if (!m_isX11) {
+-        return;
+-    }
+-    foreach (const QPixmap &pixmap, m_shadowPixmaps) {
+-        if (!QX11Info::display()) {
+-            return;
+-        }
+-        if (!pixmap.isNull()) {
+-            XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(pixmap)));
+-        }
+-    }
+-
+-    if (!m_emptyCornerPix.isNull()) {
+-        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerPix)));
+-    }
+-    if (!m_emptyCornerBottomPix.isNull()) {
+-        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerBottomPix)));
+-    }
+-    if (!m_emptyCornerLeftPix.isNull()) {
+-        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerLeftPix)));
+-    }
+-    if (!m_emptyCornerRightPix.isNull()) {
+-        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerRightPix)));
+-    }
+-    if (!m_emptyCornerTopPix.isNull()) {
+-        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerTopPix)));
+-    }
+-    if (!m_emptyVerticalPix.isNull()) {
+-        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyVerticalPix)));
+-    }
+-    if (!m_emptyHorizontalPix.isNull()) {
+-        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyHorizontalPix)));
+-    }
+-#endif
+-}
+-
+-void PanelShadows::Private::clearPixmaps()
+-{
+-#if HAVE_X11
+-    freeX11Pixmaps();
+-
+-    m_emptyCornerPix = QPixmap();
+-    m_emptyCornerBottomPix = QPixmap();
+-    m_emptyCornerLeftPix = QPixmap();
+-    m_emptyCornerRightPix = QPixmap();
+-    m_emptyCornerTopPix = QPixmap();
+-    m_emptyVerticalPix = QPixmap();
+-    m_emptyHorizontalPix = QPixmap();
+-#endif
+-    m_shadowPixmaps.clear();
+-    data.clear();
+-}
+-
+-void PanelShadows::Private::updateShadow(const QWindow *window, Plasma::FrameSvg::EnabledBorders enabledBorders)
+-{
+-#if HAVE_X11
+-    if (!m_isX11) {
+-        return;
+-    }
+-    if (m_shadowPixmaps.isEmpty()) {
+-        setupPixmaps();
+-    }
+-
+-    if (!data.contains(enabledBorders)) {
+-        setupData(enabledBorders);
+-    }
+-
+-    Display *dpy = QX11Info::display();
+-    Atom atom = XInternAtom(dpy, "_KDE_NET_WM_SHADOW", False);
+-
+-//     qDebug() << "going to set the shadow of" << window->winId() << "to" << data;
+-    XChangeProperty(dpy, window->winId(), atom, XA_CARDINAL, 32, PropModeReplace,
+-                    reinterpret_cast<const unsigned char *>(data[enabledBorders].constData()), data[enabledBorders].size());
+-#else
+-    Q_UNUSED(window)
+-    Q_UNUSED(enabledBorders)
+-#endif
+-}
+-
+-void PanelShadows::Private::clearShadow(const QWindow *window)
+-{
+-#if HAVE_X11
+-    if (!m_isX11) {
+-        return;
+-    }
+-    Display *dpy = QX11Info::display();
+-    Atom atom = XInternAtom(dpy, "_KDE_NET_WM_SHADOW", False);
+-    XDeleteProperty(dpy, window->winId(), atom);
+-#else
+-    Q_UNUSED(window)
+-#endif
+-}
+-
+ bool PanelShadows::enabled() const
+ {
+      return hasElement("shadow-left");
+diff --git a/shell/panelshadows_p.h b/shell/panelshadows_p.h
+index cce9a0f..1e66c2f 100644
+--- a/shell/panelshadows_p.h
++++ b/shell/panelshadows_p.h
+@@ -24,6 +24,7 @@
+ #include "plasma/framesvg.h"
+ #include "plasma/svg.h"
+ 
++class PlatformPanelShadows;
+ 
+ class PanelShadows : public Plasma::Svg
+ {
+@@ -41,8 +42,7 @@ public:
+     bool enabled() const;
+ 
+ private:
+-    class Private;
+-    Private * const d;
++    PlatformPanelShadows *d;
+ 
+     Q_PRIVATE_SLOT(d, void updateShadows())
+     Q_PRIVATE_SLOT(d, void windowDestroyed(QObject *deletedObject))
+diff --git a/shell/panelview.cpp b/shell/panelview.cpp
+index 997f8d0..14cb776 100644
+--- a/shell/panelview.cpp
++++ b/shell/panelview.cpp
+@@ -1,4 +1,5 @@
+ /*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
+  *  Copyright 2013 Marco Martin <mart@kde.org>
+  *
+  *  This program is free software; you can redistribute it and/or modify
+@@ -20,9 +21,17 @@
+ 
+ #include "panelview.h"
+ #include "shellcorona.h"
++#include "shellmanager.h"
+ #include "panelshadows_p.h"
+ #include "panelconfigview.h"
+ 
++#if HAVE_X11
++#  include "platform/platformpanelview_x11.h"
++#endif
++#if HAVE_WAYLAND
++#  include "platform/platformpanelview_wayland.h"
++#endif
++
+ #include <QAction>
+ #include <QApplication>
+ #include <QDebug>
+@@ -39,11 +48,6 @@
+ #include <Plasma/Package>
+ #include <KScreen/Config>
+ 
+-#if HAVE_X11
+-#include <xcb/xcb.h>
+-#include <QX11Info>
+-#endif
+-
+ static const int MINSIZE = 10;
+ 
+ PanelView::PanelView(ShellCorona *corona, QScreen *targetScreen, QWindow *parent)
+@@ -58,9 +62,21 @@ PanelView::PanelView(ShellCorona *corona, QScreen *targetScreen, QWindow *parent
+        m_visibilityMode(NormalPanel),
+        m_background(0)
+ {
++#if HAVE_X11
++    if (m_impl.isNull() && QGuiApplication::platformName() == QStringLiteral("xcb")) {
++        m_impl.reset(new PlatformPanelViewX11(this));
++    }
++#endif
++#if HAVE_WAYLAND
++    if (m_impl.isNull() && QGuiApplication::platformName().startsWith(QStringLiteral("wayland"))) {
++        m_impl.reset(new PlatformPanelViewWayland(this));
++    }
++#endif
++
+     if (targetScreen) {
+-        setScreen(targetScreen);
++        m_impl->setScreen(targetScreen);
+     }
++
+     setResizeMode(QQuickView::SizeRootObjectToView);
+     setClearBeforeRendering(true);
+     setColor(QColor(Qt::transparent));
+@@ -323,11 +339,7 @@ void PanelView::setVisibilityMode(PanelView::VisibilityMode mode)
+ {
+     m_visibilityMode = mode;
+ 
+-    if (mode == LetWindowsCover) {
+-        KWindowSystem::setState(winId(), NET::KeepBelow);
+-    } else {
+-        KWindowSystem::clearState(winId(), NET::KeepBelow);
+-    }
++    m_impl->setVisibilityMode(mode);
+ 
+     disconnect(containment(), &Plasma::Applet::activated, this, &PanelView::showTemporarily);
+     if (!(mode == NormalPanel || mode == WindowsGoBelow || mode == AutoHide)) {
+@@ -399,7 +411,7 @@ void PanelView::positionPanel()
+ 
+     setPosition(geometryByDistance(m_distance).topLeft());
+ 
+-    KWindowEffects::slideWindow(winId(), slideLocation, -1);
++    m_impl->slide(slideLocation);
+ }
+ 
+ QRect PanelView::geometryByDistance(int distance) const
+@@ -535,7 +547,7 @@ void PanelView::showConfigurationInterface(Plasma::Applet *applet)
+             m_panelConfigView.data()->hide();
+         } else {
+             m_panelConfigView.data()->show();
+-            KWindowSystem::setState(m_panelConfigView.data()->winId(), NET::SkipTaskbar | NET::SkipPager);
++            m_impl->setConfigViewState(m_panelConfigView.data());
+         }
+         return;
+     } else if (m_panelConfigView) {
+@@ -558,7 +570,7 @@ void PanelView::showConfigurationInterface(Plasma::Applet *applet)
+     m_panelConfigView.data()->show();
+ 
+     if (cont && cont->isContainment()) {
+-        KWindowSystem::setState(m_panelConfigView.data()->winId(), NET::SkipTaskbar | NET::SkipPager);
++        m_impl->setConfigViewState(m_panelConfigView.data());
+     }
+ }
+ 
+@@ -569,55 +581,7 @@ void PanelView::restoreAutoHide()
+ 
+ void PanelView::setAutoHideEnabled(bool enabled)
+ {
+-#if HAVE_X11
+-    xcb_connection_t *c = QX11Info::connection();
+-    if (!c) {
+-        return;
+-    }
+-
+-    const QByteArray effectName = QByteArrayLiteral("_KDE_NET_WM_SCREEN_EDGE_SHOW");
+-    xcb_intern_atom_cookie_t atomCookie = xcb_intern_atom_unchecked(c, false, effectName.length(), effectName.constData());
+-
+-    QScopedPointer<xcb_intern_atom_reply_t, QScopedPointerPodDeleter> atom(xcb_intern_atom_reply(c, atomCookie, NULL));
+-
+-    if (!atom) {
+-        return;
+-    }
+-
+-    if (!enabled) {
+-        xcb_delete_property(c, winId(), atom->atom);
+-        return;
+-    }
+-
+-    KWindowEffects::SlideFromLocation slideLocation = KWindowEffects::NoEdge;
+-    uint32_t value = 0;
+-
+-    switch (location()) {
+-    case Plasma::Types::TopEdge:
+-        value = 0;
+-        slideLocation = KWindowEffects::TopEdge;
+-        break;
+-    case Plasma::Types::RightEdge:
+-        value = 1;
+-        slideLocation = KWindowEffects::RightEdge;
+-        break;
+-    case Plasma::Types::BottomEdge:
+-        value = 2;
+-        slideLocation = KWindowEffects::BottomEdge;
+-        break;
+-    case Plasma::Types::LeftEdge:
+-        value = 3;
+-        slideLocation = KWindowEffects::LeftEdge;
+-        break;
+-    case Plasma::Types::Floating:
+-    default:
+-        value = 4;
+-        break;
+-    }
+-
+-    xcb_change_property(c, XCB_PROP_MODE_REPLACE, winId(), atom->atom, XCB_ATOM_CARDINAL, 32, 1, &value);
+-    KWindowEffects::slideWindow(winId(), slideLocation, -1);
+-#endif
++    m_impl->setAutoHideEnabled(enabled);
+ }
+ 
+ void PanelView::resizeEvent(QResizeEvent *ev)
+@@ -636,8 +600,7 @@ void PanelView::moveEvent(QMoveEvent *ev)
+ 
+ void PanelView::integrateScreen()
+ {
+-    KWindowSystem::setOnAllDesktops(winId(), true);
+-    KWindowSystem::setType(winId(), NET::Dock);
++    m_impl->setup();
+     setVisibilityMode(m_visibilityMode);
+ 
+     containment()->reactToScreenChange();
+@@ -676,49 +639,7 @@ bool PanelView::event(QEvent *e)
+ 
+ void PanelView::updateMask()
+ {
+-    if (KWindowSystem::compositingActive()) {
+-        setMask(QRegion());
+-    } else {
+-        if (!m_background) {
+-            m_background = new Plasma::FrameSvg(this);
+-            m_background->setImagePath("widgets/panel-background");
+-        }
+-
+-        Plasma::FrameSvg::EnabledBorders borders = Plasma::FrameSvg::AllBorders;
+-        switch (location()) {
+-        case Plasma::Types::TopEdge:
+-            borders &= ~Plasma::FrameSvg::TopBorder;
+-            break;
+-        case Plasma::Types::LeftEdge:
+-            borders &= ~Plasma::FrameSvg::LeftBorder;
+-            break;
+-        case Plasma::Types::RightEdge:
+-            borders &= ~Plasma::FrameSvg::RightBorder;
+-            break;
+-        case Plasma::Types::BottomEdge:
+-            borders &= ~Plasma::FrameSvg::BottomBorder;
+-            break;
+-        default:
+-            break;
+-        }
+-
+-        if (x() <= screen()->geometry().x()) {
+-            borders &= ~Plasma::FrameSvg::LeftBorder;
+-        }
+-        if (x() + width() >= screen()->geometry().x() + screen()->geometry().width()) {
+-            borders &= ~Plasma::FrameSvg::RightBorder;
+-        }
+-        if (y() <= screen()->geometry().y()) {
+-            borders &= ~Plasma::FrameSvg::TopBorder;
+-        }
+-        if (y() + height() >= screen()->geometry().y() + screen()->geometry().height()) {
+-            borders &= ~Plasma::FrameSvg::BottomBorder;
+-        }
+-        m_background->setEnabledBorders(borders);
+-
+-        m_background->resizeFrame(size());
+-        setMask(m_background->mask());
+-    }
++    m_impl->updateMask();
+ }
+ 
+ void PanelView::updateStruts()
+@@ -727,119 +648,12 @@ void PanelView::updateStruts()
+         return;
+     }
+ 
+-    NETExtendedStrut strut;
+-
+-    if (m_visibilityMode == NormalPanel) {
+-        const QRect thisScreen = screen()->geometry();
+-        const QRect wholeScreen = screen()->virtualGeometry();
+-
+-        //Extended struts against a screen edge near to another screen are really harmful, so windows maximized under the panel is a lesser pain
+-        //TODO: force "windows can cover" in those cases?
+-        const int numScreens = corona()->numScreens();
+-        for (int i = 0; i < numScreens; ++i) {
+-            if (i == containment()->screen()) {
+-                continue;
+-            }
+-
+-            const QRect otherScreen = corona()->screenGeometry(i);
+-
+-            switch (location())
+-            {
+-                case Plasma::Types::TopEdge:
+-                if (otherScreen.bottom() <= thisScreen.top()) {
+-                    KWindowSystem::setExtendedStrut(winId(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+-                    return;
+-                }
+-                break;
+-            case Plasma::Types::BottomEdge:
+-                if (otherScreen.top() >= thisScreen.bottom()) {
+-                    KWindowSystem::setExtendedStrut(winId(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+-                    return;
+-                }
+-                break;
+-            case Plasma::Types::RightEdge:
+-                if (otherScreen.left() >= thisScreen.right()) {
+-                    KWindowSystem::setExtendedStrut(winId(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+-                    return;
+-                }
+-                break;
+-            case Plasma::Types::LeftEdge:
+-                if (otherScreen.right() <= thisScreen.left()) {
+-                    KWindowSystem::setExtendedStrut(winId(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+-                    return;
+-                }
+-                break;
+-            default:
+-                return;
+-            }
+-        }
+-        // extended struts are to the combined screen geoms, not the single screen
+-        int leftOffset = thisScreen.x();
+-        int rightOffset = wholeScreen.right() - thisScreen.right();
+-        int bottomOffset = wholeScreen.bottom() - thisScreen.bottom();
+-//         qDebug() << "screen l/r/b/t offsets are:" << leftOffset << rightOffset << bottomOffset << topOffset << location();
+-        int topOffset = thisScreen.top();
+-
+-        switch (location())
+-        {
+-            case Plasma::Types::TopEdge:
+-                strut.top_width = thickness() + topOffset;
+-                strut.top_start = x();
+-                strut.top_end = x() + width() - 1;
+-//                 qDebug() << "setting top edge to" << strut.top_width << strut.top_start << strut.top_end;
+-                break;
+-
+-            case Plasma::Types::BottomEdge:
+-                strut.bottom_width = thickness() + bottomOffset;
+-                strut.bottom_start = x();
+-                strut.bottom_end = x() + width() - 1;
+-//                 qDebug() << "setting bottom edge to" << strut.bottom_width << strut.bottom_start << strut.bottom_end;
+-                break;
+-
+-            case Plasma::Types::RightEdge:
+-                strut.right_width = thickness() + rightOffset;
+-                strut.right_start = y();
+-                strut.right_end = y() + height() - 1;
+-//                 qDebug() << "setting right edge to" << strut.right_width << strut.right_start << strut.right_end;
+-                break;
+-
+-            case Plasma::Types::LeftEdge:
+-                strut.left_width = thickness() + leftOffset;
+-                strut.left_start = y();
+-                strut.left_end = y() + height() - 1;
+-//                 qDebug() << "setting left edge to" << strut.left_width << strut.left_start << strut.left_end;
+-                break;
+-
+-            default:
+-                //qDebug() << "where are we?";
+-                break;
+-        }
+-    }
+-
+-    KWindowSystem::setExtendedStrut(winId(), strut.left_width,
+-                                             strut.left_start,
+-                                             strut.left_end,
+-                                             strut.right_width,
+-                                             strut.right_start,
+-                                             strut.right_end,
+-                                             strut.top_width,
+-                                             strut.top_start,
+-                                             strut.top_end,
+-                                             strut.bottom_width,
+-                                             strut.bottom_start,
+-                                             strut.bottom_end);
+-
++    m_impl->updateStruts();
+ }
+ 
+ void PanelView::themeChanged()
+ {
+-    KWindowEffects::enableBlurBehind(winId(), true);
+-    KWindowEffects::enableBackgroundContrast(winId(), m_theme.backgroundContrastEnabled(),
+-                                                      m_theme.backgroundContrast(),
+-                                                      m_theme.backgroundIntensity(),
+-                                                      m_theme.backgroundSaturation());
+-
+-    updateMask();
++    m_impl->themeChanged();
+ }
+ 
+ void PanelView::containmentChanged()
+diff --git a/shell/panelview.h b/shell/panelview.h
+index 51c76f8..288151f 100644
+--- a/shell/panelview.h
++++ b/shell/panelview.h
+@@ -1,4 +1,5 @@
+ /*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
+  *  Copyright 2013 Marco Martin <mart@kde.org>
+  *
+  *  This program is free software; you can redistribute it and/or modify
+@@ -23,10 +24,14 @@
+ #include <Plasma/Theme>
+ #include <QTimer>
+ 
++#include "config-plasma.h"
+ #include "plasmaquick/view.h"
+ #include "plasmaquick/configview.h"
+ 
+ class ShellCorona;
++class PlatformPanelView;
++class PlatformPanelViewX11;
++class PlatformPanelViewWayland;
+ 
+ class PanelView : public PlasmaQuick::View
+ {
+@@ -181,8 +186,13 @@ private:
+     QTimer m_unhideTimer;
+     //only for the mask, not to actually paint
+     Plasma::FrameSvg *m_background;
++    QScopedPointer<PlatformPanelView> m_impl;
+ 
+     static const int STRUTSTIMERDELAY = 200;
++
++    friend class PlatformPanelView;
++    friend class PlatformPanelViewX11;
++    friend class PlatformPanelViewWayland;
+ };
+ 
+ #endif // PANELVIEW_H
+diff --git a/shell/platform/platformdesktopview.cpp b/shell/platform/platformdesktopview.cpp
+new file mode 100644
+index 0000000..092a6e1
+--- /dev/null
++++ b/shell/platform/platformdesktopview.cpp
+@@ -0,0 +1,43 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#include "platformdesktopview.h"
++
++PlatformDesktopView::PlatformDesktopView(DesktopView *q)
++    : q(q)
++{
++}
++
++PlatformDesktopView::~PlatformDesktopView()
++{
++}
++
++void PlatformDesktopView::setWindowType(const DesktopView::WindowType &type)
++{
++    Q_UNUSED(type);
++}
++
++void PlatformDesktopView::setScreen(QScreen *screen)
++{
++    q->setScreen(screen);
++}
++
++void PlatformDesktopView::setDashboardShown(bool shown)
++{
++    Q_UNUSED(shown);
++}
+diff --git a/shell/platform/platformdesktopview.h b/shell/platform/platformdesktopview.h
+new file mode 100644
+index 0000000..06e8c6f
+--- /dev/null
++++ b/shell/platform/platformdesktopview.h
+@@ -0,0 +1,38 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#ifndef PLATFORMDESKTOPVIEW_H
++#define PLATFORMDESKTOPVIEW_H
++
++#include "desktopview.h"
++
++class PlatformDesktopView
++{
++public:
++    PlatformDesktopView(DesktopView *q);
++    virtual ~PlatformDesktopView();
++
++    virtual void setWindowType(const DesktopView::WindowType &type);
++    virtual void setScreen(QScreen *screen);
++    virtual void setDashboardShown(bool shown);
++
++protected:
++    DesktopView *const q;
++};
++
++#endif // PLATFORMDESKTOPVIEW_H
+diff --git a/shell/platform/platformdesktopview_wayland.cpp b/shell/platform/platformdesktopview_wayland.cpp
+new file mode 100644
+index 0000000..caedb69
+--- /dev/null
++++ b/shell/platform/platformdesktopview_wayland.cpp
+@@ -0,0 +1,89 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#include "platformdesktopview_wayland.h"
++#include "shellmanager.h"
++#include "waylandinterface.h"
++
++#include <KWayland/Client/plasma_shell.h>
++#include <KWayland/Client/plasma_surface.h>
++
++PlatformDesktopViewWayland::PlatformDesktopViewWayland(DesktopView *q)
++    : PlatformDesktopView(q)
++    , m_windowTypeSet(false)
++    , m_plasmaSurface(Q_NULLPTR)
++{
++}
++
++void PlatformDesktopViewWayland::setWindowType(const DesktopView::WindowType &type)
++{
++    if (m_windowTypeSet) {
++        return;
++    }
++
++    if (type != DesktopView::Desktop || ShellManager::s_forceWindowed) {
++        if (m_plasmaSurface) {
++            delete m_plasmaSurface;
++            m_plasmaSurface = Q_NULLPTR;
++        }
++    }
++
++    if (type == DesktopView::Window || ShellManager::s_forceWindowed) {
++        q->setFlags(Qt::Window);
++        q->setVisibility(QWindow::Windowed);
++    } else if (type == DesktopView::FullScreen) {
++        q->setFlags(Qt::Window);
++        q->setVisibility(QWindow::FullScreen);
++    } else if (type == DesktopView::Desktop) {
++        Q_ASSERT(!m_plasmaSurface);
++        Q_ASSERT(WaylandInterface::plasmaShell());
++
++        q->setFlags(Qt::BypassWindowManagerHint);
++
++        m_plasmaSurface = WaylandInterface::plasmaShell()->createSurface(q, q);
++
++        if (q->isDashboardShown())
++            m_plasmaSurface->setRole(KWayland::Client::PlasmaSurface::Role::Dashboard);
++        else
++            m_plasmaSurface->setRole(KWayland::Client::PlasmaSurface::Role::Desktop);
++    } else if (type == DesktopView::WindowedDesktop) {
++        q->setFlags(Qt::FramelessWindowHint);
++        q->setVisibility(QWindow::Maximized);
++    }
++
++    m_windowTypeSet = true;
++}
++
++void PlatformDesktopViewWayland::setScreen(QScreen *screen)
++{
++    if (!m_plasmaSurface)
++        return;
++
++    m_plasmaSurface->setOutput(screen);
++}
++
++void PlatformDesktopViewWayland::setDashboardShown(bool shown)
++{
++    if (q->windowType() != DesktopView::Desktop)
++        return;
++
++    if (shown)
++        m_plasmaSurface->setRole(KWayland::Client::PlasmaSurface::Role::Dashboard);
++    else
++        m_plasmaSurface->setRole(KWayland::Client::PlasmaSurface::Role::Desktop);
++}
+diff --git a/shell/platform/platformdesktopview_wayland.h b/shell/platform/platformdesktopview_wayland.h
+new file mode 100644
+index 0000000..07169f3
+--- /dev/null
++++ b/shell/platform/platformdesktopview_wayland.h
+@@ -0,0 +1,44 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#ifndef PLATFORMDESKTOPVIEW_WAYLAND_H
++#define PLATFORMDESKTOPVIEW_WAYLAND_H
++
++#include "platformdesktopview.h"
++
++namespace KWayland {
++    namespace Client {
++        class PlasmaSurface;
++    }
++}
++
++class PlatformDesktopViewWayland : public PlatformDesktopView
++{
++public:
++    PlatformDesktopViewWayland(DesktopView *q);
++
++    void setWindowType(const DesktopView::WindowType &type);
++    void setScreen(QScreen *screen);
++    void setDashboardShown(bool shown);
++
++private:
++    bool m_windowTypeSet;
++    KWayland::Client::PlasmaSurface *m_plasmaSurface;
++};
++
++#endif // PLATFORMDESKTOPVIEW_WAYLAND_H
+diff --git a/shell/platform/platformdesktopview_x11.cpp b/shell/platform/platformdesktopview_x11.cpp
+new file mode 100644
+index 0000000..81ae507
+--- /dev/null
++++ b/shell/platform/platformdesktopview_x11.cpp
+@@ -0,0 +1,72 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *  Copyright 2013 Marco Martin <mart@kde.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#include "platformdesktopview_x11.h"
++#include "shellmanager.h"
++
++#include <kwindowsystem.h>
++
++PlatformDesktopViewX11::PlatformDesktopViewX11(DesktopView *q)
++    : PlatformDesktopView(q)
++{
++}
++
++void PlatformDesktopViewX11::setWindowType(const DesktopView::WindowType &type)
++{
++    if (type == DesktopView::Window || ShellManager::s_forceWindowed) {
++        q->setFlags(Qt::Window);
++        KWindowSystem::setType(q->winId(), NET::Normal);
++        KWindowSystem::clearState(q->winId(), NET::FullScreen);
++    } else if (type == DesktopView::Desktop) {
++        q->setFlags(Qt::Window);
++        KWindowSystem::setType(q->winId(), NET::Desktop);
++        KWindowSystem::setState(q->winId(), NET::KeepBelow);
++    } else if (type == DesktopView::WindowedDesktop) {
++        KWindowSystem::setType(q->winId(), NET::Normal);
++        KWindowSystem::clearState(q->winId(), NET::FullScreen);
++        q->setFlags(Qt::FramelessWindowHint | q->flags());
++    } else if (type == DesktopView::FullScreen) {
++        q->setFlags(Qt::Window);
++        KWindowSystem::setType(q->winId(), NET::Normal);
++        KWindowSystem::setState(q->winId(), NET::FullScreen);
++    }
++}
++
++void PlatformDesktopViewX11::setDashboardShown(bool shown)
++{
++    if (shown) {
++        if (q->windowType() == DesktopView::Desktop) {
++            KWindowSystem::setType(q->winId(), NET::Normal);
++            KWindowSystem::clearState(q->winId(), NET::KeepBelow);
++            KWindowSystem::setState(q->winId(), NET::SkipTaskbar|NET::SkipPager);
++        }
++        q->setFlags(Qt::FramelessWindowHint | Qt::CustomizeWindowHint);
++
++        q->raise();
++        KWindowSystem::raiseWindow(q->winId());
++        KWindowSystem::forceActiveWindow(q->winId());
++    } else {
++        if (q->windowType() == DesktopView::Desktop) {
++            KWindowSystem::setType(q->winId(), NET::Desktop);
++            KWindowSystem::setState(q->winId(), NET::SkipTaskbar|NET::SkipPager|NET::KeepBelow);
++        }
++        q->lower();
++        KWindowSystem::lowerWindow(q->winId());
++    }
++}
+diff --git a/shell/platform/platformdesktopview_x11.h b/shell/platform/platformdesktopview_x11.h
+new file mode 100644
+index 0000000..3bab373
+--- /dev/null
++++ b/shell/platform/platformdesktopview_x11.h
+@@ -0,0 +1,33 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#ifndef PLATFORMDESKTOPVIEW_X11_H
++#define PLATFORMDESKTOPVIEW_X11_H
++
++#include "platformdesktopview.h"
++
++class PlatformDesktopViewX11 : public PlatformDesktopView
++{
++public:
++    PlatformDesktopViewX11(DesktopView *q);
++
++    void setWindowType(const DesktopView::WindowType &type);
++    void setDashboardShown(bool shown);
++};
++
++#endif // PLATFORMDESKTOPVIEW_X11_H
+diff --git a/shell/platform/platformpanelshadows.cpp b/shell/platform/platformpanelshadows.cpp
+new file mode 100644
+index 0000000..8c765e8
+--- /dev/null
++++ b/shell/platform/platformpanelshadows.cpp
+@@ -0,0 +1,160 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *  Copyright 2011 Aaron Seigo <aseigo@kde.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#include "panelshadows_p.h"
++#include "platformpanelshadows.h"
++
++PlatformPanelShadows::PlatformPanelShadows(PanelShadows *q)
++    : q(q)
++{
++}
++
++PlatformPanelShadows::~PlatformPanelShadows()
++{
++}
++
++void PlatformPanelShadows::windowDestroyed(QObject *deletedObject)
++{
++    m_windows.remove(static_cast<QWindow *>(deletedObject));
++
++    if (m_windows.isEmpty()) {
++        clearPixmaps();
++    }
++}
++
++void PlatformPanelShadows::updateShadows()
++{
++    setupPixmaps();
++    QHash<const QWindow *, Plasma::FrameSvg::EnabledBorders>::const_iterator i;
++    for (i = m_windows.constBegin(); i != m_windows.constEnd(); ++i) {
++        updateShadow(i.key(), i.value());
++    }
++}
++
++Qt::HANDLE PlatformPanelShadows::createPixmap(const QPixmap& source)
++{
++    Q_UNUSED(source);
++    return 0;
++}
++
++void PlatformPanelShadows::initPixmap(const QString &element)
++{
++    m_shadowPixmaps << q->pixmap(element);
++}
++
++QPixmap PlatformPanelShadows::initEmptyPixmap(const QSize &size)
++{
++    Q_UNUSED(size)
++    return QPixmap();
++}
++
++void PlatformPanelShadows::setupPixmaps()
++{
++    clearPixmaps();
++    initPixmap("shadow-top");
++    initPixmap("shadow-topright");
++    initPixmap("shadow-right");
++    initPixmap("shadow-bottomright");
++    initPixmap("shadow-bottom");
++    initPixmap("shadow-bottomleft");
++    initPixmap("shadow-left");
++    initPixmap("shadow-topleft");
++
++    m_emptyCornerPix = initEmptyPixmap(QSize(1,1));
++    m_emptyCornerLeftPix = initEmptyPixmap(QSize(q->elementSize("shadow-topleft").width(), 1));
++    m_emptyCornerTopPix = initEmptyPixmap(QSize(1, q->elementSize("shadow-topleft").height()));
++    m_emptyCornerRightPix = initEmptyPixmap(QSize(q->elementSize("shadow-bottomright").width(), 1));
++    m_emptyCornerBottomPix = initEmptyPixmap(QSize(1, q->elementSize("shadow-bottomright").height()));
++    m_emptyVerticalPix = initEmptyPixmap(QSize(1, q->elementSize("shadow-left").height()));
++    m_emptyHorizontalPix = initEmptyPixmap(QSize(q->elementSize("shadow-top").width(), 1));
++
++}
++
++void PlatformPanelShadows::setupData(Plasma::FrameSvg::EnabledBorders enabledBorders)
++{
++    int left, top, right, bottom = 0;
++
++    QSize marginHint;
++    if (enabledBorders & Plasma::FrameSvg::TopBorder) {
++        marginHint = q->elementSize("shadow-hint-top-margin");
++        if (marginHint.isValid()) {
++            top = marginHint.height();
++        } else {
++            top = m_shadowPixmaps[0].height(); // top
++        }
++    } else {
++        top = 1;
++    }
++
++    if (enabledBorders & Plasma::FrameSvg::RightBorder) {
++        marginHint = q->elementSize("shadow-hint-right-margin");
++        if (marginHint.isValid()) {
++            right = marginHint.width();
++        } else {
++            right = m_shadowPixmaps[2].width(); // right
++        }
++    } else {
++        right = 1;
++    }
++
++    if (enabledBorders & Plasma::FrameSvg::BottomBorder) {
++        marginHint = q->elementSize("shadow-hint-bottom-margin");
++        if (marginHint.isValid()) {
++            bottom = marginHint.height();
++        } else {
++            bottom = m_shadowPixmaps[4].height(); // bottom
++        }
++    } else {
++        bottom = 1;
++    }
++
++    if (enabledBorders & Plasma::FrameSvg::LeftBorder) {
++        marginHint = q->elementSize("shadow-hint-left-margin");
++        if (marginHint.isValid()) {
++            left = marginHint.width();
++        } else {
++            left = m_shadowPixmaps[6].width(); // left
++        }
++    } else {
++        left = 1;
++    }
++
++    data[enabledBorders] << top << right << bottom << left;
++}
++
++void PlatformPanelShadows::freeX11Pixmaps()
++{
++}
++
++void PlatformPanelShadows::clearPixmaps()
++{
++    m_shadowPixmaps.clear();
++    data.clear();
++}
++
++void PlatformPanelShadows::updateShadow(const QWindow *window, Plasma::FrameSvg::EnabledBorders enabledBorders)
++{
++    Q_UNUSED(window)
++    Q_UNUSED(enabledBorders)
++}
++
++void PlatformPanelShadows::clearShadow(const QWindow *window)
++{
++    Q_UNUSED(window)
++}
+diff --git a/shell/platform/platformpanelshadows.h b/shell/platform/platformpanelshadows.h
+new file mode 100644
+index 0000000..c1951aa
+--- /dev/null
++++ b/shell/platform/platformpanelshadows.h
+@@ -0,0 +1,62 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *  Copyright 2011 Aaron Seigo <aseigo@kde.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#ifndef PLATFORMPANELSHADOWS_H
++#define PLATFORMPANELSHADOWS_H
++
++#include <QWindow>
++
++#include "plasma/framesvg.h"
++
++class PanelShadows;
++
++class PlatformPanelShadows
++{
++public:
++    PlatformPanelShadows(PanelShadows *shadows);
++    virtual ~PlatformPanelShadows();
++
++    virtual void freeX11Pixmaps();
++    virtual void clearPixmaps();
++    virtual void setupPixmaps();
++    virtual Qt::HANDLE createPixmap(const QPixmap& source);
++    virtual void initPixmap(const QString &element);
++    virtual QPixmap initEmptyPixmap(const QSize &size);
++    virtual void updateShadow(const QWindow *window, Plasma::FrameSvg::EnabledBorders);
++    virtual void clearShadow(const QWindow *window);
++    virtual void updateShadows();
++    virtual void windowDestroyed(QObject *deletedObject);
++    virtual void setupData(Plasma::FrameSvg::EnabledBorders enabledBorders);
++
++    PanelShadows *q;
++    QList<QPixmap> m_shadowPixmaps;
++
++    QPixmap m_emptyCornerPix;
++    QPixmap m_emptyCornerLeftPix;
++    QPixmap m_emptyCornerTopPix;
++    QPixmap m_emptyCornerRightPix;
++    QPixmap m_emptyCornerBottomPix;
++    QPixmap m_emptyVerticalPix;
++    QPixmap m_emptyHorizontalPix;
++
++    QHash<Plasma::FrameSvg::EnabledBorders, QVector<unsigned long> > data;
++    QHash<const QWindow *, Plasma::FrameSvg::EnabledBorders> m_windows;
++};
++
++#endif // PLATFORMPANELSHADOWS_H
+diff --git a/shell/platform/platformpanelshadows_x11.cpp b/shell/platform/platformpanelshadows_x11.cpp
+new file mode 100644
+index 0000000..2816de8
+--- /dev/null
++++ b/shell/platform/platformpanelshadows_x11.cpp
+@@ -0,0 +1,247 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *  Copyright 2011 Aaron Seigo <aseigo@kde.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#include "platformpanelshadows_x11.h"
++
++PlatformPanelShadowsX11::PlatformPanelShadowsX11(PanelShadows *shadows)
++    : PlatformPanelShadows(shadows)
++    , _connection(0)
++    , _gc(0)
++{
++}
++
++PlatformPanelShadowsX11::~PlatformPanelShadowsX11()
++{
++    // Do not call clearPixmaps() from here: it creates new QPixmap(),
++    // which causes a crash when application is stopping.
++    freeX11Pixmaps();
++}
++
++Qt::HANDLE PlatformPanelShadowsX11::createPixmap(const QPixmap& source)
++{
++    // do nothing for invalid pixmaps
++    if( source.isNull() ) return 0;
++
++    /*
++    in some cases, pixmap handle is invalid. This is the case notably
++    when Qt uses to RasterEngine. In this case, we create an X11 Pixmap
++    explicitly and draw the source pixmap on it.
++    */
++
++    // check connection
++    if( !_connection ) _connection = QX11Info::connection();
++
++    const int width( source.width() );
++    const int height( source.height() );
++
++    // create X11 pixmap
++    Pixmap pixmap = XCreatePixmap( QX11Info::display(), QX11Info::appRootWindow(), width, height, 32 );
++
++    // check gc
++    if( !_gc )
++    {
++        _gc = xcb_generate_id( _connection );
++        xcb_create_gc( _connection, _gc, pixmap, 0, 0x0 );
++    }
++
++//         // create explicitly shared QPixmap from it
++//         QPixmap dest( QPixmap::fromX11Pixmap( pixmap, QPixmap::ExplicitlyShared ) );
++//
++//         // create surface for pixmap
++//         {
++//             QPainter painter( &dest );
++//             painter.setCompositionMode( QPainter::CompositionMode_Source );
++//             painter.drawPixmap( 0, 0, source );
++//         }
++//
++//
++//         return pixmap;
++    QImage image( source.toImage() );
++    xcb_put_image(
++        _connection, XCB_IMAGE_FORMAT_Z_PIXMAP, pixmap, _gc,
++        image.width(), image.height(), 0, 0,
++        0, 32,
++        image.byteCount(), image.constBits());
++
++    return (Qt::HANDLE)pixmap;
++}
++
++QPixmap PlatformPanelShadowsX11::initEmptyPixmap(const QSize &size)
++{
++    QPixmap tempEmptyPix(size);
++    if (!size.isEmpty()) {
++        tempEmptyPix.fill(Qt::transparent);
++    }
++    return tempEmptyPix;
++}
++
++void PlatformPanelShadowsX11::setupData(Plasma::FrameSvg::EnabledBorders enabledBorders)
++{
++    //shadow-top
++    if (enabledBorders & Plasma::FrameSvg::TopBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[0]));
++    } else {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyHorizontalPix));
++    }
++
++    //shadow-topright
++    if (enabledBorders & Plasma::FrameSvg::TopBorder &&
++        enabledBorders & Plasma::FrameSvg::RightBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[1]));
++    } else if (enabledBorders & Plasma::FrameSvg::TopBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerTopPix));
++    } else if (enabledBorders & Plasma::FrameSvg::RightBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerRightPix));
++    } else {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerPix));
++    }
++
++    //shadow-right
++    if (enabledBorders & Plasma::FrameSvg::RightBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[2]));
++    } else {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyVerticalPix));
++    }
++
++    //shadow-bottomright
++    if (enabledBorders & Plasma::FrameSvg::BottomBorder &&
++        enabledBorders & Plasma::FrameSvg::RightBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[3]));
++    } else if (enabledBorders & Plasma::FrameSvg::BottomBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerBottomPix));
++    } else if (enabledBorders & Plasma::FrameSvg::RightBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerRightPix));
++    } else {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerPix));
++    }
++
++    //shadow-bottom
++    if (enabledBorders & Plasma::FrameSvg::BottomBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[4]));
++    } else {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyHorizontalPix));
++    }
++
++    //shadow-bottomleft
++    if (enabledBorders & Plasma::FrameSvg::BottomBorder &&
++        enabledBorders & Plasma::FrameSvg::LeftBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[5]));
++    } else if (enabledBorders & Plasma::FrameSvg::BottomBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerBottomPix));
++    } else if (enabledBorders & Plasma::FrameSvg::LeftBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerLeftPix));
++    } else {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerPix));
++    }
++
++    //shadow-left
++    if (enabledBorders & Plasma::FrameSvg::LeftBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[6]));
++    } else {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyVerticalPix));
++    }
++
++    //shadow-topleft
++    if (enabledBorders & Plasma::FrameSvg::TopBorder &&
++        enabledBorders & Plasma::FrameSvg::LeftBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_shadowPixmaps[7]));
++    } else if (enabledBorders & Plasma::FrameSvg::TopBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerTopPix));
++    } else if (enabledBorders & Plasma::FrameSvg::LeftBorder) {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerLeftPix));
++    } else {
++        data[enabledBorders] << reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerPix));
++    }
++
++    PlatformPanelShadows::setupData(enabledBorders);
++}
++
++void PlatformPanelShadowsX11::freeX11Pixmaps()
++{
++    foreach (const QPixmap &pixmap, m_shadowPixmaps) {
++        if (!QX11Info::display()) {
++            return;
++        }
++        if (!pixmap.isNull()) {
++            XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(pixmap)));
++        }
++    }
++
++    if (!m_emptyCornerPix.isNull()) {
++        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerPix)));
++    }
++    if (!m_emptyCornerBottomPix.isNull()) {
++        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerBottomPix)));
++    }
++    if (!m_emptyCornerLeftPix.isNull()) {
++        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerLeftPix)));
++    }
++    if (!m_emptyCornerRightPix.isNull()) {
++        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerRightPix)));
++    }
++    if (!m_emptyCornerTopPix.isNull()) {
++        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyCornerTopPix)));
++    }
++    if (!m_emptyVerticalPix.isNull()) {
++        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyVerticalPix)));
++    }
++    if (!m_emptyHorizontalPix.isNull()) {
++        XFreePixmap(QX11Info::display(), reinterpret_cast<unsigned long>(createPixmap(m_emptyHorizontalPix)));
++    }
++}
++
++void PlatformPanelShadowsX11::clearPixmaps()
++{
++    freeX11Pixmaps();
++
++    m_emptyCornerPix = QPixmap();
++    m_emptyCornerBottomPix = QPixmap();
++    m_emptyCornerLeftPix = QPixmap();
++    m_emptyCornerRightPix = QPixmap();
++    m_emptyCornerTopPix = QPixmap();
++    m_emptyVerticalPix = QPixmap();
++    m_emptyHorizontalPix = QPixmap();
++
++    PlatformPanelShadows::clearPixmaps();
++}
++
++void PlatformPanelShadowsX11::updateShadow(const QWindow *window, Plasma::FrameSvg::EnabledBorders enabledBorders)
++{
++    if (m_shadowPixmaps.isEmpty()) {
++        setupPixmaps();
++    }
++
++    if (!data.contains(enabledBorders)) {
++        setupData(enabledBorders);
++    }
++
++    Display *dpy = QX11Info::display();
++    Atom atom = XInternAtom(dpy, "_KDE_NET_WM_SHADOW", False);
++
++//     qDebug() << "going to set the shadow of" << window->winId() << "to" << data;
++    XChangeProperty(dpy, window->winId(), atom, XA_CARDINAL, 32, PropModeReplace,
++                    reinterpret_cast<const unsigned char *>(data[enabledBorders].constData()), data[enabledBorders].size());
++}
++
++void PlatformPanelShadowsX11::clearShadow(const QWindow *window)
++{
++    Display *dpy = QX11Info::display();
++    Atom atom = XInternAtom(dpy, "_KDE_NET_WM_SHADOW", False);
++    XDeleteProperty(dpy, window->winId(), atom);
++}
+diff --git a/shell/platform/platformpanelshadows_x11.h b/shell/platform/platformpanelshadows_x11.h
+new file mode 100644
+index 0000000..d3d7633
+--- /dev/null
++++ b/shell/platform/platformpanelshadows_x11.h
+@@ -0,0 +1,53 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *  Copyright 2011 Aaron Seigo <aseigo@kde.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#ifndef PLATFORMPANELSHADOWS_X11_H
++#define PLATFORMPANELSHADOWS_X11_H
++
++#include "platformpanelshadows.h"
++
++#include <QX11Info>
++#include <X11/Xatom.h>
++#include <X11/Xlib.h>
++#include <X11/Xlib-xcb.h>
++#include <fixx11h.h>
++
++class PlatformPanelShadowsX11 : public PlatformPanelShadows
++{
++public:
++    PlatformPanelShadowsX11(PanelShadows *q);
++    virtual ~PlatformPanelShadowsX11();
++
++    Qt::HANDLE createPixmap(const QPixmap &source);
++    QPixmap initEmptyPixmap(const QSize &size);
++    void setupData(Plasma::FrameSvg::EnabledBorders enabledBorders);
++    void freeX11Pixmaps();
++    void clearPixmaps();
++    void updateShadow(const QWindow *window, Plasma::FrameSvg::EnabledBorders enabledBorders);
++    void clearShadow(const QWindow *window);
++
++private:
++    //! xcb connection
++    xcb_connection_t* _connection;
++
++    //! graphical context
++    xcb_gcontext_t _gc;
++};
++
++#endif // PLATFORMPANELSHADOWS_X11_H
+diff --git a/shell/platform/platformpanelview.cpp b/shell/platform/platformpanelview.cpp
+new file mode 100644
+index 0000000..d2dd8e3
+--- /dev/null
++++ b/shell/platform/platformpanelview.cpp
+@@ -0,0 +1,79 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#include "platformpanelview.h"
++
++PlatformPanelView::PlatformPanelView(PanelView *q)
++    : q(q)
++{
++}
++
++PlatformPanelView::~PlatformPanelView()
++{
++}
++
++void PlatformPanelView::setup()
++{
++}
++
++bool PlatformPanelView::isCompositingActive() const
++{
++    return false;
++}
++
++void PlatformPanelView::setScreen(QScreen *screen)
++{
++    q->setScreen(screen);
++}
++
++void PlatformPanelView::setVisibilityMode(const PanelView::VisibilityMode &mode)
++{
++    Q_UNUSED(mode);
++}
++
++void PlatformPanelView::setPosition(const QPoint &pos)
++{
++    Q_UNUSED(pos);
++}
++
++void PlatformPanelView::slide(const KWindowEffects::SlideFromLocation &from)
++{
++    Q_UNUSED(from);
++}
++
++void PlatformPanelView::setConfigViewState(PlasmaQuick::ConfigView *view)
++{
++    Q_UNUSED(view);
++}
++
++void PlatformPanelView::setAutoHideEnabled(bool enabled)
++{
++    Q_UNUSED(enabled);
++}
++
++void PlatformPanelView::updateStruts()
++{
++}
++
++void PlatformPanelView::themeChanged()
++{
++}
++
++void PlatformPanelView::updateMask()
++{
++}
+diff --git a/shell/platform/platformpanelview.h b/shell/platform/platformpanelview.h
+new file mode 100644
+index 0000000..ae06ca8
+--- /dev/null
++++ b/shell/platform/platformpanelview.h
+@@ -0,0 +1,51 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#ifndef PLATFORMPANELVIEW_H
++#define PLATFORMPANELVIEW_H
++
++#include "panelview.h"
++
++#include <kwindoweffects.h>
++
++class PlatformPanelView
++{
++public:
++    PlatformPanelView(PanelView *q);
++    virtual ~PlatformPanelView();
++
++    virtual void setup();
++
++    virtual bool isCompositingActive() const;
++
++    virtual void setScreen(QScreen *screen);
++    virtual void setVisibilityMode(const PanelView::VisibilityMode &mode);
++    virtual void setPosition(const QPoint &pos);
++    virtual void slide(const KWindowEffects::SlideFromLocation &from);
++    virtual void setConfigViewState(PlasmaQuick::ConfigView *view);
++    virtual void setAutoHideEnabled(bool enabled);
++
++    virtual void updateStruts();
++    virtual void themeChanged();
++    virtual void updateMask();
++
++protected:
++    PanelView *const q;
++};
++
++#endif // PLATFORMPANELVIEW_H
+diff --git a/shell/platform/platformpanelview_wayland.cpp b/shell/platform/platformpanelview_wayland.cpp
+new file mode 100644
+index 0000000..b553998
+--- /dev/null
++++ b/shell/platform/platformpanelview_wayland.cpp
+@@ -0,0 +1,114 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#include "platformpanelview_wayland.h"
++#include "waylandinterface.h"
++
++using namespace KWayland::Client;
++
++static PlasmaSurface::Flags visibility2Wl(PanelView::VisibilityMode mode)
++{
++    switch (mode) {
++    case PanelView::AutoHide:
++        return PlasmaSurface::Flag::PanelAutoHide;
++    case PanelView::LetWindowsCover:
++        return PlasmaSurface::Flag::PanelWindowsCanCover;
++    case PanelView::WindowsGoBelow:
++        return PlasmaSurface::Flag::PanelWindowsGoBelow;
++    default:
++        break;
++    }
++
++    return PlasmaSurface::Flag::PanelAlwaysVisible;
++}
++
++static PlasmaEffects::Location location2Wl(KWindowEffects::SlideFromLocation location)
++{
++    switch (location) {
++    case KWindowEffects::LeftEdge:
++        return PlasmaEffects::Location::Left;
++    case KWindowEffects::TopEdge:
++        return PlasmaEffects::Location::Top;
++    case KWindowEffects::RightEdge:
++        return PlasmaEffects::Location::Right;
++    case KWindowEffects::BottomEdge:
++        return PlasmaEffects::Location::Bottom;
++    default:
++        break;
++    }
++
++    return PlasmaEffects::Location::None;
++}
++
++PlatformPanelViewWayland::PlatformPanelViewWayland(PanelView *q)
++    : PlatformPanelView(q)
++{
++    m_plasmaSurface = WaylandInterface::plasmaShell()->createSurface(q, q);
++    m_plasmaSurface->setRole(PlasmaSurface::Role::Panel);
++}
++
++bool PlatformPanelViewWayland::isCompositingActive() const
++{
++    return true;
++}
++
++void PlatformPanelViewWayland::setScreen(QScreen *screen)
++{
++    m_plasmaSurface->setOutput(screen);
++}
++
++void PlatformPanelViewWayland::setVisibilityMode(const PanelView::VisibilityMode &mode)
++{
++    m_plasmaSurface->setFlags(visibility2Wl(mode));
++}
++
++void PlatformPanelViewWayland::setPosition(const QPoint &pos)
++{
++    m_plasmaSurface->move(pos);
++}
++
++void PlatformPanelViewWayland::slideToLocation(const KWindowEffects::SlideFromLocation &from,
++                                               const QPoint &to)
++{
++    Q_UNUSED(to);
++    WaylandInterface::plasmaEffects()->slide(q, location2Wl(from), q->geometry().topLeft());
++}
++
++void PlatformPanelViewWayland::setConfigViewState(PlasmaQuick::ConfigView *view)
++{
++    Q_UNUSED(view);
++}
++
++void PlatformPanelViewWayland::setAutoHideEnabled(bool enabled)
++{
++    Q_UNUSED(enabled);
++}
++
++void PlatformPanelViewWayland::themeChanged()
++{
++    WaylandInterface::plasmaEffects()->enableBlurBehind(q, QRegion(q->geometry()));
++    WaylandInterface::plasmaEffects()->enableBackgroundContrast(
++        q,
++        QRegion(q->geometry()),
++        q->m_theme.backgroundContrast(),
++        q->m_theme.backgroundIntensity(),
++        q->m_theme.backgroundSaturation()
++    );
++
++    q->updateMask();
++}
+diff --git a/shell/platform/platformpanelview_wayland.h b/shell/platform/platformpanelview_wayland.h
+new file mode 100644
+index 0000000..8c87114
+--- /dev/null
++++ b/shell/platform/platformpanelview_wayland.h
+@@ -0,0 +1,47 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#ifndef PLATFORMPANELVIEW_WAYLAND_H
++#define PLATFORMPANELVIEW_WAYLAND_H
++
++#include "platformpanelview.h"
++
++#include <KWayland/Client/plasma_surface.h>
++
++class PlatformPanelViewWayland : public PlatformPanelView
++{
++public:
++    PlatformPanelViewWayland(PanelView *q);
++
++    bool isCompositingActive() const;
++
++    void setScreen(QScreen *screen);
++    void setVisibilityMode(const PanelView::VisibilityMode &mode);
++    void setPosition(const QPoint &pos);
++    void slideToLocation(const KWindowEffects::SlideFromLocation &from,
++                         const QPoint &to);
++    void setConfigViewState(PlasmaQuick::ConfigView *view);
++    void setAutoHideEnabled(bool enabled);
++
++    void themeChanged();
++
++private:
++    KWayland::Client::PlasmaSurface *m_plasmaSurface;
++};
++
++#endif // PLATFORMPANELVIEW_WAYLAND_H
+diff --git a/shell/platform/platformpanelview_x11.cpp b/shell/platform/platformpanelview_x11.cpp
+new file mode 100644
+index 0000000..f3258c4
+--- /dev/null
++++ b/shell/platform/platformpanelview_x11.cpp
+@@ -0,0 +1,284 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *  Copyright 2013 Marco Martin <mart@kde.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#include "platformpanelview_x11.h"
++
++#include <kwindowsystem.h>
++
++#include <xcb/xcb.h>
++#include <QX11Info>
++#include <QScreen>
++
++PlatformPanelViewX11::PlatformPanelViewX11(PanelView *q)
++    : PlatformPanelView(q)
++{
++}
++
++void PlatformPanelViewX11::setup()
++{
++    KWindowSystem::setOnAllDesktops(q->winId(), true);
++    KWindowSystem::setType(q->winId(), NET::Dock);
++}
++
++bool PlatformPanelViewX11::isCompositingActive() const
++{
++    return KWindowSystem::compositingActive();
++}
++
++void PlatformPanelViewX11::setVisibilityMode(const PanelView::VisibilityMode &mode)
++{
++    if (mode == PanelView::LetWindowsCover) {
++        KWindowSystem::setState(q->winId(), NET::KeepBelow);
++    } else {
++        KWindowSystem::clearState(q->winId(), NET::KeepBelow);
++    }
++}
++
++void PlatformPanelViewX11::setPosition(const QPoint &pos)
++{
++    Q_UNUSED(pos);
++}
++
++void PlatformPanelViewX11::slideToLocation(const KWindowEffects::SlideFromLocation &from,
++                                           const QPoint &to)
++{
++    Q_UNUSED(to);
++    KWindowEffects::slideWindow(q->winId(), from, -1);
++}
++
++void PlatformPanelViewX11::setConfigViewState(PlasmaQuick::ConfigView *view)
++{
++   KWindowSystem::setState(view->winId(), NET::SkipTaskbar | NET::SkipPager);
++}
++
++void PlatformPanelViewX11::setAutoHideEnabled(bool enabled)
++{
++    xcb_connection_t *c = QX11Info::connection();
++    if (!c) {
++        return;
++    }
++
++    const QByteArray effectName = QByteArrayLiteral("_KDE_NET_WM_SCREEN_EDGE_SHOW");
++    xcb_intern_atom_cookie_t atomCookie = xcb_intern_atom_unchecked(c, false, effectName.length(), effectName.constData());
++
++    QScopedPointer<xcb_intern_atom_reply_t, QScopedPointerPodDeleter> atom(xcb_intern_atom_reply(c, atomCookie, NULL));
++
++    if (!atom) {
++        return;
++    }
++
++    if (!enabled) {
++        xcb_delete_property(c, q->winId(), atom->atom);
++        return;
++    }
++
++    KWindowEffects::SlideFromLocation slideLocation = KWindowEffects::NoEdge;
++    uint32_t value = 0;
++
++    switch (q->location()) {
++    case Plasma::Types::TopEdge:
++        value = 0;
++        slideLocation = KWindowEffects::TopEdge;
++        break;
++    case Plasma::Types::RightEdge:
++        value = 1;
++        slideLocation = KWindowEffects::RightEdge;
++        break;
++    case Plasma::Types::BottomEdge:
++        value = 2;
++        slideLocation = KWindowEffects::BottomEdge;
++        break;
++    case Plasma::Types::LeftEdge:
++        value = 3;
++        slideLocation = KWindowEffects::LeftEdge;
++        break;
++    case Plasma::Types::Floating:
++    default:
++        value = 4;
++        break;
++    }
++
++    xcb_change_property(c, XCB_PROP_MODE_REPLACE, q->winId(), atom->atom, XCB_ATOM_CARDINAL, 32, 1, &value);
++    KWindowEffects::slideWindow(q->winId(), slideLocation, -1);
++}
++
++void PlatformPanelViewX11::updateStruts()
++{
++    NETExtendedStrut strut;
++
++    if (q->visibilityMode() == PanelView::NormalPanel) {
++        const QRect thisScreen = q->screen()->geometry();
++        const QRect wholeScreen = q->screen()->virtualGeometry();
++
++        //Extended struts against a screen edge near to another screen are really harmful, so windows maximized under the panel is a lesser pain
++        //TODO: force "windows can cover" in those cases?
++        const int numScreens = q->corona()->numScreens();
++        for (int i = 0; i < numScreens; ++i) {
++            if (i == q->containment()->screen()) {
++                continue;
++            }
++
++            const QRect otherScreen = q->corona()->screenGeometry(i);
++
++            switch (q->location())
++            {
++                case Plasma::Types::TopEdge:
++                if (otherScreen.bottom() <= thisScreen.top()) {
++                    KWindowSystem::setExtendedStrut(q->winId(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
++                    return;
++                }
++                break;
++            case Plasma::Types::BottomEdge:
++                if (otherScreen.top() >= thisScreen.bottom()) {
++                    KWindowSystem::setExtendedStrut(q->winId(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
++                    return;
++                }
++                break;
++            case Plasma::Types::RightEdge:
++                if (otherScreen.left() >= thisScreen.right()) {
++                    KWindowSystem::setExtendedStrut(q->winId(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
++                    return;
++                }
++                break;
++            case Plasma::Types::LeftEdge:
++                if (otherScreen.right() <= thisScreen.left()) {
++                    KWindowSystem::setExtendedStrut(q->winId(), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
++                    return;
++                }
++                break;
++            default:
++                return;
++            }
++        }
++        // extended struts are to the combined screen geoms, not the single screen
++        int leftOffset = thisScreen.x();
++        int rightOffset = wholeScreen.right() - thisScreen.right();
++        int bottomOffset = wholeScreen.bottom() - thisScreen.bottom();
++//         qDebug() << "screen l/r/b/t offsets are:" << leftOffset << rightOffset << bottomOffset << topOffset << location();
++        int topOffset = thisScreen.top();
++
++        switch (q->location())
++        {
++            case Plasma::Types::TopEdge:
++                strut.top_width = q->thickness() + topOffset;
++                strut.top_start = q->x();
++                strut.top_end = q->x() + q->width() - 1;
++//                 qDebug() << "setting top edge to" << strut.top_width << strut.top_start << strut.top_end;
++                break;
++
++            case Plasma::Types::BottomEdge:
++                strut.bottom_width = q->thickness() + bottomOffset;
++                strut.bottom_start = q->x();
++                strut.bottom_end = q->x() + q->width() - 1;
++//                 qDebug() << "setting bottom edge to" << strut.bottom_width << strut.bottom_start << strut.bottom_end;
++                break;
++
++            case Plasma::Types::RightEdge:
++                strut.right_width = q->thickness() + rightOffset;
++                strut.right_start = q->y();
++                strut.right_end = q->y() + q->height() - 1;
++//                 qDebug() << "setting right edge to" << strut.right_width << strut.right_start << strut.right_end;
++                break;
++
++            case Plasma::Types::LeftEdge:
++                strut.left_width = q->thickness() + leftOffset;
++                strut.left_start = q->y();
++                strut.left_end = q->y() + q->height() - 1;
++//                 qDebug() << "setting left edge to" << strut.left_width << strut.left_start << strut.left_end;
++                break;
++
++            default:
++                //qDebug() << "where are we?";
++                break;
++        }
++    }
++
++    KWindowSystem::setExtendedStrut(q->winId(),
++                                    strut.left_width,
++                                    strut.left_start,
++                                    strut.left_end,
++                                    strut.right_width,
++                                    strut.right_start,
++                                    strut.right_end,
++                                    strut.top_width,
++                                    strut.top_start,
++                                    strut.top_end,
++                                    strut.bottom_width,
++                                    strut.bottom_start,
++                                    strut.bottom_end);
++}
++
++void PlatformPanelViewX11::themeChanged()
++{
++    KWindowEffects::enableBlurBehind(q->winId(), true);
++    KWindowEffects::enableBackgroundContrast(q->winId(),
++                                             q->m_theme.backgroundContrastEnabled(),
++                                             q->m_theme.backgroundContrast(),
++                                             q->m_theme.backgroundIntensity(),
++                                             q->m_theme.backgroundSaturation());
++
++    updateMask();
++}
++
++void PlatformPanelViewX11::updateMask()
++{
++    if (isCompositingActive()) {
++        q->setMask(QRegion());
++    } else {
++        if (!q->m_background) {
++            q->m_background = new Plasma::FrameSvg(q);
++            q->m_background->setImagePath("widgets/panel-background");
++        }
++
++        Plasma::FrameSvg::EnabledBorders borders = Plasma::FrameSvg::AllBorders;
++        switch (q->location()) {
++        case Plasma::Types::TopEdge:
++            borders &= ~Plasma::FrameSvg::TopBorder;
++            break;
++        case Plasma::Types::LeftEdge:
++            borders &= ~Plasma::FrameSvg::LeftBorder;
++            break;
++        case Plasma::Types::RightEdge:
++            borders &= ~Plasma::FrameSvg::RightBorder;
++            break;
++        case Plasma::Types::BottomEdge:
++            borders &= ~Plasma::FrameSvg::BottomBorder;
++            break;
++        default:
++            break;
++        }
++
++        if (q->x() <= q->screen()->geometry().x()) {
++            borders &= ~Plasma::FrameSvg::LeftBorder;
++        }
++        if (q->x() + q->width() >= q->screen()->geometry().x() + q->screen()->geometry().width()) {
++            borders &= ~Plasma::FrameSvg::RightBorder;
++        }
++        if (q->y() <= q->screen()->geometry().y()) {
++            borders &= ~Plasma::FrameSvg::TopBorder;
++        }
++        if (q->y() + q->height() >= q->screen()->geometry().y() + q->screen()->geometry().height()) {
++            borders &= ~Plasma::FrameSvg::BottomBorder;
++        }
++        q->m_background->setEnabledBorders(borders);
++
++        q->m_background->resizeFrame(q->size());
++        q->setMask(q->m_background->mask());
++    }
++}
+diff --git a/shell/platform/platformpanelview_x11.h b/shell/platform/platformpanelview_x11.h
+new file mode 100644
+index 0000000..1769a18
+--- /dev/null
++++ b/shell/platform/platformpanelview_x11.h
+@@ -0,0 +1,45 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#ifndef PLATFORMPANELVIEW_X11_H
++#define PLATFORMPANELVIEW_X11_H
++
++#include "platformpanelview.h"
++
++class PlatformPanelViewX11 : public PlatformPanelView
++{
++public:
++    PlatformPanelViewX11(PanelView *q);
++
++    void setup();
++
++    bool isCompositingActive() const;
++
++    void setVisibilityMode(const PanelView::VisibilityMode &mode);
++    void setPosition(const QPoint &pos);
++    void slideToLocation(const KWindowEffects::SlideFromLocation &from,
++                         const QPoint &to);
++    void setConfigViewState(PlasmaQuick::ConfigView *view);
++    void setAutoHideEnabled(bool enabled);
++
++    void updateStruts();
++    void themeChanged();
++    void updateMask();
++};
++
++#endif // PLATFORMPANELVIEW_X11_H
+diff --git a/shell/platform/waylandinterface.cpp b/shell/platform/waylandinterface.cpp
+new file mode 100644
+index 0000000..5d46501
+--- /dev/null
++++ b/shell/platform/waylandinterface.cpp
+@@ -0,0 +1,73 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++#include <QGuiApplication>
++#include <qpa/qplatformnativeinterface.h>
++
++#include "waylandinterface.h"
++
++using namespace KWayland::Client;
++
++Q_GLOBAL_STATIC(WaylandInterface, s_waylandInterface)
++
++WaylandInterface::WaylandInterface()
++    : QObject(),
++      m_plasmaEffects(Q_NULLPTR),
++      m_plasmaShell(Q_NULLPTR)
++{
++    // Reuse QPA connection to Wayland instead of ConnectionThread, otherwise
++    // wl_surface objects from the native interface won't be recognized by
++    // the compositor
++    // TODO: Add a static method to ConnectionThread to create it using
++    // wl_display from the native interface
++    QPlatformNativeInterface *native = QGuiApplication::platformNativeInterface();
++    wl_display *display = static_cast<wl_display *>(
++        native->nativeResourceForIntegration("display"));
++
++    m_registry = new Registry(this);
++    connect(m_registry, &Registry::plasmaEffectsAnnounced, this,
++        [this](quint32 name, quint32 version) {
++            m_plasmaEffects = m_registry->createPlasmaEffects(name, version, m_registry);
++        }
++    );
++    connect(m_registry, &Registry::plasmaShellAnnounced, this,
++        [this](quint32 name, quint32 version) {
++            m_plasmaShell = m_registry->createPlasmaShell(name, version, m_registry);
++        }
++    );
++    connect(m_registry, SIGNAL(interfacesAnnounced()), this, SIGNAL(ready()));
++    m_registry->create(display);
++    m_registry->setup();
++}
++
++WaylandInterface *WaylandInterface::instance()
++{
++    return s_waylandInterface();
++}
++
++KWayland::Client::PlasmaEffects *WaylandInterface::plasmaEffects()
++{
++    return s_waylandInterface()->m_plasmaEffects;
++}
++
++KWayland::Client::PlasmaShell *WaylandInterface::plasmaShell()
++{
++    return s_waylandInterface()->m_plasmaShell;
++}
++
++#include "moc_waylandinterface.cpp"
+diff --git a/shell/platform/waylandinterface.h b/shell/platform/waylandinterface.h
+new file mode 100644
+index 0000000..7915626
+--- /dev/null
++++ b/shell/platform/waylandinterface.h
+@@ -0,0 +1,47 @@
++/*
++ *  Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@maui-project.org>
++ *
++ *  This program is free software; you can redistribute it and/or modify
++ *  it under the terms of the GNU General Public License as published by
++ *  the Free Software Foundation; either version 2 of the License, or
++ *  (at your option) any later version.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *  GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with this program; if not, write to the Free Software
++ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++
++#ifndef WAYLANDINTERFACE_H
++#define WAYLANDINTERFACE_H
++
++#include <KWayland/Client/registry.h>
++#include <KWayland/Client/plasma_effects.h>
++#include <KWayland/Client/plasma_shell.h>
++
++class WaylandInterface : public QObject
++{
++    Q_OBJECT
++public:
++    explicit WaylandInterface();
++
++    static WaylandInterface *instance();
++
++    static KWayland::Client::PlasmaEffects *plasmaEffects();
++    static KWayland::Client::PlasmaShell *plasmaShell();
++
++Q_SIGNALS:
++    void ready();
++
++private:
++    KWayland::Client::Registry *m_registry;
++    KWayland::Client::PlasmaEffects *m_plasmaEffects;
++    KWayland::Client::PlasmaShell *m_plasmaShell;
++};
++
++#endif // WAYLANDINTERFACE_H
+diff --git a/shell/shellmanager.cpp b/shell/shellmanager.cpp
+index 766eb6f..f92a735 100644
+--- a/shell/shellmanager.cpp
++++ b/shell/shellmanager.cpp
+@@ -34,6 +34,11 @@
+ //#include <config-prefix.h>
+ #include "shellcorona.h"
+ #include "config-workspace.h"
++#include "config-plasma.h"
++
++#if HAVE_WAYLAND
++# include "platform/waylandinterface.h"
++#endif
+ 
+ #include <kcrash.h>
+ 
+@@ -83,8 +88,15 @@ ShellManager::ShellManager()
+         this, &ShellManager::updateShell
+     );
+ 
++#if HAVE_WAYLAND
++    if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland"))) {
++        connect(WaylandInterface::instance(), &WaylandInterface::ready,
++                this, &ShellManager::loadHandlers);
++    }
++#else
+     //we have to ensure this is executed after QCoreApplication::exec()
+     QMetaObject::invokeMethod(this, "loadHandlers", Qt::QueuedConnection);
++#endif
+ }
+ 
+ ShellManager::~ShellManager()
+-- 
+1.8.3.1
+
