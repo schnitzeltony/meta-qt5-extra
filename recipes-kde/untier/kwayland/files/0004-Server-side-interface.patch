@@ -1,0 +1,845 @@
+From 690e2b1ae73ca69a14e111a779cae571a8fcf616 Mon Sep 17 00:00:00 2001
+From: Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+Date: Fri, 17 Oct 2014 09:06:04 +0200
+Subject: [PATCH 4/4] Server side interface
+
+Conflicts:
+	src/server/CMakeLists.txt
+
++ names/loactions of generated header changed
+---
+ autotests/client/test_plasma_shell.cpp | 358 +++++++++++++++++++++++++++++++++
+ src/server/CMakeLists.txt              |   7 +
+ src/server/plasma_shell_interface.cpp  | 331 ++++++++++++++++++++++++++++++
+ src/server/plasma_shell_interface.h    |  84 ++++++++
+ 4 files changed, 780 insertions(+)
+ create mode 100644 autotests/client/test_plasma_shell.cpp
+ create mode 100644 src/server/plasma_shell_interface.cpp
+ create mode 100644 src/server/plasma_shell_interface.h
+
+diff --git a/autotests/client/test_plasma_shell.cpp b/autotests/client/test_plasma_shell.cpp
+new file mode 100644
+index 0000000..c9257ce
+--- /dev/null
++++ b/autotests/client/test_plasma_shell.cpp
+@@ -0,0 +1,358 @@
++/********************************************************************
++Copyright 2014  Martin Gräßlin <mgraesslin@kde.org>
++
++This library is free software; you can redistribute it and/or
++modify it under the terms of the GNU Lesser General Public
++License as published by the Free Software Foundation; either
++version 2.1 of the License, or (at your option) version 3, or any
++later version accepted by the membership of KDE e.V. (or its
++successor approved by the membership of KDE e.V.), which shall
++act as a proxy defined in Section 6 of version 3 of the license.
++
++This library is distributed in the hope that it will be useful,
++but WITHOUT ANY WARRANTY; without even the implied warranty of
++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++Lesser General Public License for more details.
++
++You should have received a copy of the GNU Lesser General Public
++License along with this library.  If not, see <http://www.gnu.org/licenses/>.
++*********************************************************************/
++// Qt
++#include <QtTest/QtTest>
++// KWin
++#include "../../src/client/compositor.h"
++#include "../../src/client/connection_thread.h"
++#include "../../src/client/event_queue.h"
++#include "../../src/client/shell.h"
++#include "../../src/client/surface.h"
++#include "../../src/client/registry.h"
++#include "../../src/server/buffer_interface.h"
++#include "../../src/server/compositor_interface.h"
++#include "../../src/server/display.h"
++#include "../../src/server/shell_interface.h"
++#include "../../src/server/surface_interface.h"
++// Wayland
++#include <wayland-client-protocol.h>
++
++class TestPlasmaShell : public QObject
++{
++    Q_OBJECT
++public:
++    explicit TestPlasmaShell(QObject *parent = nullptr);
++private Q_SLOTS:
++    void init();
++    void cleanup();
++
++    void testFullscreen();
++    void testPing();
++    void testTitle();
++    void testWindowClass();
++    void testDestroy();
++    void testCast();
++
++private:
++    KWayland::Server::Display *m_display;
++    KWayland::Server::CompositorInterface *m_compositorInterface;
++    KWayland::Server::ShellInterface *m_shellInterface;
++    KWayland::Client::ConnectionThread *m_connection;
++    KWayland::Client::Compositor *m_compositor;
++    KWayland::Client::Shell *m_shell;
++    KWayland::Client::EventQueue *m_queue;
++    QThread *m_thread;
++};
++
++static const QString s_socketName = QStringLiteral("kwin-test-plasma-shell-0");
++
++TestPlasmaShell::TestPlasmaShell(QObject *parent)
++    : QObject(parent)
++    , m_display(nullptr)
++    , m_compositorInterface(nullptr)
++    , m_shellInterface(nullptr)
++    , m_connection(nullptr)
++    , m_compositor(nullptr)
++    , m_shell(nullptr)
++    , m_queue(nullptr)
++    , m_thread(nullptr)
++{
++}
++
++void TestPlasmaShell::init()
++{
++    using namespace KWayland::Server;
++    delete m_display;
++    m_display = new Display(this);
++    m_display->setSocketName(s_socketName);
++    m_display->start();
++    QVERIFY(m_display->isRunning());
++
++    m_compositorInterface = m_display->createCompositor(m_display);
++    QVERIFY(m_compositorInterface);
++    m_compositorInterface->create();
++    QVERIFY(m_compositorInterface->isValid());
++
++    m_shellInterface = m_display->createShell(m_display);
++    QVERIFY(m_shellInterface);
++    m_shellInterface->create();
++    QVERIFY(m_shellInterface->isValid());
++
++    // setup connection
++    m_connection = new KWayland::Client::ConnectionThread;
++    QSignalSpy connectedSpy(m_connection, SIGNAL(connected()));
++    m_connection->setSocketName(s_socketName);
++
++    m_thread = new QThread(this);
++    m_connection->moveToThread(m_thread);
++    m_thread->start();
++
++    m_connection->initConnection();
++    QVERIFY(connectedSpy.wait());
++
++    m_queue = new KWayland::Client::EventQueue(this);
++    QVERIFY(!m_queue->isValid());
++    m_queue->setup(m_connection);
++    QVERIFY(m_queue->isValid());
++
++    KWayland::Client::Registry registry;
++    QSignalSpy compositorSpy(&registry, SIGNAL(compositorAnnounced(quint32,quint32)));
++    QSignalSpy shellSpy(&registry, SIGNAL(shellAnnounced(quint32,quint32)));
++    QVERIFY(!registry.eventQueue());
++    registry.setEventQueue(m_queue);
++    QCOMPARE(registry.eventQueue(), m_queue);
++    registry.create(m_connection->display());
++    QVERIFY(registry.isValid());
++    registry.setup();
++    QVERIFY(compositorSpy.wait());
++
++    m_compositor = new KWayland::Client::Compositor(this);
++    m_compositor->setup(registry.bindCompositor(compositorSpy.first().first().value<quint32>(), compositorSpy.first().last().value<quint32>()));
++    QVERIFY(m_compositor->isValid());
++
++    if (shellSpy.isEmpty()) {
++        QVERIFY(shellSpy.wait());
++    }
++    m_shell = registry.createShell(shellSpy.first().first().value<quint32>(), shellSpy.first().last().value<quint32>(), this);
++    QVERIFY(m_shell->isValid());
++}
++
++void TestPlasmaShell::cleanup()
++{
++    if (m_shell) {
++        delete m_shell;
++        m_shell = nullptr;
++    }
++    if (m_compositor) {
++        delete m_compositor;
++        m_compositor = nullptr;
++    }
++    if (m_queue) {
++        delete m_queue;
++        m_queue = nullptr;
++    }
++    if (m_connection) {
++        m_connection->deleteLater();
++        m_connection = nullptr;
++    }
++    if (m_thread) {
++        m_thread->quit();
++        m_thread->wait();
++        delete m_thread;
++        m_thread = nullptr;
++    }
++
++    delete m_shellInterface;
++    m_shellInterface = nullptr;
++
++    delete m_compositorInterface;
++    m_compositorInterface = nullptr;
++
++    delete m_display;
++    m_display = nullptr;
++}
++
++void TestPlasmaShell::testFullscreen()
++{
++    using namespace KWayland::Server;
++    QScopedPointer<KWayland::Client::Surface> s(m_compositor->createSurface());
++    QVERIFY(!s.isNull());
++    QVERIFY(s->isValid());
++    KWayland::Client::ShellSurface *surface = m_shell->createSurface(s.data(), m_shell);
++    QSignalSpy sizeSpy(surface, SIGNAL(sizeChanged(QSize)));
++    QVERIFY(sizeSpy.isValid());
++    QCOMPARE(surface->size(), QSize());
++
++    QSignalSpy serverSurfaceSpy(m_shellInterface, SIGNAL(surfaceCreated(KWayland::Server::ShellSurfaceInterface*)));
++    QVERIFY(serverSurfaceSpy.isValid());
++    QVERIFY(serverSurfaceSpy.wait());
++    ShellSurfaceInterface *serverSurface = serverSurfaceSpy.first().first().value<ShellSurfaceInterface*>();
++    QVERIFY(serverSurface);
++
++    QSignalSpy fullscreenSpy(serverSurface, SIGNAL(fullscreenChanged(bool)));
++    QVERIFY(fullscreenSpy.isValid());
++
++    surface->setFullscreen();
++    QVERIFY(fullscreenSpy.wait());
++    QCOMPARE(fullscreenSpy.count(), 1);
++    QVERIFY(fullscreenSpy.first().first().toBool());
++    serverSurface->requestSize(QSize(1024, 768));
++
++    QVERIFY(sizeSpy.wait());
++    QCOMPARE(sizeSpy.count(), 1);
++    QCOMPARE(sizeSpy.first().first().toSize(), QSize(1024, 768));
++    QCOMPARE(surface->size(), QSize(1024, 768));
++
++    // set back to toplevel
++    fullscreenSpy.clear();
++    wl_shell_surface_set_toplevel(*surface);
++    QVERIFY(fullscreenSpy.wait());
++    QCOMPARE(fullscreenSpy.count(), 1);
++    QVERIFY(!fullscreenSpy.first().first().toBool());
++}
++
++void TestPlasmaShell::testPing()
++{
++    using namespace KWayland::Server;
++    QScopedPointer<KWayland::Client::Surface> s(m_compositor->createSurface());
++    QVERIFY(!s.isNull());
++    QVERIFY(s->isValid());
++    KWayland::Client::ShellSurface *surface = m_shell->createSurface(s.data(), m_shell);
++    QSignalSpy pingSpy(surface, SIGNAL(pinged()));
++
++    QSignalSpy serverSurfaceSpy(m_shellInterface, SIGNAL(surfaceCreated(KWayland::Server::ShellSurfaceInterface*)));
++    QVERIFY(serverSurfaceSpy.isValid());
++    QVERIFY(serverSurfaceSpy.wait());
++    ShellSurfaceInterface *serverSurface = serverSurfaceSpy.first().first().value<ShellSurfaceInterface*>();
++    QVERIFY(serverSurface);
++
++    QSignalSpy pingTimeoutSpy(serverSurface, SIGNAL(pingTimeout()));
++    QVERIFY(pingTimeoutSpy.isValid());
++    QSignalSpy pongSpy(serverSurface, SIGNAL(pongReceived()));
++    QVERIFY(pongSpy.isValid());
++
++    serverSurface->ping();
++    QVERIFY(pingSpy.wait());
++    wl_display_flush(m_connection->display());
++
++    if (pongSpy.isEmpty()) {
++        QVERIFY(pongSpy.wait());
++    }
++    QVERIFY(!pongSpy.isEmpty());
++    QVERIFY(pingTimeoutSpy.isEmpty());
++
++    // evil trick - timeout of zero will make it not get the pong
++    serverSurface->setPingTimeout(0);
++    pongSpy.clear();
++    pingTimeoutSpy.clear();
++    serverSurface->ping();
++    QTest::qWait(100);
++    if (pingTimeoutSpy.isEmpty()) {
++        QVERIFY(pingTimeoutSpy.wait());
++    }
++    QCOMPARE(pingTimeoutSpy.count(), 1);
++    QVERIFY(pongSpy.isEmpty());
++}
++
++void TestPlasmaShell::testTitle()
++{
++    using namespace KWayland::Server;
++    QScopedPointer<KWayland::Client::Surface> s(m_compositor->createSurface());
++    QVERIFY(!s.isNull());
++    QVERIFY(s->isValid());
++    KWayland::Client::ShellSurface *surface = m_shell->createSurface(s.data(), m_shell);
++
++    QSignalSpy serverSurfaceSpy(m_shellInterface, SIGNAL(surfaceCreated(KWayland::Server::ShellSurfaceInterface*)));
++    QVERIFY(serverSurfaceSpy.isValid());
++    QVERIFY(serverSurfaceSpy.wait());
++    ShellSurfaceInterface *serverSurface = serverSurfaceSpy.first().first().value<ShellSurfaceInterface*>();
++    QVERIFY(serverSurface);
++
++    QSignalSpy titleSpy(serverSurface, SIGNAL(titleChanged(QString)));
++    QVERIFY(titleSpy.isValid());
++    QString testTitle = QStringLiteral("fooBar");
++    QVERIFY(serverSurface->title().isNull());
++
++    wl_shell_surface_set_title(*(const KWayland::Client::ShellSurface *)surface, testTitle.toUtf8().constData());
++    QVERIFY(titleSpy.wait());
++    QCOMPARE(serverSurface->title(), testTitle);
++    QCOMPARE(titleSpy.first().first().toString(), testTitle);
++}
++
++void TestPlasmaShell::testWindowClass()
++{
++    using namespace KWayland::Server;
++    QScopedPointer<KWayland::Client::Surface> s(m_compositor->createSurface());
++    QVERIFY(!s.isNull());
++    QVERIFY(s->isValid());
++    KWayland::Client::ShellSurface *surface = m_shell->createSurface(s.data(), m_shell);
++
++    QSignalSpy serverSurfaceSpy(m_shellInterface, SIGNAL(surfaceCreated(KWayland::Server::ShellSurfaceInterface*)));
++    QVERIFY(serverSurfaceSpy.isValid());
++    QVERIFY(serverSurfaceSpy.wait());
++    ShellSurfaceInterface *serverSurface = serverSurfaceSpy.first().first().value<ShellSurfaceInterface*>();
++    QVERIFY(serverSurface);
++
++    QSignalSpy windowClassSpy(serverSurface, SIGNAL(windowClassChanged(QByteArray)));
++    QVERIFY(windowClassSpy.isValid());
++    QByteArray testClass = QByteArrayLiteral("fooBar");
++    QVERIFY(serverSurface->windowClass().isNull());
++
++    wl_shell_surface_set_class(*surface, testClass.constData());
++    QVERIFY(windowClassSpy.wait());
++    QCOMPARE(serverSurface->windowClass(), testClass);
++    QCOMPARE(windowClassSpy.first().first().toByteArray(), testClass);
++}
++
++void TestPlasmaShell::testDestroy()
++{
++    using namespace KWayland::Client;
++    QScopedPointer<Surface> s(m_compositor->createSurface());
++    QVERIFY(!s.isNull());
++    QVERIFY(s->isValid());
++    ShellSurface *surface = m_shell->createSurface(s.data(), m_shell);
++    QVERIFY(surface->isValid());
++
++    connect(m_connection, &ConnectionThread::connectionDied, m_shell, &Shell::destroy);
++    connect(m_connection, &ConnectionThread::connectionDied, m_compositor, &Compositor::destroy);
++    connect(m_connection, &ConnectionThread::connectionDied, s.data(), &Surface::destroy);
++    connect(m_connection, &ConnectionThread::connectionDied, m_queue, &EventQueue::destroy);
++
++    QSignalSpy connectionDiedSpy(m_connection, SIGNAL(connectionDied()));
++    QVERIFY(connectionDiedSpy.isValid());
++    delete m_display;
++    m_display = nullptr;
++    m_compositorInterface = nullptr;
++    m_shellInterface = nullptr;
++    QVERIFY(connectionDiedSpy.wait());
++
++    QVERIFY(!m_shell->isValid());
++    QVERIFY(!surface->isValid());
++
++    m_shell->destroy();
++    surface->destroy();
++}
++
++void TestPlasmaShell::testCast()
++{
++    using namespace KWayland::Client;
++    Registry registry;
++    QSignalSpy shellSpy(&registry, SIGNAL(shellAnnounced(quint32,quint32)));
++    registry.setEventQueue(m_queue);
++    registry.create(m_connection->display());
++    QVERIFY(registry.isValid());
++    registry.setup();
++    QVERIFY(shellSpy.wait());
++
++    Shell s;
++    auto wlShell = registry.bindShell(shellSpy.first().first().value<quint32>(), shellSpy.first().last().value<quint32>());
++    m_queue->addProxy(wlShell);
++    QVERIFY(wlShell);
++    QVERIFY(!s.isValid());
++    s.setup(wlShell);
++    QVERIFY(s.isValid());
++    QCOMPARE((wl_shell*)s, wlShell);
++
++    const Shell &s2(s);
++    QCOMPARE((wl_shell*)s2, wlShell);
++}
++
++QTEST_GUILESS_MAIN(TestPlasmaShell)
++#include "test_plasma_shell.moc"
+diff --git a/src/server/CMakeLists.txt b/src/server/CMakeLists.txt
+index 8363c37..4a0d895 100644
+--- a/src/server/CMakeLists.txt
++++ b/src/server/CMakeLists.txt
+@@ -7,6 +7,7 @@ set(SERVER_LIB_SRCS
+     dataoffer_interface.cpp
+     datasource_interface.cpp
+     display.cpp
++    plasma_shell_interface.cpp
+     global.cpp
+     keyboard_interface.cpp
+     output_interface.cpp
+@@ -19,6 +20,11 @@ set(SERVER_LIB_SRCS
+     subcompositor_interface.cpp
+ )
+ 
++ecm_add_wayland_server_protocol(SERVER_LIB_SRCS
++    PROTOCOL ${KWAYLAND_SOURCE_DIR}//src/client/protocols/plasma-shell.xml
++    BASENAME plasma-shell
++)
++
+ add_library(KF5WaylandServer ${SERVER_LIB_SRCS})
+ generate_export_header(KF5WaylandServer
+     BASE_NAME
+@@ -60,6 +66,7 @@ install(FILES
+   dataoffer_interface.h
+   datasource_interface.h
+   display.h
++  plasma_shell_interface.h
+   global.h
+   keyboard_interface.h
+   output_interface.h
+diff --git a/src/server/plasma_shell_interface.cpp b/src/server/plasma_shell_interface.cpp
+new file mode 100644
+index 0000000..dfe6b2d
+--- /dev/null
++++ b/src/server/plasma_shell_interface.cpp
+@@ -0,0 +1,331 @@
++/********************************************************************
++Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++Copyright 2014 Martin Gräßlin <mgraesslin@kde.org>
++
++This library is free software; you can redistribute it and/or
++modify it under the terms of the GNU Lesser General Public
++License as published by the Free Software Foundation; either
++version 2.1 of the License, or (at your option) version 3, or any
++later version accepted by the membership of KDE e.V. (or its
++successor approved by the membership of KDE e.V.), which shall
++act as a proxy defined in Section 6 of version 3 of the license.
++
++This library is distributed in the hope that it will be useful,
++but WITHOUT ANY WARRANTY; without even the implied warranty of
++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++Lesser General Public License for more details.
++
++You should have received a copy of the GNU Lesser General Public
++License along with this library.  If not, see <http://www.gnu.org/licenses/>.
++*********************************************************************/
++#include "plasma_shell_interface.h"
++#include "display.h"
++#include "surface_interface.h"
++#include "output_interface.h"
++
++#include <QTimer>
++
++#include <wayland-server.h>
++#include "wayland-plasma-shell-server-protocol.h"
++
++namespace KWayland
++{
++namespace Server
++{
++
++static const quint32 s_version = 1;
++
++class PlasmaShellInterface::Private
++{
++public:
++    Private(PlasmaShellInterface *q, Display *d);
++    void create();
++
++    Display *display;
++    wl_global *shell = nullptr;
++    QList<PlasmaSurfaceInterface*> surfaces;
++
++private:
++    static void bind(wl_client *client, void *data, uint32_t version, uint32_t id);
++    static void createSurfaceCallback(wl_client *client, wl_resource *resource, uint32_t id, wl_resource *surface);
++    static void desktopReadyCallback(wl_client *client, wl_resource *resource);
++    static void presentCallback(wl_client *client, wl_resource *resource, wl_array *surfaces);
++    void bind(wl_client *client, uint32_t version, uint32_t id);
++    void createSurface(wl_client *client, uint32_t version, uint32_t id, SurfaceInterface *surface);
++    void desktopReady(wl_client *client);
++    void present(wl_client *client, wl_array *surfaces);
++
++    PlasmaShellInterface *q;
++    static const struct org_kde_plasma_shell_interface s_interface;
++};
++
++PlasmaShellInterface::Private::Private(PlasmaShellInterface *q, Display *d)
++    : display(d)
++    , q(q)
++{
++}
++
++void PlasmaShellInterface::Private::create()
++{
++    Q_ASSERT(!shell);
++    shell = wl_global_create(*display, &org_kde_plasma_shell_interface, s_version, this, &bind);
++}
++
++const struct org_kde_plasma_shell_interface PlasmaShellInterface::Private::s_interface = {
++    createSurfaceCallback,
++    desktopReadyCallback,
++    presentCallback
++};
++
++
++
++class PlasmaSurfaceInterface::Private
++{
++public:
++    Private(PlasmaSurfaceInterface *q, PlasmaShellInterface *shell, SurfaceInterface *surface);
++    void create(wl_client *client, quint32 version, quint32 id);
++
++    SurfaceInterface *surface;
++    PlasmaShellInterface *shell;
++    wl_resource *shellSurface = nullptr;
++    wl_client *client = nullptr;
++
++private:
++    static Private *cast(wl_resource *r) {
++        return reinterpret_cast<Private*>(wl_resource_get_user_data(r));
++    }
++
++    static void unbind(wl_resource *r);
++    // interface callbacks
++    static void destroyCallback(wl_client *client, wl_resource *resource);
++    static void setOutputCallback(wl_client *client, wl_resource *resource, wl_resource *output);
++    static void setPositionCallback(wl_client *client, wl_resource *resource,
++                                    int32_t x, int32_t y);
++    static void setRoleCallback(wl_client *client, wl_resource *resource, uint32_t role);
++    static void setFlagsCallback(wl_client *client, wl_resource *resource, uint32_t flags);
++    static void setScreenEdgeCallback(wl_client *client, wl_resource *resource, uint32_t edge);
++
++    PlasmaSurfaceInterface *q;
++    static const struct org_kde_plasma_surface_interface s_interface;
++};
++
++PlasmaShellInterface::PlasmaShellInterface(Display *display, QObject *parent)
++    : QObject(parent)
++    , d(new Private(this, display))
++{
++}
++
++PlasmaShellInterface::~PlasmaShellInterface()
++{
++    destroy();
++}
++
++void PlasmaShellInterface::create()
++{
++    d->create();
++}
++
++void PlasmaShellInterface::destroy()
++{
++    if (!d->shell) {
++        return;
++    }
++    wl_global_destroy(d->shell);
++    d->shell = nullptr;
++}
++
++void PlasmaShellInterface::Private::bind(wl_client *client, void *data, uint32_t version, uint32_t id)
++{
++    reinterpret_cast<PlasmaShellInterface::Private*>(data)->bind(client, version, id);
++}
++
++void PlasmaShellInterface::Private::bind(wl_client *client, uint32_t version, uint32_t id)
++{
++    wl_resource *shell = wl_resource_create(client, &org_kde_plasma_shell_interface, qMin(version, s_version), id);
++    if (!shell) {
++        wl_client_post_no_memory(client);
++        return;
++    }
++    wl_resource_set_implementation(shell, &s_interface, this, nullptr);
++}
++
++void PlasmaShellInterface::Private::createSurfaceCallback(wl_client *client, wl_resource *resource, uint32_t id, wl_resource *surface)
++{
++    auto s = reinterpret_cast<PlasmaShellInterface::Private*>(wl_resource_get_user_data(resource));
++    s->createSurface(client, wl_resource_get_version(resource), id, SurfaceInterface::get(surface));
++}
++
++void PlasmaShellInterface::Private::createSurface(wl_client *client, uint32_t version, uint32_t id, SurfaceInterface *surface)
++{
++    auto it = std::find_if(surfaces.constBegin(), surfaces.constEnd(),
++        [surface](PlasmaSurfaceInterface *s) {
++            return surface == s->surface();
++        }
++    );
++    if (it != surfaces.constEnd()) {
++        wl_resource_post_error(surface->resource(), WL_DISPLAY_ERROR_INVALID_OBJECT, "PlasmaSurface already created");
++        return;
++    }
++    PlasmaSurfaceInterface *shellSurface = new PlasmaSurfaceInterface(q, surface);
++    surfaces << shellSurface;
++    QObject::connect(shellSurface, &PlasmaSurfaceInterface::destroyed, q,
++        [this, shellSurface] {
++            surfaces.removeAll(shellSurface);
++        }
++    );
++    shellSurface->d->create(client, version, id);
++    emit q->surfaceCreated(shellSurface);
++}
++
++void PlasmaShellInterface::Private::desktopReadyCallback(wl_client *client, wl_resource *resource)
++{
++    auto s = reinterpret_cast<PlasmaShellInterface::Private*>(wl_resource_get_user_data(resource));
++    s->desktopReady(client);
++}
++
++void PlasmaShellInterface::Private::desktopReady(wl_client *client)
++{
++    Q_UNUSED(client);
++    emit q->ready();
++}
++
++void PlasmaShellInterface::Private::presentCallback(wl_client *client, wl_resource *resource, wl_array *surfaces)
++{
++    auto s = reinterpret_cast<PlasmaShellInterface::Private*>(wl_resource_get_user_data(resource));
++    s->present(client, surfaces);
++}
++
++void PlasmaShellInterface::Private::present(wl_client *client, wl_array *surfaces)
++{
++    Q_UNUSED(client);
++    Q_UNUSED(surfaces);
++    // TODO: implement
++}
++
++bool PlasmaShellInterface::isValid() const
++{
++    return d->shell != nullptr;
++}
++
++Display *PlasmaShellInterface::display() const
++{
++    return d->display;
++}
++
++/*********************************
++ * PlasmaSurfaceInterface
++ *********************************/
++PlasmaSurfaceInterface::Private::Private(PlasmaSurfaceInterface *q, PlasmaShellInterface *shell, SurfaceInterface *surface)
++    : surface(surface)
++    , shell(shell)
++    , q(q)
++{
++}
++
++const struct org_kde_plasma_surface_interface PlasmaSurfaceInterface::Private::s_interface = {
++    destroyCallback,
++    setOutputCallback,
++    setPositionCallback,
++    setRoleCallback,
++    setFlagsCallback,
++    setScreenEdgeCallback
++};
++
++PlasmaSurfaceInterface::PlasmaSurfaceInterface(PlasmaShellInterface *shell, SurfaceInterface *parent)
++    : QObject(parent)
++    , d(new Private(this, shell, parent))
++{
++}
++
++PlasmaSurfaceInterface::~PlasmaSurfaceInterface()
++{
++    if (d->shellSurface) {
++        wl_resource_destroy(d->shellSurface);
++    }
++}
++
++void PlasmaSurfaceInterface::Private::create(wl_client *c, quint32 version, quint32 id)
++{
++    Q_ASSERT(!client);
++    Q_ASSERT(!shellSurface);
++    shellSurface = wl_resource_create(c, &org_kde_plasma_surface_interface, version, id);
++    if (!shellSurface) {
++        wl_client_post_no_memory(c);
++        return;
++    }
++    client = c;
++
++    wl_resource_set_implementation(shellSurface, &s_interface, this, unbind);
++}
++
++void PlasmaSurfaceInterface::Private::unbind(wl_resource *r)
++{
++    auto s = cast(r);
++    s->shellSurface = nullptr;
++    s->q->deleteLater();
++}
++
++void PlasmaSurfaceInterface::Private::destroyCallback(wl_client *client, wl_resource *resource)
++{
++    Q_UNUSED(client);
++    unbind(resource);
++    auto s = cast(resource);
++    delete s;
++}
++
++void PlasmaSurfaceInterface::Private::setOutputCallback(wl_client *client, wl_resource *resource, wl_resource *output)
++{
++    Q_UNUSED(client);
++    Q_UNUSED(output)
++    auto s = cast(resource);
++    Q_ASSERT(client == s->client);
++    // TODO: implement
++}
++
++void PlasmaSurfaceInterface::Private::setPositionCallback(wl_client *client, wl_resource *resource,
++                                                          int32_t x, int32_t y)
++{
++    Q_UNUSED(x)
++    Q_UNUSED(y)
++    auto s = cast(resource);
++    Q_ASSERT(client == s->client);
++    // TODO: implement
++}
++
++void PlasmaSurfaceInterface::Private::setRoleCallback(wl_client *client, wl_resource *resource, uint32_t role)
++{
++    Q_UNUSED(role)
++    auto s = cast(resource);
++    Q_ASSERT(client == s->client);
++    // TODO: implement
++}
++
++void PlasmaSurfaceInterface::Private::setFlagsCallback(wl_client *client, wl_resource *resource, uint32_t flags)
++{
++    Q_UNUSED(flags)
++    auto s = cast(resource);
++    Q_ASSERT(client == s->client);
++    // TODO: implement
++}
++
++void PlasmaSurfaceInterface::Private::setScreenEdgeCallback(wl_client *client, wl_resource *resource, uint32_t edge)
++{
++    auto s = cast(resource);
++    Q_ASSERT(client == s->client);
++    // TODO: implement
++}
++
++SurfaceInterface *PlasmaSurfaceInterface::surface() const {
++    return d->surface;
++}
++
++PlasmaShellInterface *PlasmaSurfaceInterface::shell() const {
++    return d->shell;
++}
++
++wl_resource *PlasmaSurfaceInterface::shellSurface() const {
++    return d->shellSurface;
++}
++
++}
++}
+diff --git a/src/server/plasma_shell_interface.h b/src/server/plasma_shell_interface.h
+new file mode 100644
+index 0000000..169679d
+--- /dev/null
++++ b/src/server/plasma_shell_interface.h
+@@ -0,0 +1,84 @@
++/********************************************************************
++Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++Copyright 2014 Martin Gräßlin <mgraesslin@kde.org>
++
++This library is free software; you can redistribute it and/or
++modify it under the terms of the GNU Lesser General Public
++License as published by the Free Software Foundation; either
++version 2.1 of the License, or (at your option) version 3, or any
++later version accepted by the membership of KDE e.V. (or its
++successor approved by the membership of KDE e.V.), which shall
++act as a proxy defined in Section 6 of version 3 of the license.
++
++This library is distributed in the hope that it will be useful,
++but WITHOUT ANY WARRANTY; without even the implied warranty of
++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++Lesser General Public License for more details.
++
++You should have received a copy of the GNU Lesser General Public
++License along with this library.  If not, see <http://www.gnu.org/licenses/>.
++*********************************************************************/
++#ifndef WAYLAND_SERVER_PLASMA_SHELL_INTERFACE_H
++#define WAYLAND_SERVER_PLASMA_SHELL_INTERFACE_H
++
++#include <QObject>
++
++#include <KWayland/Server/kwaylandserver_export.h>
++
++struct wl_resource;
++
++namespace KWayland
++{
++namespace Server
++{
++
++class Display;
++class SurfaceInterface;
++class PlasmaSurfaceInterface;
++class OutputInterface;
++
++class KWAYLANDSERVER_EXPORT PlasmaShellInterface : public QObject
++{
++    Q_OBJECT
++public:
++    virtual ~PlasmaShellInterface();
++
++    void create();
++    void destroy();
++
++    bool isValid() const;
++
++    Display *display() const;
++
++Q_SIGNALS:
++    void surfaceCreated(KWayland::Server::PlasmaSurfaceInterface*);
++    void ready();
++
++private:
++    friend class Display;
++    explicit PlasmaShellInterface(Display *display, QObject *parent);
++    class Private;
++    QScopedPointer<Private> d;
++};
++
++class KWAYLANDSERVER_EXPORT PlasmaSurfaceInterface : public QObject
++{
++    Q_OBJECT
++public:
++    virtual ~PlasmaSurfaceInterface();
++
++    SurfaceInterface *surface() const;
++    PlasmaShellInterface *shell() const;
++    wl_resource *shellSurface() const;
++
++private:
++    friend class PlasmaShellInterface;
++    explicit PlasmaSurfaceInterface(PlasmaShellInterface *shell, SurfaceInterface *parent);
++    class Private;
++    QScopedPointer<Private> d;
++};
++
++}
++}
++
++#endif
+-- 
+1.8.3.1
+

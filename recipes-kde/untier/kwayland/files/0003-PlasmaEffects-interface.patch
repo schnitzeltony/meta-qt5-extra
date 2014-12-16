@@ -1,0 +1,654 @@
+From 7133d2781230b0a45e18c8c84a3b10b178cb16a6 Mon Sep 17 00:00:00 2001
+From: Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+Date: Sun, 21 Sep 2014 12:25:53 +0200
+Subject: [PATCH 3/4] PlasmaEffects interface
+
+Conflicts:
+	src/client/CMakeLists.txt
+	src/client/registry.cpp
+
++ names of generated header changed
+---
+ autotests/client/test_wayland_registry.cpp |   1 +
+ src/client/CMakeLists.txt                  |   7 +
+ src/client/plasma_effects.cpp              | 319 +++++++++++++++++++++++++++++
+ src/client/plasma_effects.h                | 102 +++++++++
+ src/client/registry.cpp                    |  24 +++
+ src/client/registry.h                      |  16 ++
+ 6 files changed, 469 insertions(+)
+ create mode 100644 src/client/plasma_effects.cpp
+ create mode 100644 src/client/plasma_effects.h
+
+diff --git a/autotests/client/test_wayland_registry.cpp b/autotests/client/test_wayland_registry.cpp
+index 7004f5e..8eacd3c 100644
+--- a/autotests/client/test_wayland_registry.cpp
++++ b/autotests/client/test_wayland_registry.cpp
+@@ -238,6 +238,7 @@ void TestWaylandRegistry::testRemoval()
+     QVERIFY(registry.hasInterface(KWayland::Client::Registry::Interface::SubCompositor));
+     QVERIFY(!registry.hasInterface(KWayland::Client::Registry::Interface::FullscreenShell));
+     QVERIFY(!registry.hasInterface(KWayland::Client::Registry::Interface::PlasmaShell));
++    QVERIFY(!registry.hasInterface(KWayland::Client::Registry::Interface::PlasmaEffects));
+ 
+     QSignalSpy seatRemovedSpy(&registry, SIGNAL(seatRemoved(quint32)));
+     QVERIFY(seatRemovedSpy.isValid());
+diff --git a/src/client/CMakeLists.txt b/src/client/CMakeLists.txt
+index b1dfe95..666fa52 100644
+--- a/src/client/CMakeLists.txt
++++ b/src/client/CMakeLists.txt
+@@ -16,6 +16,7 @@ set(CLIENT_LIB_SRCS
+     fullscreen_shell.cpp
+     keyboard.cpp
+     output.cpp
++    plasma_effects.cpp
+     plasma_shell.cpp
+     plasma_surface.cpp
+     pointer.cpp
+@@ -39,6 +40,11 @@ ecm_add_wayland_client_protocol(CLIENT_LIB_SRCS
+     BASENAME plasma-shell
+ )
+ 
++ecm_add_wayland_client_protocol(CLIENT_LIB_SRCS
++    PROTOCOL ${KWAYLAND_SOURCE_DIR}/src/client/protocols/plasma-effects.xml
++    BASENAME plasma-effects
++)
++
+ add_library(KF5WaylandClient ${CLIENT_LIB_SRCS})
+ generate_export_header(KF5WaylandClient
+     BASE_NAME
+@@ -81,6 +87,7 @@ install(FILES
+   fullscreen_shell.h
+   keyboard.h
+   output.h
++  plasma_effects.h
+   plasma_shell.h
+   plasma_surface.h
+   pointer.h
+diff --git a/src/client/plasma_effects.cpp b/src/client/plasma_effects.cpp
+new file mode 100644
+index 0000000..61866a4
+--- /dev/null
++++ b/src/client/plasma_effects.cpp
+@@ -0,0 +1,319 @@
++/********************************************************************
++Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++
++This library is free software; you can redistribute it and/or
++modify it under the terms of the GNU Lesser General Public
++License as published by the Free Software Foundation; either
++version 2.1 of the License, or (at your option) version 3, or any
++later version accepted by the membership of KDE e.V. (or its
++successor approved by the membership of KDE e.V.), which shall
++act as a proxy defined in Section 6 of version 3 of the license.
++
++This library is distributed in the hope that it will be useful,
++but WITHOUT ANY WARRANTY; without even the implied warranty of
++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++Lesser General Public License for more details.
++
++You should have received a copy of the GNU Lesser General Public
++License along with this library.  If not, see <http://www.gnu.org/licenses/>.
++*********************************************************************/
++
++#include "output.h"
++#include "plasma_effects.h"
++#include "surface.h"
++
++// Qt
++#include <QtMath>
++#include <QVector>
++#include <QGuiApplication>
++#include <qpa/qplatformnativeinterface.h>
++#include <QWindow>
++
++// wayland
++#include <wayland-plasma-effects-client-protocol.h>
++#include <wayland-client-protocol.h>
++
++namespace KWayland
++{
++namespace Client
++{
++
++class PlasmaEffects::Private
++{
++public:
++    Private(PlasmaEffects *q);
++
++    void setup(org_kde_plasma_effects *e);
++
++    wl_region *createRegion(const QRegion &region);
++
++    org_kde_plasma_effects *effects = Q_NULLPTR;
++
++private:
++    PlasmaEffects *q;
++};
++
++PlasmaEffects::Private::Private(PlasmaEffects *q)
++    : q(q)
++{
++}
++
++void PlasmaEffects::Private::setup(org_kde_plasma_effects *e)
++{
++    Q_ASSERT(!effects);
++    Q_ASSERT(e);
++    effects = e;
++}
++
++wl_region *PlasmaEffects::Private::createRegion(const QRegion &region)
++{
++    // Platform native interface
++    QPlatformNativeInterface *native = QGuiApplication::platformNativeInterface();
++    Q_ASSERT(native);
++
++    // Compositor
++    wl_compositor *compositor = static_cast<wl_compositor *>(
++        native->nativeResourceForIntegration("compositor"));
++    Q_ASSERT(compositor);
++
++    // Create wl_region
++    wl_region *wlRegion = wl_compositor_create_region(compositor);
++    Q_ASSERT(wlRegion);
++
++    for (QRect rect: region.rects())
++        wl_region_add(wlRegion, rect.x(), rect.y(), rect.width(), rect.height());
++
++    return wlRegion;
++}
++
++PlasmaEffects::PlasmaEffects(QObject *parent)
++    : QObject(parent)
++    , d(new Private(this))
++{
++}
++
++PlasmaEffects::~PlasmaEffects()
++{
++    release();
++}
++
++bool PlasmaEffects::isValid() const
++{
++    return d->effects != Q_NULLPTR;
++}
++
++void PlasmaEffects::setup(org_kde_plasma_effects *e)
++{
++    d->setup(e);
++}
++
++void PlasmaEffects::release()
++{
++    if (d->effects) {
++        org_kde_plasma_effects_destroy(d->effects);
++    }
++}
++
++void PlasmaEffects::destroy()
++{
++    if (d->effects) {
++        free(d->effects);
++        d->effects = Q_NULLPTR;
++    }
++}
++
++void PlasmaEffects::slide(wl_output *output, wl_surface *surface,
++                          const Location &from, const QPoint &to)
++{
++    Q_ASSERT(d->effects);
++    Q_ASSERT(output);
++    Q_ASSERT(surface);
++
++    quint32 wlFrom = ORG_KDE_PLASMA_EFFECTS_LOCATION_NONE;
++    switch (from) {
++    case Location::Left:
++        wlFrom = ORG_KDE_PLASMA_EFFECTS_LOCATION_LEFT;
++        break;
++    case Location::Top:
++        wlFrom = ORG_KDE_PLASMA_EFFECTS_LOCATION_TOP;
++        break;
++    case Location::Right:
++        wlFrom = ORG_KDE_PLASMA_EFFECTS_LOCATION_RIGHT;
++        break;
++    case Location::Bottom:
++        wlFrom = ORG_KDE_PLASMA_EFFECTS_LOCATION_BOTTOM;
++        break;
++    default:
++        break;
++    }
++
++    org_kde_plasma_effects_slide(d->effects, output, surface,
++                                 wlFrom, to.x(), to.y());
++}
++
++void PlasmaEffects::slide(Output *output, Surface *surface,
++                          const Location &from, const QPoint &to)
++{
++    Q_ASSERT(output);
++    Q_ASSERT(surface);
++
++    slide(*output, *surface, from, to);
++}
++
++void PlasmaEffects::slide(QWindow *window,
++                          const Location &from, const QPoint &to)
++{
++    Q_ASSERT(window);
++
++    // Platform native interface
++    QPlatformNativeInterface *native = QGuiApplication::platformNativeInterface();
++    Q_ASSERT(native);
++
++    // Get surface and output
++    wl_surface *wlSurface = static_cast<wl_surface *>(
++        native->nativeResourceForWindow("surface", window));
++    wl_output *wlOutput = static_cast<wl_output *>(
++        native->nativeResourceForScreen("output", window->screen()));
++
++    slide(wlOutput, wlSurface, from, to);
++}
++
++void PlasmaEffects::enableBlurBehind(wl_surface *surface,
++                                     const QRegion &region)
++{
++    Q_ASSERT(d->effects);
++    Q_ASSERT(surface);
++
++    wl_region *wlRegion = d->createRegion(region);
++    org_kde_plasma_effects_set_blur_behind_region(d->effects, surface, wlRegion);
++}
++
++void PlasmaEffects::enableBlurBehind(Surface *surface,
++                                     const QRegion &region)
++{
++    Q_ASSERT(surface);
++
++    enableBlurBehind(*surface, region);
++}
++
++void PlasmaEffects::enableBlurBehind(QWindow *window,
++                                     const QRegion &region)
++{
++    Q_ASSERT(window);
++
++    // Platform native interface
++    QPlatformNativeInterface *native = QGuiApplication::platformNativeInterface();
++    Q_ASSERT(native);
++
++    // Get surface
++    wl_surface *wlSurface = static_cast<wl_surface *>(
++        native->nativeResourceForWindow("surface", window));
++
++    enableBlurBehind(wlSurface, region);
++}
++
++void PlasmaEffects::disableBlurBehind(wl_surface *surface)
++{
++    Q_ASSERT(d->effects);
++    Q_ASSERT(surface);
++
++    org_kde_plasma_effects_set_blur_behind_region(d->effects, surface, Q_NULLPTR);
++}
++
++void PlasmaEffects::disableBlurBehind(Surface *surface)
++{
++    Q_ASSERT(surface);
++
++    disableBlurBehind(*surface);
++}
++
++void PlasmaEffects::disableBlurBehind(QWindow *window)
++{
++    Q_ASSERT(window);
++
++    // Platform native interface
++    QPlatformNativeInterface *native = QGuiApplication::platformNativeInterface();
++    Q_ASSERT(native);
++
++    // Get surface
++    wl_surface *wlSurface = static_cast<wl_surface *>(
++        native->nativeResourceForWindow("surface", window));
++
++    disableBlurBehind(wlSurface);
++}
++
++void PlasmaEffects::enableBackgroundContrast(wl_surface *surface, const QRegion &region,
++                                             qreal contrast, qreal intensity,
++                                             qreal saturation)
++{
++    Q_ASSERT(d->effects);
++    Q_ASSERT(surface);
++
++    wl_region *wlRegion = d->createRegion(region);
++    org_kde_plasma_effects_set_contrast_region(d->effects, surface, wlRegion,
++                                               contrast, intensity, saturation);
++}
++
++void PlasmaEffects::enableBackgroundContrast(Surface *surface, const QRegion &region,
++                                             qreal contrast, qreal intensity,
++                                             qreal saturation)
++{
++    Q_ASSERT(surface);
++
++    // Convert values to integers
++    quint32 c = qFloor(contrast * 255);
++    quint32 i = qFloor(intensity * 255);
++    quint32 s = qFloor(saturation * 255);
++
++    enableBackgroundContrast(*surface, region, c, i, s);
++}
++
++void PlasmaEffects::enableBackgroundContrast(QWindow *window, const QRegion &region,
++                                             qreal contrast, qreal intensity,
++                                             qreal saturation)
++{
++    Q_ASSERT(window);
++
++    // Platform native interface
++    QPlatformNativeInterface *native = QGuiApplication::platformNativeInterface();
++    Q_ASSERT(native);
++
++    // Get surface
++    wl_surface *wlSurface = static_cast<wl_surface *>(
++        native->nativeResourceForWindow("surface", window));
++
++    enableBackgroundContrast(wlSurface, region, contrast, intensity, saturation);
++}
++
++void PlasmaEffects::disableBackgroundContrast(wl_surface *surface)
++{
++    Q_ASSERT(d->effects);
++    Q_ASSERT(surface);
++
++    org_kde_plasma_effects_set_contrast_region(d->effects, surface, Q_NULLPTR, 0, 0, 0);
++}
++
++void PlasmaEffects::disableBackgroundContrast(Surface *surface)
++{
++    Q_ASSERT(surface);
++
++    disableBackgroundContrast(*surface);
++}
++
++void PlasmaEffects::disableBackgroundContrast(QWindow *window)
++{
++    Q_ASSERT(window);
++
++    // Platform native interface
++    QPlatformNativeInterface *native = QGuiApplication::platformNativeInterface();
++    Q_ASSERT(native);
++
++    // Get surface
++    wl_surface *wlSurface = static_cast<wl_surface *>(
++        native->nativeResourceForWindow("surface", window));
++
++    disableBackgroundContrast(wlSurface);
++}
++
++} // namespace Client
++} // namespace KWayland
+diff --git a/src/client/plasma_effects.h b/src/client/plasma_effects.h
+new file mode 100644
+index 0000000..9a1e89d
+--- /dev/null
++++ b/src/client/plasma_effects.h
+@@ -0,0 +1,102 @@
++/********************************************************************
++Copyright 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
++
++This library is free software; you can redistribute it and/or
++modify it under the terms of the GNU Lesser General Public
++License as published by the Free Software Foundation; either
++version 2.1 of the License, or (at your option) version 3, or any
++later version accepted by the membership of KDE e.V. (or its
++successor approved by the membership of KDE e.V.), which shall
++act as a proxy defined in Section 6 of version 3 of the license.
++
++This library is distributed in the hope that it will be useful,
++but WITHOUT ANY WARRANTY; without even the implied warranty of
++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++Lesser General Public License for more details.
++
++You should have received a copy of the GNU Lesser General Public
++License along with this library.  If not, see <http://www.gnu.org/licenses/>.
++*********************************************************************/
++
++#ifndef WAYLAND_PLASMA_EFFECTS_H
++#define WAYLAND_PLASMA_EFFECTS_H
++
++#include <QObject>
++#include <QRegion>
++
++#include <KWayland/Client/kwaylandclient_export.h>
++
++class QWindow;
++
++struct wl_output;
++struct wl_surface;
++struct org_kde_plasma_effects;
++
++namespace KWayland
++{
++namespace Client
++{
++
++class Output;
++class Surface;
++
++class KWAYLANDCLIENT_EXPORT PlasmaEffects : public QObject
++{
++    Q_OBJECT
++public:
++    enum class Location {
++        None,
++        Left,
++        Top,
++        Right,
++        Bottom
++    };
++
++    explicit PlasmaEffects(QObject *parent = Q_NULLPTR);
++    virtual ~PlasmaEffects();
++
++    bool isValid() const;
++
++    void setup(org_kde_plasma_effects *s);
++
++    void release();
++    void destroy();
++
++    void slide(wl_output *output, wl_surface *surface,
++               const Location &from, const QPoint &to);
++    void slide(Output *output, Surface *surface,
++               const Location &from, const QPoint &to);
++    void slide(QWindow *window,
++               const Location &from, const QPoint &to);
++
++    void enableBlurBehind(wl_surface *surface,
++                          const QRegion &region);
++    void enableBlurBehind(Surface *surface,
++                          const QRegion &region);
++    void enableBlurBehind(QWindow *window,
++                          const QRegion &region);
++
++    void disableBlurBehind(wl_surface *surface);
++    void disableBlurBehind(Surface *surface);
++    void disableBlurBehind(QWindow *window);
++
++    void enableBackgroundContrast(wl_surface *surface, const QRegion &region,
++                                  qreal contrast, qreal intensity, qreal saturation);
++    void enableBackgroundContrast(Surface *surface, const QRegion &region,
++                                  qreal contrast, qreal intensity, qreal saturation);
++    void enableBackgroundContrast(QWindow *window, const QRegion &region,
++                                  qreal contrast, qreal intensity, qreal saturation);
++
++    void disableBackgroundContrast(wl_surface *surface);
++    void disableBackgroundContrast(Surface *surface);
++    void disableBackgroundContrast(QWindow *window);
++
++private:
++    class Private;
++    QScopedPointer<Private> d;
++};
++
++} // namespace Client
++} // namespace KWayland
++
++#endif // WAYLAND_PLASMA_EFFECTS_H
+diff --git a/src/client/registry.cpp b/src/client/registry.cpp
+index 192af78..541b1c5 100644
+--- a/src/client/registry.cpp
++++ b/src/client/registry.cpp
+@@ -24,6 +24,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ #include "event_queue.h"
+ #include "fullscreen_shell.h"
+ #include "output.h"
++#include "plasma_effects.h"
+ #include "plasma_shell.h"
+ #include "seat.h"
+ #include "shell.h"
+@@ -36,6 +37,7 @@ License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ #include <wayland-client-protocol.h>
+ #include <wayland-fullscreen-shell-client-protocol.h>
+ #include <wayland-plasma-shell-client-protocol.h>
++#include <wayland-plasma-effects-client-protocol.h>
+ 
+ namespace KWayland
+ {
+@@ -215,6 +217,8 @@ static Registry::Interface nameToInterface(const char *interface)
+         return Registry::Interface::DataDeviceManager;
+     } else if (strcmp(interface, "org_kde_plasma_shell") == 0) {
+         return Registry::Interface::PlasmaShell;
++    } else if (strcmp(interface, "org_kde_plasma_effects") == 0) {
++        return Registry::Interface::PlasmaEffects;
+     }
+     return Registry::Interface::Unknown;
+ }
+@@ -257,6 +261,9 @@ void Registry::Private::handleAnnounce(uint32_t name, const char *interface, uin
+     case Interface::PlasmaShell:
+         emit q->plasmaShellAnnounced(name, version);
+         break;
++    case Interface::PlasmaEffects:
++        emit q->plasmaEffectsAnnounced(name, version);
++        break;
+     case Interface::Unknown:
+     default:
+         // nothing
+@@ -302,6 +309,9 @@ void Registry::Private::handleRemove(uint32_t name)
+         case Interface::PlasmaShell:
+             emit q->plasmaShellRemoved(data.name);
+             break;
++        case Interface::PlasmaEffects:
++            emit q->plasmaEffectsRemoved(data.name);
++            break;
+         case Interface::Unknown:
+         default:
+             // nothing
+@@ -371,6 +381,11 @@ wl_data_device_manager *Registry::bindDataDeviceManager(uint32_t name, uint32_t
+     return d->bind<wl_data_device_manager>(Interface::DataDeviceManager, name, qMin(s_dataDeviceManagerMaxVersion, version));
+ }
+ 
++org_kde_plasma_effects *Registry::bindPlasmaEffects(uint32_t name, uint32_t version) const
++{
++    return d->bind<org_kde_plasma_effects>(Interface::PlasmaEffects, name, version);
++}
++
+ Compositor *Registry::createCompositor(quint32 name, quint32 version, QObject *parent)
+ {
+     Compositor *c = new Compositor(parent);
+@@ -440,6 +455,13 @@ PlasmaShell *Registry::createPlasmaShell(quint32 name, quint32 version, QObject
+     return s;
+ }
+ 
++PlasmaEffects *Registry::createPlasmaEffects(quint32 name, quint32 version, QObject *parent)
++{
++    PlasmaEffects *e = new PlasmaEffects(parent);
++    e->setup(bindPlasmaEffects(name, version));
++    return e;
++}
++
+ static const wl_interface *wlInterface(Registry::Interface interface)
+ {
+     switch (interface) {
+@@ -461,6 +483,8 @@ static const wl_interface *wlInterface(Registry::Interface interface)
+         return &wl_data_device_manager_interface;
+     case Registry::Interface::PlasmaShell:
+         return &org_kde_plasma_shell_interface;
++    case Registry::Interface::PlasmaEffects:
++        return &org_kde_plasma_effects_interface;
+     case Registry::Interface::Unknown:
+     default:
+         return nullptr;
+diff --git a/src/client/registry.h b/src/client/registry.h
+index 5fbb499..5ef2b97 100644
+--- a/src/client/registry.h
++++ b/src/client/registry.h
+@@ -36,6 +36,7 @@ struct wl_shm;
+ struct wl_subcompositor;
+ struct _wl_fullscreen_shell;
+ struct org_kde_plasma_shell;
++struct org_kde_plasma_effects;
+ 
+ namespace KWayland
+ {
+@@ -48,6 +49,7 @@ class DataDeviceManager;
+ class EventQueue;
+ class FullscreenShell;
+ class Output;
++class PlasmaEffects;
+ class PlasmaShell;
+ class Seat;
+ class Shell;
+@@ -95,6 +97,7 @@ public:
+         Seat,       ///< Refers to the wl_seat interface
+         Shm,        ///< Refers to the wl_shm interface
+         Output,     ///< Refers to the wl_output interface
++        PlasmaEffects,  ///< Refers to the org_kde_plasma_effects interface
+         PlasmaShell,    ///< Refers to the org_kde_plasma_shell interface
+         FullscreenShell, ///< Refers to the _wl_fullscreen_shell interface
+         SubCompositor, ///< Refers to the wl_subcompositor interface;
+@@ -231,6 +234,7 @@ public:
+     _wl_fullscreen_shell *bindFullscreenShell(uint32_t name, uint32_t version) const;
+     wl_data_device_manager *bindDataDeviceManager(uint32_t name, uint32_t version) const;
+     org_kde_plasma_shell *bindPlasmaShell(uint32_t name, uint32_t version) const;
++    org_kde_plasma_effects *bindPlasmaEffects(uint32_t name, uint32_t version) const;
+ 
+     /**
+      * Creates a Compositor and sets it up to manage the interface identified by
+@@ -339,6 +343,7 @@ public:
+     FullscreenShell *createFullscreenShell(quint32 name, quint32 version, QObject *parent = nullptr);
+     DataDeviceManager *createDataDeviceManager(quint32 name, quint32 version, QObject *parent = nullptr);
+     PlasmaShell *createPlasmaShell(quint32 name, quint32 version, QObject *parent = nullptr);
++    PlasmaEffects *createPlasmaEffects(quint32 name, quint32 version, QObject *parent = nullptr);
+ 
+     operator wl_registry*();
+     operator wl_registry*() const;
+@@ -382,6 +387,12 @@ Q_SIGNALS:
+      **/
+     void outputAnnounced(quint32 name, quint32 version);
+     /**
++     * Emitted whenever a org_kde_plasma_effects interface gets announced.
++     * @param name The name for the announced interface
++     * @param version The maximum supported version of the announced interface
++     **/
++    void plasmaEffectsAnnounced(quint32 name, quint32 version);
++    /**
+      * Emitted whenever a org_kde_plasma_shell interface gets announced.
+      * @param name The name for the announced interface
+      * @param version The maximum supported version of the announced interface
+@@ -425,6 +436,11 @@ Q_SIGNALS:
+      **/
+     void outputRemoved(quint32 name);
+     /**
++     * Emitted whenever a org_kde_plasma_effects interface gets removed.
++     * @param name The name for the removed interface
++     **/
++    void plasmaEffectsRemoved(quint32 name);
++    /**
+      * Emitted whenever a org_kde_plasma_shell interface gets removed.
+      * @param name The name for the removed interface
+      **/
+-- 
+1.8.3.1
+

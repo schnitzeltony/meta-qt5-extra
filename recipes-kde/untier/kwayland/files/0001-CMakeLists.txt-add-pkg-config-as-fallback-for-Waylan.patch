@@ -1,7 +1,7 @@
-From 1949fa04bef188d67f655cca13c4f8adb7f2c991 Mon Sep 17 00:00:00 2001
+From ec3ac36c761195cdc9f5bc03acb0baf1c0652212 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Fri, 21 Nov 2014 08:39:28 +0100
-Subject: [PATCH] CMakeLists.txt: add pkg-config as fallback for Wayland
+Subject: [PATCH 1/4] CMakeLists.txt: add pkg-config as fallback for Wayland
  lacking cmake-files
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -23,7 +23,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b981b66..340c123 100644
+index 22edaa3..93fbaef 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -28,6 +28,7 @@ ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KWAYLAND
