@@ -6,10 +6,8 @@ inherit cmake_qt5
 
 DEPENDS = "qtbase qttools karchive"
 
-SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
+SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=master"
 SRCREV = "2a14d5a0cd4f2d6fdba80b4fe657d6d9962fb4b3"
 PV = "0.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
-
-EXTRA_OECMAKE += "-DQt5LinguistTools_DIR=${STAGING_LIBDIR_NATIVE}/cmake/Qt5LinguistTools"
