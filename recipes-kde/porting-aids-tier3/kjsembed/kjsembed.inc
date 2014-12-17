@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde
 
+# kde stuff takes care of native recipes
 DEPENDS += "kjs ki18n kdoctools"
 
 SRCREV = "361d5434b9ff286d8b4d7fab2cc2f2b77289496f"
