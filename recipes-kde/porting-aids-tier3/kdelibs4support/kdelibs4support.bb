@@ -11,6 +11,7 @@ DEPENDS += " \
 	kconfigwidgets \
 	kcrash \
 	kdesignerplugin \
+	kemoticons \
 	kglobalaccel \
 	kdoctools \
 	kguiaddons \
