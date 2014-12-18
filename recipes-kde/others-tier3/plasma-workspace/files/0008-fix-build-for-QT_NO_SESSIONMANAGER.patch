@@ -1,7 +1,7 @@
 From 81fbb6d0d806f7934e24145fcd329a6a67b04952 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Thu, 11 Dec 2014 17:07:06 +0100
-Subject: [PATCH 08/11] fix build for QT_NO_SESSIONMANAGER
+Subject: [PATCH 08/12] fix build for QT_NO_SESSIONMANAGER
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

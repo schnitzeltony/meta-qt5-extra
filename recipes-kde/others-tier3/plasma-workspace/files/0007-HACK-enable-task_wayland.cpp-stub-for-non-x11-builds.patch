@@ -1,7 +1,7 @@
 From 12cf21754b2ea41b13930943d6065a907dbd0a21 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Thu, 11 Dec 2014 15:15:43 +0100
-Subject: [PATCH 07/11] HACK: enable task_wayland.cpp stub for non x11 builds
+Subject: [PATCH 07/12] HACK: enable task_wayland.cpp stub for non x11 builds
  to make linker happy
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

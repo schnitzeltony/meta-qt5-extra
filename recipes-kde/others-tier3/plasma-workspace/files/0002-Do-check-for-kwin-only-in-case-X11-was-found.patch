@@ -1,7 +1,7 @@
 From 5133618013e0806e709a123e1f3bc20c8e51afc5 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Thu, 11 Dec 2014 13:37:36 +0100
-Subject: [PATCH 02/11] Do check for kwin only in case X11 was found
+Subject: [PATCH 02/12] Do check for kwin only in case X11 was found
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

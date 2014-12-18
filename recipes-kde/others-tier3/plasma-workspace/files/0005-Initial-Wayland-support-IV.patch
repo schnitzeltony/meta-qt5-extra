@@ -1,7 +1,7 @@
 From 7e38e15ce6ed9a1b01feb243abe911287a5b0627 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Thu, 11 Dec 2014 15:33:08 +0100
-Subject: [PATCH 05/11] Initial Wayland support IV
+Subject: [PATCH 05/12] Initial Wayland support IV
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

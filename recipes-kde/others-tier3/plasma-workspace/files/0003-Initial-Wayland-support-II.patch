@@ -1,7 +1,7 @@
 From d811d01b610432c3ae6480883f01b7367254e2db Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Thu, 11 Dec 2014 13:54:24 +0100
-Subject: [PATCH 03/11] Initial Wayland support II
+Subject: [PATCH 03/12] Initial Wayland support II
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

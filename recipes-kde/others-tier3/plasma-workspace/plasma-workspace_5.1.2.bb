@@ -49,6 +49,7 @@ SRC_URI += " \
 	file://0009-Stub-down-sessionrunner-in-x11-less-environments.patch \
 	file://0010-align-phonon-path.patch \
 	file://0011-kglobalaccel-add-wayland-stub.patch \
+	file://0012-Make-KWayland-optional.patch \
 "
 
 # Notes on patches

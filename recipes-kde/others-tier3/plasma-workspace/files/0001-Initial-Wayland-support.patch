@@ -1,7 +1,7 @@
 From 0d22c828b7d8b73a1030e33af2aef21d033859d3 Mon Sep 17 00:00:00 2001
 From: Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 Date: Sun, 7 Sep 2014 18:01:36 +0200
-Subject: [PATCH 01/11] Initial Wayland support
+Subject: [PATCH 01/12] Initial Wayland support
 
 Add KF5Wayland check and port a few components.
 

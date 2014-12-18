@@ -1,7 +1,7 @@
 From 723e5d63a56f83fdc341f8f290df0453d7756ed8 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Tue, 16 Dec 2014 22:18:12 +0100
-Subject: [PATCH 09/11] Stub down sessionrunner in x11-less environments
+Subject: [PATCH 09/12] Stub down sessionrunner in x11-less environments
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
