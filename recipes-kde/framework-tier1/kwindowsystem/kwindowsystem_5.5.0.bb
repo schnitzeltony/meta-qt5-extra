@@ -8,6 +8,8 @@ inherit kde cmake-lib
 
 SRCREV = "ef9ecca7a4619a11d3bcd31c70571ed6f6c2b2b3"
 
+DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)}"
+
 CMAKE_HIDE_ERROR[1] = "KF5WindowSystem, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5WindowSystem, -S${includedir}, -S${STAGING_INCDIR}"
 
