@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-DEPENDS += "ki18n kconfig kidletime kauth kcrash solid kio kdelibs4support kfilemetadata ktexteditor xapian-core"
+DEPENDS += "ki18n kconfig kidletime kitemmodels kinit kauth kcrash solid kio kdelibs4support kfilemetadata ktexteditor xapian-core"
 
 SRCREV = "adfd9da80f65b3342833391c30f69d8036132601"
 KDE_BRANCH = "Plasma/5.1"
