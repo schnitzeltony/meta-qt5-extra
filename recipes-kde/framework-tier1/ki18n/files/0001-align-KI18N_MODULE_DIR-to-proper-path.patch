@@ -1,7 +1,7 @@
-From e977098c48c7cbea7bfc13b059759d02e78e5f55 Mon Sep 17 00:00:00 2001
+From 2a041dadd884a69ca2c893a2bd76bd3c5071a8c8 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Mon, 1 Dec 2014 19:14:24 +0100
-Subject: [PATCH] align KI18N_MODULE_DIR to proper path
+Subject: [PATCH 1/2] align KI18N_MODULE_DIR to proper path
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

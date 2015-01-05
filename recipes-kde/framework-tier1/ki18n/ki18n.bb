@@ -2,7 +2,7 @@ require ${BPN}.inc
 
 inherit cmake-lib
 
-SRC_URI += "file://0002-align-KI18N_MODULE_DIR-to-proper-path.patch"
+SRC_URI += "file://0001-align-KI18N_MODULE_DIR-to-proper-path.patch"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5I18n, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

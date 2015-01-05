@@ -1,0 +1,48 @@
+From 1f7e6c3b0bbbb25e83550739692e857fc5d7ea84 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 5 Jan 2015 13:39:45 +0100
+Subject: [PATCH 2/2] CMakeLists.txt: do not search for libintl / gettext
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt            | 6 ------
+ cmake/KF5I18NMacros.cmake | 1 -
+ 2 files changed, 7 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3bea9f5..46fd9a4 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -30,12 +30,6 @@ include(KDEInstallDirs)
+ include(KDEFrameworkCompilerSettings)
+ include(KDECMakeSettings)
+ 
+-find_package(LibIntl)
+-set_package_properties(LibIntl PROPERTIES TYPE REQUIRED
+-	URL "http://gnuwin32.sourceforge.net/packages/libintl.htm"
+-	PURPOSE "Needed for building KI18n unless glibc is the system libc implementation"
+-)
+-
+ include(cmake/KF5I18NMacros.cmake)
+ 
+ remove_definitions(-DQT_NO_CAST_FROM_ASCII)
+diff --git a/cmake/KF5I18NMacros.cmake b/cmake/KF5I18NMacros.cmake
+index a55f472..1928e9d 100644
+--- a/cmake/KF5I18NMacros.cmake
++++ b/cmake/KF5I18NMacros.cmake
+@@ -4,7 +4,6 @@
+ # Redistribution and use is allowed according to the terms of the BSD license.
+ # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
+ 
+-find_package(Gettext REQUIRED)
+ find_package(PythonInterp REQUIRED)
+ 
+ if(KI18N_MODULE_DIR)
+-- 
+1.8.3.1
+
