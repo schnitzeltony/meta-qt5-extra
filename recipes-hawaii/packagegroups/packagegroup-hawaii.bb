@@ -5,19 +5,16 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
 inherit packagegroup
 
 RDEPENDS_${PN} = " \
-	libhawaii \
 	cinema \
 	eyesight \
-	fluid \
-	hawaii-icon-themes \
-	hawaii-shell \
+	pss \
+	pss-framework \
 	hawaii-system-preferences \
 	hawaii-terminal \
 	hawaii-wallpapers \
-	hawaii-widget-styles \
 	polkit-qt-1 \
 	qtaccountsservice \
 	qtconfiguration \
 	swordfish \
-	widget-factory \
+	wind \
 "
