@@ -6,7 +6,8 @@ inherit cmake_qt5 cmake-lib
 
 DEPENDS = "qtbase qtdeclarative extra-cmake-modules-native"
 
-SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=dev"
+# TBD: abandoned
+SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git;protocol=git;branch=dev"
 SRCREV = "20f7fcf49c90108c42f3ce0b7357775a846dfc2d"
 
 S = "${WORKDIR}/git"
