@@ -14,32 +14,32 @@ Since we decided to use upstream, we have to follow different API.
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- src/compositor/output.cpp | 5 +++--
+ src/libgreenisland/output.cpp | 5 +++--
  1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/src/compositor/output.cpp b/src/compositor/output.cpp
+diff --git a/src/libgreenisland/output.cpp b/src/libgreenisland/output.cpp
 index f7bce60..498af0b 100644
---- a/src/compositor/output.cpp
-+++ b/src/compositor/output.cpp
-@@ -110,8 +110,7 @@ void OutputPrivate::_q_posChanged()
+--- a/src/libgreenisland/output.cpp
++++ b/src/libgreenisland/output.cpp
+@@ -118,8 +118,7 @@ void OutputPrivate::_q_posChanged()
   */
  
  Output::Output(Compositor *compositor, KScreen::Output *output)
--    : QWaylandOutput(compositor, new OutputWindow(compositor),
--                     output->edid()->vendor(), output->edid()->serial())
-+    : QWaylandOutput(compositor, new OutputWindow(compositor))
+-    : QWaylandQuickOutput(compositor, new OutputWindow(compositor),
+-                          output->edid()->vendor(), output->edid()->serial())
++    : QWaylandQuickOutput(compositor, new OutputWindow(compositor))
      , d_ptr(new OutputPrivate(this))
  {
      Q_D(Output);
-@@ -124,6 +123,8 @@ Output::Output(Compositor *compositor, KScreen::Output *output)
-     setPhysicalSize(d->output->sizeMm());
+@@ -131,6 +130,8 @@ Output::Output(Compositor *compositor, KScreen::Output *output)
+     d->_q_primaryChanged();
      d->_q_currentModeIdChanged();
      d->_q_posChanged();
 +    setManufacturer(output->edid()->vendor());
 +    setModel(output->edid()->serial());
  
      // React to output changes
-     connect(output, &KScreen::Output::isPrimaryChanged,
+     connect(output, SIGNAL(isPrimaryChanged()),
 -- 
 1.8.3.1
 

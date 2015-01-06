@@ -4,14 +4,13 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
 
 inherit cmake_qt5 pythonnative pkgconfig
 
-DEPENDS = "extra-cmake-modules-native qtbase qtdeclarative qtwayland ki18n libkscreen kservice kpackage virtual/egl"
-
+DEPENDS = "extra-cmake-modules-native qtbase qtdeclarative qtwayland ki18n libkscreen kservice virtual/egl"
 SRC_URI = " \
-	git://github.com/mauios/${BPN}.git;protocol=git;branch=master \
-	file://0001-Add-versions-to-resources.patch \
-	file://0002-Use-correct-API-for-QWaylandOutput.patch \
+	git://github.com/greenisland/${BPN}.git;protocol=git;branch=master \
 "
-SRCREV = "68ebbcc4172409958b00aaab534b5085fd538984"
+#	file://0001-Use-correct-API-for-QWaylandOutput.patch
+
+SRCREV = "e1dbde7b18d8a1f5256368d74baa6ce398334722"
 PV = "0.5.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
@@ -24,5 +23,6 @@ EXTRA_OECMAKE += " \
 # this should be fixed elsewhere..
 CXXFLAGS_append_mx6 = " -DEGL_API_FB"
 
-FILES_${PN} += "${libdir}/qml/GreenIsland ${libdir}/plugins/kpackage"
-FILES_${PN}-dbg += "${libdir}/qml/GreenIsland/.debug ${libdir}/plugins/kpackage/*/.debug"
+FILES_${PN} += "${libdir}/qml/GreenIsland"
+FILES_${PN}-dbg += "${libdir}/qml/GreenIsland/.debug"
+FILES_${PN}-dev += "${libdir}/cmake"
