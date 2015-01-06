@@ -4,13 +4,12 @@ LIC_FILES_CHKSUM = "file://src/main.cpp;beginline=9;endline=24;md5=abd5b11c017f9
 
 inherit qmake5
 
-DEPENDS = "qtbase qtdeclarative qtquickcontrols qtmultimedia fluid"
-
+DEPENDS = "qtbase qtdeclarative qtquickcontrols qtmultimedia"
 SRC_URI = " \
-	git://github.com/mauios/${BPN}.git;protocol=git;branch=dev \
+	git://github.com/plfiorini/${BPN}.git;protocol=git;branch=master \
 	file://0001-Make-install-work.patch \
 "
-SRCREV = "ad3ac6952aca6854b6df7e01e48f10a858dd2529"
+SRCREV = "66290bce6b5a9074f13886b42370f95677ef50d6"
 PV = "git${SRCPV}"
 
 S = "${WORKDIR}/git"
