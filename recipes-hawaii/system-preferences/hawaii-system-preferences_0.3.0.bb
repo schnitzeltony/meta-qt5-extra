@@ -7,12 +7,10 @@ LIC_FILES_CHKSUM = " \
 
 inherit cmake_qt5
 
-DEPENDS = "qtbase qtdeclarative qtquickcontrols polkit-qt-1 qtconfiguration libhawaii hawaii-shell qtaccountsservice qttools extra-cmake-modules-native"
+DEPENDS = "qtbase qtdeclarative qtquickcontrols polkit-qt-1 qtconfiguration pss qtaccountsservice qttools extra-cmake-modules-native"
 
-SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=master"
+SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git;protocol=git;branch=master"
 SRCREV = "4f7aaed8fe5ace9d5efcdec160c963ff101c845f"
-PV = "0.3.0.git${SRCPV}"
-
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DQt5LinguistTools_DIR=${STAGING_LIBDIR_NATIVE}/cmake/Qt5LinguistTools"
