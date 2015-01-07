@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 
 inherit cmake_qt5
 
-DEPENDS = "qtbase qtdeclarative qtquickcontrols"
+DEPENDS = "qtbase qtdeclarative qtquickcontrols plasma-framework"
 
 SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=master"
 SRCREV = "292a7d4891b47f44cb3dcf896749ade9330e6ae0"
