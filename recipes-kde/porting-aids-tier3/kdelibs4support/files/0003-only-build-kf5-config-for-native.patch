@@ -1,4 +1,4 @@
-From c3c9d326fffcdda31086f307c49c4de11668ad35 Mon Sep 17 00:00:00 2001
+From 9db80c0ea1ac3355d8d79ba0c6607e88e469fae6 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Mon, 8 Dec 2014 13:37:14 +0100
 Subject: [PATCH 3/3] only build kf5-config for native
@@ -10,15 +10,15 @@ Upstream-Status: Inappropriate [cross-specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- CMakeLists.txt                |  21 +---
+ CMakeLists.txt                |  22 +----
  src/CMakeLists.txt            | 223 ------------------------------------------
  src/kdecore/kglobal.cpp       |  18 ----
  src/kdecore/klocale_kde.cpp   |   4 -
  src/kdecore/kstandarddirs.cpp |   1 -
- 5 files changed, 2 insertions(+), 265 deletions(-)
+ 5 files changed, 2 insertions(+), 266 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 493d309..3eca192 100644
+index 493d309..f3174b0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -16,27 +16,11 @@ include(CMakeFindFrameworks)
@@ -51,7 +51,15 @@ index 493d309..3eca192 100644
  
  if(WIN32)
      find_package(KDEWin REQUIRED)
-@@ -149,7 +133,6 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+@@ -48,7 +32,6 @@ endif()
+ set(HAVE_X11 ${X11_FOUND})
+ if (HAVE_X11)
+   add_feature_info("X11 Session Management (libSM)" X11_SM_FOUND "Support for session management in KApplication")
+-  find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED X11Extras)
+ endif ()
+ if (APPLE)
+     cmake_find_frameworks(CoreFoundation)
+@@ -149,7 +132,6 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
  endif()
  add_subdirectory(cmake)
  add_subdirectory(data)
