@@ -20,9 +20,6 @@ EXTRA_OECMAKE += " \
 	-DCMAKE_PROGRAM_PATH=${STAGING_DIR_NATIVE}/$bindir/qt5 \
 "
 
-# this should be fixed elsewhere..
-CXXFLAGS_append_mx6 = " -DEGL_API_FB"
-
 FILES_${PN} += "${libdir}/qml/GreenIsland"
 FILES_${PN}-dbg += "${libdir}/qml/GreenIsland/.debug"
 FILES_${PN}-dev += "${libdir}/cmake"
