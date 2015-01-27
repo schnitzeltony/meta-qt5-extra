@@ -4,18 +4,24 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
 
 inherit cmake_qt5 pythonnative pkgconfig
 
-DEPENDS = "extra-cmake-modules-native qtbase qtdeclarative qtwayland ki18n libkscreen kservice virtual/egl"
-SRC_URI = " \
-	git://github.com/greenisland/${BPN}.git;protocol=git;branch=master \
+DEPENDS = " \
+    ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+    extra-cmake-modules-native \
+    qtbase \
+    qtdeclarative \
+    qtquickcontrols \
+    qtwayland \
+    libkscreen \
+    virtual/egl \
 "
-#	file://0001-Use-correct-API-for-QWaylandOutput.patch
+SRC_URI = "git://github.com/greenisland/${BPN}.git;protocol=git;branch=master"
 
-SRCREV = "e1dbde7b18d8a1f5256368d74baa6ce398334722"
+SRCREV = "3f8ccb4613112eb3b0d7f9c3a3cf5c157fecbc92"
 PV = "0.5.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-# for wayland scanner
+# make it find qtwaylandscanner
 EXTRA_OECMAKE += " \
 	-DCMAKE_PROGRAM_PATH=${STAGING_DIR_NATIVE}/$bindir/qt5 \
 "
