@@ -1,6 +1,6 @@
-From ca1027a2a317e414192647dc295f5dd08f6156b8 Mon Sep 17 00:00:00 2001
+From 72341abc7360dc8b28e9f05382222a0c8f433ea7 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Mon, 24 Nov 2014 10:16:50 +0100
+Date: Tue, 27 Jan 2015 10:55:30 +0100
 Subject: [PATCH] fix configuration/build on x-less systems
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -8,73 +8,50 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- CMakeLists.txt                  | 33 +++++++++++++++++++--------------
- backends/CMakeLists.txt         |  6 +++---
- backends/qscreen/CMakeLists.txt | 17 ++++++++++++-----
- src/CMakeLists.txt              |  6 +++++-
- src/backendloader.cpp           | 11 ++++++++++-
- 5 files changed, 49 insertions(+), 24 deletions(-)
+ CMakeLists.txt                        | 11 ++++++++---
+ backends/CMakeLists.txt               |  6 +++---
+ backends/qscreen/CMakeLists.txt       | 17 ++++++++++++-----
+ src/CMakeLists.txt                    | 23 ++++++++++++++++-------
+ src/backendlauncher/CMakeLists.txt    | 23 ++++++++++++++++-------
+ src/backendlauncher/backendloader.cpp | 13 +++++++++----
+ 6 files changed, 64 insertions(+), 29 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 93c1f1e..e8aca15 100644
+index a915140..9bf94e6 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -14,8 +14,26 @@ include(ECMGenerateHeaders)
+@@ -15,9 +15,6 @@ include(ECMGenerateHeaders)
  include(FeatureSummary)
  include(CheckCXXCompilerFlag)
  
-+find_package(XCB COMPONENTS XCB RANDR)
-+set_package_properties(XCB PROPERTIES
-+                       TYPE OPTIONAL
-+                       PURPOSE "Required for building XRandR 1.1 backend"
-+)
-+
-+find_package(X11)
-+set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
-+                        URL "http://www.x.org"
-+                        TYPE OPTIONAL
-+                        PURPOSE "Required for building XRandR 1.2 backend"
-+)
-+
- set(REQUIRED_QT_VERSION 5.2.0)
--find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui Test X11Extras)
+-set(REQUIRED_QT_VERSION 5.2.0)
+-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core DBus Gui Test X11Extras)
+-
+ find_package(XCB COMPONENTS XCB RANDR)
+ set_package_properties(XCB PROPERTIES
+                        TYPE OPTIONAL
+@@ -31,6 +28,14 @@ set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
+                         PURPOSE "Required for building XRandR 1.2 backend"
+ )
+ 
++set(REQUIRED_QT_VERSION 5.2.0)
 +if (XCB_FOUND AND X11_XCB_FOUND)
-+    add_definitions(-DHAVE_XCB)
-+    find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui Test X11Extras)
++    add_definitions(-DHAVE_X11)
++    find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core DBus Gui Test X11Extras)
 +else()
-+    find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui Test)
++    find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core DBus Gui Test)
 +endif()
- 
- find_package(Wayland 1.2 COMPONENTS Client Cursor)
- set_package_properties(Wayland PROPERTIES
-@@ -36,19 +54,6 @@ else()
-     set(ENABLE_WAYLAND FALSE)
- endif()
- 
--find_package(XCB COMPONENTS XCB RANDR)
--set_package_properties(XCB PROPERTIES
--                       TYPE OPTIONAL
--                       PURPOSE "Required for building XRandR 1.1 backend"
--)
--
--find_package(X11)
--set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
--                        URL "http://www.x.org"
--                        TYPE OPTIONAL
--                        PURPOSE "Required for building XRandR 1.2 backend"
--)
--
- set(KF5_VERSION "5.0.91") #When we are happy with the api, we can sync with frameworks
++
+ set(KF5_VERSION ${PROJECT_VERSION}) #When we are happy with the api, we can sync with frameworks
  ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KSCREEN
                          VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kscreen_version.h"
 diff --git a/backends/CMakeLists.txt b/backends/CMakeLists.txt
-index ba0cc74..c392978 100644
+index ab160e0..611d63b 100644
 --- a/backends/CMakeLists.txt
 +++ b/backends/CMakeLists.txt
-@@ -8,7 +8,7 @@ else()
-     message(STATUS "Not building Wayland backend")
- endif()
- 
+@@ -1,6 +1,6 @@
+ add_subdirectory(fake)
+ add_subdirectory(qscreen)
 -add_subdirectory(xrandr)
 -# if (XCB_FOUND AND X11_XCB_FOUND)
 +if (XCB_FOUND AND X11_XCB_FOUND)
@@ -83,7 +60,7 @@ index ba0cc74..c392978 100644
 -# endif(XCB_FOUND AND X11_XCB_FOUND)
 +endif(XCB_FOUND AND X11_XCB_FOUND)
 diff --git a/backends/qscreen/CMakeLists.txt b/backends/qscreen/CMakeLists.txt
-index 1342d4f..c4e7b44 100644
+index 1342d4f..ab5c4fb 100644
 --- a/backends/qscreen/CMakeLists.txt
 +++ b/backends/qscreen/CMakeLists.txt
 @@ -12,10 +12,17 @@ set(qscreen_SRCS
@@ -96,73 +73,128 @@ index 1342d4f..c4e7b44 100644
 -                                 KF5::Screen
 -)
 +if (XCB_FOUND AND X11_XCB_FOUND)
-+	target_link_libraries(KSC_QScreen Qt5::Core
-+		                         Qt5::Gui
-+		                         Qt5::X11Extras
-+		                         KF5::Screen
-+	)
++    target_link_libraries(KSC_QScreen Qt5::Core
++                                     Qt5::Gui
++                                     Qt5::X11Extras
++                                     KF5::Screen
++    )
 +else()
-+	target_link_libraries(KSC_QScreen Qt5::Core
-+		                         Qt5::Gui
-+		                         KF5::Screen
-+	)
++    target_link_libraries(KSC_QScreen Qt5::Core
++                                     Qt5::Gui
++                                     KF5::Screen
++    )
 +endif()
  
  install(TARGETS KSC_QScreen DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/kscreen/)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 460022f..e6dcfd7 100644
+index 3b73de5..079f28c 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -13,7 +13,11 @@ set(libkscreen_SRCS
+@@ -24,13 +24,22 @@ qt5_add_dbus_interface(libkscreen_SRCS ${CMAKE_SOURCE_DIR}/interfaces/org.kde.KS
  
  add_library(KF5Screen SHARED ${libkscreen_SRCS})
  
--target_link_libraries(KF5Screen PUBLIC Qt5::Core PRIVATE Qt5::X11Extras)
+-target_link_libraries(KF5Screen
+-    PUBLIC
+-    Qt5::Core
+-    PRIVATE
+-    Qt5::DBus
+-    Qt5::X11Extras
+-)
 +if (XCB_FOUND AND X11_XCB_FOUND)
-+    target_link_libraries(KF5Screen PUBLIC Qt5::Core PRIVATE Qt5::X11Extras)
++    target_link_libraries(KF5Screen
++        PUBLIC
++        Qt5::Core
++        PRIVATE
++        Qt5::DBus
++        Qt5::X11Extras
++    )
 +else()
-+    target_link_libraries(KF5Screen PUBLIC Qt5::Core PRIVATE)
++    target_link_libraries(KF5Screen
++        PUBLIC
++        Qt5::Core
++        PRIVATE
++        Qt5::DBus
++    )
 +endif()
  
  set_target_properties(KF5Screen PROPERTIES
      VERSION "${KSCREEN_VERSION_STRING}"
-diff --git a/src/backendloader.cpp b/src/backendloader.cpp
-index 9ff38cb..8f019f0 100644
---- a/src/backendloader.cpp
-+++ b/src/backendloader.cpp
-@@ -23,7 +23,9 @@
- #include <QtCore/QStringList>
- #include <QtCore/QCoreApplication>
- #include <QtCore/QPluginLoader>
-+#ifdef HAVE_XCB
- #include <QX11Info>
-+#endif
- #include <QDir>
+diff --git a/src/backendlauncher/CMakeLists.txt b/src/backendlauncher/CMakeLists.txt
+index de73ae1..94d1f16 100644
+--- a/src/backendlauncher/CMakeLists.txt
++++ b/src/backendlauncher/CMakeLists.txt
+@@ -14,12 +14,21 @@ qt5_add_dbus_adaptor(backendlauncher_SRCS ${CMAKE_SOURCE_DIR}/interfaces/org.kde
  
- AbstractBackend* BackendLoader::s_backend = 0;
-@@ -53,6 +55,7 @@ bool BackendLoader::init()
+ add_executable(kscreen_backend_launcher ${backendlauncher_SRCS})
+ 
+-target_link_libraries(kscreen_backend_launcher
+-    KF5Screen
+-    Qt5::Core
+-    Qt5::Gui
+-    Qt5::X11Extras
+-    Qt5::DBus
+-)
++if (XCB_FOUND AND X11_XCB_FOUND)
++    target_link_libraries(kscreen_backend_launcher
++        KF5Screen
++        Qt5::Core
++        Qt5::Gui
++        Qt5::X11Extras
++        Qt5::DBus
++    )
++else()
++    target_link_libraries(kscreen_backend_launcher
++        KF5Screen
++        Qt5::Core
++        Qt5::Gui
++        Qt5::DBus
++    )
++endif()
+ 
+ install(TARGETS kscreen_backend_launcher DESTINATION ${CMAKE_INSTALL_FULL_LIBEXECDIR_KF5})
+diff --git a/src/backendlauncher/backendloader.cpp b/src/backendlauncher/backendloader.cpp
+index 7b90745..9278f9c 100644
+--- a/src/backendlauncher/backendloader.cpp
++++ b/src/backendlauncher/backendloader.cpp
+@@ -24,8 +24,9 @@
+ #include <QDBusConnectionInterface>
+ #include <QDir>
+ #include <QPluginLoader>
++#ifdef HAVE_X11
+ #include <QX11Info>
+-
++#endif
+ #include <QDBusConnection>
+ #include <QDBusInterface>
+ 
+@@ -58,6 +59,7 @@ bool BackendLoader::loadBackend(const QString& backend)
                  continue;
              }
  
-+#ifdef HAVE_XCB
++#ifdef HAVE_X11
              // When on X11, skip the QScreen backend, instead use the XRandR backend,
              // if not specified in KSCREEN_BACKEND
              if (backend.isEmpty() &&
-@@ -76,7 +79,13 @@ bool BackendLoader::init()
+@@ -65,12 +67,15 @@ bool BackendLoader::loadBackend(const QString& backend)
                      QX11Info::isPlatformX11()) {
                  continue;
              }
 -
-+#else
-+            // When not on X11, allow wayland only
-+            if (backend.isEmpty() &&
-+                    !finfo.fileName().contains(QLatin1String("KSC_Wayland"))) {
-+                continue;
-+            }
 +#endif
-             QPluginLoader loader(finfo.filePath());
-             loader.load();
-             QObject *instance = loader.instance();
+             // When not on X11, skip the XRandR backend, and fall back to QSCreen
+             // if not specified in KSCREEN_BACKEND
+             if (backend.isEmpty() &&
+-                    finfo.fileName().contains(QLatin1String("KSC_XRandR")) &&
+-                    !QX11Info::isPlatformX11()) {
++                    finfo.fileName().contains(QLatin1String("KSC_XRandR"))
++#ifdef HAVE_X11
++                    && !QX11Info::isPlatformX11()
++#endif
++                    ) {
+                 continue;
+             }
+ 
 -- 
 1.8.3.1
 
