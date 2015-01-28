@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-SRCREV = "19b903c7d99238e3bf0257bb9cd9602fa9a71386"
+SRCREV = "241e63e2010b43c0ed5a21a0d411fd80425bd0f6"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5ItemViews, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
