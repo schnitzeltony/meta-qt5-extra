@@ -9,5 +9,5 @@ inherit kde
 
 DEPENDS += "bzip2 xz zlib"
 
-SRCREV = "b75c77a2ba78755de25c08bb9532292b5ceb4d2d"
-PV = "5.5.0"
+SRCREV = "05dd0f7fac116d905e37e01807b7d20489ceb1ca"
+PV = "5.7.0"
