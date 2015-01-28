@@ -8,7 +8,7 @@ inherit kde cmake-lib
 
 DEPENDS += "kconfig kwidgetsaddons"
 
-SRCREV = "278e8f0c396a1e30723775d437db34a46a5843c5"
+SRCREV = "339f8072f96373f1946ce99936b8864020d052a7"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Completion, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
