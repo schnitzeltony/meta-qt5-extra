@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-SRCREV = "c380fe7121b4b4695f116ff8139fb5ab58c2bd1b"
+SRCREV = "ce5590c108edde83557eff70232a3cd195eb2d0b"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5ThreadWeaver, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
