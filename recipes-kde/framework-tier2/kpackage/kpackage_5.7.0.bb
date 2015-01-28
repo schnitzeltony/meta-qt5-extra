@@ -9,8 +9,7 @@ inherit kde cmake-lib
 
 DEPENDS += "karchive ki18n kcoreaddons kconfig kdoctools"
 
-SRCREV = "59759b1a8a892f79c9160b1ef44247f07c933e88"
-PV = "5.4.0+git${SRCPV}"
+SRCREV = "70110fc5179a16d46ee52963a836418d4dca23fb"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Package, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
