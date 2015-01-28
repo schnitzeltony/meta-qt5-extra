@@ -11,4 +11,4 @@ inherit kde cmake-lib
 CMAKE_HIDE_ERROR[1] = "KF5Codecs, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5Codecs, -S${includedir}, -S${STAGING_INCDIR}"
 
-SRCREV = "b9269f97bae2fd6b43d2baceb2787f3c73a6656b"
+SRCREV = "bfb64b089a5003281576fadaa5530a65f82e35f2"
