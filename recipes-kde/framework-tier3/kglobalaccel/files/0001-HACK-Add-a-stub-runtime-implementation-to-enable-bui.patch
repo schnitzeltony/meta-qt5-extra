@@ -1,0 +1,169 @@
+From 9cf19c35854c0bfd6aa343200a15dabdea5e2026 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 28 Jan 2015 14:19:56 +0100
+Subject: [PATCH] HACK: Add a stub runtime implementation to enable build for
+ pure wayland
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/runtime/CMakeLists.txt        |  8 ++---
+ src/runtime/kglobalaccel_stub.cpp | 49 +++++++++++++++++++++++++++++++
+ src/runtime/kglobalaccel_stub.h   | 61 +++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 114 insertions(+), 4 deletions(-)
+ create mode 100644 src/runtime/kglobalaccel_stub.cpp
+ create mode 100644 src/runtime/kglobalaccel_stub.h
+
+diff --git a/src/runtime/CMakeLists.txt b/src/runtime/CMakeLists.txt
+index e639fa5..d4ee295 100644
+--- a/src/runtime/CMakeLists.txt
++++ b/src/runtime/CMakeLists.txt
+@@ -15,15 +15,14 @@ set(kglobalaccel_SRCS
+ 
+ if (${XCB_XCB_FOUND} AND ${XCB_KEYSYMS_FOUND})
+   set( kglobalaccel_SRCS ${kglobalaccel_SRCS} kglobalaccel_x11.cpp )
+-endif()
+-if ( Q_WS_MAC )
++elseif ( Q_WS_MAC )
+   set( kglobalaccel_SRCS ${kglobalaccel_SRCS} kglobalaccel_mac.cpp )
+-endif ()
+-if ( Q_WS_WIN )
++elseif ( Q_WS_WIN )
+   set( kglobalaccel_SRCS ${kglobalaccel_SRCS} kglobalaccel_win.cpp )
+-endif ()
+-if ( Q_WS_QWS )
++elseif ( Q_WS_QWS )
+   set( kglobalaccel_SRCS ${kglobalaccel_SRCS} kglobalaccel_qws.cpp )
++else()
++  set( kglobalaccel_SRCS ${kglobalaccel_SRCS} kglobalaccel_stub.cpp )
+ endif ()
+ 
+ configure_file(config-kglobalaccel.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kglobalaccel.h )
+diff --git a/src/runtime/kglobalaccel_stub.cpp b/src/runtime/kglobalaccel_stub.cpp
+new file mode 100644
+index 0000000..71e7a3f
+--- /dev/null
++++ b/src/runtime/kglobalaccel_stub.cpp
+@@ -0,0 +1,49 @@
++/* This file is part of the KDE libraries
++    Copyright (C) 2001,2002 Ellis Whitehead <ellis@kde.org>
++
++    This library is free software; you can redistribute it and/or
++    modify it under the terms of the GNU Library General Public
++    License as published by the Free Software Foundation; either
++    version 2 of the License, or (at your option) any later version.
++
++    This library is distributed in the hope that it will be useful,
++    but WITHOUT ANY WARRANTY; without even the implied warranty of
++    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++    Library General Public License for more details.
++
++    You should have received a copy of the GNU Library General Public License
++    along with this library; see the file COPYING.LIB.  If not, write to
++    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
++    Boston, MA 02110-1301, USA.
++*/
++
++#include "kglobalaccel_stub.h"
++
++
++#include <QWidgetList>
++
++#include "kglobalaccel.h"
++#include "globalshortcutsregistry.h"
++
++#include <QDebug>
++
++KGlobalAccelImpl::KGlobalAccelImpl(GlobalShortcutsRegistry* owner)
++    : m_owner(owner), m_enabled(false)
++{
++}
++
++bool KGlobalAccelImpl::grabKey( int keyQt, bool grab )
++{
++    if( !keyQt ) {
++        qWarning() << "Tried to grab key with null code.";
++        return false;
++    }
++
++
++    return true;
++}
++
++void KGlobalAccelImpl::setEnabled( bool enable )
++{
++    m_enabled = enable;
++}
+diff --git a/src/runtime/kglobalaccel_stub.h b/src/runtime/kglobalaccel_stub.h
+new file mode 100644
+index 0000000..d96df1f
+--- /dev/null
++++ b/src/runtime/kglobalaccel_stub.h
+@@ -0,0 +1,62 @@
++/* This file is part of the KDE libraries
++    Copyright (C) 2001,2002 Ellis Whitehead <ellis@kde.org>
++
++    This library is free software; you can redistribute it and/or
++    modify it under the terms of the GNU Library General Public
++    License as published by the Free Software Foundation; either
++    version 2 of the License, or (at your option) any later version.
++
++    This library is distributed in the hope that it will be useful,
++    but WITHOUT ANY WARRANTY; without even the implied warranty of
++    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++    Library General Public License for more details.
++
++    You should have received a copy of the GNU Library General Public License
++    along with this library; see the file COPYING.LIB.  If not, write to
++    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
++    Boston, MA 02110-1301, USA.
++*/
++
++#ifndef _KGLOBALACCEL_STUB_H
++#define _KGLOBALACCEL_STUB_H
++
++#include <QWidget>
++
++class GlobalShortcutsRegistry;
++/**
++ * @internal
++ *
++ * The KGlobalAccel private class handles grabbing of global keys,
++ * and notification of when these keys are pressed.
++ */
++class KGlobalAccelImpl : public QWidget
++{
++    Q_OBJECT
++
++public:
++    KGlobalAccelImpl(GlobalShortcutsRegistry* owner);
++
++public:
++    /**
++    * This function registers or unregisters a certain key for global capture,
++    * depending on \b grab.
++    *
++    * Before destruction, every grabbed key will be released, so this
++    * object does not need to do any tracking.
++    *
++    * \param key the Qt keycode to grab or release.
++    * \param grab true to grab they key, false to release the key.
++    *
++    * \return true if successful, otherwise false.
++    */
++    bool grabKey(int key, bool grab);
++
++    /// Enable/disable all shortcuts. There will not be any grabbed shortcuts at this point.
++    void setEnabled(bool);
++
++private:
++    GlobalShortcutsRegistry* m_owner;
++    bool m_enabled;
++};
++
++#endif // _KGLOBALACCEL_STUB_H
+-- 
+1.8.3.1
+
