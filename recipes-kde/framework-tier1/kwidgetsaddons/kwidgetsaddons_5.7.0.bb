@@ -9,7 +9,7 @@ DEPENDS += "qttools"
 
 inherit kde cmake-lib
 
-SRCREV = "ea0e37b25b239edd8d7ed9236477f94ac01b4cc8"
+SRCREV = "f5bbceadda6b80426a889e1554c2f4ee369840e3"
 
 CMAKE_HIDE_ERROR[1] = "KF5WidgetsAddons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5WidgetsAddons, -S${includedir}, -S${STAGING_INCDIR}"
