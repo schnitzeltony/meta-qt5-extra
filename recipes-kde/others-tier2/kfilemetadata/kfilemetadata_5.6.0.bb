@@ -14,8 +14,7 @@ DEPENDS += "ki18n karchive"
 # TODO: optionals PACKAGECONFIG (not yet in oe: poppler-qt5 / exiv2 / ffmpeg / epub)
 DEPENDS += "taglib"
 
-SRCREV = "ba2c25b6aecd680ef913d2c0e2dd897d8da86ce9"
-KDE_BRANCH = "Plasma/5.1"
+SRCREV = "a674091d00b8159a788afef3d65436529aae3ba7"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5FileMetaData, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
