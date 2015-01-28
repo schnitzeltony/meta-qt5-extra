@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-SRCREV = "d8ff80cd58ba070ce266462860dd7ddba9569d7d"
+SRCREV = "e939e5136711df31ace7ff627f3a0e58c60f3588"
 
 CMAKE_HIDE_ERROR[1] = "KF5DBusAddons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5DBusAddons, -S${includedir}, -S${STAGING_INCDIR}"
