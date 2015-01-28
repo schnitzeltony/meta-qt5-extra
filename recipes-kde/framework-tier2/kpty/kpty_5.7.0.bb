@@ -9,7 +9,7 @@ inherit kde cmake-lib
 
 DEPENDS += "kcoreaddons ki18n"
 
-SRCREV = "b67ae94d31d54431a7e19983f306b2197a75f7f7"
+SRCREV = "bfe2aef89f88b727a2e5b2d8e9d608a2796bd6f6"
 
 CMAKE_HIDE_ERROR[1] = "KF5Pty, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5Pty, -S${includedir}, -S${STAGING_INCDIR}"
