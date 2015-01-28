@@ -7,5 +7,5 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde
 
-SRCREV = "0e762b47c1132e311d200d3d7e9b3e6c37750aa6"
-PV = "5.5.0"
+SRCREV = "1a5df65f06d5f51da1d6e1f06229ebd95b3161d9"
+PV = "5.7.0"
