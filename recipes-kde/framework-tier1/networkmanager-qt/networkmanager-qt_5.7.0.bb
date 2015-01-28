@@ -8,7 +8,7 @@ inherit kde cmake-lib pkgconfig
 
 DEPENDS += "networkmanager"
 
-SRCREV = "7e351978ce7f309cfaeb52aa8ff110b64edd74b7"
+SRCREV = "e05ce6e7d5a39b44058ac54f8a399d0afdbffb99"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5NetworkManagerQt, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
