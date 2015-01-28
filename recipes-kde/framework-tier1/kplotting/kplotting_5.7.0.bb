@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-SRCREV = "361eba095446ce8cdc9ceab62fea3a0a96422a6b"
+SRCREV = "124723a60eb6eabbb081255ef13cd71285ff5faa"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Plotting, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
