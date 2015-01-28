@@ -9,8 +9,7 @@ inherit kde cmake-lib
 
 DEPENDS += "ki18n kconfig kidletime kitemmodels kinit kauth kcrash solid kio kdelibs4support kfilemetadata ktexteditor xapian-core"
 
-SRCREV = "adfd9da80f65b3342833391c30f69d8036132601"
-KDE_BRANCH = "Plasma/5.1"
+SRCREV = "e56b27a5e2078a989216eebcd9651fec3da967b6"
 SRC_URI += "file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch"
 
 # cross libs / headers
