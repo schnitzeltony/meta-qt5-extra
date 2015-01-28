@@ -28,7 +28,7 @@ index b7d1d70..1c7a32e 100644
  
  include(FeatureSummary)
  include(GenerateExportHeader)
-@@ -33,12 +33,9 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+@@ -33,12 +33,10 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
      ecm_install_po_files_as_qm(po)
  endif()
  
@@ -36,20 +36,14 @@ index b7d1d70..1c7a32e 100644
 -add_subdirectory(autotests)
  add_subdirectory(data)
 -add_subdirectory(examples)
--
+ 
  
 +if(False)
  # create a Config.cmake and a ConfigVersion.cmake file and install them
- set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Sonnet")
+ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Sonnet")
  
-@@ -52,9 +49,8 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/KF5SonnetConfig.cmake"
-               "${CMAKE_CURRENT_BINARY_DIR}/KF5SonnetConfigVersion.cmake"
-         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"  COMPONENT Devel )
- 
--install(EXPORT KF5SonnetTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5SonnetTargets.cmake NAMESPACE KF5:: )
--
- install(FILES ${CMAKE_CURRENT_BINARY_DIR}/sonnet_version.h
-         DESTINATION ${KF5_INCLUDE_INSTALL_DIR} COMPONENT Devel )
+@@ -58,3 +56,4 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/sonnet_version.h
+         DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5} COMPONENT Devel )
  
  feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 +endif()
