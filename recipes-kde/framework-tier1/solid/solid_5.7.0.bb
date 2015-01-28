@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-SRCREV = "1424bccf5b6772c072612c72f2db8e0ce50cd1d3"
+SRCREV = "5ec75ac1daf0fc3b016e138590b0429b2ab4934e"
 
 DEPENDS += "qtdeclarative"
 
