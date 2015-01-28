@@ -10,7 +10,7 @@ inherit kde
 SRC_URI += " \
 	file://0001-kconfiggui-do-only-compile-in-case-sessions-are-aval.patch \
 "
-SRCREV = "f844f6a85e4bce35d0802eed11b19916d34ed78c"
-PV = "5.5.0"
+SRCREV = "fef653b071c97cc22117a215cc858be963a479ed"
+PV = "5.7.0"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
