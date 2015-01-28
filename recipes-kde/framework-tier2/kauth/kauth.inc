@@ -10,7 +10,7 @@ SRC_URI += " \
 	file://0001-Make-autotests-optional.patch \
 	file://0002-align-installation-location-for-helpers.patch \
 "
-SRCREV = "4f6d10cdc59aca6819e4189e81ff65150559bc10"
-PV = "5.5.0"
+SRCREV = "9f162d6ef8cc5b5d468b9ba2092684b9b256e089"
+PV = "5.7.0"
 
 EXTRA_OECMAKE += "-DAUTOTESTS=OFF"

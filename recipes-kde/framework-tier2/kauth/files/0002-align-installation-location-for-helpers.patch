@@ -17,12 +17,12 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 98248c7..5e37f30 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -33,7 +33,7 @@ option(AUTOTESTS "Perform autotests" ON)
+@@ -30,7 +30,7 @@ ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KAUTH
  
  find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
  
--set(KAUTH_HELPER_INSTALL_DIR "${LIBEXEC_INSTALL_DIR}/kauth")
-+set(KAUTH_HELPER_INSTALL_DIR "${LIBEXEC_INSTALL_DIR}")
+-set(KAUTH_HELPER_INSTALL_DIR "${KDE_INSTALL_LIBEXECDIR}/kauth")
++set(KAUTH_HELPER_INSTALL_DIR "${KDE_INSTALL_LIBEXECDIR}")
  
  if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
      ecm_install_po_files_as_qm(po)
