@@ -16,8 +16,8 @@ OECMAKE_EXTRA_ROOT_PATH = "${STAGING_DIR}/${MACHINE}"
 # for xsl (we have to hardcode /usr - ${prefix} is aligned by native.bbclase
 EXTRA_OECMAKE += "-DOE_ROOT_PATH_PREFIX=${STAGING_DIR}/${MACHINE}/usr"
 
-SRCREV = "4c2f75cf0364e84f8bb962b0c9de791bba2b1a9f"
-PV = "5.5.0"
+SRCREV = "93b844cdcfde640acfb231429c1c685de2c3cc4f"
+PV = "5.7.0"
 
 SRC_URI += " \
 	file://0001-Add-cmdline-param-to-help-find-xsl.patch \
