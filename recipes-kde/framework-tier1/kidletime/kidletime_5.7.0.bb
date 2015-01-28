@@ -12,7 +12,7 @@ DEPENDS += " \
 "
 
 SRC_URI += "file://0001-Do-not-search-for-Qt5X11Extras-in-x-less-environment.patch"
-SRCREV = "31e0bc0429000c93da91cba8df79b08e1afd6a9b"
+SRCREV = "4ba80494b02888a07c5666c4fd6c38252ff5e53a"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5IdleTime, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
