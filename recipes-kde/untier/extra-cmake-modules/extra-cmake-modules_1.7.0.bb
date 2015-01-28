@@ -6,7 +6,7 @@ inherit cmake_qt5
 
 SRC_URI = "git://anongit.kde.org/extra-cmake-modules;protocol=git"
 
-SRCREV = "7e535b93cdbb7420d241c00cb9c0abf462ff59d8"
+SRCREV = "ca6d601ac04f8ef5813f6b02015a37622d68ef6c"
 S = "${WORKDIR}/git"
 
 DEPENDS = "qttools"
