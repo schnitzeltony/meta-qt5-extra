@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde cmake-lib
 
-SRCREV = "59a419adc1ba6ee9aaff64a176b3f3829930a73c"
+SRCREV = "4b5fa02f4b634961960aa9672aafef3369129a41"
 
 CMAKE_HIDE_ERROR[1] = "KF5Attica, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5Attica, -S${includedir}, -S${STAGING_INCDIR}"
