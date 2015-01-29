@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde perlnative
 
-SRCREV = "c59650a0b873df766de2bbf11e6ef37a7b2c323b"
-PV = "5.5.0"
+SRCREV = "12cf97b33e96dc45de0486d3dd5501c99a768a54"
