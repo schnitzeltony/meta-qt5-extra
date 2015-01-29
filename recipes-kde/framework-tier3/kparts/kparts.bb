@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib
 
 DEPENDS += " \
@@ -20,7 +22,7 @@ DEPENDS += " \
 	kxmlgui \
 "
 
-SRCREV = "7784c69b3306ada9c0242b2112743f59edf74a50"
+SRCREV = "e979067f95c4f9c1a841631d52b8cced588f83f0"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Parts, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
