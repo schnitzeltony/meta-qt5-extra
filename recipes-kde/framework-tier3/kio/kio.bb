@@ -4,33 +4,30 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib
 
 DEPENDS += " \
 	karchive \
-	kbookmarks \
 	kcodecs \
-	kcompletion \
 	kconfig \
-	kconfigwidgets \
 	kcoreaddons \
 	kdbusaddons \
 	kdoctools \
 	ki18n \
-	kiconthemes \
-	kitemviews \
-	kjobwidgets \
 	knotifications \
 	kservice \
 	solid \
-	kwidgetsaddons \
-	kwindowsystem \
 	kxmlgui \
 	kwallet \
 	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)} \
 "
 
-SRCREV = "72b971ef5618b41452e709819b217be4ba5a200e"
+SRCREV = "ec023712125ffc0a8cbb617c93285bdaa21f6381"
+
+PACKAGECONFIG[full] = "-DKIOCORE_ONLY=OFF,-DKIOCORE_ONLY=ON, kbookmarks kcompletion kconfigwidgets kiconthemes kitemviews kjobwidgets kwidgetsaddons kwindowsystem"
+PACKAGECONFIG ??= ""
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5KIO, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
