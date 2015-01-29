@@ -1,0 +1,46 @@
+From 3f93930dc8acf938a6dc4907a082da71e3a31569 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 29 Jan 2015 13:22:58 +0100
+Subject: [PATCH 1/2] configure.ac: don't rely on Xorg.macros
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ configure.ac | 12 ------------
+ 1 file changed, 12 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index a52fc58..d24d4a9 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -31,15 +31,6 @@ AC_CONFIG_HEADERS([config.h])
+ # Initialize Automake
+ AM_INIT_AUTOMAKE([foreign dist-bzip2 subdir-objects])
+ 
+-# Require X.Org macros 1.8 or later for MAN_SUBSTS set by XORG_MANPAGE_SECTIONS
+-m4_ifndef([XORG_MACROS_VERSION],
+-          [m4_fatal([must install xorg-macros 1.8 or later before running autoconf/autogen.
+-  Hint: either install from source, git://anongit.freedesktop.org/xorg/util/macros or,
+-  depending on you distribution, try package 'xutils-dev' or 'xorg-x11-util-macros'])])
+-
+-XORG_MACROS_VERSION(1.8)
+-XORG_DEFAULT_OPTIONS
+-
+ AC_CHECK_PROGS([PYTHON], [python3 python2 python])
+ 
+ # Initialize libtool
+@@ -54,9 +45,6 @@ AC_CHECK_HEADER([KHR/khrplatform.h],
+                            )]
+                )
+ 
+-# OS X defaults to having -Wint-conversion ("warn when passing
+-# uintptr_t to a void *") by default.  Kill that.
+-XORG_TESTSET_CFLAG(CWARNFLAGS, [-Wno-int-conversion])
+ 
+ has_znow=yes
+ 
+-- 
+1.8.3.1
+

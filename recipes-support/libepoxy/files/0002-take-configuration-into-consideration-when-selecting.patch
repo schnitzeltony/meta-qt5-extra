@@ -1,0 +1,102 @@
+From a1d0f9eae290432de4762c29d22183c524579c57 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 29 Jan 2015 13:35:57 +0100
+Subject: [PATCH 2/2] take configuration into consideration when selecting
+ supported platforms
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+doing so we can build properly on X11-less wayland environments
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ configure.ac          | 14 ++++++--------
+ src/dispatch_common.h |  9 +++++----
+ 2 files changed, 11 insertions(+), 12 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index d24d4a9..74dba1a 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -45,6 +45,10 @@ AC_CHECK_HEADER([KHR/khrplatform.h],
+                            )]
+                )
+ 
++PKG_CHECK_MODULES(X11, [x11], [x11=yes], [x11=no])
++
++AM_CONDITIONAL(HAVE_X11, test x$x11 = xyes)
++
+ 
+ has_znow=yes
+ 
+@@ -74,7 +78,7 @@ case $host_os in
+         ;;
+     *)
+         build_egl=yes
+-        build_glx=yes
++        build_glx=$x11
+         build_wgl=no
+         # On platforms with dlopen, we load everything dynamically and
+         # don't link against a specific window system or GL implementation.
+@@ -132,13 +136,6 @@ esac
+ 
+ AC_SUBST([VISIBILITY_CFLAGS])
+ 
+-PKG_CHECK_MODULES(X11, [x11], [x11=yes], [x11=no])
+-if test x$x11 = xno -a x$build_glx = xyes; then
+-    AC_MSG_ERROR([libX11 headers (libx11-dev) required to build with GLX support])
+-fi
+-
+-AM_CONDITIONAL(HAVE_X11, test x$x11 = xyes)
+-
+ PKG_CHECK_MODULES(GL, [gl], [gl=yes], [gl=no])
+ 
+ AC_CONFIG_FILES([
+@@ -150,6 +147,7 @@ AC_CONFIG_FILES([
+ ])
+ AC_OUTPUT
+ 
++echo "           X11:         $x11"
+ echo "           EGL:         $build_egl"
+ echo "           GLX:         $build_glx"
+ echo "           WGL:         $build_wgl"
+diff --git a/src/dispatch_common.h b/src/dispatch_common.h
+index 6b8503a..82681e4 100644
+--- a/src/dispatch_common.h
++++ b/src/dispatch_common.h
+@@ -21,12 +21,13 @@
+  * IN THE SOFTWARE.
+  */
+ 
++#include <config.h>
+ #include <stdbool.h>
+ 
+ #ifdef _WIN32
+ #define PLATFORM_HAS_EGL 0
+ #define PLATFORM_HAS_GLX 0
+-#define PLATFORM_HAS_WGL 1
++#define PLATFORM_HAS_WGL BUILD_WGL
+ #define EPOXY_IMPORTEXPORT __declspec(dllexport)
+ #elif defined(__APPLE__)
+ #define PLATFORM_HAS_EGL 0
+@@ -34,13 +35,13 @@
+ #define PLATFORM_HAS_WGL 0
+ #define EPOXY_IMPORTEXPORT
+ #elif defined(ANDROID)
+-#define PLATFORM_HAS_EGL 1
++#define PLATFORM_HAS_EGL BUILD_EGL
+ #define PLATFORM_HAS_GLX 0
+ #define PLATFORM_HAS_WGL 0
+ #define EPOXY_IMPORTEXPORT
+ #else
+-#define PLATFORM_HAS_EGL 1
+-#define PLATFORM_HAS_GLX 1
++#define PLATFORM_HAS_EGL BUILD_EGL
++#define PLATFORM_HAS_GLX BUILD_GLX
+ #define PLATFORM_HAS_WGL 0
+ #define EPOXY_IMPORTEXPORT
+ #endif
+-- 
+1.8.3.1
+
