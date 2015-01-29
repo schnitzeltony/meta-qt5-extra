@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib
 
 DEPENDS += " \
@@ -16,7 +18,7 @@ DEPENDS += " \
 "
 
 SRC_URI += "file://0001-HACK-Add-a-stub-runtime-implementation-to-enable-bui.patch"
-SRCREV = "95d4ac8b5948c46bce9af97e6ad61c29c09c5e40"
+SRCREV = "f9eb427b293c40eec96784e059054bafd431c9bc"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5GlobalAccel, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

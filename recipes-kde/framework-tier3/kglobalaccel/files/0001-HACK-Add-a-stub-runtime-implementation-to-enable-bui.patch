@@ -9,38 +9,48 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- src/runtime/CMakeLists.txt        |  8 ++---
+ src/runtime/CMakeLists.txt              | 8 ++++----
+ src/runtime/globalshortcutsregistry.cpp | 2 ++
  src/runtime/kglobalaccel_stub.cpp | 49 +++++++++++++++++++++++++++++++
  src/runtime/kglobalaccel_stub.h   | 61 +++++++++++++++++++++++++++++++++++++++
- 3 files changed, 114 insertions(+), 4 deletions(-)
+ 4 files changed, 114 insertions(+), 4 deletions(-)
  create mode 100644 src/runtime/kglobalaccel_stub.cpp
  create mode 100644 src/runtime/kglobalaccel_stub.h
 
 diff --git a/src/runtime/CMakeLists.txt b/src/runtime/CMakeLists.txt
-index e639fa5..d4ee295 100644
+index e639fa5..5cf43b5 100644
 --- a/src/runtime/CMakeLists.txt
 +++ b/src/runtime/CMakeLists.txt
-@@ -15,15 +15,14 @@ set(kglobalaccel_SRCS
+@@ -15,12 +15,12 @@ set(kglobalaccel_SRCS
  
  if (${XCB_XCB_FOUND} AND ${XCB_KEYSYMS_FOUND})
    set( kglobalaccel_SRCS ${kglobalaccel_SRCS} kglobalaccel_x11.cpp )
 -endif()
--if ( Q_WS_MAC )
-+elseif ( Q_WS_MAC )
+-if ( APPLE )
++elseif ( APPLE )
    set( kglobalaccel_SRCS ${kglobalaccel_SRCS} kglobalaccel_mac.cpp )
 -endif ()
--if ( Q_WS_WIN )
-+elseif ( Q_WS_WIN )
+-if ( WIN32 )
++elseif ( WIN32 )
    set( kglobalaccel_SRCS ${kglobalaccel_SRCS} kglobalaccel_win.cpp )
--endif ()
--if ( Q_WS_QWS )
-+elseif ( Q_WS_QWS )
-   set( kglobalaccel_SRCS ${kglobalaccel_SRCS} kglobalaccel_qws.cpp )
 +else()
 +  set( kglobalaccel_SRCS ${kglobalaccel_SRCS} kglobalaccel_stub.cpp )
  endif ()
  
  configure_file(config-kglobalaccel.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kglobalaccel.h )
+diff --git a/src/runtime/globalshortcutsregistry.cpp b/src/runtime/globalshortcutsregistry.cpp
+index 3e4d720..b7acae9 100644
+--- a/src/runtime/globalshortcutsregistry.cpp
++++ b/src/runtime/globalshortcutsregistry.cpp
+@@ -34,6 +34,8 @@
+ #include "kglobalaccel_mac.h"
+ #elif defined(Q_OS_WIN)
+ #include "kglobalaccel_win.h"
++#else
++#include "kglobalaccel_stub.h"
+ #endif
+ 
+ GlobalShortcutsRegistry::GlobalShortcutsRegistry()
 diff --git a/src/runtime/kglobalaccel_stub.cpp b/src/runtime/kglobalaccel_stub.cpp
 new file mode 100644
 index 0000000..71e7a3f
