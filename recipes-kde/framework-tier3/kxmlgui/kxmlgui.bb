@@ -5,11 +5,13 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib
 
 DEPENDS += "kitemviews kconfig kglobalaccel kconfigwidgets ki18n kiconthemes ktextwidgets kwidgetsaddons kwindowsystem attica"
 
-SRCREV = "2c13cbff3775a615fb9f95c68510b04dffc596e8"
+SRCREV = "41a2bcc80650843aee553a9b47e1ed86fb898268"
 # REVISIT remove ugly hack for wayland-only environments
 SRC_URI += "file://0001-workaround-session-less-qtbase-required-for-pure-way.patch"
 
