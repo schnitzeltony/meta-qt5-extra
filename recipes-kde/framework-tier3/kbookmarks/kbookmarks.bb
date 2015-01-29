@@ -4,11 +4,13 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib
 
 DEPENDS += "kconfigwidgets kconfig kiconthemes kxmlgui"
 
-SRCREV = "ccbd27549aad8a5efefe2c0b0e1473238451b471"
+SRCREV = "5111bfa15d9e7181bdb0155e287942fb448802cf"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Bookmarks, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
