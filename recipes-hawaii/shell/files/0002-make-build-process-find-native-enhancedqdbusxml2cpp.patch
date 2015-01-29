@@ -1,0 +1,31 @@
+From d58728e01bb704c5ce5b9ba65e4acf8fff3a9841 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 30 Jan 2015 08:46:38 +0100
+Subject: [PATCH] make build process find native enhancedqdbusxml2cpp
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ 3rdparty/qlogind/src/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/3rdparty/qlogind/src/CMakeLists.txt b/3rdparty/qlogind/src/CMakeLists.txt
+index 7643e43..b6a326b 100644
+--- a/3rdparty/qlogind/src/CMakeLists.txt
++++ b/3rdparty/qlogind/src/CMakeLists.txt
+@@ -4,7 +4,7 @@ macro(generateInterface interfaceName)
+     string(REPLACE "." "" fileName ${interfaceName})
+ 
+     add_custom_command(OUTPUT ${fileName}.cpp OUTPUT ${fileName}.h
+-        COMMAND ../tools/enhancedqdbusxml2cpp -p ${fileName} ${CMAKE_SOURCE_DIR}/3rdparty/qlogind/spec/${interfaceName}.xml -i types.h
++        COMMAND enhancedqdbusxml2cpp -p ${fileName} ${CMAKE_SOURCE_DIR}/3rdparty/qlogind/spec/${interfaceName}.xml -i types.h
+         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+         COMMENT "Generating Interface for ${interfaceName}"
+         SOURCES $fileName.h
+-- 
+1.8.3.1
+
