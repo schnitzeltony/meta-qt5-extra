@@ -4,11 +4,13 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib
 
 DEPENDS += "kconfig kcoreaddons kcrash kdbusaddons kdoctools kinit kservice"
 
-SRCREV = "54170e00bc63b6d1031546ad354c7b7bb854a2e0"
+SRCREV = "a72c1fcbf6600c1c84e71c312a586386dcd7ce62"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KDED, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
