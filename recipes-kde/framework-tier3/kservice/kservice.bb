@@ -6,9 +6,11 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib
 
-SRCREV = "91311e0b348f73713b5b2d5721c46b75207a5a7b"
+SRCREV = "75cb3119ee0a5e0bfe2b4c38a23e346d93dc465e"
 
 DEPENDS += "kconfig kcoreaddons kcrash kdbusaddons ki18n kdoctools"
 
