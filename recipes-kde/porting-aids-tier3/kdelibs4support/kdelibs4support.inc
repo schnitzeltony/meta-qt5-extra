@@ -5,11 +5,12 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde
 
 SRC_URI += " \
 	file://0001-make-broken-glib-a-configure-option-we-cannot-run-co.patch \
 	file://0002-fix-build-for-QT_NO_SESSIONMANAGER.patch \
 "
-SRCREV = "eab967901725ce9e553f768cf549a2b5cc26b351"
-PV = "5.5.0"
+SRCREV = "b796420399d81b96ce9d1a9ae8712018b2f67171"

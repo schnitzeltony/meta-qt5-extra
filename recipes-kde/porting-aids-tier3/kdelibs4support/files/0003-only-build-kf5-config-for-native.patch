@@ -22,8 +22,8 @@ index 493d309..f3174b0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -16,27 +16,11 @@ include(CMakeFindFrameworks)
- set(KF5_VERSION "5.5.0") # handled by release scripts
- set(KF5_DEP_VERSION "5.5.0") # handled by release scripts
+ set(KF5_VERSION "5.7.0") # handled by release scripts
+ set(KF5_DEP_VERSION "5.7.0") # handled by release scripts
  set(REQUIRED_QT_VERSION 5.2.0)
 -find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network Widgets DBus Test Svg PrintSupport Designer)
 +find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network DBus Test)
@@ -78,34 +78,19 @@ index 4a1d80d..5543fb2 100644
  add_subdirectory(l10n)
  if(NOT HAVE_NEPOMUK)
     set(KIO_NO_NEPOMUK TRUE)
-@@ -21,30 +19,6 @@ if(NOT KIO_NO_NEPOMUK)
+@@ -21,6 +19,7 @@ if(NOT KIO_NO_NEPOMUK)
  endif()
  
  
--find_package(OpenSSL)
--set_package_properties(OpenSSL PROPERTIES DESCRIPTION "Support for secure network communications (SSL and TLS)"
--                       URL "http://openssl.org"
--                       TYPE RECOMMENDED
--                       PURPOSE "KDE uses OpenSSL for the bulk of secure communications, including secure web browsing via HTTPS"
--                      )
--if(OPENSSL_FOUND)
--   set(KSSL_HAVE_SSL 1)
--   include_directories(${OPENSSL_INCLUDE_DIR})
--endif()
--
--add_subdirectory( kioslave )
--add_subdirectory( kssl/kssl )
--add_subdirectory( kssl/kcm )
--add_subdirectory( kio/imageformats )
--
--if(WIN32)
--   set(libkdelibs4support_SRCS solid/networking_win.cpp
--                               kdeui/kapplication_win.cpp)
--else()
--   set(libkdelibs4support_SRCS solid/networking.cpp)
--endif()
--
--
++if(False)
+ find_package(OpenSSL)
+ set_package_properties(OpenSSL PROPERTIES DESCRIPTION "Support for secure network communications (SSL and TLS)"
+                        URL "http://openssl.org"
+@@ -45,6 +44,7 @@ else()
+ endif()
+ 
+ 
++endif()
  set(libkdelibs4support_SRCS
      ${libkdelibs4support_SRCS}
      kdecore/k4aboutdata.cpp
@@ -327,7 +312,7 @@ index 4a1d80d..5543fb2 100644
     ${platformLinkLibraries}
  )
  
-@@ -362,29 +162,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
+@@ -362,26 +362,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
  )
  
  
@@ -348,15 +333,12 @@ index 4a1d80d..5543fb2 100644
 -                                    KF5::Auth
 -                                    )
 -
--install(TARGETS kf5deprecatedwidgets DESTINATION ${QT_PLUGIN_INSTALL_DIR}/designer)
+-install(TARGETS kf5deprecatedwidgets DESTINATION ${KDE_INSTALL_QTPLUGINDIR}/designer)
 -
 -##########
--
--add_subdirectory(pics)
--
- install(TARGETS KF5KDELibs4Support
-         EXPORT KF5KDELibs4SupportTargets
-         ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+ 
+ add_subdirectory(pics)
+ 
 diff --git a/src/kdecore/kglobal.cpp b/src/kdecore/kglobal.cpp
 index d493314..5373b4e 100644
 --- a/src/kdecore/kglobal.cpp
