@@ -7,7 +7,7 @@ inherit packagegroup
 RDEPENDS_${PN} = " \
 	cinema \
 	eyesight \
-	pss \
+	hawaii-shell \
 	pss-framework \
 	hawaii-system-preferences \
 	hawaii-terminal \
