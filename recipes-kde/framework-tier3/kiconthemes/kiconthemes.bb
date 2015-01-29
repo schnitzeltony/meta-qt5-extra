@@ -4,11 +4,13 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib
 
 DEPENDS += "qtsvg ki18n kconfig kconfigwidgets kwidgetsaddons kitemviews"
 
-SRCREV = "99cd7bdbd99e809d9de26977c4788d2d90db24cf"
+SRCREV = "2286886decfec2b1a956b813b4c078c38bc2f43b"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5IconThemes, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
