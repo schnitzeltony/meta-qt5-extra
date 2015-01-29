@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS += "qttools"
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib
 
 SRCREV = "f5bbceadda6b80426a889e1554c2f4ee369840e3"

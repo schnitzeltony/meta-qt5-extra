@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib
 
 SRCREV = "5ec75ac1daf0fc3b016e138590b0429b2ab4934e"

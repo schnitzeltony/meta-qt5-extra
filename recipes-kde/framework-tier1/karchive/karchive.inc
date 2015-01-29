@@ -5,9 +5,10 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde
 
 DEPENDS += "bzip2 xz zlib"
 
 SRCREV = "05dd0f7fac116d905e37e01807b7d20489ceb1ca"
-PV = "5.7.0"

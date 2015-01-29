@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib pkgconfig
 
 DEPENDS += "networkmanager"
