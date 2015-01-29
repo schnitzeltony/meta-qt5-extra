@@ -5,11 +5,13 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib
 
 DEPENDS += "karchive kconfig kservice kcoreaddons"
 
-SRCREV = "7a8d7ffd3480c8b981bce2774cf5d968e2912e5b"
+SRCREV = "df487b4808daa448692b8d3277f745a952e71945"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Emoticons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
