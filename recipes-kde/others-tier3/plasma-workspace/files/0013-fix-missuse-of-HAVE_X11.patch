@@ -1,0 +1,70 @@
+From e75ca437349155a3a40eea7e688657065efc777d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 28 Jan 2015 10:39:36 +0100
+Subject: [PATCH] fix missuse of HAVE_X11
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+fixes in X11-less environments:
+
+| shell/scripting/appinterface.cpp:41:22: fatal error: X11/Xlib.h: No such file or directory
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ shell/scripting/appinterface.cpp | 4 ++--
+ soliduiserver/soliduiserver.cpp  | 2 +-
+ startkde/kcminit/main.cpp        | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/shell/scripting/appinterface.cpp b/shell/scripting/appinterface.cpp
+index 4153c9b..6be429e 100644
+--- a/shell/scripting/appinterface.cpp
++++ b/shell/scripting/appinterface.cpp
+@@ -37,7 +37,7 @@
+ #include <windows.h>
+ #endif
+ 
+-#ifdef HAVE_X11
++#if HAVE_X11
+ #include <X11/Xlib.h>
+ #include <fixx11h.h>
+ #endif
+@@ -137,7 +137,7 @@ int AppInterface::multiheadScreen() const
+ {
+     int id = -1;
+ 
+-#ifdef HAVE_X11
++#if HAVE_X11
+     if (multihead()) {
+         // with multihead, we "lie" and say that screen 0 is the default screen, in fact, we pretend
+         // we have only one screen at all
+diff --git a/soliduiserver/soliduiserver.cpp b/soliduiserver/soliduiserver.cpp
+index 2af2555..1afe2d8 100644
+--- a/soliduiserver/soliduiserver.cpp
++++ b/soliduiserver/soliduiserver.cpp
+@@ -222,7 +222,7 @@ void SolidUiServer::reparentDialog(QWidget *dialog, WId wId, const QString &appI
+ 
+     KWindowSystem::setMainWindow(dialog, wId); // correct, set dialog parent
+ 
+-#ifdef HAVE_X11
++#if HAVE_X11
+     if (modal) {
+         KWindowSystem::setState(dialog->winId(), NET::Modal);
+     } else {
+diff --git a/startkde/kcminit/main.cpp b/startkde/kcminit/main.cpp
+index 4724323..0fa2dda 100644
+--- a/startkde/kcminit/main.cpp
++++ b/startkde/kcminit/main.cpp
+@@ -163,7 +163,7 @@ KCMInit::KCMInit( KCmdLineArgs* args )
+   // This key has no GUI apparently
+   KConfig _config( "kcmdisplayrc" );
+   KConfigGroup config(&_config, "X11");
+-#ifdef HAVE_X11
++#if HAVE_X11
+   bool multihead = !config.readEntry( "disableMultihead", false) &&
+                     (QGuiApplication::screens().count() > 1);
+ #else
+-- 
+1.8.3.1
+

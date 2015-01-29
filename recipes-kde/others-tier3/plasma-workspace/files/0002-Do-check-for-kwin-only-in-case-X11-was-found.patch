@@ -15,15 +15,15 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 582b58e..d86e815 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -21,7 +21,6 @@ find_package(KF5 REQUIRED COMPONENTS PlasmaQuick)
- find_package(KF5 REQUIRED COMPONENTS SysGuard)
- find_package(KF5 REQUIRED COMPONENTS Screen)
+@@ -23,7 +23,6 @@ find_package(KF5 5.0.93 REQUIRED COMPONENTS Screen)
+ # Baloo has a different version scheme than KF5 for now
+ find_package(KF5 5.1 REQUIRED COMPONENTS Baloo)
  find_package(KF5TextEditor)
 -find_package(KWinDBusInterface CONFIG REQUIRED)
+ find_package(KF5WebKit)
  
  include(KDEInstallDirs)
- include(KDECMakeSettings)
-@@ -121,6 +120,7 @@ add_subdirectory(freespacenotifier)
+@@ -144,6 +143,7 @@ add_subdirectory(freespacenotifier)
  add_subdirectory(klipper)
  add_subdirectory(krunner)
  if(HAVE_X11)

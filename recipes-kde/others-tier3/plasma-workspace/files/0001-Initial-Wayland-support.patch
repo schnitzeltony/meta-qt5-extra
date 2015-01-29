@@ -18,13 +18,13 @@ The remaining components will be ported in future commits.
  CMakeLists.txt                                 |  21 +-
  kglobalaccel/config-kglobalaccel.h.cmake       |   1 +
  ksplash/ksplashqml/CMakeLists.txt              |  24 ++
- ksplash/ksplashqml/SplashApp.cpp               | 129 +++++---
- ksplash/ksplashqml/SplashApp.h                 |  17 +-
- ksplash/ksplashqml/SplashAppWayland.cpp        |  78 +++++
- ksplash/ksplashqml/SplashAppWayland_p.h        |  47 +++
- ksplash/ksplashqml/SplashAppX11.cpp            |  30 ++
- ksplash/ksplashqml/SplashAppX11_p.h            |  33 ++
- ksplash/ksplashqml/SplashApp_p.h               |  56 ++++
+ ksplash/ksplashqml/splashapp.cpp               | 129 +++++---
+ ksplash/ksplashqml/splashapp.h                 |  17 +-
+ ksplash/ksplashqml/splashappwayland.cpp        |  78 +++++
+ ksplash/ksplashqml/splashappwayland_p.h        |  47 +++
+ ksplash/ksplashqml/splashappx11.cpp            |  30 ++
+ ksplash/ksplashqml/splashappx11_p.h            |  33 ++
+ ksplash/ksplashqml/splashapp_p.h               |  56 ++++
  ksplash/ksplashqml/config-ksplashqml.h.cmake   |   2 +
  libkworkspace/config-libkworkspace.h.cmake     |   7 +-
  libtaskmanager/CMakeLists.txt                  |   8 +-
@@ -61,11 +61,11 @@ The remaining components will be ported in future commits.
  shell/platform/waylandinterface.h              |  47 +++
  shell/shellmanager.cpp                         |  12 +
  45 files changed, 2236 insertions(+), 743 deletions(-)
- create mode 100644 ksplash/ksplashqml/SplashAppWayland.cpp
- create mode 100644 ksplash/ksplashqml/SplashAppWayland_p.h
- create mode 100644 ksplash/ksplashqml/SplashAppX11.cpp
- create mode 100644 ksplash/ksplashqml/SplashAppX11_p.h
- create mode 100644 ksplash/ksplashqml/SplashApp_p.h
+ create mode 100644 ksplash/ksplashqml/splashappwayland.cpp
+ create mode 100644 ksplash/ksplashqml/splashappwayland_p.h
+ create mode 100644 ksplash/ksplashqml/splashappx11.cpp
+ create mode 100644 ksplash/ksplashqml/splashappx11_p.h
+ create mode 100644 ksplash/ksplashqml/splashapp_p.h
  create mode 100644 ksplash/ksplashqml/config-ksplashqml.h.cmake
  create mode 100644 libtaskmanager/task_wayland.cpp
  create mode 100644 shell/platform/platformdesktopview.cpp
@@ -163,21 +163,21 @@ index 16c58a0..59a1a3c 100644
 +
  set(ksplashqml_SRCS
      main.cpp
-     SplashApp.cpp
-     SplashWindow.cpp
+     splashapp.cpp
+     splashwindow.cpp
     )
  
 +if(HAVE_X11)
 +    set(ksplashqml_SRCS
 +        ${ksplashqml_SRCS}
-+        SplashAppX11.cpp
++        splashappx11.cpp
 +    )
 +endif()
 +
 +if(HAVE_WAYLAND)
 +    set(ksplashqml_SRCS
 +        ${ksplashqml_SRCS}
-+        SplashAppWayland.cpp
++        splashappwayland.cpp
 +    )
 +endif()
 +
@@ -195,10 +195,10 @@ index 16c58a0..59a1a3c 100644
  install(TARGETS ksplashqml ${INSTALL_TARGETS_DEFAULT_ARGS})
  install(FILES org.kde.KSplash.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR})
  
-diff --git a/ksplash/ksplashqml/SplashApp.cpp b/ksplash/ksplashqml/SplashApp.cpp
+diff --git a/ksplash/ksplashqml/splashapp.cpp b/ksplash/ksplashqml/splashapp.cpp
 index e68db1b..4e1ba55 100644
---- a/ksplash/ksplashqml/SplashApp.cpp
-+++ b/ksplash/ksplashqml/SplashApp.cpp
+--- a/ksplash/ksplashqml/splashapp.cpp
++++ b/ksplash/ksplashqml/splashapp.cpp
 @@ -1,6 +1,7 @@
  /*
   *   Copyright (C) 2010 Ivan Cukic <ivan.cukic(at)kde.org>
@@ -209,17 +209,17 @@ index e68db1b..4e1ba55 100644
   *   it under the terms of the GNU General Public License version 2,
 @@ -20,6 +21,16 @@
  
- #include "SplashWindow.h"
- #include "SplashApp.h"
-+#include "SplashApp_p.h"
+ #include "splashwindow.h"
+ #include "splashapp.h"
++#include "splashapp_p.h"
 +
 +#include "config-ksplashqml.h"
 +
 +#if HAVE_X11
-+#  include "SplashAppX11_p.h"
++#  include "splashappx11_p.h"
 +#endif
 +#if HAVE_WAYLAND
-+#  include "SplashAppWayland_p.h"
++#  include "splashappwayland_p.h"
 +#endif
  
  #include <QPixmap>
@@ -398,10 +398,10 @@ index e68db1b..4e1ba55 100644
          w->deleteLater();
      });
  }
-diff --git a/ksplash/ksplashqml/SplashApp.h b/ksplash/ksplashqml/SplashApp.h
+diff --git a/ksplash/ksplashqml/splashapp.h b/ksplash/ksplashqml/splashapp.h
 index 1be9d0b..86d86c7 100644
---- a/ksplash/ksplashqml/SplashApp.h
-+++ b/ksplash/ksplashqml/SplashApp.h
+--- a/ksplash/ksplashqml/splashapp.h
++++ b/ksplash/ksplashqml/splashapp.h
 @@ -1,6 +1,7 @@
  /*
   *   Copyright (C) 2010 Ivan Cukic <ivan.cukic(at)kde.org>
@@ -416,7 +416,7 @@ index 1be9d0b..86d86c7 100644
  #include <QGuiApplication>
 -#include <QBasicTimer>
 -#include <QDateTime>
-+#include "SplashApp_p.h"
++#include "splashapp_p.h"
  
 -class SplashWindow;
 +class SplashAppPrivate;
@@ -448,11 +448,11 @@ index 1be9d0b..86d86c7 100644
  
  private Q_SLOTS:
      void adoptScreen(QScreen*);
-diff --git a/ksplash/ksplashqml/SplashAppWayland.cpp b/ksplash/ksplashqml/SplashAppWayland.cpp
+diff --git a/ksplash/ksplashqml/splashappwayland.cpp b/ksplash/ksplashqml/splashappwayland.cpp
 new file mode 100644
 index 0000000..aa21b8f
 --- /dev/null
-+++ b/ksplash/ksplashqml/SplashAppWayland.cpp
++++ b/ksplash/ksplashqml/splashappwayland.cpp
 @@ -0,0 +1,78 @@
 +/*
 + *   Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
@@ -473,9 +473,9 @@ index 0000000..aa21b8f
 + *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 + */
 +
-+#include "SplashApp.h"
-+#include "SplashAppWayland_p.h"
-+#include "SplashWindow.h"
++#include "splashapp.h"
++#include "splashappwayland_p.h"
++#include "splashwindow.h"
 +
 +#include <QGuiApplication>
 +#include <qpa/qplatformnativeinterface.h>
@@ -531,12 +531,12 @@ index 0000000..aa21b8f
 +        m_plasmaShell->desktopReady();
 +}
 +
-+#include "SplashAppWayland.moc"
-diff --git a/ksplash/ksplashqml/SplashAppWayland_p.h b/ksplash/ksplashqml/SplashAppWayland_p.h
++#include "splashappwayland.moc"
+diff --git a/ksplash/ksplashqml/splashappwayland_p.h b/ksplash/ksplashqml/splashappwayland_p.h
 new file mode 100644
 index 0000000..24d9df8
 --- /dev/null
-+++ b/ksplash/ksplashqml/SplashAppWayland_p.h
++++ b/ksplash/ksplashqml/splashappwayland_p.h
 @@ -0,0 +1,47 @@
 +/*
 + *   Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
@@ -562,7 +562,7 @@ index 0000000..24d9df8
 +
 +#include <QtCore/QObject>
 +
-+#include "SplashApp_p.h"
++#include "splashapp_p.h"
 +
 +namespace KWayland {
 +  namespace Client {
@@ -585,11 +585,11 @@ index 0000000..24d9df8
 +};
 +
 +#endif // SPLASH_APP_WAYLAND_P_H
-diff --git a/ksplash/ksplashqml/SplashAppX11.cpp b/ksplash/ksplashqml/SplashAppX11.cpp
+diff --git a/ksplash/ksplashqml/splashappx11.cpp b/ksplash/ksplashqml/splashappx11.cpp
 new file mode 100644
 index 0000000..3464eb3
 --- /dev/null
-+++ b/ksplash/ksplashqml/SplashAppX11.cpp
++++ b/ksplash/ksplashqml/splashappx11.cpp
 @@ -0,0 +1,30 @@
 +/*
 + *   Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
@@ -610,7 +610,7 @@ index 0000000..3464eb3
 + *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 + */
 +
-+#include "SplashAppX11_p.h"
++#include "splashappx11_p.h"
 +
 +SplashAppX11::SplashAppX11(SplashApp *q)
 +    : SplashAppPrivate(q)
@@ -621,11 +621,11 @@ index 0000000..3464eb3
 +{
 +    setup();
 +}
-diff --git a/ksplash/ksplashqml/SplashAppX11_p.h b/ksplash/ksplashqml/SplashAppX11_p.h
+diff --git a/ksplash/ksplashqml/splashappx11_p.h b/ksplash/ksplashqml/splashappx11_p.h
 new file mode 100644
 index 0000000..4812082
 --- /dev/null
-+++ b/ksplash/ksplashqml/SplashAppX11_p.h
++++ b/ksplash/ksplashqml/splashappx11_p.h
 @@ -0,0 +1,33 @@
 +/*
 + *   Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
@@ -649,7 +649,7 @@ index 0000000..4812082
 +#ifndef SPLASH_APP_X11_P_H
 +#define SPLASH_APP_X11_P_H
 +
-+#include "SplashApp_p.h"
++#include "splashapp_p.h"
 +
 +class SplashAppX11 : public SplashAppPrivate
 +{
@@ -660,11 +660,11 @@ index 0000000..4812082
 +};
 +
 +#endif // SPLASH_APP_X11_P_H
-diff --git a/ksplash/ksplashqml/SplashApp_p.h b/ksplash/ksplashqml/SplashApp_p.h
+diff --git a/ksplash/ksplashqml/splashapp_p.h b/ksplash/ksplashqml/splashapp_p.h
 new file mode 100644
 index 0000000..c4a46a3
 --- /dev/null
-+++ b/ksplash/ksplashqml/SplashApp_p.h
++++ b/ksplash/ksplashqml/splashapp_p.h
 @@ -0,0 +1,56 @@
 +/*
 + *   Copyright (C) 2010 Ivan Cukic <ivan.cukic(at)kde.org>
@@ -1184,15 +1184,15 @@ index 1b07261..480af49 100644
   *  Copyright 2013 Marco Martin <mart@kde.org>
   *
   *  This program is free software; you can redistribute it and/or modify
-@@ -25,6 +26,7 @@
+@@ -24,6 +25,7 @@
+ #include "panelconfigview.h"
  #include <QtCore/qpointer.h>
  
- class ShellCorona;
 +class PlatformDesktopView;
  
  class DesktopView : public PlasmaQuick::View
  {
-@@ -79,6 +81,7 @@ private:
+@@ -78,6 +80,7 @@ private:
      QPointer<QScreen> m_oldScreen;
      bool m_dashboardShown : 1;
      WindowType m_windowType;

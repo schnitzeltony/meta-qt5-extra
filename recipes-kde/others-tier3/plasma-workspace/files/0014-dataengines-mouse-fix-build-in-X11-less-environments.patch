@@ -1,0 +1,44 @@
+From b3c1c404169a768dc108b835056405404eff0bea Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 28 Jan 2015 11:14:17 +0100
+Subject: [PATCH] dataengines/mouse: fix build in X11-less environments
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ dataengines/mouse/CMakeLists.txt | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/dataengines/mouse/CMakeLists.txt b/dataengines/mouse/CMakeLists.txt
+index b744a6c..e9d56a3 100644
+--- a/dataengines/mouse/CMakeLists.txt
++++ b/dataengines/mouse/CMakeLists.txt
+@@ -11,16 +11,21 @@ endif ()
+ add_library(plasma_engine_mouse MODULE ${mouse_engine_SRCS})
+ target_link_libraries(plasma_engine_mouse
+     Qt5::Widgets
+-    Qt5::X11Extras
+     KF5::Plasma
+     KF5::WindowSystem
+-    ${X11_LIBRARIES}
+ )
+ 
+ if (X11_Xfixes_FOUND)
+ 	target_link_libraries(plasma_engine_mouse ${X11_Xfixes_LIB})
+ endif ()
+ 
++if (X11_FOUND)
++    target_link_libraries(plasma_engine_mouse
++        Qt5::X11Extras
++        ${X11_LIBRARIES}
++    )
++endif ()
++
+ kcoreaddons_desktop_to_json(plasma_engine_mouse plasma-dataengine-mouse.desktop)
+ 
+ install(TARGETS plasma_engine_mouse DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/dataengine)
+-- 
+1.8.3.1
+
