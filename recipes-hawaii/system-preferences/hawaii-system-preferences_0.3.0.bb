@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
 inherit cmake_qt5
 
 # TBD: libhawaii is already marekd as abandoned
-DEPENDS = "qtbase qtdeclarative qtquickcontrols polkit-qt-1 qtconfiguration libhawaii pss qtaccountsservice qttools extra-cmake-modules-native"
+DEPENDS = "qtbase qtdeclarative qtquickcontrols polkit-qt-1 qtconfiguration libhawaii hawaii-shell qtaccountsservice qttools extra-cmake-modules-native"
 
 SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git;protocol=git;branch=master"
 SRCREV = "4f7aaed8fe5ace9d5efcdec160c963ff101c845f"
