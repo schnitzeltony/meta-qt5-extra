@@ -27,7 +27,8 @@ DEPENDS += " \
 SRCREV = "ec023712125ffc0a8cbb617c93285bdaa21f6381"
 
 PACKAGECONFIG[full] = "-DKIOCORE_ONLY=OFF,-DKIOCORE_ONLY=ON, kbookmarks kcompletion kconfigwidgets kiconthemes kitemviews kjobwidgets kwidgetsaddons kwindowsystem"
-PACKAGECONFIG ??= ""
+# Note that kdeclarative fails without KIOWidgets
+PACKAGECONFIG ??= "full"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5KIO, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
