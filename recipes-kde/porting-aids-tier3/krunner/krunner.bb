@@ -3,10 +3,11 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = " \
 	file://src/abstractrunner.h;endline=18;md5=a6a49d7635ef149bcddf8c46f0eae999 \
 "
+require ../../kf5-version.inc
 
 inherit kde cmake-lib
 
-SRCREV = "174472e8aae63899dbf09c9c07ba249d84d4a4c0"
+SRCREV = "f79f3177cc5ea057e128be791c3cbe198f18038f"
 
 DEPENDS += "qtdeclarative kconfig kcoreaddons ki18n kio kservice plasma-framework solid threadweaver"
 
