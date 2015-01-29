@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
+require ../../kf5-version.inc
+
 inherit kde cmake-lib
 
 DEPENDS += " \
@@ -21,7 +23,7 @@ DEPENDS += " \
 	attica \
 "
 
-SRCREV = "bb51cf99c76d3d334ef9272e2b9d6ee930b2329e"
+SRCREV = "1ccdf90d041bd945bfd33e275f4f00b3ea51c4aa"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5NewStuff, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
