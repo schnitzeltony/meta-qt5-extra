@@ -1,14 +1,47 @@
 # This class helps to align paths for cmake files in build sysroot while 
-# keeping proper paths on target packages
+# keeping proper paths for target packages/rootfs
 #
 # Alignment is controlled by
 #
 # CMAKE_HIDE_ERROR[unique-id] = "dir, search, replace"
 #
-# -f<file-in-WORKDIR>
-# -s<string>
+# 'unique-id': 
+#    string value of your choice e.g. "1", "2"...
+#    !!COMMON PITFALL!!: Copy & Paste CMAKE_HIDE_ERROR lines without updating unique-id -> 
+#    not all lines are evaluated!!
+#
+# 'dir':
+#    cmake configuration files are ususally installed as
+#
+#    1. ${libdir}/cmake/<CMakePackageName>/*.cmake
+#    or
+#    2. ${datadir}/cmake/<CMakePackageName>/*.cmake
+#    
+#    'dir' can be any matching part of 1. and 2. but suggestion is to use
+#    is <CMakePackageName>
+#
+# 'search'/'replace':
+#    cmake configuration files are scanned and the resulting string found in 'search'
+#    is replaced by resulting string of 'replace'. To create a resulting string currently
+#    6 command-line like options are available (see parseparam below):
+#
+#      -f<file-in-WORKDIR>:
+#        Resulting string is taken from the file <file-in-WORKDIR>. This option should be
+#        choosen for longer strings or stings containg ','.
+#      -F<file-in-WORKDIR>:
+#        same as -f but bitbake variables are expanded e.g '${libdir}' -> '/usr/lib'
+#      -s<string>
+#        Resulting string is <string>
+#      -S<string>
+#        same as -f but bitbake variables are expanded e.g '${libdir}' -> '/usr/lib'
+#      -c<shell-command>
+#        Resulting string is created by the shell command found in <shell-command>
+#      -C<shell-command>
+#        same as -c but bitbake variables are expanded BEFORE executing shell command
+
 # -c<shell-command>
 
+# filename for the file containg full names of all cmakefiles staged
 CMAKEINSTALLED = "${WORKDIR}/staged_cmake_files"
 
 # 1. basic checks for CMAKE_HIDE_ERROR
@@ -94,7 +127,6 @@ python do_populate_sysroot_append() {
     else:
         # parse CMAKE_HIDE_ERROR[..]
         cmakehideflags = d.getVarFlags("CMAKE_HIDE_ERROR") or {}
-        sysroot = d.getVar('SYSROOT_DESTDIR', True)
 
         for flag, flagval in sorted(cmakehideflags.items()):
             items = flagval.split(",")
@@ -124,26 +156,26 @@ python do_populate_sysroot_append() {
             # Now do the replacements
             if len(matching_files) > 0:
                 replacement_performed = False
-                # HACK/REVISIT: do_siteconfig causes double replacement.
-                # Add a marker to detect that we already replaced
-                replace_key = "#CMAKE_HIDE_ERROR[%s]-%s replaced" % (flag, pn)
                 for filename in matching_files:
                     filename = filename.replace('\n','')
                     f = open(filename, 'r')
                     cmakestr = f.read()
                     f.close()
-                    if cmakestr.find(replace_key) == -1:
-                        cmakestr_new = cmakestr.replace(search, replace)
-                        # Only overwrite if necessary
+                    cmakestr_new = cmakestr.replace(search, replace)
+                    if cmakestr_new != cmakestr:
+                        replacement_performed = True
+                        # Undo double replacement possibly caused by absolute paths from other libraries 
+                        # (e.g fixed at do_install)
+                        doublereplace = replace.replace(search, replace)
+                        cmakestr_new = cmakestr_new.replace(doublereplace, replace)
+                        # do write only if necessary
                         if cmakestr_new != cmakestr:
+                            # we delete the old file to unbreak link to image-path path causing
+                            # package polution with sysroot paths
+                            os.remove(filename)
                             f = open(filename, 'w')
                             f.write(cmakestr_new)
-                            f.write("\n")
-                            f.write(replace_key)
                             f.close()
-                            replacement_performed = True
-                    else:
-                        replacement_performed = True
                 if not replacement_performed:
                     bb.warn("No cmake replacements performed in %s for CMAKE_HIDE_ERROR[%s]" % (pn, flag))
 }
