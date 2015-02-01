@@ -64,11 +64,15 @@ RDEPENDS_${PN} = "         \
     kwidgetsaddons \
     libksysguard \
     polkit-qt-1 \
-    kwayland \
-    kwin \
     extra-cmake-modules \ 
     libkscreen \
     phonon \
     baloo \
     plasma-workspace \
+    \
+    kwayland \
 "
+
+#    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)}
+
+
