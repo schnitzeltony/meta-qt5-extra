@@ -21,8 +21,6 @@ DEPENDS += " \
 
 SRC_URI += " \
     file://0002-make-build-process-find-native-enhancedqdbusxml2cpp.patch \
-    file://0003-add-fPIC-to-libHawaiiQtXDG-compiler-options.patch \
-    file://0004-Add-an-option-ENABLE_MAINLINE_QTXDG-to-use-mainline-.patch \
 "
 
 EXTRA_OECMAKE += "-DENABLE_MAINLINE_QTXDG=ON"
