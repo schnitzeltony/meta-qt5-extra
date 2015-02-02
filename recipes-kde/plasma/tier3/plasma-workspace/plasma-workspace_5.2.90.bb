@@ -29,7 +29,7 @@ DEPENDS += " \
     kcrash \
     libksysguard \
     libkscreen \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver libsm libxcb", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver libsm libxcb kwin", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "kwayland", "", d)} \
     zlib \
 "
