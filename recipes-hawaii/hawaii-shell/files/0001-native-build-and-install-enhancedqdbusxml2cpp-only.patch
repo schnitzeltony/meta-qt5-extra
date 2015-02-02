@@ -20,11 +20,12 @@ diff --git a/3rdparty/CMakeLists.txt b/3rdparty/CMakeLists.txt
 index a30bd32..8d34a3b 100644
 --- a/3rdparty/CMakeLists.txt
 +++ b/3rdparty/CMakeLists.txt
-@@ -1,3 +1,2 @@
--add_subdirectory(libqtxdg)
+@@ -1,5 +1 @@
+-if(NOT QTXDG_FOUND)
+-    add_subdirectory(libqtxdg)
+-endif()
  add_subdirectory(qlogind)
 -add_subdirectory(sigwatch)
-+
 diff --git a/3rdparty/qlogind/CMakeLists.txt b/3rdparty/qlogind/CMakeLists.txt
 index e4ce7ae..e7e1486 100644
 --- a/3rdparty/qlogind/CMakeLists.txt
@@ -47,7 +48,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 116c085..e088adb 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -65,12 +65,13 @@ set(KF5_MIN_VERSION "5.1.0")
+@@ -66,12 +66,9 @@ set(KF5_MIN_VERSION "5.1.0")
  # Find Qt5
  find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
               Core
@@ -57,19 +58,15 @@ index 116c085..e088adb 100644
 -             Qml
 -             Quick)
 +             DBus)
-+#             Gui
-+#             Widgets
-+#             Qml
-+#             Quick)
  
 +if(False)
  # Find KF5
  find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
               KDELibs4Support
-@@ -83,9 +84,11 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
- 
- # Find Green Island
- find_package(GreenIsland REQUIRED)
+@@ -89,9 +86,11 @@ find_package(GreenIsland REQUIRED)
+ if(ENABLE_MAINLINE_QTXDG)
+     find_package(QT5XDG REQUIRED)
+ endif()
 +endif()
  
  # Subdirectories
@@ -78,7 +75,7 @@ index 116c085..e088adb 100644
  add_subdirectory(compositor)
  add_subdirectory(data)
  add_subdirectory(declarative)
-@@ -97,6 +100,7 @@ add_subdirectory(session)
+@@ -103,6 +102,7 @@ add_subdirectory(session)
  add_subdirectory(shells)
  add_subdirectory(styles)
  add_subdirectory(themes)
