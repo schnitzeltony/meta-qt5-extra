@@ -69,10 +69,11 @@ RDEPENDS_${PN} = "         \
     phonon \
     baloo \
     plasma-workspace \
+    kdecoration \
     \
     kwayland \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
 "
 
-#    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)}
 
 
