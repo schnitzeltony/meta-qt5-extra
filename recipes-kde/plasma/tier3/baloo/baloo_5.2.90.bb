@@ -10,6 +10,7 @@ inherit kde cmake-lib
 DEPENDS += "ki18n kconfig kidletime kitemmodels kinit kauth kcrash solid kio kdelibs4support kfilemetadata ktexteditor xapian-core"
 
 SRCREV = "e56b27a5e2078a989216eebcd9651fec3da967b6"
+S = "${WORKDIR}/git"
 SRC_URI += "file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch"
 
 # cross libs / headers

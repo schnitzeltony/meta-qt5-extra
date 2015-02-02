@@ -5,8 +5,10 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 "
 
-SRCREV = "be1c7112d477acbcf16904c20d38ca1f15fdaf05"
 inherit kde cmake-lib
+
+SRCREV = "be1c7112d477acbcf16904c20d38ca1f15fdaf05"
+S = "${WORKDIR}/git"
 
 SRC_URI += " \
     file://0001-fix-configuration-build-on-x-less-systems.patch \

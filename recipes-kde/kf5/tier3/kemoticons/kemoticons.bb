@@ -12,6 +12,7 @@ inherit kde cmake-lib
 DEPENDS += "karchive kconfig kservice kcoreaddons"
 
 SRCREV = "df487b4808daa448692b8d3277f745a952e71945"
+S = "${WORKDIR}/git"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Emoticons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

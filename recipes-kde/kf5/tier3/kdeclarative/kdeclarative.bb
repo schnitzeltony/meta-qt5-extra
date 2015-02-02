@@ -12,6 +12,7 @@ inherit kde cmake-lib
 DEPENDS += "qtdeclarative kconfig ki18n kiconthemes kio kwidgetsaddons kwindowsystem kglobalaccel kguiaddons libepoxy"
 
 SRCREV = "e86059398d493a320b6f228858ea19c8a168b4ba"
+S = "${WORKDIR}/git"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Declarative, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

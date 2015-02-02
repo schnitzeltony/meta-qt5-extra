@@ -12,6 +12,8 @@ inherit kde cmake-lib
 DEPENDS += "kitemviews kconfig kglobalaccel kconfigwidgets ki18n kiconthemes ktextwidgets kwidgetsaddons kwindowsystem attica"
 
 SRCREV = "41a2bcc80650843aee553a9b47e1ed86fb898268"
+S = "${WORKDIR}/git"
+
 # REVISIT remove ugly hack for wayland-only environments
 SRC_URI += "file://0001-workaround-session-less-qtbase-required-for-pure-way.patch"
 

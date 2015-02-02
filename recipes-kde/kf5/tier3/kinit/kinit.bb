@@ -21,6 +21,7 @@ DEPENDS += " \
 "
 
 SRCREV = "d96cf2f4ebb63ef63e7b9c43987a2f85429db8f8"
+S = "${WORKDIR}/git"
 SRC_URI += "file://0001-return-WAYLAND_DISPLAY-if-all-known-options-fail.patch"
 
 FILES_${PN} += "${datadir}/dbus-1 ${libdir}/libkdeinit5_klauncher.so"

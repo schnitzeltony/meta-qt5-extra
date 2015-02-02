@@ -12,3 +12,4 @@ inherit kde
 DEPENDS += "bzip2 xz zlib"
 
 SRCREV = "05dd0f7fac116d905e37e01807b7d20489ceb1ca"
+S = "${WORKDIR}/git"

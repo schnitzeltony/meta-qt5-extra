@@ -8,6 +8,7 @@ require ../../kf5-version.inc
 inherit kde cmake-lib
 
 SRCREV = "f79f3177cc5ea057e128be791c3cbe198f18038f"
+S = "${WORKDIR}/git"
 
 DEPENDS += "qtdeclarative kconfig kcoreaddons ki18n kio kservice plasma-framework solid threadweaver"
 

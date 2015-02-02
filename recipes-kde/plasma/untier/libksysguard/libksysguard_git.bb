@@ -25,6 +25,7 @@ DEPENDS += " \
 "
 
 SRCREV = "e52a86fde551660853e94f33fcdefc7900eb1c45"
+S = "${WORKDIR}/git"
 PV = "5.1.90+git${SRCPV}"
 
 # cross libs / headers

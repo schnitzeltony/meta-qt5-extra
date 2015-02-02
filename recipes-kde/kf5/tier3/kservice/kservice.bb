@@ -11,6 +11,7 @@ require ../../kf5-version.inc
 inherit kde cmake-lib
 
 SRCREV = "75cb3119ee0a5e0bfe2b4c38a23e346d93dc465e"
+S = "${WORKDIR}/git"
 
 DEPENDS += "kconfig kcoreaddons kcrash kdbusaddons ki18n kdoctools"
 

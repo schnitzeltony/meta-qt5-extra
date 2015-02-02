@@ -19,6 +19,7 @@ OECMAKE_EXTRA_ROOT_PATH = "${STAGING_DIR}/${MACHINE}"
 EXTRA_OECMAKE += "-DOE_ROOT_PATH_PREFIX=${STAGING_DIR}/${MACHINE}/usr"
 
 SRCREV = "93b844cdcfde640acfb231429c1c685de2c3cc4f"
+S = "${WORKDIR}/git"
 
 SRC_URI += " \
 	file://0001-Add-cmdline-param-to-help-find-xsl.patch \

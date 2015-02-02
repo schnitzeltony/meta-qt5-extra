@@ -9,6 +9,7 @@ require ../../kf5-version.inc
 inherit kde cmake-lib
 
 SRCREV = "72645d0ca8942b2550377567fe861183de8ab038"
+S = "${WORKDIR}/git"
 
 DEPENDS += "qtsvg qttools kjs ki18n kdoctools"
 

@@ -11,6 +11,7 @@ inherit kde cmake-lib
 DEPENDS += "kcoreaddons kwindowsystem"
 
 SRCREV = "7ec5be038c40bee9471b07752b5a0036339d7687"
+S = "${WORKDIR}/git"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Crash, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

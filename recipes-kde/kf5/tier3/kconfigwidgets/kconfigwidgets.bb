@@ -11,6 +11,7 @@ inherit kde cmake-lib
 DEPENDS += "kauth kcodecs kdoctools kguiaddons kwidgetsaddons"
 
 SRCREV = "1335e3e55ab7f68e59aae9bf5529eeabc9738d27"
+S = "${WORKDIR}/git"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5ConfigWidgets, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

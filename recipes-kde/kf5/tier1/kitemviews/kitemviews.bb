@@ -10,6 +10,7 @@ require ../../kf5-version.inc
 inherit kde cmake-lib
 
 SRCREV = "241e63e2010b43c0ed5a21a0d411fd80425bd0f6"
+S = "${WORKDIR}/git"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5ItemViews, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

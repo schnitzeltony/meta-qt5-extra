@@ -11,6 +11,7 @@ inherit kde cmake-lib
 DEPENDS += "ki18n"
 
 SRCREV = "276398a036d336542de90b3f4457ebb3066f8364"
+S = "${WORKDIR}/git"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5UnitConversion, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

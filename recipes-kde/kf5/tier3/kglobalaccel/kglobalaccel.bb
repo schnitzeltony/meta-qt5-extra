@@ -19,6 +19,7 @@ DEPENDS += " \
 
 SRC_URI += "file://0001-HACK-Add-a-stub-runtime-implementation-to-enable-bui.patch"
 SRCREV = "f9eb427b293c40eec96784e059054bafd431c9bc"
+S = "${WORKDIR}/git"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5GlobalAccel, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

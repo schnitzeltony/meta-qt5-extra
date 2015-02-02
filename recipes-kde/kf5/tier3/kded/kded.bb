@@ -11,6 +11,7 @@ inherit kde cmake-lib
 DEPENDS += "kconfig kcoreaddons kcrash kdbusaddons kdoctools kinit kservice"
 
 SRCREV = "a72c1fcbf6600c1c84e71c312a586386dcd7ce62"
+S = "${WORKDIR}/git"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KDED, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

@@ -15,6 +15,7 @@ DEPENDS += "ki18n karchive"
 DEPENDS += "taglib"
 
 SRCREV = "a674091d00b8159a788afef3d65436529aae3ba7"
+S = "${WORKDIR}/git"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5FileMetaData, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

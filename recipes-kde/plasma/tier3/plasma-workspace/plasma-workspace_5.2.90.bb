@@ -36,6 +36,7 @@ DEPENDS += " \
 
 
 SRCREV = "38cf27146758738c0885810a42a0ce2b678de9ae"
+S = "${WORKDIR}/git"
 SRC_URI += " \
     file://0001-Initial-Wayland-support.patch \
     file://0002-Do-check-for-kwin-only-in-case-X11-was-found.patch \

@@ -13,6 +13,7 @@ SRC_URI += " \
     file://0004-Server-side-interface.patch \
 "
 SRCREV = "bc9ab6731700eabf17e1b193d13c904f68f7ebe0"
+S = "${WORKDIR}/git"
 PV = "5.1.90+git${SRCPV}"
 
 DEPENDS += "wayland wayland-native"

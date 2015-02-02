@@ -47,7 +47,7 @@ DEPENDS += " \
 "
 
 SRCREV = "3b6ab89617fd8b94bc926055a13df772036b33d2"
-
+S = "${WORKDIR}/git"
 SRC_URI += "file://0001-fix-build-for-qtbase-without-session-management.patch"
 
 # REVISIT: this should be fixed in meta-fsl-arm

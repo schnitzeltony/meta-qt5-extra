@@ -9,6 +9,7 @@ require ../../kf5-version.inc
 inherit kde cmake-lib
 
 SRCREV = "4b5fa02f4b634961960aa9672aafef3369129a41"
+S = "${WORKDIR}/git"
 
 CMAKE_HIDE_ERROR[1] = "KF5Attica, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5Attica, -S${includedir}, -S${STAGING_INCDIR}"

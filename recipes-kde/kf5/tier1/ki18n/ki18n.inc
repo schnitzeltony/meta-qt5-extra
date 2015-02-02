@@ -10,3 +10,5 @@ require ../../kf5-version.inc
 inherit kde
 
 SRCREV = "1a5df65f06d5f51da1d6e1f06229ebd95b3161d9"
+S = "${WORKDIR}/git"
+

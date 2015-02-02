@@ -12,6 +12,7 @@ require ../../kf5-version.inc
 inherit kde cmake-lib
 
 SRCREV = "f5bbceadda6b80426a889e1554c2f4ee369840e3"
+S = "${WORKDIR}/git"
 
 CMAKE_HIDE_ERROR[1] = "KF5WidgetsAddons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5WidgetsAddons, -S${includedir}, -S${STAGING_INCDIR}"

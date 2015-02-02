@@ -24,6 +24,7 @@ DEPENDS += " \
 "
 
 SRCREV = "1ccdf90d041bd945bfd33e275f4f00b3ea51c4aa"
+S = "${WORKDIR}/git"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5NewStuff, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

@@ -11,6 +11,7 @@ inherit kde cmake-lib
 DEPENDS += "boost kconfig kcoreaddons ki18n kservice kwindowsystem kglobalaccel kxmlgui kio kdbusaddons kdeclarative kcmutils"
 
 SRCREV = "26fbf4fab77f3458893715541f3abae5743ad59c"
+S = "${WORKDIR}/git"
 SRC_URI += "file://0001-replace-try_run-by-try_compile-in-compiler-feature-c.patch"
 
 # cross libs / headers

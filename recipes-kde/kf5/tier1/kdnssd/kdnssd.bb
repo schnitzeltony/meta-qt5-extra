@@ -12,6 +12,7 @@ inherit kde cmake-lib
 DEPENDS += "avahi"
 
 SRCREV = "980e5035baf769894da000d8db8867e47224dbec"
+S = "${WORKDIR}/git"
 
 CMAKE_HIDE_ERROR[1] = "KF5DNSSD, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5DNSSD, -S${includedir}, -S${STAGING_INCDIR}"

@@ -11,5 +11,6 @@ inherit kde perlnative
 DEPENDS += "karchive kconfig kguiaddons ki18n kio kparts sonnet"
 
 SRCREV = "0d0924fb7900505bc9f9fab7767e35bb2b417f30"
+S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"

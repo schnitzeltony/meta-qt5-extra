@@ -2,8 +2,6 @@ KDE_BRANCH ?= "master"
 
 SRC_URI = "git://anongit.kde.org/${BPN};protocol=git;branch=${KDE_BRANCH}"
 
-S = "${WORKDIR}/git"
-
 DEPENDS += "qtbase extra-cmake-modules-native"
 
 # extra-cmake-modules cause dependent to check for python

@@ -14,3 +14,4 @@ SRC_URI += " \
 	file://0002-fix-build-for-QT_NO_SESSIONMANAGER.patch \
 "
 SRCREV = "b796420399d81b96ce9d1a9ae8712018b2f67171"
+S = "${WORKDIR}/git"

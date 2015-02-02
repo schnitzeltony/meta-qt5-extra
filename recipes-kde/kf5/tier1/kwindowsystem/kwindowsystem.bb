@@ -9,6 +9,7 @@ require ../../kf5-version.inc
 inherit kde cmake-lib
 
 SRCREV = "5bfbdc5e46c3dfdcf7fab02f45d835ecb559316c"
+S = "${WORKDIR}/git"
 
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)}"
 

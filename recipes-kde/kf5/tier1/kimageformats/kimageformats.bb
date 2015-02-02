@@ -11,6 +11,7 @@ inherit kde
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
 
 SRCREV = "6b72930cb2c8255cd14a8f0924af693b23be37c1"
+S = "${WORKDIR}/git"
 
 FILES_${PN} += "${libdir}/plugins ${datadir}/kservices5"
 FILES_${PN}-dbg += "${libdir}/plugins/*/.debug"

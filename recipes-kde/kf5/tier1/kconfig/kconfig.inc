@@ -13,5 +13,6 @@ SRC_URI += " \
 	file://0001-kconfiggui-do-only-compile-in-case-sessions-are-aval.patch \
 "
 SRCREV = "fef653b071c97cc22117a215cc858be963a479ed"
+S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"

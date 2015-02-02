@@ -9,6 +9,7 @@ require ../../kf5-version.inc
 inherit kde cmake-lib
 
 SRCREV = "124723a60eb6eabbb081255ef13cd71285ff5faa"
+S = "${WORKDIR}/git"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Plotting, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

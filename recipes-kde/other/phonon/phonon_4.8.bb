@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde cmake-lib
 
 SRCREV = "e08fdba6b64ad6a09a9dcd6696de4d82f2dd8224"
+S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DPHONON_BUILD_DEMOS=ON -DPHONON_BUILD_PHONON4QT5=ON"
 
