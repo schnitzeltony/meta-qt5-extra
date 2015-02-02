@@ -11,7 +11,7 @@
 #    not all lines are evaluated!!
 #
 # 'dir':
-#    cmake configuration files are ususally installed as
+#    cmake configuration files are usually installed as
 #
 #    1. ${libdir}/cmake/<CMakePackageName>/*.cmake
 #    or
