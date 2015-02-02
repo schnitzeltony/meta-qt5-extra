@@ -1,4 +1,4 @@
-SUMMARY = "LXQt system settings cente"
+SUMMARY = "LXQt system settings center"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0964c689fcf4c21c6797ea87408416b6"
 
