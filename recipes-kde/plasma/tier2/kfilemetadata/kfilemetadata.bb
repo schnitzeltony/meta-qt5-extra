@@ -14,7 +14,7 @@ PV = "5.6.0"
 SRC_URI[md5sum] = "38104ee93350ef69428e645da1564a0d"
 SRC_URI[sha256sum] = "96a4b5dc68f30ca1f5db773c431d1c1963fe1c6c95f54847e9cb60d10ca3e96d"
 
-DEPENDS += "ki18n karchive"
+DEPENDS += "libav ki18n karchive"
 
 # TODO: optionals PACKAGECONFIG (not yet in oe: poppler-qt5 / exiv2 / ffmpeg / epub)
 DEPENDS += "taglib"
