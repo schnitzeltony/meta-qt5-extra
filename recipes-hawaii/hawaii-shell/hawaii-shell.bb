@@ -4,31 +4,48 @@ require ${BPN}.inc
 
 DEPENDS += " \
     ${BPN}-native \
-    greenisland \
     qtscript \
     qtdeclarative \
+    qtgraphicaleffects \
     qtquickcontrols \
+    qtsvg \
+    \
     libqtxdg \
-    plasma-framework \
-    plasma-workspace \
-    ki18n \
-    kdelibs4support \
-    kitemmodels \
-    krunner \
+    \
+    kconfig \
+    kcoreaddons \
+    kio \
     kservice \
     solid \
+    plasma-framework \
+    plasma-workspace \
+    plasma-nm \
+    \
+    greenisland \
 "
 
+# REVISIT optionals
+DEPENDS += " \
+    alsa-lib \
+    pulseaudio \
+"
+
+# starter scripts rely on bash qdbus catchsegv
+RDEPENDS_${PN} = "bash qttools-tools qtwayland-plugins catchsegv"
+
+# REVISIT optionals
+RRECOMMENDS_${PN} += " \
+    hawaii-wallpapers \
+    hawaii-icon-themes \
+    weston \
+"
+
+   
 SRC_URI += " \
     file://0002-make-build-process-find-native-enhancedqdbusxml2cpp.patch \
 "
 
 EXTRA_OECMAKE += "-DENABLE_MAINLINE_QTXDG=ON"
-
-# starter scripts rely on bash qdbus catchsegv
-RDEPENDS_${PN} = "bash qttools-tools qtwayland-plugins catchsegv"
-
-RRECOMMENDS_${PN} += "hawaii-wallpapers"
 
 FILES_${PN} += " \
 	${datadir} \

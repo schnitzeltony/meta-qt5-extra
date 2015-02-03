@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
 inherit cmake_qt5 pythonnative
 
 SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git;protocol=git;branch=master"
-SRCREV = "00d454fb651ea8d8a949a7a94fbda8d906bf3e43"
+SRCREV = "f99682ab647cf1877df55a9937c0b2c755214d19"
 PV = "0.3.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
