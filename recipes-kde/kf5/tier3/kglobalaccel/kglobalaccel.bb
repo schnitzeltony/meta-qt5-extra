@@ -4,9 +4,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-require ../../kf5-version.inc
-
-inherit kde cmake-lib
+inherit kde-kf5 cmake-lib
 
 DEPENDS += " \
     kconfig \
@@ -17,9 +15,11 @@ DEPENDS += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 
-SRC_URI += "file://0001-HACK-Add-a-stub-runtime-implementation-to-enable-bui.patch"
+PV = "${KF5_VERSION}"
 SRCREV = "f9eb427b293c40eec96784e059054bafd431c9bc"
 S = "${WORKDIR}/git"
+
+SRC_URI += "file://0001-HACK-Add-a-stub-runtime-implementation-to-enable-bui.patch"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5GlobalAccel, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

@@ -1,8 +1,9 @@
+DEPENDS += "qtbase extra-cmake-modules-native"
+
 KDE_BRANCH ?= "master"
 
+# default git
 SRC_URI = "git://anongit.kde.org/${BPN};protocol=git;branch=${KDE_BRANCH}"
-
-DEPENDS += "qtbase extra-cmake-modules-native"
 
 # extra-cmake-modules cause dependent to check for python
 inherit cmake_qt5 pythonnative

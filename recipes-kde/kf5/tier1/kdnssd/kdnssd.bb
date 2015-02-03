@@ -5,12 +5,11 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING-CMAKE-SCRIPTS;md5=54c7042be62e169199200bc6477f04d1 \
 "
 
-require ../../kf5-version.inc
-
-inherit kde cmake-lib
+inherit kde-kf5 cmake-lib
 
 DEPENDS += "avahi"
 
+PV = "${KF5_VERSION}"
 SRCREV = "980e5035baf769894da000d8db8867e47224dbec"
 S = "${WORKDIR}/git"
 

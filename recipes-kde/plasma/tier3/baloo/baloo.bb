@@ -5,12 +5,14 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit kde cmake-lib
+inherit kde-plasma cmake-lib
 
 DEPENDS += "ki18n kconfig kidletime kitemmodels kinit kauth kcrash solid kio kdelibs4support kfilemetadata ktexteditor xapian-core"
 
-SRCREV = "e56b27a5e2078a989216eebcd9651fec3da967b6"
-S = "${WORKDIR}/git"
+PV = "5.6.0"
+SRC_URI[md5sum] = "2b3ab6d78e2e492d281d27ce4bc00e1a"
+SRC_URI[sha256sum] = "2418194eabe140c432434fdad0224bcc9d735c22960df116ff8668e4e6b5c0df"
+
 SRC_URI += "file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch"
 
 # cross libs / headers

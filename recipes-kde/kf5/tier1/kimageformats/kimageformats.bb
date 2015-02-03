@@ -4,12 +4,11 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-require ../../kf5-version.inc
-
-inherit kde
+inherit kde-kf5
 
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
 
+PV = "${KF5_VERSION}"
 SRCREV = "6b72930cb2c8255cd14a8f0924af693b23be37c1"
 S = "${WORKDIR}/git"
 

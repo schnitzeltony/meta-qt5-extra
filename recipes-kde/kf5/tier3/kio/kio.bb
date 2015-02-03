@@ -4,26 +4,25 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-require ../../kf5-version.inc
-
-inherit kde cmake-lib
+inherit kde-kf5 cmake-lib
 
 DEPENDS += " \
-	karchive \
-	kcodecs \
-	kconfig \
-	kcoreaddons \
-	kdbusaddons \
-	kdoctools \
-	ki18n \
-	knotifications \
-	kservice \
-	solid \
-	kxmlgui \
-	kwallet \
-	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)} \
+    karchive \
+    kcodecs \
+    kconfig \
+    kcoreaddons \
+    kdbusaddons \
+    kdoctools \
+    ki18n \
+    knotifications \
+    kservice \
+    solid \
+    kxmlgui \
+    kwallet \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)} \
 "
 
+PV = "${KF5_VERSION}"
 SRCREV = "ec023712125ffc0a8cbb617c93285bdaa21f6381"
 S = "${WORKDIR}/git"
 

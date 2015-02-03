@@ -6,14 +6,13 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-require ../../kf5-version.inc
-
-inherit kde cmake-lib
-
-SRCREV = "75cb3119ee0a5e0bfe2b4c38a23e346d93dc465e"
-S = "${WORKDIR}/git"
+inherit kde-kf5 cmake-lib
 
 DEPENDS += "kconfig kcoreaddons kcrash kdbusaddons ki18n kdoctools"
+
+PV = "${KF5_VERSION}"
+SRCREV = "75cb3119ee0a5e0bfe2b4c38a23e346d93dc465e"
+S = "${WORKDIR}/git"
 
 CMAKE_HIDE_ERROR[1] = "KF5Service, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5Service, -S${includedir}, -S${STAGING_INCDIR}"

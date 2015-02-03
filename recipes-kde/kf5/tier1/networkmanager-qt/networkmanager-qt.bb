@@ -4,12 +4,11 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-require ../../kf5-version.inc
-
-inherit kde cmake-lib pkgconfig
+inherit kde-kf5 cmake-lib pkgconfig
 
 DEPENDS += "networkmanager"
 
+PV = "${KF5_VERSION}"
 SRCREV = "e05ce6e7d5a39b44058ac54f8a399d0afdbffb99"
 S = "${WORKDIR}/git"
 

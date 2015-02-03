@@ -5,12 +5,22 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-require ../../kf5-version.inc
+inherit kde-kf5 cmake-lib
 
-inherit kde cmake-lib
+DEPENDS += " \
+    kitemviews \
+    kconfig \
+    kglobalaccel \
+    kconfigwidgets \
+    ki18n \
+    kiconthemes \
+    ktextwidgets \
+    kwidgetsaddons \
+    kwindowsystem \
+    attica \
+"
 
-DEPENDS += "kitemviews kconfig kglobalaccel kconfigwidgets ki18n kiconthemes ktextwidgets kwidgetsaddons kwindowsystem attica"
-
+PV = "${KF5_VERSION}"
 SRCREV = "41a2bcc80650843aee553a9b47e1ed86fb898268"
 S = "${WORKDIR}/git"
 

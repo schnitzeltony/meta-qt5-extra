@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde cmake-lib
+inherit kde-plasma cmake-lib
 
 DEPENDS += " \
 	kconfig \
@@ -46,8 +46,10 @@ DEPENDS += " \
 	virtual/egl \
 "
 
-SRCREV = "3b6ab89617fd8b94bc926055a13df772036b33d2"
-S = "${WORKDIR}/git"
+PV = "5.2.0.1"
+SRC_URI[md5sum] = "47b6ce31b45450fa702098c9f3f5ac95"
+SRC_URI[sha256sum] = "aed82bd23376b44534a01b277cab3aed012c778540320814469b446719ccdf49"
+
 SRC_URI += "file://0001-fix-build-for-qtbase-without-session-management.patch"
 
 # REVISIT: this should be fixed in meta-fsl-arm

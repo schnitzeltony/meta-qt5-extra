@@ -4,12 +4,11 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-require ../../kf5-version.inc
-
-inherit kde cmake-lib
+inherit kde-kf5 cmake-lib
 
 DEPENDS += "kcoreaddons kwindowsystem"
 
+PV = "${KF5_VERSION}"
 SRCREV = "7ec5be038c40bee9471b07752b5a0036339d7687"
 S = "${WORKDIR}/git"
 

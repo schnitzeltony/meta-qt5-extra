@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde cmake-lib
+inherit kde-plasma cmake-lib
 
 DEPENDS += " \
 	qtwebkit \
@@ -24,9 +24,9 @@ DEPENDS += " \
 	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 
-SRCREV = "e52a86fde551660853e94f33fcdefc7900eb1c45"
-S = "${WORKDIR}/git"
-PV = "5.1.90+git${SRCPV}"
+PV = "${PLASMA_VERSION}"
+SRC_URI[md5sum] = "ffc4435d1c38ebc5a89a538cc61bbf64"
+SRC_URI[sha256sum] = "977f9baea4bfdc993382476bde9669a74b9491258127ef8bef57aaf641f2de49"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5SysGuard, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

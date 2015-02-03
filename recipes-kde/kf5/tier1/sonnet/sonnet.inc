@@ -4,9 +4,8 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-require ../../kf5-version.inc
+inherit kde-kf5
 
-inherit kde
-
+PV = "${KF5_VERSION}"
 SRCREV = "a9fcc63282ddbc6c93a590494cfb57e6164e8364"
 S = "${WORKDIR}/git"

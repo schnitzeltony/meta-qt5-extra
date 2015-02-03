@@ -4,9 +4,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-require ../../kf5-version.inc
-
-inherit kde cmake-lib
+inherit kde-kf5 cmake-lib
 
 DEPENDS += " \
 	libgcrypt \
@@ -24,9 +22,11 @@ DEPENDS += " \
 
 # TBD: add KF5Gpgmepp with PACKAGECONFIG??
 
-SRC_URI += "file://0001-add-NO_CMAKE_FIND_ROOT_PATH-in-find-to-org.kde.KWall.patch"
+PV = "${KF5_VERSION}"
 SRCREV = "5a605f8a6ec979aac537230e82bace01f499abb4"
 S = "${WORKDIR}/git"
+
+SRC_URI += "file://0001-add-NO_CMAKE_FIND_ROOT_PATH-in-find-to-org.kde.KWall.patch"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Wallet, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

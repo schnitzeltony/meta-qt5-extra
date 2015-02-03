@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde cmake-lib
+inherit kde-plasma cmake-lib
 
 DEPENDS += " \
     baloo \
@@ -34,9 +34,10 @@ DEPENDS += " \
     zlib \
 "
 
+PV = "${PLASMA_VERSION}"
+SRC_URI[md5sum] = "4ffdb4c7e310dff222abd452fd67e74d"
+SRC_URI[sha256sum] = "43eece34f9ca2a15dc01aa4163db7d97aea09daab6b337cf4062ec2a4e8891eb"
 
-SRCREV = "38cf27146758738c0885810a42a0ce2b678de9ae"
-S = "${WORKDIR}/git"
 SRC_URI += " \
     file://0001-Initial-Wayland-support.patch \
     file://0002-Do-check-for-kwin-only-in-case-X11-was-found.patch \

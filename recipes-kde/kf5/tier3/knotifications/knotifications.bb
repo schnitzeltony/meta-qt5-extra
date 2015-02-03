@@ -5,13 +5,12 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING-CMAKE-SCRIPTS;md5=54c7042be62e169199200bc6477f04d1 \
 "
 
-require ../../kf5-version.inc
-
-inherit kde cmake-lib
+inherit kde-kf5 cmake-lib
 
 DEPENDS += "kwindowsystem kservice kconfig kiconthemes kcodecs kcoreaddons phonon"
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
 
+PV = "${KF5_VERSION}"
 SRCREV = "b5c1488beeedac53a23f8464d8ef3cea941ecfe8"
 S = "${WORKDIR}/git"
 

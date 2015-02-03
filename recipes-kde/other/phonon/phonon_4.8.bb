@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde cmake-lib
+inherit kde-base cmake-lib
 
 SRCREV = "e08fdba6b64ad6a09a9dcd6696de4d82f2dd8224"
 S = "${WORKDIR}/git"
