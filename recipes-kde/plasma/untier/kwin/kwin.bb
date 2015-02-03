@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma cmake-lib
+inherit kde-plasma
 
 DEPENDS += " \
 	kconfig \
@@ -59,10 +59,6 @@ CXXFLAGS_append_mx6 = " -DLINUX \
                                                      '-DEGL_API_WL -DEGL_API_FB', '', d), d)}"
 
 
-
-# cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5Win, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Win, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
