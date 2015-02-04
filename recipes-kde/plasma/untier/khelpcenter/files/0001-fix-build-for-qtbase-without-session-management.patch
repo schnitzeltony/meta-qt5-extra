@@ -1,0 +1,46 @@
+From bf1ddc0831cf20839a4738b6b534e4e50691fd60 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 4 Feb 2015 13:54:14 +0100
+Subject: [PATCH] fix build for qtbase without session management
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ application.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/application.cpp b/application.cpp
+index d29234d..5570879 100644
+--- a/application.cpp
++++ b/application.cpp
+@@ -54,10 +54,12 @@ void Application::activate(const QStringList& args, const QString &workingDirect
+ 
+   if( !mMainWindow )
+   {
++#ifndef QT_NO_SESSIONMANAGER
+     if (qApp->isSessionRestored()) {
+         // The kRestoreMainWindows call will do the rest.
+         return;
+     }
++#endif
+     mMainWindow = new MainWindow;
+   }
+ 
+@@ -92,10 +94,12 @@ extern "C" int Q_DECL_EXPORT kdemain( int argc, char **argv )
+ 
+   app.activate(app.arguments(), QDir::currentPath());
+ 
++#ifndef QT_NO_SESSIONMANAGER
+   if ( app.isSessionRestored() )
+   {
+      kRestoreMainWindows<MainWindow>();
+   }
++#endif
+ 
+   return app.exec();
+ }
+-- 
+1.8.3.1
+
