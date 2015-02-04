@@ -73,6 +73,7 @@ RDEPENDS_${PN} = "         \
     plasma-nm \
     breeze \
     kde-cli-tools \
+    kde-gtk-config \
     \
     kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
