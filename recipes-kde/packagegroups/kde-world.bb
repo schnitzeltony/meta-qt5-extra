@@ -71,6 +71,7 @@ RDEPENDS_${PN} = "         \
     plasma-workspace \
     kdecoration \
     plasma-nm \
+    breeze \
     \
     kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
