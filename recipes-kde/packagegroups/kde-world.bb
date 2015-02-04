@@ -78,6 +78,7 @@ RDEPENDS_${PN} = "         \
     khtml \
     khelpcenter \
     khotkeys \
+    kinfocenter \
     \
     kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
