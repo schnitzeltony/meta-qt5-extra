@@ -80,6 +80,7 @@ RDEPENDS_${PN} = "         \
     khotkeys \
     kinfocenter \
     kio-extras \
+    kmenuedit \
     \
     kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
