@@ -75,6 +75,7 @@ RDEPENDS_${PN} = "         \
     kde-cli-tools \
     kde-gtk-config \
     kdeplasma-addons \
+    khtml \
     \
     kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
