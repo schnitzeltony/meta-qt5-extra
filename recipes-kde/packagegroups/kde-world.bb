@@ -82,6 +82,7 @@ RDEPENDS_${PN} = "         \
     kio-extras \
     kmenuedit \
     kscreen \
+    ksshaskpass \
     \
     kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
