@@ -1,0 +1,47 @@
+From f071db0302346479d8d4473ca31fc8753698412e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 5 Feb 2015 21:52:18 +0100
+Subject: [PATCH] showdesktop: do check HAVE_X11 correctly
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ applets/showdesktop/plugin/showdesktop.cpp | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/applets/showdesktop/plugin/showdesktop.cpp b/applets/showdesktop/plugin/showdesktop.cpp
+index 99696a1..a1961cd 100644
+--- a/applets/showdesktop/plugin/showdesktop.cpp
++++ b/applets/showdesktop/plugin/showdesktop.cpp
+@@ -20,7 +20,7 @@
+ #include <KGlobalSettings>
+ #include <KWindowSystem>
+ 
+-#ifdef HAVE_X11
++#if HAVE_X11
+ #include <NETWM>
+ #include <QtX11Extras/QX11Info>
+ #endif
+@@ -31,7 +31,7 @@ ShowDesktop::ShowDesktop()
+      ,m_down(false)
+ #endif
+ {
+-#ifdef HAVE_X11
++#if HAVE_X11
+     if (QX11Info::isPlatformX11()) {
+         NETRootInfo info(QX11Info::connection(), NET::Supported);
+         m_wm2ShowingDesktop = info.isSupported(NET::WM2ShowingDesktop);
+@@ -45,7 +45,7 @@ ShowDesktop::~ShowDesktop()
+ 
+ void ShowDesktop::showDesktop()
+ {
+-#ifdef HAVE_X11
++#if HAVE_X11
+     if (QX11Info::isPlatformX11()) {
+         if (m_wm2ShowingDesktop) {
+             NETRootInfo info(QX11Info::connection(), 0);
+-- 
+1.9.3
+
