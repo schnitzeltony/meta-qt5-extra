@@ -87,6 +87,7 @@ RDEPENDS_${PN} = "         \
     kwrited \
     libmm-qt \
     milou \
+    muon \
     \
     kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
