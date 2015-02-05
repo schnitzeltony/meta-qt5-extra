@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
+REQUIRED_DISTRO_FEATURES = "x11"
+
 inherit kde-plasma
 
 DEPENDS += " \

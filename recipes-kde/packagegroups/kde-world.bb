@@ -73,7 +73,6 @@ RDEPENDS_${PN} = "         \
     plasma-nm \
     breeze \
     kde-cli-tools \
-    kde-gtk-config \
     kdeplasma-addons \
     khtml \
     khelpcenter \
@@ -89,7 +88,7 @@ RDEPENDS_${PN} = "         \
     muon \
     \
     kwayland \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin khotkeys", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin khotkeys kde-gtk-config", "",d)} \
 "
 
 
