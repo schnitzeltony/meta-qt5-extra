@@ -85,6 +85,7 @@ RDEPENDS_${PN} = "         \
     ksshaskpass \
     ksysguard \
     kwrited \
+    libmm-qt \
     \
     kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
