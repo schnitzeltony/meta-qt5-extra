@@ -20,6 +20,8 @@ PV = "${PLASMA_VERSION}"
 SRC_URI[md5sum] = "283896b01e1d0a2bacf45498aeffefae"
 SRC_URI[sha256sum] = "712e1a3ff69059ddcc44eca2f7697c06d302bae276c7391ea9d23c5d56c64ebd"
 
+SRC_URI += "file://0001-fix-for-gtk2-only-and-gtk3-only-environments.patch"
+
 FILES_${PN} += " \
     ${datadir}/kservices5 \
     ${datadir}/kcm-gtk-module \
