@@ -38,6 +38,8 @@ PV = "${PLASMA_VERSION}"
 SRC_URI[md5sum] = "45a9b78c78fd8a53018a28043b8b9634"
 SRC_URI[sha256sum] = "89a976d2eb6aef02db02db82d645eacbf710f6e0c3ad9fdd932455c309a62e94"
 
+SRC_URI += "file://0001-fix-build-in-x11-less-environments.patch"
+
 FILES_${PN} += " \
     ${datadir}/kcmusb \
     ${datadir}/desktop-directories \
