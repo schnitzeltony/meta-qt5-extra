@@ -77,7 +77,6 @@ RDEPENDS_${PN} = "         \
     kdeplasma-addons \
     khtml \
     khelpcenter \
-    khotkeys \
     kinfocenter \
     kio-extras \
     kmenuedit \
@@ -90,7 +89,7 @@ RDEPENDS_${PN} = "         \
     muon \
     \
     kwayland \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin khotkeys", "",d)} \
 "
 
 
