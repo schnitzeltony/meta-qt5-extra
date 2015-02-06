@@ -86,6 +86,9 @@ RDEPENDS_${PN} = "         \
     libmm-qt \
     milou \
     muon \
+    oxygen-fonts \
+    oxygen \
+    frameworkintegration \
     \
     kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin khotkeys kde-gtk-config", "",d)} \
