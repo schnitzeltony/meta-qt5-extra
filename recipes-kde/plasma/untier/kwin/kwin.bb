@@ -43,7 +43,6 @@ DEPENDS += " \
 	kwayland \
 	kactivities \
 	kdoctools \
-	virtual/egl \
 "
 
 PV = "5.2.0.1"
