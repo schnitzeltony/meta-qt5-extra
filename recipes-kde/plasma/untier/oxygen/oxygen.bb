@@ -23,8 +23,6 @@ PV = "${PLASMA_VERSION}"
 SRC_URI[md5sum] = "b919c30021bff3bc09c105ddcaa0c7f6"
 SRC_URI[sha256sum] = "5d816ce545debb63deb084a5bb2160bd9330874da1f347764a3e0c68462d4df1"
 
-#FILES_SOLIBSDEV = "${libdir}/libmuonprivate${SOLIBSDEV}"
-
 FILES_${PN} += " \
     ${datadir}/icons \
     ${datadir}/kstyle \

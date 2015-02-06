@@ -15,7 +15,6 @@ SRC_URI[md5sum] = "4868641ea354177bca6873e7798398ad"
 SRC_URI[sha256sum] = "71d2d5781921829c0489ff4b3e1c0902ab40aa0ebb1e247dd55e59322df35080"
 
 EXTRA_OECMAKE += "-DOXYGEN_FONT_INSTALL_DIR=${datadir}/fonts/truetype/oxygen"
-#FILES_SOLIBSDEV = "${libdir}/libmuonprivate${SOLIBSDEV}"
 
 FILES_${PN} += " \
     ${datadir}/fonts \
