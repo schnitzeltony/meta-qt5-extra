@@ -6,8 +6,8 @@ inherit lxqt cmake-lib
 
 DEPENDS += "libqtxdg kwindowsystem"
 
-SRCREV = "70bab6483fbe1f4aff1625b7a6afceaf5216cb80"
-PV = "0.8.0+git${SRCPV}"
+SRCREV = "64d1e6c1076aea2783138e9d5ce4bb30b58c77b4"
+PV = "0.9.0"
 
 EXTRA_OECMAKE += "-DCMAKE_INSTALL_DATAROOTDIR=share -DLXQT_ETC_XDG_DIR=${sysconfdir}/xdg"
 
