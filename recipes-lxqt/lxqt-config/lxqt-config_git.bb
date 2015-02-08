@@ -6,8 +6,8 @@ inherit lxqt
 
 DEPENDS += "liblxqt"
 
-SRCREV = "8f5f74ca1b47b57e73c19174cd0e0b1eb577658c"
-PV = "0.8.0+git${SRCPV}"
+SRCREV = "f4c15db2d9e9fb130d58ed691a4a6be886d933ef"
+PV = "0.9.0"
 
 # there are no dev files / pack liblxqt-config-cursor.so correctly
 FILES_${PN} += "${libdir}/liblxqt-config-cursor.so"
