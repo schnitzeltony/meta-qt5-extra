@@ -10,4 +10,3 @@ SRCREV = "4bc9f66d12afb4bab72867c64769697aab74bfa4"
 PV = "0.9.0"
 
 FILES_${PN} += "${datadir}/icons"
-FILES_${PN}-translations += "${datadir}/lxqt/translations/lxqt-config-powermanagement"

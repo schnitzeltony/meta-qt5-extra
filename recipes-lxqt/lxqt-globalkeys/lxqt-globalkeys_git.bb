@@ -9,8 +9,6 @@ DEPENDS += "liblxqt"
 SRCREV = "4504880ff4c960a7cf1e971128c415390109feed"
 PV = "0.9.0"
 
-FILES_${PN}-translations += "${datadir}/lxqt/translations/lxqt-config-globalkeyshortcuts"
-
 CMAKE_HIDE_ERROR[1] = "lxqt-globalkeys, -S${includedir}, -S${STAGING_INCDIR}"
 CMAKE_HIDE_ERROR[2] = "lxqt-globalkeys, -S${libdir}, -S${STAGING_LIBDIR}"
 CMAKE_HIDE_ERROR[3] = "lxqt-globalkeys-ui, -S${includedir}, -S${STAGING_INCDIR}"
