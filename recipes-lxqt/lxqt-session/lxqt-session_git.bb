@@ -7,7 +7,7 @@ inherit lxqt
 DEPENDS += "liblxqt kwindowsystem"
 
 SRCREV = "9877c3be90d00b94020ddd131a983864e1a77a62"
-PV = "0.8.0+git${SRCPV}"
+PV = "0.9.0"
 
 FILES_${PN}-translations += "${datadir}/lxqt/translations/lxqt-config-session"
 
