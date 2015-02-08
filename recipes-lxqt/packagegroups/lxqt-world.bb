@@ -12,9 +12,13 @@ RDEPENDS_${PN} = " \
     lxqt-common \
     lxqt-config \
     lxqt-globalkeys \
+    lxqt-notificationd \
     lxqt-panel \
+    lxqt-policykit \
+    lxqt-powermanagement \
     lxqt-qtplugin \
     lxqt-runner \
     lxqt-session \
+    menu-cache \
     pcmanfm-qt \
 "
