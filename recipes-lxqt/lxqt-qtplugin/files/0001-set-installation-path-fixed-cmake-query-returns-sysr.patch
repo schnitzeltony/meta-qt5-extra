@@ -1,0 +1,50 @@
+From 1404a308cde3904e10262687c9c3a3cc9f0aafd1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 8 Feb 2015 20:50:43 +0100
+Subject: [PATCH] set installation path fixed - cmake query returns sysrooted
+ path
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/CMakeLists.txt | 23 +----------------------
+ 1 file changed, 1 insertion(+), 22 deletions(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index d65d813..61038fb 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -14,25 +14,4 @@ target_link_libraries(qtlxqt
+     Qt5::Widgets
+ )
+ 
+-# there is no standard way to get the plugin dir of Qt5 with cmake
+-# The best way is get_target_property(QT_PLUGINS_DIR Qt5::QGtk2ThemePlugin LOCATION).
+-# This directly returns the platformthemes dir. However, this does not work
+-# in some distros, such as ubuntu.
+-# Finally, I came up with a more reliable way by using qmake.
+-get_target_property(QT_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE} IMPORTED_LOCATION)
+-if(NOT QT_QMAKE_EXECUTABLE)
+-    message(FATAL_ERROR "qmake is not found.")
+-endif()
+-
+-# execute the command "qmake -query QT_INSTALL_PLUGINS" to get the path of plugins dir.
+-execute_process(COMMAND ${QT_QMAKE_EXECUTABLE} -query QT_INSTALL_PLUGINS
+-    OUTPUT_VARIABLE QT_PLUGINS_DIR
+-    OUTPUT_STRIP_TRAILING_WHITESPACE
+-)
+-if(QT_PLUGINS_DIR)
+-    message(STATUS "Qt5 plugin directory:" "${QT_PLUGINS_DIR}")
+-else()
+-    message(FATAL_ERROR "Qt5 plugin directory cannot be detected.")
+-endif()
+-
+-install(TARGETS qtlxqt LIBRARY DESTINATION "${QT_PLUGINS_DIR}/platformthemes")
++install(TARGETS qtlxqt LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/qt5/platformthemes")
+-- 
+1.9.3
+
