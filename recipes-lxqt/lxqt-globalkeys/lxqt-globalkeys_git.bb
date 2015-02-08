@@ -7,7 +7,7 @@ inherit lxqt cmake-lib
 DEPENDS += "liblxqt"
 
 SRCREV = "4504880ff4c960a7cf1e971128c415390109feed"
-PV = "0.8.0+git${SRCPV}"
+PV = "0.9.0"
 
 FILES_${PN}-translations += "${datadir}/lxqt/translations/lxqt-config-globalkeyshortcuts"
 
