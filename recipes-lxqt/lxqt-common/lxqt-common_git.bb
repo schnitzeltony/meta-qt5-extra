@@ -6,8 +6,8 @@ inherit lxqt
 
 DEPENDS += "liblxqt"
 
-SRCREV = "7db79ae08a53e8578ce24846686fc8a0c6048b9f"
-PV = "0.8.0+git${SRCPV}"
+SRCREV = "e400c79738b7251526d5e5317926f30a70d61801"
+PV = "0.9.0"
 
 FILES_${PN} += " \
     ${datadir} \
