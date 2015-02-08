@@ -7,8 +7,8 @@ inherit lxqt cmake-lib
 # libmagic is supplied by file
 DEPENDS += "file"
 
-SRCREV = "d98585a5519e0aba2c6290ddb652953515170b2f"
-PV = "1.0.0+git${SRCPV}"
+SRCREV = "87fb74a1e7618ba199b977ee0d1ac341a3c13ee6"
+PV = "1.1.0"
 
 EXTRA_OECMAKE += "-DCMAKE_INSTALL_PREFIX=''"
 
