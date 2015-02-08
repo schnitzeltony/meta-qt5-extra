@@ -6,8 +6,8 @@ inherit lxqt
 
 DEPENDS += "liblxqt lxqt-globalkeys kwindowsystem kguiaddons"
 
-SRCREV = "ae7100b2eb88de9b80f62b93d6e98b2941021744"
-PV = "0.8.0+git${SRCPV}"
+SRCREV = "43665172c0726b215c59440e9bd16628465143bc"
+PV = "0.9.0"
 
 PACKAGECONFIG[cpu_plugin] = "-DCPULOAD_PLUGIN=Yes,-DCPULOAD_PLUGIN=No, libstatgrab"
 PACKAGECONFIG[mount_plugin] = "-DMOUNT_PLUGIN=Yes,-DMOUNT_PLUGIN=No, liblxqt-mount"
