@@ -25,7 +25,10 @@ SRCREV = "41a2bcc80650843aee553a9b47e1ed86fb898268"
 S = "${WORKDIR}/git"
 
 # REVISIT remove ugly hack for wayland-only environments
-SRC_URI += "file://0001-workaround-session-less-qtbase-required-for-pure-way.patch"
+SRC_URI += " \
+    file://0001-workaround-session-less-qtbase-required-for-pure-way.patch \
+    file://0002-fix-path-to-ksendbugmail.patch \
+"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
