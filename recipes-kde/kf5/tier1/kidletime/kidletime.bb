@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 cmake-lib
 
-DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb qtx11extras", "", d)}"
+DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb qtx11extras libxscrnsaver", "", d)}"
 
 PV = "${KF5_VERSION}"
 SRCREV = "4ba80494b02888a07c5666c4fd6c38252ff5e53a"
