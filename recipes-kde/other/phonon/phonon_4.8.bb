@@ -8,6 +8,7 @@ inherit kde-base cmake-lib
 
 SRCREV = "e08fdba6b64ad6a09a9dcd6696de4d82f2dd8224"
 S = "${WORKDIR}/git"
+SRC_URI += "file://0001-fix-PHONON_LIBRARY_PATH-was-usr-usr-lib-qt5-plugins.patch"
 
 EXTRA_OECMAKE += "-DPHONON_BUILD_DEMOS=ON -DPHONON_BUILD_PHONON4QT5=ON"
 
