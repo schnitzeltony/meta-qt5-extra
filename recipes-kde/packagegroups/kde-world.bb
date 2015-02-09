@@ -90,6 +90,7 @@ RDEPENDS_${PN} = "         \
     oxygen \
     frameworkintegration \
     plasma-desktop \
+    plasma-workspace-wallpapers \
     \
     kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin khotkeys kde-gtk-config", "",d)} \
