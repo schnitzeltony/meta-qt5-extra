@@ -21,7 +21,7 @@ DEPENDS += " \
     kservice \
     plasma-framework \
     kauth \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras libxres", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"
