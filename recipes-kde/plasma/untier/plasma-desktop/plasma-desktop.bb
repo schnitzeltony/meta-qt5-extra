@@ -44,6 +44,8 @@ PV = "${PLASMA_VERSION}"
 SRC_URI[md5sum] = "476bc7465f8615b932696c9721453d26"
 SRC_URI[sha256sum] = "e922c64a1d5e78d83006a45a74dd3656266301b3e5a8e00a9fe85ca4fa3c8d76"
 
+SRC_URI += "file://0001-fix-path-to-fontinst.patch"
+
 FILES_SOLIBSDEV = "${libdir}/libkfont*${SOLIBSDEV}"
 
 FILES_${PN} += " \

@@ -1,0 +1,42 @@
+From 8b20638bfbc98158e63a4e7900a1b825546436cb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 9 Feb 2015 11:52:42 +0100
+Subject: [PATCH] fix path to fontinst
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ kcms/kfontinst/config-fontinst.h.cmake             | 2 +-
+ kcms/kfontinst/dbus/org.kde.fontinst.service.cmake | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/kcms/kfontinst/config-fontinst.h.cmake b/kcms/kfontinst/config-fontinst.h.cmake
+index f2e6014..53961fb 100644
+--- a/kcms/kfontinst/config-fontinst.h.cmake
++++ b/kcms/kfontinst/config-fontinst.h.cmake
+@@ -1,7 +1,7 @@
+ #ifndef __CONFIG_FONTINST_H__
+ #define __CONFIG_FONTINST_H__
+ 
+-#define KFONTINST_LIB_EXEC_DIR "@CMAKE_INSTALL_PREFIX@/@KAUTH_HELPER_INSTALL_DIR@"
++#define KFONTINST_LIB_EXEC_DIR "@KAUTH_HELPER_INSTALL_DIR@"
+ 
+ /* Define to 1 if you have the <locale.h> header file. */
+ #cmakedefine HAVE_LOCALE_H 1
+diff --git a/kcms/kfontinst/dbus/org.kde.fontinst.service.cmake b/kcms/kfontinst/dbus/org.kde.fontinst.service.cmake
+index e212a88..c58f166 100644
+--- a/kcms/kfontinst/dbus/org.kde.fontinst.service.cmake
++++ b/kcms/kfontinst/dbus/org.kde.fontinst.service.cmake
+@@ -1,4 +1,4 @@
+ [D-BUS Service]
+ Name=org.kde.fontinst
+-Exec=@CMAKE_INSTALL_PREFIX@/@KAUTH_HELPER_INSTALL_DIR@/fontinst
++Exec=@KAUTH_HELPER_INSTALL_DIR@/fontinst
+ 
+-- 
+1.9.3
+
