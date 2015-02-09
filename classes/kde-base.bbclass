@@ -6,7 +6,7 @@ KDE_BRANCH ?= "master"
 SRC_URI = "git://anongit.kde.org/${BPN};protocol=git;branch=${KDE_BRANCH}"
 
 # extra-cmake-modules cause dependent to check for python
-inherit cmake_qt5 pythonnative
+inherit cmake_qt5 cmake-extra-sanity pythonnative
 
 FILES_${PN} += "${libdir}/plugins/kf5 ${datadir}/kf5"
 FILES_${PN}-dev += "${libdir}/cmake"
