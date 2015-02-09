@@ -28,6 +28,7 @@ DEPENDS += " \
     kinit \
     kdelibs4support \
     networkmanager-qt \
+    libmm-qt \
     \
     networkmanager \
 "
