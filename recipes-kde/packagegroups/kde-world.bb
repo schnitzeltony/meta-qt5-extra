@@ -95,7 +95,7 @@ RDEPENDS_${PN} = "         \
     powerdevil \
     \
     kwayland \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin khotkeys kde-gtk-config", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin khotkeys kde-gtk-config sddm-kcm", "",d)} \
 "
 
 
