@@ -54,6 +54,7 @@ SRC_URI += " \
     file://0013-fix-missuse-of-HAVE_X11.patch \
     file://0014-dataengines-mouse-fix-build-in-X11-less-environments.patch \
     file://0015-fix-paths-in-startkde.patch \
+    file://0016-startkde-add-meta-qt5-standard-binary-path-to-PATH.patch \
 "
 
 # Notes on patches

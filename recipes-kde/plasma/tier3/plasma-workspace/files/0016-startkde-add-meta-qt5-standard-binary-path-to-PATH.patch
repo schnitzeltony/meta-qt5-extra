@@ -1,0 +1,32 @@
+From aad377ab9446b0e1d187204990d706b505fa254d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 9 Feb 2015 17:48:32 +0100
+Subject: [PATCH] startkde: add meta-qt5 standard binary path to PATH
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ startkde/startkde.cmake | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/startkde/startkde.cmake b/startkde/startkde.cmake
+index 046543e..2663348 100644
+--- a/startkde/startkde.cmake
++++ b/startkde/startkde.cmake
+@@ -3,6 +3,9 @@
+ #  DEFAULT KDE STARTUP SCRIPT ( @PROJECT_VERSION@ )
+ #
+ 
++# meta-qt5 specific
++PATH=$PATH:@CMAKE_INSTALL_FULL_BINDIR@/qt5; export PATH
++
+ if test "x$1" = x--failsafe; then
+     KDE_FAILSAFE=1 # General failsafe flag
+     KWIN_COMPOSE=N # Disable KWin's compositing
+-- 
+1.9.3
+
