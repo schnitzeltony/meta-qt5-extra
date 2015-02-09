@@ -1,0 +1,45 @@
+From 099c0a4f82aaea70d751ad33fc35dfaea0c80a1b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 9 Feb 2015 20:00:24 +0100
+Subject: [PATCH] fix build for QT_NO_SESSIONMANAGER
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ main.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/main.cpp b/main.cpp
+index c770e25..8b93157 100644
+--- a/main.cpp
++++ b/main.cpp
+@@ -25,7 +25,9 @@
+ #include <KCrash>
+ #include <KDBusService>
+ 
++#ifndef QT_NO_SESSIONMANAGER
+ #include <QSessionManager>
++#endif
+ 
+ #include "policykitkde.h"
+ 
+@@ -48,12 +50,14 @@ int main(int argc, char *argv[])
+     PolicyKitKDE agent(argc, argv);
+     KDBusService service(KDBusService::Unique);
+ 
++#ifndef QT_NO_SESSIONMANAGER
+     auto disableSessionManagement = [](QSessionManager &sm) {
+         sm.setRestartHint(QSessionManager::RestartNever);
+     };
+ 
+     QObject::connect(&agent, &QGuiApplication::commitDataRequest, disableSessionManagement);
+     QObject::connect(&agent, &QGuiApplication::saveStateRequest, disableSessionManagement);
++#endif
+ 
+     agent.exec();
+ }
+-- 
+1.9.3
+
