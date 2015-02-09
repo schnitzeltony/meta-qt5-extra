@@ -6,6 +6,10 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 cmake-lib
 
+DEPENDS += " \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)} \
+"
+
 PV = "${KF5_VERSION}"
 SRCREV = "e939e5136711df31ace7ff627f3a0e58c60f3588"
 S = "${WORKDIR}/git"
