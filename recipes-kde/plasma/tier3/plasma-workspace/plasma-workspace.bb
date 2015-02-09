@@ -93,5 +93,8 @@ FILES_${PN}-dev = " \
     ${libdir}/libtaskmanager.so \
 "
 
-# startkde requires at least qtdbus
-RDEPENDS_${PN} += "qttools-tools"
+# startkde requires:
+RDEPENDS_${PN} += " \
+    qttools-tools \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsetroot xmessage", "", d)} \
+"
