@@ -92,6 +92,7 @@ RDEPENDS_${PN} = "         \
     plasma-desktop \
     plasma-workspace-wallpapers \
     polkit-kde-agent-1 \
+    powerdevil \
     \
     kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin khotkeys kde-gtk-config", "",d)} \
