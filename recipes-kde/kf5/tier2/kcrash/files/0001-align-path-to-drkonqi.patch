@@ -1,0 +1,45 @@
+From 400a073a899a56940f8f8c6986591abb5a3f7313 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 9 Feb 2015 09:50:39 +0100
+Subject: [PATCH] align path to drkonqi
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+we do not have a shared libexec
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/config-kcrash.h.cmake | 1 +
+ src/kcrash.cpp            | 4 +++-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/src/config-kcrash.h.cmake b/src/config-kcrash.h.cmake
+index f1b3a9b..3ac6dfd 100644
+--- a/src/config-kcrash.h.cmake
++++ b/src/config-kcrash.h.cmake
+@@ -2,3 +2,4 @@
+ 
+ #define kde_socklen_t socklen_t
+ #define CMAKE_INSTALL_FULL_LIBEXECDIR "${CMAKE_INSTALL_FULL_LIBEXECDIR}"
++#define CMAKE_INSTALL_FULL_LIBDIR "${CMAKE_INSTALL_FULL_LIBDIR}"
+diff --git a/src/kcrash.cpp b/src/kcrash.cpp
+index d72d8f8..caa6600 100644
+--- a/src/kcrash.cpp
++++ b/src/kcrash.cpp
+@@ -209,7 +209,9 @@ void KCrash::setDrKonqiEnabled(bool enabled)
+ {
+     s_launchDrKonqi = enabled ? 1 : 0;
+     if (s_launchDrKonqi && !s_drkonqiPath) {
+-        const QList<QString> paths = QFile::decodeName(qgetenv("LIBEXEC_PATH")).split(QLatin1Char(':'));
++        QList<QString> paths = QFile::decodeName(qgetenv("LIBEXEC_PATH")).split(QLatin1Char(':'));
++        /* take care of per-package libexec dir for plasma-workspace as origin of drkonqi */
++        paths.append(QFile::decodeName(CMAKE_INSTALL_FULL_LIBDIR "/plasma-workspace"));
+         const QString exec = QStandardPaths::findExecutable(QLatin1String("drkonqi"), paths);
+         if (exec.isEmpty()) {
+             s_drkonqiPath = qstrdup(CMAKE_INSTALL_FULL_LIBEXECDIR "/drkonqi");
+-- 
+1.9.3
+

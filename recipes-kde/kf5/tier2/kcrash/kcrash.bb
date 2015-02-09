@@ -12,6 +12,8 @@ PV = "${KF5_VERSION}"
 SRCREV = "7ec5be038c40bee9471b07752b5a0036339d7687"
 S = "${WORKDIR}/git"
 
+SRC_URI += "file://0001-align-path-to-drkonqi.patch"
+
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Crash, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5Crash, -S${includedir}, -S${STAGING_INCDIR}"
