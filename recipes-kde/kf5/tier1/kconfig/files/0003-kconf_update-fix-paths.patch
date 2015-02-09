@@ -1,0 +1,45 @@
+From dd2c25f7f856d82e499b5cb062f7254ddf3f4d28 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 9 Feb 2015 13:44:18 +0100
+Subject: [PATCH] kconf_update: fix paths
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/kconf_update/CMakeLists.txt   | 2 +-
+ src/kconf_update/kconf_update.cpp | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/kconf_update/CMakeLists.txt b/src/kconf_update/CMakeLists.txt
+index 34419c7..a04c43a 100644
+--- a/src/kconf_update/CMakeLists.txt
++++ b/src/kconf_update/CMakeLists.txt
+@@ -15,7 +15,7 @@ target_link_libraries(kconf_update Qt5::Core KF5::ConfigCore)
+ include(ECMMarkNonGuiExecutable)
+ ecm_mark_nongui_executable(kconf_update)
+ 
+-get_target_property(KCONF_UPDATE_EXECUTABLE kconf_update LOCATION)
++set(KCONF_UPDATE_EXECUTABLE ${KDE_INSTALL_LIBEXECDIR_KF5}/kconf_update)
+ configure_file(config-kconf.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kconf.h )
+ 
+ # Although this is mostly an internal binary (hence installing it in
+diff --git a/src/kconf_update/kconf_update.cpp b/src/kconf_update/kconf_update.cpp
+index 309bc3c..3ff5163 100644
+--- a/src/kconf_update/kconf_update.cpp
++++ b/src/kconf_update/kconf_update.cpp
+@@ -758,7 +758,7 @@ void KonfUpdate::gotScript(const QString &_script)
+     QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kconf_update/") + script);
+     if (path.isEmpty()) {
+         if (interpreter.isEmpty()) {
+-            path = CMAKE_INSTALL_PREFIX "/" LIB_INSTALL_DIR "/kconf_update_bin/" + script;
++            path = LIB_INSTALL_DIR "/kconf_update_bin/" + script;
+             if (!QFile::exists(path)) {
+                 path = QStandardPaths::findExecutable(script);
+             }
+-- 
+1.9.3
+

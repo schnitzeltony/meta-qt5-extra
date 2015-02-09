@@ -4,6 +4,8 @@ inherit cmake-lib
 
 DEPENDS += "${BPN}-native"
 
+SRC_URI += "file://0003-kconf_update-fix-paths.patch"
+
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Config, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5Config, -S${includedir}, -S${STAGING_INCDIR}"
