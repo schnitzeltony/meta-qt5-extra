@@ -1,0 +1,37 @@
+kde-plasma:
+* bluedevil
+* libbluedevil
+
+kde-apps:
+* kate
+* konsole
+..........
+
+* sddm
+
+patches upstream:
+
+* meta-oe:
++ f0a9288b33ebec0c774ee2be750f05e86bbdf9f4 libmbim: initial add 1.12.2
++ b04182ec701419842bd67261be0494936efec5f2 libqmi: initial add 1.12.2
++ 1720e7d30bdc9ea81517c9917ebfc1e59fd7f2ee modemmanager: update to 1.4.2
++ 15bf7023f40898de470deb7ffc797c7cdd85f17f initial add xmessage 1.0.4
++ edfe9ab528b51d57c28dd2a3e9163df64593ee01 initial add xsetroot 1.1.1
++ and xfce-stuff
+
+* oe-core
++ c4a5a43772be36220b01b76a63022d766ed27868 gpgme: fix configuration by setting proper parameters instead of patching
++ 4d44d9d950e9c69021e3e75bfb0d672d4752e1fc gpgme: add native build and ship a valid gpgme-config
++ c6ce7322e73e4a526b1f1ee42eee562719e52269 libassuan: add native build
+
+* meta-fsl-arm
++ d5c3cc0bfbfd48fccad6bfe8bba038ada27779f1 add gpu-viv-bin-mx6q-dev to meta-qt5's packagegroup-qt5-toolchain-target
++ 2e30fed7bc9ee855d4fe626b51315e947a473ee3 gpu-viv-bin-mx6q: ship a link named libwayland-egl.so
+
+* meta-qt5
++ 0321b82e44b286e6ac67c793294d561149d7ced3 qtbase: remove patches required for native(-sdk) only
++ 75e830ce7226a062b3533568f8acdef1891c91b8 qtbase/EXTERNAL_HOST_BINS: split out code only required for native-(sdk)
++ d0f38006f10abb1f634f021ad40880b3dec391d2 qtbase: build qmake for target with paths aligned
++ 661f90ec86682712eb7c93fc9d5a5ba1c28d3562 qt5-creator: add 3.3.0 of qt-creator
++ ac60cf9c98e4f11f016dc2fdd8cedd2f7f047461 add gdb append to enable python packageconfig
+
