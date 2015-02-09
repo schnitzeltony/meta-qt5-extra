@@ -1,0 +1,49 @@
+From ec6e2b30c1268aadad3bfd6605360d90cec3dcd1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 9 Feb 2015 15:27:21 +0100
+Subject: [PATCH] fix paths in startkde
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ startkde/startkde.cmake | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/startkde/startkde.cmake b/startkde/startkde.cmake
+index 046543e..742df82 100644
+--- a/startkde/startkde.cmake
++++ b/startkde/startkde.cmake
+@@ -113,7 +113,7 @@ EOF
+ # fontconfig
+ 
+ usr_share="/usr/share"
+-install_share="@CMAKE_INSTALL_PREFIX@/@SHARE_INSTALL_PREFIX@"
++install_share="@SHARE_INSTALL_PREFIX@"
+ 
+ if [ ! $install_share = $usr_share ]; then
+ 
+@@ -128,7 +128,7 @@ if [ ! $install_share = $usr_share ]; then
+     }
+ 
+     oxygenDir=$fontsDir/oxygen
+-    prefixDir="@CMAKE_INSTALL_PREFIX@/@SHARE_INSTALL_PREFIX@/fonts/oxygen"
++    prefixDir="@SHARE_INSTALL_PREFIX@/fonts/oxygen"
+ 
+     # if the oxygen dir doesn't exist, create a symlink to be sure that the
+     # Oxygen font is available to the user
+@@ -284,7 +284,7 @@ echo 'startkde: Starting up...'  1>&2
+ # to set it to a list of paths *not* including the KDE prefix if it's not /usr or
+ # /usr/local.
+ if test -z "$XDG_DATA_DIRS"; then
+-    XDG_DATA_DIRS="@CMAKE_INSTALL_PREFIX@/@SHARE_INSTALL_PREFIX@:/usr/share:/usr/local/share"
++    XDG_DATA_DIRS="/usr/share:/usr/local/share"
+ fi
+ export XDG_DATA_DIRS
+ 
+-- 
+1.9.3
+

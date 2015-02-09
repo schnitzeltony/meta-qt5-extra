@@ -53,6 +53,7 @@ SRC_URI += " \
     file://0012-Make-KWayland-optional.patch \
     file://0013-fix-missuse-of-HAVE_X11.patch \
     file://0014-dataengines-mouse-fix-build-in-X11-less-environments.patch \
+    file://0015-fix-paths-in-startkde.patch \
 "
 
 # Notes on patches
