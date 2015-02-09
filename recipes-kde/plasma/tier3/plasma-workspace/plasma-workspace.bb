@@ -90,3 +90,6 @@ FILES_${PN}-dev = " \
     ${libdir}/libplasma-geolocation-interface.so \
     ${libdir}/libtaskmanager.so \
 "
+
+# startkde requires at least qtdbus
+RDEPENDS_${PN} += "qttools-tools"
