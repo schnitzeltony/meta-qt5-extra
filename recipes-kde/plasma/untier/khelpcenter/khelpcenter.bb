@@ -20,7 +20,10 @@ PV = "${PLASMA_VERSION}"
 SRC_URI[md5sum] = "f575d603c62a001c551a213398c46268"
 SRC_URI[sha256sum] = "3a0396118077af3b1e3df4654540a1d8cc900a3eae656f65409737d9f712bfa8"
 
-SRC_URI += "file://0001-fix-build-for-qtbase-without-session-management.patch"
+SRC_URI += " \
+    file://0001-fix-build-for-qtbase-without-session-management.patch \
+    file://0002-fix-path-to-khc_indexbuilder.patch \
+"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
