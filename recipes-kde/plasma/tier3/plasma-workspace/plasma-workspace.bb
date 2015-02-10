@@ -29,8 +29,8 @@ DEPENDS += " \
     kcrash \
     libksysguard \
     libkscreen \
+    kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver libsm libxcb kwin", "", d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "kwayland", "", d)} \
     zlib \
 "
 
@@ -40,22 +40,24 @@ SRC_URI[sha256sum] = "43eece34f9ca2a15dc01aa4163db7d97aea09daab6b337cf4062ec2a4e
 
 SRC_URI += " \
     file://0001-Initial-Wayland-support.patch \
-    file://0002-Do-check-for-kwin-only-in-case-X11-was-found.patch \
-    file://0003-Initial-Wayland-support-II.patch \
-    file://0004-Initial-Wayland-support-III.patch \
-    file://0005-Initial-Wayland-support-IV.patch \
-    file://0006-Initial-Wayland-support-V.patch \
-    file://0007-HACK-enable-task_wayland.cpp-stub-for-non-x11-builds.patch \
-    file://0008-fix-build-for-QT_NO_SESSIONMANAGER.patch \
-    file://0009-Stub-down-sessionrunner-in-x11-less-environments.patch \
-    file://0010-align-phonon-path.patch \
-    file://0011-kglobalaccel-add-wayland-stub.patch \
-    file://0012-Make-KWayland-optional.patch \
-    file://0013-fix-missuse-of-HAVE_X11.patch \
-    file://0014-dataengines-mouse-fix-build-in-X11-less-environments.patch \
-    file://0015-fix-paths-in-startkde.patch \
-    file://0016-startkde-add-meta-qt5-standard-binary-path-to-PATH.patch \
-    file://0017-startkde-fix-path-for-start_kdeinit_wrapper.patch \
+    file://0002-Initial-Wayland-support-II.patch \
+    file://0003-Initial-Wayland-support-III.patch \
+    file://0004-Initial-Wayland-support-IV.patch \
+    file://0005-Initial-Wayland-support-V.patch \
+    \
+    file://0006-HACK-enable-task_wayland.cpp-stub-for-non-x11-builds.patch \
+    \
+    file://0007-Do-check-for-kwin-only-in-case-X11-was-found.patch \
+    file://0008-Stub-down-sessionrunner-in-x11-less-environments.patch \
+    file://0009-dataengines-mouse-fix-build-in-X11-less-environments.patch \
+    file://0010-fix-missuse-of-HAVE_X11.patch \
+    \
+    file://0011-fix-build-for-QT_NO_SESSIONMANAGER.patch \
+    \
+    file://0012-align-phonon-path.patch \
+    file://0013-fix-paths-in-startkde.patch \
+    file://0014-startkde-add-meta-qt5-standard-binary-path-to-PATH.patch \
+    file://0015-startkde-fix-path-for-start_kdeinit_wrapper.patch \
 "
 
 # Notes on patches
