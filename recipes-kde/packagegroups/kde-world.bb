@@ -94,8 +94,10 @@ RDEPENDS_${PN} = "         \
     polkit-kde-agent-1 \
     powerdevil \
     systemsettings \
-    \
     kwayland \
+    \
+    kate \
+    \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin khotkeys kde-gtk-config sddm-kcm", "",d)} \
 "
 

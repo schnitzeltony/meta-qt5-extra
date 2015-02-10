@@ -1,0 +1,72 @@
+From ac7548b52a701ad846dd0cb534440f8de7864711 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 10 Feb 2015 11:43:46 +0100
+Subject: [PATCH 1/2] fix build for qtbase build without session support
+ QT_NO_SESSIONMANAGER
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ kate/src/kateapp.cpp        | 5 ++++-
+ kate/src/katemainwindow.cpp | 2 ++
+ kwrite/main.cpp             | 5 ++++-
+ 3 files changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/kate/src/kateapp.cpp b/kate/src/kateapp.cpp
+index 4c26f33..03fd159 100644
+--- a/kate/src/kateapp.cpp
++++ b/kate/src/kateapp.cpp
+@@ -99,10 +99,13 @@ bool KateApp::init()
+     // set KATE_PID for use in child processes
+     qputenv("KATE_PID", QString::fromLatin1("%1").arg(QCoreApplication::applicationPid()).toLatin1().constData());
+ 
++#ifndef QT_NO_SESSIONMANAGER
+     // handle restore different
+     if (qApp->isSessionRestored()) {
+         restoreKate();
+-    } else {
++    } else 
++#endif    
++    {
+         // let us handle our command line args and co ;)
+         // we can exit here if session chooser decides
+         if (!startupKate()) {
+diff --git a/kate/src/katemainwindow.cpp b/kate/src/katemainwindow.cpp
+index 464e20c..8efc401 100644
+--- a/kate/src/katemainwindow.cpp
++++ b/kate/src/katemainwindow.cpp
+@@ -467,9 +467,11 @@ bool KateMainWindow::queryClose()
+ {
+     // session saving, can we close all views ?
+     // just test, not close them actually
++#ifndef QT_NO_SESSIONMANAGER
+     if (qApp->isSavingSession()) {
+         return queryClose_internal();
+     }
++#endif
+ 
+     // normal closing of window
+     // allow to close all windows until the last without restrictions
+diff --git a/kwrite/main.cpp b/kwrite/main.cpp
+index a361527..d5738e9 100644
+--- a/kwrite/main.cpp
++++ b/kwrite/main.cpp
+@@ -159,9 +159,12 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
+      */
+     aboutData.processCommandLine(&parser);
+ 
++#ifndef QT_NO_SESSIONMANAGER
+     if (app.isSessionRestored()) {
+         KWrite::restore();
+-    } else {
++    } else 
++#endif    
++    {
+         bool nav = false;
+         int line = 0, column = 0;
+ 
+-- 
+1.9.3
+
