@@ -97,6 +97,7 @@ RDEPENDS_${PN} = "         \
     kwayland \
     \
     kate \
+    oxygen-icons \
     \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin khotkeys kde-gtk-config sddm-kcm", "",d)} \
 "
