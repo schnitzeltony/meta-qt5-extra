@@ -16,6 +16,7 @@ patches upstream:
 + 1720e7d30bdc9ea81517c9917ebfc1e59fd7f2ee modemmanager: update to 1.4.2
 + 15bf7023f40898de470deb7ffc797c7cdd85f17f initial add xmessage 1.0.4
 + edfe9ab528b51d57c28dd2a3e9163df64593ee01 initial add xsetroot 1.1.1
++ fontforge -> meta-oe
 + and xfce-stuff
 
 * oe-core
