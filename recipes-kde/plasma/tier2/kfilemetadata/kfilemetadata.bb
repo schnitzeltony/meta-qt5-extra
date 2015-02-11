@@ -1,5 +1,5 @@
 SUMMARY = "A file metadata and text extraction library"
-LICENSE = "MIT LGPLv2+"
+LICENSE = "MIT & LGPLv2+"
 LIC_FILES_CHKSUM = " \
 	file://COPYING-CMAKE-SCRIPTS;md5=54c7042be62e169199200bc6477f04d1 \
 	file://COPYING.LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \

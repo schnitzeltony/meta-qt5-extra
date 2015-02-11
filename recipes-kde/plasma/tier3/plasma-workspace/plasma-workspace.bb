@@ -1,5 +1,5 @@
 SUMMARY = "Support for bookmarks and the XBEL format"
-LICENSE = "GPLv2 LGPLv2.1 GFDL-1.2"
+LICENSE = "GPLv2 & LGPLv2.1 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
