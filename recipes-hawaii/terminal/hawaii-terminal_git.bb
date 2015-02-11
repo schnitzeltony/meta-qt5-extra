@@ -1,5 +1,5 @@
 SUMMARY = "Terminal emulator for the Hawaii desktop environment"
-LICENSE = "GPLv2 MIT"
+LICENSE = "GPLv2 & MIT"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE;md5=414fa9eab8935f538d25474667060bd1 \
 	file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263 \

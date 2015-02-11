@@ -1,5 +1,5 @@
 SUMMARY = "Wind theme for Maui and Hawaii"
-LICENSE = "GPLv2 BSD LGPLv2.1"
+LICENSE = "GPLv2 & BSD & LGPLv2.1"
 LIC_FILES_CHKSUM = " \
 	file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 	file://COPYING.BSD;md5=9e96e13a1a76211bcdb0255a5d42b01d \

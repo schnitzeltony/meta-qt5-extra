@@ -1,5 +1,5 @@
 SUMMARY = "Modules for fluid and dynamic applications development with QtQuick"
-LICENSE = "BSD GFDL-1.3 GPLv3 LGPLv2.1"
+LICENSE = "BSD & GFDL-1.3 & GPLv3 & LGPLv2.1"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE.BSD;md5=5bd3079664b3473c826ea30fd8d55687 \
 	file://LICENSE.FDL;md5=3801d7932fdc07fd9efe89f9854a6caa \
