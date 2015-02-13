@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=6e01bfa20e899e8ad569d5488923cbd2 \
 "
 
-inherit kde-apps allarch
+inherit kde-apps allarch fontcache
 
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "c15b889622986ff4740c5a216efd577c"
