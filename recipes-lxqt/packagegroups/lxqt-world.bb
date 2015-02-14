@@ -12,6 +12,7 @@ RDEPENDS_${PN} = " \
     libsysstat \
     lximage-qt \
     lxmenu-data \
+    lxqt-about \
     lxqt-common \
     lxqt-config \
     lxqt-globalkeys \
