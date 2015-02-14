@@ -10,6 +10,7 @@ RDEPENDS_${PN} = " \
     liblxqt-mount \
     libqtxdg \
     libsysstat \
+    lximage-qt \
     lxmenu-data \
     lxqt-common \
     lxqt-config \

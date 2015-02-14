@@ -1,0 +1,32 @@
+From 21089835b9f3b7fdcb47e0b6b7367b70c2633811 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sat, 14 Feb 2015 19:53:25 +0100
+Subject: [PATCH] src/CMakeLists.txt: do not completely overwrite
+ CMAKE_CXX_FLAGS
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+causes for hardfloat machine:
+
+/usr/include/gnu/stubs.h:7:29: fatal error: gnu/stubs-soft.h: No such file or directory
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 690ba7c..9219327 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ # set visibility to hidden to hide symbols, unlesss they're exporeted manually in the code
+-set(CMAKE_CXX_FLAGS "-DQT_NO_KEYWORDS -fno-exceptions")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_NO_KEYWORDS -fno-exceptions")
+ 
+ set(QTX_INCLUDE_DIRS "")
+ set(QTX_LIBRARIES Qt5::Widgets Qt5::Core Qt5::DBus Qt5::PrintSupport Qt5::X11Extras)
+-- 
+1.9.3
+
