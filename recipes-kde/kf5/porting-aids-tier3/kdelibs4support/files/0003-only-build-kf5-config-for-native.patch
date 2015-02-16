@@ -1,4 +1,4 @@
-From 9db80c0ea1ac3355d8d79ba0c6607e88e469fae6 Mon Sep 17 00:00:00 2001
+From ac2556aa6a1bdbbdb7347079bfe4bddb74756263 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Mon, 8 Dec 2014 13:37:14 +0100
 Subject: [PATCH 3/3] only build kf5-config for native
@@ -10,15 +10,15 @@ Upstream-Status: Inappropriate [cross-specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- CMakeLists.txt                |  22 +----
- src/CMakeLists.txt            | 223 ------------------------------------------
+ CMakeLists.txt                |  26 +-----
+ src/CMakeLists.txt            | 198 +-----------------------------------------
  src/kdecore/kglobal.cpp       |  18 ----
  src/kdecore/klocale_kde.cpp   |   4 -
  src/kdecore/kstandarddirs.cpp |   1 -
- 5 files changed, 2 insertions(+), 266 deletions(-)
+ 5 files changed, 4 insertions(+), 243 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 493d309..f3174b0 100644
+index 25c35c5..60f7775 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -16,27 +16,11 @@ include(CMakeFindFrameworks)
@@ -59,8 +59,14 @@ index 493d309..f3174b0 100644
  endif ()
  if (APPLE)
      cmake_find_frameworks(CoreFoundation)
-@@ -149,7 +132,6 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
- endif()
+@@ -143,13 +126,8 @@ install(
+ 
+ 
+ 
+-if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+-    ki18n_install(po)
+-    kdoctools_install(po)
+-endif()
  add_subdirectory(cmake)
  add_subdirectory(data)
 -add_subdirectory(docs)
@@ -68,7 +74,7 @@ index 493d309..f3174b0 100644
  
  if (BUILD_TESTING)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 4a1d80d..5543fb2 100644
+index 64a53d8..9f2e8ac 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -1,6 +1,4 @@
@@ -94,7 +100,7 @@ index 4a1d80d..5543fb2 100644
  set(libkdelibs4support_SRCS
      ${libkdelibs4support_SRCS}
      kdecore/k4aboutdata.cpp
-@@ -52,39 +26,9 @@ set(libkdelibs4support_SRCS
+@@ -52,39 +52,9 @@ set(libkdelibs4support_SRCS
      kdecore/kcurrencycode.cpp
      kdecore/kdebug.cpp
      kdecore/kdebugdbusiface.cpp
@@ -134,7 +140,7 @@ index 4a1d80d..5543fb2 100644
      kdecore/kcalendarera.cpp
      kdecore/kcalendarsystem.cpp
      kdecore/kcalendarsystemcoptic.cpp
-@@ -108,96 +52,6 @@ set(libkdelibs4support_SRCS
+@@ -108,96 +78,6 @@ set(libkdelibs4support_SRCS
      kdecore/ktzfiletimezone.cpp
      kdecore/klocale.cpp
      kdecore/klocale_kde.cpp
@@ -231,7 +237,7 @@ index 4a1d80d..5543fb2 100644
  )
  
  set_source_files_properties( solid/org.freedesktop.PowerManagement.xml
-@@ -205,36 +59,6 @@ set_source_files_properties( solid/org.freedesktop.PowerManagement.xml
+@@ -205,36 +85,6 @@ set_source_files_properties( solid/org.freedesktop.PowerManagement.xml
                               solid/org.kde.Solid.PowerManagement.PolicyAgent.xml
                               PROPERTIES NO_NAMESPACE TRUE)
  
@@ -268,7 +274,7 @@ index 4a1d80d..5543fb2 100644
  
  if (APPLE)
      set(libkdelibs4support_SRCS ${libkdelibs4support_SRCS}
-@@ -260,10 +84,6 @@ configure_file(kdecore/config-date.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-da
+@@ -260,10 +110,6 @@ configure_file(kdecore/config-date.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-da
  configure_file(kdecore/config-localization.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-localization.h)
  
  
@@ -279,7 +285,7 @@ index 4a1d80d..5543fb2 100644
  check_function_exists(mmap HAVE_MMAP)
  check_symbol_exists(posix_madvise "sys/mman.h" HAVE_MADVISE)
  configure_file(config-kdelibs4support.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kdelibs4support.h )
-@@ -309,32 +129,12 @@ endif()
+@@ -309,32 +155,12 @@ endif()
  
  target_link_libraries(KF5KDELibs4Support
  PUBLIC
@@ -312,7 +318,7 @@ index 4a1d80d..5543fb2 100644
     ${platformLinkLibraries}
  )
  
-@@ -362,26 +362,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
+@@ -362,26 +188,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
  )
  
  
@@ -430,5 +436,5 @@ index 4161425..6bb6a69 100644
  #include <config-kstandarddirs.h>
  #include <config-kdelibs4support.h>
 -- 
-1.8.3.1
+1.9.3
 

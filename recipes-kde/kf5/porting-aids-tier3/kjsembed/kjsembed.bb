@@ -4,13 +4,13 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5 cmake-lib
+inherit kde-kf5-porting-aids cmake-lib
 
 DEPENDS += "qtsvg qttools kjs ki18n kdoctools"
 
 PV = "${KF5_VERSION}"
-SRCREV = "72645d0ca8942b2550377567fe861183de8ab038"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "c5ec56e2460296046bc57714105e5d2c"
+SRC_URI[sha256sum] = "8daa6a8929495d7cc5f335291ba481b9fe778fe4e6389a911628384e3069279c"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5JsEmbed, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

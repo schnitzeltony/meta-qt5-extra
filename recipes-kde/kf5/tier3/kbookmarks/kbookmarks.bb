@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "kconfigwidgets kconfig kiconthemes kxmlgui"
 
 PV = "${KF5_VERSION}"
-SRCREV = "5111bfa15d9e7181bdb0155e287942fb448802cf"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "c741e9e3fc6451841a62dc1e7deb6c66"
+SRC_URI[sha256sum] = "14297ff266c260e81dc94d2d882583f4dc35399926afacae5025ebaf73e463ef"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Bookmarks, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

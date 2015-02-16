@@ -10,8 +10,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "karchive kconfig kservice kcoreaddons"
 
 PV = "${KF5_VERSION}"
-SRCREV = "df487b4808daa448692b8d3277f745a952e71945"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "0505fcffffb67aeeff888ead356b3e88"
+SRC_URI[sha256sum] = "bb6db7dd33a617446570b19b62cd6eeb3f7cfa14fe7e6a4cef643bc0ba19a4cc"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Emoticons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

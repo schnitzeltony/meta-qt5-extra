@@ -19,8 +19,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRCREV = "d96cf2f4ebb63ef63e7b9c43987a2f85429db8f8"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "df35cdef22ccd888a22af1291a88eb3f"
+SRC_URI[sha256sum] = "a2eb4b356cd940018afa975fd3ddd81384a44aa46a27aa2611c19d83f08ff5bb"
 
 SRC_URI += " \
     file://0001-return-WAYLAND_DISPLAY-if-all-known-options-fail.patch \

@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "boost kconfig kcoreaddons ki18n kservice kwindowsystem kglobalaccel kxmlgui kio kdbusaddons kdeclarative kcmutils"
 
 PV = "${KF5_VERSION}"
-SRCREV = "26fbf4fab77f3458893715541f3abae5743ad59c"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "5dfd4efc47839bb89bb1e4a45a651899"
+SRC_URI[sha256sum] = "2978ab55a9ce484db5790a13fa1ae081bb1e3b3925c34c1ac91a9700148882b4"
 
 SRC_URI += "file://0001-replace-try_run-by-try_compile-in-compiler-feature-c.patch"
 

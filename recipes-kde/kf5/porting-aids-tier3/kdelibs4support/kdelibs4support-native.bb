@@ -3,9 +3,9 @@ require ${BPN}.inc
 inherit native
 
 DEPENDS += " \
-	kconfig-native \
-	kcoreaddons-native \
-	ki18n-native \
+    kconfig-native \
+    kcoreaddons-native \
+    ki18n-native \
 "
 
 SRC_URI += " \

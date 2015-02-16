@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "qtsvg ki18n kconfig kconfigwidgets kwidgetsaddons kitemviews"
 
 PV = "${KF5_VERSION}"
-SRCREV = "2286886decfec2b1a956b813b4c078c38bc2f43b"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "d41b5a4f68e350b1d36e05c99f060e53"
+SRC_URI[sha256sum] = "4f06c930303761fc9985422cc0bb0c474f6430235adbf61378c1e943866c3984"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5IconThemes, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

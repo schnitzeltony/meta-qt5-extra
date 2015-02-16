@@ -21,8 +21,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRCREV = "41a2bcc80650843aee553a9b47e1ed86fb898268"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "8bcf5f6aabff251d3e722216c1ecfff2"
+SRC_URI[sha256sum] = "0687ba5cf1a6dbd5cb699a48fa8793c132f8bbc9746662efc82610b4058cfcfe"
 
 # REVISIT remove ugly hack for wayland-only environments
 SRC_URI += " \

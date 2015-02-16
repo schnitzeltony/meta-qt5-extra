@@ -16,8 +16,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRCREV = "f9eb427b293c40eec96784e059054bafd431c9bc"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "a54ad9ea7f1ed3eb5d8f3f3708e1d78c"
+SRC_URI[sha256sum] = "3e0996ca5a1f29ef9c0ff2ba503cde4a395d898702594237f1a91ff0c6b4934a"
 
 SRC_URI += "file://0001-HACK-Add-a-stub-runtime-implementation-to-enable-bui.patch"
 

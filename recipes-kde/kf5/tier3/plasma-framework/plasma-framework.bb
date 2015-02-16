@@ -31,8 +31,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRCREV = "a39f20cc044c866389618a21fde26e27f8f06dfe"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "0e8c690beeec8da3b9ae9f45ca5c1942"
+SRC_URI[sha256sum] = "35345ced57cce80e1089b3172edfd277a0dc5ed4148b9c52a18c2ca0869eb364"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Plasma, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

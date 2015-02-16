@@ -23,8 +23,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRCREV = "ec023712125ffc0a8cbb617c93285bdaa21f6381"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "2b8c55bc56b2c2fc1948fcf3aa5714fe"
+SRC_URI[sha256sum] = "f47284fbd03bd4f7fdb3eed9f6d67c2741628517bc82c822c4f9e5409c1bc475"
 
 PACKAGECONFIG[full] = "-DKIOCORE_ONLY=OFF,-DKIOCORE_ONLY=ON, kbookmarks kcompletion kconfigwidgets kiconthemes kitemviews kjobwidgets kwidgetsaddons kwindowsystem"
 # Note that kdeclarative fails without KIOWidgets

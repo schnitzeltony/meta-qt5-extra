@@ -19,8 +19,8 @@ DEPENDS += " \
 RRECCOMENDS_${PN} += "oxygen-fonts"
 
 PV = "${KF5_VERSION}"
-SRCREV = "2571c2b39a707b5495f950f6a6879aff84ca7e82"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "cee7800425102977c1290869d8280bd1"
+SRC_URI[sha256sum] = "e2fc33afc69c7dc8329b8f97340a6d052f035ad88593af2d6668da94fc001a34"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5FrameworkIntegration, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
