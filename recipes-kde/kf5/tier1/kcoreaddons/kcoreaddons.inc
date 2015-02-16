@@ -7,5 +7,5 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5
 
 PV = "${KF5_VERSION}"
-SRCREV = "e8cf6542fdbe137bbff40a22bfc50f810daa38fd"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "7347d864de95d4b5df03bba93ed22ad5"
+SRC_URI[sha256sum] = "cbe30fe049f45e861ffe4c59b2a50f2cd0c3254976e39a15a4fb8dcad7ec7e01"
