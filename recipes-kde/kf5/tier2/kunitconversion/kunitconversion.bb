@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "ki18n"
 
 PV = "${KF5_VERSION}"
-SRCREV = "276398a036d336542de90b3f4457ebb3066f8364"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "6abf99054b392606e4290a24277dfb13"
+SRC_URI[sha256sum] = "3a12803dea3a91a2f02eaac99bba38f2fbbf78d96f699cd3330de021561310ba"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5UnitConversion, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
