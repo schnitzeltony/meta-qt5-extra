@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "kconfig kwidgetsaddons"
 
 PV = "${KF5_VERSION}"
-SRCREV = "339f8072f96373f1946ce99936b8864020d052a7"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "821eef72d69c49cf5afd0a7793db9f70"
+SRC_URI[sha256sum] = "d0f9fd0b18953943c50f56680d95c0f62dc39a096f5a6961adedcc96d11218b5"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Completion, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
