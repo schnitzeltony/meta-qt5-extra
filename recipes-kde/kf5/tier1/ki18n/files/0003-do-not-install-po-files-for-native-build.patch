@@ -1,0 +1,32 @@
+From 69bf91f00ec2f62907d57e6ce0f1a044669ba837 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 16 Feb 2015 14:46:17 +0100
+Subject: [PATCH] do not install po-files for native build
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e7c284c..aaa0c76 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -47,9 +47,6 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII)
+ remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
+ 
+ add_definitions(-DTRANSLATION_DOMAIN=\"ki18n5\")
+-if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+-    ki18n_install(po)
+-endif()
+ add_subdirectory(src)
+ add_subdirectory(autotests)
+ 
+-- 
+1.9.3
+

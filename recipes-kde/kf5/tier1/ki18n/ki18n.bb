@@ -1,6 +1,6 @@
 require ${BPN}.inc 
 
-inherit cmake-lib
+inherit cmake-lib pythonnative
 
 SRC_URI += "file://0001-align-KI18N_MODULE_DIR-to-proper-path.patch"
 
