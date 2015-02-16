@@ -4,7 +4,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0964c689fcf4c21c6797ea87408416b6"
 
 inherit lxqt
 
-DEPENDS += "liblxqt lxqt-globalkeys kwindowsystem kguiaddons"
+DEPENDS += " \
+    liblxqt \
+    lxqt-globalkeys \
+    menu-cache \
+    kwindowsystem \
+    kguiaddons \
+"
 
 SRCREV = "43665172c0726b215c59440e9bd16628465143bc"
 PV = "0.9.0"
