@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "kcoreaddons kwidgetsaddons ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRCREV = "6103026116c953dff9d9890676fb7f38900e376a"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "0ac73cbe963296657429d82668801335"
+SRC_URI[sha256sum] = "3e2b38800ac2a39b3343c84154d4034f7f97e3ad5ad55ef164ff21d62a337e0c"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5JobWidgets, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
