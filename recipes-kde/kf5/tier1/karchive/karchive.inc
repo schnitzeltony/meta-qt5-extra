@@ -10,5 +10,6 @@ inherit kde-kf5
 DEPENDS += "bzip2 xz zlib"
 
 PV = "${KF5_VERSION}"
-SRCREV = "05dd0f7fac116d905e37e01807b7d20489ceb1ca"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "c811d4ebf158cee741715a06e27ff0cb"
+SRC_URI[sha256sum] = "b8d66164eab8c262f1ee5da9f595c2b8de9878d5ac992070b2c9ad736825f85e"
+
