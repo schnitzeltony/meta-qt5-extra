@@ -10,8 +10,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "kcoreaddons ki18n"
 
 PV = "${KF5_VERSION}"
-SRCREV = "bfe2aef89f88b727a2e5b2d8e9d608a2796bd6f6"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "27da31464d8381c228d8dd1226628659"
+SRC_URI[sha256sum] = "602b305ade4e2499cbc29273e3ecb54c315925652ba3b657c7bed597ff0de169"
 
 CMAKE_HIDE_ERROR[1] = "KF5Pty, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5Pty, -S${includedir}, -S${STAGING_INCDIR}"
