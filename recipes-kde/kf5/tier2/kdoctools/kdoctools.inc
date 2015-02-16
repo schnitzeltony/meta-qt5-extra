@@ -11,8 +11,8 @@ inherit kde-kf5
 DEPENDS += "docbook-xml-dtd4 docbook-xsl-stylesheets"
 
 PV = "${KF5_VERSION}"
-SRCREV = "93b844cdcfde640acfb231429c1c685de2c3cc4f"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "65efa563057f08eb25bf626eab5d7345"
+SRC_URI[sha256sum] = "b125d7b2654cbbe6ba0f5eaf7773f688c54ba4bd048046f7a2134b3954869a06"
 
 SRC_URI += " \
 	file://0001-Add-cmdline-param-to-help-find-xsl.patch \
