@@ -11,8 +11,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRCREV = "e939e5136711df31ace7ff627f3a0e58c60f3588"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "b328dd1478fa5fd3a1e65b299cc7062a"
+SRC_URI[sha256sum] = "7b64c858e8871ab2deb6739c9a6aae79e634f8fc34043f46025341cbbd57c5ae"
 
 CMAKE_HIDE_ERROR[1] = "KF5DBusAddons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5DBusAddons, -S${includedir}, -S${STAGING_INCDIR}"
