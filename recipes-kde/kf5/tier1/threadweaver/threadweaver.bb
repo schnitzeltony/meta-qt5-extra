@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 cmake-lib
 
 PV = "${KF5_VERSION}"
-SRCREV = "ce5590c108edde83557eff70232a3cd195eb2d0b"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "01ce1c8a53bb864288b56454da236296"
+SRC_URI[sha256sum] = "eaaa4ba735810728532f87afc835184c1372b94df3dc3374b64f50ca150262a9"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5ThreadWeaver, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
