@@ -2,14 +2,12 @@ SUMMARY = "Extra modules and scripts for CMake"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING-CMAKE-SCRIPTS;md5=54c7042be62e169199200bc6477f04d1"
 
-inherit cmake_qt5
-
-SRC_URI = "git://anongit.kde.org/extra-cmake-modules;protocol=git"
-
-SRCREV = "ca6d601ac04f8ef5813f6b02015a37622d68ef6c"
-S = "${WORKDIR}/git"
+inherit kde-kf5
 
 DEPENDS = "qttools"
+
+SRC_URI[md5sum] = "45fd1e6f38b23b00983e5eab9ba61d15"
+SRC_URI[sha256sum] = "c88de18f41fb9e5bb1f296bd4762315b2911fa5feb5c10aed8352d00fc08fdd1"
 
 FILES_${PN} += "${datadir}/ECM"
 
