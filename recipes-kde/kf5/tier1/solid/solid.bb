@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "qtdeclarative"
 
 PV = "${KF5_VERSION}"
-SRCREV = "5ec75ac1daf0fc3b016e138590b0429b2ab4934e"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "763c77540a984d28e00be0026aea8b14"
+SRC_URI[sha256sum] = "24dc18630476db845af6a14553659c91a40b36d6c4ebbca470e061cbd9c2bf29"
 
 CMAKE_HIDE_ERROR[1] = "KF5Solid, -S${libdir}, -S${STAGING_LIBDIR}"
 CMAKE_HIDE_ERROR[2] = "KF5Solid, -S${includedir}, -S${STAGING_INCDIR}"
