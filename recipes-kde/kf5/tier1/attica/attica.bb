@@ -6,9 +6,10 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 cmake-lib
 
+SRC_URI[md5sum] = "45edbcf24f65f17f6d00860ae77cbc1e"
+SRC_URI[sha256sum] = "906f480e181ee31a141e9e9b839d084f17800657faf639d8b5c5ec250c18adf7"
+
 PV = "${KF5_VERSION}"
-SRCREV = "4b5fa02f4b634961960aa9672aafef3369129a41"
-S = "${WORKDIR}/git"
 
 CMAKE_HIDE_ERROR[1] = "KF5Attica, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5Attica, -S${includedir}, -S${STAGING_INCDIR}"
