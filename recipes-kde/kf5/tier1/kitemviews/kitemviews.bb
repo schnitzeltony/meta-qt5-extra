@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 cmake-lib
 
 PV = "${KF5_VERSION}"
-SRCREV = "241e63e2010b43c0ed5a21a0d411fd80425bd0f6"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "6c1ac3c1f806fc4223b0d098005218e6"
+SRC_URI[sha256sum] = "0619256e295038173d7f028a281cd59ed8125599e61e492855046d7b248566c5"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5ItemViews, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
