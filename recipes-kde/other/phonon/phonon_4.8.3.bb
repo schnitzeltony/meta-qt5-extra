@@ -6,9 +6,12 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-base cmake-lib
 
-SRCREV = "e08fdba6b64ad6a09a9dcd6696de4d82f2dd8224"
-S = "${WORKDIR}/git"
-SRC_URI += "file://0001-fix-PHONON_LIBRARY_PATH-was-usr-usr-lib-qt5-plugins.patch"
+SRC_URI = " \
+    http://download.kde.org/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz \
+    file://0001-fix-PHONON_LIBRARY_PATH-was-usr-usr-lib-qt5-plugins.patch \
+"
+SRC_URI[md5sum] = "88bb9867261803eed61ff53a7c026338"
+SRC_URI[sha256sum] = "a1149c961ca1570968d070bbd23671e614aa506f847ca93748960e309f85da16"
 
 EXTRA_OECMAKE += "-DPHONON_BUILD_DEMOS=ON -DPHONON_BUILD_PHONON4QT5=ON"
 
