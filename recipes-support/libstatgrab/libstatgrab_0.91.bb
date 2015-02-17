@@ -8,3 +8,6 @@ SRC_URI[md5sum] = "b906d312076ca9be3d5188edfe07f496"
 SRC_URI[sha256sum] = "03e9328e4857c2c9dcc1b0347724ae4cd741a72ee11acc991784e8ef45b7f1ab"
 
 inherit autotools pkgconfig
+
+DEPENDS += "ncurses"
+RDEPENDS_${PN} += "perl"
