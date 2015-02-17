@@ -20,9 +20,7 @@ EXTRA_OECONF_append_class-native = " with_x=no --disable-python-extension --disa
 do_configure_prepend() {
     currdir=`pwd`
     cd ${S}
-
     ./bootstrap
-
     cd $currdir
 }
 
@@ -39,5 +37,5 @@ FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR} ${datadir}/${PN}/python"
 FILES_${PN}-python-dbg = "${PYTHON_SITEPACKAGES_DIR}/.debug"
 RDEPENDS_${PN}-python = "python"
 
-# for kde-fonts oxygen-fonts
+# for e.g kde's oxygen-fonts
 BBCLASSEXTEND = "native"
