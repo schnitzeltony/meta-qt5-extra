@@ -10,4 +10,4 @@ SRCREV = "de6de66013e15f149526f6eee856aeef316a3198"
 PV = "0.9.0"
 
 # REVISIT: These are poluted by host paths
-FILES-${PN}-dev += "${datadir}/lxqt/lxqt-runner/*.cmake"
+FILES_${PN}-dev += "${datadir}/lxqt/lxqt-runner/*.cmake"
