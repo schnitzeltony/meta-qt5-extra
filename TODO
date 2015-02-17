@@ -19,9 +19,7 @@ patches upstream:
 + and xfce-stuff
 
 * oe-core
-+ c4a5a43772be36220b01b76a63022d766ed27868 gpgme: fix configuration by setting proper parameters instead of patching
 + 4d44d9d950e9c69021e3e75bfb0d672d4752e1fc gpgme: add native build and ship a valid gpgme-config
-+ c6ce7322e73e4a526b1f1ee42eee562719e52269 libassuan: add native build
 
 * meta-fsl-arm
 + d5c3cc0bfbfd48fccad6bfe8bba038ada27779f1 add gpu-viv-bin-mx6q-dev to meta-qt5's packagegroup-qt5-toolchain-target
