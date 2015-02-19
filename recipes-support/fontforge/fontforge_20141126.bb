@@ -20,7 +20,7 @@ EXTRA_OECONF_append_class-native = " with_x=no --disable-python-extension --disa
 do_configure_prepend() {
     currdir=`pwd`
     cd ${S}
-    ./bootstrap
+    ./bootstrap --force
     cd $currdir
 }
 
