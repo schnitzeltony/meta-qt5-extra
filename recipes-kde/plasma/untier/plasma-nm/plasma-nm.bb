@@ -17,6 +17,7 @@ DEPENDS += " \
     kcoreaddons \
     kwallet \
     kitemviews \
+    kitemmodels \
     kxmlgui \
     kconfigwidgets \
     kiconthemes \
