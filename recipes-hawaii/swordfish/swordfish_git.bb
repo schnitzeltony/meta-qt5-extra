@@ -2,9 +2,9 @@ SUMMARY = "File manager"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-inherit cmake_qt5
+inherit cmake_qt5 pkgconfig
 
-DEPENDS = "qtbase qtdeclarative qtquickcontrols qttools pss-framework"
+DEPENDS = "qtbase qtdeclarative qtquickcontrols qttools"
 
 SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git;protocol=git;branch=master"
 SRCREV = "0f1d9294cbf9d4ac235c31d10b0c7166845e098f"

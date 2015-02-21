@@ -4,22 +4,18 @@ require ${BPN}.inc
 
 DEPENDS += " \
     ${BPN}-native \
-    qtscript \
+    qtbase \
     qtdeclarative \
-    qtgraphicaleffects \
-    qtquickcontrols \
-    qtsvg \
     \
     libqtxdg \
     \
+    kdelibs4support \
     kconfig \
     kcoreaddons \
     kio \
+    krunner \
     kservice \
     solid \
-    plasma-framework \
-    plasma-workspace \
-    plasma-nm \
     \
     greenisland \
 "
