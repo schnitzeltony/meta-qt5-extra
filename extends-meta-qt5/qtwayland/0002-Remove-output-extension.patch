@@ -1,0 +1,701 @@
+From 6337760ad2693756000625d17fcb89e2a3c22119 Mon Sep 17 00:00:00 2001
+From: Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+Date: Sat, 3 Jan 2015 17:03:13 +0100
+Subject: [PATCH 2/3] Remove output extension
+
+This protocol is empty now and is no longer used.
+
+Change-Id: I45e79fb86a67b4cebdc307170218fa039b2aa27f
+---
+ src/client/client.pro                              |  3 -
+ src/client/qwaylanddisplay.cpp                     |  6 --
+ src/client/qwaylanddisplay_p.h                     |  2 -
+ src/client/qwaylandextendedoutput.cpp              | 61 ---------------
+ src/client/qwaylandextendedoutput_p.h              | 66 ----------------
+ src/client/qwaylandscreen.cpp                      | 16 ----
+ src/client/qwaylandscreen_p.h                      |  5 --
+ src/compositor/compositor_api/qwaylandcompositor.h | 17 ++---
+ src/compositor/wayland_wrapper/qwlcompositor.cpp   |  5 --
+ src/compositor/wayland_wrapper/qwlcompositor_p.h   |  2 -
+ .../wayland_wrapper/qwlextendedoutput.cpp          | 71 ------------------
+ .../wayland_wrapper/qwlextendedoutput_p.h          | 87 ----------------------
+ src/compositor/wayland_wrapper/qwloutput.cpp       |  1 -
+ src/compositor/wayland_wrapper/qwloutput_p.h       |  4 +-
+ src/compositor/wayland_wrapper/wayland_wrapper.pri |  3 -
+ src/extensions/output-extension.xml                | 51 -------------
+ 16 files changed, 9 insertions(+), 391 deletions(-)
+ delete mode 100644 src/client/qwaylandextendedoutput.cpp
+ delete mode 100644 src/client/qwaylandextendedoutput_p.h
+ delete mode 100644 src/compositor/wayland_wrapper/qwlextendedoutput.cpp
+ delete mode 100644 src/compositor/wayland_wrapper/qwlextendedoutput_p.h
+ delete mode 100644 src/extensions/output-extension.xml
+
+diff --git a/src/client/client.pro b/src/client/client.pro
+index ef3cff0..4c398fe 100644
+--- a/src/client/client.pro
++++ b/src/client/client.pro
+@@ -41,7 +41,6 @@ WAYLANDCLIENTSOURCES += \
+             ../3rdparty/protocol/wayland.xml \
+             ../extensions/surface-extension.xml \
+             ../extensions/sub-surface-extension.xml \
+-            ../extensions/output-extension.xml \
+             ../extensions/touch-extension.xml \
+             ../extensions/qtkey-extension.xml \
+             ../extensions/windowmanager.xml \
+@@ -66,7 +65,6 @@ SOURCES +=  qwaylandintegration.cpp \
+             qwaylandwlshellsurface.cpp \
+             qwaylandxdgshell.cpp \
+             qwaylandxdgsurface.cpp \
+-            qwaylandextendedoutput.cpp \
+             qwaylandextendedsurface.cpp \
+             qwaylandsubsurface.cpp \
+             qwaylandtouch.cpp \
+@@ -99,7 +97,6 @@ HEADERS +=  qwaylandintegration_p.h \
+             qwaylandwlshellsurface_p.h \
+             qwaylandxdgshell_p.h \
+             qwaylandxdgsurface_p.h \
+-            qwaylandextendedoutput_p.h \
+             qwaylandextendedsurface_p.h \
+             qwaylandsubsurface_p.h \
+             qwaylandtouch_p.h \
+diff --git a/src/client/qwaylanddisplay.cpp b/src/client/qwaylanddisplay.cpp
+index ea7fe1a..d4845ec 100644
+--- a/src/client/qwaylanddisplay.cpp
++++ b/src/client/qwaylanddisplay.cpp
+@@ -58,7 +58,6 @@
+ #include "qwaylandshellintegration_p.h"
+ #include "qwaylandclientbufferintegration_p.h"
+ 
+-#include "qwaylandextendedoutput_p.h"
+ #include "qwaylandextendedsurface_p.h"
+ #include "qwaylandsubsurface_p.h"
+ #include "qwaylandtouch_p.h"
+@@ -135,7 +134,6 @@ QWaylandDisplay::QWaylandDisplay(QWaylandIntegration *waylandIntegration)
+     , mDndSelectionHandler(0)
+     , mWindowExtension(0)
+     , mSubSurfaceExtension(0)
+-    , mOutputExtension(0)
+     , mTouchExtension(0)
+     , mQtKeyExtension(0)
+     , mTextInputManager(0)
+@@ -260,10 +258,6 @@ void QWaylandDisplay::registry_global(uint32_t id, const QString &interface, uin
+         mInputDevices.append(inputDevice);
+     } else if (interface == QStringLiteral("wl_data_device_manager")) {
+         mDndSelectionHandler.reset(new QWaylandDataDeviceManager(this, id));
+-    } else if (interface == QStringLiteral("qt_output_extension")) {
+-        mOutputExtension.reset(new QtWayland::qt_output_extension(registry, id, 1));
+-        foreach (QPlatformScreen *screen, screens())
+-            static_cast<QWaylandScreen *>(screen)->createExtendedOutput();
+     } else if (interface == QStringLiteral("qt_surface_extension")) {
+         mWindowExtension.reset(new QtWayland::qt_surface_extension(registry, id, 1));
+     } else if (interface == QStringLiteral("qt_sub_surface_extension")) {
+diff --git a/src/client/qwaylanddisplay_p.h b/src/client/qwaylanddisplay_p.h
+index 9d4413f..e478e17 100644
+--- a/src/client/qwaylanddisplay_p.h
++++ b/src/client/qwaylanddisplay_p.h
+@@ -136,7 +136,6 @@ public:
+ 
+     QtWayland::qt_surface_extension *windowExtension() const { return mWindowExtension.data(); }
+     QtWayland::qt_sub_surface_extension *subSurfaceExtension() const { return mSubSurfaceExtension.data(); }
+-    QtWayland::qt_output_extension *outputExtension() const { return mOutputExtension.data(); }
+     QWaylandTouchExtension *touchExtension() const { return mTouchExtension.data(); }
+     QtWayland::wl_text_input_manager *textInputManager() const { return mTextInputManager.data(); }
+     QWaylandHardwareIntegration *hardwareIntegration() const { return mHardwareIntegration.data(); }
+@@ -192,7 +191,6 @@ private:
+     QScopedPointer<QWaylandDataDeviceManager> mDndSelectionHandler;
+     QScopedPointer<QtWayland::qt_surface_extension> mWindowExtension;
+     QScopedPointer<QtWayland::qt_sub_surface_extension> mSubSurfaceExtension;
+-    QScopedPointer<QtWayland::qt_output_extension> mOutputExtension;
+     QScopedPointer<QWaylandTouchExtension> mTouchExtension;
+     QScopedPointer<QWaylandQtKeyExtension> mQtKeyExtension;
+     QScopedPointer<QWaylandWindowManagerIntegration> mWindowManagerIntegration;
+diff --git a/src/client/qwaylandextendedoutput.cpp b/src/client/qwaylandextendedoutput.cpp
+deleted file mode 100644
+index 26fba99..0000000
+--- a/src/client/qwaylandextendedoutput.cpp
++++ /dev/null
+@@ -1,61 +0,0 @@
+-/****************************************************************************
+-**
+-** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+-** Contact: http://www.qt-project.org/legal
+-**
+-** This file is part of the plugins of the Qt Toolkit.
+-**
+-** $QT_BEGIN_LICENSE:LGPL$
+-** Commercial License Usage
+-** Licensees holding valid commercial Qt licenses may use this file in
+-** accordance with the commercial license agreement provided with the
+-** Software or, alternatively, in accordance with the terms contained in
+-** a written agreement between you and Digia.  For licensing terms and
+-** conditions see http://qt.digia.com/licensing.  For further information
+-** use the contact form at http://qt.digia.com/contact-us.
+-**
+-** GNU Lesser General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU Lesser
+-** General Public License version 2.1 as published by the Free Software
+-** Foundation and appearing in the file LICENSE.LGPL included in the
+-** packaging of this file.  Please review the following information to
+-** ensure the GNU Lesser General Public License version 2.1 requirements
+-** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+-**
+-** In addition, as a special exception, Digia gives you certain additional
+-** rights.  These rights are described in the Digia Qt LGPL Exception
+-** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+-**
+-** GNU General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU
+-** General Public License version 3.0 as published by the Free Software
+-** Foundation and appearing in the file LICENSE.GPL included in the
+-** packaging of this file.  Please review the following information to
+-** ensure the GNU General Public License version 3.0 requirements will be
+-** met: http://www.gnu.org/copyleft/gpl.html.
+-**
+-**
+-** $QT_END_LICENSE$
+-**
+-****************************************************************************/
+-
+-#include "qwaylandextendedoutput_p.h"
+-
+-#include "qwaylandscreen_p.h"
+-
+-#include <qpa/qwindowsysteminterface.h>
+-
+-#include <QtCore/QDebug>
+-
+-QT_BEGIN_NAMESPACE
+-
+-namespace QtWaylandClient {
+-
+-QWaylandExtendedOutput::QWaylandExtendedOutput(QWaylandScreen *screen, ::qt_extended_output *extended_output)
+-    : QtWayland::qt_extended_output(extended_output)
+-{
+-    Q_UNUSED(screen);
+-}
+-
+-}
+-QT_END_NAMESPACE
+diff --git a/src/client/qwaylandextendedoutput_p.h b/src/client/qwaylandextendedoutput_p.h
+deleted file mode 100644
+index 0ac24d6..0000000
+--- a/src/client/qwaylandextendedoutput_p.h
++++ /dev/null
+@@ -1,66 +0,0 @@
+-/****************************************************************************
+-**
+-** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+-** Contact: http://www.qt-project.org/legal
+-**
+-** This file is part of the plugins of the Qt Toolkit.
+-**
+-** $QT_BEGIN_LICENSE:LGPL$
+-** Commercial License Usage
+-** Licensees holding valid commercial Qt licenses may use this file in
+-** accordance with the commercial license agreement provided with the
+-** Software or, alternatively, in accordance with the terms contained in
+-** a written agreement between you and Digia.  For licensing terms and
+-** conditions see http://qt.digia.com/licensing.  For further information
+-** use the contact form at http://qt.digia.com/contact-us.
+-**
+-** GNU Lesser General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU Lesser
+-** General Public License version 2.1 as published by the Free Software
+-** Foundation and appearing in the file LICENSE.LGPL included in the
+-** packaging of this file.  Please review the following information to
+-** ensure the GNU Lesser General Public License version 2.1 requirements
+-** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+-**
+-** In addition, as a special exception, Digia gives you certain additional
+-** rights.  These rights are described in the Digia Qt LGPL Exception
+-** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+-**
+-** GNU General Public License Usage
+-** Alternatively, this file may be used under the terms of the GNU
+-** General Public License version 3.0 as published by the Free Software
+-** Foundation and appearing in the file LICENSE.GPL included in the
+-** packaging of this file.  Please review the following information to
+-** ensure the GNU General Public License version 3.0 requirements will be
+-** met: http://www.gnu.org/copyleft/gpl.html.
+-**
+-**
+-** $QT_END_LICENSE$
+-**
+-****************************************************************************/
+-
+-#ifndef QWAYLANDEXTENDEDOUTPUT_H
+-#define QWAYLANDEXTENDEDOUTPUT_H
+-
+-#include <QtWaylandClient/private/qwayland-output-extension.h>
+-#include <QtWaylandClient/private/qwaylandclientexport_p.h>
+-
+-QT_BEGIN_NAMESPACE
+-
+-namespace QtWaylandClient {
+-
+-class QWaylandDisplay;
+-class QWaylandScreen;
+-class QWaylandExtendedOutput;
+-
+-class Q_WAYLAND_CLIENT_EXPORT QWaylandExtendedOutput : public QtWayland::qt_extended_output
+-{
+-public:
+-    QWaylandExtendedOutput(QWaylandScreen *screen, struct ::qt_extended_output *extended_output);
+-};
+-
+-}
+-
+-QT_END_NAMESPACE
+-
+-#endif // QWAYLANDEXTENDEDOUTPUT_H
+diff --git a/src/client/qwaylandscreen.cpp b/src/client/qwaylandscreen.cpp
+index a1aff8d..7caebb7 100644
+--- a/src/client/qwaylandscreen.cpp
++++ b/src/client/qwaylandscreen.cpp
+@@ -43,7 +43,6 @@
+ 
+ #include "qwaylanddisplay_p.h"
+ #include "qwaylandcursor_p.h"
+-#include "qwaylandextendedoutput_p.h"
+ #include "qwaylandwindow_p.h"
+ 
+ #include <QtGui/QGuiApplication>
+@@ -60,7 +59,6 @@ QWaylandScreen::QWaylandScreen(QWaylandDisplay *waylandDisplay, int version, uin
+     , QtWayland::wl_output(waylandDisplay->wl_registry(), id, qMin(version, 2))
+     , m_outputId(id)
+     , mWaylandDisplay(waylandDisplay)
+-    , mExtendedOutput(0)
+     , mScale(1)
+     , mDepth(32)
+     , mRefreshRate(60000)
+@@ -70,8 +68,6 @@ QWaylandScreen::QWaylandScreen(QWaylandDisplay *waylandDisplay, int version, uin
+     , m_orientation(Qt::PrimaryOrientation)
+     , mWaylandCursor(new QWaylandCursor(this))
+ {
+-    // handle case of output extension global being sent after outputs
+-    createExtendedOutput();
+ }
+ 
+ QWaylandScreen::~QWaylandScreen()
+@@ -152,18 +148,6 @@ QPlatformCursor *QWaylandScreen::cursor() const
+     return  mWaylandCursor;
+ }
+ 
+-QWaylandExtendedOutput *QWaylandScreen::extendedOutput() const
+-{
+-    return mExtendedOutput;
+-}
+-
+-void QWaylandScreen::createExtendedOutput()
+-{
+-    QtWayland::qt_output_extension *extension = mWaylandDisplay->outputExtension();
+-    if (!mExtendedOutput && extension)
+-        mExtendedOutput = new QWaylandExtendedOutput(this, extension->get_extended_output(output()));
+-}
+-
+ QWaylandScreen * QWaylandScreen::waylandScreenFromWindow(QWindow *window)
+ {
+     QPlatformScreen *platformScreen = QPlatformScreen::platformScreenForWindow(window);
+diff --git a/src/client/qwaylandscreen_p.h b/src/client/qwaylandscreen_p.h
+index c337d9b..3971c8a 100644
+--- a/src/client/qwaylandscreen_p.h
++++ b/src/client/qwaylandscreen_p.h
+@@ -53,7 +53,6 @@ namespace QtWaylandClient {
+ 
+ class QWaylandDisplay;
+ class QWaylandCursor;
+-class QWaylandExtendedOutput;
+ 
+ class Q_WAYLAND_CLIENT_EXPORT QWaylandScreen : public QPlatformScreen, QtWayland::wl_output
+ {
+@@ -86,9 +85,6 @@ public:
+     uint32_t outputId() const { return m_outputId; }
+     ::wl_output *output() { return object(); }
+ 
+-    QWaylandExtendedOutput *extendedOutput() const;
+-    void createExtendedOutput();
+-
+     static QWaylandScreen *waylandScreenFromWindow(QWindow *window);
+ 
+ private:
+@@ -104,7 +100,6 @@ private:
+ 
+     int m_outputId;
+     QWaylandDisplay *mWaylandDisplay;
+-    QWaylandExtendedOutput *mExtendedOutput;
+     QRect mGeometry;
+     int mScale;
+     int mDepth;
+diff --git a/src/compositor/compositor_api/qwaylandcompositor.h b/src/compositor/compositor_api/qwaylandcompositor.h
+index 1e482eb..86ca61a 100644
+--- a/src/compositor/compositor_api/qwaylandcompositor.h
++++ b/src/compositor/compositor_api/qwaylandcompositor.h
+@@ -75,15 +75,14 @@ class Q_COMPOSITOR_EXPORT QWaylandCompositor
+ public:
+     enum ExtensionFlag {
+         WindowManagerExtension = 0x01,
+-        OutputExtension = 0x02,
+-        SurfaceExtension = 0x04,
+-        QtKeyExtension = 0x08,
+-        TouchExtension = 0x10,
+-        SubSurfaceExtension = 0x20,
+-        TextInputExtension = 0x40,
+-        HardwareIntegrationExtension = 0x80,
+-
+-        DefaultExtensions = WindowManagerExtension | OutputExtension | SurfaceExtension | QtKeyExtension | TouchExtension | HardwareIntegrationExtension
++        SurfaceExtension = 0x02,
++        QtKeyExtension = 0x04,
++        TouchExtension = 0x08,
++        SubSurfaceExtension = 0x10,
++        TextInputExtension = 0x20,
++        HardwareIntegrationExtension = 0x40,
++
++        DefaultExtensions = WindowManagerExtension | SurfaceExtension | QtKeyExtension | TouchExtension | HardwareIntegrationExtension
+     };
+     Q_DECLARE_FLAGS(ExtensionFlags, ExtensionFlag)
+ 
+diff --git a/src/compositor/wayland_wrapper/qwlcompositor.cpp b/src/compositor/wayland_wrapper/qwlcompositor.cpp
+index 3f1a7ba..be4845d 100644
+--- a/src/compositor/wayland_wrapper/qwlcompositor.cpp
++++ b/src/compositor/wayland_wrapper/qwlcompositor.cpp
+@@ -49,7 +49,6 @@
+ #include "qwaylandcompositor.h"
+ #include "qwldatadevicemanager_p.h"
+ #include "qwldatadevice_p.h"
+-#include "qwlextendedoutput_p.h"
+ #include "qwlextendedsurface_p.h"
+ #include "qwlsubsurface_p.h"
+ #include "qwlshellsurface_p.h"
+@@ -121,7 +120,6 @@ Compositor::Compositor(QWaylandCompositor *qt_compositor, QWaylandCompositor::Ex
+     , m_server_buffer_integration(0)
+ #endif
+     , m_windowManagerIntegration(0)
+-    , m_outputExtension(0)
+     , m_surfaceExtension(0)
+     , m_subSurfaceExtension(0)
+     , m_touchExtension(0)
+@@ -185,7 +183,6 @@ Compositor::~Compositor()
+ 
+     qDeleteAll(m_outputs);
+ 
+-    delete m_outputExtension;
+     delete m_surfaceExtension;
+     delete m_subSurfaceExtension;
+     delete m_touchExtension;
+@@ -349,8 +346,6 @@ void Compositor::initializeHardwareIntegration()
+ 
+ void Compositor::initializeExtensions()
+ {
+-    if (m_extensions & QWaylandCompositor::OutputExtension)
+-        m_outputExtension = new OutputExtensionGlobal(this);
+     if (m_extensions & QWaylandCompositor::SurfaceExtension)
+         m_surfaceExtension = new SurfaceExtensionGlobal(this);
+     if (m_extensions & QWaylandCompositor::SubSurfaceExtension)
+diff --git a/src/compositor/wayland_wrapper/qwlcompositor_p.h b/src/compositor/wayland_wrapper/qwlcompositor_p.h
+index f67d39b..bb4fa7d 100644
+--- a/src/compositor/wayland_wrapper/qwlcompositor_p.h
++++ b/src/compositor/wayland_wrapper/qwlcompositor_p.h
+@@ -74,7 +74,6 @@ class SurfaceBuffer;
+ class InputDevice;
+ class DataDeviceManager;
+ class OutputGlobal;
+-class OutputExtensionGlobal;
+ class SurfaceExtensionGlobal;
+ class SubSurfaceExtensionGlobal;
+ class TouchExtensionGlobal;
+@@ -210,7 +209,6 @@ protected:
+     //extensions
+     WindowManagerServerIntegration *m_windowManagerIntegration;
+ 
+-    OutputExtensionGlobal *m_outputExtension;
+     SurfaceExtensionGlobal *m_surfaceExtension;
+     SubSurfaceExtensionGlobal *m_subSurfaceExtension;
+     TouchExtensionGlobal *m_touchExtension;
+diff --git a/src/compositor/wayland_wrapper/qwlextendedoutput.cpp b/src/compositor/wayland_wrapper/qwlextendedoutput.cpp
+deleted file mode 100644
+index edb4f55..0000000
+--- a/src/compositor/wayland_wrapper/qwlextendedoutput.cpp
++++ /dev/null
+@@ -1,71 +0,0 @@
+-/****************************************************************************
+-**
+-** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+-** Contact: http://www.qt-project.org/legal
+-**
+-** This file is part of the Qt Compositor.
+-**
+-** $QT_BEGIN_LICENSE:BSD$
+-** You may use this file under the terms of the BSD license as follows:
+-**
+-** "Redistribution and use in source and binary forms, with or without
+-** modification, are permitted provided that the following conditions are
+-** met:
+-**   * Redistributions of source code must retain the above copyright
+-**     notice, this list of conditions and the following disclaimer.
+-**   * Redistributions in binary form must reproduce the above copyright
+-**     notice, this list of conditions and the following disclaimer in
+-**     the documentation and/or other materials provided with the
+-**     distribution.
+-**   * Neither the name of Digia Plc and its Subsidiary(-ies) nor the names
+-**     of its contributors may be used to endorse or promote products derived
+-**     from this software without specific prior written permission.
+-**
+-**
+-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+-** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+-** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+-** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+-** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+-** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+-** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+-** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+-** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+-**
+-** $QT_END_LICENSE$
+-**
+-****************************************************************************/
+-
+-#include "qwlextendedoutput_p.h"
+-
+-#include "qwlcompositor_p.h"
+-#include "qwlsurface_p.h"
+-#include "qwloutput_p.h"
+-
+-QT_BEGIN_NAMESPACE
+-
+-namespace QtWayland {
+-
+-OutputExtensionGlobal::OutputExtensionGlobal(Compositor *compositor)
+-    : QtWaylandServer::qt_output_extension(compositor->wl_display(), 1)
+-    , m_compositor(compositor)
+-{
+-}
+-
+-void OutputExtensionGlobal::output_extension_get_extended_output(qt_output_extension::Resource *resource, uint32_t id, wl_resource *output_resource)
+-{
+-    OutputResource *output = static_cast<OutputResource *>(Output::Resource::fromResource(output_resource));
+-    Q_ASSERT(output->extendedOutput == 0);
+-
+-    ExtendedOutput *extendedOutput = static_cast<ExtendedOutput *>(qt_extended_output::add(resource->client(), id));
+-
+-    Q_ASSERT(!output->extendedOutput);
+-    output->extendedOutput = extendedOutput;
+-    extendedOutput->output = output;
+-}
+-
+-}
+-
+-QT_END_NAMESPACE
+diff --git a/src/compositor/wayland_wrapper/qwlextendedoutput_p.h b/src/compositor/wayland_wrapper/qwlextendedoutput_p.h
+deleted file mode 100644
+index f0772e1..0000000
+--- a/src/compositor/wayland_wrapper/qwlextendedoutput_p.h
++++ /dev/null
+@@ -1,87 +0,0 @@
+-/****************************************************************************
+-**
+-** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+-** Contact: http://www.qt-project.org/legal
+-**
+-** This file is part of the Qt Compositor.
+-**
+-** $QT_BEGIN_LICENSE:BSD$
+-** You may use this file under the terms of the BSD license as follows:
+-**
+-** "Redistribution and use in source and binary forms, with or without
+-** modification, are permitted provided that the following conditions are
+-** met:
+-**   * Redistributions of source code must retain the above copyright
+-**     notice, this list of conditions and the following disclaimer.
+-**   * Redistributions in binary form must reproduce the above copyright
+-**     notice, this list of conditions and the following disclaimer in
+-**     the documentation and/or other materials provided with the
+-**     distribution.
+-**   * Neither the name of Digia Plc and its Subsidiary(-ies) nor the names
+-**     of its contributors may be used to endorse or promote products derived
+-**     from this software without specific prior written permission.
+-**
+-**
+-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+-** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+-** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+-** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+-** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+-** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+-** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+-** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+-** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+-**
+-** $QT_END_LICENSE$
+-**
+-****************************************************************************/
+-
+-#ifndef WLEXTENDEDOUTPUT_H
+-#define WLEXTENDEDOUTPUT_H
+-
+-#include "wayland-server.h"
+-
+-#include <QtCompositor/qwaylandexport.h>
+-
+-#include <QtCore/qnamespace.h>
+-
+-#include <QtCompositor/private/qwayland-server-output-extension.h>
+-
+-QT_BEGIN_NAMESPACE
+-
+-namespace QtWayland {
+-
+-class Compositor;
+-class OutputResource;
+-
+-class ExtendedOutput : public QtWaylandServer::qt_extended_output::Resource
+-{
+-public:
+-    ExtendedOutput() : output(0) {}
+-
+-    OutputResource *output;
+-};
+-
+-class OutputExtensionGlobal : public QtWaylandServer::qt_output_extension, public QtWaylandServer::qt_extended_output
+-{
+-public:
+-    OutputExtensionGlobal(Compositor *compositor);
+-
+-private:
+-    Compositor *m_compositor;
+-
+-    qt_extended_output::Resource *extended_output_allocate() Q_DECL_OVERRIDE { return new ExtendedOutput; }
+-
+-    void output_extension_get_extended_output(qt_output_extension::Resource *resource,
+-                                              uint32_t id,
+-                                              struct wl_resource *output_resource) Q_DECL_OVERRIDE;
+-};
+-
+-
+-}
+-
+-QT_END_NAMESPACE
+-
+-#endif // WLEXTENDEDOUTPUT_H
+diff --git a/src/compositor/wayland_wrapper/qwloutput.cpp b/src/compositor/wayland_wrapper/qwloutput.cpp
+index da7e0a9..2775898 100644
+--- a/src/compositor/wayland_wrapper/qwloutput.cpp
++++ b/src/compositor/wayland_wrapper/qwloutput.cpp
+@@ -42,7 +42,6 @@
+ #include "qwloutput_p.h"
+ 
+ #include "qwlcompositor_p.h"
+-#include "qwlextendedoutput_p.h"
+ #include "qwlsurface_p.h"
+ 
+ #include <QtGui/QWindow>
+diff --git a/src/compositor/wayland_wrapper/qwloutput_p.h b/src/compositor/wayland_wrapper/qwloutput_p.h
+index 9247b47..828544b 100644
+--- a/src/compositor/wayland_wrapper/qwloutput_p.h
++++ b/src/compositor/wayland_wrapper/qwloutput_p.h
+@@ -57,12 +57,10 @@ class QWindow;
+ namespace QtWayland {
+ 
+ class Compositor;
+-class ExtendedOutput;
+ 
+ struct OutputResource : public QtWaylandServer::wl_output::Resource
+ {
+-    OutputResource() : extendedOutput(0) {}
+-    ExtendedOutput *extendedOutput;
++    OutputResource() {}
+ };
+ 
+ class Output : public QtWaylandServer::wl_output
+diff --git a/src/compositor/wayland_wrapper/wayland_wrapper.pri b/src/compositor/wayland_wrapper/wayland_wrapper.pri
+index ac34ae2..d70facd 100644
+--- a/src/compositor/wayland_wrapper/wayland_wrapper.pri
++++ b/src/compositor/wayland_wrapper/wayland_wrapper.pri
+@@ -2,7 +2,6 @@ CONFIG += wayland-scanner
+ WAYLANDSERVERSOURCES += \
+     ../extensions/surface-extension.xml \
+     ../extensions/sub-surface-extension.xml \
+-    ../extensions/output-extension.xml \
+     ../extensions/touch-extension.xml \
+     ../extensions/qtkey-extension.xml \
+     ../extensions/windowmanager.xml \
+@@ -17,7 +16,6 @@ HEADERS += \
+     wayland_wrapper/qwldataoffer_p.h \
+     wayland_wrapper/qwldatasource_p.h \
+     wayland_wrapper/qwldisplay_p.h \
+-    wayland_wrapper/qwlextendedoutput_p.h \
+     wayland_wrapper/qwlextendedsurface_p.h \
+     wayland_wrapper/qwlinputdevice_p.h \
+     wayland_wrapper/qwlinputmethod_p.h \
+@@ -46,7 +44,6 @@ SOURCES += \
+     wayland_wrapper/qwldataoffer.cpp \
+     wayland_wrapper/qwldatasource.cpp \
+     wayland_wrapper/qwldisplay.cpp \
+-    wayland_wrapper/qwlextendedoutput.cpp \
+     wayland_wrapper/qwlextendedsurface.cpp \
+     wayland_wrapper/qwlinputdevice.cpp \
+     wayland_wrapper/qwlinputmethod.cpp \
+diff --git a/src/extensions/output-extension.xml b/src/extensions/output-extension.xml
+deleted file mode 100644
+index 0a7f11a..0000000
+--- a/src/extensions/output-extension.xml
++++ /dev/null
+@@ -1,51 +0,0 @@
+-<protocol name="output_extension">
+-
+-    <copyright>
+- Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
+- Contact: http://www.qt-project.org/legal
+-
+- This file is part of the plugins of the Qt Toolkit.
+-
+- $QT_BEGIN_LICENSE:BSD$
+- You may use this file under the terms of the BSD license as follows:
+-
+- "Redistribution and use in source and binary forms, with or without
+- modification, are permitted provided that the following conditions are
+- met:
+-   * Redistributions of source code must retain the above copyright
+-     notice, this list of conditions and the following disclaimer.
+-   * Redistributions in binary form must reproduce the above copyright
+-     notice, this list of conditions and the following disclaimer in
+-     the documentation and/or other materials provided with the
+-     distribution.
+-   * Neither the name of Digia Plc and its Subsidiary(-ies) nor the names
+-     of its contributors may be used to endorse or promote products derived
+-     from this software without specific prior written permission.
+-
+-
+- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+- "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+- LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+- A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+- OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+- SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+- LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+- DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+- THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+- (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+-
+- $QT_END_LICENSE$
+-    </copyright>
+-
+-    <interface name="qt_output_extension" version="1">
+-        <request name="get_extended_output">
+-            <arg name="id" type="new_id" interface="qt_extended_output"/>
+-            <arg name="output" type="object" interface="wl_output"/>
+-        </request>
+-    </interface>
+-
+-    <interface name="qt_extended_output" version="1">
+-
+-    </interface>
+-</protocol>
+-- 
+1.9.3
+
