@@ -9,14 +9,17 @@ DEPENDS = " \
     extra-cmake-modules-native \
     qtbase \
     qtdeclarative \
-    qtquickcontrols \
+    wayland \
     qtwayland \
     libkscreen \
     virtual/egl \
 "
-SRC_URI = "git://github.com/greenisland/${BPN}.git;protocol=git;branch=master"
+SRC_URI = " \
+    git://github.com/greenisland/${BPN}.git;protocol=git;branch=master \
+    file://0001-do-not-require-wayland-egl-explicitly.patch \
+"
 
-SRCREV = "3f8ccb4613112eb3b0d7f9c3a3cf5c157fecbc92"
+SRCREV = "02db54bf021d74f5695cb1fc3f9ea0200f90a8c1"
 PV = "0.5.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
