@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5
+inherit kde-kf5 mime
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "7347d864de95d4b5df03bba93ed22ad5"
