@@ -26,8 +26,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "ffc167621958ea47162c2a4d5359f381"
-SRC_URI[sha256sum] = "7cfa7049d1a356d53c8c19a49b03af4a0ebbd745eef4cc17f0f1261d5ea20b99"
+SRC_URI[md5sum] = "9bd19b65f6c8692a1e24fd60629b64b0"
+SRC_URI[sha256sum] = "239f137c78715c661f53364cff353581c323164ab870ec3fa04be2008b33cbd1"
 
 SRC_URI += "file://0001-showdesktop-do-check-HAVE_X11-correctly.patch"
 

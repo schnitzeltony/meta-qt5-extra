@@ -45,9 +45,9 @@ DEPENDS += " \
 	kdoctools \
 "
 
-PV = "5.2.0.1"
-SRC_URI[md5sum] = "47b6ce31b45450fa702098c9f3f5ac95"
-SRC_URI[sha256sum] = "aed82bd23376b44534a01b277cab3aed012c778540320814469b446719ccdf49"
+PV = "${PLASMA_VERSION}"
+SRC_URI[md5sum] = "863205ef27b7a11897fdeb24a75399ed"
+SRC_URI[sha256sum] = "d17c95fef098e853a468f91d2dbb7313a8bc1917fd5695e48f521e0fa6cae7b2"
 
 SRC_URI += "file://0001-fix-build-for-qtbase-without-session-management.patch"
 

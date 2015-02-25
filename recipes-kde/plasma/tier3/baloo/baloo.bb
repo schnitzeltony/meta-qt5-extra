@@ -9,9 +9,9 @@ inherit kde-plasma cmake-lib
 
 DEPENDS += "ki18n kconfig kidletime kitemmodels kinit kauth kcrash solid kio kdelibs4support kfilemetadata ktexteditor xapian-core"
 
-PV = "5.6.0"
-SRC_URI[md5sum] = "2b3ab6d78e2e492d281d27ce4bc00e1a"
-SRC_URI[sha256sum] = "2418194eabe140c432434fdad0224bcc9d735c22960df116ff8668e4e6b5c0df"
+PV = "5.6.1"
+SRC_URI[md5sum] = "df0d96ef85bfe46bceab6fdf796300f8"
+SRC_URI[sha256sum] = "c2e1b6bf3c2ad830fde63c863fa1b792272cca2986a5145b490ba63ef116eea9"
 
 SRC_URI += "file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch"
 

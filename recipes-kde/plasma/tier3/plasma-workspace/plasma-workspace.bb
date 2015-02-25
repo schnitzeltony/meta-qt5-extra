@@ -35,8 +35,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "4ffdb4c7e310dff222abd452fd67e74d"
-SRC_URI[sha256sum] = "43eece34f9ca2a15dc01aa4163db7d97aea09daab6b337cf4062ec2a4e8891eb"
+SRC_URI[md5sum] = "29694a2c8b43cf269ab89a50fb0e917e"
+SRC_URI[sha256sum] = "c3dca77ea4deb872cf5225f5982055cf71fda3d63ff6cd08ab11215770d0b451"
 
 SRC_URI += " \
     file://0001-Initial-Wayland-support.patch \

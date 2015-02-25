@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma cmake-lib
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "6f17d46bed6463c9217dad8e1fe49387"
-SRC_URI[sha256sum] = "dab0e9a3a82d4abb4686a1a900cab826091e1fa2c373db25ac42e3e1afded41d"
+SRC_URI[md5sum] = "9b71038c7a9bfb7c89a92176dc28fbf3"
+SRC_URI[sha256sum] = "96c346189c3021c7712043ad22df3e89136e5d876bd9dce0e9594622df227858"
 
 DEPENDS += " \
     modemmanager \

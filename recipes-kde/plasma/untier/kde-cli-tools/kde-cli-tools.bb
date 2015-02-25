@@ -21,8 +21,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "fdd6ec4c00fe14409944dbe20572b0eb"
-SRC_URI[sha256sum] = "b812932fdbb17c88326db33669a45fb8f719819e144205ac073d6037518e2353"
+SRC_URI[md5sum] = "5ddd0a1d4930adf635a83c015b61b757"
+SRC_URI[sha256sum] = "38ed83602db6cb4c14fb18351047523cbde941d38588228d0692564a64b0b97f"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
@@ -35,4 +35,5 @@ FILES_${PN} += " \
 
 FILES_${PN}-dbg += " \
     ${libdir}/*/.debug \
+    ${libdir}/${BPN}/*/.debug \
 "

@@ -1,0 +1,35 @@
+From 0803702f8cae2734df58e82a19905de4cbd22484 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 25 Feb 2015 11:47:44 +0100
+Subject: [PATCH] fix build for qtbase without session management
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ kwrited.cpp | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/kwrited.cpp b/kwrited.cpp
+index 2b73e36..de0a49a 100644
+--- a/kwrited.cpp
++++ b/kwrited.cpp
+@@ -73,11 +73,14 @@ int main(int argc, char **argv)
+     KAboutData::setApplicationData(aboutData());
+     QApplication::setDesktopSettingsAware(false);
+     QApplication a(argc, argv);
++
++#ifndef QT_NO_SESSIONMANAGER
+     auto disableSessionManagement = [](QSessionManager &sm) {
+             sm.setRestartHint(QSessionManager::RestartNever);
+     };
+     QObject::connect(&a, &QGuiApplication::commitDataRequest, disableSessionManagement);
+     QObject::connect(&a, &QGuiApplication::saveStateRequest, disableSessionManagement);
++#endif
+ 
+     KWrited w;
+     return a.exec();
+-- 
+1.9.3
+

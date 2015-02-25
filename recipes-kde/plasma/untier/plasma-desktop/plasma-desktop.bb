@@ -41,8 +41,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "476bc7465f8615b932696c9721453d26"
-SRC_URI[sha256sum] = "e922c64a1d5e78d83006a45a74dd3656266301b3e5a8e00a9fe85ca4fa3c8d76"
+SRC_URI[md5sum] = "8a9f8e2914ca6ec653565a7eeb65f91f"
+SRC_URI[sha256sum] = "ada8f06f922418be2bdca5e98b1ec03fdfc7a461688ac3ea054d7e8ad6f6f222"
 
 SRC_URI += "file://0001-fix-path-to-fontinst.patch"
 
