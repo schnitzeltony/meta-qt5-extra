@@ -6,24 +6,13 @@ kde-apps:
 * konsole
 ..........
 
-* sddm
-
 patches upstream:
 
 * meta-oe:
-+ f0a9288b33ebec0c774ee2be750f05e86bbdf9f4 libmbim: initial add 1.12.2
-+ b04182ec701419842bd67261be0494936efec5f2 libqmi: initial add 1.12.2
-+ 1720e7d30bdc9ea81517c9917ebfc1e59fd7f2ee modemmanager: update to 1.4.2
-+ 15bf7023f40898de470deb7ffc797c7cdd85f17f initial add xmessage 1.0.4
 + fontforge -> meta-oe
-+ and xfce-stuff
 
-* oe-core
+* oe-core (not accepted -> merged here -> non bincfg solution)
 + 4d44d9d950e9c69021e3e75bfb0d672d4752e1fc gpgme: add native build and ship a valid gpgme-config
-
-* meta-fsl-arm
-+ d5c3cc0bfbfd48fccad6bfe8bba038ada27779f1 add gpu-viv-bin-mx6q-dev to meta-qt5's packagegroup-qt5-toolchain-target
-+ 2e30fed7bc9ee855d4fe626b51315e947a473ee3 gpu-viv-bin-mx6q: ship a link named libwayland-egl.so
 
 * meta-qt5
 + 0321b82e44b286e6ac67c793294d561149d7ced3 qtbase: remove patches required for native(-sdk) only
