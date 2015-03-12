@@ -14,4 +14,4 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig pythonnative
 
-DEPENDS = "virtual/libgl ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)}"
+DEPENDS = "virtual/egl ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)}"
