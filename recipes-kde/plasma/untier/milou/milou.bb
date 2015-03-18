@@ -15,11 +15,13 @@ DEPENDS += " \
     plasma-framework \
     ki18n \
     kdeclarative \
+    kservice \
 "
 
 PV = "${PLASMA_VERSION}"
 SRC_URI[md5sum] = "68f3bec27aa66de065cf2fb087d8bd95"
 SRC_URI[sha256sum] = "d6472ca1ce2fb865a856c1b3008a5c8c385df3e9bbe991cb7f03bfc50f77abe0"
+SRC_URI += "file://0001-Add-missing-KF5-dependancies.patch"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
