@@ -18,8 +18,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "3c8027a2eb04cc76bf8dba23cddb88fa"
-SRC_URI[sha256sum] = "bf4f68adbeeea32f8d179dc8b1b266dd53fee7870101776fb73121d98c12eb13"
+SRC_URI[md5sum] = "7e2bd16d3b35d75e1a21226af2257048"
+SRC_URI[sha256sum] = "b9a00448f7a6129bd713e02633c0baeb8e1cd84ece599f9ebf0a24c356d558c0"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5WebKit, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

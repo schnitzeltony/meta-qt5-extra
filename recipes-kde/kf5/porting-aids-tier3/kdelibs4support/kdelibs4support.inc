@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5-porting-aids
+inherit kde-kf5-porting-aids perlnative
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "8699a1c9a310e75117349b176fb15187"
-SRC_URI[sha256sum] = "652508f6e8efaa3923e525644ec0049eaaf3badb073bd3ec5a7f7ad016d086ee"
+SRC_URI[md5sum] = "8c095f662a282799590beff3650dd79e"
+SRC_URI[sha256sum] = "62087a7076641dbb8034e9a41f58c849016f9fc98efc1c524f2e86f5cfbf7248"
 
 SRC_URI += " \
 	file://0001-make-broken-glib-a-configure-option-we-cannot-run-co.patch \

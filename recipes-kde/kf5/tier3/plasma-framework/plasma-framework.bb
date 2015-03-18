@@ -31,8 +31,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "0e8c690beeec8da3b9ae9f45ca5c1942"
-SRC_URI[sha256sum] = "35345ced57cce80e1089b3172edfd277a0dc5ed4148b9c52a18c2ca0869eb364"
+SRC_URI[md5sum] = "4e8388cee55215412db36c226f4b3b2c"
+SRC_URI[sha256sum] = "027544d49d3da11d8b16ac0caa3007fbb27d5a64d4ba02f113a6376282758280"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Plasma, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

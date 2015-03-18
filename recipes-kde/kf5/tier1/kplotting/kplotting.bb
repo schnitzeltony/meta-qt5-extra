@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 cmake-lib
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "637609e197e3ed92ae352f86f14d0baf"
-SRC_URI[sha256sum] = "f1ce8e4585239037b59adefc2603a57d9fc53ef2446d40bdc8c501ec61f3a708"
+SRC_URI[md5sum] = "b8a053219aa6fd8273212b7faa4c39a0"
+SRC_URI[sha256sum] = "b107f53c51e273f8cfe5cca3e823f318d6a7a8d096601768abb1d184f9773196"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Plotting, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

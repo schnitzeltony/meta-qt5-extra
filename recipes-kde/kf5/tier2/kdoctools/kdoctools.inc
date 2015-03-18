@@ -5,14 +5,14 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE;md5=d975629b732b61cb58f9595c6baa9379 \
 "
 
-inherit kde-kf5
+inherit kde-kf5 perlnative
 
 # allarch recipes
 DEPENDS += "docbook-xml-dtd4 docbook-xsl-stylesheets"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "65efa563057f08eb25bf626eab5d7345"
-SRC_URI[sha256sum] = "b125d7b2654cbbe6ba0f5eaf7773f688c54ba4bd048046f7a2134b3954869a06"
+SRC_URI[md5sum] = "1bcb1b093999efa4426be034e2aa671f"
+SRC_URI[sha256sum] = "12541b8c808b1efac15c8f97741d6893670a1e6cd75aa731a1ce7701c2f71b0b"
 
 SRC_URI += " \
 	file://0001-Add-cmdline-param-to-help-find-xsl.patch \

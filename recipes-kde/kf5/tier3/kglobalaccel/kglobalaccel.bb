@@ -16,8 +16,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "a54ad9ea7f1ed3eb5d8f3f3708e1d78c"
-SRC_URI[sha256sum] = "3e0996ca5a1f29ef9c0ff2ba503cde4a395d898702594237f1a91ff0c6b4934a"
+SRC_URI[md5sum] = "e3b6e3965f9777489fce066627611d50"
+SRC_URI[sha256sum] = "a47ace37aea45a9ea39f04d136b950f977ca9905beb9ade48b56e0f653d4823b"
 
 SRC_URI += "file://0001-HACK-Add-a-stub-runtime-implementation-to-enable-bui.patch"
 

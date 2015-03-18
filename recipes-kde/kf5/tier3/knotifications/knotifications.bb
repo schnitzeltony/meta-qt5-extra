@@ -11,8 +11,8 @@ DEPENDS += "kwindowsystem kservice kconfig kiconthemes kcodecs kcoreaddons phono
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "b610f0a52530f6ced9ea5cc206c39d7a"
-SRC_URI[sha256sum] = "43242ba806feedb226b77c414bcc5fc20cbb37c83ac006949725265b83d02b7d"
+SRC_URI[md5sum] = "cdcded8f150246437eced2ce5fface2f"
+SRC_URI[sha256sum] = "78df80e45900840e31bea30c38706358612bdcfb8d5150e518d91e9c2fe69b1b"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Notifications, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

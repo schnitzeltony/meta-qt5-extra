@@ -6,8 +6,8 @@ inherit kde-kf5
 
 DEPENDS = "qttools"
 
-SRC_URI[md5sum] = "45fd1e6f38b23b00983e5eab9ba61d15"
-SRC_URI[sha256sum] = "c88de18f41fb9e5bb1f296bd4762315b2911fa5feb5c10aed8352d00fc08fdd1"
+SRC_URI[md5sum] = "e877d996f478419c3a749cfc425bd6c0"
+SRC_URI[sha256sum] = "47bc234a9a1e3f041d0386a1971e34be3a1f024ba94c2d88e48475923473f56a"
 
 FILES_${PN} += "${datadir}/ECM"
 

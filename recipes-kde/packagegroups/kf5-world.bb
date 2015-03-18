@@ -57,11 +57,13 @@ TIER_3 = " \
     knotifications \
     knotifyconfig \
     kparts \
+    kpeople \
     kservice \
     ktexteditor \
     ktextwidgets \
     kwallet \
     kxmlgui \
+    kxmlrpcclient \
     plasma-framework \
 "
 

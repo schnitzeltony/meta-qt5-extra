@@ -12,8 +12,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "59ddec8e7b1957d2026e13692d76d054"
-SRC_URI[sha256sum] = "2b4be90bcbb5242acff007722b42d94a86d1702a9982c260ff4ef1e282ddc338"
+SRC_URI[md5sum] = "d82fde58b0fb646aa8b3593720e8a22f"
+SRC_URI[sha256sum] = "82a3dd36debe87d682a7df2aad7c4d0f8fab66f2eea26bd5fe02ccd7adbaa085"
 
 CMAKE_HIDE_ERROR[1] = "KF5GuiAddons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5GuiAddons, -S${includedir}, -S${STAGING_INCDIR}"

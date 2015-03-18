@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 cmake-lib
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "bc01fc93692ca2d703e3a659e574163a"
-SRC_URI[sha256sum] = "1262cd0411c962332006bce18c9d1bc5e05d5220be3d84b78b14d526cb20ce5e"
+SRC_URI[md5sum] = "694923c6ca1f5a427aa7c7700190bfd5"
+SRC_URI[sha256sum] = "ec0b7073cc9f9552258d2a8c4626f8119bfbc482df7a0771d97b94fa6041edc6"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Codecs, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

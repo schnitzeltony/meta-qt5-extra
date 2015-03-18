@@ -32,8 +32,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "e7467a0a2af4147e98f285f65e5aa7c1"
-SRC_URI[sha256sum] = "260ab3bfd6214e3d03fc1c58a22bad05f964ebef3f77f8448145736b3e46993a"
+SRC_URI[md5sum] = "023518c1fd0bcd215ceeb354cf370a1d"
+SRC_URI[sha256sum] = "6b10e3ebba3bb19a7f5292b6adcfccb8d757bd15a7f489544a152027d510017c"
 
 CMAKE_HIDE_ERROR[1] = "KF5KHtml, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5KHtml, -S${includedir}, -S${STAGING_INCDIR}"

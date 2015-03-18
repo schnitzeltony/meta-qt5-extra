@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "kcompletion kconfig kconfigwidgets ki18n kiconthemes kservice kwidgetsaddons kwindowsystem sonnet"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "bb39ff70f893174be874defd70924f52"
-SRC_URI[sha256sum] = "45c97495dabf59cb77e4b3d0388bc42aee1e82f75f13a398908b0afb58aa107a"
+SRC_URI[md5sum] = "b033eacbea5aafc024302fc847bf3f53"
+SRC_URI[sha256sum] = "9bd528d8ed3feec1d18f4449e8649506c8c5d8c83915b51ccdb6856b1d7e5115"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5TextWidgets, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

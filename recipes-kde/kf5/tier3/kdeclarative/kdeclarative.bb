@@ -10,8 +10,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "qtdeclarative kconfig ki18n kiconthemes kio kwidgetsaddons kwindowsystem kglobalaccel kguiaddons libepoxy"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "414cb5a4c26c5c3150c2867e29ec0181"
-SRC_URI[sha256sum] = "afe4295bcb8e85b0ffee754b0db29056a7c422bf62934233991a812292bba18e"
+SRC_URI[md5sum] = "04b6eedce4147f97c8d1ed7bb186fed3"
+SRC_URI[sha256sum] = "563848af5392a23f94e8ce185ac1878749d64cc4c0327f646b34ebd10887dea3"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5Declarative, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

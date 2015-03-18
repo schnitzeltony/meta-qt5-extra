@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib pkgconfig
 DEPENDS += "networkmanager"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "fbac640d46ec3e3ff173c12a5c30a072"
-SRC_URI[sha256sum] = "535e6b04fa041c38bb9af1bf4aea293ee5ae4f9883df7dd1cb0e1671b5dca1d3"
+SRC_URI[md5sum] = "ed270d6e56214107d23ca3d8f067d99e"
+SRC_URI[sha256sum] = "7f8858bbf90a6cd0e64dbd8b2223fc16225f6d8415e9ceb028616d4d99b0891d"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5NetworkManagerQt, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

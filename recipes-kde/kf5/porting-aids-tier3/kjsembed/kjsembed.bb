@@ -9,8 +9,8 @@ inherit kde-kf5-porting-aids cmake-lib
 DEPENDS += "qtsvg qttools kjs ki18n kdoctools"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "c5ec56e2460296046bc57714105e5d2c"
-SRC_URI[sha256sum] = "8daa6a8929495d7cc5f335291ba481b9fe778fe4e6389a911628384e3069279c"
+SRC_URI[md5sum] = "30d32919babdf97c40cfccf1cd1676cb"
+SRC_URI[sha256sum] = "7d29f773194d1a4bdfc7391b186ed78bce732dfad5b840ed38543e8b87da5813"
 
 # cross libs / headers
 CMAKE_HIDE_ERROR[1] = "KF5JsEmbed, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

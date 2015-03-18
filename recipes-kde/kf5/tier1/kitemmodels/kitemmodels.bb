@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 cmake-lib
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "f4be5065077ba4fe7310ce9fa0a8cb46"
-SRC_URI[sha256sum] = "f0d2a736acac531ad6f06c1abf36c68bf448e8a663fd32c2ce1610988f8e7f78"
+SRC_URI[md5sum] = "1906bbf0023fe8c46af589699a50d791"
+SRC_URI[sha256sum] = "f2018f8a16572fc188c135a309747dbf899d8879e587bc93c358a915527dd7d4"
 
 CMAKE_HIDE_ERROR[1] = "KF5ItemModels, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_HIDE_ERROR[2] = "KF5ItemModels, -S${includedir}, -S${STAGING_INCDIR}"
