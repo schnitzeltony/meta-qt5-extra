@@ -27,8 +27,8 @@ do_install_append() {
 }
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "phonon4qt5, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "phonon4qt5, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "phonon4qt5, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "phonon4qt5, -S${includedir}, -S${STAGING_INCDIR}"
 
 PACKAGES =+ "${PN}-designer-plugin-dbg ${PN}-designer-plugin"
 FILES_${PN}-designer-plugin = "${libdir}/qt5/plugins/designer"

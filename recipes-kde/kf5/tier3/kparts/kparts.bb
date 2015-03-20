@@ -25,8 +25,8 @@ SRC_URI[md5sum] = "354a43983d5d66fe795808d48527daad"
 SRC_URI[sha256sum] = "6291872e24f45b093eb1a08b771fde6206538905d7a363b2ce22c8d4d1cf3801"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5Parts, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Parts, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Parts, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Parts, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${datadir}/k*5 ${libdir}/plugins"
 FILES_${PN}-dbg += "${libdir}/plugins/.debug"

@@ -12,7 +12,7 @@ inherit autotools cmake-lib
 DEPENDS = "util-linux zlib"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "xapian, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "xapian, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "xapian, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "xapian, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN}-dev += "${libdir}/cmake"

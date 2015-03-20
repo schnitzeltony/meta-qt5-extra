@@ -31,10 +31,10 @@ PACKAGECONFIG[kplotting] = "-DWITH_KPLOTTING=ON,,kplotting"
 PACKAGECONFIG[kdewebkit] = "-DWITH_KDEWEBKIT=ON,,kdewebkit"
 
 # cross headers
-CMAKE_HIDE_ERROR[1] = "KF5DesignerPlugin, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5DesignerPlugin, -S${includedir}, -S${STAGING_INCDIR}"
 
 # native binaries
-CMAKE_HIDE_ERROR[2] = "KF5DesignerPlugin, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
+CMAKE_ALIGN_SYSROOT[2] = "KF5DesignerPlugin, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
 
 FILES_${PN} += "${libdir}/plugins/designer"
 FILES_${PN}-dbg += "${libdir}/plugins/designer/.debug"

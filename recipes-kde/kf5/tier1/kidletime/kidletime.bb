@@ -16,5 +16,5 @@ SRC_URI[sha256sum] = "7ee7d58a6c999debd6582add8bc4def609c87a25456c09d345402fe1b2
 SRC_URI += "file://0001-Do-not-search-for-Qt5X11Extras-in-x-less-environment.patch"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5IdleTime, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5IdleTime, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5IdleTime, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5IdleTime, -S${includedir}, -S${STAGING_INCDIR}"

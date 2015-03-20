@@ -13,5 +13,5 @@ SRC_URI[md5sum] = "3f579762a22fa0c91731ea8d2c44cbb5"
 SRC_URI[sha256sum] = "11631f3f64bc54d80d1b0ce0d11318e50daec2d64efa91154b1929596a54342f"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5Bookmarks, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Bookmarks, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Bookmarks, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Bookmarks, -S${includedir}, -S${STAGING_INCDIR}"

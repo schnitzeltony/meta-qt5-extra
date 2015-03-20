@@ -12,5 +12,5 @@ PV = "1.1.0"
 
 EXTRA_OECMAKE += "-DCMAKE_INSTALL_PREFIX=''"
 
-CMAKE_HIDE_ERROR[1] = "qt5xdg, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_HIDE_ERROR[2] = "qt5xdg, -S${libdir}, -S${STAGING_LIBDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "qt5xdg, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[2] = "qt5xdg, -S${libdir}, -S${STAGING_LIBDIR}"

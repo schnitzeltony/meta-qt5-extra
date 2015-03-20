@@ -13,6 +13,6 @@ PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "951dfbb91016e4f7982feb18602087f5"
 SRC_URI[sha256sum] = "2cb079363073074e82ad94e26c8ea429c50ef0f49873dd2656b8ab2a6377c42b"
 
-CMAKE_HIDE_ERROR[1] = "KF5WidgetsAddons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5WidgetsAddons, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5WidgetsAddons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5WidgetsAddons, -S${includedir}, -S${STAGING_INCDIR}"
 

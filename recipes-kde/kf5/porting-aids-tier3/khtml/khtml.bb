@@ -35,8 +35,8 @@ PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "023518c1fd0bcd215ceeb354cf370a1d"
 SRC_URI[sha256sum] = "6b10e3ebba3bb19a7f5292b6adcfccb8d757bd15a7f489544a152027d510017c"
 
-CMAKE_HIDE_ERROR[1] = "KF5KHtml, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5KHtml, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5KHtml, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5KHtml, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

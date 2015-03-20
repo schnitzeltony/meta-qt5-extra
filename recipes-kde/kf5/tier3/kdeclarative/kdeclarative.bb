@@ -14,8 +14,8 @@ SRC_URI[md5sum] = "04b6eedce4147f97c8d1ed7bb186fed3"
 SRC_URI[sha256sum] = "563848af5392a23f94e8ce185ac1878749d64cc4c0327f646b34ebd10887dea3"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5Declarative, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Declarative, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Declarative, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Declarative, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${libdir}/qml/org/kde"
 FILES_${PN}-dbg += "${libdir}/qml/org/kde/*/.debug ${libdir}/qml/org/kde/*/*/.debug"

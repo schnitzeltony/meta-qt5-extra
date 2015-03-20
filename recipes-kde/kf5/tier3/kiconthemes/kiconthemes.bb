@@ -13,5 +13,5 @@ SRC_URI[md5sum] = "bebd631369a52c8ce3b168f033688a8d"
 SRC_URI[sha256sum] = "60e5c34a16af7c4bb67785756e301de765604b518bddb3adb4765ac75f9fa92a"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5IconThemes, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5IconThemes, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5IconThemes, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5IconThemes, -S${includedir}, -S${STAGING_INCDIR}"

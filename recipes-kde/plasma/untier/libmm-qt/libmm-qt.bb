@@ -14,6 +14,6 @@ DEPENDS += " \
     modemmanager \
 "
 
-CMAKE_HIDE_ERROR[1] = "KF5ModemManagerQt, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_HIDE_ERROR[2] = "KF5ModemManagerQt, -S${libdir}, -S${STAGING_LIBDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5ModemManagerQt, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[2] = "KF5ModemManagerQt, -S${libdir}, -S${STAGING_LIBDIR}"
 

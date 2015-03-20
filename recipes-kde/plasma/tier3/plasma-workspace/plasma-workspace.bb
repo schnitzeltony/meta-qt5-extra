@@ -66,10 +66,10 @@ SRC_URI += " \
 # 0007 taskmanager stub either X11 or wayland
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "LibKWorkspace, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "LibKWorkspace, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_HIDE_ERROR[3] = "LibTaskManager, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[4] = "LibTaskManager, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "LibKWorkspace, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "LibKWorkspace, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[3] = "LibTaskManager, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[4] = "LibTaskManager, -S${includedir}, -S${STAGING_INCDIR}"
 
 # REVISIT
 FILES_${PN} += " \

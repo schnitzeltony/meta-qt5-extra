@@ -14,7 +14,7 @@ SRC_URI[md5sum] = "c30bb0ce023cc7f22dd2c3c092f4da56"
 SRC_URI[sha256sum] = "2a64e01a713c0804ee4e0961da11be538a602653f6e932fd03c0dbdd0a469ef8"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5Package, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Package, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Package, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Package, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${datadir}/k*5"

@@ -22,7 +22,7 @@ SRC_URI[sha256sum] = "a47ace37aea45a9ea39f04d136b950f977ca9905beb9ade48b56e0f653
 SRC_URI += "file://0001-HACK-Add-a-stub-runtime-implementation-to-enable-bui.patch"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5GlobalAccel, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5GlobalAccel, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5GlobalAccel, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5GlobalAccel, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${datadir}/dbus-1 ${datadir}/kservices5"

@@ -12,8 +12,8 @@ SRCREV = "20f7fcf49c90108c42f3ce0b7357775a846dfc2d"
 
 S = "${WORKDIR}/git"
 
-CMAKE_HIDE_ERROR[1] = "Hawaii, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "Hawaii, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "Hawaii, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "Hawaii, -S${includedir}, -S${STAGING_INCDIR}"
 
 
 FILES_${PN} += "${libdir}/hawaii"

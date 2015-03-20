@@ -23,8 +23,8 @@ SRC_URI[md5sum] = "5e833c39103910c01d851db6dddffffc"
 SRC_URI[sha256sum] = "6ee0c7dbfa1e63cc470a1d32805e6c726aa9a54d5d776ec81e20787eb4b34b87"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5FrameworkIntegration, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5FrameworkIntegration, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5FrameworkIntegration, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5FrameworkIntegration, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
     ${datadir}/knotifications5 \

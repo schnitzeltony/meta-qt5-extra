@@ -14,12 +14,12 @@ do_configure_append() {
 }
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5DocTools, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5DocTools, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5DocTools, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5DocTools, -S${includedir}, -S${STAGING_INCDIR}"
 # native binaries
-CMAKE_HIDE_ERROR[3] = "KF5DocTools, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
+CMAKE_ALIGN_SYSROOT[3] = "KF5DocTools, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
 
 # make meinproc5 find kdoctools data
-CMAKE_HIDE_ERROR[4] = "KF5DocToolsMacros.cmake, -sCOMMAND ${KDOCTOOLS_MEINPROC_EXECUTABLE}, -SCOMMAND ${KDOCTOOLS_MEINPROC_EXECUTABLE} --srcdir ${STAGING_DATADIR}/kf5/kdoctools"
+CMAKE_ALIGN_SYSROOT[4] = "KF5DocToolsMacros.cmake, -sCOMMAND ${KDOCTOOLS_MEINPROC_EXECUTABLE}, -SCOMMAND ${KDOCTOOLS_MEINPROC_EXECUTABLE} --srcdir ${STAGING_DATADIR}/kf5/kdoctools"
 
 FILES_${PN}-dev += "${datadir}/kf5/kdoctools/customization"

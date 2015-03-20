@@ -12,7 +12,7 @@ SRC_URI[md5sum] = "694923c6ca1f5a427aa7c7700190bfd5"
 SRC_URI[sha256sum] = "ec0b7073cc9f9552258d2a8c4626f8119bfbc482df7a0771d97b94fa6041edc6"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5Codecs, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Codecs, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Codecs, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Codecs, -S${includedir}, -S${STAGING_INCDIR}"
 
 

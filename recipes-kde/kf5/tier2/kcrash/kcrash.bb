@@ -15,5 +15,5 @@ SRC_URI[sha256sum] = "5968694919e374b432b2e53ad1f6c15a018011ecd3c45d0b2d9dd586af
 SRC_URI += "file://0001-align-path-to-drkonqi.patch"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5Crash, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Crash, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Crash, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Crash, -S${includedir}, -S${STAGING_INCDIR}"

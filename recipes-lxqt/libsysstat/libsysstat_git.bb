@@ -7,5 +7,5 @@ inherit lxqt cmake-lib
 SRCREV = "70f70eb97e5b144a63468ea78b6c436bf43cf571"
 PV = "0.3.0"
 
-CMAKE_HIDE_ERROR[1] = "sysstat-qt5, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_HIDE_ERROR[2] = "sysstat-qt5, -S${libdir}, -S${STAGING_LIBDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "sysstat-qt5, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[2] = "sysstat-qt5, -S${libdir}, -S${STAGING_LIBDIR}"

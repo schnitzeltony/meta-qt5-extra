@@ -15,7 +15,7 @@ SRC_URI[md5sum] = "cdcded8f150246437eced2ce5fface2f"
 SRC_URI[sha256sum] = "78df80e45900840e31bea30c38706358612bdcfb8d5150e518d91e9c2fe69b1b"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5Notifications, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Notifications, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Notifications, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Notifications, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${datadir}/dbus-1 ${datadir}/kservicetypes5"

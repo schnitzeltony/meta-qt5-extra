@@ -33,11 +33,11 @@ DEPENDS += " \
 #EXTRA_OECMAKE += "-DHAVE_GOOD_GETADDRINFO=OFF"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KDELibs4, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_HIDE_ERROR[2] = "KDELibs4, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[1] = "KDELibs4, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[2] = "KDELibs4, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 
 # native executables
-CMAKE_HIDE_ERROR[3] = "KF5KDELibs4Support, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
+CMAKE_ALIGN_SYSROOT[3] = "KF5KDELibs4Support, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
 
 FILES_${PN} += " \
 	${datadir}/k*5 \

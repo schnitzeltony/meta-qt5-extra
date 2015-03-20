@@ -12,8 +12,8 @@ PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "ebc23e7ff249c7b1a2c95175d1c0f7bc"
 SRC_URI[sha256sum] = "90532e715fe9d133efd8c299c5d3bdffa74ce56bcf36d36284461bae9e291a70"
 
-CMAKE_HIDE_ERROR[1] = "KF5Runner, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Runner, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Runner, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Runner, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${datadir}/k*5 ${libdir}/qml/org/kde"
 FILES_${PN}-dbg += "${libdir}/qml/org/kde/*/.debug"

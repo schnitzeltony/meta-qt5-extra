@@ -11,6 +11,6 @@ PV = "0.9.0"
 
 EXTRA_OECMAKE += "-DCMAKE_INSTALL_DATAROOTDIR=share -DLXQT_ETC_XDG_DIR=${sysconfdir}/xdg"
 
-CMAKE_HIDE_ERROR[1] = "lxqt, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_HIDE_ERROR[2] = "lxqt, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[3] = "lxqt, -S${datadir}/cmake, -S${STAGING_DATADIR}/cmake"
+CMAKE_ALIGN_SYSROOT[1] = "lxqt, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[2] = "lxqt, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[3] = "lxqt, -S${datadir}/cmake, -S${STAGING_DATADIR}/cmake"

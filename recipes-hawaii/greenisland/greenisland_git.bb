@@ -30,8 +30,8 @@ EXTRA_OECMAKE += " \
 "
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "GreenIsland, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "GreenIsland, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "GreenIsland, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "GreenIsland, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${libdir}/qml/GreenIsland"
 FILES_${PN}-dbg += "${libdir}/qml/GreenIsland/.debug"

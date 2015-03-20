@@ -7,4 +7,4 @@ inherit lxqt cmake-lib
 SRCREV = "1c8422bd78dfb06b631568b1780ec5f59682cbdc"
 PV = "0.9.0"
 
-CMAKE_HIDE_ERROR[1] = "lxqtmount, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "lxqtmount, -S${includedir}, -S${STAGING_INCDIR}"

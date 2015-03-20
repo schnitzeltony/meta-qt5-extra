@@ -16,8 +16,8 @@ SRC_URI[sha256sum] = "c2e1b6bf3c2ad830fde63c863fa1b792272cca2986a5145b490ba63ef1
 SRC_URI += "file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5Baloo, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Baloo, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Baloo, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Baloo, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${datadir} \
 	${libdir}/qml/org/kde/baloo \

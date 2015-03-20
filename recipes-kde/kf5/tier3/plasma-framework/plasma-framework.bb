@@ -35,8 +35,8 @@ SRC_URI[md5sum] = "4e8388cee55215412db36c226f4b3b2c"
 SRC_URI[sha256sum] = "027544d49d3da11d8b16ac0caa3007fbb27d5a64d4ba02f113a6376282758280"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5Plasma, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Plasma, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Plasma, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Plasma, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

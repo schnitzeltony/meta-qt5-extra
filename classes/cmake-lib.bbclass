@@ -3,11 +3,11 @@
 #
 # Alignment is controlled by
 #
-# CMAKE_HIDE_ERROR[unique-id] = "dir, search, replace"
+# CMAKE_ALIGN_SYSROOT[unique-id] = "dir, search, replace"
 #
 # 'unique-id': 
 #    string value of your choice e.g. "1", "2"...
-#    !!COMMON PITFALL!!: Copy & Paste CMAKE_HIDE_ERROR lines without updating unique-id -> 
+#    !!COMMON PITFALL!!: Copy & Paste CMAKE_ALIGN_SYSROOT lines without updating unique-id -> 
 #    not all lines are evaluated!!
 #
 # 'dir':
@@ -44,18 +44,18 @@
 # filename for the file containg full names of all cmakefiles staged
 CMAKEINSTALLED = "${WORKDIR}/staged_cmake_files"
 
-# 1. basic checks for CMAKE_HIDE_ERROR
+# 1. basic checks for CMAKE_ALIGN_SYSROOT
 python () {
-    cmakehideflags = d.getVarFlags("CMAKE_HIDE_ERROR") or {}
+    cmakehideflags = d.getVarFlags("CMAKE_ALIGN_SYSROOT") or {}
     pn = d.getVar('PN', True)
     if cmakehideflags:
         for flag, flagval in sorted(cmakehideflags.items()):
             items = flagval.split(",")
             num = len(items)
             if num != 3:
-                bb.fatal('CMAKE_HIDE_ERROR[%s] requires 3 parameters (dir, search, replace) in %s' % (flag, pn))
+                bb.fatal('CMAKE_ALIGN_SYSROOT[%s] requires 3 parameters (dir, search, replace) in %s' % (flag, pn))
     else:
-        bb.fatal('The recipe %s inherits cmake-lib but does not set CMAKE_HIDE_ERROR' % pn)
+        bb.fatal('The recipe %s inherits cmake-lib but does not set CMAKE_ALIGN_SYSROOT' % pn)
 }
 
 # 2. remove tmp file from last build
@@ -75,11 +75,11 @@ sysroot_stage_dir_append() {
     done
 }
 
-# 4. Handle CMAKE_HIDE_ERROR
+# 4. Handle CMAKE_ALIGN_SYSROOT
 python do_populate_sysroot_append() {
     pn = d.getVar('PN', True)
 
-    # parse single parameter in CMAKE_HIDE_ERROR[..] and return array of line strings extracted
+    # parse single parameter in CMAKE_ALIGN_SYSROOT[..] and return array of line strings extracted
     def parseparam(param, flag):
         param = param.strip()
         if len(param) > 2:
@@ -116,17 +116,17 @@ python do_populate_sysroot_append() {
                 pipe.close()
                 return str
             else:
-                bb.fatal("CMAKE_HIDE_ERROR[%s] contains an invalid parameter '%s%s' in %s" % (flag, cmd, cmdparam, pn))
+                bb.fatal("CMAKE_ALIGN_SYSROOT[%s] contains an invalid parameter '%s%s' in %s" % (flag, cmd, cmdparam, pn))
         else:
-            bb.fatal("Parameter %s is too short for CMAKE_HIDE_ERROR[%s] in %s" % (param, flag, pn))
+            bb.fatal("Parameter %s is too short for CMAKE_ALIGN_SYSROOT[%s] in %s" % (param, flag, pn))
 
     # first check if cmake files were installed to sysroot
     tmpfile = d.getVar('CMAKEINSTALLED', True)
     if (not os.path.isfile(tmpfile)) or os.path.getsize(tmpfile) == 0:
         bb.warn("There were no cmake files installed by %s" % pn)
     else:
-        # parse CMAKE_HIDE_ERROR[..]
-        cmakehideflags = d.getVarFlags("CMAKE_HIDE_ERROR") or {}
+        # parse CMAKE_ALIGN_SYSROOT[..]
+        cmakehideflags = d.getVarFlags("CMAKE_ALIGN_SYSROOT") or {}
 
         for flag, flagval in sorted(cmakehideflags.items()):
             items = flagval.split(",")
@@ -134,18 +134,18 @@ python do_populate_sysroot_append() {
             # 1. cmake-subdirectory in sysroot
             cmakedir = d.expand(items[0])
             if len(cmakedir) == 0:
-                bb.fatal('Directory in CMAKE_HIDE_ERROR[%s] must not be empty in %s' % (flag, pn))
+                bb.fatal('Directory in CMAKE_ALIGN_SYSROOT[%s] must not be empty in %s' % (flag, pn))
             # check if this directory is created by us
             pipe = os.popen('grep %s %s' % (cmakedir, d.getVar('CMAKEINSTALLED', True)))
             matching_files = pipe.readlines()
             pipe.close()
             if len(matching_files) == 0:
-                bb.warn("No matching cmake file found for directory '%s' set by CMAKE_HIDE_ERROR[%s] in %s" % (cmakedir, flag, pn))
+                bb.warn("No matching cmake file found for directory '%s' set by CMAKE_ALIGN_SYSROOT[%s] in %s" % (cmakedir, flag, pn))
 
             # 2. search
             search = parseparam(items[1], flag)
             if len(search) == 0:
-                bb.warn("Search string must not be empty - see CMAKE_HIDE_ERROR[%s] in %s" % (flag, pn))
+                bb.warn("Search string must not be empty - see CMAKE_ALIGN_SYSROOT[%s] in %s" % (flag, pn))
 
             # 3. replace
             replace = parseparam(items[2], flag)
@@ -177,9 +177,9 @@ python do_populate_sysroot_append() {
                             f.write(cmakestr_new)
                             f.close()
                 if not replacement_performed:
-                    bb.warn("No cmake replacements performed in %s for CMAKE_HIDE_ERROR[%s]" % (pn, flag))
+                    bb.warn("No cmake replacements performed in %s for CMAKE_ALIGN_SYSROOT[%s]" % (pn, flag))
 }
 
-do_populate_sysroot[vardeps] += "CMAKE_HIDE_ERROR"
-# REVISIT: CMAKE_HIDE_ERROR cause configure rerun
-sysroot_cleansstate[vardeps] += "CMAKE_HIDE_ERROR"
+do_populate_sysroot[vardeps] += "CMAKE_ALIGN_SYSROOT"
+# REVISIT: CMAKE_ALIGN_SYSROOT cause configure rerun
+sysroot_cleansstate[vardeps] += "CMAKE_ALIGN_SYSROOT"

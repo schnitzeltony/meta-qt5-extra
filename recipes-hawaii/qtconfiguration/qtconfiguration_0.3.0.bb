@@ -16,7 +16,7 @@ SRCREV = "804739d73de982fc144ff45653c243cefcfa79cb"
 
 S = "${WORKDIR}/git"
 
-CMAKE_HIDE_ERROR[1] = "QtConfiguration, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[1] = "QtConfiguration, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 
 FILES_${PN} += "${libdir}/hawaii/qml/Hawaii/Configuration"
 FILES_${PN}-dbg += "${libdir}/hawaii/qml/Hawaii/Configuration/.debug"

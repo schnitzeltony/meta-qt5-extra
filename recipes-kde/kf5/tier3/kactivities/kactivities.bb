@@ -15,8 +15,8 @@ SRC_URI[sha256sum] = "4affc5f4d20f1b923439a7da7e31defbf00e2d8fd1d182d0910b6cac6f
 SRC_URI += "file://0001-replace-try_run-by-try_compile-in-compiler-feature-c.patch"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5Activities, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Activities, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Activities, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Activities, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${datadir}/k*5 ${libdir}/plugins ${libdir}/qml/org/kde"
 FILES_${PN}-dbg += "${libdir}/plugins/.debug ${libdir}/plugins/*/.debug ${libdir}/qml/org/kde/*/.debug"

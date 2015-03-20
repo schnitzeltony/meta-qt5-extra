@@ -33,8 +33,8 @@ SRC_URI += " \
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5XmlGui, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5XmlGui, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5XmlGui, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5XmlGui, -S${includedir}, -S${STAGING_INCDIR}"
 
 # evt. put ksendbugmail to separate package later
 FILES_${PN}-dbg += "${libdir}/kxmlgui/kf5/.debug/"

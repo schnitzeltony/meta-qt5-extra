@@ -20,7 +20,7 @@ DEPENDS += "libav ki18n karchive poppler"
 DEPENDS += "taglib"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5FileMetaData, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5FileMetaData, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5FileMetaData, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5FileMetaData, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN}-dbg += "${libdir}/plugins/kf5/kfilemetadata/.debug"

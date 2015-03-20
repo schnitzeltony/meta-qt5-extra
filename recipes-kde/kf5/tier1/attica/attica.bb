@@ -11,6 +11,6 @@ SRC_URI[sha256sum] = "ebc51ef26ecb30e94fea243e18e5a4f785188b00033e6081a9eb7c743a
 
 PV = "${KF5_VERSION}"
 
-CMAKE_HIDE_ERROR[1] = "KF5Attica, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Attica, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Attica, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Attica, -S${includedir}, -S${STAGING_INCDIR}"
 

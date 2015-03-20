@@ -18,7 +18,7 @@ SRC_URI[md5sum] = "b47ba38043952502127431910d920b50"
 SRC_URI[sha256sum] = "7bec16bab7a272cd7714fc5b9d7d54a1dfa618985553bbd0244941b6c6839d2f"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5Su, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5Su, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Su, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Su, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN}-dbg += "${libdir}/kdesu/kf5/.debug"

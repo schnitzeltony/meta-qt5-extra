@@ -13,6 +13,6 @@ PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "c5d91b6f92e470feec25b6ba147a44a4"
 SRC_URI[sha256sum] = "6f6f36def7f4edc3db47ba9276fd0e8fda6d8310970d0a70f22a38e7bad21a7d"
 
-CMAKE_HIDE_ERROR[1] = "KF5DNSSD, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5DNSSD, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5DNSSD, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5DNSSD, -S${includedir}, -S${STAGING_INCDIR}"
 

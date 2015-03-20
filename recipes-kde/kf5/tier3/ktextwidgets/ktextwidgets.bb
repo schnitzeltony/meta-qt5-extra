@@ -13,7 +13,7 @@ SRC_URI[md5sum] = "b033eacbea5aafc024302fc847bf3f53"
 SRC_URI[sha256sum] = "9bd528d8ed3feec1d18f4449e8649506c8c5d8c83915b51ccdb6856b1d7e5115"
 
 # cross libs / headers
-CMAKE_HIDE_ERROR[1] = "KF5TextWidgets, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_HIDE_ERROR[2] = "KF5TextWidgets, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5TextWidgets, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5TextWidgets, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${datadir}/kservicetypes5"

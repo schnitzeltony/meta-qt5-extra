@@ -26,6 +26,6 @@ FILES_${PN}-dbg += " \
     ${libexecdir}/kf5/.debug \
 "
 
-CMAKE_HIDE_ERROR[1] = "KF5Screen, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_HIDE_ERROR[2] = "KF5Screen, -S${libdir}, -S${STAGING_LIBDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Screen, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[2] = "KF5Screen, -S${libdir}, -S${STAGING_LIBDIR}"
 

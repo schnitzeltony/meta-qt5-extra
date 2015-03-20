@@ -10,5 +10,5 @@ SRC_URI += " \
 "
 
 # make meinproc5 find kdoctools data
-CMAKE_HIDE_ERROR[1] = "KF5DocToolsMacros.cmake, -s--stylesheet, -S--srcdir ${STAGING_DATADIR_NATIVE}/kf5/kdoctools --stylesheet"
+CMAKE_ALIGN_SYSROOT[1] = "KF5DocToolsMacros.cmake, -s--stylesheet, -S--srcdir ${STAGING_DATADIR_NATIVE}/kf5/kdoctools --stylesheet"
 
