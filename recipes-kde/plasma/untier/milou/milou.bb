@@ -19,9 +19,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "68f3bec27aa66de065cf2fb087d8bd95"
-SRC_URI[sha256sum] = "d6472ca1ce2fb865a856c1b3008a5c8c385df3e9bbe991cb7f03bfc50f77abe0"
-SRC_URI += "file://0001-Add-missing-KF5-dependancies.patch"
+SRC_URI[md5sum] = "b1a618f3887ee6b0ebe5edf5568a6261"
+SRC_URI[sha256sum] = "d9fd5bc3a438affec9d4cc786a03929c7ed379d6cac22a920f1d9b0812d8e048"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
