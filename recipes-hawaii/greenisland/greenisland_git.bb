@@ -16,11 +16,10 @@ DEPENDS = " \
 "
 SRC_URI = " \
     git://github.com/greenisland/${BPN}.git;protocol=git;branch=master \
-    file://0001-do-not-require-wayland-egl-explicitly.patch \
 "
 
-SRCREV = "02db54bf021d74f5695cb1fc3f9ea0200f90a8c1"
-PV = "0.5.90+git${SRCPV}"
+SRCREV = "93835c578ae04febe047afd7113da84d816daac1"
+PV = "0.5.92+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -33,6 +32,12 @@ EXTRA_OECMAKE += " \
 CMAKE_ALIGN_SYSROOT[1] = "GreenIsland, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "GreenIsland, -S${includedir}, -S${STAGING_INCDIR}"
 
-FILES_${PN} += "${libdir}/qml/GreenIsland"
-FILES_${PN}-dbg += "${libdir}/qml/GreenIsland/.debug"
+FILES_${PN} += " \
+    ${libdir}/qml/GreenIsland \
+    ${libdir}/plugins/greenisland \
+"
+FILES_${PN}-dbg += " \
+    ${libdir}/qml/GreenIsland/.debug \
+    ${libdir}/plugins/greenisland/.debug \
+"
 FILES_${PN}-dev += "${libdir}/cmake"
