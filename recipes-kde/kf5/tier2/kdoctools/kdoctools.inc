@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 perlnative
 
 # allarch recipes
-DEPENDS += "docbook-xml-dtd4 docbook-xsl-stylesheets"
+DEPENDS += "docbook-xml-dtd4 docbook-xsl-stylesheets liburi-perl-native"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "1bcb1b093999efa4426be034e2aa671f"
