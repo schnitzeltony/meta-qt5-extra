@@ -26,11 +26,12 @@ DEPENDS += " \
     threadweaver \
     plasma-framework \
     knewstuff \
+    kiconthemes \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "8a26f6de18caddceec3d997e77137070"
-SRC_URI[sha256sum] = "ceb95148543b89b799a1dff9ee45b0a14c2883965853d7537f4890e5992ccb58"
+SRC_URI[md5sum] = "044d039d1a49f8502c42f1c18b21703d"
+SRC_URI[sha256sum] = "215b294b37ff8739620b1b76d36c4ec4bc274a8b7ea2db73b76dd5525a828dbc"
 
 SRC_URI += " \
     file://0001-fix-build-for-qtbase-build-without-session-support-Q.patch \
@@ -45,6 +46,7 @@ FILES_${PN} += " \
     ${datadir}/plasma \
     ${datadir}/katexmltools \
     ${datadir}/icons \
+    ${datadir}/appdata \
     \
     ${libdir}/libkdeinit5*.so \
     ${libdir}/plugins \

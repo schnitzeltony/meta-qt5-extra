@@ -1,0 +1,41 @@
+From 517853035c99b29006a7b757651161859c6e9db5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 24 Apr 2015 11:26:38 +0200
+Subject: [PATCH] do not build docs
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+docs creation fails with
+
+index.docbook:2: element para: validity error : ID gnu-fdl already defined
+...
+element div: validity error : ID header already defined
+element div: validity error : ID header_content already defined
+element div: validity error : ID header_left already defined
+element div: validity error : ID header_right already defined
+element div: validity error : ID header already defined
+element div: validity error : ID header_content already defined
+...
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 834282f..35e51b6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -60,5 +60,5 @@ include_directories(src/)
+ 
+ add_subdirectory(src)
+ add_subdirectory(misc)
+-add_subdirectory(doc)
++#add_subdirectory(doc)
+ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+-- 
+1.9.3
+
