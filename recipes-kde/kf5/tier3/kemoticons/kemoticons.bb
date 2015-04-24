@@ -10,8 +10,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "karchive kconfig kservice kcoreaddons"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "76d2095cb438ce97d740a043aeb4c159"
-SRC_URI[sha256sum] = "1296e79a454fa7a626c65f6156cc80a955d7d3c4662a1e4ec2e8bd942a97fdb0"
+SRC_URI[md5sum] = "cf5211202934943d2364596acfaf4f40"
+SRC_URI[sha256sum] = "500a816ebecd98bf55f838e8a22ebf9345470943d7544cbdd228e072ea8f28ff"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Emoticons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

@@ -21,6 +21,7 @@ TIER_1 = " \
     kplotting \
     kwidgetsaddons \
     kwindowsystem \
+    modemmanager-qt \
     networkmanager-qt \
     solid \
     sonnet \
@@ -82,6 +83,10 @@ PORTING_AIDS_TIER_3 = " \
     krunner \
 "
 
+UNTIER = " \
+    extra-cmake-modules \
+"
+
 RDEPENDS_${PN} = " \
     ${TIER_1} \
     ${TIER_2} \
@@ -89,4 +94,5 @@ RDEPENDS_${PN} = " \
     ${TIER_4} \
     ${PORTING_AIDS_TIER_1} \
     ${PORTING_AIDS_TIER_3} \
+    ${UNTIER} \
 "

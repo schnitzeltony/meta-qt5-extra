@@ -10,7 +10,7 @@ Upstream-Status: Inappropriate [cross-specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- CMakeLists.txt                |  26 +-----
+ CMakeLists.txt                | 27 ++-------------------------
  src/CMakeLists.txt            | 198 +-----------------------------------------
  src/kdecore/kglobal.cpp       |  18 ----
  src/kdecore/klocale_kde.cpp   |   4 -
@@ -18,12 +18,12 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  5 files changed, 4 insertions(+), 243 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 25c35c5..60f7775 100644
+index 7e6b3b9..3e60563 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -16,27 +16,11 @@ include(CMakeFindFrameworks)
- set(KF5_VERSION "5.7.0") # handled by release scripts
- set(KF5_DEP_VERSION "5.7.0") # handled by release scripts
+@@ -16,28 +16,11 @@ include(CMakeFindFrameworks)
+ set(KF5_VERSION "5.10.0") # handled by release scripts
+ set(KF5_DEP_VERSION "5.9.0") # handled by release scripts
  set(REQUIRED_QT_VERSION 5.2.0)
 -find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network Widgets DBus Test Svg PrintSupport Designer)
 +find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network DBus Test)
@@ -47,11 +47,12 @@ index 25c35c5..60f7775 100644
 -find_package(KF5WidgetsAddons ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5WindowSystem ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5XmlGui ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5DBusAddons ${KF5_DEP_VERSION} REQUIRED)
 +find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
  
  if(WIN32)
      find_package(KDEWin REQUIRED)
-@@ -48,7 +32,6 @@ endif()
+@@ -49,7 +32,6 @@ endif()
  set(HAVE_X11 ${X11_FOUND})
  if (HAVE_X11)
    add_feature_info("X11 Session Management (libSM)" X11_SM_FOUND "Support for session management in KApplication")
@@ -59,7 +60,7 @@ index 25c35c5..60f7775 100644
  endif ()
  if (APPLE)
      cmake_find_frameworks(CoreFoundation)
-@@ -143,13 +126,8 @@ install(
+@@ -145,13 +127,8 @@ install(
  
  
  

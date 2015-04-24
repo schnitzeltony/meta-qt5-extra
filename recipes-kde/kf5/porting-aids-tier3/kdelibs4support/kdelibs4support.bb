@@ -3,30 +3,31 @@ require ${BPN}.inc
 inherit cmake-lib
 
 DEPENDS += " \
-	${BPN}-native \
-	qtsvg \
-	qttools \
-	kcompletion \
-	kconfig \
-	kconfigwidgets \
-	kcrash \
-	kdesignerplugin \
-	kemoticons \
-	kglobalaccel \
-	kdoctools \
-	kguiaddons \
-	ki18n \
-	kiconthemes \
-	kio \
-	knotifications \
-	kparts \
-	kservice \
-	ktextwidgets \
-	kunitconversion \
-	kwidgetsaddons \
-	kwindowsystem \
-	kxmlgui \
-	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
+    ${BPN}-native \
+    qtsvg \
+    qttools \
+    kcompletion \
+    kconfig \
+    kconfigwidgets \
+    kcrash \
+    kdesignerplugin \
+    kdbusaddons \
+    kemoticons \
+    kglobalaccel \
+    kdoctools \
+    kguiaddons \
+    ki18n \
+    kiconthemes \
+    kio \
+    knotifications \
+    kparts \
+    kservice \
+    ktextwidgets \
+    kunitconversion \
+    kwidgetsaddons \
+    kwindowsystem \
+    kxmlgui \
+${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 
 # uncomment for broken gelib getaddr / AI_PASSIVE

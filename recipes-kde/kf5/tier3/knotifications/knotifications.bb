@@ -11,8 +11,8 @@ DEPENDS += "kwindowsystem kservice kconfig kiconthemes kcodecs kcoreaddons phono
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "cdcded8f150246437eced2ce5fface2f"
-SRC_URI[sha256sum] = "78df80e45900840e31bea30c38706358612bdcfb8d5150e518d91e9c2fe69b1b"
+SRC_URI[md5sum] = "978f89eebb9562dda8732b59411b74a4"
+SRC_URI[sha256sum] = "8a0f13e59e4b26e4797229d3efedfd8db52fbe7fadb5aca42e9fb75059c73fe8"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Notifications, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

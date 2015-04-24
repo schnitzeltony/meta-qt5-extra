@@ -28,8 +28,8 @@ DEPENDS += " \
     kdeclarative \
     kinit \
     kdelibs4support \
+    modemmanager-qt \
     networkmanager-qt \
-    libmm-qt \
     \
     networkmanager \
 "
@@ -42,6 +42,7 @@ DEPENDS += " \
 PV = "${PLASMA_VERSION}"
 SRC_URI[md5sum] = "296b78fb6b84f80441f6144b11a5d6a5"
 SRC_URI[sha256sum] = "4def5df2fa1d5def34c9085d11dea3e08b2a7fa0994ffe61165b14b34ea26180"
+SRC_URI += "file://0001-Adapt-to-modemmanager-qt-API-changes.patch"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
