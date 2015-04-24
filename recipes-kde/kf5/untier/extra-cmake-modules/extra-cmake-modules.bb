@@ -8,6 +8,7 @@ DEPENDS = "qttools"
 
 SRC_URI[md5sum] = "98633e740805a56be02a23ffa1c57a73"
 SRC_URI[sha256sum] = "c991f2f16b2aa5941e52e56a1a2ee75c7fa3a5b7fc0a764b53fc12f789640bc7"
+SRC_URI += "file://0001-FindQtWaylandScanner.cmake-align-path-to-our-needs.patch"
 
 PV = "${KF5_VERSION}"
 

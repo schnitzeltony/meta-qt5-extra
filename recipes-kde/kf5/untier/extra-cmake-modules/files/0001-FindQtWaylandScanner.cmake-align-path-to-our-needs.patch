@@ -1,0 +1,31 @@
+From 320b6fdbd2c6b409c39ee0f0a320ab581a52bcf7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 24 Apr 2015 12:20:47 +0200
+Subject: [PATCH] FindQtWaylandScanner.cmake: align path to our needs
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ find-modules/FindQtWaylandScanner.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/find-modules/FindQtWaylandScanner.cmake b/find-modules/FindQtWaylandScanner.cmake
+index 79a1b05..cb9dbda 100644
+--- a/find-modules/FindQtWaylandScanner.cmake
++++ b/find-modules/FindQtWaylandScanner.cmake
+@@ -90,7 +90,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/ECMFindModuleHelpersStub.cmake)
+ ecm_find_package_version_check(QtWaylandScanner)
+ 
+ # Find qtwaylandscanner
+-find_program(QtWaylandScanner_EXECUTABLE NAMES qtwaylandscanner HINTS /usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}/qt5/bin/)
++find_program(QtWaylandScanner_EXECUTABLE NAMES qtwaylandscanner HINTS /usr/bin/qt5/)
+ 
+ include(FindPackageHandleStandardArgs)
+ find_package_handle_standard_args(QtWaylandScanner
+-- 
+1.9.3
+
