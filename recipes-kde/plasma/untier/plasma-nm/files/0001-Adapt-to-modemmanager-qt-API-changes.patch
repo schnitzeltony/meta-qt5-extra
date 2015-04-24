@@ -1,0 +1,81 @@
+From 4d72cb7966edda33bc72c77fc2a126844fc1f134 Mon Sep 17 00:00:00 2001
+From: Jan Grulich <jgrulich@redhat.com>
+Date: Tue, 31 Mar 2015 14:37:16 +0200
+Subject: [PATCH] Adapt to modemmanager-qt API changes
+
+Upstream-Status: Backport [1]
+
+[1] http://quickgit.kde.org/?p=plasma-nm.git&a=commitdiff&h=4d72cb7966edda33bc72c77fc2a126844fc1f134
+---
+ libs/models/networkmodel.cpp | 16 ++++++++--------
+ libs/models/networkmodel.h   |  4 ++--
+ 2 files changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/libs/models/networkmodel.cpp b/libs/models/networkmodel.cpp
+index 536fdce..448ac3c 100644
+--- a/libs/models/networkmodel.cpp
++++ b/libs/models/networkmodel.cpp
+@@ -246,10 +246,10 @@ void NetworkModel::initializeSignals(const NetworkManager::Device::Ptr& device)
+             if (modem->hasInterface(ModemManager::ModemDevice::ModemInterface)) {
+                 ModemManager::Modem::Ptr modemNetwork = modem->interface(ModemManager::ModemDevice::ModemInterface).objectCast<ModemManager::Modem>();
+                 if (modemNetwork) {
+-                    connect(modemNetwork.data(), SIGNAL(signalQualityChanged(uint)),
+-                            SLOT(gsmNetworkSignalQualityChanged(uint)), Qt::UniqueConnection);
+-                    connect(modemNetwork.data(), SIGNAL(accessTechnologyChanged(ModemManager::Modem::AccessTechnologies)),
+-                            SLOT(gsmNetworkAccessTechnologyChanged(ModemManager::Modem::AccessTechnologies)), Qt::UniqueConnection);
++                    connect(modemNetwork.data(), SIGNAL(signalQualityChanged(ModemManager::SignalQualityPair)),
++                            SLOT(gsmNetworkSignalQualityChanged(ModemManager::SignalQualityPair)), Qt::UniqueConnection);
++                    connect(modemNetwork.data(), SIGNAL(accessTechnologiesChanged(QFlags<MMModemAccessTechnology>)),
++                            SLOT(gsmNetworkAccessTechnologiesChanged(QFlags<MMModemAccessTechnology>)), Qt::UniqueConnection);
+                     connect(modemNetwork.data(), SIGNAL(currentModesChanged()),
+                             SLOT(gsmNetworkCurrentModesChanged()), Qt::UniqueConnection);
+                 }
+@@ -847,9 +847,9 @@ void NetworkModel::deviceStateChanged(NetworkManager::Device::State state, Netwo
+ }
+ 
+ #if WITH_MODEMMANAGER_SUPPORT
+-void NetworkModel::gsmNetworkAccessTechnologyChanged(ModemManager::Modem::AccessTechnologies technology)
++void NetworkModel::gsmNetworkAccessTechnologiesChanged(QFlags<MMModemAccessTechnology> accessTechnologies)
+ {
+-    Q_UNUSED(technology);
++    Q_UNUSED(accessTechnologies);
+     ModemManager::Modem * gsmNetwork = qobject_cast<ModemManager::Modem*>(sender());
+     if (gsmNetwork) {
+         Q_FOREACH (const NetworkManager::Device::Ptr & dev, NetworkManager::networkInterfaces()) {
+@@ -893,7 +893,7 @@ void NetworkModel::gsmNetworkCurrentModesChanged()
+     }
+ }
+ 
+-void NetworkModel::gsmNetworkSignalQualityChanged(uint signal)
++void NetworkModel::gsmNetworkSignalQualityChanged(const ModemManager::SignalQualityPair &signalQuality)
+ {
+     ModemManager::Modem * gsmNetwork = qobject_cast<ModemManager::Modem*>(sender());
+     if (gsmNetwork) {
+@@ -912,7 +912,7 @@ void NetworkModel::gsmNetworkSignalQualityChanged(uint signal)
+                         ModemManager::Modem::Ptr modemNetwork = modem->interface(ModemManager::ModemDevice::ModemInterface).objectCast<ModemManager::Modem>();
+                         if (modemNetwork && modemNetwork->device() == gsmNetwork->device()) {
+                             Q_FOREACH(NetworkModelItem * item, m_list.returnItems(NetworkItemsList::Device, dev->uni())) {
+-                                item->setSignal(signal);
++                                item->setSignal(signalQuality.signal);
+                                 updateItem(item);
+                             }
+                         }
+diff --git a/libs/models/networkmodel.h b/libs/models/networkmodel.h
+index 3d100ec..d506960 100644
+--- a/libs/models/networkmodel.h
++++ b/libs/models/networkmodel.h
+@@ -94,9 +94,9 @@ private Q_SLOTS:
+     void deviceRemoved(const QString& device);
+     void deviceStateChanged(NetworkManager::Device::State state, NetworkManager::Device::State oldState, NetworkManager::Device::StateChangeReason reason);
+ #if WITH_MODEMMANAGER_SUPPORT
+-    void gsmNetworkAccessTechnologyChanged(ModemManager::Modem::AccessTechnologies technology);
++    void gsmNetworkAccessTechnologiesChanged(QFlags<MMModemAccessTechnology> accessTechnologies);
+     void gsmNetworkCurrentModesChanged();
+-    void gsmNetworkSignalQualityChanged(uint signal);
++    void gsmNetworkSignalQualityChanged(const ModemManager::SignalQualityPair &signalQuality);
+ #endif
+     void ipConfigChanged();
+     void ipInterfaceChanged();
+-- 
+1.9.3
+
