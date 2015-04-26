@@ -7,6 +7,7 @@ inherit packagegroup distro_features_check
 RDEPENDS_${PN} = " \
     filelight \
     libkdegames \
+    kapman \
     kate \
     oxygen-icons \
 "
