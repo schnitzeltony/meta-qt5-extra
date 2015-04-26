@@ -1,0 +1,85 @@
+From fffc82666c0cc3002b140b3598defc4923ce7bbf Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 26 Apr 2015 17:28:12 +0200
+Subject: [PATCH] CMakeLists.txt: add an option BUILD_KGDECLARATIVE disabled by
+ default
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+on machines not supporting x11-egl (Raspberrypi / TI armv7) kdeclarative fails
+to build. By this option we get the chance to build the library for these
+machines and still suppprting many games.
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2664fd4..0340453 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -8,13 +8,18 @@ set (QT_MIN_VERSION "5.3.0")
+ find_package(ECM 1.3.0 REQUIRED NO_MODULE)
+ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+ 
++option(BUILD_KGDECLARATIVE "Build kgdeclarativeview" OFF)
+ 
+ find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Widgets Qml Quick QuickWidgets Svg Test)
+ find_package(KF5 REQUIRED COMPONENTS CoreAddons Config WidgetsAddons Codecs Archive
+-    DBusAddons DNSSD Declarative
++    DBusAddons DNSSD
+     I18n GuiAddons Service ConfigWidgets ItemViews IconThemes Completion JobWidgets TextWidgets GlobalAccel XmlGui Crash
+     Bookmarks KIO NewStuff KDELibs4Support)
+ 
++if(BUILD_KGDECLARATIVE)
++    find_package(KF5 REQUIRED COMPONENTS Declarative)
++endif()
++
+ include(FeatureSummary)
+ include(GenerateExportHeader)
+ include(ECMPackageConfigHelpers)
+@@ -103,7 +108,6 @@ set(kdegames_LIB_SRCS
+     kgamerenderedobjectitem.cpp
+     kgamerendererclient.cpp
+     kgamerenderer.cpp
+-    kgdeclarativeview.cpp
+     kgimageprovider.cpp
+     kgdifficulty.cpp
+     kgtheme.cpp
+@@ -114,6 +118,10 @@ set(kdegames_LIB_SRCS
+ if(Q_WS_X11)
+ 	set(kdegames_LIB_SRCS ${kdegames_LIB_SRCS} chooserastergraphicssystem.cpp)
+ endif(Q_WS_X11)
++if(BUILD_KGDECLARATIVE)
++	set(kdegames_LIB_SRCS kgdeclarativeview.cpp)
++endif()
++
+ 
+ add_library(KF5KDEGames SHARED ${kdegames_LIB_SRCS})
+ 
+@@ -125,7 +133,6 @@ target_link_libraries(KF5KDEGames
+                       Qt5::Xml
+                       Qt5::Svg
+                       Qt5::Quick
+-                      KF5::Declarative
+                       KF5::KIOWidgets
+                       KF5::NewStuff
+                       KF5::IconThemes
+@@ -141,6 +148,10 @@ target_link_libraries(KF5KDEGames
+                       KF5::ConfigWidgets
+ )
+ 
++if(BUILD_KGDECLARATIVE)
++    target_link_libraries(KF5KDEGames PRIVATE KF5::Declarative)
++endif()
++
+ target_include_directories(KF5KDEGames INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames;${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE;${KF5_INCLUDE_INSTALL_DIR}>")
+ 
+ #NOTE: 6.0.0 = KDE 4.9 release
+-- 
+1.9.3
+

@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-apps
+inherit kde-apps cmake-lib
 
 DEPENDS += "\
     kcoreaddons \
@@ -15,7 +15,6 @@ DEPENDS += "\
     karchive \
     kdbusaddons \
     kdnssd \
-    kdeclarative \
     ki18n \
     kguiaddons \
     kservice \
@@ -43,6 +42,10 @@ DEPENDS += "\
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "876a27db04ac8d957c62779dfa8f81e4"
 SRC_URI[sha256sum] = "6a894457adb38a6042d429196e6f3fa3d6fe1dd7f09af2a1cb870c8b6fc98be7"
+SRC_URI += "file://0001-CMakeLists.txt-add-an-option-BUILD_KGDECLARATIVE-dis.patch"
+
+PACKAGECONFIG[kgdeclarative] = "-DBUILD_KGDECLARATIVE=Yes,-DBUILD_KGDECLARATIVE=No, kdeclarative"
+PACKAGECONFIG ??= ""
 
 FILES_${PN} += " \
     ${datadir}/carddecks \
@@ -53,3 +56,6 @@ FILES_${PN} += " \
 FILES_${PN}-dbg += " \
     ${libdir}/qml/*/*/*/*/.debug \
 "
+
+CMAKE_ALIGN_SYSROOT[1] = "KF5KDEGames, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "KF5KDEGames, -S${includedir}, -S${STAGING_INCDIR}"
