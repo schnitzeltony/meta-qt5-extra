@@ -80,6 +80,7 @@ PORTING_AIDS_TIER_3 = " \
     kdelibs4support \
     khtml \
     kjsembed \
+    kross \
     krunner \
 "
 
