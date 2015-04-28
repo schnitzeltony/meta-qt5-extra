@@ -34,17 +34,16 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "0cf225caaea032301670a1c11240233a"
-SRC_URI[sha256sum] = "74629647897a6ff7d2bae45d1d8c1c473ed2c9a65cc7877b042114e1e81bb02b"
+SRC_URI[md5sum] = "69c3b7d22f80994aaa603ee7563bd63b"
+SRC_URI[sha256sum] = "3cb666bc974d26e269cf07f050049b47bb523530e14ab60802ee0c1902b7f60b"
 
 SRC_URI += "file://0001-fix-build-in-x11-less-environments.patch"
 
 FILES_${PN} += " \
     ${datadir}/kcmusb \
     ${datadir}/desktop-directories \
-    ${datadir}/kservices5 \
-    ${datadir}/kxmlgui5 \
-    ${datadir}/kservicetypes5 \
+    ${datadir}/k*5 \
+    ${datadir}/kpackage \
     \
     ${libdir}/plugins \
 "

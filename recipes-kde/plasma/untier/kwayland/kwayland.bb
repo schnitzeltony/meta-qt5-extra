@@ -4,21 +4,14 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-base cmake-lib
-
-SRC_URI += " \
-    file://0001-CMakeLists.txt-add-pkg-config-as-fallback-for-Waylan.patch \
-    file://0002-PlasmaShell-and-PlasmaSurface-interfaces.patch \
-    file://0003-PlasmaEffects-interface.patch \
-    file://0004-Server-side-interface.patch \
-"
-
-# TODO come back to mainline
-SRCREV = "bc9ab6731700eabf17e1b193d13c904f68f7ebe0"
-S = "${WORKDIR}/git"
-PV = "5.1.90+git${SRCPV}"
+inherit kde-plasma cmake-lib
 
 DEPENDS += "wayland wayland-native"
+
+PV = "${PLASMA_VERSION}"
+SRC_URI[md5sum] = "ab9f358c68470f41732470b90427c5e8"
+SRC_URI[sha256sum] = "99598a9fd17d9e79f69646f0ac32e6d4fb0c8aa09da58c886cca22332de41dbe"
+SRC_URI += "file://0001-do-not-perform-runtime-tests.patch"
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5Wayland, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Wayland, -S${includedir}, -S${STAGING_INCDIR}"

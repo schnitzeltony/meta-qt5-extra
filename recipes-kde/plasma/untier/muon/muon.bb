@@ -27,8 +27,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "842a75bd7614fb4f8a7003f0f49046fa"
-SRC_URI[sha256sum] = "289979be6c918576c1ca2abbe90fea5b7339d5ee082a65d8ce3599ee40e4005b"
+SRC_URI[md5sum] = "c2d29016945ab4a87a6e9b80099b7d0e"
+SRC_URI[sha256sum] = "196c63d899ac9399993e3353d630b769d965ec1d0fa884028dd70277c5b52b39"
 
 FILES_SOLIBSDEV = "${libdir}/libmuonprivate${SOLIBSDEV}"
 
@@ -41,6 +41,7 @@ FILES_${PN} += " \
     ${datadir}/desktoptheme \
     ${datadir}/muonabstractnotifier \
     \
+    ${libdir}/libMuonCommon.so \
     ${libdir}/libMuonNotifiers.so \
     ${libdir}/plugins \
     ${libdir}/qml \

@@ -10,9 +10,9 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-plasma cmake-lib pkgconfig
 
-PV = "5.6.1"
-SRC_URI[md5sum] = "12c57ca501117397edbda63f284dae68"
-SRC_URI[sha256sum] = "83d375cef080fd9171b84c37229b8f090e69ae4d05196c7baee472f22cfccd70"
+PV = "5.9.0"
+SRC_URI[md5sum] = "681f81b14a6e5ea2df5e3d765de30080"
+SRC_URI[sha256sum] = "5c92b9edf53de8bb4f5ce7efed9c858cb6726eefd265ac43d8178fa0fd6dec65"
 
 DEPENDS += "libav ki18n karchive poppler"
 

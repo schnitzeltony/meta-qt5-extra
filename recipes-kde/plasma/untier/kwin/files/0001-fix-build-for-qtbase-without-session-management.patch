@@ -16,7 +16,7 @@ diff --git a/main.cpp b/main.cpp
 index 44d8c49..0cb9e44 100644
 --- a/main.cpp
 +++ b/main.cpp
-@@ -360,7 +360,13 @@ void Application::createWorkspace()
+@@ -372,7 +372,13 @@ void Application::createWorkspace()
      // critical startup section where x errors cause kwin to abort.
  
      // create workspace.
@@ -27,10 +27,10 @@ index 44d8c49..0cb9e44 100644
 +#else
 +        false
 +#endif
-+      );
++    );
+     emit workspaceCreated();
  }
  
- void Application::createAtoms()
 diff --git a/workspace.cpp b/workspace.cpp
 index 7cbe81e..66c603b 100644
 --- a/workspace.cpp

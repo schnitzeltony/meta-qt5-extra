@@ -40,9 +40,8 @@ DEPENDS += " \
 # MobileBroadbandProviderInfo
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "296b78fb6b84f80441f6144b11a5d6a5"
-SRC_URI[sha256sum] = "4def5df2fa1d5def34c9085d11dea3e08b2a7fa0994ffe61165b14b34ea26180"
-SRC_URI += "file://0001-Adapt-to-modemmanager-qt-API-changes.patch"
+SRC_URI[md5sum] = "7bee8712c848e467ad23856ed6b89b9e"
+SRC_URI[sha256sum] = "2a7b31a0b6a69ba062fb96702dd7215b4d2a44bede93d909853a8c915b968dfe"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

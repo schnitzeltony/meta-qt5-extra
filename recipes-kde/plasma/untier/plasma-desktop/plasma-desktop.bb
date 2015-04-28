@@ -29,6 +29,7 @@ DEPENDS += " \
     kitemmodels \
     kemoticons \
     baloo \
+    kpeople \
     \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver libxcb qtx11extras", "", d)} \
 "
@@ -41,8 +42,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "dc5e656b26d31bda9d0504b3df2a5b18"
-SRC_URI[sha256sum] = "d44b0eb0f59d8f2fba827418202e12fb12e0aab02c6608823085574c5a68f113"
+SRC_URI[md5sum] = "3f2b87f8b1d61dd06fd882a6576f4047"
+SRC_URI[sha256sum] = "376112701ee3ad29d9b5701887e5e1eb79b06e5ad3a0f1cdf3792f16eed01939"
 
 SRC_URI += "file://0001-fix-path-to-fontinst.patch"
 

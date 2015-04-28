@@ -26,7 +26,9 @@ DEPENDS += " \
     kdewebkit \
     ktextwidgets \
     kdelibs4support \
+    kxmlrpcclient \
     kcrash \
+    networkmanager-qt \
     libksysguard \
     libkscreen \
     kwayland \
@@ -35,35 +37,17 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "93b4b7e187035635982d3099ba2c8d79"
-SRC_URI[sha256sum] = "b174136ab7e5ec7190d5ad872e7334245b2e59c2a93e5f53666d155744a90572"
+SRC_URI[md5sum] = "4085a9bdd87706beeccfcc7dd09d5b85"
+SRC_URI[sha256sum] = "95f5b2319ca0c63f883e5350760d234eb2ee1a57f21e612f9ac35b0ded467316"
 
 SRC_URI += " \
-    file://0001-Initial-Wayland-support.patch \
-    file://0002-Initial-Wayland-support-II.patch \
-    file://0003-Initial-Wayland-support-III.patch \
-    file://0004-Initial-Wayland-support-IV.patch \
-    file://0005-Initial-Wayland-support-V.patch \
+    file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
     \
-    file://0006-HACK-enable-task_wayland.cpp-stub-for-non-x11-builds.patch \
-    \
-    file://0007-Do-check-for-kwin-only-in-case-X11-was-found.patch \
-    file://0008-Stub-down-sessionrunner-in-x11-less-environments.patch \
-    file://0009-dataengines-mouse-fix-build-in-X11-less-environments.patch \
-    file://0010-fix-missuse-of-HAVE_X11.patch \
-    \
-    file://0011-fix-build-for-QT_NO_SESSIONMANAGER.patch \
-    \
-    file://0012-align-phonon-path.patch \
-    file://0013-fix-paths-in-startkde.patch \
-    file://0014-startkde-add-meta-qt5-standard-binary-path-to-PATH.patch \
-    file://0015-startkde-fix-path-for-start_kdeinit_wrapper.patch \
+    file://0002-align-phonon-path.patch \
+    file://0003-fix-paths-in-startkde.patch \
+    file://0004-startkde-add-meta-qt5-standard-binary-path-to-PATH.patch \
+    file://0005-startkde-fix-path-for-start_kdeinit_wrapper.patch \
 "
-
-# Notes on patches
-# 0001 stolen from http://quickgit.kde.org/?p=clones%2Fplasma-workspace%2Fpierluigifiorini%2Fwayland.git&a=shortlog&h=8ce24d3c1cc9b3fe2ced19e7dec8c24c7ddc1173
-# 0002-0006 are neccessary for x11-less wayland
-# 0007 taskmanager stub either X11 or wayland
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "LibKWorkspace, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

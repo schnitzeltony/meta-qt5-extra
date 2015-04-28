@@ -42,8 +42,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "c63b83ca7df980875a8827bdb936793d"
-SRC_URI[sha256sum] = "4b5127239283da14a83fd21896f99767cec7f8f7818aa19ff960c57fec7fd7a3"
+SRC_URI[md5sum] = "cac226ba36f31c0f755482c73c820685"
+SRC_URI[sha256sum] = "0e523e936eebc4f19a7f65ab48709055ea4ccdfda2853059a826dca61859ce58"
 
 FILES_${PN} += " \
     ${datadir}/kio_bookmarks \

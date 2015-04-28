@@ -20,11 +20,12 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "0caa3195658000ad8ac06e63d935ac6d"
-SRC_URI[sha256sum] = "f54f2971f750dd941e9208e690f64dde91b59024c891ccfdf5abea45af0075c2"
+SRC_URI[md5sum] = "e1ffcc826eb9de168b68d7f2244df510"
+SRC_URI[sha256sum] = "e3d8d37e4178b00324a99a04b0a40b6c4544f913d2887727cda6047599fda528"
 
 FILES_${PN} += " \
     ${datadir}/icons \
+    ${datadir}/kservices5 \
     ${datadir}/kstyle \
     ${datadir}/plasma \
     ${libdir}/plugins \

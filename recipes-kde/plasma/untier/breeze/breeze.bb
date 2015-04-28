@@ -21,13 +21,14 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "eab754e5ad4ee9f7e83bf6bbc40815c3"
-SRC_URI[sha256sum] = "5b480d0fd8f277796e7a67d5ac4e255c4479909e5aa0b283e4e0aa21035e8460"
+SRC_URI[md5sum] = "1fcd000caca4ba4255c2ded1857f6786"
+SRC_URI[sha256sum] = "93ed542922847f6be9684aff21c627d5cab1c1e14116f24ef360ae23095fb989"
 
 FILES_${PN} += " \
     ${datadir}/color-schemes \
     ${datadir}/icons \
     ${datadir}/kconf_update \
+    ${datadir}/kservices5 \
     ${datadir}/kstyle \
     ${datadir}/QtCurve \
     ${datadir}/wallpapers \

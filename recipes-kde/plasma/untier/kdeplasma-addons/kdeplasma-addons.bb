@@ -21,19 +21,21 @@ DEPENDS += " \
     sonnet \
     kunitconversion \
     kdelibs4support \
+    kross \
+    knewstuff \
     \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "d172b2438d751f7b39ddffb47aacbfc3"
-SRC_URI[sha256sum] = "f893ad77dea6b9fa08e4eeab57d47370795ae5c39826c51c9e492a4adf5dff7f"
+SRC_URI[md5sum] = "f72a71c6f52ae05e0040d9f2de5bc8ae"
+SRC_URI[sha256sum] = "9472cf37d0f85fd1446e8f4e73fc7d221330c03241585cc549d28c52b1460682"
 
 SRC_URI += "file://0001-showdesktop-do-check-HAVE_X11-correctly.patch"
 
 FILES_${PN} += " \
     ${datadir}/kwin \
-    ${datadir}/kservices5 \
+    ${datadir}/k*5 \
     ${datadir}/plasma \
     ${datadir}/icons \
     \
@@ -43,6 +45,6 @@ FILES_${PN} += " \
 
 FILES_${PN}-dbg += " \
     ${libdir}/plugins/.debug \
-    ${libdir}/plugins/plasma/dataengine/.debug \
+    ${libdir}/plugins/*/*/.debug \
     ${libdir}/qml/org/kde/plasma/private/*/.debug \
 "

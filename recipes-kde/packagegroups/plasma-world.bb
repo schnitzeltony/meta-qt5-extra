@@ -14,7 +14,7 @@ TIER_2 = " \
 
 TIER_3 = " \
     baloo \
-    plasma-workspace \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "plasma-workspace", "",d)} \
 "
 
 UNTIER = " \
@@ -40,7 +40,7 @@ UNTIER = " \
     muon \
     oxygen \
     oxygen-fonts \
-    plasma-desktop \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "plasma-desktop", "",d)} \
     plasma-nm \
     plasma-workspace-wallpapers \
     polkit-kde-agent-1 \
