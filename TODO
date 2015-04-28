@@ -1,6 +1,9 @@
 kde-plasma:
 * bluedevil
 * libbluedevil
+* bluez-qt
+* plasma-mediacenter
+* plasma-sdk
 
 kde-apps:
 * konsole
