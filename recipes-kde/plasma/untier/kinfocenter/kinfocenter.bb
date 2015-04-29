@@ -50,4 +50,5 @@ FILES_${PN} += " \
 
 FILES_${PN}-dbg += " \
     ${libdir}/plugins/.debug \
+    ${libdir}/plugins/*/.debug \
 "
