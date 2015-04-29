@@ -16,6 +16,7 @@ DEPENDS += " \
     kcompletion \
     frameworkintegration \
     kwindowsystem \
+    kdecoration \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb qtx11extras", "", d)} \
 "
 
