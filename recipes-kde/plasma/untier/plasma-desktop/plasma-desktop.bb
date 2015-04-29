@@ -68,5 +68,7 @@ FILES_${PN} += " \
 
 FILES_${PN}-dbg += " \
     ${libdir}/*/.debug \
+    ${libdir}/plugins/*/.debug \
+    ${libdir}/qml/org/kde/*/*/.debug \
     ${libdir}/qml/org/kde/*/*/*/.debug \
 "
