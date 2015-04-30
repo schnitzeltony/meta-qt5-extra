@@ -1,0 +1,36 @@
+From 5c0fb3d53f7889e70a47a64cd691bee473ec783f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 29 Apr 2015 18:10:16 +0200
+Subject: [PATCH] startkde: create kde's home
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+fixes:
+
+| static QPlatformTheme* QKdeTheme::createKdeTheme(): Unable to determine KDE dirs
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ startkde/startkde.cmake | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/startkde/startkde.cmake b/startkde/startkde.cmake
+index 891c21e..cbb7063 100644
+--- a/startkde/startkde.cmake
++++ b/startkde/startkde.cmake
+@@ -66,6 +66,11 @@ fi
+ 
+ mkdir -p $configDir
+ 
++# Make qtbase/src/platformsupport/themes/genericunix/qgenericunixthemes.cpp
++# happy by creating kde home
++mkdir -p ${HOME}/.kde
++
++
+ #This is basically setting defaults so we can use them with kstartupconfig5
+ cat >$configDir/startupconfigkeys <<EOF
+ kcminputrc Mouse cursorTheme 'breeze_cursors'
+-- 
+1.9.3
+
