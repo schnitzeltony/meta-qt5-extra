@@ -28,9 +28,9 @@ SRC_URI += " \
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/icons \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
 "

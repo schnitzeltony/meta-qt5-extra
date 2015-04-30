@@ -18,5 +18,13 @@ SRC_URI += "file://0001-replace-try_run-by-try_compile-in-compiler-feature-c.pat
 CMAKE_ALIGN_SYSROOT[1] = "KF5Activities, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Activities, -S${includedir}, -S${STAGING_INCDIR}"
 
-FILES_${PN} += "${datadir}/k*5 ${libdir}/plugins ${libdir}/qml/org/kde"
-FILES_${PN}-dbg += "${libdir}/plugins/.debug ${libdir}/plugins/*/.debug ${libdir}/qml/org/kde/*/.debug"
+FILES_${PN} += " \
+    ${datadir}/k*5 \
+    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${libdir}/qml/org/kde \
+"
+FILES_${PN}-dbg += " \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
+    ${libdir}/qml/org/kde/*/.debug \
+"

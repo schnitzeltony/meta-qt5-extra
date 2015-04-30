@@ -33,7 +33,7 @@ FILES_${PN} += " \
     ${datadir}/QtCurve \
     ${datadir}/wallpapers \
     \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
     ${libdir}/qml \
     ${libdir}/kconf_update_bin \
 "
@@ -41,4 +41,5 @@ FILES_${PN} += " \
 FILES_${PN}-dbg += " \
     ${libdir}/*/.debug \
     ${libdir}/*/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
 "

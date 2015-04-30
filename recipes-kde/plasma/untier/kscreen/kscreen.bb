@@ -28,9 +28,9 @@ FILES_${PN} += " \
     ${datadir}/kcm_kscreen \
     ${datadir}/kservices5 \
     ${datadir}/icons \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
 "

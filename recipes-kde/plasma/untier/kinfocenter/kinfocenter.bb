@@ -45,10 +45,10 @@ FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/kpackage \
     \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/.debug \
-    ${libdir}/plugins/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
 "

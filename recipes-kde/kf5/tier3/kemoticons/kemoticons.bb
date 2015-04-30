@@ -17,5 +17,12 @@ SRC_URI[sha256sum] = "500a816ebecd98bf55f838e8a22ebf9345470943d7544cbdd228e072ea
 CMAKE_ALIGN_SYSROOT[1] = "KF5Emoticons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Emoticons, -S${includedir}, -S${STAGING_INCDIR}"
 
-FILES_${PN} += "${datadir}/emoticons ${datadir}/k*5"
-FILES_${PN}-dbg += "${libdir}/plugins/kf5/*/.debug"
+FILES_${PN} += " \
+    ${datadir}/emoticons \
+    ${datadir}/k*5 \
+    ${libdir}/${QT_DIR_NAME}/plugins \
+"
+FILES_${PN}-dbg += " \
+    ${libdir}/${QT_DIR_NAME}/plugins/kf5/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/kf5/*/.debug \
+"

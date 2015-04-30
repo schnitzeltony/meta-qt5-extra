@@ -30,11 +30,11 @@ FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
     ${libdir}/kauth \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
     ${libdir}/kauth/.debug \
 "

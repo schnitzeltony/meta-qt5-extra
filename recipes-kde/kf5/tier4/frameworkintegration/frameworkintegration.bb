@@ -28,9 +28,9 @@ CMAKE_ALIGN_SYSROOT[2] = "KF5FrameworkIntegration, -S${includedir}, -S${STAGING_
 
 FILES_${PN} += " \
     ${datadir}/knotifications5 \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
 "

@@ -13,5 +13,5 @@ CMAKE_ALIGN_SYSROOT[2] = "KF5Auth, -S${includedir}, -S${STAGING_INCDIR}"
 # executables
 CMAKE_ALIGN_SYSROOT[3] = "KF5Auth, -S${libexecdir}/kauth-policy-gen, -S${STAGING_LIBDIR_NATIVE}/${BPN}/kauth-policy-gen"
 
-FILES_${PN} += "${libdir}/plugins"
-FILES_${PN}-dbg += "${libdir}/plugins/*/*/.debug"
+FILES_${PN} += "${libdir}/${QT_DIR_NAME}/plugins"
+FILES_${PN}-dbg += "${libdir}/${QT_DIR_NAME}/plugins/*/*/.debug"

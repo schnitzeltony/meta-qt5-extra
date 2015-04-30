@@ -28,5 +28,8 @@ SRC_URI[sha256sum] = "54bcb5059ee1cbcb287d0c5f7d8660849574978a9678417118be6a2481
 CMAKE_ALIGN_SYSROOT[1] = "KF5Parts, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Parts, -S${includedir}, -S${STAGING_INCDIR}"
 
-FILES_${PN} += "${datadir}/k*5 ${libdir}/plugins"
-FILES_${PN}-dbg += "${libdir}/plugins/.debug"
+FILES_${PN} += " \
+    ${datadir}/k*5 \
+    ${libdir}/${QT_DIR_NAME}/plugins \
+"
+FILES_${PN}-dbg += "${libdir}/${QT_DIR_NAME}/plugins/.debug"

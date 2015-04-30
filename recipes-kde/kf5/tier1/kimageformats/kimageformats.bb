@@ -12,5 +12,8 @@ PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "f5c9f709a11753baeabdf1b7a2cb0c16"
 SRC_URI[sha256sum] = "afae002076702bd4b5509a4cea43161d409bda6b2de6797023d9f90bc3cc9984"
 
-FILES_${PN} += "${libdir}/plugins ${datadir}/kservices5"
-FILES_${PN}-dbg += "${libdir}/plugins/*/.debug"
+FILES_${PN} += " \
+    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${datadir}/kservices5 \
+"
+FILES_${PN}-dbg += "${libdir}/${QT_DIR_NAME}/plugins/*/.debug"

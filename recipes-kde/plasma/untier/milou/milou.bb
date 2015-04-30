@@ -25,11 +25,11 @@ SRC_URI[sha256sum] = "5857081b91a6537d110608901b4eac4b0e8aa627f608a8b4d243f1c86f
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/plasma \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
     ${libdir}/qml \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
     ${libdir}/qml/*/*/*/.debug \
 "

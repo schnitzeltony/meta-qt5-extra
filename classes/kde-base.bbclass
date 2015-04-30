@@ -16,5 +16,6 @@ EXTRA_OECMAKE += " \
     -DECM_MKSPECS_INSTALL_DIR=${libdir}/${QT_DIR_NAME}/mkspecs/modules \
     -DCMAKE_INSTALL_DATADIR=share \
     -DCMAKE_INSTALL_DBUSINTERFACEDIR=share/dbus-1/interfaces \
+    -DKDE_INSTALL_QTPLUGINDIR=${libdir}/${QT_DIR_NAME}/plugins \
 "
 FILES_${PN}-dev += "${libdir}/${QT_DIR_NAME}/mkspecs"

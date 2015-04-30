@@ -34,5 +34,14 @@ PACKAGECONFIG ??= "full"
 CMAKE_ALIGN_SYSROOT[1] = "KF5KIO, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5KIO, -S${includedir}, -S${STAGING_INCDIR}"
 
-FILES_${PN} += "${datadir}/dbus-1 ${datadir}/k*5 ${libdir}/plugins"
-FILES_${PN}-dbg += "${libdir}/plugins/.debug ${libdir}/${BPN}/kf5/.debug ${libdir}/plugins/kf5/*/.debug"
+FILES_${PN} += " \
+    ${datadir}/dbus-1 \
+    ${datadir}/k*5 \
+    ${libdir}/${QT_DIR_NAME}/plugins \
+"
+FILES_${PN}-dbg += " \
+    ${libdir}/${BPN}/kf5/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/*/*/.debug \
+"

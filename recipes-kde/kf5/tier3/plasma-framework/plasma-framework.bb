@@ -43,15 +43,15 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/plasma \
     \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
     ${libdir}/platformqml \
     ${libdir}/qml \
     ${libdir}/org/kde/plasma \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/.debug \
-    ${libdir}/plugins/kf5/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/kf5/*/.debug \
     ${libdir}/platformqml/*/org/kde/plasma/*/.debug \
     ${libdir}/org/kde/plasma/*/.debug \
     ${libdir}/qml/org/kde/plasma/*/.debug \

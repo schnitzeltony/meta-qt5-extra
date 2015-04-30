@@ -61,13 +61,13 @@ CMAKE_ALIGN_SYSROOT[4] = "LibTaskManager, -S${includedir}, -S${STAGING_INCDIR}"
 FILES_${PN} += " \
     ${datadir} \
     ${libdir}/libkdeinit5*.so \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
     ${libdir}/qml \
 "
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/.debug \
-    ${libdir}/plugins/*/.debug \
-    ${libdir}/plugins/*/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/*/*/.debug \
     ${libdir}/qml/org/kde/*/*/.debug \
     ${libdir}/qml/org/kde/*/*/*/.debug \
 "

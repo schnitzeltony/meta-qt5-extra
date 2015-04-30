@@ -62,13 +62,14 @@ FILES_${PN} += " \
     ${libdir}/libkdeinit5_kaccess.so \
     ${libdir}/qml \
     ${libdir}/kauth \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
     ${libdir}/kconf_update_bin \
 "
 
 FILES_${PN}-dbg += " \
     ${libdir}/*/.debug \
-    ${libdir}/plugins/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
     ${libdir}/qml/org/kde/*/*/.debug \
     ${libdir}/qml/org/kde/*/*/*/.debug \
 "

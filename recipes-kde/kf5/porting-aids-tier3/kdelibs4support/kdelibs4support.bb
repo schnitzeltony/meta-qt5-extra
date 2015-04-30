@@ -43,13 +43,13 @@ CMAKE_ALIGN_SYSROOT[2] = "KDELibs4, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[3] = "KF5KDELibs4Support, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
 
 FILES_${PN} += " \
-	${datadir}/k*5 \
-	${datadir}/dbus-1 \
-	${libdir}/plugins \
+    ${datadir}/k*5 \
+    ${datadir}/dbus-1 \
+    ${libdir}/${QT_DIR_NAME}/plugins \
 "
 
 FILES_${PN}-dbg += " \
-	${libdir}/plugins/.debug \
-	${libdir}/plugins/kf5/*/.debug \
-	${libdir}/plugins/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/kf5/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
 "
