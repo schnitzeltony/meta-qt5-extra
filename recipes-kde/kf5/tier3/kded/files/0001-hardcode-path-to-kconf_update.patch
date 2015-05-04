@@ -1,0 +1,38 @@
+From 145e379cc805838e7aa88d3875d771c5ee55bda1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 4 May 2015 14:51:48 +0200
+Subject: [PATCH] hardcode path to kconf_update
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+kconfig does not export location to kconfig in our environment so set it
+manually.
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 5e95df8..8334c80 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -18,10 +18,10 @@ target_link_libraries(kdeinit_kded5
+     KF5::Crash # Sets it as autostart
+ )
+ target_compile_definitions(kdeinit_kded5 PRIVATE
+-    KCONF_UPDATE_EXE="$<TARGET_FILE:KF5::kconf_update>"
++    KCONF_UPDATE_EXE="${CMAKE_INSTALL_LIBDIR}/kconfig/kf5/kconf_update"
+ )
+ target_compile_definitions(kded5 PRIVATE
+-    KCONF_UPDATE_EXE="$<TARGET_FILE:KF5::kconf_update>"
++    KCONF_UPDATE_EXE="${CMAKE_INSTALL_LIBDIR}/kconfig/kf5/kconf_update"
+ )
+ 
+ install(TARGETS kdeinit_kded5 EXPORT KDEDTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+-- 
+1.9.3
+
