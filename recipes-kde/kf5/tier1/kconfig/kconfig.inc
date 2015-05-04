@@ -12,7 +12,8 @@ SRC_URI[sha256sum] = "a14951f08e13c67b00a5ee4f4e00d998875630d9c40f27af53173bdb75
 
 # REVISIT remove ugly hack for wayland-only environments
 SRC_URI += " \
-	file://0001-kconfiggui-do-only-compile-in-case-sessions-are-aval.patch \
+    file://0001-kconfiggui-do-only-compile-in-case-sessions-are-aval.patch \
+    file://0002-do-not-export-location-for-kconf_update.patch \
 "
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
