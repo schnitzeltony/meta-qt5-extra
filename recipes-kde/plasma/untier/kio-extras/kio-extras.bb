@@ -59,10 +59,10 @@ FILES_${PN} += " \
     ${datadir}/kio_docfilter \
     ${datadir}/solid \
     \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/.debug \
-    ${libdir}/plugins/kf5/kio/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/kf5/kio/.debug \
 "

@@ -49,12 +49,12 @@ FILES_SOLIBSDEV = ""
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/plasma \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
     ${libdir}/qml \
     ${libdir}/*.so \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
     ${libdir}/qml/*/*/*/*/.debug \
 "

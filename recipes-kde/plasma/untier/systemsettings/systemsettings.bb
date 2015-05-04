@@ -28,9 +28,9 @@ SRC_URI[sha256sum] = "701bf4a62c55dafcd9994d9e193c0895b7d531422f674b5548a664435a
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
 "

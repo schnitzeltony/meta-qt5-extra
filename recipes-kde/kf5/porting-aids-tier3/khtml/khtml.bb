@@ -40,8 +40,9 @@ CMAKE_ALIGN_SYSROOT[2] = "KF5KHtml, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
+    ${libdir}/${QT_DIR_NAME}/plugins \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/kf5/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/kf5/*/.debug \
 "

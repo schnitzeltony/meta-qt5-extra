@@ -66,7 +66,7 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/icons \
     ${datadir}/*5 \
-    ${libdir}/plugins \
+    ${libdir}/${QT_DIR_NAME}/plugins \
     ${libdir}/qml \
     ${libdir}/kconf_update_bin \
 "
@@ -82,6 +82,7 @@ FILES_${PN} += " \
 FILES_${PN}-dbg += " \
     ${libdir}/*/.debug \
     ${libdir}/*/*/.debug \
+    ${libdir}/*/*/*/.debug \
     ${libdir}/*/*/*/*/.debug \
     ${libdir}/*/*/*/*/*/.debug \
     ${libdir}/*/*/*/*/*/*/.debug \
