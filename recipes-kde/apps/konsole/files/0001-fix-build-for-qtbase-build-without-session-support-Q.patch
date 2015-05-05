@@ -1,0 +1,53 @@
+From 1cf0d1c36834d7c326c8fd1c51f9f075f0785fcf Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 5 May 2015 15:19:52 +0200
+Subject: [PATCH] fix build for qtbase build without session support
+ QT_NO_SESSIONMANAGER
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/Application.cpp | 7 ++++++-
+ src/main.cpp        | 2 ++
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/src/Application.cpp b/src/Application.cpp
+index 0857eaf..6abaa84 100644
+--- a/src/Application.cpp
++++ b/src/Application.cpp
+@@ -100,7 +100,12 @@ int Application::newInstance()
+     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+ 
+     // handle session management
+-    if ((args->count() != 0) || !firstInstance || !isSessionRestored()) {
++    if ((args->count() != 0) || !firstInstance
++#ifndef QT_NO_SESSIONMANAGER
++		|| !isSessionRestored()) {
++#else
++		) {
++#endif
+         // check for arguments to print help or other information to the
+         // terminal, quit if such an argument was found
+         if (processHelpArgs(args))
+diff --git a/src/main.cpp b/src/main.cpp
+index b6ba2dc..90bdbe1 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -288,10 +288,12 @@ void fillAboutData(K4AboutData& aboutData)
+ 
+ void restoreSession(Application& app)
+ {
++#ifndef QT_NO_SESSIONMANAGER
+     if (app.isSessionRestored()) {
+         int n = 1;
+         while (KMainWindow::canBeRestored(n))
+             app.newMainWindow()->restore(n++);
+     }
++#endif
+ }
+ 
+-- 
+1.9.3
+
