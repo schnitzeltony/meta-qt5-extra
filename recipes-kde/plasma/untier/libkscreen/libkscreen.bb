@@ -21,8 +21,12 @@ SRC_URI += " \
 "
 
 
+FILES_${PN} += " \
+    ${libdir}/${QT_DIR_NAME}/plugins \
+"
+
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/kf5/kscreen/.debug \
+    ${libdir}/${QT_DIR_NAME}/plugins/kf5/kscreen/.debug \
     ${libexecdir}/kf5/.debug \
 "
 
