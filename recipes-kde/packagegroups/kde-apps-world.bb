@@ -9,5 +9,6 @@ RDEPENDS_${PN} = " \
     libkdegames \
     kapman \
     kate \
+    katomic \
     oxygen-icons \
 "
