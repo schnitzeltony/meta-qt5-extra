@@ -50,11 +50,11 @@ PACKAGECONFIG ??= ""
 FILES_${PN} += " \
     ${datadir}/carddecks \
     ${datadir}/kconf_update \
-    ${libdir}/qml \
+    ${libdir}/${QT_DIR_NAME}/qml \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/qml/*/*/*/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/qml/*/*/*/*/.debug \
 "
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5KDEGames, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

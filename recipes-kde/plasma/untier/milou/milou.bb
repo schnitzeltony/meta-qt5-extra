@@ -26,10 +26,10 @@ FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/plasma \
     ${libdir}/${QT_DIR_NAME}/plugins \
-    ${libdir}/qml \
+    ${libdir}/${QT_DIR_NAME}/qml \
 "
 
 FILES_${PN}-dbg += " \
     ${libdir}/${QT_DIR_NAME}/plugins/.debug \
-    ${libdir}/qml/*/*/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/qml/*/*/*/.debug \
 "

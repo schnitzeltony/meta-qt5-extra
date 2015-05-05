@@ -21,10 +21,10 @@ CMAKE_ALIGN_SYSROOT[2] = "KF5Activities, -S${includedir}, -S${STAGING_INCDIR}"
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${libdir}/${QT_DIR_NAME}/plugins \
-    ${libdir}/qml/org/kde \
+    ${libdir}/${QT_DIR_NAME}/qml/org/kde \
 "
 FILES_${PN}-dbg += " \
     ${libdir}/${QT_DIR_NAME}/plugins/.debug \
     ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
-    ${libdir}/qml/org/kde/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/qml/org/kde/*/.debug \
 "

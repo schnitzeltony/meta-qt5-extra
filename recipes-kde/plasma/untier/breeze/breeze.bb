@@ -35,7 +35,7 @@ FILES_${PN} += " \
     ${datadir}/wallpapers \
     \
     ${libdir}/${QT_DIR_NAME}/plugins \
-    ${libdir}/qml \
+    ${libdir}/${QT_DIR_NAME}/qml \
     ${libdir}/kconf_update_bin \
 "
 

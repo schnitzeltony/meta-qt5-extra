@@ -40,11 +40,11 @@ FILES_${PN} += " \
     ${datadir}/icons \
     \
     ${libdir}/${QT_DIR_NAME}/plugins \
-    ${libdir}/qml \
+    ${libdir}/${QT_DIR_NAME}/qml \
 "
 
 FILES_${PN}-dbg += " \
     ${libdir}/${QT_DIR_NAME}/plugins/.debug \
     ${libdir}/${QT_DIR_NAME}/plugins/*/*/.debug \
-    ${libdir}/qml/org/kde/plasma/private/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/qml/org/kde/plasma/private/*/.debug \
 "

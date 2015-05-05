@@ -45,7 +45,7 @@ FILES_${PN} += " \
     \
     ${libdir}/${QT_DIR_NAME}/plugins \
     ${libdir}/platformqml \
-    ${libdir}/qml \
+    ${libdir}/${QT_DIR_NAME}/qml \
     ${libdir}/org/kde/plasma \
 "
 
@@ -54,5 +54,5 @@ FILES_${PN}-dbg += " \
     ${libdir}/${QT_DIR_NAME}/plugins/kf5/*/.debug \
     ${libdir}/platformqml/*/org/kde/plasma/*/.debug \
     ${libdir}/org/kde/plasma/*/.debug \
-    ${libdir}/qml/org/kde/plasma/*/.debug \
+    ${libdir}/${QT_DIR_NAME}/qml/org/kde/plasma/*/.debug \
 "

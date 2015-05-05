@@ -15,5 +15,7 @@ SRC_URI[sha256sum] = "96e38e4aa1c3bbc77557dd608552e2d1dc78b7300f7c2a62846ebd43af
 CMAKE_ALIGN_SYSROOT[1] = "KF5Solid, -S${libdir}, -S${STAGING_LIBDIR}"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Solid, -S${includedir}, -S${STAGING_INCDIR}"
 
-FILES_${PN} += "${libdir}/qml"
-FILES_${PN}-dbg += "${libdir}/qml/org/kde/${BPN}/.debug"
+FILES_${PN} += "${libdir}/${QT_DIR_NAME}/qml"
+FILES_${PN}-dbg += "${libdir}/${QT_DIR_NAME}/qml/org/kde/${BPN}/.debug"
+
+RRECOMMENDS_${PN} += "udisks2"
