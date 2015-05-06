@@ -1,0 +1,35 @@
+From e83caa529f812a4b10dea34b1c854d02fed83d8c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 6 May 2015 16:38:17 +0200
+Subject: [PATCH] startlxqt: enable starting from console
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ startlxqt.in | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/startlxqt.in b/startlxqt.in
+index 2dc30bf..bb98fce 100755
+--- a/startlxqt.in
++++ b/startlxqt.in
+@@ -42,5 +42,12 @@ export XDG_MENU_PREFIX="lxqt-"
+ 
+ export XDG_CURRENT_DESKTOP="LXQt"
+ 
+-# Start the LXQt session
+-exec lxqt-session
++# xserver needs start?
++if test "x$DISPLAY" = "x"; then
++	echo "Starting X server..."
++	prog=`which lxqt-session`
++	exec xinit $prog
++else
++	# Start the LXQt session
++	exec lxqt-session
++fi
+-- 
+1.9.3
+

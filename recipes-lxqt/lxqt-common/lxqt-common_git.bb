@@ -6,6 +6,7 @@ inherit lxqt
 
 DEPENDS += "liblxqt"
 
+SRC_URI += "file://0001-startlxqt-enable-starting-from-console.patch"
 SRCREV = "e400c79738b7251526d5e5317926f30a70d61801"
 PV = "0.9.0"
 
