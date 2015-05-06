@@ -25,6 +25,4 @@ RDEPENDS_${PN} = " \
     lxqt-session \
     menu-cache \
     pcmanfm-qt \
-    \
-    openbox \
 "
