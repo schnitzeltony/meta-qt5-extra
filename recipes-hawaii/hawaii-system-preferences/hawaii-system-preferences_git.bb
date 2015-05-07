@@ -5,11 +5,10 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit cmake_qt5
+inherit hawaii
 
-DEPENDS = "qtbase qtdeclarative qtquickcontrols polkit-qt-1 extra-cmake-modules-native kscreen"
+DEPENDS += "polkit-qt-1 kscreen"
 
-SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git;protocol=git;branch=master"
 SRCREV = "4a3ca3e05ba591ff2cbb1f97f27e19e6cf5a1489"
 PV = "0.4.0+git${SRCPV}"
 S = "${WORKDIR}/git"
@@ -17,9 +16,9 @@ S = "${WORKDIR}/git"
 EXTRA_OECMAKE += "-DQt5LinguistTools_DIR=${STAGING_LIBDIR_NATIVE}/cmake/Qt5LinguistTools"
 
 FILES_${PN} += " \
-    ${libdir}/qml \
+    ${OE_QMAKE_PATH_QML} \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/qml/org/hawaii/systempreferences/*/.debug \
+    ${OE_QMAKE_PATH_QML}/org/hawaii/systempreferences/*/.debug \
 "
