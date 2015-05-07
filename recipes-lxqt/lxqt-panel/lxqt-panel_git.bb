@@ -12,7 +12,7 @@ DEPENDS += " \
     kguiaddons \
 "
 
-SRCREV = "43665172c0726b215c59440e9bd16628465143bc"
+SRCREV = "703a7aff3d5b7324fe6ef9f32527a24cda35b50f"
 PV = "0.9.0"
 
 PACKAGECONFIG[cpu_plugin] = "-DCPULOAD_PLUGIN=Yes,-DCPULOAD_PLUGIN=No, libstatgrab"
