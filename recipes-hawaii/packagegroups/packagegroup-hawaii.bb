@@ -5,16 +5,19 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
 inherit packagegroup
 
 RDEPENDS_${PN} = " \
-	cinema \
-	eyesight \
-	hawaii-shell \
-	pss-framework \
-	hawaii-system-preferences \
-	hawaii-terminal \
-	hawaii-wallpapers \
-	polkit-qt-1 \
-	qtaccountsservice \
-	qtconfiguration \
-	swordfish \
-	wind \
+    cinema \
+    eyesight \
+    greenisland \
+    hawaii-baseapps \
+    hawaii-icon-themes \
+    hawaii-shell \
+    hawaii-system-preferences \
+    hawaii-terminal \
+    hawaii-wallpapers \
+    hawaii-widget-styles \
+    pss-framework \
+    qtaccountsservice \
+    qtconfiguration \
+    swordfish \
+    wind \
 "
