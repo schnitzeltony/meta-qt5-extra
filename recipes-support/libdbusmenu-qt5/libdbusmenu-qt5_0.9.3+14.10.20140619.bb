@@ -1,4 +1,4 @@
-SUMMARY = "dbusmenu library for Qt5"
+SUMMARY = "A library that provides a Qt implementation of the DBusMenu spec"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=db979804f025cf55aabec7129cb671ed"
 DEPENDS = "qtbase dbus"
@@ -11,9 +11,18 @@ inherit cmake_qt5 cmake-lib
 
 S = "${WORKDIR}/libdbusmenu-qt-${PV}"
 
-EXTRA_OECMAKE += "-DUSE_QT5=On"
+EXTRA_OECMAKE += " \
+    -DUSE_QT5=On \
+"
+
+do_install_append() {
+    # HACK: make others find my headers (on target) - in sysroot class cmake-lib takes care
+    sed -i 's:${PACKAGE_PREFIX_DIR}:${prefix}:g' ${D}/${libdir}/cmake/dbusmenu-qt5/dbusmenu-qt5-config.cmake
+    sed -i 's:${_IMPORT_PREFIX}:${prefix}:g' ${D}/${libdir}/cmake/dbusmenu-qt5/dbusmenu-qt5-targets.cmake
+}
 
 FILES_${PN}-dev += "${libdir}/cmake"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "dbusmenu-qt5, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "dbusmenu-qt5, -S${includedir}, -S${STAGING_INCDIR}"
