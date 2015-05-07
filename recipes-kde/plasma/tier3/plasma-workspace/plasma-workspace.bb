@@ -85,5 +85,6 @@ FILES_${PN}-dev = " \
 # startkde requires:
 RDEPENDS_${PN} += " \
     qttools-tools \
+    kconfig-bin \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsetroot xmessage", "", d)} \
 "
