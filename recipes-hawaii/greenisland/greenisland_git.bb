@@ -2,13 +2,10 @@ SUMMARY = "Support library to make Qt-based Wayland compositors development easi
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
 
-inherit cmake_qt5 cmake-lib pythonnative pkgconfig
+inherit hawaii cmake-lib pythonnative pkgconfig
 
-DEPENDS = " \
+DEPENDS += " \
     ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-    extra-cmake-modules-native \
-    qtbase \
-    qtdeclarative \
     wayland \
     qtwayland \
     libkscreen \
@@ -33,11 +30,11 @@ CMAKE_ALIGN_SYSROOT[1] = "GreenIsland, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "GreenIsland, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
-    ${libdir}/qml/GreenIsland \
+    ${OE_QMAKE_PATH_QML}/GreenIsland \
     ${libdir}/plugins/greenisland \
 "
 FILES_${PN}-dbg += " \
-    ${libdir}/qml/GreenIsland/.debug \
+    ${OE_QMAKE_PATH_QML}/GreenIsland/.debug \
     ${libdir}/plugins/greenisland/.debug \
 "
 FILES_${PN}-dev += "${libdir}/cmake"
