@@ -6,13 +6,11 @@ LIC_FILES_CHKSUM = " \
     file://cursors/hawaii/src/renderpngs.py;beginline=3;endline=8;md5=4476bcd5b2a0f234e52bacaae0f6b37e \
 "
 
-inherit cmake
+inherit hawaii
 
 SRCREV = "6a72786dd196d04807bf082f67414cc8a8ebba36"
 PV = "0.3.0+git${SRCPV}"
 S = "${WORKDIR}/git"
-
-SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git;protocol=git;branch=stable"
 
 PACKAGE_ARCH = "all"
 
