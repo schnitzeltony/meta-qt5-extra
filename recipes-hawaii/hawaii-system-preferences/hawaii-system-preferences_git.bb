@@ -10,7 +10,7 @@ inherit cmake_qt5
 DEPENDS = "qtbase qtdeclarative qtquickcontrols polkit-qt-1 extra-cmake-modules-native kscreen"
 
 SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git;protocol=git;branch=master"
-SRCREV = "e60b281d6aad847802f1bf0aaa08f41eed1533a8"
+SRCREV = "4a3ca3e05ba591ff2cbb1f97f27e19e6cf5a1489"
 PV = "0.4.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
