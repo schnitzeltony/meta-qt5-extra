@@ -7,8 +7,17 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 cmake-lib
 
-DEPENDS += "kwindowsystem kservice kconfig kiconthemes kcodecs kcoreaddons phonon"
-DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
+DEPENDS += " \
+    kwindowsystem \
+    kservice \
+    kconfig \
+    kiconthemes \
+    kcodecs \
+    kcoreaddons \
+    phonon \
+    libdbusmenu-qt5 \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)} \
+"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "978f89eebb9562dda8732b59411b74a4"
