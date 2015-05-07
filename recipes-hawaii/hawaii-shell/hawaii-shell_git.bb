@@ -5,11 +5,10 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit cmake_qt5 pythonnative cmake-lib
+inherit hawaii pythonnative cmake-lib
 #inherit systemd
 
-SRC_URI = " \
-    git://github.com/hawaii-desktop/${BPN}.git;protocol=git;branch=master \
+SRC_URI += " \
     file://0001-find-host-s-git.patch \
 "
 SRCREV = "f5b93a89ca61f7240008ae610a70c0e2c9ace952"
@@ -17,10 +16,7 @@ PV = "0.4.93+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = " \
-    extra-cmake-modules-native \
-    qtbase \
-    qtdeclarative \
+DEPENDS += " \
     qtwayland-native \
     \
     wayland \
@@ -55,15 +51,15 @@ RRECOMMENDS_${PN} += " \
 
 FILES_${PN} += " \
     ${datadir} \
-    ${libdir}/qml \
+    ${OE_QMAKE_PATH_QML} \
     ${libdir}/plugins \
     ${libdir}/systemd \
 "
 
 FILES_${PN}-dbg += " \
     ${libdir}/plugins/*/.debug \
-    ${libdir}/qml/*/*/.debug \
-    ${libdir}/qml/*/*/*/.debug \
+    ${OE_QMAKE_PATH_QML}/*/*/.debug \
+    ${OE_QMAKE_PATH_QML}/*/*/*/.debug \
 "
 
 FILES_${PN}-dev += " \
