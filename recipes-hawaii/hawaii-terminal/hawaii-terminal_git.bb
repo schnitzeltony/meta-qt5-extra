@@ -6,11 +6,8 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.yat;md5=e1fd7e8dc980533b8d71d81c102cb511 \
 "
 
-inherit cmake_qt5
+inherit hawaii
 
-DEPENDS = "qtbase qtdeclarative qtquickcontrols"
-
-SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git;protocol=git;branch=master"
 SRCREV = "f5dfc3cb7f64854ab322b4d03425599d29049b04"
 PV = "0.2.0+git${SRCPV}"
 
