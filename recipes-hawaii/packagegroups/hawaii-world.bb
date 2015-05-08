@@ -15,7 +15,6 @@ RDEPENDS_${PN} = " \
     hawaii-terminal \
     hawaii-wallpapers \
     hawaii-widget-styles \
-    pss-framework \
     qtaccountsservice \
     qtconfiguration \
     swordfish \
