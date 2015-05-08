@@ -5,11 +5,10 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit cmake_qt5 pkgconfig
+inherit hawaii pkgconfig
 
-DEPENDS = "qtbase qtdeclarative polkit-qt-1 extra-cmake-modules-native"
+DEPENDS += "polkit-qt-1"
 
-SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git"
 SRCREV = "fb3495d281fac91e27f00121de7c3bb2da90a7db"
 PV = "0.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
