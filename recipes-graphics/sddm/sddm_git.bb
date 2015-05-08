@@ -16,20 +16,34 @@ DEPENDS += "libpam"
 
 SRC_URI = " \
     git://github.com/sddm/${BPN}.git;protocol=git;branch=master \
-    file://0001-handle-merge-of-libsystemd-journal-libsystemd-for-sy.patch \
-    file://0002-fix-qml-install-dir.patch \
+    file://0001-fix-qml-install-dir.patch \
+    file://0002-temporary-hack.patch \
+    file://sddm.pam \
+    file://sddm.conf \
 "
-SRCREV = "5fef418d71730f631fa313a521b23fa1b40a332c"
+SRCREV = "a6cb08074fdfdee8673a910ef64eb17428b0b390"
 PV = "0.11.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECMAKE += "-DQML_INSTALL_DIR=${libdir}/qml"
+EXTRA_OECMAKE += "-DQML_INSTALL_DIR=${OE_QMAKE_PATH_QML}"
 
-FILES_${PN} += "${libdir}/qml"
+do_install_append() {
+    install -d ${D}/${sysconfdir}
+    install -m 644 ${WORKDIR}/sddm.conf ${D}/${sysconfdir}
+
+    install -d ${D}${sysconfdir}/pam.d
+    install -m 644 ${WORKDIR}/sddm.pam ${D}${sysconfdir}/pam.d/sddm
+
+    install -d ${D}${localstatedir}/lib/sddm
+    chown -R sddm:sddm ${D}${localstatedir}/lib/sddm
+    chmod 0750 ${D}${localstatedir}/lib/sddm
+}
+
+FILES_${PN} += "${OE_QMAKE_PATH_QML}"
 
 SYSTEMD_SERVICE_${PN} = "${BPN}.service"
 
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM_${PN} = "--system --home /var/lib/sddm --shell /bin/false --user-group sddm"
+USERADD_PARAM_${PN} = "--system --home ${localstatedir}/lib/sddm --shell /bin/false --user-group --groups video sddm"
 

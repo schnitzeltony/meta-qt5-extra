@@ -1,0 +1,91 @@
+From 1a0bbae083aa2b73615ee006708f8bd5433ec8a5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 29 Apr 2015 11:01:47 +0200
+Subject: [PATCH] XorgDisplayServer.cpp: create pipe earlier to extract display
+ number
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+addCookie() requires m_display properly set otherwise we get
+
+| sddm[309]: /usr/bin/xauth: (stdin):1:  bad "remove" command line
+| sddm[309]: /usr/bin/xauth: (stdin):2:  bad "add" command line
+
+Motivated by [1]
+
+https://github.com/sddm/sddm/issues/390
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/daemon/XorgDisplayServer.cpp | 40 ++++++++++++++++++++--------------------
+ 1 file changed, 20 insertions(+), 20 deletions(-)
+
+diff --git a/src/daemon/XorgDisplayServer.cpp b/src/daemon/XorgDisplayServer.cpp
+index 407dd3e..4b3ca01 100644
+--- a/src/daemon/XorgDisplayServer.cpp
++++ b/src/daemon/XorgDisplayServer.cpp
+@@ -116,6 +116,26 @@ namespace SDDM {
+         if (m_started)
+             return false;
+ 
++        //create pipe for communicating with X server
++        //0 == read from X, 1== write to from X
++        int pipeFds[2];
++        if (pipe(pipeFds) != 0) {
++            qCritical("Could not create pipe to start X server");
++        }
++
++        QFile readPipe;
++
++        if (!readPipe.open(pipeFds[0], QIODevice::ReadOnly)) {
++            qCritical("Failed to open pipe to start X Server ");
++
++            close(pipeFds[0]);
++            return false;
++        }
++        QByteArray displayNumber = readPipe.readLine();
++        displayNumber.prepend(QByteArray(":"));
++        displayNumber.remove(displayNumber.size() -1, 1); //trim trailing whitespace
++        m_display = displayNumber;
++
+         // generate auth file
+         addCookie(m_authPath);
+         changeOwner(m_authPath);
+@@ -150,13 +170,6 @@ namespace SDDM {
+             env.insert("XCURSOR_THEME", mainConfig.Theme.CursorTheme.get());
+             process->setProcessEnvironment(env);
+ 
+-            //create pipe for communicating with X server
+-            //0 == read from X, 1== write to from X
+-            int pipeFds[2];
+-            if (pipe(pipeFds) != 0) {
+-                qCritical("Could not create pipe to start X server");
+-            }
+-
+             // start display server
+             QStringList args;
+             args << "-auth" << m_authPath
+@@ -180,19 +193,6 @@ namespace SDDM {
+                 return false;
+             }
+ 
+-            QFile readPipe;
+-
+-            if (!readPipe.open(pipeFds[0], QIODevice::ReadOnly)) {
+-                qCritical("Failed to open pipe to start X Server ");
+-
+-                close(pipeFds[0]);
+-                return false;
+-            }
+-            QByteArray displayNumber = readPipe.readLine();
+-            displayNumber.prepend(QByteArray(":"));
+-            displayNumber.remove(displayNumber.size() -1, 1); //trim trailing whitespace
+-            m_display= displayNumber;
+-    
+             // close our pipe
+             close(pipeFds[0]);
+ 
+-- 
+1.9.3
+
