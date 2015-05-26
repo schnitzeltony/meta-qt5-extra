@@ -1,26 +1,33 @@
-kde-plasma:
+kde-plasma missing:
 * bluedevil
 * libbluedevil
 * bluez-qt
 * plasma-mediacenter
 * plasma-sdk
 
-kde-apps:
-* konsole
 ..........
 
 patches upstream:
 
-* meta-oe:
-+ fontforge -> meta-oe
-
 * oe-core (not accepted -> merged here -> non bincfg solution)
 + 4d44d9d950e9c69021e3e75bfb0d672d4752e1fc gpgme: add native build and ship a valid gpgme-config
 
-* meta-qt5
-+ 0321b82e44b286e6ac67c793294d561149d7ced3 qtbase: remove patches required for native(-sdk) only
-+ 75e830ce7226a062b3533568f8acdef1891c91b8 qtbase/EXTERNAL_HOST_BINS: split out code only required for native-(sdk)
-+ d0f38006f10abb1f634f021ad40880b3dec391d2 qtbase: build qmake for target with paths aligned
-+ 661f90ec86682712eb7c93fc9d5a5ba1c28d3562 qt5-creator: add 3.3.0 of qt-creator
-+ ac60cf9c98e4f11f016dc2fdd8cedd2f7f047461 add gdb append to enable python packageconfig
+..........
 
+issues:
+
+plasma-desktop:
+* crashing as non priviledged user
+* window decorations not repainted / compositng disabled (only for OpenGL ES > 2.0??)
+
+lxqt:
+* start menu button not working
+
+hawaii:
+* unable to start session
+
+
+..........
+
+misc:
+* reduce meta-qt5 overrrides as soon as qt5 5.5.x is out
