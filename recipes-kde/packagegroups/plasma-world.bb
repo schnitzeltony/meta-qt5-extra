@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
 inherit packagegroup distro_features_check
 
 TIER_1 = " \
+    bluez-qt \
     kdecoration \
 "
 
