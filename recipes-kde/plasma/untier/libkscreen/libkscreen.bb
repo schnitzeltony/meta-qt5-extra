@@ -13,8 +13,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "13475823e0a69ec263b284e1fd65b0c3"
-SRC_URI[sha256sum] = "4dd23d72d0fa54cfaa23d62c93ab0a01ad75c4d7023895b23a47c450e890afc1"
+SRC_URI[md5sum] = "c5969c94320013740c67fe129bbea4c4"
+SRC_URI[sha256sum] = "74983b37ab9cd48dd40a33dbcb81d7f4acebe09fd4c629550210fbe87c00e401"
 
 SRC_URI += " \
     file://0001-fix-configuration-build-on-x-less-systems.patch \

@@ -7,8 +7,8 @@ inherit kde-plasma cmake-lib
 DEPENDS += "qtdeclarative"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "e5ece42a1c25b10e751e7334c8420de0"
-SRC_URI[sha256sum] = "05db3e81f00b164aeec7183e6816b5e74ddbca41ced2f0b1a0f972151d5a987d"
+SRC_URI[md5sum] = "8af6a399bbecc58dd726daea9aa9c6b7"
+SRC_URI[sha256sum] = "149c6776e89f33c25a05ccab171e82e5bef1ba576bb9026522af1b37ebf2258e"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
 FILES_${PN}-dbg += "${OE_QMAKE_PATH_QML}/org/kde/bluezqt/.debug"

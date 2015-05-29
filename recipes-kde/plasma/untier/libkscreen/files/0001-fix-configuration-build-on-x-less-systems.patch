@@ -1,6 +1,6 @@
-From 295235f0ab69ab218f7390e98ed12d71c0a3f757 Mon Sep 17 00:00:00 2001
+From 18833000cc646db37d9006a2766c3be0707377a8 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 28 Apr 2015 13:43:12 +0200
+Date: Fri, 29 May 2015 23:49:00 +0200
 Subject: [PATCH] fix configuration/build on x-less systems
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -15,11 +15,11 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  backends/qscreen/CMakeLists.txt       |  5 ++++-
  src/CMakeLists.txt                    |  5 ++++-
  src/backendlauncher/CMakeLists.txt    |  5 ++++-
- src/backendlauncher/backendloader.cpp | 13 ++++++++++---
- 6 files changed, 34 insertions(+), 12 deletions(-)
+ src/backendlauncher/backendloader.cpp | 11 +++++++++--
+ 6 files changed, 33 insertions(+), 11 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 7cf6a31..beb47a0 100644
+index dca5cb4..6121065 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -15,15 +15,19 @@ include(ECMGenerateHeaders)
@@ -112,21 +112,20 @@ index de73ae1..ddf631f 100644
 +
  install(TARGETS kscreen_backend_launcher DESTINATION ${CMAKE_INSTALL_FULL_LIBEXECDIR_KF5})
 diff --git a/src/backendlauncher/backendloader.cpp b/src/backendlauncher/backendloader.cpp
-index 32a4a2b..b369ac7 100644
+index 18e08bc..882d741 100644
 --- a/src/backendlauncher/backendloader.cpp
 +++ b/src/backendlauncher/backendloader.cpp
-@@ -24,8 +24,9 @@
+@@ -24,7 +24,9 @@
  #include <QDBusConnectionInterface>
  #include <QDir>
  #include <QPluginLoader>
 +#ifdef HAVE_XCB
  #include <QX11Info>
--
 +#endif
- #include <QDBusConnection>
- #include <QDBusInterface>
  
-@@ -60,6 +61,7 @@ bool BackendLoader::loadBackend(const QString& backend)
+ #include <memory>
+ 
+@@ -74,6 +76,7 @@ bool BackendLoader::loadBackend(const QString& backend)
                  continue;
              }
  
@@ -134,7 +133,7 @@ index 32a4a2b..b369ac7 100644
              // When on X11, skip the QScreen backend, instead use the XRandR backend,
              // if not specified in KSCREEN_BACKEND
              if (backend.isEmpty() &&
-@@ -67,12 +69,17 @@ bool BackendLoader::loadBackend(const QString& backend)
+@@ -81,12 +84,16 @@ bool BackendLoader::loadBackend(const QString& backend)
                      QX11Info::isPlatformX11()) {
                  continue;
              }
@@ -145,12 +144,11 @@ index 32a4a2b..b369ac7 100644
              if (backend.isEmpty() &&
 -                    finfo.fileName().contains(QLatin1String("KSC_XRandR")) &&
 -                    !QX11Info::isPlatformX11()) {
-+                    finfo.fileName().contains(QLatin1String("KSC_XRandR")) 
++                    finfo.fileName().contains(QLatin1String("KSC_XRandR"))
 +#ifdef HAVE_XCB
 +                    && !QX11Info::isPlatformX11()
 +#endif
-+               ) {
-+						
++                ) {
                  continue;
              }
  
