@@ -11,7 +11,7 @@ inherit hawaii pythonnative cmake-lib
 SRC_URI += " \
     file://0001-find-host-s-git.patch \
 "
-SRCREV = "f5b93a89ca61f7240008ae610a70c0e2c9ace952"
+SRCREV = "66f1400c4239f88ad261ee853349e8a4164bd72e"
 PV = "0.4.93+git${SRCPV}"
 
 S = "${WORKDIR}/git"
@@ -23,8 +23,6 @@ DEPENDS += " \
     \
     libqtxdg \
     \
-    kconfig \
-    kcoreaddons \
     solid \
     \
     greenisland \
