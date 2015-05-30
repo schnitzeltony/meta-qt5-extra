@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma
+inherit kde-plasma distro_features_check
 
 DEPENDS += " \
     gtk+3 \

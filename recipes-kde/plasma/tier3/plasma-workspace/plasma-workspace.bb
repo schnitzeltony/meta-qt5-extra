@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-plasma cmake-lib
+REQUIRED_DISTRO_FEATURES = "x11"
+
+inherit kde-plasma cmake-lib distro_features_check
 
 DEPENDS += " \
     baloo \

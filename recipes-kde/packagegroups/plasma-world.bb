@@ -2,7 +2,7 @@ SUMMARY = "All KF5 packages - just for build test"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
-inherit packagegroup distro_features_check
+inherit packagegroup
 
 TIER_1 = " \
     bluez-qt \
@@ -45,7 +45,7 @@ UNTIER = " \
     plasma-nm \
     plasma-workspace-wallpapers \
     polkit-kde-agent-1 \
-    powerdevil \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "powerdevil", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sddm-kcm", "",d)} \
     systemsettings \
 "
