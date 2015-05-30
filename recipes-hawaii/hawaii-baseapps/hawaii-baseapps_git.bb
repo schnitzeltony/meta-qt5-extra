@@ -9,6 +9,6 @@ inherit hawaii pkgconfig
 
 DEPENDS += "polkit-qt-1"
 
-SRCREV = "fb3495d281fac91e27f00121de7c3bb2da90a7db"
-PV = "0.0.0+git${SRCPV}"
+SRCREV = "74d6e19a0736aba338d1594a66cd1f0bd790091f"
+PV = "0.4.0"
 S = "${WORKDIR}/git"
