@@ -52,6 +52,7 @@ SRC_URI[sha256sum] = "665412fd2cdd8b1f69fcd957f8972afd4c0da29166063d1da2b62e460b
 SRC_URI += " \
     file://0001-fix-build-for-qtbase-without-session-management.patch \
     file://0002-add-egl-flags-for-compiling.patch \
+    file://0003-eglonxbackend-add-debug-output.patch \
 "
 
 FILES_${PN} += " \
