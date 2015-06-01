@@ -49,15 +49,10 @@ PV = "${PLASMA_VERSION}"
 SRC_URI[md5sum] = "34607a1d125dc12fd88b5b8cdcc396b1"
 SRC_URI[sha256sum] = "665412fd2cdd8b1f69fcd957f8972afd4c0da29166063d1da2b62e460b717d11"
 
-SRC_URI += "file://0001-fix-build-for-qtbase-without-session-management.patch"
-
-# REVISIT: this should be fixed in meta-fsl-arm
-CXXFLAGS_append_mx6 = " -DLINUX \
-                      ${@base_contains('DISTRO_FEATURES', 'x11', '', \
-                                       base_contains('DISTRO_FEATURES', 'wayland', \
-                                                     '-DEGL_API_WL -DEGL_API_FB', '', d), d)}"
-
-
+SRC_URI += " \
+    file://0001-fix-build-for-qtbase-without-session-management.patch \
+    file://0002-add-egl-flags-for-compiling.patch \
+"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
