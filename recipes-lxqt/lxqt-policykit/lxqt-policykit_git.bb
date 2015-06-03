@@ -8,6 +8,3 @@ DEPENDS += "polkit-qt-1 liblxqt libqtxdg"
 
 SRCREV = "2b0e784cf3a71bcee25cafc844ec34306eb17aaf"
 PV = "0.9.0"
-
-FILES_${PN} += " \
-"
