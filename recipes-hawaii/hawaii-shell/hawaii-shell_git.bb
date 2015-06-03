@@ -5,8 +5,11 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit hawaii pythonnative cmake-lib
+inherit hawaii pythonnative cmake-lib distro_features_check
 #inherit systemd
+
+# weston fails for missing wayland-egl
+REQUIRED_DISTRO_FEATURES = "wayland"
 
 SRC_URI += " \
     file://0001-find-host-s-git.patch \
