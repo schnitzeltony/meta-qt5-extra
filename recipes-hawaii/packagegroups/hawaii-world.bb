@@ -10,7 +10,7 @@ RDEPENDS_${PN} = " \
     greenisland \
     hawaii-baseapps \
     hawaii-icon-themes \
-    hawaii-shell \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "hawaii-shell", "",d)} \
     hawaii-system-preferences \
     hawaii-terminal \
     hawaii-wallpapers \
