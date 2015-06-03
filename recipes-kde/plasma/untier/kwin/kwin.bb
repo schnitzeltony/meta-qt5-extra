@@ -53,6 +53,8 @@ SRC_URI += " \
     file://0001-fix-build-for-qtbase-without-session-management.patch \
     file://0002-add-egl-flags-for-compiling.patch \
     file://0003-eglonxbackend-add-debug-output.patch \
+    file://0004-Properly-add-define-for-gles.patch \
+    file://0005-kwinglutils-Init-glVersion-on-gles.patch \
 "
 
 FILES_${PN} += " \
