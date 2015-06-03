@@ -2,7 +2,9 @@ SUMMARY = "The LXQt desktop panel"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0964c689fcf4c21c6797ea87408416b6"
 
-inherit lxqt
+inherit lxqt distro_features_check
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += " \
     liblxqt \
@@ -12,6 +14,7 @@ DEPENDS += " \
     kguiaddons \
 "
 
+SRC_URI += "file://0001-panel-link-against-Qt5-X11Extras.patch"
 SRCREV = "703a7aff3d5b7324fe6ef9f32527a24cda35b50f"
 PV = "0.9.0"
 

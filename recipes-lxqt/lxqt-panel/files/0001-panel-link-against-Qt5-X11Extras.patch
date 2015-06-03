@@ -1,0 +1,33 @@
+From 8b0b57e8a8813e62aeb7fc67007c67507c5c306d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 3 Jun 2015 22:40:17 +0200
+Subject: [PATCH] panel: link against Qt5::X11Extras
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+caused by out liblxqt modification
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ panel/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/panel/CMakeLists.txt b/panel/CMakeLists.txt
+index 1ef3a32..41294bc 100644
+--- a/panel/CMakeLists.txt
++++ b/panel/CMakeLists.txt
+@@ -93,7 +93,7 @@ lxqt_app_translation_loader(QM_LOADER ${PROJECT_NAME})
+ 
+ 
+ add_executable(${PROJECT} ${lxqt-panel_PUB_H_FILES} ${lxqt-panel_PRIV_H_FILES} ${lxqt-panel_CPP_FILES} ${MOC_SOURCES} ${lxqt-runner_QM_FILES} ${QRC_SOURCES} ${UI_HEADERS} ${QM_LOADER})
+-target_link_libraries(${PROJECT} ${LIBRARIES} ${QTX_LIBRARIES} KF5::WindowSystem)
++target_link_libraries(${PROJECT} ${LIBRARIES} ${QTX_LIBRARIES} Qt5::X11Extras KF5::WindowSystem)
+ 
+ install(TARGETS ${PROJECT} RUNTIME DESTINATION bin)
+ install(FILES ${CONFIG_FILES} DESTINATION ${LXQT_ETC_XDG_DIR}/lxqt)
+-- 
+1.9.3
+
