@@ -1,0 +1,62 @@
+From 4afe7826aa00727ee333100870679155b1e01f72 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 31 May 2015 00:48:29 +0200
+Subject: [PATCH] remove Qt5X11Extras dependency - it is not required
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+For building in x11-less environments
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt          | 4 +---
+ cmake/lxqt_use.cmake.in | 1 -
+ 2 files changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8adf523..692ca83 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -136,7 +136,6 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+ set(CMAKE_AUTOMOC ON)
+ find_package(Qt5Widgets REQUIRED QUIET)
+ find_package(Qt5DBus REQUIRED QUIET)
+-find_package(Qt5X11Extras REQUIRED QUIET)
+ find_package(Qt5LinguistTools REQUIRED QUIET)
+ find_package(Qt5Xdg REQUIRED QUIET)
+ find_package(KF5WindowSystem REQUIRED QUIET)
+@@ -157,7 +156,7 @@ QT5_ADD_DBUS_ADAPTOR(SRCS
+ set(LXQT_QT_VERSION "5")
+ 
+ # KF5WindowSystem is missing here. KF5WindowSystem doesn't provide an .pc file.
+-set(LXQT_PKG_CONFIG_REQUIRES "Qt5Widgets Qt5Xml Qt5DBus Qt5X11Extras")
++set(LXQT_PKG_CONFIG_REQUIRES "Qt5Widgets Qt5Xml Qt5DBus")
+ 
+ include(${QTXDG_USE_FILE})
+ 
+@@ -310,7 +309,6 @@ target_link_libraries(${LXQT_LIBRARY_NAME}
+     KF5::WindowSystem
+     Qt5::Widgets
+     Qt5::DBus
+-    Qt5::X11Extras
+     ${QTXDG_LIBRARIES}
+ )
+ 
+diff --git a/cmake/lxqt_use.cmake.in b/cmake/lxqt_use.cmake.in
+index 55df65e..be5d634 100644
+--- a/cmake/lxqt_use.cmake.in
++++ b/cmake/lxqt_use.cmake.in
+@@ -56,7 +56,6 @@ if (LXQT_QT_VERSION EQUAL "4")
+ elseif(LXQT_QT_VERSION EQUAL "5")
+     find_package(Qt5Widgets REQUIRED QUIET)
+     find_package(Qt5DBus REQUIRED QUIET)
+-    find_package(Qt5X11Extras REQUIRED QUIET)
+     find_package(Qt5LinguistTools REQUIRED QUIET)
+     find_package(Qt5Xdg REQUIRED)
+     find_package(KF5WindowSystem REQUIRED QUIET)
+-- 
+1.9.3
+

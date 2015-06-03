@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0964c689fcf4c21c6797ea87408416b6"
 inherit lxqt cmake-lib
 
 DEPENDS += "libqtxdg kwindowsystem"
+SRC_URI += "file://0001-remove-Qt5X11Extras-dependency-it-is-not-required.patch"
 
 SRCREV = "64d1e6c1076aea2783138e9d5ce4bb30b58c77b4"
 PV = "0.9.0"
