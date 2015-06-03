@@ -1,0 +1,36 @@
+From d5fa7823c6ddbfb5a1f00ba391e6bb5fe5f9df29 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 31 May 2015 01:12:28 +0200
+Subject: [PATCH] do not depend on Qt5X11Extras
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c49929f..beacc50 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -7,7 +7,6 @@ set(CPP_FILES
+ 
+ find_package(Qt5Widgets REQUIRED QUIET)
+ find_package(Qt5DBus REQUIRED QUIET)
+-find_package(Qt5X11Extras REQUIRED QUIET)
+ find_package(lxqt REQUIRED QUIET)
+ include(${LXQT_USE_FILE})
+ 
+@@ -41,7 +40,6 @@ add_executable(${PROJECT_NAME}
+ target_link_libraries(${PROJECT_NAME}
+     Qt5::Widgets
+     Qt5::DBus
+-    Qt5::X11Extras
+     ${LXQT_LIBRARIES}
+ )
+ 
+-- 
+1.9.3
+
