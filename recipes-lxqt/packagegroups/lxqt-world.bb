@@ -2,7 +2,7 @@ SUMMARY = "All lxqt packages - just for build test"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
-inherit packagegroup distro_features_check
+inherit packagegroup
 
 RDEPENDS_${PN} = " \
     compton-conf \
@@ -10,19 +10,20 @@ RDEPENDS_${PN} = " \
     liblxqt-mount \
     libqtxdg \
     libsysstat \
-    lximage-qt \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lximage-qt", "",d)} \
     lxmenu-data \
     lxqt-about \
     lxqt-common \
-    lxqt-config \
-    lxqt-globalkeys \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-config", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-globalkeys", "",d)} \
     lxqt-notificationd \
-    lxqt-panel \
+    lxqt-openssh-askpass \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-panel", "",d)} \
     lxqt-policykit \
-    lxqt-powermanagement \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-powermanagement", "",d)} \
     lxqt-qtplugin \
-    lxqt-runner \
-    lxqt-session \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-runner", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-session", "",d)} \
     menu-cache \
-    pcmanfm-qt \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pcmanfm-qt", "",d)} \
 "
