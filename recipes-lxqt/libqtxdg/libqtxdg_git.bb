@@ -7,8 +7,12 @@ inherit lxqt cmake-lib
 # libmagic is supplied by file
 DEPENDS += "file"
 
-SRCREV = "87fb74a1e7618ba199b977ee0d1ac341a3c13ee6"
-PV = "1.1.0"
+SRC_URI += " \
+    file://0001-do-not-add-CMAKE_INSTALL_PREFIX-to-header-install-lo.patch \
+    file://0002-remove-prefix-from-packageconfig.patch \
+"
+SRCREV = "da936792f2376327db2c287348738ede394e7bcc"
+PV = "1.2.0"
 
 EXTRA_OECMAKE += "-DCMAKE_INSTALL_PREFIX=''"
 
