@@ -1,6 +1,6 @@
 From ec4fa422d845e2de33b6392a8fdb4ae76ddcfac2 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 10 Feb 2015 14:31:50 +0100
+Date: Wed, 17 Jun 2015 10:49:14 +0200
 Subject: [PATCH] no session management if not supported by qtbase - indicated
  by QT_NO_SESSIONMANAGER
 MIME-Version: 1.0
@@ -11,11 +11,11 @@ Upstream-Status: pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- src/kmainwindow.cpp | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ src/kmainwindow.cpp | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/src/kmainwindow.cpp b/src/kmainwindow.cpp
-index 0c285f8..96a28b8 100644
+index 7c86841..4035561 100644
 --- a/src/kmainwindow.cpp
 +++ b/src/kmainwindow.cpp
 @@ -119,8 +119,10 @@ bool DockResizeListener::eventFilter(QObject *watched, QEvent *event)
@@ -31,21 +31,22 @@ index 0c285f8..96a28b8 100644
  KMWSessionManager::~KMWSessionManager()
 @@ -129,6 +131,7 @@ KMWSessionManager::~KMWSessionManager()
  
- bool KMWSessionManager::saveState(QSessionManager &)
+ bool KMWSessionManager::saveState(QSessionManager &sm)
  {
 +#ifndef QT_NO_SESSIONMANAGER
-     KConfig *config = KConfigGui::sessionConfig();
-     if (KMainWindow::memberList().count()) {
-         // According to Jochen Wilhelmy <digisnap@cs.tu-berlin.de>, this
-@@ -144,6 +147,7 @@ bool KMWSessionManager::saveState(QSessionManager &)
+     KConfigGui::setSessionConfig(sm.sessionId(), sm.sessionKey());
  
-     KConfigGroup group(config, "Number");
-     group.writeEntry("NumberOfWindows", n);
+     KConfig *config = KConfigGui::sessionConfig();
+@@ -158,7 +161,7 @@ bool KMWSessionManager::saveState(QSessionManager &sm)
+         discard << localFilePath;
+         sm.setDiscardCommand(discard);
+     }
+-
 +#endif
      return true;
  }
  
-@@ -372,6 +376,9 @@ QMenu *KMainWindow::customHelpMenu(bool showWhatsThis)
+@@ -387,6 +390,9 @@ QMenu *KMainWindow::customHelpMenu(bool showWhatsThis)
  
  bool KMainWindow::canBeRestored(int number)
  {
@@ -55,7 +56,7 @@ index 0c285f8..96a28b8 100644
      if (!qApp->isSessionRestored()) {
          return false;
      }
-@@ -383,10 +390,14 @@ bool KMainWindow::canBeRestored(int number)
+@@ -398,10 +404,14 @@ bool KMainWindow::canBeRestored(int number)
      KConfigGroup group(config, "Number");
      const int n = group.readEntry("NumberOfWindows", 1);
      return number >= 1 && number <= n;
@@ -70,7 +71,7 @@ index 0c285f8..96a28b8 100644
      if (!qApp->isSessionRestored()) {
          return QString();
      }
-@@ -401,10 +412,12 @@ const QString KMainWindow::classNameOfToplevel(int number)
+@@ -416,10 +426,12 @@ const QString KMainWindow::classNameOfToplevel(int number)
      } else {
          return group.readEntry("ClassName");
      }
@@ -83,7 +84,7 @@ index 0c285f8..96a28b8 100644
      if (!canBeRestored(number)) {
          return false;
      }
-@@ -415,6 +428,7 @@ bool KMainWindow::restore(int number, bool show)
+@@ -430,6 +442,7 @@ bool KMainWindow::restore(int number, bool show)
          }
          return false;
      }

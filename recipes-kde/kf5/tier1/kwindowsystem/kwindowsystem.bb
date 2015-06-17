@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "7a78b9f0effd8b6148fe457bbbc4a7f3"
-SRC_URI[sha256sum] = "0ec79551cf3175ed359397951a35e3fa4b458765fb6c45ad456826c69a5f3d3f"
+SRC_URI[md5sum] = "aa8a829b16e4821c12f742aea0476eff"
+SRC_URI[sha256sum] = "9d8f80fa311f82b860e059c15211e5914353a35ce8d4a3353ddb41174528d33d"
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5WindowSystem, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5WindowSystem, -S${includedir}, -S${STAGING_INCDIR}"

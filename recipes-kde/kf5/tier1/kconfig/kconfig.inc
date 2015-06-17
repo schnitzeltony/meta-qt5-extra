@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "0c762fbe3b98fede3e8a7af3e18e71bb"
-SRC_URI[sha256sum] = "b8a5d362552bc0f8dfb31bf9bc5ea5eccc9e20c202579c68028d5a0aa327f9e4"
+SRC_URI[md5sum] = "ecd6f03aa5e0bdcfa1a9b17ce1654afe"
+SRC_URI[sha256sum] = "3cd834330ef2aed786ae3d08dcaa2479cfd7b6d542153a142d356697770a9834"
 
 # REVISIT remove ugly hack for wayland-only environments
 SRC_URI += " \

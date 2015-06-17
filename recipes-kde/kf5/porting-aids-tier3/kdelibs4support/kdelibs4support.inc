@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5-porting-aids perlnative
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "c272c09f4b4591390a469578d55d7770"
-SRC_URI[sha256sum] = "c253e2f7b9f94c9708335990bcf64e7ab1fb6b3bf204b21afbe84f860e80ea48"
+SRC_URI[md5sum] = "9a9dbbd563af37470665bef96813b495"
+SRC_URI[sha256sum] = "30b6b8e9d3994ac69f38b7a4cbc164bc636a52c6975ecd56c1a376066a93b6ac"
 
 SRC_URI += " \
 	file://0001-make-broken-glib-a-configure-option-we-cannot-run-co.patch \

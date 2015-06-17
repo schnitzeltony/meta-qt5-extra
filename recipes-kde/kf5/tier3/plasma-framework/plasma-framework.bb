@@ -31,8 +31,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "3435d5f1771a227368e2579ccd347a90"
-SRC_URI[sha256sum] = "0a4944f1db4644d6ebb43af99423993146262d7322aa93954617f97c579f5428"
+SRC_URI[md5sum] = "de179500e7536dadd33a4b4b3a5f9ed1"
+SRC_URI[sha256sum] = "d24328863453de054df7d34b2369315dbf609a8bea7cfb06c6cba482a5cff5ef"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Plasma, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
@@ -43,16 +43,16 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/plasma \
     \
-    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${OE_QMAKE_PATH_PLUGINS} \
     ${libdir}/platformqml \
-    ${libdir}/${QT_DIR_NAME}/qml \
+    ${OE_QMAKE_PATH_QML} \
     ${libdir}/org/kde/plasma \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
-    ${libdir}/${QT_DIR_NAME}/plugins/kf5/*/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
     ${libdir}/platformqml/*/org/kde/plasma/*/.debug \
     ${libdir}/org/kde/plasma/*/.debug \
-    ${libdir}/${QT_DIR_NAME}/qml/org/kde/plasma/*/.debug \
+    ${OE_QMAKE_PATH_QML}/org/kde/plasma/*/.debug \
 "
