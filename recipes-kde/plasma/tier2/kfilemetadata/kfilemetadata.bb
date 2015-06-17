@@ -23,8 +23,8 @@ DEPENDS += "taglib"
 CMAKE_ALIGN_SYSROOT[1] = "KF5FileMetaData, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5FileMetaData, -S${includedir}, -S${STAGING_INCDIR}"
 
-FILES_${PN} += "${libdir}/${QT_DIR_NAME}/plugins/kf5"
+FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/kf5"
 FILES_${PN}-dbg += " \
-    ${libdir}/${QT_DIR_NAME}/plugins/kf5/.debug \
-    ${libdir}/${QT_DIR_NAME}/plugins/kf5/*/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/kf5/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/kf5/*/.debug \
 "

@@ -26,11 +26,11 @@ FILES_${PN} += " \
     ${datadir}/kservices5 \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \
-    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${OE_QMAKE_PATH_PLUGINS} \
     ${libdir}/kauth \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/.debug \
     ${libdir}/kauth/.debug \
 "

@@ -64,8 +64,8 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/icons \
     ${datadir}/*5 \
-    ${libdir}/${QT_DIR_NAME}/plugins \
-    ${libdir}/${QT_DIR_NAME}/qml \
+    ${OE_QMAKE_PATH_PLUGINS} \
+    ${OE_QMAKE_PATH_QML} \
     ${libdir}/kconf_update_bin \
 "
 

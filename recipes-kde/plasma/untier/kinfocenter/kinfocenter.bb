@@ -44,10 +44,10 @@ FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/kpackage \
     \
-    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${OE_QMAKE_PATH_PLUGINS} \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
-    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
 "

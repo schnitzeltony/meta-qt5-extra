@@ -17,8 +17,8 @@ SRC_URI[sha256sum] = "d93148c3284d85b31cc79378ba52bbc38aad2a7364a93ecaaf2206b277
 CMAKE_ALIGN_SYSROOT[1] = "KF5Declarative, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Declarative, -S${includedir}, -S${STAGING_INCDIR}"
 
-FILES_${PN} += "${libdir}/${QT_DIR_NAME}/qml/org/kde"
+FILES_${PN} += "${OE_QMAKE_PATH_QML}/org/kde"
 FILES_${PN}-dbg += " \
-    ${libdir}/${QT_DIR_NAME}/qml/org/kde/*/.debug \
-    ${libdir}/${QT_DIR_NAME}/qml/org/kde/*/*/.debug \
+    ${OE_QMAKE_PATH_QML}/org/kde/*/.debug \
+    ${OE_QMAKE_PATH_QML}/org/kde/*/*/.debug \
 "

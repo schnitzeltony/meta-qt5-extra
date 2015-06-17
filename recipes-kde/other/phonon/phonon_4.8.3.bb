@@ -31,8 +31,8 @@ CMAKE_ALIGN_SYSROOT[1] = "phonon4qt5, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "phonon4qt5, -S${includedir}, -S${STAGING_INCDIR}"
 
 PACKAGES =+ "${PN}-designer-plugin-dbg ${PN}-designer-plugin"
-FILES_${PN}-designer-plugin = "${libdir}/qt5/plugins/designer"
-FILES_${PN}-designer-plugin-dbg = "${libdir}/qt5/plugins/designer/.debug"
+FILES_${PN}-designer-plugin = "${OE_QMAKE_PATH_PLUGINS}/designer"
+FILES_${PN}-designer-plugin-dbg = "${OE_QMAKE_PATH_PLUGINS}/designer/.debug"
 
 FILES_${PN} += "${datadir}/dbus-1"
 FILES_${PN}-dev += "${datadir}/${QT_DIR_NAME}/mkspecs ${datadir}/phonon4qt5/buildsystem"

@@ -30,9 +30,9 @@ SRC_URI[sha256sum] = "bb6a42028ef92da96105e1e8ee32b03192950255a29df3aa183d4931bf
 FILES_${PN} += " \
     ${datadir}/kservices5 \
     ${datadir}/dbus-1 \
-    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${OE_QMAKE_PATH_PLUGINS} \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "

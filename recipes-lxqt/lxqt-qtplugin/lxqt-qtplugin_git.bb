@@ -13,6 +13,6 @@ SRC_URI += " \
     file://0002-Unify-naming-for-a-unique-lxqt.-No-more-suffixes.patch \
 "
 
-FILES_${PN} += "${libdir}/qt5/platformthemes"
-FILES_${PN}-dbg += "${libdir}/qt5/platformthemes/.debug"
+FILES_${PN} += "${libdir}/${QT_DIR_NAME}/platformthemes"
+FILES_${PN}-dbg += "${libdir}/${QT_DIR_NAME}/platformthemes/.debug"
 

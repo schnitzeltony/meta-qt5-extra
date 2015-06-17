@@ -60,16 +60,16 @@ FILES_${PN} += " \
     ${datadir}/solid \
     \
     ${libdir}/libkdeinit5_kaccess.so \
-    ${libdir}/${QT_DIR_NAME}/qml \
+    ${OE_QMAKE_PATH_QML} \
     ${libdir}/kauth \
-    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${OE_QMAKE_PATH_PLUGINS} \
     ${libdir}/kconf_update_bin \
 "
 
 FILES_${PN}-dbg += " \
     ${libdir}/*/.debug \
-    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
-    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
-    ${libdir}/${QT_DIR_NAME}/qml/org/kde/*/*/.debug \
-    ${libdir}/${QT_DIR_NAME}/qml/org/kde/*/*/*/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
+    ${OE_QMAKE_PATH_QML}/org/kde/*/*/.debug \
+    ${OE_QMAKE_PATH_QML}/org/kde/*/*/*/.debug \
 "

@@ -17,6 +17,6 @@ CMAKE_ALIGN_SYSROOT[2] = "KF5Runner, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
-    ${libdir}/${QT_DIR_NAME}/qml/org/kde \
+    ${OE_QMAKE_PATH_QML}/org/kde \
 "
-FILES_${PN}-dbg += "${libdir}/${QT_DIR_NAME}/qml/org/kde/*/.debug"
+FILES_${PN}-dbg += "${OE_QMAKE_PATH_QML}/org/kde/*/.debug"

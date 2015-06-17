@@ -22,11 +22,11 @@ SRC_URI += " \
 
 
 FILES_${PN} += " \
-    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${OE_QMAKE_PATH_PLUGINS} \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/${QT_DIR_NAME}/plugins/kf5/kscreen/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/kf5/kscreen/.debug \
     ${libexecdir}/kf5/.debug \
 "
 

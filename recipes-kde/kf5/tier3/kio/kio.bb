@@ -37,11 +37,11 @@ CMAKE_ALIGN_SYSROOT[2] = "KF5KIO, -S${includedir}, -S${STAGING_INCDIR}"
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/k*5 \
-    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${OE_QMAKE_PATH_PLUGINS} \
 "
 FILES_${PN}-dbg += " \
     ${libdir}/${BPN}/kf5/.debug \
-    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
-    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
-    ${libdir}/${QT_DIR_NAME}/plugins/*/*/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
 "

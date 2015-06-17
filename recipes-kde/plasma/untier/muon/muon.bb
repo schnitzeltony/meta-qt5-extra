@@ -43,11 +43,11 @@ FILES_${PN} += " \
     \
     ${libdir}/libMuonCommon.so \
     ${libdir}/libMuonNotifiers.so \
-    ${libdir}/${QT_DIR_NAME}/plugins \
-    ${libdir}/${QT_DIR_NAME}/qml \
+    ${OE_QMAKE_PATH_PLUGINS} \
+    ${OE_QMAKE_PATH_QML} \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
-    ${libdir}/${QT_DIR_NAME}/qml/org/kde/*/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
+    ${OE_QMAKE_PATH_QML}/org/kde/*/.debug \
 "

@@ -45,11 +45,11 @@ CMAKE_ALIGN_SYSROOT[3] = "KF5KDELibs4Support, -S${bindir}, -S${STAGING_BINDIR_NA
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/dbus-1 \
-    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${OE_QMAKE_PATH_PLUGINS} \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
-    ${libdir}/${QT_DIR_NAME}/plugins/kf5/*/.debug \
-    ${libdir}/${QT_DIR_NAME}/plugins/*/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/kf5/*/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
 "

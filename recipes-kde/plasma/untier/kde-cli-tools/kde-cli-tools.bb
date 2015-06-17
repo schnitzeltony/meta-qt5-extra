@@ -29,12 +29,12 @@ FILES_SOLIBSDEV = ""
 
 FILES_${PN} += " \
     ${datadir}/kservices5 \
-    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${OE_QMAKE_PATH_PLUGINS} \
     ${libdir}/libkdeinit5_kcmshell5.so \
 "
 
 FILES_${PN}-dbg += " \
     ${libdir}/*/.debug \
     ${libdir}/${BPN}/*/.debug \
-    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "

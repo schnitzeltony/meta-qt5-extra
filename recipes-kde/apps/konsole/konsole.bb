@@ -46,10 +46,10 @@ FILES_SOLIBSDEV = ""
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/appdata \
-    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${OE_QMAKE_PATH_PLUGINS} \
     ${libdir}/libkdeinit5_konsole.so \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "

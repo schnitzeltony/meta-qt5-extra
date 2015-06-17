@@ -21,14 +21,14 @@ CMAKE_ALIGN_SYSROOT[2] = "KF5Baloo, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${datadir} \
     ${libdir}/kauth \
-    ${libdir}/${QT_DIR_NAME}/qml/org/kde/baloo \
-    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${OE_QMAKE_PATH_QML}/org/kde/baloo \
+    ${OE_QMAKE_PATH_PLUGINS} \
 "
 
 FILES_${PN}-dbg += " \
 	${libdir}/*/.debug \
-	${libdir}/${QT_DIR_NAME}/qml/org/kde/baloo/.debug \
-	${libdir}/${QT_DIR_NAME}/plugins/.debug \
-	${libdir}/${QT_DIR_NAME}/plugins/kf5/*/.debug \
+	${OE_QMAKE_PATH_QML}/org/kde/baloo/.debug \
+	${OE_QMAKE_PATH_PLUGINS}/.debug \
+	${OE_QMAKE_PATH_PLUGINS}/kf5/*/.debug \
 "
 

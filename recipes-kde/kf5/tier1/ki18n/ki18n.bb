@@ -9,5 +9,5 @@ CMAKE_ALIGN_SYSROOT[2] = "KF5I18n, -S${includedir}, -S${STAGING_INCDIR}"
 
 DEPENDS += "${BPN}-native qtscript"
 
-FILES_${PN} += "${libdir}/${QT_DIR_NAME}/plugins/kf5"
-FILES_${PN}-dbg += "${libdir}/${QT_DIR_NAME}/plugins/kf5/.debug"
+FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/kf5"
+FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/kf5/.debug"

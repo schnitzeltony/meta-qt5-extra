@@ -18,6 +18,6 @@ CMAKE_ALIGN_SYSROOT[2] = "KF5People, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
-    ${libdir}/${QT_DIR_NAME}/qml \
+    ${OE_QMAKE_PATH_QML} \
 "
-FILES_${PN}-dbg += "${libdir}/${QT_DIR_NAME}/qml/*/*/*/.debug"
+FILES_${PN}-dbg += "${OE_QMAKE_PATH_QML}/*/*/*/.debug"

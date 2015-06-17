@@ -39,12 +39,12 @@ FILES_${PN} += " \
     ${datadir}/plasma \
     ${datadir}/icons \
     \
-    ${libdir}/${QT_DIR_NAME}/plugins \
-    ${libdir}/${QT_DIR_NAME}/qml \
+    ${OE_QMAKE_PATH_PLUGINS} \
+    ${OE_QMAKE_PATH_QML} \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/${QT_DIR_NAME}/plugins/.debug \
-    ${libdir}/${QT_DIR_NAME}/plugins/*/*/.debug \
-    ${libdir}/${QT_DIR_NAME}/qml/org/kde/plasma/private/*/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
+    ${OE_QMAKE_PATH_QML}/org/kde/plasma/private/*/.debug \
 "

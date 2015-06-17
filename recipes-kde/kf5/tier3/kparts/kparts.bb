@@ -30,6 +30,6 @@ CMAKE_ALIGN_SYSROOT[2] = "KF5Parts, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
-    ${libdir}/${QT_DIR_NAME}/plugins \
+    ${OE_QMAKE_PATH_PLUGINS} \
 "
-FILES_${PN}-dbg += "${libdir}/${QT_DIR_NAME}/plugins/.debug"
+FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/.debug"
