@@ -15,8 +15,8 @@ SRC_URI = " \
     git://github.com/greenisland/${BPN}.git;protocol=git;branch=master \
 "
 
-SRCREV = "98c424c667546d926e7616414298cb87cc203658"
-PV = "0.5.93+git${SRCPV}"
+SRCREV = "917fc3d21751562531788680cf95b274da2eb5fe"
+PV = "0.5.94+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
