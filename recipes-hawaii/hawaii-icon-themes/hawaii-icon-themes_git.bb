@@ -1,15 +1,18 @@
 SUMMARY = "Icon themes for the Hawaii desktop environment"
-LICENSE = "LGPLv2.1 & MIT & GPLv2"
+LICENSE = "LGPLv3.0 | CC-BY-SA-3.0"
 LIC_FILES_CHKSUM = " \
-    file://cursors/hawaii/COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-    file://cursors/hawaii/src/adwaita.svg;beginline=6366;endline=6367;md5=b972d4171447cb2b52bc7b6ba883014e \
-    file://cursors/hawaii/src/renderpngs.py;beginline=3;endline=8;md5=4476bcd5b2a0f234e52bacaae0f6b37e \
+    file://src/cursors/COPYING;md5=c84cac88e46fc07647ea07e6c24eeb7c \
+    file://src/cursors/COPYING_CCBYSA3;md5=96143d33de3a79321b1006c4e8ed07e7 \
+    file://src/cursors/COPYING_LGPL;md5=e6a600fd5e1d9cbde2d983680233ad02 \
+    file://src/symbolic/COPYING;md5=c84cac88e46fc07647ea07e6c24eeb7c \
+    file://src/symbolic/COPYING_CCBYSA3;md5=96143d33de3a79321b1006c4e8ed07e7 \
+    file://src/symbolic/COPYING_LGPL;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
 inherit hawaii
 
-SRCREV = "6a72786dd196d04807bf082f67414cc8a8ebba36"
-PV = "0.3.0+git${SRCPV}"
+SRCREV = "1ff24655d3881762294e9dde4a83770e6ff80c3b"
+PV = "0.4.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 PACKAGE_ARCH = "all"
