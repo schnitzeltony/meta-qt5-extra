@@ -14,8 +14,8 @@ REQUIRED_DISTRO_FEATURES = "wayland"
 SRC_URI += " \
     file://0001-find-host-s-git.patch \
 "
-SRCREV = "66f1400c4239f88ad261ee853349e8a4164bd72e"
-PV = "0.4.93+git${SRCPV}"
+SRCREV = "5b018bdc78b63f26d801ed3f443c4f0bc09b2de8"
+PV = "0.4.94+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
