@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
-SRCREV = "1d0475db32e114d9f15345293a143a21dfa41d34"
+SRCREV = "c1c8d30ce7bee081af5e917cac4d980b542cb905"
 
 SRC_URI = " \
     git://github.com/maui-packages/qtwayland.git;branch=output54 \
