@@ -21,7 +21,7 @@ SRC_URI = " \
     file://sddm.pam \
     file://sddm.conf \
 "
-SRCREV = "a6cb08074fdfdee8673a910ef64eb17428b0b390"
+SRCREV = "07866210800743a5930f6e77a4ad6cb85b8e51b7"
 PV = "0.11.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
