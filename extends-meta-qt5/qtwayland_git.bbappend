@@ -1,15 +1,6 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
-
-SRCREV = "c1c8d30ce7bee081af5e917cac4d980b542cb905"
-
-SRC_URI = " \
-    git://github.com/maui-packages/qtwayland.git;branch=output54 \
-    file://0001-examples-wayland-include-server-buffer-only-when-bui.patch \
-"
-
-S = "${WORKDIR}/git"
-
-QT_VERSION = "5.4.2"
+SRCREV = "862673b75f81e7e836ea083498734b49bae4218a"
+QT_MODULE_BRANCH = "5.5.0"
+QT_VERSION = "5.5.0"
 
 LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
 LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
