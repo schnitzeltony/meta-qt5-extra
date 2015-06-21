@@ -1,5 +1,5 @@
 SUMMARY = "Icon themes for the Hawaii desktop environment"
-LICENSE = "LGPLv3.0 | CC-BY-SA-3.0"
+LICENSE = "LGPLv3 | CC-BY-SA-3.0"
 LIC_FILES_CHKSUM = " \
     file://src/cursors/COPYING;md5=c84cac88e46fc07647ea07e6c24eeb7c \
     file://src/cursors/COPYING_CCBYSA3;md5=96143d33de3a79321b1006c4e8ed07e7 \
