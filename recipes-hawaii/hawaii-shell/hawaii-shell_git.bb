@@ -21,14 +21,12 @@ S = "${WORKDIR}/git"
 
 DEPENDS += " \
     qtwayland-native \
-    \
     wayland \
-    \
     libqtxdg \
-    \
     solid \
-    \
     greenisland \
+    networkmanager-qt \
+    modemmanager-qt \
 "
 
 # REVISIT optionals
