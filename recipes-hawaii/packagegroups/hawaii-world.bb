@@ -18,5 +18,8 @@ RDEPENDS_${PN} = " \
     qtaccountsservice \
     qtconfiguration \
     swordfish \
-    wind \
 "
+
+# wind was a X11 mauios approach. For dependencies (kdeclarative does not build 
+# for raspi) keep out
+# wind
