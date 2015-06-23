@@ -17,11 +17,10 @@ DEPENDS += "libpam"
 SRC_URI = " \
     git://github.com/sddm/${BPN}.git;protocol=git;branch=master \
     file://0001-fix-qml-install-dir.patch \
-    file://0002-temporary-hack.patch \
     file://sddm.pam \
     file://sddm.conf \
 "
-SRCREV = "07866210800743a5930f6e77a4ad6cb85b8e51b7"
+SRCREV = "19780278b30ac5f50e78f4acd3f01f79b759b9cc"
 PV = "0.11.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
