@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 cmake-lib
 
-DEPENDS += "kauth kcodecs kdoctools kguiaddons kwidgetsaddons"
+DEPENDS += "kauth kconfig kcodecs kdoctools kguiaddons kwidgetsaddons"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "91e25767cadb56b3894ebfff045f7a21"
