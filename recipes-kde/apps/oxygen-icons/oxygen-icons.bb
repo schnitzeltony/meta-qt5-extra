@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-apps allarch fontcache
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "ebf12a35e36fb633f6251cb3dbdc92a8"
-SRC_URI[sha256sum] = "2dd9ad91cdfee785f61389d756dc1777a9f4b552c9486e4b6dc1a6acb8405efb"
+SRC_URI[md5sum] = "4f24f975fb90d8daab833fc719ce39a3"
+SRC_URI[sha256sum] = "133b66d70b51641f841799674afd993a6af0d9d9b646021a0ed609beb2ffd71e"
 
 FILES_${PN} += " \
     ${datadir}/icons/oxygen \
