@@ -31,8 +31,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "de179500e7536dadd33a4b4b3a5f9ed1"
-SRC_URI[sha256sum] = "d24328863453de054df7d34b2369315dbf609a8bea7cfb06c6cba482a5cff5ef"
+SRC_URI[md5sum] = "5d995245c69498886e7e2a546cc095eb"
+SRC_URI[sha256sum] = "150e0cfff77b0dca956bc885502ba00c45061fcc63e9c25eea298f3db22daa1e"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Plasma, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

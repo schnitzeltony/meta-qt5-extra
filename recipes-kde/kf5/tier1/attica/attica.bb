@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 cmake-lib
 
-SRC_URI[md5sum] = "cf34c6fa2dcad71300592dd393920ff4"
-SRC_URI[sha256sum] = "1df6a2fd762c4bdc547950f529272d347a0b2f017d10ecf387cb6655f1ef2da5"
+SRC_URI[md5sum] = "f12d5f866690b0954dfaa963e971eb27"
+SRC_URI[sha256sum] = "873d406c50a5abfed196a087281bdc7a6683e713ef255306fedce97f720e6114"
 
 PV = "${KF5_VERSION}"
 

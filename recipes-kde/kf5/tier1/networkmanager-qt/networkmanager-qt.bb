@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib pkgconfig
 DEPENDS += "networkmanager"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "ccfb2950c7ae9a1022aba4fa4eb5d5a2"
-SRC_URI[sha256sum] = "5159520ffbf1540ed685fd47adaa35bd8f48008208269a2cac4c5a37dc1ae7f0"
+SRC_URI[md5sum] = "984c2ca3a17b066b6be0220db610659b"
+SRC_URI[sha256sum] = "2401bf3730195701f7abf2df0813a4a2ea0a8af081858a08beed10ee6db8dc7e"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5NetworkManagerQt, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

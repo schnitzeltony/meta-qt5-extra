@@ -1,6 +1,6 @@
-From 013bd6451624d6deb23e64485a552ce92d09a4ee Mon Sep 17 00:00:00 2001
+From 3bbad0ba8d976da9e852840aeaf5831af7831357 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 9 Dec 2014 08:49:14 +0100
+Date: Wed, 22 Jul 2015 12:58:30 +0200
 Subject: [PATCH 2/3] align installation location for helpers
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -14,18 +14,18 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 98248c7..5e37f30 100644
+index 403c114..95e9819 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -30,7 +30,7 @@ ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KAUTH
+@@ -37,7 +37,7 @@ option(AUTOTESTS "Perform autotests" ON)
  
  find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
  
 -set(KAUTH_HELPER_INSTALL_DIR "${KDE_INSTALL_LIBEXECDIR}/kauth")
 +set(KAUTH_HELPER_INSTALL_DIR "${KDE_INSTALL_LIBEXECDIR}")
  
- if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
-     ecm_install_po_files_as_qm(po)
+ if(IS_ABSOLUTE ${KAUTH_HELPER_INSTALL_DIR})
+     set(KAUTH_HELPER_INSTALL_ABSOLUTE_DIR ${KAUTH_HELPER_INSTALL_DIR})
 -- 
-1.8.3.1
+1.9.3
 

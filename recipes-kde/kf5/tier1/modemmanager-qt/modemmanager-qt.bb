@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib pkgconfig
 DEPENDS += "modemmanager"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "7527cfdc8aa93e1ada1ebb765d90ab22"
-SRC_URI[sha256sum] = "4b9cdf8d8e911dc04688918985d3ee115a99e99f2456be61845e40343d63885e"
+SRC_URI[md5sum] = "92a765aef34a5cb59969abcde487e5e0"
+SRC_URI[sha256sum] = "b1f337a6933db9cc52f19cab899192fd97f79d585c8b3eb4c679ce3baff32ae9"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5ModemManagerQt, -S${includedir}, -S${STAGING_INCDIR}"

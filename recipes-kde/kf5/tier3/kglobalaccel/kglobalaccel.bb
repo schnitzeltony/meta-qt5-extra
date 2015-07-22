@@ -15,19 +15,16 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "bbdc7503aa7bb3d7be82a5a206520c97"
-SRC_URI[sha256sum] = "bedf7dd6e5c0d5328383b66eb08108e783a1d2a0bac64fd500c763685421b4c4"
+SRC_URI[md5sum] = "93b2302fa2587bec638c3e619fac1bd5"
+SRC_URI[sha256sum] = "28d725dc0f6d322a63f413f5c16b17c2bc85a4d9038d827233de5352c39013dd"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5GlobalAccel, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5GlobalAccel, -S${includedir}, -S${STAGING_INCDIR}"
 
-FILES_SOLIBSDEV = "${libdir}/lib*Accel${SOLIBSDEV}"
-
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/kservices5 \
-    ${libdir}/libKF5GlobalAccelPrivate.so \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
