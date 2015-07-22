@@ -6,6 +6,7 @@ inherit packagegroup
 
 TIER_1 = " \
     attica \
+    bluez-qt \
     karchive \
     kcodecs \
     kconfig \

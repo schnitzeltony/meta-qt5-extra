@@ -2,13 +2,13 @@ SUMMARY = "Qt wrapper for BlueZ 5 DBus AP"
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 
-inherit kde-plasma cmake-lib
+inherit kde-kf5 cmake-lib
 
 DEPENDS += "qtdeclarative"
 
-PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "2faf9cc5fe74bf1d468ef63a03286d18"
-SRC_URI[sha256sum] = "90e625d20c2e19419fe782ffd1d556cf1f280386e6c474073406baf551bc892d"
+PV = "${KF5_VERSION}"
+SRC_URI[md5sum] = "909827fc26098c7b4ab48c7228801e16"
+SRC_URI[sha256sum] = "e3bfe021f1cf7b822387c9f11a8d6a86dd1a9b4b301fb564a67e2964b8cb92c7"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
 FILES_${PN}-dbg += "${OE_QMAKE_PATH_QML}/org/kde/bluezqt/.debug"
