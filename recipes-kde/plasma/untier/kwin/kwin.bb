@@ -10,27 +10,28 @@ REQUIRED_DISTRO_FEATURES = "x11"
 inherit kde-plasma distro_features_check
 
 DEPENDS += " \
-	kconfig \
-	kconfigwidgets \
-	kcoreaddons \
-	kcrash \
-	kglobalaccel \
-	ki18n \
-	kinit \
-	knotifications \
-	kservice \
-	plasma-framework \
-	kwidgetsaddons \
-	kwindowsystem \
-	\
-	kcompletion \
-	kdeclarative \
-	kcmutils \
-	kio \
-	knewstuff \
-	kxmlgui \
-        kdecoration \
-	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras libepoxy", "",d)} \
+    libinput \
+    \
+    kconfig \
+    kconfigwidgets \
+    kcoreaddons \
+    kcrash \
+    kglobalaccel \
+    ki18n \
+    kinit \
+    knotifications \
+    kservice \
+    plasma-framework \
+    kwidgetsaddons \
+    kwindowsystem \
+    kcompletion \
+    kdeclarative \
+    kcmutils \
+    kio \
+    knewstuff \
+    kxmlgui \
+    kdecoration \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras libepoxy", "",d)} \
 "
 
 # this condition matches always currently - it is kept in this way as a marker
