@@ -1,0 +1,35 @@
+From 80a6a407f3e868be9203c98d38f5471141e2014c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 22 Jul 2015 00:53:39 +0200
+Subject: [PATCH] align binary installation folders
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ qt/antimony.pro | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/qt/antimony.pro b/qt/antimony.pro
+index 9d586f4..9c423f8 100644
+--- a/qt/antimony.pro
++++ b/qt/antimony.pro
+@@ -125,11 +125,11 @@ macx {
+ }
+ 
+ linux {
+-    executable.path = /usr/local/bin
++    executable.path = /usr/bin
+     executable.files = antimony
+-    nodes_folder.path = /usr/local/bin/sb/nodes
++    nodes_folder.path = /usr/bin/sb/nodes
+     nodes_folder.files = ../py/nodes/*
+-    fab_folder.path = /usr/local/bin/sb/fab
++    fab_folder.path = /usr/bin/sb/fab
+     fab_folder.files = ../py/fab/*
+     INSTALLS += executable nodes_folder fab_folder
+ }
+-- 
+1.9.3
+

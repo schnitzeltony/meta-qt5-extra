@@ -1,0 +1,37 @@
+From dc197a74f73664a08f9747f63df4bbd0dc466d2d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 22 Jul 2015 00:14:09 +0200
+Subject: [PATCH] hardcode boost_python3 library - detection wont't work
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ qt/shared.pri | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
+
+diff --git a/qt/shared.pri b/qt/shared.pri
+index 5ee0b5d..b996eb2 100644
+--- a/qt/shared.pri
++++ b/qt/shared.pri
+@@ -63,14 +63,8 @@ linux {
+         error("Could not find ldconfig!")
+     }
+ 
+-    # Check for different boost::python naming schemes
+-    LDCONFIG_OUT = $$system($$LDCONFIG_BIN -p|grep python)
+-    for (b, $$list(boost_python-py34 boost_python3)) {
+-        contains(LDCONFIG_OUT, "lib$${b}.so") {
+-            LIBS += "-l$$b"
+-            GOT_BOOST_PYTHON = True
+-        }
+-    }
++    LIBS += "-lboost_python3"
++    GOT_BOOST_PYTHON = True
+ 
+     # If we couldn't find boost::python, exit with an error.
+     isEmpty(GOT_BOOST_PYTHON) {
+-- 
+1.9.3
+
