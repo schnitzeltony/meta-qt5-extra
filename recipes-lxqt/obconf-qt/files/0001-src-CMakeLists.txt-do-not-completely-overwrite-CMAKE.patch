@@ -1,0 +1,32 @@
+From 65de29e11d7bb4932aefd56aa8b3a48c76402bb7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 23 Jul 2015 16:41:36 +0200
+Subject: [PATCH 1/2] src/CMakeLists.txt: do not completely overwrite
+ CMAKE_CXX_FLAGS
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+causes for hardfloat machine:
+
+/usr/include/gnu/stubs.h:7:29: fatal error: gnu/stubs-soft.h: No such file or directory
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 85b8c25..d2843a2 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ # set visibility to hidden to hide symbols, unlesss they're exporeted manually in the code
+-set(CMAKE_CXX_FLAGS "-DQT_NO_KEYWORDS -fno-exceptions")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_NO_KEYWORDS -fno-exceptions")
+ 
+ if(USE_QT4)
+     set(QTX_INCLUDE_DIRS ${QT_QTCORE_INCLUDE_DIR} ${QT_QTGUI_INCLUDE_DIR} ${QT_QTDBUS_DIR})
+-- 
+1.9.3
+

@@ -1,0 +1,43 @@
+From 76ba8b96c2a5281b1b549e6512b4d998e05b4304 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 23 Jul 2015 16:34:45 +0200
+Subject: [PATCH 2/2] finding sed does not work and is not neccessary
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt     | 2 --
+ src/CMakeLists.txt | 2 +-
+ 2 files changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 789b14f..0f78001 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -2,8 +2,6 @@ project(obconf-qt)
+ # newer cmake is required for CMAKE_AUTOMOC Qt support
+ cmake_minimum_required(VERSION 2.8.6)
+ 
+-find_program(SED_PROGRAM sed)
+-
+ # additional cmake files
+ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+ 
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index d2843a2..ac0eb85 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -46,7 +46,7 @@ endif()
+ # but we don't want that. Fix it with sed.
+ add_custom_command(
+   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/ui_obconf_fixed.h
+-  COMMAND ${SED_PROGRAM}
++  COMMAND sed
+   ARGS "/connectSlotsByName/d" ${obconf-qt_UI_H} > ${CMAKE_CURRENT_BINARY_DIR}/ui_obconf_fixed.h
+   # DEPENDS
+   MAIN_DEPENDENCY ${obconf-qt_UI_H}
+-- 
+1.9.3
+

@@ -25,5 +25,6 @@ RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-runner", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-session", "",d)} \
     menu-cache \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "obconf-qt", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pcmanfm-qt", "",d)} \
 "
