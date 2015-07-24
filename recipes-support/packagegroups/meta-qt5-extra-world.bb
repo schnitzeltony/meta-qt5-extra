@@ -8,6 +8,6 @@ RDEPENDS_${PN} = " \
     hawaii-world \
     kde-world \
     lxqt-world \
+    qterminal-world \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sddm", "",d)} \
-    qterminal \
 "
