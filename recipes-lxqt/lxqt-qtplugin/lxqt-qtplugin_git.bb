@@ -6,11 +6,10 @@ inherit lxqt
 
 DEPENDS += "liblxqt"
 
-SRCREV = "7963ead0cdd4180b61e5d8a90827c60f6b077965"
-PV = "0.9.0"
+SRCREV = "052919d39fbc4977372e1114001af6b210a89b6f"
+PV = "0.9.0+git${SRCPV}"
 SRC_URI += " \
     file://0001-set-installation-path-fixed-cmake-query-returns-sysr.patch \
-    file://0002-Unify-naming-for-a-unique-lxqt.-No-more-suffixes.patch \
 "
 
 FILES_${PN} += "${libdir}/${QT_DIR_NAME}/platformthemes"
