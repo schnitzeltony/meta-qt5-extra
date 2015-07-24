@@ -9,4 +9,5 @@ RDEPENDS_${PN} = " \
     kde-world \
     lxqt-world \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sddm", "",d)} \
+    qterminal \
 "
