@@ -8,8 +8,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qtscript libqtxdg lxqt-globalkeys menu-cache"
 
-SRCREV = "de6de66013e15f149526f6eee856aeef316a3198"
-PV = "0.9.0"
+SRCREV = "c02fc4b867aaa7e7772730420c3635e858db1b5f"
+PV = "0.9.0+git${SRCPV}"
 
 # REVISIT: These are poluted by host paths
 FILES_${PN}-dev += "${datadir}/lxqt/lxqt-runner/*.cmake"
