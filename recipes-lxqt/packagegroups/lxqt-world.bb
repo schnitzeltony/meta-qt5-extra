@@ -7,7 +7,6 @@ inherit packagegroup
 RDEPENDS_${PN} = " \
     compton-conf \
     liblxqt \
-    liblxqt-mount \
     libqtxdg \
     libsysstat \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lximage-qt", "",d)} \
