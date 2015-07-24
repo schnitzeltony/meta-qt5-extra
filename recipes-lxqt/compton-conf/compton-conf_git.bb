@@ -6,9 +6,7 @@ inherit lxqt pkgconfig
 
 DEPENDS += "libconfig"
 
-SRCREV = "3bd14bc34f7731812f3f2833bd4d796ecb36caa0"
+SRCREV = "8ae8fbb95e2958adeaac681077a2751a1a776a07"
 PV = "0.1.0+git${SRCPV}"
-
-SRC_URI += "file://0001-CMakeLists.txt-do-not-completely-overwrite-CMAKE_CXX.patch"
 
 EXTRA_OECMAKE += "-DUSE_QT5=ON"
