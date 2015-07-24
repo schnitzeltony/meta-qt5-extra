@@ -8,5 +8,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "liblxqt kwindowsystem"
 
-SRCREV = "9877c3be90d00b94020ddd131a983864e1a77a62"
-PV = "0.9.0"
+SRCREV = "15d40800eee8612073caf2a1895a9d8ace6c450d"
+PV = "0.9.0+git${SRCPV}"
+
+FILES_${PN} += "${datadir}/lxqt/translations"
