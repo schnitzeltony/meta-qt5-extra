@@ -8,8 +8,8 @@ inherit lxqt pkgconfig distro_features_check
 
 DEPENDS += "qtx11extras glib-2.0 libxcb libfm menu-cache"
 
-SRCREV = "d73a7b33a693b769e0bcb026192cc87965778aa4"
-PV = "0.9.0"
+SRCREV = "cfdbb92cef6df49b5f2d8fcf955db6c230771349"
+PV = "0.9.0+git${SRCPV}"
 
 FILES_${PN}-translations = " \
     ${datadir}/libfm-qt/translations \
