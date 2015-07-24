@@ -6,11 +6,14 @@ inherit lxqt distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "liblxqt"
+DEPENDS += "qtsvg liblxqt"
 
-SRCREV = "f4c15db2d9e9fb130d58ed691a4a6be886d933ef"
-PV = "0.9.0"
+SRCREV = "c7a9328c0e3a39e0fcd740df98eb4400623af40a"
+PV = "0.9.0+git${SRCPV}"
 
 # there are no dev files / pack liblxqt-config-cursor.so correctly
-FILES_${PN} += "${libdir}/liblxqt-config-cursor.so"
+FILES_${PN} += " \
+    ${datadir}/lxqt/icons \
+    ${libdir}/liblxqt-config-cursor.so \
+"
 FILES_${PN}-dev = ""
