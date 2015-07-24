@@ -9,14 +9,16 @@ REQUIRED_DISTRO_FEATURES = "x11"
 DEPENDS += " \
     liblxqt \
     lxqt-globalkeys \
+    libdbusmenu-qt5 \
     menu-cache \
     kwindowsystem \
     kguiaddons \
+    solid \
 "
 
 SRC_URI += "file://0001-panel-link-against-Qt5-X11Extras.patch"
-SRCREV = "703a7aff3d5b7324fe6ef9f32527a24cda35b50f"
-PV = "0.9.0"
+SRCREV = "3da78ed149191d213cef6c0b66918c09963c3954"
+PV = "0.9.0+git${SRCPV}"
 
 PACKAGECONFIG[cpu_plugin] = "-DCPULOAD_PLUGIN=Yes,-DCPULOAD_PLUGIN=No, libstatgrab"
 PACKAGECONFIG[mount_plugin] = "-DMOUNT_PLUGIN=Yes,-DMOUNT_PLUGIN=No, liblxqt-mount"
