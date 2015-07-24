@@ -8,8 +8,7 @@ DEPENDS += " \
     liblxqt \
 "
 
-SRC_URI += "file://0001-do-not-depend-on-Qt5X11Extras.patch"
-SRCREV = "dd55813a86080341b6068d788b5efb19c869e8af"
-PV = "0.9.0"
+SRCREV = "a287e724ea4a59557a88399e88e2dcb942b5640a"
+PV = "0.9.0+git${SRCPV}"
 
 FILES_${PN}-dev += "${datadir}/lxqt/lxqt-about/KF5WindowSystemTargets-noconfig.cmake"
