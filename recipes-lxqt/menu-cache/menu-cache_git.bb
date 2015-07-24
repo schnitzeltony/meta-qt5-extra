@@ -6,7 +6,7 @@ inherit autotools pkgconfig gtk-doc
 
 DEPENDS = "glib-2.0 libfm-extra"
 
-SRC_URI = "git://github.com/lxde/${BPN}.git;protocol=git;branch=master"
+SRC_URI = "git://github.com/lxde/${BPN}.git"
 S = "${WORKDIR}/git"
-SRCREV = "2097b14e2fbcf33f2fe0bb0e93829ccb1e04ae64"
+SRCREV = "e9ece4a1f8b82e7c5d7eba67a62f5d7e71c6e3ea"
 PV = "1.0.0+git${SRCPV}"
