@@ -7,8 +7,8 @@ inherit lxqt
 DEPENDS += "liblxqt"
 
 SRC_URI += "file://0001-startlxqt-enable-starting-from-console.patch"
-SRCREV = "365ac505fe5886dd10b17c86a201321492bd78e1"
-PV = "0.9.1"
+SRCREV = "da721845de52526d71cc8457d6c1beb45a9278aa"
+PV = "0.9.1+git${SRCPV}"
 
 FILES_${PN} += " \
     ${datadir} \
