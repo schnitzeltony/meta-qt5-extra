@@ -6,9 +6,9 @@ inherit lxqt distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "qtsvg liblxqt libqtxdg"
+DEPENDS += "qtsvg liblxqt libqtxdg solid"
 
-SRCREV = "4bc9f66d12afb4bab72867c64769697aab74bfa4"
-PV = "0.9.0"
+SRCREV = "92298941bf700a034b4ef3941e6f350a3c824f57"
+PV = "0.9.0+git${SRCPV}"
 
 FILES_${PN} += "${datadir}/icons"
