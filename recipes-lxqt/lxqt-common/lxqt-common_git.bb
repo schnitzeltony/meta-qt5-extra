@@ -6,10 +6,15 @@ inherit lxqt gtk-icon-cache
 
 DEPENDS += "liblxqt"
 
-SRC_URI += "file://0001-startlxqt-enable-starting-from-console.patch"
+SRC_URI += " \
+    file://0001-startlxqt-enable-starting-from-console.patch \
+    file://0002-slightly-change-theme-defaults.patch \
+"
 SRCREV = "da721845de52526d71cc8457d6c1beb45a9278aa"
 PV = "0.9.1+git${SRCPV}"
 
 FILES_${PN} += " \
     ${datadir} \
 "
+
+RRECOMMENDS_${PN} += "oxygen"
