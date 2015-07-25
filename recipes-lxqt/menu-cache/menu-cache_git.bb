@@ -10,3 +10,8 @@ SRC_URI = "git://github.com/lxde/${BPN}.git"
 S = "${WORKDIR}/git"
 SRCREV = "e9ece4a1f8b82e7c5d7eba67a62f5d7e71c6e3ea"
 PV = "1.0.0+git${SRCPV}"
+
+do_configure_append() {
+    # fix binary installation path to what others do
+    sed -i 's|pkglibexecdir =.*|pkglibexecdir = $(libexecdir)|g' `find ${B} -name Makefile`
+}
