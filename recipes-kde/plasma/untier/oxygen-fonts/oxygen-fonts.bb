@@ -1,4 +1,4 @@
-SUMMARY = "OXYGEN"
+SUMMARY = "oxygen fonts"
 LICENSE = "GPLv3 & OFL-1.1"
 LIC_FILES_CHKSUM = " \
     file://COPYING-GPL+FE.txt;md5=b10e10d276dbedbf992190166973213d \
@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://GPL.txt;md5=d32239bcb673463ab874e80d47fae504 \
 "
 
-inherit kde-plasma
+inherit kde-plasma fontcache
 
 DEPENDS += "fontforge-native"
 
