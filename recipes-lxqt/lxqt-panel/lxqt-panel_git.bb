@@ -2,17 +2,17 @@ SUMMARY = "The LXQt desktop panel"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0964c689fcf4c21c6797ea87408416b6"
 
-inherit lxqt distro_features_check
+inherit lxqt distro_features_check pkgconfig
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += " \
+    qttools-native \
     liblxqt \
     lxqt-globalkeys \
     libdbusmenu-qt5 \
     menu-cache \
     kwindowsystem \
-    kguiaddons \
 "
 
 SRC_URI += "file://0001-panel-link-against-Qt5-X11Extras.patch"
