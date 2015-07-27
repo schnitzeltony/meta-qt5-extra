@@ -9,4 +9,6 @@ DEPENDS += "libconfig"
 SRCREV = "8ae8fbb95e2958adeaac681077a2751a1a776a07"
 PV = "0.1.0+git${SRCPV}"
 
+FILES_${PN} += "${datadir}/${BPN}/compton.conf.example"
+
 EXTRA_OECMAKE += "-DUSE_QT5=ON"
