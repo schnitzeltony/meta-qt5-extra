@@ -9,11 +9,9 @@ TIER_1 = " \
 "
 
 TIER_2 = " \
-    kfilemetadata \
 "
 
 TIER_3 = " \
-    baloo \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "plasma-workspace", "",d)} \
 "
 

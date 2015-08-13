@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit kde-plasma cmake-lib
+inherit kde-kf5 cmake-lib
 
 DEPENDS += "ki18n kconfig kidletime kitemmodels kinit kauth kcrash solid kio kdelibs4support kfilemetadata ktexteditor xapian-core"
 
-PV = "5.9.2"
+PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "2fb26fe7937565d3c8d54a11ee8b21a5"
 SRC_URI[sha256sum] = "1ca97763c136d3b7762cdc04f6e76fb9d314ba38db8ad48778647590626e19e6"
 

@@ -34,6 +34,7 @@ TIER_2 = " \
     kcompletion \
     kcrash \
     kdoctools \
+    kfilemetadata \
     kjobwidgets \
     kpackage \
     kpty \
@@ -41,6 +42,7 @@ TIER_2 = " \
 "
 
 TIER_3 = " \
+    baloo \
     kactivities \
     kbookmarks \
     kcmutils \

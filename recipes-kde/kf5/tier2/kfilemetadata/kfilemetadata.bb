@@ -8,9 +8,9 @@ LIC_FILES_CHKSUM = " \
 "
 
 
-inherit kde-plasma cmake-lib pkgconfig
+inherit kde-kf5 cmake-lib pkgconfig
 
-PV = "5.9.2"
+PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "74d278d9c6dab71d3126ba51858a5d02"
 SRC_URI[sha256sum] = "0959a19591180216472c9c7845d180d2b16501b266c6ca10e438c745ca2e151c"
 
