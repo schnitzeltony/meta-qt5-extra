@@ -27,6 +27,7 @@ DEPENDS += " \
     kdeclarative \
     kdewebkit \
     ktextwidgets \
+    ktexteditor \
     kdelibs4support \
     kxmlrpcclient \
     kcrash \
@@ -52,6 +53,9 @@ SRC_URI += " \
     file://0005-startkde-fix-path-for-start_kdeinit_wrapper.patch \
     file://0006-startkde-create-kde-s-home.patch \
     file://0007-startkde-enable-starting-X.patch \
+    \
+    file://0008-BalooRunner-Baloo-Result-header-is-no-longer-install.patch \
+    file://0009-Baloo-Runner-Use-the-filepath-as-the-unique-id-of-th.patch \
 "
 
 # cross libs / headers
