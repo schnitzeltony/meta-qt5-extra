@@ -12,8 +12,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "154b8c8a475a18ef1936e53f91ca5dff"
-SRC_URI[sha256sum] = "e3726591d6ba2daf97415d7466632f693556f9cd3bfa7cb36d4ded138cdd8968"
+SRC_URI[md5sum] = "62ab7a6b1829b31b1d3be9f611e051ee"
+SRC_URI[sha256sum] = "4731f30535e7c1bfb57f29cbd44d45f6ec32969dd356c45bff6cb1cf6188635c"
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5GuiAddons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5GuiAddons, -S${includedir}, -S${STAGING_INCDIR}"

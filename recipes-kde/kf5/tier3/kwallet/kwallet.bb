@@ -23,8 +23,8 @@ DEPENDS += " \
 # TBD: add KF5Gpgmepp with PACKAGECONFIG??
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "eb3118489006cd6760740cc9f1f3be51"
-SRC_URI[sha256sum] = "ed8fce8c88eec6ff601e522c83782737bb840aff7dfc4ab21427082289c38544"
+SRC_URI[md5sum] = "df67412fef04c891c98facf870ec370f"
+SRC_URI[sha256sum] = "6873275f7117c2affef070734607c8aec0d83432f1d67042d3ba01a22ad0ea5c"
 
 SRC_URI += "file://0001-add-NO_CMAKE_FIND_ROOT_PATH-in-find-to-org.kde.KWall.patch"
 

@@ -1,4 +1,4 @@
-From b3de662b0b4b2f1aa7bd85c3a7035ea02420b5fc Mon Sep 17 00:00:00 2001
+From 053ed2d35ec5085c727b9ab2c1a8025322372beb Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Wed, 22 Jul 2015 13:05:17 +0200
 Subject: [PATCH 3/3] build kauth-policy-gen only with for polkit-qt-1 backend
@@ -18,13 +18,13 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  3 files changed, 15 insertions(+), 18 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 95e9819..b0d97dd 100644
+index 7ad7b42..62a78e6 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -10,7 +10,7 @@ feature_summary(WHAT REQUIRED_PACKAGES_NOT_FOUND FATAL_ON_MISSING_REQUIRED_PACKA
  set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
  
- set(REQUIRED_QT_VERSION 5.2.0)
+ set(REQUIRED_QT_VERSION 5.3.0)
 -find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Widgets DBus)
 +find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED DBus)
  include(KDEInstallDirs)
@@ -38,19 +38,19 @@ index 95e9819..b0d97dd 100644
  # create a Config.cmake and a ConfigVersion.cmake file and install them
  set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Auth")
  
-@@ -81,3 +82,4 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kauth_version.h
+@@ -86,3 +87,4 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kauth_version.h
  
  
  feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 +endif()
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 7527bea..4ba4275 100644
+index 1b6930d..23e78b0 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -1,5 +1,5 @@
  
--find_package(Qt5 5.2.0 CONFIG REQUIRED Widgets DBus)
-+find_package(Qt5 5.2.0 CONFIG REQUIRED DBus)
+-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Widgets DBus)
++find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED DBus)
  
  # This file handles all the logic for compiling KAuth's backends
  include(ConfigureChecks.cmake)
@@ -124,5 +124,5 @@ index d46761a..48f33a2 100644
  ########################
  # Helper backend probing
 -- 
-1.9.3
+2.1.0
 

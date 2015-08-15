@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "kcoreaddons kwindowsystem"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "47ae59a330ec700e0912382ddb951c25"
-SRC_URI[sha256sum] = "ef16a2c37ac2582df8961ee546610199c099a7e7d769e5236c79facc814ba602"
+SRC_URI[md5sum] = "f261f5f1aff9bfce0abea333ce3aa89a"
+SRC_URI[sha256sum] = "16152d3757618aa8bba4a5b52f93a1f6ce0e0cbbac12e958b3e4f0e0aa348b1d"
 
 SRC_URI += "file://0001-align-path-to-drkonqi.patch"
 

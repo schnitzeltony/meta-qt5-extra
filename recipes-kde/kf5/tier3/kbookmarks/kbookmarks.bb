@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "kconfigwidgets kconfig kiconthemes kxmlgui"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "baf1c82110ab626ef8f1cafc80571490"
-SRC_URI[sha256sum] = "b0bc40bf85e09e647552906d0c2f156462b7585cf2717b89138f27784ef4aa1f"
+SRC_URI[md5sum] = "da4abc3e0f2acc90d97a4bc4edc86405"
+SRC_URI[sha256sum] = "8f9acfdc3350cab97c58381067e25bb0df37a3da148612195667d3082fdcba3e"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Bookmarks, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

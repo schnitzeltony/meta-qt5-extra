@@ -1,4 +1,4 @@
-From 3bbad0ba8d976da9e852840aeaf5831af7831357 Mon Sep 17 00:00:00 2001
+From 11d6fc16310d1f6f49cdcabe74c3f649c0b23350 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Wed, 22 Jul 2015 12:58:30 +0200
 Subject: [PATCH 2/3] align installation location for helpers
@@ -14,7 +14,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 403c114..95e9819 100644
+index 0124800..7ad7b42 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -37,7 +37,7 @@ option(AUTOTESTS "Perform autotests" ON)
@@ -27,5 +27,5 @@ index 403c114..95e9819 100644
  if(IS_ABSOLUTE ${KAUTH_HELPER_INSTALL_DIR})
      set(KAUTH_HELPER_INSTALL_ABSOLUTE_DIR ${KAUTH_HELPER_INSTALL_DIR})
 -- 
-1.9.3
+2.1.0
 

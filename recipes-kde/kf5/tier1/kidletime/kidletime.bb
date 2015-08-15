@@ -10,10 +10,13 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb qtx11extras libxscrnsaver", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "f87b44e5acd0c3a0ec891450a11f6c2b"
-SRC_URI[sha256sum] = "0c0bd1ca3e028b5e78a5c3d2313aa24d62ddbe66971c41ac3a81e9033091fbe6"
+SRC_URI[md5sum] = "2461e099b2bf54ef26e0c1a7891db120"
+SRC_URI[sha256sum] = "623591eb891566c4e00ba338aea61a63eec35fdc71b737961e5e358e1a25d7b4"
 
 SRC_URI += "file://0001-Do-not-search-for-Qt5X11Extras-in-x-less-environment.patch"
+
+FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}"
+FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/*/*/.debug"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5IdleTime, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

@@ -21,8 +21,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "bce712aaeb6e369dcb950753370da5a8"
-SRC_URI[sha256sum] = "d4c768a5032652d997fbf5e98768b3a137c43deb09d2d3867f33569fe17036ed"
+SRC_URI[md5sum] = "2d78a1a34b7e52fc8cf104b068cc92cf"
+SRC_URI[sha256sum] = "d8182f5a8e82a97dcffa33df59911648f9da5f6153fd1b9b3c6602afe938281a"
 
 # REVISIT remove ugly hack for wayland-only environments
 SRC_URI += " \
