@@ -5,15 +5,8 @@ QT_TRANSLATION_FILES ??= "${datadir}/*/translations/*.qm ${datadir}/*/translatio
 
 FILES_${PN}-locale = "${datadir}/*/translations"
 
-# bitbake.conf sets ${datadir}/${BPN} so overwrite
-FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
-            ${sysconfdir} ${sharedstatedir} ${localstatedir} \
-            ${base_bindir}/* ${base_sbindir}/* \
-            ${base_libdir}/*${SOLIBS} \
-            ${base_prefix}/lib/udev/rules.d ${prefix}/lib/udev/rules.d \
-            ${libdir}/${BPN}/* \
-            ${datadir}/pixmaps ${datadir}/applications \
-"
+# remove ${datadir}/${BPN} set by bitbake.conf
+FILES_${PN}_remove = "${datadir}/${BPN}"
 
 python qt_do_split_locales() {
     import glob
