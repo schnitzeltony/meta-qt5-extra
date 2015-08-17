@@ -6,6 +6,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     antimony \
+    gottet \
     hawaii-world \
     kde-world \
     lxqt-world \
