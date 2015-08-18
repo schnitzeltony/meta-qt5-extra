@@ -8,6 +8,7 @@ RDEPENDS_${PN} = " \
     antimony \
     gottet \
     hawaii-world \
+    hexalate \
     kde-world \
     lxqt-world \
     qterminal-world \
