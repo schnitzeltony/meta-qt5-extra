@@ -19,7 +19,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 14 insertions(+), 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 2664fd4..0340453 100644
+index b5d8ffe..538d7c8 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -8,13 +8,18 @@ set (QT_MIN_VERSION "5.3.0")
@@ -42,7 +42,7 @@ index 2664fd4..0340453 100644
  include(FeatureSummary)
  include(GenerateExportHeader)
  include(ECMPackageConfigHelpers)
-@@ -103,7 +108,6 @@ set(kdegames_LIB_SRCS
+@@ -98,7 +103,6 @@ set(kdegames_LIB_SRCS
      kgamerenderedobjectitem.cpp
      kgamerendererclient.cpp
      kgamerenderer.cpp
@@ -50,18 +50,18 @@ index 2664fd4..0340453 100644
      kgimageprovider.cpp
      kgdifficulty.cpp
      kgtheme.cpp
-@@ -114,6 +118,10 @@ set(kdegames_LIB_SRCS
- if(Q_WS_X11)
- 	set(kdegames_LIB_SRCS ${kdegames_LIB_SRCS} chooserastergraphicssystem.cpp)
- endif(Q_WS_X11)
+@@ -107,6 +111,10 @@ set(kdegames_LIB_SRCS
+     kstandardgameaction.cpp
+ )
+ 
 +if(BUILD_KGDECLARATIVE)
 +	set(kdegames_LIB_SRCS kgdeclarativeview.cpp)
 +endif()
 +
- 
  add_library(KF5KDEGames SHARED ${kdegames_LIB_SRCS})
  
-@@ -125,7 +133,6 @@ target_link_libraries(KF5KDEGames
+ generate_export_header(KF5KDEGames BASE_NAME libkdegames EXPORT_MACRO_NAME KDEGAMES_EXPORT DEPRECATED_MACRO_NAME KDE_DEPRECATED)
+@@ -117,7 +125,6 @@ target_link_libraries(KF5KDEGames
                        Qt5::Xml
                        Qt5::Svg
                        Qt5::Quick
@@ -69,7 +69,7 @@ index 2664fd4..0340453 100644
                        KF5::KIOWidgets
                        KF5::NewStuff
                        KF5::IconThemes
-@@ -141,6 +148,10 @@ target_link_libraries(KF5KDEGames
+@@ -132,6 +139,10 @@ target_link_libraries(KF5KDEGames
                        KF5::ConfigWidgets
  )
  
@@ -79,7 +79,7 @@ index 2664fd4..0340453 100644
 +
  target_include_directories(KF5KDEGames INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames;${KF5_INCLUDE_INSTALL_DIR}/KF5KDEGames/KDE;${KF5_INCLUDE_INSTALL_DIR}>")
  
- #NOTE: 6.0.0 = KDE 4.9 release
+ set(KDEGAMES_VERSION 7.0.0)
 -- 
-1.9.3
+2.1.0
 
