@@ -23,7 +23,6 @@ UNTIER = " \
     khelpcenter \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "khotkeys", "",d)} \
     kinfocenter \
-    kio-extras \
     kmenuedit \
     kscreen \
     ksshaskpass \

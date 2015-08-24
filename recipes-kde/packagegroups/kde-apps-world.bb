@@ -10,6 +10,7 @@ RDEPENDS_${PN} = " \
     kapman \
     kate \
     katomic \
+    kio-extras \
     konsole \
     oxygen-icons \
 "

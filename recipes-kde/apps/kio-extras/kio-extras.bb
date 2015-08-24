@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
     file://man/LICENSE;md5=d975629b732b61cb58f9595c6baa9379 \
 "
 
-inherit kde-plasma
+inherit kde-apps
 
 DEPENDS += " \
     qtsvg \
@@ -41,9 +41,9 @@ DEPENDS += " \
     samba \
 "
 
-PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "ee6f6308723206dbc871b3888317484b"
-SRC_URI[sha256sum] = "7cc90553fc6a003e776ee5417e437007cc97d37f774edc92e21bdf5a0710d7ed"
+PV = "${KDE_APP_VERSION}"
+SRC_URI[md5sum] = "4e2bb6dc68355e874d0a4e5fbd6c4669"
+SRC_URI[sha256sum] = "b72384e7ad29a7eca7bce344cf1a8f48cd557444bd0afeced01c817826f3e074"
 
 FILES_${PN} += " \
     ${datadir}/kio_bookmarks \
