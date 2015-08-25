@@ -44,7 +44,7 @@ index d65d813..61038fb 100644
 -endif()
 -
 -install(TARGETS qtlxqt LIBRARY DESTINATION "${QT_PLUGINS_DIR}/platformthemes")
-+install(TARGETS qtlxqt LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/qt5/platformthemes")
++install(TARGETS qtlxqt LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/qt5/plugins/platformthemes")
 -- 
 1.9.3
 

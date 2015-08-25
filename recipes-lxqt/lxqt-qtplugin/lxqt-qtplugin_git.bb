@@ -12,6 +12,6 @@ SRC_URI += " \
     file://0001-set-installation-path-fixed-cmake-query-returns-sysr.patch \
 "
 
-FILES_${PN} += "${libdir}/${QT_DIR_NAME}/platformthemes"
-FILES_${PN}-dbg += "${libdir}/${QT_DIR_NAME}/platformthemes/.debug"
+FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/platformthemes"
+FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/platformthemes/.debug"
 
