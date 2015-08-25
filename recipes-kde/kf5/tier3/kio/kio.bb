@@ -30,6 +30,11 @@ PACKAGECONFIG[full] = "-DKIOCORE_ONLY=OFF,-DKIOCORE_ONLY=ON, kbookmarks kcomplet
 # Note that kdeclarative fails without KIOWidgets
 PACKAGECONFIG ??= "full"
 
+# REVISIT make optional
+DEPENDS += " \
+    krb5 \
+"
+
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5KIO, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5KIO, -S${includedir}, -S${STAGING_INCDIR}"
