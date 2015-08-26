@@ -17,4 +17,4 @@ FILES_${PN} += " \
     ${datadir} \
 "
 
-RRECOMMENDS_${PN} += "oxygen"
+RRECOMMENDS_${PN} += "oxygen qtsvg-plugins"
