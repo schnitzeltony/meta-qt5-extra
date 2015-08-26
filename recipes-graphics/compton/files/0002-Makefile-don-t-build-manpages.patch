@@ -1,0 +1,33 @@
+From c5fbed297f765b222d92c4eca15743c8f8b4741d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 26 Aug 2015 23:04:41 +0200
+Subject: [PATCH 2/2] Makefile: don't build manpages
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+we don't have all these tools neccessary in oe
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ Makefile | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index e66f322..94d595c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -126,8 +126,6 @@ INCS += $(shell pkg-config --cflags $(PACKAGES))
+ CFLAGS += -Wall
+ 
+ BINS = compton bin/compton-trans
+-MANPAGES = man/compton.1 man/compton-trans.1
+-MANPAGES_HTML = $(addsuffix .html,$(MANPAGES))
+ 
+ # === Recipes ===
+ .DEFAULT_GOAL := compton
+-- 
+2.1.0
+
