@@ -12,3 +12,5 @@ PV = "0.1.0+git${SRCPV}"
 FILES_${PN} += "${datadir}/${BPN}/compton.conf.example"
 
 EXTRA_OECMAKE += "-DUSE_QT5=ON"
+
+RDEPENDS_${PN} += "compton"
