@@ -1,6 +1,6 @@
-From f2b5981d848d700212fc30d719c30db6d57cd2e5 Mon Sep 17 00:00:00 2001
+From 6bd24445775d64078327f50d3ea834970f4a9231 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Mon, 2 Feb 2015 14:28:10 +0100
+Date: Fri, 28 Aug 2015 22:17:57 +0200
 Subject: [PATCH] fix build for qtbase without session management
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -8,64 +8,98 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- main.cpp      |  8 +++++++-
+ main_x11.cpp  |  2 ++
+ sm.cpp        |  4 ++++
  workspace.cpp | 11 ++++++++++-
- 2 files changed, 17 insertions(+), 2 deletions(-)
+ workspace.h   |  2 ++
+ 4 files changed, 18 insertions(+), 1 deletion(-)
 
-diff --git a/main.cpp b/main.cpp
-index 44d8c49..0cb9e44 100644
---- a/main.cpp
-+++ b/main.cpp
-@@ -372,7 +372,13 @@ void Application::createWorkspace()
-     // critical startup section where x errors cause kwin to abort.
+diff --git a/main_x11.cpp b/main_x11.cpp
+index 5cb1f5d..162bb1b 100644
+--- a/main_x11.cpp
++++ b/main_x11.cpp
+@@ -146,10 +146,12 @@ void ApplicationX11::performStartup()
+         Application::setX11ScreenNumber(QX11Info::appScreen());
+     }
  
-     // create workspace.
--    (void) new Workspace(isSessionRestored());
-+    (void) new Workspace(
 +#ifndef QT_NO_SESSIONMANAGER
-+        isSessionRestored()
-+#else
-+        false
+     // QSessionManager for some reason triggers a very early commitDataRequest
+     // and updates the key - before we create the workspace and load the session
+     // data -> store and pass to the workspace constructor
+     m_originalSessionKey = sessionKey();
 +#endif
-+    );
-     emit workspaceCreated();
+ 
+     owner.reset(new KWinSelectionOwner(Application::x11ScreenNumber()));
+     connect(owner.data(), &KSelectionOwner::failedToClaimOwnership, []{
+diff --git a/sm.cpp b/sm.cpp
+index 087782d..912450f 100644
+--- a/sm.cpp
++++ b/sm.cpp
+@@ -56,6 +56,7 @@ static KConfig *sessionConfig(QString id, QString key)
+     return config;
  }
  
++#ifndef QT_NO_SESSIONMANAGER
+ void Workspace::saveState(QSessionManager &sm)
+ {
+     // If the session manager is ksmserver, save stacking
+@@ -92,6 +93,7 @@ void Workspace::commitData(QSessionManager &sm)
+     if (!sm.isPhase2())
+         sessionSaveStarted();
+ }
++#endif
+ 
+ // Workspace
+ 
+@@ -215,8 +217,10 @@ void Workspace::loadSessionInfo(const QString &key)
+     // NOTICE: qApp->sessionKey() is outdated when this gets invoked
+     // the key parameter is cached from the application constructor.
+     session.clear();
++#ifndef QT_NO_SESSIONMANAGER
+     KConfigGroup cg(sessionConfig(qApp->sessionId(), key), "Session");
+     addSessionInfo(cg);
++#endif
+ }
+ 
+ void Workspace::addSessionInfo(KConfigGroup &cg)
 diff --git a/workspace.cpp b/workspace.cpp
-index 7cbe81e..66c603b 100644
+index 43ec3df..efebc9d 100644
 --- a/workspace.cpp
 +++ b/workspace.cpp
-@@ -277,8 +277,11 @@ void Workspace::init()
+@@ -159,10 +159,12 @@ Workspace::Workspace(const QString &sessionKey)
+ 
+     delayFocusTimer = 0;
+ 
++#ifndef QT_NO_SESSIONMANAGER
+     if (!sessionKey.isEmpty())
+         loadSessionInfo(sessionKey);
+     connect(qApp, &QGuiApplication::commitDataRequest, this, &Workspace::commitData);
+     connect(qApp, &QGuiApplication::saveStateRequest, this, &Workspace::saveState);
++#endif
+ 
+     RuleBook::create(this)->load();
+ 
+@@ -266,7 +268,9 @@ void Workspace::init()
+ 
      // Extra NETRootInfo instance in Client mode is needed to get the values of the properties
      NETRootInfo client_info(connection(), NET::ActiveWindow | NET::CurrentDesktop);
-     int initial_desktop;
 +#ifndef QT_NO_SESSIONMANAGER
      if (!qApp->isSessionRestored())
-+#endif // QT_NO_SESSIONMANAGER
-         initial_desktop = client_info.currentDesktop();
-+#ifndef QT_NO_SESSIONMANAGER
-     else {
- #if KWIN_QT5_PORTING
-         KConfigGroup group(kapp->sessionConfig(), "Session");
-@@ -287,6 +290,7 @@ void Workspace::init()
-         initial_desktop = 1;
- #endif
-     }
-+#endif // QT_NO_SESSIONMANAGER
-     if (!VirtualDesktopManager::self()->setCurrent(initial_desktop))
++#endif
+         m_initialDesktop = client_info.currentDesktop();
+     if (!VirtualDesktopManager::self()->setCurrent(m_initialDesktop))
          VirtualDesktopManager::self()->setCurrent(1);
- 
-@@ -307,7 +311,9 @@ void Workspace::init()
+@@ -288,7 +292,9 @@ void Workspace::init()
      active_client = NULL;
      rootInfo->setActiveWindow(None);
      focusToNull();
 +#ifndef QT_NO_SESSIONMANAGER
      if (!qApp->isSessionRestored())
-+#endif // QT_NO_SESSIONMANAGER
++#endif
          ++block_focus; // Because it will be set below
  
      {
-@@ -372,7 +378,10 @@ void Workspace::init()
+@@ -353,7 +359,10 @@ void Workspace::init()
      } // End updates blocker block
  
      Client* new_active_client = NULL;
@@ -77,6 +111,22 @@ index 7cbe81e..66c603b 100644
          --block_focus;
          new_active_client = findClient(Predicate::WindowMatch, client_info.activeWindow());
      }
+diff --git a/workspace.h b/workspace.h
+index 0da4db7..ffd5cba 100644
+--- a/workspace.h
++++ b/workspace.h
+@@ -433,9 +433,11 @@ private Q_SLOTS:
+     void slotDesktopCountChanged(uint previousCount, uint newCount);
+     void slotCurrentDesktopChanged(uint oldDesktop, uint newDesktop);
+ 
++#ifndef QT_NO_SESSIONMANAGER
+     // session management
+     void saveState(QSessionManager &sm);
+     void commitData(QSessionManager &sm);
++#endif
+ 
+ Q_SIGNALS:
+     /**
 -- 
-1.8.3.1
+2.1.0
 

@@ -31,12 +31,11 @@ DEPENDS += " \
     knewstuff \
     kxmlgui \
     kdecoration \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras libepoxy", "",d)} \
 "
 
 # this condition matches always currently - it is kept in this way as a marker
 DEPENDS += " \
-	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras libepoxy", "",d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras libepoxy xcb-util-cursor", "",d)} \
 "
 
 # REVISIT: PACKAGECONFIG for optionals
@@ -47,15 +46,13 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "55357eef894ba4e6c16b77c385a63675"
-SRC_URI[sha256sum] = "7f77420455a1bb5887f586aa2a31eaeab919240757f47b1ca1c0ff849571575c"
+SRC_URI[md5sum] = "38b4a6d540ec6bbe94c0ec658c47eb5c"
+SRC_URI[sha256sum] = "81f0caced49288f38ef1b34f70d4f62f4f261bdf57f6875631ec1017cfd6c7d3"
 
 SRC_URI += " \
     file://0001-fix-build-for-qtbase-without-session-management.patch \
     file://0002-add-egl-flags-for-compiling.patch \
     file://0003-eglonxbackend-add-debug-output.patch \
-    file://0004-Properly-add-define-for-gles.patch \
-    file://0005-kwinglutils-Init-glVersion-on-gles.patch \
 "
 
 FILES_${PN} += " \

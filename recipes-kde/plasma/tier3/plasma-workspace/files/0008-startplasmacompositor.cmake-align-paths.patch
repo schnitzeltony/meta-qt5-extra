@@ -1,0 +1,49 @@
+From 53a751970798108dafb01de6615559f6ca9b7d95 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 28 Aug 2015 23:43:15 +0200
+Subject: [PATCH] startplasmacompositor.cmake: align paths
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ startkde/startplasmacompositor.cmake | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/startkde/startplasmacompositor.cmake b/startkde/startplasmacompositor.cmake
+index d8ed68e..5f3c153 100644
+--- a/startkde/startplasmacompositor.cmake
++++ b/startkde/startplasmacompositor.cmake
+@@ -70,7 +70,7 @@ EOF
+ # fontconfig
+ 
+ usr_share="/usr/share"
+-install_share="@CMAKE_INSTALL_PREFIX@/@SHARE_INSTALL_PREFIX@"
++install_share="@SHARE_INSTALL_PREFIX@"
+ 
+ if [ ! $install_share = $usr_share ]; then
+ 
+@@ -85,7 +85,7 @@ if [ ! $install_share = $usr_share ]; then
+     }
+ 
+     oxygenDir=$fontsDir/oxygen
+-    prefixDir="@CMAKE_INSTALL_PREFIX@/@SHARE_INSTALL_PREFIX@/fonts/oxygen"
++    prefixDir="@SHARE_INSTALL_PREFIX@/fonts/oxygen"
+ 
+     # if the oxygen dir doesn't exist, create a symlink to be sure that the
+     # Oxygen font is available to the user
+@@ -155,7 +155,7 @@ echo 'startplasmacompositor: Starting up...'  1>&2
+ # to set it to a list of paths *not* including the KDE prefix if it's not /usr or
+ # /usr/local.
+ if test -z "$XDG_DATA_DIRS"; then
+-    XDG_DATA_DIRS="@CMAKE_INSTALL_PREFIX@/@SHARE_INSTALL_PREFIX@:/usr/share:/usr/local/share"
++    XDG_DATA_DIRS="@SHARE_INSTALL_PREFIX@:/usr/share:/usr/local/share"
+ fi
+ export XDG_DATA_DIRS
+ 
+-- 
+2.1.0
+

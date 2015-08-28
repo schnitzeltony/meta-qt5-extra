@@ -41,8 +41,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "3d6a6e1ffcbf2d3e27668dc471523907"
-SRC_URI[sha256sum] = "4165a547efc59dd42a15d24f21f722d88e4acfb6fb6d6a4db3c3d0ce54fa54c4"
+SRC_URI[md5sum] = "0bb91a876188f98791358017c85ccec8"
+SRC_URI[sha256sum] = "102e06f9d8c1f2be18aefe009c8d66fa99a1d986f392474490fe37d4d1f3993f"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
@@ -53,9 +53,7 @@ SRC_URI += " \
     file://0005-startkde-fix-path-for-start_kdeinit_wrapper.patch \
     file://0006-startkde-create-kde-s-home.patch \
     file://0007-startkde-enable-starting-X.patch \
-    \
-    file://0008-BalooRunner-Baloo-Result-header-is-no-longer-install.patch \
-    file://0009-Baloo-Runner-Use-the-filepath-as-the-unique-id-of-th.patch \
+    file://0008-startplasmacompositor.cmake-align-paths.patch \
 "
 
 # cross libs / headers

@@ -28,10 +28,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "04d3c086c0cc4650013dad955bd07788"
-SRC_URI[sha256sum] = "c46e0c6962a6fe055d160c177cf2843c50515c5bc60d7f460e2447adcd386322"
-
-SRC_URI += "file://0001-showdesktop-do-check-HAVE_X11-correctly.patch"
+SRC_URI[md5sum] = "d9876ebbd99cd3285b86fe6205857eea"
+SRC_URI[sha256sum] = "46a8e31f4feb9b94ca5e4438369cc4cc4d86ef9535c55e9820b07e0f9f322fd7"
 
 FILES_${PN} += " \
     ${datadir}/kwin \
