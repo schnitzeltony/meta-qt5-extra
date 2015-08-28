@@ -1,0 +1,53 @@
+From b9abe385e2563d7178fbf982ec6977b9f3e625bf Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 28 Aug 2015 23:22:18 +0200
+Subject: [PATCH 2/2] fix build for qtbase without session management
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/dolphinmainwindow.cpp | 2 ++
+ src/main.cpp              | 2 ++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/src/dolphinmainwindow.cpp b/src/dolphinmainwindow.cpp
+index f7a7613..127cd85 100644
+--- a/src/dolphinmainwindow.cpp
++++ b/src/dolphinmainwindow.cpp
+@@ -346,9 +346,11 @@ void DolphinMainWindow::closeEvent(QCloseEvent* event)
+     // Find out if Dolphin is closed directly by the user or
+     // by the session manager because the session is closed
+     bool closedByUser = true;
++#ifndef QT_NO_SESSIONMANAGER
+     if (qApp->isSessionRestored()) {
+         closedByUser = false;
+     }
++#endif
+ 
+     if (m_tabWidget->count() > 1 && GeneralSettings::confirmClosingMultipleTabs() && closedByUser) {
+         // Ask the user if he really wants to quit and close all tabs.
+diff --git a/src/main.cpp b/src/main.cpp
+index b4ca2c6..5c058a9 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -134,6 +134,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
+ 
+     mainWindow->show();
+ 
++#ifndef QT_NO_SESSIONMANAGER
+     if (app.isSessionRestored()) {
+         const QString className = KXmlGuiWindow::classNameOfToplevel(1);
+         if (className == QLatin1String("DolphinMainWindow")) {
+@@ -142,6 +143,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
+            qCWarning(DolphinDebug) << "Unknown class " << className << " in session saved data!";
+         }
+     }
++#endif
+ 
+     return app.exec(); // krazy:exclude=crash;
+ }
+-- 
+2.1.0
+

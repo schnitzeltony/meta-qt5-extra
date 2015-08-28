@@ -1,7 +1,7 @@
 From ed293f192c85976efdff4d8253a63a9d1a801d11 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Sun, 23 Aug 2015 22:59:27 +0200
-Subject: [PATCH] align paths to phonon
+Subject: [PATCH 1/2] align paths to phonon
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
