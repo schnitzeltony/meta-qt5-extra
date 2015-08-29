@@ -28,11 +28,11 @@ UNTIER = " \
     ksshaskpass \
     ksysguard \
     kwayland \
+    kwallet-pam \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
     kwrited \
     libkscreen \
     libksysguard \
-    libmm-qt \
     milou \
     muon \
     oxygen \
@@ -44,6 +44,7 @@ UNTIER = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "powerdevil", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sddm-kcm", "",d)} \
     systemsettings \
+    user-manager \
 "
 
 RDEPENDS_${PN} = " \
