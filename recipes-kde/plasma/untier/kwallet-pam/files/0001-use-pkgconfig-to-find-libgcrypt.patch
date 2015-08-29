@@ -1,0 +1,32 @@
+From 02ed7d968dc1c4e8140c73bfe8e9becac1e2aad7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sat, 29 Aug 2015 23:16:15 +0200
+Subject: [PATCH 1/2] use pkgconfig to find libgcrypt
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f60ac41..e04d6af 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -7,7 +7,8 @@ set(PROJECT_VERSION_MAJOR 5)
+ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" )
+ 
+ find_package(PAM REQUIRED)
+-find_package(LibGcrypt 1.5.0 REQUIRED)
++find_package(PkgConfig REQUIRED)
++pkg_search_module(LIBGCRYPT REQUIRED libgcrypt)
+ include(GNUInstallDirs)
+ 
+ include_directories (
+-- 
+2.1.0
+
