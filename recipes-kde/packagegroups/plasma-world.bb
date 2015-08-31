@@ -20,6 +20,7 @@ UNTIER = " \
     kde-cli-tools \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kde-gtk-config", "",d)} \
     kdeplasma-addons \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kgamma5", "",d)} \
     khelpcenter \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "khotkeys", "",d)} \
     kinfocenter \
@@ -38,6 +39,7 @@ UNTIER = " \
     oxygen \
     oxygen-fonts \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "plasma-desktop", "",d)} \
+    plasma-mediacenter \
     plasma-nm \
     plasma-workspace-wallpapers \
     polkit-kde-agent-1 \
