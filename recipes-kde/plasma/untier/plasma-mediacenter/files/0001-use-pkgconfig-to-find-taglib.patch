@@ -1,0 +1,36 @@
+From 6b374e0f4faaa4038d631a07a4508b6b5f248afa Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 31 Aug 2015 23:26:18 +0200
+Subject: [PATCH] use pkgconfig to find taglib
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a1d7a4b..b9a96b0 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -49,10 +49,11 @@ find_package(KF5 ${KF5_MIN_VERSION} COMPONENTS REQUIRED
+ 
+ find_package(KF5Baloo)
+ add_feature_info("KF5Baloo" KF5Baloo_FOUND "Required for Baloo integration")
+-find_package(Taglib REQUIRED)
++find_package(PkgConfig REQUIRED)
++pkg_search_module(TAGLIB REQUIRED taglib)
+ 
+ include_directories(
+-    ${TAGLIB_INCLUDES}
++    ${TAGLIB_INCLUDE_DIRS}
+ )
+ 
+ include_directories(
+-- 
+2.1.0
+
