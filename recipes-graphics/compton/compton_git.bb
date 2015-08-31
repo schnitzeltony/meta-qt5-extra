@@ -17,6 +17,7 @@ DEPENDS = " \
     libpcre \
     libconfig \
     libxinerama \
+    libdrm \
     dbus \
 "
 
