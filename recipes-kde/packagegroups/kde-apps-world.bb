@@ -12,6 +12,7 @@ RDEPENDS_${PN} = " \
     kapman \
     kate \
     katomic \
+    kdenlive \
     kio-extras \
     konsole \
     libkdegames \
