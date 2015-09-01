@@ -6,7 +6,14 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5-porting-aids cmake-lib
 
-DEPENDS += "qtsvg qttools kjs ki18n kdoctools"
+DEPENDS += " \
+    ${BPN}-native \
+    qtsvg \
+    qttools \
+    kjs \
+    ki18n \
+    kdoctools \
+"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "46d322b756d75de73cf70e2cbae8351c"
@@ -16,8 +23,5 @@ SRC_URI[sha256sum] = "28b288a40ea602d4254396f79ea8476319c42610ebc13997e531bb990f
 CMAKE_ALIGN_SYSROOT[1] = "KF5JsEmbed, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5JsEmbed, -S${includedir}, -S${STAGING_INCDIR}"
 
-# HACK for kjscmd5: to avoid more native qt5 extensions we simply link to icemaker
-# created by kjs-native which is in the dependency chain by kjs. kjs-native has
-# only few dependencies and nothing needs kjscmd5 to build. The only reason to
-# do this hack is to make cmake checks happy.
-CMAKE_ALIGN_SYSROOT[3] = "KF5JsEmbed, -S${bindir}/kjscmd5, -S${STAGING_BINDIR_NATIVE}/icemaker"
+# kjsembed's kjscmd5 is not required for build -> point to native dummy to make cmake happy
+CMAKE_ALIGN_SYSROOT[3] = "KF5JsEmbed, -S${bindir}/kjscmd5, -S${STAGING_BINDIR_NATIVE}/kjscmd5"
