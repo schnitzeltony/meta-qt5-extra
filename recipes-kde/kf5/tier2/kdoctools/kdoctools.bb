@@ -9,8 +9,12 @@ SRC_URI += " \
 "
 
 do_configure_append() {
-	# use native docbookl10nhelper
-	sed -i 's:\./docbookl10nhelper:${STAGING_BINDIR_NATIVE}/docbookl10nhelper:' ${B}/src/CMakeFiles/docbookl10nhelper.dir/build.make
+    # use native docbookl10nhelper
+    sed -i 's:\./docbookl10nhelper:${STAGING_BINDIR_NATIVE}/docbookl10nhelper:' ${B}/src/CMakeFiles/docbookl10nhelper.dir/build.make
+
+    # remove build host paths
+    sed -i 's:${STAGING_DIR_NATIVE}::g' ${B}/config-kdoctools.h
+    sed -i 's:${STAGING_DIR_TARGET}::g' ${B}/config-kdoctools.h
 }
 
 # cross libs / headers
