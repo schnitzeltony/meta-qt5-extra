@@ -1,15 +1,5 @@
-kde-plasma missing:
-* bluedevil
-* libbluedevil
-* plasma-mediacenter
+kde missing:
 * plasma-sdk
-
-..........
-
-patches upstream:
-
-* oe-core (not accepted -> merged here -> non bincfg solution)
-+ 4d44d9d950e9c69021e3e75bfb0d672d4752e1fc gpgme: add native build and ship a valid gpgme-config
 
 ..........
 
@@ -17,16 +7,19 @@ issues:
 
 plasma-desktop:
 * crashing as non priviledged user
-* window decorations not repainted / compositng disabled (only for OpenGL ES > 2.0??)
+* kwin crashing / window decorations not repainted / compositng disabled (only for OpenGL ES > 2.0??)
 
-lxqt:
-* start menu button not working
+kdenlive:
+* mlt configuration pointing to build sysroot -> implement proper sanity check for cases like these
 
 hawaii:
 * unable to start session
 
+antimony:
+* not finding python modules
 
 ..........
 
 misc:
-* reduce meta-qt5 overrrides as soon as qt5 5.5.x is out
+* follow meta-qt5 to 5.5 / reduce meta-qt5 overrrides (pull #1)
+* proper gpgme solution see commit 618331ae
