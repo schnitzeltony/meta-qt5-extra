@@ -1,0 +1,32 @@
+From 5f8382fdb80bc77a6788b8dcfec04097d6e885b3 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sat, 5 Sep 2015 14:01:44 +0200
+Subject: [PATCH] create_hash_table: avoid polution of files with build sysroot
+ in comments
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/kjs/create_hash_table | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/kjs/create_hash_table b/src/kjs/create_hash_table
+index 8b5b61d..fe2f1ba 100644
+--- a/src/kjs/create_hash_table
++++ b/src/kjs/create_hash_table
+@@ -218,7 +218,7 @@ sub hashValue($) {
+ sub output() {
+   if (!$banner) {
+     $banner = 1;
+-    print "/* Automatically generated from $file using $0. DO NOT EDIT ! */\n";
++    print "/* Automatically generated from $file using kjs's create_hash_table. DO NOT EDIT ! */\n";
+   }
+ 
+   my $nameEntries = "${name}Entries";
+-- 
+2.1.0
+
