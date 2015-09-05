@@ -2,7 +2,7 @@ SUMMARY = "Qt wrapper for NetworkManager API"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 
-inherit kde-kf5 cmake-lib pkgconfig
+inherit kde-kf5 pkgconfig cmake-lib cmake-auto-align-paths
 
 DEPENDS += "networkmanager"
 
@@ -13,3 +13,4 @@ SRC_URI[sha256sum] = "29a821326733290efd7f28b763fed22a0a47376dcd400187d0363a2f52
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5NetworkManagerQt, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5NetworkManagerQt, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[3] = "KF5NetworkManagerQt, -S${libdir}/glib-2.0/include, -S${STAGING_LIBDIR}/glib-2.0/include"
