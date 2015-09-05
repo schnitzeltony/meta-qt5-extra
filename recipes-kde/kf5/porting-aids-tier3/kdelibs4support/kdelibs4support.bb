@@ -35,6 +35,11 @@ DEPENDS += " \
 # uncomment for broken gelib getaddr / AI_PASSIVE
 #EXTRA_OECMAKE += "-DHAVE_GOOD_GETADDRINFO=OFF"
 
+do_configure_append() {
+    # fix KCONFIG_COMPILER_LOCATION
+    sed -i 's:${STAGING_LIBDIR_NATIVE}:${libdir}:g' ${B}/src/config-kstandarddirs.h
+}
+
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KDELibs4, -S${includedir}, -S${STAGING_INCDIR}"
 CMAKE_ALIGN_SYSROOT[2] = "KDELibs4, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
