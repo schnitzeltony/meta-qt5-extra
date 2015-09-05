@@ -1,0 +1,31 @@
+From d7cf023376cb834f9becb63f2648c63c5ec3fd12 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 4 Sep 2015 14:01:36 +0200
+Subject: [PATCH] CMakeLists.txt: make MLT_PREFIX configurable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b5a646d..7018636 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -82,7 +82,7 @@ set_package_properties(MLT PROPERTIES
+                 TYPE RUNTIME
+                 PURPOSE "Required to do video processing")
+ 
+-set(MLT_PREFIX ${MLT_ROOT_DIR})
++SET(MLT_PREFIX "/usr" CACHE STRING "mlt prefix")
+ 
+ add_subdirectory(data)
+ add_subdirectory(doc)
+-- 
+2.1.0
+
