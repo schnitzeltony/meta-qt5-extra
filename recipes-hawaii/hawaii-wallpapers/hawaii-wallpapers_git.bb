@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02"
 
 inherit hawaii
 
-SRCREV = "8fd3af71230f0d4649b94e3afba5cfe0b25b0a8d"
+SRCREV = "ffca94dc6917ba0109dbd837cc3579fd0cde6357"
+PV = "0.4.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
