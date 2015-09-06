@@ -15,15 +15,20 @@ SRC_URI = " \
     git://github.com/greenisland/${BPN}.git;protocol=git;branch=master \
 "
 
-SRCREV = "917fc3d21751562531788680cf95b274da2eb5fe"
-PV = "0.5.94+git${SRCPV}"
+SRCREV = "9c3ce026da4249346c4e85ff9215eab66522444d"
+PV = "0.6.0"
 
 S = "${WORKDIR}/git"
 
 # make it find qtwaylandscanner
 EXTRA_OECMAKE += " \
-	-DCMAKE_PROGRAM_PATH=${STAGING_DIR_NATIVE}/$bindir/qt5 \
+    -DCMAKE_PROGRAM_PATH=${STAGING_DIR_NATIVE}/$bindir/qt5 \
 "
+
+PACKAGECONFIG ??= " \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xwayland", "",d)} \
+"
+PACKAGECONFIG[xawayland] = "-DENABLE_XWAYLAND=ON,-DENABLE_XWAYLAND=OFF,libxcb"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "GreenIsland, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
