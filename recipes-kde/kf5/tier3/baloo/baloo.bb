@@ -22,11 +22,6 @@ DEPENDS += " \
     xapian-core \
 "
 
-# RESIVISIT: something strange ongoing 
-# we get | /usr/lib/libKF5BalooEngine.so.5.13.0_baloo contained in package baloo requires liblmdb.so, but no providers found in its RDEPENDS [file-rdeps]
-# * kfilemetadata in DEPENDS should be enough
-# * there is no file 'libKF5BalooEngine.so.5.13.0_baloo' !!!
-
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "67bceaf70f9da493161c0eb94a214099"
 SRC_URI[sha256sum] = "78d59a31b74da08089589f2df89f06b541447da3546edcccd2477add499e2f95"
@@ -47,8 +42,8 @@ FILES_${PN} += "${datadir} \
 "
 
 FILES_${PN}-dbg += " \
-	${libdir}/*/.debug \
-	${OE_QMAKE_PATH_QML}/org/kde/baloo/.debug \
-	${OE_QMAKE_PATH_PLUGINS}/.debug \
-	${OE_QMAKE_PATH_PLUGINS}/kf5/*/.debug \
+    ${libdir}/*/.debug \
+    ${OE_QMAKE_PATH_QML}/org/kde/baloo/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/kf5/*/.debug \
 "
