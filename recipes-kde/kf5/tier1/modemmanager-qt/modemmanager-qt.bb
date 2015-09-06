@@ -2,7 +2,7 @@ SUMMARY = "Qt wrapper for ModemManager API"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 
-inherit kde-kf5 cmake-lib pkgconfig
+inherit kde-kf5 cmake-lib pkgconfig cmake-auto-align-paths
 
 DEPENDS += "modemmanager"
 
