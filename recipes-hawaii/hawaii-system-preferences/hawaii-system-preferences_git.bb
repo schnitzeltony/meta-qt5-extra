@@ -9,7 +9,7 @@ inherit hawaii
 
 DEPENDS += "polkit-qt-1 kscreen"
 
-SRCREV = "4a3ca3e05ba591ff2cbb1f97f27e19e6cf5a1489"
+SRCREV = "5d9d32762151f7306fcb0c6798d2e4a940f57f2f"
 PV = "0.4.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
