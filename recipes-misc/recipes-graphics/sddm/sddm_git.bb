@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit cmake_qt5 pkgconfig systemd useradd distro_features_check
+inherit cmake_qt5 cmake-extra-sanity pkgconfig systemd useradd distro_features_check
 
 DEPENDS += "qtbase qtdeclarative qttools-native libxcb"
 # REVISIT optionals
@@ -26,6 +26,11 @@ PV = "0.11.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DQML_INSTALL_DIR=${OE_QMAKE_PATH_QML}"
+
+do_configure_append() {
+    # fix sysroot path
+    sed -i 's:${STAGING_DIR_NATIVE}.*${libdir}:${libdir}:g' ${B}/src/common/Constants.h
+}
 
 do_install_append() {
     install -d ${D}/${sysconfdir}
