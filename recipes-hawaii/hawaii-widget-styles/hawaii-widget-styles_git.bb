@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
 
 inherit hawaii
 
-SRCREV = "b1e5148dc4c7a422aed096b6d9647f7ba2673569"
+SRCREV = "bc6678a242a8439488e0f57ddefdbb1eed5eabf2"
+PV = "0.5.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
