@@ -9,9 +9,6 @@ plasma-desktop:
 * crashing as non priviledged user
 * kwin crashing / window decorations not repainted / compositng disabled (only for OpenGL ES > 2.0??)
 
-kdenlive:
-* mlt configuration pointing to build sysroot -> implement proper sanity check for cases like these
-
 hawaii:
 * unable to start session
 
@@ -23,3 +20,4 @@ antimony:
 misc:
 * follow meta-qt5 to 5.5 / reduce meta-qt5 overrrides (pull #1)
 * proper gpgme solution see commit 618331ae
+* kjsembedded-native dummy?
