@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit cmake_qt5 pkgconfig cmake-lib
+inherit hawaii cmake-lib
 
-DEPENDS = "qtbase qtdeclarative dconf"
+DEPENDS += "dconf"
 
 SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git"
 SRCREV = "804739d73de982fc144ff45653c243cefcfa79cb"
