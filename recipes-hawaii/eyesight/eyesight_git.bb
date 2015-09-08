@@ -6,8 +6,8 @@ inherit hawaii
 
 DEPENDS += "qttools-native"
 
-SRCREV = "b2cb44436240a26d2f3eb2c3c37f8cd5b9f9ec2a"
-PV = "0.1.2+git${SRCPV}"
+SRCREV = "7ff55701dde114df2911c937143499f73d0f4e09"
+PV = "0.1.4+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
