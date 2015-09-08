@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit cmake_qt5
+inherit hawaii
 
-DEPENDS = "qtbase qtdeclarative qtquickcontrols plasma-framework"
+DEPENDS += "plasma-framework"
 
 SRC_URI = "git://github.com/mauios/${BPN}.git;protocol=git;branch=master"
 SRCREV = "cc5d4de41aaeb63611701c0a739a93bc31bccf50"
@@ -22,4 +22,7 @@ PACKAGES =+ "${PN}-grub ${PN}-plymouth ${PN}-widget-factory"
 FILES_${PN}-grub = "/boot"
 FILES_${PN}-plymouth = "${datadir}/plymouth/themes"
 FILES_${PN}-widget-factory = "${bindir}/*widget-factory"
-FILES_${PN} += "${datadir} ${libdir}/qml"
+FILES_${PN} += " \
+    ${datadir} \
+    ${OE_QMAKE_PATH_QML} \
+"
