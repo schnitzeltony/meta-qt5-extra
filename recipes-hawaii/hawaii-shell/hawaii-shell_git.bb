@@ -14,8 +14,8 @@ REQUIRED_DISTRO_FEATURES = "wayland"
 SRC_URI += " \
     file://0001-find-host-s-git.patch \
 "
-SRCREV = "5b018bdc78b63f26d801ed3f443c4f0bc09b2de8"
-PV = "0.4.94+git${SRCPV}"
+SRCREV = "8a33b1b5a292db4bac87943515586d32259d5ada"
+PV = "0.5.91+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -35,8 +35,11 @@ DEPENDS += " \
     pulseaudio \
 "
 
-PACKAGECONFIG[nm_qt] = "-DENABLE_NETWORK_MANAGER=OFF,-DENABLE_NETWORK_MANAGER=ON,networkmanager-qt"
+PACKAGECONFIG[nm_qt] = "-DENABLE_NETWORK_MANAGER=ON,-DENABLE_NETWORK_MANAGER=OFF,networkmanager-qt"
 PACKAGECONFIG ??= "nm_qt"
+
+# REVISIT/HACK: for unkown reasons libqtxdg libs are not found
+LDFLAGS += "-lQt5Xdg"
 
 # starter scripts rely on bash qdbus catchsegv
 RDEPENDS_${PN} = "bash qttools-tools qtwayland-plugins catchsegv"
