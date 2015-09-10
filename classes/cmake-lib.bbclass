@@ -77,6 +77,10 @@ sysroot_stage_dir_append() {
 
 # 4. Handle CMAKE_ALIGN_SYSROOT
 python do_populate_sysroot_append() {
+    # we don't care for native(sdk) sysroot
+    if bb.data.inherits_class('nativesdk', d) or bb.data.inherits_class('native', d):
+        return
+
     pn = d.getVar('PN', True)
 
     # parse single parameter in CMAKE_ALIGN_SYSROOT[..] and return array of line strings extracted
