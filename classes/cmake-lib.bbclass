@@ -38,15 +38,28 @@
 #        Resulting string is created by the shell command found in <shell-command>
 #      -C<shell-command>
 #        same as -c but bitbake variables are expanded BEFORE executing shell command
+#
+# Native overriding
+#
+# CMAKE_ALIGN_SYSROOT_class-native[unique-id] = "dir, search, replace"
+#
 
-# -c<shell-command>
 
 # filename for the file containg full names of all cmakefiles staged
 CMAKEINSTALLED = "${WORKDIR}/staged_cmake_files"
 
+# global helper to get CMAKE_ALIGN_SYSROOT array
+def get_align_flags(d):
+    ret = {}
+    if bb.data.inherits_class('native', d):
+        ret = d.getVarFlags("CMAKE_ALIGN_SYSROOT_class-native") or {}
+    if ret == {}:
+        ret = d.getVarFlags("CMAKE_ALIGN_SYSROOT") or {}
+    return ret
+
 # 1. basic checks for CMAKE_ALIGN_SYSROOT
 python () {
-    cmakehideflags = d.getVarFlags("CMAKE_ALIGN_SYSROOT") or {}
+    cmakehideflags = get_align_flags(d)
     pn = d.getVar('PN', True)
     if cmakehideflags:
         for flag, flagval in sorted(cmakehideflags.items()):
@@ -126,7 +139,7 @@ python do_populate_sysroot_append() {
         bb.warn("There were no cmake files installed by %s" % pn)
     else:
         # parse CMAKE_ALIGN_SYSROOT[..]
-        cmakehideflags = d.getVarFlags("CMAKE_ALIGN_SYSROOT") or {}
+        cmakehideflags = get_align_flags(d)
 
         for flag, flagval in sorted(cmakehideflags.items()):
             items = flagval.split(",")
@@ -180,6 +193,10 @@ python do_populate_sysroot_append() {
                     bb.warn("No cmake replacements performed in %s for CMAKE_ALIGN_SYSROOT[%s]" % (pn, flag))
 }
 
-do_populate_sysroot[vardeps] += "CMAKE_ALIGN_SYSROOT"
-# REVISIT: CMAKE_ALIGN_SYSROOT cause configure rerun
-sysroot_cleansstate[vardeps] += "CMAKE_ALIGN_SYSROOT"
+do_populate_sysroot[vardeps] += "CMAKE_ALIGN_SYSROOT CMAKE_ALIGN_SYSROOT_class-native"
+
+# change of CMAKE_ALIGN_SYSROOT causes configure rerun which currently seems
+# the only way to force a rebuild at change of CMAKE_ALIGN_SYSROOT for recipes
+# depending on this recipe
+
+sysroot_cleansstate[vardeps] += "CMAKE_ALIGN_SYSROOT CMAKE_ALIGN_SYSROOT_class-native"
