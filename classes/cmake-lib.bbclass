@@ -3,14 +3,14 @@
 #
 # Alignment is controlled by:
 #
-#   CMAKE_ALIGN_SYSROOT[unique-id] = "dir, search, replace"
+#   CMAKE_ALIGN_SYSROOT[<unique-id>] = "<dir>, <search>, <replace>"
 #
-#   'unique-id':
+#   <unique-id>:
 #      string value of your choice e.g. "1", "2"...
 #      !!COMMON PITFALL!!: Copy & Paste CMAKE_ALIGN_SYSROOT lines without updating unique-id ->
 #      not all lines are evaluated!!
 #
-#   'dir':
+#   <dir>:
 #      cmake configuration files are usually installed as
 #
 #      1. ${libdir}/cmake/<CMakePackageName>/*.cmake
@@ -20,7 +20,7 @@
 #      'dir' can be any matching part of 1. and 2. but suggestion is to use
 #      is <CMakePackageName>
 #
-#   'search'/'replace':
+#   <search>/<replace>:
 #      cmake configuration files are scanned and the resulting string found in 'search'
 #      is replaced by resulting string of 'replace'. To create a resulting string currently
 #      6 command-line like options are available (see parseparam below):
@@ -42,7 +42,7 @@
 #
 # Native overriding:
 #
-#   CMAKE_ALIGN_SYSROOT_class-native[unique-id] = "dir, search, replace"
+#   CMAKE_ALIGN_SYSROOT_class-native[<unique-id>] = "<dir>, <search>, <replace>"
 #
 
 
