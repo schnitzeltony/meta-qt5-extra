@@ -44,6 +44,16 @@
 #
 #   CMAKE_ALIGN_SYSROOT_class-native[<unique-id>] = "<dir>, <search>, <replace>"
 #
+# Native extended recipe -> no native alignement:
+#
+#   CMAKE_ALIGN_SYSROOT_class-native[<unique-id>] = "ignore"
+#   CMAKE_ALIGN_SYSROOT[<unique-id>] = "<dir>, <search>, <replace>"
+#
+# Native extended recipe -> no cross alignement:
+#
+#   CMAKE_ALIGN_SYSROOT_class-native[<unique-id>] = "<dir>, <search>, <replace>"
+#   CMAKE_ALIGN_SYSROOT[<unique-id>] = "ignore"
+#
 
 
 # filename for the file containg full names of all cmakefiles staged
@@ -58,9 +68,19 @@ def get_align_flags(d):
         ret = d.getVarFlags("CMAKE_ALIGN_SYSROOT") or {}
     return ret
 
+# global helper to check CMAKE_ALIGN_SYSROOT array contains 'ignore'
+def get_flags_ignore(flags):
+    if flags and flags.values().count('ignore') > 0:
+        return True
+    return False
+
+
 # 1. basic checks for CMAKE_ALIGN_SYSROOT
 python () {
     cmakehideflags = get_align_flags(d)
+    if get_flags_ignore(cmakehideflags):
+        return
+
     pn = d.getVar('PN', True)
     if cmakehideflags:
         for flag, flagval in sorted(cmakehideflags.items()):
@@ -134,14 +154,16 @@ python do_populate_sysroot_append() {
         else:
             bb.fatal("Parameter %s is too short for CMAKE_ALIGN_SYSROOT[%s] in %s" % (param, flag, pn))
 
-    # first check if cmake files were installed to sysroot
+    cmakehideflags = get_align_flags(d)
+    if get_flags_ignore(cmakehideflags):
+        return
+
+    # check if cmake files were installed to sysroot
     tmpfile = d.getVar('CMAKEINSTALLED', True)
     if (not os.path.isfile(tmpfile)) or os.path.getsize(tmpfile) == 0:
         bb.warn("There were no cmake files installed by %s" % pn)
     else:
         # parse CMAKE_ALIGN_SYSROOT[..]
-        cmakehideflags = get_align_flags(d)
-
         for flag, flagval in sorted(cmakehideflags.items()):
             items = flagval.split(",")
 
