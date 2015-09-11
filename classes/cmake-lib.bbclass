@@ -1,47 +1,48 @@
 # This class helps to align paths for cmake files in build sysroot while 
 # keeping proper paths for target packages/rootfs
 #
-# Alignment is controlled by
+# Alignment is controlled by:
 #
-# CMAKE_ALIGN_SYSROOT[unique-id] = "dir, search, replace"
+#   CMAKE_ALIGN_SYSROOT[unique-id] = "dir, search, replace"
 #
-# 'unique-id': 
-#    string value of your choice e.g. "1", "2"...
-#    !!COMMON PITFALL!!: Copy & Paste CMAKE_ALIGN_SYSROOT lines without updating unique-id -> 
-#    not all lines are evaluated!!
+#   'unique-id':
+#      string value of your choice e.g. "1", "2"...
+#      !!COMMON PITFALL!!: Copy & Paste CMAKE_ALIGN_SYSROOT lines without updating unique-id ->
+#      not all lines are evaluated!!
 #
-# 'dir':
-#    cmake configuration files are usually installed as
+#   'dir':
+#      cmake configuration files are usually installed as
 #
-#    1. ${libdir}/cmake/<CMakePackageName>/*.cmake
-#    or
-#    2. ${datadir}/cmake/<CMakePackageName>/*.cmake
-#    
-#    'dir' can be any matching part of 1. and 2. but suggestion is to use
-#    is <CMakePackageName>
+#      1. ${libdir}/cmake/<CMakePackageName>/*.cmake
+#      or
+#      2. ${datadir}/cmake/<CMakePackageName>/*.cmake
 #
-# 'search'/'replace':
-#    cmake configuration files are scanned and the resulting string found in 'search'
-#    is replaced by resulting string of 'replace'. To create a resulting string currently
-#    6 command-line like options are available (see parseparam below):
+#      'dir' can be any matching part of 1. and 2. but suggestion is to use
+#      is <CMakePackageName>
 #
-#      -f<file-in-WORKDIR>:
-#        Resulting string is taken from the file <file-in-WORKDIR>. This option should be
-#        choosen for longer strings or stings containg ','.
-#      -F<file-in-WORKDIR>:
-#        same as -f but bitbake variables are expanded e.g '${libdir}' -> '/usr/lib'
-#      -s<string>
-#        Resulting string is <string>
-#      -S<string>
-#        same as -f but bitbake variables are expanded e.g '${libdir}' -> '/usr/lib'
-#      -c<shell-command>
-#        Resulting string is created by the shell command found in <shell-command>
-#      -C<shell-command>
-#        same as -c but bitbake variables are expanded BEFORE executing shell command
+#   'search'/'replace':
+#      cmake configuration files are scanned and the resulting string found in 'search'
+#      is replaced by resulting string of 'replace'. To create a resulting string currently
+#      6 command-line like options are available (see parseparam below):
 #
-# Native overriding
+#        -f<file-in-WORKDIR>:
+#          Resulting string is taken from the file <file-in-WORKDIR>. This option should be
+#          choosen for longer strings or stings containg ','.
+#        -F<file-in-WORKDIR>:
+#          same as -f but bitbake variables are expanded e.g '${libdir}' -> '/usr/lib'
+#        -s<string>
+#          Resulting string is <string>
+#        -S<string>
+#          same as -f but bitbake variables are expanded e.g '${libdir}' -> '/usr/lib'
+#        -c<shell-command>
+#          Resulting string is created by the shell command found in <shell-command>
+#        -C<shell-command>
+#          same as -c but bitbake variables are expanded BEFORE executing shell command
 #
-# CMAKE_ALIGN_SYSROOT_class-native[unique-id] = "dir, search, replace"
+#
+# Native overriding:
+#
+#   CMAKE_ALIGN_SYSROOT_class-native[unique-id] = "dir, search, replace"
 #
 
 
