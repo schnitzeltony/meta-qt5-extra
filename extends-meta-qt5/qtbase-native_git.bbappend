@@ -8,7 +8,3 @@ do_configure_append() {
      sed -i 's:STRING_FULL_PATH:${TMPDIR}:g' ${S}/src/tools/qdbusxml2cpp/qdbusxml2cpp.cpp
      sed -i 's:STRING_PATH:<oe-temp>:g' ${S}/src/tools/qdbusxml2cpp/qdbusxml2cpp.cpp
 }
-
-# required for kjsembedded
-
-EXTRA_OECONF += "-gui"
