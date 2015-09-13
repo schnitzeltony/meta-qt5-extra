@@ -12,7 +12,7 @@ RDEPENDS_${PN} = " \
     kapman \
     kate \
     katomic \
-    kdenlive \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
     kio-extras \
     konsole \
     libkdegames \
