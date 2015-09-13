@@ -6,5 +6,5 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     qtermwidget \
-    qterminal \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qterminal", "",d)} \
 "
