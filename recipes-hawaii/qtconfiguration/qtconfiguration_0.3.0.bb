@@ -11,7 +11,10 @@ inherit hawaii cmake-lib
 
 DEPENDS += "dconf"
 
-SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git"
+SRC_URI = " \
+    git://github.com/hawaii-desktop/${BPN}.git \
+    file://0001-fix-build-with-qt-5.5.patch \
+"
 SRCREV = "804739d73de982fc144ff45653c243cefcfa79cb"
 
 S = "${WORKDIR}/git"

@@ -1,0 +1,36 @@
+From 9d6d7a17b26935658c8fc546712e423fbd2cfad3 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 13 Sep 2015 23:36:56 +0200
+Subject: [PATCH] fix build with qt 5.5
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+src/configuration/qgvariantutils.cpp:99:26: error: variable 'QDataStream s' has initializer but incomplete type
+             QDataStream s(&a, QIODevice::ReadOnly);
+                          ^
+
+Upstream-Status: Submitted [1]
+
+[1] https://github.com/hawaii-desktop/qtconfiguration/pull/1
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/configuration/qgvariantutils.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/configuration/qgvariantutils.cpp b/src/configuration/qgvariantutils.cpp
+index 757f56d..b5add00 100644
+--- a/src/configuration/qgvariantutils.cpp
++++ b/src/configuration/qgvariantutils.cpp
+@@ -39,6 +39,7 @@
+ #include <QtCore/QDebug>
+ #include <QtCore/QUrl>
+ #include <QtCore/QStringList>
++#include <QDataStream>
+ 
+ #include "qgvariantutils.h"
+ 
+-- 
+2.1.0
+
