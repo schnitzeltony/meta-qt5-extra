@@ -18,6 +18,5 @@ antimony:
 ..........
 
 misc:
-* follow meta-qt5 to 5.5 / reduce meta-qt5 overrrides (pull #1)
 * proper gpgme solution see commit 618331ae
 * kjsembedded-native dummy?
