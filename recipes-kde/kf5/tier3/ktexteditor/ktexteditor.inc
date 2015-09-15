@@ -9,7 +9,7 @@ inherit kde-kf5 perlnative
 DEPENDS += "karchive kconfig kguiaddons ki18n kio kparts sonnet"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "8d7b4487743292ce2a21a84867f5d519"
-SRC_URI[sha256sum] = "4e78c9efcc745266b8bb3140f85ce2376932f15387a6f998c470df71e2c551dd"
+SRC_URI[md5sum] = "2c5c660aea6c55c3f21f29cc3f1df604"
+SRC_URI[sha256sum] = "3f3dab1f0d84972d50a7cd97f9641018954014605cff2f6240ffb86331d47fe4"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"

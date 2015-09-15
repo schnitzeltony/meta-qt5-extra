@@ -7,8 +7,8 @@ inherit kde-kf5 pkgconfig cmake-lib cmake-auto-align-paths
 DEPENDS += "networkmanager"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "c1f71c733c5b4e03ad0af4a558c6dc8f"
-SRC_URI[sha256sum] = "29a821326733290efd7f28b763fed22a0a47376dcd400187d0363a2f52de629b"
+SRC_URI[md5sum] = "ea34cd8d1093724fc60da6e2555f2750"
+SRC_URI[sha256sum] = "06690249ce6f3343c2109d9f89264c5f82994e92392c1fc1324d8a4ffecb5ac8"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5NetworkManagerQt, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
