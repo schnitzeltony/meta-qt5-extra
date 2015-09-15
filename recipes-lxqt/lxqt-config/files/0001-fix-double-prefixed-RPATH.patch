@@ -1,0 +1,45 @@
+From b341dc4629946d56a96d634c75859d9c31b501ad Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 15 Sep 2015 18:00:46 +0200
+Subject: [PATCH] fix double prefixed RPATH
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ lxqt-config-appearance/CMakeLists.txt | 2 +-
+ lxqt-config-input/CMakeLists.txt      | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/lxqt-config-appearance/CMakeLists.txt b/lxqt-config-appearance/CMakeLists.txt
+index e160755..8c1674e 100644
+--- a/lxqt-config-appearance/CMakeLists.txt
++++ b/lxqt-config-appearance/CMakeLists.txt
+@@ -77,7 +77,7 @@ target_link_libraries(${PROJECT_NAME}
+ 
+ set_target_properties("${PROJECT_NAME}"
+     PROPERTIES
+-    INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/${LXQT_CONFIG_PROJECT}"
++    INSTALL_RPATH "${CMAKE_INSTALL_LIBDIR}/${LXQT_CONFIG_PROJECT}"
+ )
+ 
+ install(TARGETS
+diff --git a/lxqt-config-input/CMakeLists.txt b/lxqt-config-input/CMakeLists.txt
+index 5c42961..e495b37 100644
+--- a/lxqt-config-input/CMakeLists.txt
++++ b/lxqt-config-input/CMakeLists.txt
+@@ -68,7 +68,7 @@ target_link_libraries(lxqt-config-input
+ 
+ set_target_properties(lxqt-config-input
+     PROPERTIES
+-    INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/${LXQT_CONFIG_PROJECT}"
++    INSTALL_RPATH "${CMAKE_INSTALL_LIBDIR}/${LXQT_CONFIG_PROJECT}"
+ )
+ 
+ install(TARGETS
+-- 
+2.1.0
+

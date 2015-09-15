@@ -1,0 +1,47 @@
+From 7fa9b8774ea02de9d85eb7e01675fa80865dcf4c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 15 Sep 2015 17:27:07 +0200
+Subject: [PATCH] add Qt5::X11Extras to QTX_LIBRARIES
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+caused by our liblxqt modification
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ cmake/BuildPlugin.cmake | 2 +-
+ panel/CMakeLists.txt    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/cmake/BuildPlugin.cmake b/cmake/BuildPlugin.cmake
+index a354255..d1c431c 100644
+--- a/cmake/BuildPlugin.cmake
++++ b/cmake/BuildPlugin.cmake
+@@ -33,7 +33,7 @@ MACRO (BUILD_LXQT_PLUGIN NAME)
+         set (PLUGIN_DIR ${CMAKE_INSTALL_FULL_LIBDIR}/${PROGRAM})
+     endif (NOT DEFINED PLUGIN_DIR)
+ 
+-    set(QTX_LIBRARIES Qt5::Widgets)
++    set(QTX_LIBRARIES Qt5::Widgets Qt5::X11Extras)
+     if(QT_USE_QTXML)
+         set(QTX_LIBRARIES ${QTX_LIBRARIES} Qt5::Xml)
+     endif()
+diff --git a/panel/CMakeLists.txt b/panel/CMakeLists.txt
+index 4e23b53..da31e6c 100644
+--- a/panel/CMakeLists.txt
++++ b/panel/CMakeLists.txt
+@@ -60,7 +60,7 @@ add_definitions(-DPLUGIN_DESKTOPS_DIR=\"${PLUGIN_DESKTOPS_DIR}\")
+ 
+ project(${PROJECT})
+ 
+-set(QTX_LIBRARIES Qt5::Widgets Qt5::Xml Qt5::DBus)
++set(QTX_LIBRARIES Qt5::Widgets Qt5::Xml Qt5::DBus Qt5::X11Extras)
+ 
+ # Translations
+ lxqt_translate_ts(QM_FILES SOURCES
+-- 
+2.1.0
+

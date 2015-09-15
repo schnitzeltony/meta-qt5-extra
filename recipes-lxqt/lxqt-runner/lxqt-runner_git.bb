@@ -8,7 +8,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qtscript libqtxdg lxqt-globalkeys menu-cache"
 
-SRCREV = "c02fc4b867aaa7e7772730420c3635e858db1b5f"
+SRCREV = "7d49b685fbc33f74022e2138b89eaf43a006023c"
 PV = "0.9.0+git${SRCPV}"
 
 # REVISIT: These are poluted by host paths

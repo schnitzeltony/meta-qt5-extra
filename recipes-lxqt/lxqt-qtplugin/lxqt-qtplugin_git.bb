@@ -6,7 +6,7 @@ inherit lxqt
 
 DEPENDS += "liblxqt"
 
-SRCREV = "052919d39fbc4977372e1114001af6b210a89b6f"
+SRCREV = "6584ff0df727f8d5017a66034b849f427d79bbc4"
 PV = "0.9.0+git${SRCPV}"
 SRC_URI += " \
     file://0001-set-installation-path-fixed-cmake-query-returns-sysr.patch \

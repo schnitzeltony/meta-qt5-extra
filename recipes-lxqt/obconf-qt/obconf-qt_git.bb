@@ -7,10 +7,9 @@ inherit lxqt pkgconfig
 DEPENDS += "qtx11extras openbox"
 
 SRC_URI += " \
-    file://0001-src-CMakeLists.txt-do-not-completely-overwrite-CMAKE.patch \
-    file://0002-finding-sed-does-not-work-and-is-not-neccessary.patch \
+    file://0001-finding-sed-does-not-work-and-is-not-neccessary.patch \
 "
-SRCREV = "1ce85f193385adba843d9257639442578db4170e"
+SRCREV = "9be460975407638ef8362f026a4097437d6a2538"
 PV = "0.9.0+git${SRCPV}"
 
 FILES_${PN} += "${datadir}/icons"

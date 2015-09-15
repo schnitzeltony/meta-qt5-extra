@@ -8,5 +8,5 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "liblxqt kwindowsystem"
 
-SRCREV = "15d40800eee8612073caf2a1895a9d8ace6c450d"
+SRCREV = "3037ea5685007a4e01566d1c1659b19c4a5bfaef"
 PV = "0.9.0+git${SRCPV}"

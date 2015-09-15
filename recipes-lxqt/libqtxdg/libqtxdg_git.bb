@@ -7,7 +7,7 @@ inherit lxqt cmake-lib
 # libmagic is supplied by file
 DEPENDS += "file"
 
-SRCREV = "194df9fc35ebe77597a62983bb42ad7ac20a023a"
+SRCREV = "d1bae674d698be6e2949b65c99ab06093cbe9600"
 PV = "1.2.0+git${SRCPV}"
 
 CMAKE_ALIGN_SYSROOT[1] = "qt5xdg, -S${includedir}, -S${STAGING_INCDIR}"

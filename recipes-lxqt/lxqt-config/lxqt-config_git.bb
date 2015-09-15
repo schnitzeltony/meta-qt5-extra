@@ -8,8 +8,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qtsvg liblxqt"
 
-SRCREV = "c7a9328c0e3a39e0fcd740df98eb4400623af40a"
+SRCREV = "fc078770b882d1a325afe644aa3890e2a17cec16"
 PV = "0.9.0+git${SRCPV}"
+SRC_URI += "file://0001-fix-double-prefixed-RPATH.patch"
 
 # there are no dev files / pack liblxqt-config-cursor.so correctly
 FILES_${PN} += " \

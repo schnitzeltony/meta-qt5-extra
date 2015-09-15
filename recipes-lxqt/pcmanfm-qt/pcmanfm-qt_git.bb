@@ -8,7 +8,7 @@ inherit lxqt pkgconfig distro_features_check
 
 DEPENDS += "qtx11extras glib-2.0 libxcb libfm menu-cache"
 
-SRCREV = "cfdbb92cef6df49b5f2d8fcf955db6c230771349"
+SRCREV = "1af5a3d1e71994cb80b3f367f8bf0c2fcd109ece"
 PV = "0.9.0+git${SRCPV}"
 
 RRECOMMENDS_${PN} = "gvfs gvfsd-trash udisks eject"

@@ -8,7 +8,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "liblxqt"
 
-SRCREV = "34e794531fa907b47adc087a0ac8bf33e81faed2"
+SRCREV = "2f96d221d94be9481ebc07083f1e941294e03302"
 PV = "0.9.0+git${SRCPV}"
 
 CMAKE_ALIGN_SYSROOT[1] = "lxqt-globalkeys, -S${includedir}, -S${STAGING_INCDIR}"

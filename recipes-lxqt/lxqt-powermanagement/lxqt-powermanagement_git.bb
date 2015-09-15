@@ -8,7 +8,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qtsvg liblxqt libqtxdg solid"
 
-SRCREV = "92298941bf700a034b4ef3941e6f350a3c824f57"
+SRCREV = "a49f1c98972b817a5f3e6489ffe00dd6afe010ec"
 PV = "0.9.0+git${SRCPV}"
 
 FILES_${PN} += "${datadir}/icons"

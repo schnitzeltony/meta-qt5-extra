@@ -6,5 +6,5 @@ inherit lxqt pkgconfig
 
 DEPENDS += "polkit-qt-1 liblxqt libqtxdg"
 
-SRCREV = "afc4614bc5024cc1d2d3aa3beab7d9e9ef183781"
+SRCREV = "28a5fc85693cd7cc6a10f787c46473efa0c976d4"
 PV = "0.9.0+git${SRCPV}"

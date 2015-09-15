@@ -7,7 +7,7 @@ inherit lxqt cmake-lib
 DEPENDS += "libqtxdg kwindowsystem"
 SRC_URI += "file://0001-remove-Qt5X11Extras-dependency-it-is-not-required.patch"
 
-SRCREV = "8fcfb6f5ed33b437f0e17f0bece46c6467ab4085"
+SRCREV = "979e0ce7da8fbdcd0b65ea84c8ea80902e69de7d"
 PV = "0.9.0+git${SRCPV}"
 
 EXTRA_OECMAKE += "-DCMAKE_INSTALL_DATAROOTDIR=share -DLXQT_ETC_XDG_DIR=${sysconfdir}/xdg"

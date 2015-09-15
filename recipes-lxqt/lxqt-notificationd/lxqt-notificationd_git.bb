@@ -6,5 +6,5 @@ inherit lxqt
 
 DEPENDS += "liblxqt libqtxdg kwindowsystem"
 
-SRCREV = "119336efe28ccac9aacc54633ea2972cfbfaf6ba"
+SRCREV = "c3750aac12171d3e35c045083b75b2f9a1a96366"
 PV = "0.9.0+git${SRCPV}"

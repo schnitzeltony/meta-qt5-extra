@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0964c689fcf4c21c6797ea87408416b6"
 
 inherit lxqt cmake-lib
 
-SRCREV = "0a59c411aad006adb66755f677611da9a95b9164"
+SRCREV = "e58d8be655bf631f0695e2d790e7d1a94faf8c94"
 PV = "0.3.0+git${SRCPV}"
 
 CMAKE_ALIGN_SYSROOT[1] = "sysstat-qt5, -S${includedir}, -S${STAGING_INCDIR}"

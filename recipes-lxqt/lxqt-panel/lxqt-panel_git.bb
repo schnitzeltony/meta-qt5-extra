@@ -15,8 +15,8 @@ DEPENDS += " \
     kwindowsystem \
 "
 
-SRC_URI += "file://0001-panel-link-against-Qt5-X11Extras.patch"
-SRCREV = "3da78ed149191d213cef6c0b66918c09963c3954"
+SRC_URI += "file://0001-add-Qt5-X11Extras-to-QTX_LIBRARIES.patch"
+SRCREV = "099f32df9e64d0059a7e395994477e6fdd55eff2"
 PV = "0.9.0+git${SRCPV}"
 
 PACKAGECONFIG[cpu_plugin] = "-DCPULOAD_PLUGIN=Yes,-DCPULOAD_PLUGIN=No, libstatgrab"
