@@ -16,5 +16,6 @@ RDEPENDS_${PN} = " \
     kio-extras \
     konsole \
     libkdegames \
+    marble \
     oxygen-icons \
 "
