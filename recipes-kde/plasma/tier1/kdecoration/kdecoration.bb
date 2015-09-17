@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1"
 inherit kde-plasma cmake-lib
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "a83f26aff81a798929dd002e7b868c75"
-SRC_URI[sha256sum] = "924f61e6a1191902622141ada6548cf44922d62fdd1b9b8d5277db456cf3b153"
+SRC_URI[md5sum] = "e2b451c47c68e42f653caaa00b74e83f"
+SRC_URI[sha256sum] = "db23b15a46356128fb68b8d44521c370e46cda17a71557348f1c96cec0025f12"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KDecoration2, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
