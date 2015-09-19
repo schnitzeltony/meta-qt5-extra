@@ -17,11 +17,11 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 68b3d78..57c4792 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -197,7 +197,7 @@ add_feature_info("Qt Designer plugins" WITH_DESIGNER_PLUGIN "Marble widget suppo
- set(LIB_SUFFIX "" CACHE STRING "Define suffix of directory name (32/64)" )
+@@ -199,7 +199,7 @@ add_feature_info("Qt Designer plugins" WITH_DESIGNER_PLUGIN "Marble widget suppo
+ 
  set(EXEC_INSTALL_PREFIX  ${CMAKE_INSTALL_PREFIX} CACHE PATH  "Base directory for executables and libraries" FORCE)
  if (QT5BUILD)
--   set(QT_PLUGINS_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/plugins)
+-   set(QT_PLUGINS_DIR ${CMAKE_INSTALL_LIBDIR}/plugins)
 +   set(QT_PLUGINS_DIR ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/qt5/plugins)
  endif()
  

@@ -29,10 +29,13 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "3a08051a2abfbfe2343df70f06630c4a"
-SRC_URI[sha256sum] = "3768ee66dc48bf1a506284e0c39f2e61ca9467a484d50987f3d9c2c1863e4274"
+SRC_URI[md5sum] = "a3fbabe1108f0c1c7e76f61527d9c28e"
+SRC_URI[sha256sum] = "2fc251b4d5bce703451c25ca504a31f3dafb23f3fc346d16cff7d325079d2b0f"
 
-SRC_URI += "file://0001-CMakeLists.txt-make-MLT_PREFIX-configurable.patch"
+SRC_URI += " \
+    file://0001-CMakeLists.txt-make-MLT_PREFIX-configurable.patch \
+    file://0002-add-FindOpenGLES-as-long-as-there-is-no-common-solut.patch \
+"
 EXTRA_OECMAKE += "-DMLT_PREFIX=${prefix}"
 
 FILES_${PN} += " \
