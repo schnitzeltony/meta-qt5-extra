@@ -1,4 +1,4 @@
-SUMMARY = "Support for bookmarks and the XBEL format"
+SUMMARY = "KDE's window manager"
 LICENSE = "LGPLv2.1 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
 	file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
