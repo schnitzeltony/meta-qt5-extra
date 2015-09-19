@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
 inherit packagegroup
 
 RDEPENDS_${PN} = " \
+    ark \
     baloo-widgets \
     dolphin \
     dolphin-plugins \
@@ -15,6 +16,7 @@ RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
     kio-extras \
     konsole \
+    kwalletmanager \
     libkdegames \
     marble \
     oxygen-icons \
