@@ -35,4 +35,4 @@ FILES_${PN}-designer-plugin = "${OE_QMAKE_PATH_PLUGINS}/designer"
 FILES_${PN}-designer-plugin-dbg = "${OE_QMAKE_PATH_PLUGINS}/designer/.debug"
 
 FILES_${PN} += "${datadir}/dbus-1"
-FILES_${PN}-dev += "${datadir}/${QT_DIR_NAME}/mkspecs ${datadir}/phonon4qt5/buildsystem"
+FILES_${PN}-dev += "${datadir}${QT_DIR_NAME}/mkspecs ${datadir}/phonon4qt5/buildsystem"
