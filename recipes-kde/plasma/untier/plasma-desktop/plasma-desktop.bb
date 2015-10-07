@@ -42,10 +42,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "823180ad53fafca7a6be56ab3f9ec2df"
-SRC_URI[sha256sum] = "58321f79538442e5786ae1884abc66929aebf69cfc3397dcad5a84e92ba572a8"
-
-SRC_URI += "file://0001-fix-path-to-fontinst.patch"
+SRC_URI[md5sum] = "457b1b6d69fd52416485e08ed7744fe3"
+SRC_URI[sha256sum] = "0f83fbabac177c222f1e8d209af8a69e968e3df20961cf46805a0934ab37daa7"
 
 FILES_SOLIBSDEV = "${libdir}/libkfont*${SOLIBSDEV}"
 

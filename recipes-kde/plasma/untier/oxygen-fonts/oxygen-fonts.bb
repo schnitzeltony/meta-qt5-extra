@@ -11,8 +11,8 @@ inherit kde-plasma fontcache
 DEPENDS += "fontforge-native"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "88522f2478fdff511e02102861dab620"
-SRC_URI[sha256sum] = "db6ccaa7ceaf7e93fe24986d3794a74dccf255aff93ea131ad67ecf3317fcb63"
+SRC_URI[md5sum] = "25bc526b21e9a0472e94a73b5f2d7d83"
+SRC_URI[sha256sum] = "74ce20431b825c7903a4a11825432c88a1a2537456314c260fca75fbf5a37db7"
 
 EXTRA_OECMAKE += "-DOXYGEN_FONT_INSTALL_DIR=${datadir}/fonts/truetype/oxygen"
 
