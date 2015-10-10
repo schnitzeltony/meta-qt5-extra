@@ -15,6 +15,7 @@ RDEPENDS_${PN} = " \
     katomic \
     kbounce \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
+    kdiamond \
     kio-extras \
     konsole \
     kwalletmanager \
