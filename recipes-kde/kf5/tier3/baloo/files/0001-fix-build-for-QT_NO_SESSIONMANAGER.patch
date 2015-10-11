@@ -1,6 +1,6 @@
-From 432cefd14f0056c5c81587079fe93c9244f59b5e Mon Sep 17 00:00:00 2001
+From e770efcd3bcdbf0e885c8db2df10fa1bd09b4c06 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 9 Dec 2014 14:48:36 +0100
+Date: Sun, 11 Oct 2015 17:56:45 +0200
 Subject: [PATCH] fix build for QT_NO_SESSIONMANAGER
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -10,26 +10,25 @@ Upstream-Status: pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- src/file/main.cpp | 5 +++++
- 1 file changed, 5 insertions(+)
+ src/file/extractor/main.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/src/file/main.cpp b/src/file/main.cpp
-index e46ce47..c8b0c8b 100644
---- a/src/file/main.cpp
-+++ b/src/file/main.cpp
-@@ -38,7 +38,10 @@
+diff --git a/src/file/extractor/main.cpp b/src/file/extractor/main.cpp
+index cf9fec7..7c12646 100644
+--- a/src/file/extractor/main.cpp
++++ b/src/file/extractor/main.cpp
+@@ -29,7 +29,9 @@
+ #include <QByteArray>
  
- #include <QDBusConnection>
  #include <QApplication>
-+
 +#ifndef QT_NO_SESSIONMANAGER
  #include <QSessionManager>
 +#endif
  
- int main(int argc, char** argv)
+ int main(int argc, char* argv[])
  {
-@@ -57,11 +60,13 @@ int main(int argc, char** argv)
-     QApplication app(argc, argv);
+@@ -47,11 +49,13 @@ int main(int argc, char* argv[])
+ 
      app.setQuitOnLastWindowClosed(false);
  
 +#ifndef QT_NO_SESSIONMANAGER
@@ -40,8 +39,8 @@ index e46ce47..c8b0c8b 100644
      QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
 +#endif
  
-     KConfig config(QLatin1String("baloofilerc"));
-     KConfigGroup group = config.group("Basic Settings");
+     Baloo::App appObject;
+     return app.exec();
 -- 
-1.8.3.1
+2.1.0
 

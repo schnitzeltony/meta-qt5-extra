@@ -7,8 +7,8 @@ inherit kde-kf5 cmake-lib pkgconfig cmake-auto-align-paths
 DEPENDS += "modemmanager"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "644a45b79fd1106a68f0478d89e891e8"
-SRC_URI[sha256sum] = "9311ceb56534402ccf05530fac3b8a731ddecc23a4c5d30c0fcfc8faeb034fda"
+SRC_URI[md5sum] = "6b14c285d47ffc1e1bab756cf659ab7a"
+SRC_URI[sha256sum] = "29e7968ebaa0fe76f3b7430faff0784ee42dbdecfc74366d286d7cdda518b1eb"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5ModemManagerQt, -S${includedir}, -S${STAGING_INCDIR}"

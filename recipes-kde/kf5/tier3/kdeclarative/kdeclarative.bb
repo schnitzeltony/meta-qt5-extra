@@ -10,8 +10,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "qtdeclarative kconfig ki18n kiconthemes kio kwidgetsaddons kwindowsystem kglobalaccel kguiaddons kpackage libepoxy"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "46c2fbccef981359cb9af1c73bd8eada"
-SRC_URI[sha256sum] = "24efe52b31fff61efadd8bbe945913a005359a557876841ee024edcc8cd007b5"
+SRC_URI[md5sum] = "6d016b4a482e34fd75e12bb773ab68ae"
+SRC_URI[sha256sum] = "627ce0d7f141c6fa11d0a86e7999ba7c549bf465839b5d164ef78bb24529bb1b"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Declarative, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
