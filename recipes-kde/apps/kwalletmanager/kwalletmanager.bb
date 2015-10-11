@@ -25,6 +25,7 @@ DEPENDS += " \
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "93e4ef5baa2c95cbb49c3adeb2baefd7"
 SRC_URI[sha256sum] = "6713ee6fc37e50061be3caef2adae5fe4fb0a96717b9d0abb61d3f4e9f8a6ec5"
+SRC_URI += "file://0001-fix-build-with-QT_NO_SESSIONMANAGER-set.patch"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
