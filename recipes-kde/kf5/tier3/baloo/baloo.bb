@@ -44,6 +44,7 @@ FILES_${PN} += "${datadir} \
 FILES_${PN}-dbg += " \
     ${libdir}/*/.debug \
     ${OE_QMAKE_PATH_QML}/org/kde/baloo/.debug \
+    ${OE_QMAKE_PATH_QML}/org/kde/baloo/experimental/.debug/ \
     ${OE_QMAKE_PATH_PLUGINS}/.debug \
     ${OE_QMAKE_PATH_PLUGINS}/kf5/*/.debug \
 "
