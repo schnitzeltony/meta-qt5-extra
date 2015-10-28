@@ -33,8 +33,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "8df0dc7c04a78e8358dd269b7766a328"
-SRC_URI[sha256sum] = "5a5e895a1ccd6e423af2a349572658c34469102305c4d6469b047bbf3e29b926"
+SRC_URI[md5sum] = "a8a9847cf8b3929257833c19e9f1e986"
+SRC_URI[sha256sum] = "4d9c62b80c2d2041818aeabdcd83848a31679dca41963cb104a87f53e611a1fd"
 SRC_URI += " \
     file://0001-align-paths-to-phonon.patch \
     file://0002-fix-build-for-qtbase-without-session-management.patch \

@@ -18,8 +18,8 @@ DEPENDS += "\
 " 
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "8be76053816d783e41c1975c8ec85219"
-SRC_URI[sha256sum] = "6ced28e631afcfbf72b2af8fa9d933d179ffec26aff15a96680aaa8a777c3408"
+SRC_URI[md5sum] = "f85ee9180b47dd89db9883c50c83fc50"
+SRC_URI[sha256sum] = "f293e95e67fd819766228af50a78a68130b335c2bff70860acbb26c750ba36e5"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5BalooWidgets, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
