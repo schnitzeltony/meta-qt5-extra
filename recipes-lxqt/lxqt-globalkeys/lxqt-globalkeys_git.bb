@@ -1,6 +1,6 @@
 SUMMARY = "Daemon used to register global keyboard shortcuts"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING;md5=0964c689fcf4c21c6797ea87408416b6"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
 
 inherit lxqt cmake-lib distro_features_check
 
@@ -8,8 +8,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "liblxqt"
 
-SRCREV = "2f96d221d94be9481ebc07083f1e941294e03302"
-PV = "0.9.0+git${SRCPV}"
+SRCREV = "2182537ae53f1abec533504bdac646e10c7228c2"
+PV = "0.10.0"
 
 CMAKE_ALIGN_SYSROOT[1] = "lxqt-globalkeys, -S${includedir}, -S${STAGING_INCDIR}"
 CMAKE_ALIGN_SYSROOT[2] = "lxqt-globalkeys, -S${libdir}, -S${STAGING_LIBDIR}"
