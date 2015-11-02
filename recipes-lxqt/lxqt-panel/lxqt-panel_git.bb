@@ -1,6 +1,6 @@
 SUMMARY = "The LXQt desktop panel"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING;md5=0964c689fcf4c21c6797ea87408416b6"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
 
 inherit lxqt distro_features_check pkgconfig
 
@@ -16,8 +16,8 @@ DEPENDS += " \
 "
 
 SRC_URI += "file://0001-add-Qt5-X11Extras-to-QTX_LIBRARIES.patch"
-SRCREV = "099f32df9e64d0059a7e395994477e6fdd55eff2"
-PV = "0.9.0+git${SRCPV}"
+SRCREV = "dcf70ec6a2b4de748e052b7301b599fe327ec2e7"
+PV = "0.10.0"
 
 PACKAGECONFIG[cpu_plugin] = "-DCPULOAD_PLUGIN=Yes,-DCPULOAD_PLUGIN=No, libstatgrab"
 PACKAGECONFIG[mount_plugin] = "-DMOUNT_PLUGIN=Yes,-DMOUNT_PLUGIN=No, solid"
