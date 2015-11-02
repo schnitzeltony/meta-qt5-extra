@@ -1,15 +1,15 @@
 SUMMARY = "LXQt system settings center"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING;md5=0964c689fcf4c21c6797ea87408416b6"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
 
 inherit lxqt distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "qtsvg liblxqt"
+DEPENDS += "qtsvg liblxqt libkscreen"
 
-SRCREV = "fc078770b882d1a325afe644aa3890e2a17cec16"
-PV = "0.9.0+git${SRCPV}"
+SRCREV = "b8a6f3a9ba0eed02a3f964eaba2d577a8bb3c89d"
+PV = "0.10.0"
 SRC_URI += "file://0001-fix-double-prefixed-RPATH.patch"
 
 # there are no dev files / pack liblxqt-config-cursor.so correctly
