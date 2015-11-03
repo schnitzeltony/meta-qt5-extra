@@ -1,6 +1,6 @@
 SUMMARY = "An alternative session manager ported from the original razor-session"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING;md5=0964c689fcf4c21c6797ea87408416b6"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
 
 inherit lxqt distro_features_check
 
@@ -8,5 +8,5 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "liblxqt kwindowsystem"
 
-SRCREV = "3037ea5685007a4e01566d1c1659b19c4a5bfaef"
-PV = "0.9.0+git${SRCPV}"
+SRCREV = "a6acb54f459ad136c8b420b6709b55f1159e994b"
+PV = "0.10.0"
