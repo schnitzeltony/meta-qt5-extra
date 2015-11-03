@@ -33,7 +33,7 @@
 #        -s<string>
 #          Resulting string is <string>
 #        -S<string>
-#          same as -f but bitbake variables are expanded e.g '${libdir}' -> '/usr/lib'
+#          same as -s but bitbake variables are expanded e.g '${libdir}' -> '/usr/lib'
 #        -c<shell-command>
 #          Resulting string is created by the shell command found in <shell-command>
 #        -C<shell-command>
