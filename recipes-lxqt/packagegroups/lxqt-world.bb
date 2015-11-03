@@ -23,6 +23,7 @@ RDEPENDS_${PN} = " \
     lxqt-qtplugin \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-runner", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-session", "",d)} \
+    lxqt-sudo \
     menu-cache \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "obconf-qt", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pcmanfm-qt", "",d)} \
