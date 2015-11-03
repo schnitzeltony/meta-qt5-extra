@@ -2,6 +2,12 @@ inherit cmake-lib
 
 DEPENDS += "${BPN}-native"
 
+
+# It's really time for us to publish cmake-lib.bbclass
+SRC_URI_remove = " \
+    file://0004-linguist-tools-cmake-allow-overriding-the-location-f.patch \
+"
+
 # native ignore
 CMAKE_ALIGN_SYSROOT_class-native[1] = "ignore"
 
