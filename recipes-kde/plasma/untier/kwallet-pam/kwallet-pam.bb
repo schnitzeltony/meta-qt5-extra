@@ -21,5 +21,7 @@ SRC_URI += " \
     file://0002-fix-install-path.patch \
 "
 
-FILES_${PN} += "${libdir}/security"
-FILES_${PN}-dbg += "${libdir}/security/.debug"
+EXTRA_OECMAKE += "-DCMAKE_INSTALL_LIBDIR=${base_libdir}"
+
+FILES_${PN} += "${base_libdir}/security"
+FILES_${PN}-dbg += "${base_libdir}/security/.debug"
