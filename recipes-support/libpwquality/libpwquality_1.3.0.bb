@@ -12,6 +12,7 @@ inherit autotools-brokensep pkgconfig gettext pythonnative
 DEPENDS = "zlib cracklib libpam"
 
 EXTRA_OECONF = " \
+    --with-securedir=${base_libdir}/security \
     --with-python-binary=${PYTHON} \
 "
 
@@ -34,7 +35,7 @@ do_install() {
 }
 
 FILES_${PN} += " \
-    ${libdir}/security/*.so \
+    ${base_libdir}/security/*.so \
 "
 
 PACKAGE_BEFORE_PN += "${PN}-python"
@@ -45,14 +46,14 @@ FILES_${PN}-python = " \
 
 FILES_${PN}-staticdev += " \
     ${PYTHON_SITEPACKAGES_DIR}/*.a \
-    ${libdir}/security/*.a \
+    ${base_libdir}/security/*.a \
 "
 FILES_${PN}-dev += " \
     ${PYTHON_SITEPACKAGES_DIR}/*.la \
-    ${libdir}/security/*.la \
+    ${base_libdir}/security/*.la \
 "
 
 FILES_${PN}-dbg += "\
     ${PYTHON_SITEPACKAGES_DIR}/.debug \
-    ${libdir}/security/.debug \
+    ${base_libdir}/security/.debug \
 "
