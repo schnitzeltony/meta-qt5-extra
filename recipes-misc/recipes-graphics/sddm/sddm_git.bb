@@ -17,12 +17,11 @@ DEPENDS += "libpam"
 SRC_URI = " \
     git://github.com/sddm/${BPN}.git;protocol=git;branch=master \
     file://0001-fix-qml-install-dir.patch \
-    file://0002-Disable-greeters-from-loading-KDE-s-debug-hander.patch \
     file://sddm.pam \
     file://sddm.conf \
 "
-SRCREV = "79f8a58f7fed3a9033b71f8893fb182df38a6210"
-PV = "0.12.0"
+SRCREV = "f3c810407e4e79597dcdc76508f08c33152fe3cd"
+PV = "0.13.0"
 
 S = "${WORKDIR}/git"
 
