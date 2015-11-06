@@ -11,6 +11,5 @@ RDEPENDS_${PN} = " \
     hexalate \
     kde-world \
     lxqt-world \
-    qterminal-world \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sddm", "",d)} \
 "

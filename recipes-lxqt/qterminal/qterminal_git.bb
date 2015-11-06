@@ -8,7 +8,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS = "qtbase qttools-native qtermwidget"
 
-SRC_URI = "git://github.com/qterminal/${BPN}.git"
+SRC_URI = "git://github.com/lxde/${BPN}.git"
 SRCREV = "7f2c9e03e193df4d98cfb665d2acfa45e7153d91"
 PV = "0.6.0+git${SRCPV}"
 

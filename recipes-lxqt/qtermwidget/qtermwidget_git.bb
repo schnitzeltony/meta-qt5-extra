@@ -6,7 +6,7 @@ inherit cmake_qt5 cmake-lib cmake-extra-sanity
 
 DEPENDS = "qtbase"
 
-SRC_URI = "git://github.com/qterminal/${BPN}.git"
+SRC_URI = "git://github.com/lxde/${BPN}.git"
 SRCREV = "72ffc262eb6cd5deaf3489068f7fe6a91f734998"
 PV = "0.6.0+git${SRCPV}"
 

@@ -10,7 +10,6 @@ RDEPENDS_${PN} = " \
     qtimageformats-plugins \
     \
     lxqt-world \
-    qterminal-world \
     oxygen-icons \
     \
     openbox \
