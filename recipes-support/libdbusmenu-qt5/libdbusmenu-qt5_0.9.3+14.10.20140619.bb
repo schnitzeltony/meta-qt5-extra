@@ -13,6 +13,7 @@ S = "${WORKDIR}/libdbusmenu-qt-${PV}"
 
 EXTRA_OECMAKE += " \
     -DUSE_QT5=On \
+    -DWITH_DOC=OFF \
 "
 
 do_install_append() {
