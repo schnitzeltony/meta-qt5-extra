@@ -9,11 +9,12 @@ inherit kde-base cmake-lib
 SRC_URI = " \
     http://download.kde.org/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz \
     file://0001-fix-PHONON_LIBRARY_PATH-was-usr-usr-lib-qt5-plugins.patch \
+    file://fix-qt-5.4.2-or-newer.patch \
 "
 SRC_URI[md5sum] = "88bb9867261803eed61ff53a7c026338"
 SRC_URI[sha256sum] = "a1149c961ca1570968d070bbd23671e614aa506f847ca93748960e309f85da16"
 
-EXTRA_OECMAKE += "-DPHONON_BUILD_DEMOS=ON -DPHONON_BUILD_PHONON4QT5=ON"
+EXTRA_OECMAKE += "-DPHONON_BUILD_DEMOS=ON -DPHONON_BUILD_PHONON4QT5=ON -D__KDE_HAVE_GCC_VISIBILITY=NO"
 
 # qml-plugin broken currently!
 PACKAGECONFIG[qml-plugin] = "-DPHONON_BUILD_DECLARATIVE_PLUGIN=ON,-DPHONON_BUILD_DECLARATIVE_PLUGIN=OFF,qtquick1"
