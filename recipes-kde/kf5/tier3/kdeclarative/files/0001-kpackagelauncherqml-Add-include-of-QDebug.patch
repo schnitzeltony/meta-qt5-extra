@@ -1,0 +1,36 @@
+From 4abd065ef3e2778c1c55a82212d9eb796f62858e Mon Sep 17 00:00:00 2001
+From: Otavio Salvador <otavio@ossystems.com.br>
+Date: Tue, 10 Nov 2015 08:43:14 -0200
+Subject: [PATCH] kpackagelauncherqml: Add include of QDebug
+Organization: O.S. Systems Software LTDA.
+
+The GCC triggers a build error as:
+
+| .../src/kpackagelauncherqml/main.cpp: In function 'int main(int, char**)':
+| .../src/kpackagelauncherqml/main.cpp:70:18: error: invalid use of incomplete type 'class QDebug'
+|          qWarning() << "The specified Application package is not valid.";
+
+Fix this adding the missing include of QDebug header file.
+
+Upstream-Status: Pending
+
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ src/kpackagelauncherqml/main.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/kpackagelauncherqml/main.cpp b/src/kpackagelauncherqml/main.cpp
+index 79e3fa1..3adf2d1 100644
+--- a/src/kpackagelauncherqml/main.cpp
++++ b/src/kpackagelauncherqml/main.cpp
+@@ -18,6 +18,7 @@
+  */
+ 
+ #include <QApplication>
++#include <QDebug>
+ 
+ #include <klocalizedstring.h>
+ #include <qcommandlineparser.h>
+-- 
+2.1.4
+
