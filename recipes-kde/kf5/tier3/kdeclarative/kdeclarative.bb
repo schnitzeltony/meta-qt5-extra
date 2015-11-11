@@ -9,6 +9,8 @@ inherit kde-kf5 cmake-lib
 
 DEPENDS += "qtdeclarative kconfig ki18n kiconthemes kio kwidgetsaddons kwindowsystem kglobalaccel kguiaddons kpackage libepoxy"
 
+SRC_URI += "file://0001-kpackagelauncherqml-Add-include-of-QDebug.patch"
+
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "6d016b4a482e34fd75e12bb773ab68ae"
 SRC_URI[sha256sum] = "627ce0d7f141c6fa11d0a86e7999ba7c549bf465839b5d164ef78bb24529bb1b"
