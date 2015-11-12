@@ -1,0 +1,27 @@
+From 424d64bdf12632bfd7d3331a4aef0f2bfdf7de8d Mon Sep 17 00:00:00 2001
+From: "Luis Gustavo S. Barreto" <gustavo@ossystems.com.br>
+Date: Thu, 12 Nov 2015 17:32:17 +0000
+Subject: [PATCH] Ensure xkb_base is not empty instead of checking if a file
+ exists
+
+Upstream-Status: Pending
+---
+ ConfigureChecks.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ConfigureChecks.cmake b/ConfigureChecks.cmake
+index c7ea746..bd34032 100644
+--- a/ConfigureChecks.cmake
++++ b/ConfigureChecks.cmake
+@@ -1,7 +1,7 @@
+ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH} )
+ 
+ execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable=xkb_base xkeyboard-config OUTPUT_VARIABLE XKBDIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+-if (NOT EXISTS "${XKBDIR}")
++if ("${XKBDIR}" STREQUAL "")
+     message(FATAL_ERROR "Couldn't find XKB location: .${XKBDIR}.")
+ endif()
+ set(KWIN_BIN "kwin_x11" CACHE STRING "Name of the KWin binary")
+-- 
+2.1.4
+
