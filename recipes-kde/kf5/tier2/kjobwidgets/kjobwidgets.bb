@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "kcoreaddons kwidgetsaddons ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "7603245a0a103fb45cc893eb639fe1cb"
-SRC_URI[sha256sum] = "aa7db4d1440579d784709ecc1f2dda443ef9b22f8f3cdbc0914cd5cd5790238b"
+SRC_URI[md5sum] = "1e3bc3da69178a784ee2a71b69379618"
+SRC_URI[sha256sum] = "aa4f90d776ab6d0d3cc668d5287f5e233f867f723abcb9876224898218a7ac1d"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5JobWidgets, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

@@ -1,3 +1,3 @@
 inherit kde-kf5
 
-SRC_URI = "http://download.kde.org/stable/frameworks/5.15/portingAids/${BPN}-${PV}.tar.xz"
+SRC_URI = "http://download.kde.org/stable/frameworks/5.16/portingAids/${BPN}-${PV}.tar.xz"

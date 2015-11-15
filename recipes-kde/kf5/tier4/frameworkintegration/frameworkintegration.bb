@@ -17,8 +17,8 @@ DEPENDS += " \
 RRECCOMENDS_${PN} += "oxygen-fonts"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "1dd33272081ff78e40a26262a74e499a"
-SRC_URI[sha256sum] = "2a7a3d450c28d7f1ac19ddf02cb5e2badcd6903cf3981d82ce70bcd16d644a1b"
+SRC_URI[md5sum] = "4a4eff6bea888031d7a463fdae9d3c09"
+SRC_URI[sha256sum] = "ceb0f3e79497a99a88aea3154c0c50c376ce4e8efea18a9ff4e6de4a061bdb6f"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5FrameworkIntegration, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
@@ -26,6 +26,7 @@ CMAKE_ALIGN_SYSROOT[2] = "KF5FrameworkIntegration, -S${includedir}, -S${STAGING_
 
 FILES_${PN} += " \
     ${datadir}/knotifications5 \
+    ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
