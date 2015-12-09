@@ -8,8 +8,8 @@ DEPENDS = "glib-2.0 libfm-extra"
 
 SRC_URI = "git://github.com/lxde/${BPN}.git"
 S = "${WORKDIR}/git"
-SRCREV = "e9ece4a1f8b82e7c5d7eba67a62f5d7e71c6e3ea"
-PV = "1.0.0+git${SRCPV}"
+SRCREV = "4f60184fd82b5b54531367e480a14785459b8600"
+PV = "1.0.1"
 
 do_configure_append() {
     # fix binary installation path to what others do
