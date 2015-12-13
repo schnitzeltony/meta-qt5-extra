@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-base cmake-lib
 
-SRC_URI = " \
-    http://download.kde.org/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz \
+SRC_URI += " \
     file://0001-fix-PHONON_LIBRARY_PATH-was-usr-usr-lib-qt5-plugins.patch \
     file://fix-qt-5.4.2-or-newer.patch \
 "
