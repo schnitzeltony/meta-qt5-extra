@@ -1,0 +1,33 @@
+From 1663aa4fef3954ad04f6f7210b42199cac72827b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 13 Dec 2015 23:23:38 +0100
+Subject: [PATCH] use pkg-config to find libgcrypt
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [config]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ cmake/modules/FindLibGcrypt.cmake | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/cmake/modules/FindLibGcrypt.cmake b/cmake/modules/FindLibGcrypt.cmake
+index 679ef69..29ec42d 100644
+--- a/cmake/modules/FindLibGcrypt.cmake
++++ b/cmake/modules/FindLibGcrypt.cmake
+@@ -26,8 +26,8 @@ IF(LIBGCRYPTCONFIG_EXECUTABLE)
+ 
+   # workaround for MinGW/MSYS
+   # CMake can't starts shell scripts on windows so it need to use sh.exe
+-  EXECUTE_PROCESS(COMMAND sh ${LIBGCRYPTCONFIG_EXECUTABLE} --libs RESULT_VARIABLE _return_VALUE OUTPUT_VARIABLE LIBGCRYPT_LIBRARIES OUTPUT_STRIP_TRAILING_WHITESPACE)
+-  EXECUTE_PROCESS(COMMAND sh ${LIBGCRYPTCONFIG_EXECUTABLE} --cflags RESULT_VARIABLE _return_VALUE OUTPUT_VARIABLE LIBGCRYPT_CFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
++  EXECUTE_PROCESS(COMMAND pkg-config libgcrypt --libs RESULT_VARIABLE _return_VALUE OUTPUT_VARIABLE LIBGCRYPT_LIBRARIES OUTPUT_STRIP_TRAILING_WHITESPACE)
++  EXECUTE_PROCESS(COMMAND pkg-config libgcrypt --cflags RESULT_VARIABLE _return_VALUE OUTPUT_VARIABLE LIBGCRYPT_CFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
+ 
+   IF(NOT LIBGCRYPT_CFLAGS AND NOT _return_VALUE)
+     SET(LIBGCRYPT_CFLAGS " ")
+-- 
+2.5.0
+
