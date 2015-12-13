@@ -14,6 +14,7 @@ RDEPENDS_${PN} = " \
     muon \
     phonon \
     polkit-qt-1 \
+    qca \
 "
 
 
