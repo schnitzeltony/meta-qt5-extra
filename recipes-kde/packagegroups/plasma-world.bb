@@ -37,7 +37,6 @@ UNTIER = " \
     libkscreen \
     libksysguard \
     milou \
-    muon \
     oxygen \
     oxygen-fonts \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "plasma-desktop", "",d)} \

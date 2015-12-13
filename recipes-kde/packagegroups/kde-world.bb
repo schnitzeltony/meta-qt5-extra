@@ -9,6 +9,9 @@ RDEPENDS_${PN} = " \
     plasma-world \
     kde-apps-world \
     \
+    libdebconf-kde \
+    libqapt \
+    muon \
     phonon \
     polkit-qt-1 \
 "
