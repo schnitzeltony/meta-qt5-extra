@@ -1,6 +1,6 @@
-From 18833000cc646db37d9006a2766c3be0707377a8 Mon Sep 17 00:00:00 2001
+From e25d8d40b9189c0400db694b18d104909ef78fe3 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 29 May 2015 23:49:00 +0200
+Date: Fri, 11 Dec 2015 22:03:01 +0100
 Subject: [PATCH] fix configuration/build on x-less systems
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -14,15 +14,15 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  backends/CMakeLists.txt               |  6 ++++--
  backends/qscreen/CMakeLists.txt       |  5 ++++-
  src/CMakeLists.txt                    |  5 ++++-
- src/backendlauncher/CMakeLists.txt    |  5 ++++-
+ src/backendlauncher/CMakeLists.txt    |  7 +++++--
  src/backendlauncher/backendloader.cpp | 11 +++++++++--
- 6 files changed, 33 insertions(+), 11 deletions(-)
+ 6 files changed, 34 insertions(+), 12 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index dca5cb4..6121065 100644
+index 5b6a404..c25cdae 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -15,15 +15,19 @@ include(ECMGenerateHeaders)
+@@ -16,15 +16,19 @@ include(ECMQtDeclareLoggingCategory)
  include(FeatureSummary)
  include(CheckCXXCompilerFlag)
  
@@ -77,10 +77,10 @@ index 1342d4f..1a07544 100644
 +
  install(TARGETS KSC_QScreen DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/kscreen/)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 3b73de5..d496140 100644
+index 4b56b61..6d7fab1 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -29,9 +29,12 @@ target_link_libraries(KF5Screen
+@@ -27,9 +27,12 @@ target_link_libraries(KF5Screen
      Qt5::Core
      PRIVATE
      Qt5::DBus
@@ -95,10 +95,10 @@ index 3b73de5..d496140 100644
      VERSION "${KSCREEN_VERSION_STRING}"
      SOVERSION "${KSCREEN_SOVERSION}"
 diff --git a/src/backendlauncher/CMakeLists.txt b/src/backendlauncher/CMakeLists.txt
-index de73ae1..ddf631f 100644
+index f26ad0e..c933f10 100644
 --- a/src/backendlauncher/CMakeLists.txt
 +++ b/src/backendlauncher/CMakeLists.txt
-@@ -18,8 +18,11 @@ target_link_libraries(kscreen_backend_launcher
+@@ -26,10 +26,13 @@ target_link_libraries(kscreen_backend_launcher
      KF5Screen
      Qt5::Core
      Qt5::Gui
@@ -110,12 +110,21 @@ index de73ae1..ddf631f 100644
 +    target_link_libraries(kscreen_backend_launcher Qt5::X11Extras)
 +endif()
 +
- install(TARGETS kscreen_backend_launcher DESTINATION ${CMAKE_INSTALL_FULL_LIBEXECDIR_KF5})
+ install(TARGETS kscreen_backend_launcher
+         DESTINATION ${CMAKE_INSTALL_FULL_LIBEXECDIR_KF5}
+ )
+@@ -39,4 +42,4 @@ configure_file(org.kde.kscreen.service.cmake
+ )
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kscreen.service
+         DESTINATION ${KDE_INSTALL_DBUSSERVICEDIR}
+-)
+\ No newline at end of file
++)
 diff --git a/src/backendlauncher/backendloader.cpp b/src/backendlauncher/backendloader.cpp
-index 18e08bc..882d741 100644
+index 52051df..a8e53fc 100644
 --- a/src/backendlauncher/backendloader.cpp
 +++ b/src/backendlauncher/backendloader.cpp
-@@ -24,7 +24,9 @@
+@@ -27,7 +27,9 @@
  #include <QDBusConnectionInterface>
  #include <QDir>
  #include <QPluginLoader>
@@ -125,15 +134,15 @@ index 18e08bc..882d741 100644
  
  #include <memory>
  
-@@ -74,6 +76,7 @@ bool BackendLoader::loadBackend(const QString& backend)
+@@ -130,6 +132,7 @@ KScreen::AbstractBackend *BackendLoader::loadBackend(const QString &name,
                  continue;
              }
  
 +#ifdef HAVE_XCB
              // When on X11, skip the QScreen backend, instead use the XRandR backend,
              // if not specified in KSCREEN_BACKEND
-             if (backend.isEmpty() &&
-@@ -81,12 +84,16 @@ bool BackendLoader::loadBackend(const QString& backend)
+             if (name.isEmpty() &&
+@@ -137,12 +140,16 @@ KScreen::AbstractBackend *BackendLoader::loadBackend(const QString &name,
                      QX11Info::isPlatformX11()) {
                  continue;
              }
@@ -141,17 +150,17 @@ index 18e08bc..882d741 100644
  
              // When not on X11, skip the XRandR backend, and fall back to QSCreen
              // if not specified in KSCREEN_BACKEND
-             if (backend.isEmpty() &&
+             if (name.isEmpty() &&
 -                    finfo.fileName().contains(QLatin1String("KSC_XRandR")) &&
 -                    !QX11Info::isPlatformX11()) {
 +                    finfo.fileName().contains(QLatin1String("KSC_XRandR"))
 +#ifdef HAVE_XCB
 +                    && !QX11Info::isPlatformX11()
 +#endif
-+                ) {
++            ) {
                  continue;
              }
  
 -- 
-1.9.3
+2.5.0
 

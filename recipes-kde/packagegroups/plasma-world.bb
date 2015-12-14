@@ -18,6 +18,7 @@ TIER_3 = " \
 UNTIER = " \
     bluedevil \
     breeze \
+    discover \
     kde-cli-tools \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kde-gtk-config", "",d)} \
     kdeplasma-addons \
@@ -27,6 +28,7 @@ UNTIER = " \
     kinfocenter \
     kmenuedit \
     kscreen \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kscreenlocker", "",d)} \
     ksshaskpass \
     ksysguard \
     kwayland \

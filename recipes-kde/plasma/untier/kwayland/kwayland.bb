@@ -9,8 +9,8 @@ inherit kde-plasma cmake-lib
 DEPENDS += "wayland wayland-native"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "c6e75d3e7050ca2db6f1c8f7750a4d8f"
-SRC_URI[sha256sum] = "8085ef636c91c83c03eddaac0de7d8e7f56f08884ea8aa72fb63b9b93d7fd208"
+SRC_URI[md5sum] = "5027a8b6a6afdbe61cf2d63e8c7dbb94"
+SRC_URI[sha256sum] = "494364792100213be6d58d41497fbb20a4eaf9505e0a56dfe0d2a487671faab7"
 SRC_URI += "file://0001-do-not-perform-runtime-tests.patch"
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5Wayland, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

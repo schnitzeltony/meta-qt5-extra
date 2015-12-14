@@ -13,7 +13,6 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  klipper/klipper.cpp                     | 2 ++
  klipper/main.cpp                        | 4 ++++
  krunner/main.cpp                        | 4 ++++
- ksmserver/screenlocker/greeter/main.cpp | 4 ++++
  shell/main.cpp                          | 5 ++++-
  5 files changed, 18 insertions(+), 1 deletion(-)
 
@@ -90,35 +89,6 @@ index fd851c0..90c9233 100644
  
      View view;
      view.setVisible(false);
-diff --git a/ksmserver/screenlocker/greeter/main.cpp b/ksmserver/screenlocker/greeter/main.cpp
-index 12e5701..a126fa7 100644
---- a/ksmserver/screenlocker/greeter/main.cpp
-+++ b/ksmserver/screenlocker/greeter/main.cpp
-@@ -20,7 +20,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
- 
- #include <QDateTime>
- #include <QCommandLineParser>
-+#ifndef QT_NO_SESSIONMANAGER
- #include <QSessionManager>
-+#endif
- 
- #include <iostream>
- 
-@@ -58,12 +60,14 @@ int main(int argc, char* argv[])
-     QCoreApplication::setApplicationVersion(QStringLiteral("0.1"));
-     QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
- 
-+#ifndef QT_NO_SESSIONMANAGER
-     // disable session management for the greeter
-     auto disableSessionManagement = [](QSessionManager &sm) {
-         sm.setRestartHint(QSessionManager::RestartNever);
-     };
-     QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
-     QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
-+#endif
- 
-     QCommandLineParser parser;
-     parser.setApplicationDescription(i18n("Greeter for the KDE Plasma Workspaces Screen locker"));
 diff --git a/shell/main.cpp b/shell/main.cpp
 index 005f908..6b5e57c 100644
 --- a/shell/main.cpp

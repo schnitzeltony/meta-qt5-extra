@@ -1,0 +1,31 @@
+From cf0f340a72212522c8f67c4ccfe8a118bf69a3f2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 15 Dec 2015 00:16:56 +0100
+Subject: [PATCH] startkde: remove CMAKE_INSTALL_PREFIX in XDG_DATA_DIRS
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ startkde/startkde.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/startkde/startkde.cmake b/startkde/startkde.cmake
+index 12c921e..9a367b7 100644
+--- a/startkde/startkde.cmake
++++ b/startkde/startkde.cmake
+@@ -279,7 +279,7 @@ echo 'startkde: Starting up...'  1>&2
+ # to set it to a list of paths *not* including the KDE prefix if it's not /usr or
+ # /usr/local.
+ if test -z "$XDG_DATA_DIRS"; then
+-    XDG_DATA_DIRS="@CMAKE_INSTALL_PREFIX@/@SHARE_INSTALL_PREFIX@:/usr/share:/usr/local/share"
++    XDG_DATA_DIRS="@SHARE_INSTALL_PREFIX@:/usr/share:/usr/local/share"
+ fi
+ export XDG_DATA_DIRS
+ 
+-- 
+2.5.0
+

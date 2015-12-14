@@ -10,7 +10,7 @@ inherit kde-plasma fontcache
 
 DEPENDS += "fontforge-native"
 
-PV = "${PLASMA_VERSION}"
+PV = "5.4.3"
 SRC_URI[md5sum] = "8d8ab61a65642a18a40de9f3945ce584"
 SRC_URI[sha256sum] = "a02f6580e9a53cb16694a99adbb6dbf76f17584f3e97f469a22286299507838c"
 

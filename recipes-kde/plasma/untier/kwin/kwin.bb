@@ -20,10 +20,13 @@ DEPENDS += " \
     ki18n \
     kinit \
     knotifications \
+    kpackage \
     kservice \
     plasma-framework \
     kwidgetsaddons \
     kwindowsystem \
+    kiconthemes \
+    kidletime \
     kcompletion \
     kdeclarative \
     kcmutils \
@@ -31,6 +34,8 @@ DEPENDS += " \
     knewstuff \
     kxmlgui \
     kdecoration \
+	kwayland \
+    kscreenlocker \
 "
 
 # this condition matches always currently - it is kept in this way as a marker
@@ -40,20 +45,25 @@ DEPENDS += " \
 
 # REVISIT: PACKAGECONFIG for optionals
 DEPENDS += " \
-	kwayland \
 	kactivities \
 	kdoctools \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "0ec5dcf4776b7ad9a0231c04f739039d"
-SRC_URI[sha256sum] = "ab4842735dbee91e93f0d0dadb39df4aed234346010caeb3c2fcc230562ac366"
+SRC_URI[md5sum] = "613586192701ed2a0a08acc4a8d78874"
+SRC_URI[sha256sum] = "34b02f5a1ef50390ed90f550e4d15ed806279072a34e7ded2475f32027a8f338"
 
 SRC_URI += " \
     file://0001-fix-build-for-qtbase-without-session-management.patch \
-    file://0002-add-egl-flags-for-compiling.patch \
-    file://0003-eglonxbackend-add-debug-output.patch \
+    file://0002-eglonxbackend-add-debug-output.patch \
+    file://0003-Make-building-of-QPA-wayland-plugin-an-option.patch \
 "
+
+# pure X11 environments fail to build wayland plugin
+EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DKWIN_BUILD_QPA=ON', '-DKWIN_BUILD_QPA=OFF', d)}"
+
+# kwin check libepoxy only -> egl pkgconfig is skipped
+CXXFLAGS_append_mx6 += " -DLINUX=1"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
@@ -74,7 +84,6 @@ FILES_${PN} += " \
     ${libdir}/*.so \
 "
 
-
 FILES_${PN}-dbg += " \
     ${libdir}/*/.debug \
     ${libdir}/*/*/.debug \
@@ -84,3 +93,5 @@ FILES_${PN}-dbg += " \
     ${libdir}/*/*/*/*/*/*/.debug \
     ${libdir}/*/*/*/*/*/*/*/.debug \
 "
+
+REDEPENDS_${PN} += "qtmultimedia"

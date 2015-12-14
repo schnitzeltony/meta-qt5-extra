@@ -41,19 +41,18 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "18fdce9f566050c0f2e7897b2e2df660"
-SRC_URI[sha256sum] = "bfe459234e1bcd8ed5c3a64524061330e92e38ec693099d5007048a483c71d0c"
+SRC_URI[md5sum] = "ac2d460f1e822df9da094c4e23d52bab"
+SRC_URI[sha256sum] = "2338e8b35651c5caf4fe28c99e37e89d56538f8b7c80a367e26af808f4007f04"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
     \
     file://0002-align-phonon-path.patch \
-    file://0003-fix-paths-in-startkde.patch \
-    file://0004-startkde-add-meta-qt5-standard-binary-path-to-PATH.patch \
-    file://0005-startkde-fix-path-for-start_kdeinit_wrapper.patch \
-    file://0006-startkde-create-kde-s-home.patch \
-    file://0007-startkde-enable-starting-X.patch \
-    file://0008-startplasmacompositor.cmake-align-paths.patch \
+    file://0003-startkde-add-meta-qt5-standard-binary-path-to-PATH.patch \
+    file://0004-startkde-fix-path-for-start_kdeinit_wrapper.patch \
+    file://0005-startkde-create-kde-s-home.patch \
+    file://0006-startkde-enable-starting-X.patch \
+    file://0007-startkde-remove-CMAKE_INSTALL_PREFIX-in-XDG_DATA_DIR.patch \
 "
 
 # cross libs / headers

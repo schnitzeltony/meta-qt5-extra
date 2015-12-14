@@ -1,24 +1,26 @@
-From 6bd24445775d64078327f50d3ea834970f4a9231 Mon Sep 17 00:00:00 2001
+From 3e8eab8c8350333d5d86fb52b3a1c89002632ecd Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 28 Aug 2015 22:17:57 +0200
+Date: Fri, 11 Dec 2015 22:33:39 +0100
 Subject: [PATCH] fix build for qtbase without session management
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Upstream-Status: Inappropriate [configuration]
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
  main_x11.cpp  |  2 ++
  sm.cpp        |  4 ++++
- workspace.cpp | 11 ++++++++++-
+ workspace.cpp | 12 ++++++++++--
  workspace.h   |  2 ++
- 4 files changed, 18 insertions(+), 1 deletion(-)
+ 4 files changed, 18 insertions(+), 2 deletions(-)
 
 diff --git a/main_x11.cpp b/main_x11.cpp
-index 5cb1f5d..162bb1b 100644
+index 2c13743..742a5af 100644
 --- a/main_x11.cpp
 +++ b/main_x11.cpp
-@@ -146,10 +146,12 @@ void ApplicationX11::performStartup()
+@@ -148,10 +148,12 @@ void ApplicationX11::performStartup()
          Application::setX11ScreenNumber(QX11Info::appScreen());
      }
  
@@ -32,7 +34,7 @@ index 5cb1f5d..162bb1b 100644
      owner.reset(new KWinSelectionOwner(Application::x11ScreenNumber()));
      connect(owner.data(), &KSelectionOwner::failedToClaimOwnership, []{
 diff --git a/sm.cpp b/sm.cpp
-index 087782d..912450f 100644
+index 6852390..efa2e82 100644
 --- a/sm.cpp
 +++ b/sm.cpp
 @@ -56,6 +56,7 @@ static KConfig *sessionConfig(QString id, QString key)
@@ -63,7 +65,7 @@ index 087782d..912450f 100644
  
  void Workspace::addSessionInfo(KConfigGroup &cg)
 diff --git a/workspace.cpp b/workspace.cpp
-index 43ec3df..efebc9d 100644
+index 078f79f..24b3219 100644
 --- a/workspace.cpp
 +++ b/workspace.cpp
 @@ -159,10 +159,12 @@ Workspace::Workspace(const QString &sessionKey)
@@ -89,20 +91,22 @@ index 43ec3df..efebc9d 100644
          m_initialDesktop = client_info.currentDesktop();
      if (!VirtualDesktopManager::self()->setCurrent(m_initialDesktop))
          VirtualDesktopManager::self()->setCurrent(1);
-@@ -288,7 +292,9 @@ void Workspace::init()
+@@ -288,9 +292,10 @@ void Workspace::init()
      active_client = NULL;
      rootInfo->setActiveWindow(None);
      focusToNull();
 +#ifndef QT_NO_SESSIONMANAGER
      if (!qApp->isSessionRestored())
-+#endif
          ++block_focus; // Because it will be set below
- 
+-
++#endif
      {
-@@ -353,7 +359,10 @@ void Workspace::init()
+         // Begin updates blocker block
+         StackingUpdatesBlocker blocker(this);
+@@ -353,7 +358,10 @@ void Workspace::init()
      } // End updates blocker block
  
-     Client* new_active_client = NULL;
+     AbstractClient* new_active_client = nullptr;
 -    if (!qApp->isSessionRestored()) {
 +#ifndef QT_NO_SESSIONMANAGER
 +    if (!qApp->isSessionRestored())
@@ -112,10 +116,10 @@ index 43ec3df..efebc9d 100644
          new_active_client = findClient(Predicate::WindowMatch, client_info.activeWindow());
      }
 diff --git a/workspace.h b/workspace.h
-index 0da4db7..ffd5cba 100644
+index 0653064..c3c0a02 100644
 --- a/workspace.h
 +++ b/workspace.h
-@@ -433,9 +433,11 @@ private Q_SLOTS:
+@@ -441,9 +441,11 @@ private Q_SLOTS:
      void slotDesktopCountChanged(uint previousCount, uint newCount);
      void slotCurrentDesktopChanged(uint oldDesktop, uint newDesktop);
  
@@ -128,5 +132,5 @@ index 0da4db7..ffd5cba 100644
  Q_SIGNALS:
      /**
 -- 
-2.1.0
+2.5.0
 

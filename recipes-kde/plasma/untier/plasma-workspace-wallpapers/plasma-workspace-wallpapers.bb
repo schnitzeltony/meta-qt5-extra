@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "4dceee9550f7e433aeb2daa2a8dfee82"
-SRC_URI[sha256sum] = "1de6e524506b00a2948c19175292dd02916e19fa9111c66a9dcefab3444bcb8b"
+SRC_URI[md5sum] = "424d4866704ec719ad81d3ff01287b13"
+SRC_URI[sha256sum] = "bf11efae144e3e00623b565aedd5f48e24aba29ec03466d4f5b561e4ff214563"
 
 FILES_${PN} += "${datadir}/wallpapers"
