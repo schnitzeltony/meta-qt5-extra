@@ -24,8 +24,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "913cbf4770c5beed41e48d028e30497e"
-SRC_URI[sha256sum] = "146a1c5ed5052a3ebff4da84f27eabf17667f5a71cb816d12ca6b21cea87eea4"
+SRC_URI[md5sum] = "a3d8f1361e3abcdee7f9b7cc8b6d3c66"
+SRC_URI[sha256sum] = "1132aa80ef8c3548d82d85c50e65b131530efc6318e461670abaa2ed116c7565"
 
 FILES_${PN} += " \
     ${datadir}/kservices5 \
@@ -35,4 +35,5 @@ FILES_${PN} += " \
 
 FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
 "

@@ -21,8 +21,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "91d261e85aa95f22f35b01dd67433b19"
-SRC_URI[sha256sum] = "a6b3074461435b1303b669d6355c1c1a82cff4e15194b3b0dbc5fcb468baf657"
+SRC_URI[md5sum] = "561d6c1e3c3345abbf4d98bd342fdebb"
+SRC_URI[sha256sum] = "acd44e8f445516da50d7f1bfb63036884c8d92b23e529037be3d75319d0fc3fe"
 
 FILES_${PN} += " \
     ${datadir}/kcm_kscreen \
@@ -33,4 +33,5 @@ FILES_${PN} += " \
 
 FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
 "

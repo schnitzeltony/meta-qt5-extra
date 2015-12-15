@@ -23,8 +23,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "3e1a0db7fa30f18df3520ad7af966c0d"
-SRC_URI[sha256sum] = "8ef0f17ca326b839c60cbb59d71b9c8cb94d9c040e94a620291477053ff3ea0d"
+SRC_URI[md5sum] = "d842f1d1b2af27ec72eefd7eb4dd08fd"
+SRC_URI[sha256sum] = "f76205cc39329c683eb03efb5dbc4b3c9e891d55a236f4ccaab437542a6550be"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
@@ -36,5 +36,6 @@ FILES_${PN} += " \
 
 FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
     ${libdir}/kauth/.debug \
 "

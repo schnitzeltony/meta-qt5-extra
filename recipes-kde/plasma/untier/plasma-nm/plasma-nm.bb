@@ -30,6 +30,7 @@ DEPENDS += " \
     kdelibs4support \
     modemmanager-qt \
     networkmanager-qt \
+    qca \
     \
     networkmanager \
 "
@@ -40,8 +41,8 @@ DEPENDS += " \
 # MobileBroadbandProviderInfo
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "d92523a194f29d7a5c08b513e8f39b02"
-SRC_URI[sha256sum] = "a4391942d81dcb1a752ef5e7ec6e84b97c6af598dc2e6c9ad02f3c7464ae9fb2"
+SRC_URI[md5sum] = "d39a576058ff1c8f54f6af1f2894317a"
+SRC_URI[sha256sum] = "0ffac9d50564928136d68c74a2d27f6eab450f51474e5dcceee09cf377420160"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
@@ -56,5 +57,7 @@ FILES_${PN} += " \
 
 FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
+	${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
     ${OE_QMAKE_PATH_QML}/*/*/*/*/.debug \
 "

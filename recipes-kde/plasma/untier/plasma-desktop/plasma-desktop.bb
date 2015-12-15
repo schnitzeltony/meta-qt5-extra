@@ -42,8 +42,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "4039d29843c5a5dc71b2f2f787f634d3"
-SRC_URI[sha256sum] = "846fc39cf73cc94344f1ba68a3640e586c513879820787aa06f5c528892453c5"
+SRC_URI[md5sum] = "022cceb5cd2d2dabc1bcf07522aebdbe"
+SRC_URI[sha256sum] = "d146a98ff75726ae04c2025477f78b8ec1f124475f5f94cd3727045048865fbd"
 
 FILES_SOLIBSDEV = "${libdir}/libkfont*${SOLIBSDEV}"
 
@@ -68,6 +68,7 @@ FILES_${PN}-dbg += " \
     ${libdir}/*/.debug \
     ${OE_QMAKE_PATH_PLUGINS}/.debug \
     ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
     ${OE_QMAKE_PATH_QML}/org/kde/*/*/.debug \
     ${OE_QMAKE_PATH_QML}/org/kde/*/*/*/.debug \
 "

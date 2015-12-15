@@ -21,8 +21,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "992c92983197ddc4826eddfd72721e2e"
-SRC_URI[sha256sum] = "c4a19246a252b2faa4c8f1ac7436c31ceebbba71eb35d445ac784692e76bfd59"
+SRC_URI[md5sum] = "e87f0fdcb7078d7b7976907fd0cc61f8"
+SRC_URI[sha256sum] = "8e1ba18e0760eda6874d2874db8ccb5a93f3f5820b10f692ca88ac6e4440245b"
 
 FILES_SOLIBSDEV = "${libdir}/libmuonprivate${SOLIBSDEV}"
 

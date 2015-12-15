@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma
 
 DEPENDS += " \
+    plasma-framework \
     ki18n \
     kcoreaddons \
     kguiaddons \
@@ -22,8 +23,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "18a2661718d8f24beb591a9f08cc3942"
-SRC_URI[sha256sum] = "77a8d5732437ccb1cec08aa1c89ab409e75aa8cd55940e49cc6ab45d72445c49"
+SRC_URI[md5sum] = "a57b24aed93ac3d2f50995a0a7fcfb07"
+SRC_URI[sha256sum] = "7cc284bcad00fc7505c76e6d6baff5f953a4aa03fd1ebfcd6729a383a293900d"
 
 FILES_${PN} += " \
     ${datadir}/color-schemes \

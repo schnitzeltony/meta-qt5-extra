@@ -13,8 +13,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "a411e34f491faf15b62517654c48debb"
-SRC_URI[sha256sum] = "83f75c47336bf12815960010fb3e44238ef2af3ba76b72ff07a67f8599740370"
+SRC_URI[md5sum] = "7a437d07e7dff6665c1978540fe577b4"
+SRC_URI[sha256sum] = "5e2c38a436293ec4ba2f19237614e254a799808ee232818a053d439e5b8761ec"
 
 SRC_URI += " \
     file://0001-fix-configuration-build-on-x-less-systems.patch \
@@ -22,6 +22,7 @@ SRC_URI += " \
 
 
 FILES_${PN} += " \
+    ${datadir}/dbus-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
