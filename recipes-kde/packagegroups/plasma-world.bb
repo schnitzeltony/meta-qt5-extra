@@ -44,6 +44,7 @@ UNTIER = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "plasma-desktop", "",d)} \
     plasma-mediacenter \
     plasma-nm \
+    plasma-pa \
     plasma-workspace-wallpapers \
     polkit-kde-agent-1 \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "powerdevil", "",d)} \
