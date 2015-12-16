@@ -31,16 +31,17 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "bf64d612d33c73c51841d74540cc119f"
-SRC_URI[sha256sum] = "e37e1c890cd8b0d1522a8baabc120bfac29912d52c14ee34222c099ba281d1ea"
+SRC_URI[md5sum] = "5b0f2f31497c81870f3ccc68e3e7a5fa"
+SRC_URI[sha256sum] = "50bab98ec5c364cf57a5ea93b0ad7cd067b48a6115d5c4e3ef440398de0d295e"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Plasma, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Plasma, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
-    ${datadir}/k*5 \
+    ${datadir}/kdevappwizard \
     ${datadir}/dbus-1 \
+    ${datadir}/k*5 \
     ${datadir}/plasma \
     \
     ${OE_QMAKE_PATH_PLUGINS} \
