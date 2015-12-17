@@ -33,7 +33,7 @@ index b5d8ffe..538d7c8 100644
 -    DBusAddons DNSSD Declarative
 +    DBusAddons DNSSD
      I18n GuiAddons Service ConfigWidgets ItemViews IconThemes Completion JobWidgets TextWidgets GlobalAccel XmlGui Crash
-     Bookmarks KIO NewStuff KDELibs4Support)
+     Bookmarks KIO NewStuff)
  
 +if(BUILD_KGDECLARATIVE)
 +    find_package(KF5 REQUIRED COMPONENTS Declarative)
@@ -81,5 +81,5 @@ index b5d8ffe..538d7c8 100644
  
  set(KDEGAMES_VERSION 7.0.0)
 -- 
-2.1.0
+2.5.0
 

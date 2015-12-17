@@ -8,14 +8,14 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- kate/src/kateapp.cpp | 2 ++
- kwrite/kwrite.cpp    | 2 ++
+ kate/kateapp.cpp   | 2 ++
+ kwrite/kwrite.cpp  | 2 ++
  2 files changed, 4 insertions(+)
 
-diff --git a/kate/src/kateapp.cpp b/kate/src/kateapp.cpp
+diff --git a/kate/kateapp.cpp b/kate/kateapp.cpp
 index 03fd159..ae2c793 100644
---- a/kate/src/kateapp.cpp
-+++ b/kate/src/kateapp.cpp
+--- a/kate/kateapp.cpp
++++ b/kate/kateapp.cpp
 @@ -121,6 +121,7 @@ bool KateApp::init()
  
  void KateApp::restoreKate()

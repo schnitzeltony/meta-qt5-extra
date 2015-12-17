@@ -9,15 +9,15 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- kate/src/kateapp.cpp        | 5 ++++-
- kate/src/katemainwindow.cpp | 2 ++
+ kate/kateapp.cpp            | 5 ++++-
+ kate/katemainwindow.cpp     | 2 ++
  kwrite/main.cpp             | 5 ++++-
  3 files changed, 10 insertions(+), 2 deletions(-)
 
 diff --git a/kate/src/kateapp.cpp b/kate/src/kateapp.cpp
 index 4c26f33..03fd159 100644
---- a/kate/src/kateapp.cpp
-+++ b/kate/src/kateapp.cpp
+--- a/kate/kateapp.cpp
++++ b/kate/kateapp.cpp
 @@ -99,10 +99,13 @@ bool KateApp::init()
      // set KATE_PID for use in child processes
      qputenv("KATE_PID", QString::fromLatin1("%1").arg(QCoreApplication::applicationPid()).toLatin1().constData());
@@ -35,8 +35,8 @@ index 4c26f33..03fd159 100644
          if (!startupKate()) {
 diff --git a/kate/src/katemainwindow.cpp b/kate/src/katemainwindow.cpp
 index 464e20c..8efc401 100644
---- a/kate/src/katemainwindow.cpp
-+++ b/kate/src/katemainwindow.cpp
+--- a/kate/katemainwindow.cpp
++++ b/kate/katemainwindow.cpp
 @@ -467,9 +467,11 @@ bool KateMainWindow::queryClose()
  {
      // session saving, can we close all views ?
