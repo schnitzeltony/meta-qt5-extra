@@ -6,7 +6,7 @@ inherit kde-base cmake-lib
 
 DEPENDS += "polkit glib-2.0"
 
-SRC_URI = "http://download.kde.org/stable/apps/KDE4.x/admin/${BPN}-${PV}.tar.bz2"
+SRC_URI = "${KDE_MIRROR}/stable/apps/KDE4.x/admin/${BPN}-${PV}.tar.bz2"
 SRC_URI[md5sum] = "bee71b71c12797e6fc498540a06c829b"
 SRC_URI[sha256sum] = "67fb03bf6ca3e0bdbd98d374dfb5b1651a07d17ae6c23e11a81b4b084447e7c6"
 
