@@ -14,4 +14,5 @@ RDEPENDS_${PN} = " \
     konsole \
     kwalletmanager \
     marble \
+    spectacle \
 "
