@@ -16,6 +16,7 @@ DEPENDS += " \
     kdbusaddons \
 "
 
+SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}.tar.xz"
 SRC_URI[md5sum] = "004e91140a482d16cdd749aafcede0ba"
 SRC_URI[sha256sum] = "4f6164687077fc1042ab9e873c71afab9ed7689d9963e0f3d34fa19291d2c6da"
 
