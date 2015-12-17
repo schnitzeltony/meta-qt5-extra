@@ -1,4 +1,4 @@
-SUMMARY = "Support for bookmarks and the XBEL format"
+SUMMARY = "Plasma workspace, applications and applets"
 LICENSE = "GPLv2 & LGPLv2.1 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
@@ -41,8 +41,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "9007fe743784f6b1f04956cbd3429fec"
-SRC_URI[sha256sum] = "b8423fe5b8f6ef08f5c187320a58538dde37cb47263371bc8e1de2f9619eaecd"
+SRC_URI[md5sum] = "eefa12bd529d8df31852bb6472c2bcd1"
+SRC_URI[sha256sum] = "7e91dac2301975ae8ee788deddc9e4ac8c5f699865e85d09cefe0f9f29ac3705"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
