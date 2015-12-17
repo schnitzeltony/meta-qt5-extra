@@ -18,6 +18,7 @@ TIER_3 = " \
 UNTIER = " \
     bluedevil \
     breeze \
+    breeze-gtk \
     discover \
     kde-cli-tools \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kde-gtk-config", "",d)} \
