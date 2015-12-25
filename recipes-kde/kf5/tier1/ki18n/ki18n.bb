@@ -7,7 +7,7 @@ CMAKE_ALIGN_SYSROOT[1] = "KF5I18n, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5I18n, -S${includedir}, -S${STAGING_INCDIR}"
 # revisit python?
 
-DEPENDS += "${BPN}-native qtscript"
+DEPENDS += "${BPN}-native qtscript qtdeclarative"
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/kf5"
 FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/kf5/.debug"
