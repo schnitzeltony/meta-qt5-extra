@@ -11,6 +11,14 @@ do_configure_append() {
 	sed -i 's:\./parsetrigrams:${STAGING_BINDIR_NATIVE}/parsetrigrams:' ${B}/data/CMakeFiles/trigrams_sonnet.dir/build.make
 }
 
+FILES_${PN} += " \
+    ${OE_QMAKE_PATH_PLUGINS}/kf5/sonnet \
+"
+
+FILES_${PN}-dbg += " \
+    ${OE_QMAKE_PATH_PLUGINS}/kf5/sonnet/.debug \
+"
+
 CMAKE_ALIGN_SYSROOT[1] = "KF5Sonnet, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Sonnet, -S${includedir}, -S${STAGING_INCDIR}"
 
