@@ -1,4 +1,5 @@
 SUMMARY = "Katomic is a fun and educational game built around molecular geometry"
+DESCRIPTION = "KAtomic is a fun educational game built around molecular geometry. It employs simplistic two-dimensional looks at different chemical elements."
 LICENSE = "GPLv2 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
