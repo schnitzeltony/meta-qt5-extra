@@ -1,4 +1,5 @@
 SUMMARY = "KBounce is a single player arcade game with the elements of puzzle"
+DESCRIPTION = "KBounce is a single player arcade game with the elements of puzzle. It is played on a field, surrounded by wall, with two or more balls bouncing around within the walls. The object of the game is to build new walls to decrease the size of the active field."
 LICENSE = "GPLv2 & LGPLv2 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
