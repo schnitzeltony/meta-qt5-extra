@@ -42,8 +42,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "022cceb5cd2d2dabc1bcf07522aebdbe"
-SRC_URI[sha256sum] = "d146a98ff75726ae04c2025477f78b8ec1f124475f5f94cd3727045048865fbd"
+SRC_URI[md5sum] = "ed01bcf7d3ad8a8e398d8d9ee489e971"
+SRC_URI[sha256sum] = "15e4f5f4b7fe8a2cfc9abb4bb922cd4b83c9dabbcb23273c15e284213cbcabf0"
 
 FILES_SOLIBSDEV = "${libdir}/libkfont*${SOLIBSDEV}"
 

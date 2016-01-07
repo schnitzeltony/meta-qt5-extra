@@ -26,8 +26,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "92c0ca61f88001e91eedab5921b312cc"
-SRC_URI[sha256sum] = "be81e0cd40d16c6c103e06d9222d3e5171d8ccadc99dbb54abd4e825738fb48b"
+SRC_URI[md5sum] = "56ef7525e72457deed301d947a2cb4cd"
+SRC_URI[sha256sum] = "7b71f0b34fb7a1fb9775f6ef416c7f32d4133cc302af3d5d8ef93d7fc1d45197"
 SRC_URI += "file://0001-use-pkgconfig-to-find-taglib.patch"
 
 FILES_${PN} += " \
