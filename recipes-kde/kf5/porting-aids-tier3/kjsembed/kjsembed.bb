@@ -16,8 +16,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "c38861c6dec77d27ede32cb0be49f721"
-SRC_URI[sha256sum] = "fa615df2ce0bd31a14f7c6a6f5811221234e91c1364681988eb25dc1da3da22a"
+SRC_URI[md5sum] = "a3d27a96247c55ea52df34f1cbbc1b2a"
+SRC_URI[sha256sum] = "6dcc5fd2e53230076404e905416369d43f8f746c2267a746a0a65ecdbd3af856"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5JsEmbed, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
