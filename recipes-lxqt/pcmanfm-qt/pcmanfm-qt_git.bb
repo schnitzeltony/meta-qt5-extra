@@ -11,4 +11,4 @@ DEPENDS += "qtx11extras glib-2.0 libxcb libfm menu-cache"
 SRCREV = "aa00f0639f659f20185c4ae4cfe9ad3ca6467baa"
 PV = "0.10.0"
 
-RRECOMMENDS_${PN} = "gvfs gvfsd-trash udisks eject"
+RRECOMMENDS_${PN} = "gvfs gvfsd-trash eject"
