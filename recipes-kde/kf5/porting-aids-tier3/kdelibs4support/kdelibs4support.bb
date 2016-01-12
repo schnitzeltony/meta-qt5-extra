@@ -36,6 +36,11 @@ DEPENDS += " \
 # uncomment for broken gelib getaddr / AI_PASSIVE
 #EXTRA_OECMAKE += "-DHAVE_GOOD_GETADDRINFO=OFF"
 
+do_compile_prepend() {
+    # Error: Could not locate service type file kservicetypes5/ "kdedmodule.desktop" , tried ...
+    export XDG_DATA_HOME=${STAGING_DATADIR}
+}
+
 do_configure_append() {
     # fix KCONFIG_COMPILER_LOCATION
     sed -i 's:${STAGING_LIBDIR_NATIVE}:${libdir}:g' ${B}/src/config-kstandarddirs.h
