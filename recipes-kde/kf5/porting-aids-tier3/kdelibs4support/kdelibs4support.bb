@@ -29,6 +29,7 @@ DEPENDS += " \
     kwidgetsaddons \
     kwindowsystem \
     kxmlgui \
+    kded \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 
