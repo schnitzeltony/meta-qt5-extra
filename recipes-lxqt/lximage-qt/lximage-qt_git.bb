@@ -8,7 +8,7 @@ inherit lxqt pkgconfig distro_features_check gtk-icon-cache mime
 
 DEPENDS += "qtx11extras glib-2.0 libexif pcmanfm-qt libxfixes"
 
-SRCREV = "a68b3d7a9f86f8d8013717bc2ff8d76f32da3acc"
+SRCREV = "9c4fc7cb60480c787cd87062dc63d62dcc699a78"
 PV = "0.4.0+git${SRCPV}"
 
 FILES_${PN} += "${datadir}/icons"
