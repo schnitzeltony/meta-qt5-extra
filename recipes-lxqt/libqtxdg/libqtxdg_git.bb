@@ -7,6 +7,7 @@ inherit lxqt cmake-lib
 # libmagic is supplied by file
 DEPENDS += "file"
 
+SRC_URI += "file://0001-xdgdesktopfile-handle-Path-entry-for-working-directo.patch"
 SRCREV = "b65a324bcd2fc498f8a01eb56dfb54ae05e9b0b2"
 PV = "1.3.0"
 
