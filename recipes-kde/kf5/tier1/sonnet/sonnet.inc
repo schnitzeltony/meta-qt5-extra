@@ -7,3 +7,4 @@ inherit kde-kf5
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "8fb3c2fac12e7c2671c3318f41bc4161"
 SRC_URI[sha256sum] = "6ffa49bab59dba0080c03a8b7863efd53006239350f634575b4aabe9f496009d"
+SRC_URI += "file://0003-make-build-of-hunspell-optional.patch"
