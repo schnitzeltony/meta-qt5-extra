@@ -63,7 +63,21 @@ CMAKE_ALIGN_SYSROOT[4] = "LibTaskManager, -S${includedir}, -S${STAGING_INCDIR}"
 
 # REVISIT
 FILES_${PN} += " \
-    ${datadir} \
+    ${datadir}/config.kcfg \
+    ${datadir}/k*5 \
+    ${datadir}/dbus-1 \
+    ${datadir}/kstyle \
+    ${datadir}/wayland-sessions \
+    ${datadir}/ksplash \
+    ${datadir}/drkonqi \
+    ${datadir}/kio_desktop \
+    ${datadir}/solid \
+    ${datadir}/xsessions \
+    ${datadir}/desktop-directories \
+    ${datadir}/sddm \
+    ${datadir}/plasma \
+    ${datadir}/ksmserver \
+    \
     ${libdir}/libkdeinit5*.so \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
