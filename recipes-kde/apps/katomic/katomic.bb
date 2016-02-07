@@ -30,5 +30,8 @@ SRC_URI[sha256sum] = "a685a3107790bea5e12e1230f41d96d77660b52f56510ede6f9d4c55bf
 SRC_URI += "file://0001-fix-build-for-qtbase-build-without-session-support-Q.patch"
 
 FILES_${PN} += " \
-    ${datadir} \
+    ${datadir}/kxmlgui5 \
+    ${datadir}/kconf_update \
+    ${datadir}/icons \
+    ${datadir}/appdata \
 "
