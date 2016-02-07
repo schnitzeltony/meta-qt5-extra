@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit kde-kf5 cmake-lib cmake-auto-align-paths
+inherit kde-kf5 cmake-lib cmake-auto-align-paths gtk-icon-cache
 
 DEPENDS += " \
     ki18n \
