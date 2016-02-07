@@ -32,5 +32,10 @@ SRC_URI[sha256sum] = "81573caf0d2110c0c4ea934c91fb7d117dbc6ec40b9c7227f4283f50e3
 CMAKE_ALIGN_SYSROOT[1] = "KF5SysGuard, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5SysGuard, -S${includedir}, -S${STAGING_INCDIR}"
 
-FILES_${PN} += "${datadir} ${libdir}/kauth"
+FILES_${PN} += " \
+    ${datadir}/dbus-1 \
+    ${datadir}/polkit-1 \
+    ${datadir}/ksysguard \
+    ${libdir}/kauth \
+"
 FILES_${PN}-dbg += "${libdir}/kauth/.debug"
