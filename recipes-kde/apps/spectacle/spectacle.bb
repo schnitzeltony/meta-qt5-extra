@@ -1,4 +1,4 @@
-SUMMARY = "he new screenshot capture utility, replaces KSnapshot"
+SUMMARY = "The new screenshot capture utility, replaces KSnapshot"
 LICENSE = "GPLv2 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
@@ -27,8 +27,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "bedebdd924cf5a650c87b1306d4e6a94"
-SRC_URI[sha256sum] = "303b4739c544e3292a19f4cca4b8f8627f4430b18deb87dbe3e189324974ce7a"
+SRC_URI[md5sum] = "c319447edf42728269b51c3d4ed45704"
+SRC_URI[sha256sum] = "1e645572beb06ef3760b79b0199415e92da5f334e50e45d024f3bb825e127b46"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \

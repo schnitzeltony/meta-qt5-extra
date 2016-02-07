@@ -1,6 +1,6 @@
 inherit kde-base
 
-KDE_APP_VERSION = "15.12.0"
+KDE_APP_VERSION = "15.12.1"
 
 SRC_URI = "${KDE_MIRROR}/stable/applications/${PV}/src/${BPN}-${PV}.tar.xz"
 
