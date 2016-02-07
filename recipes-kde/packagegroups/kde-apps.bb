@@ -15,4 +15,5 @@ RDEPENDS_${PN} = " \
     kwalletmanager \
     marble \
     spectacle \
+    umbrello \
 "
