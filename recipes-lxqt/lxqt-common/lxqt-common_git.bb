@@ -14,7 +14,10 @@ SRCREV = "dd50e284b05e00f749a8cc513c024d212ecda68e"
 PV = "0.10.0"
 
 FILES_${PN} += " \
-    ${datadir} \
+    ${datadir}/kdm \
+    ${datadir}/xsessions \
+    ${datadir}/desktop-directories \
+    ${datadir}/lxqt \
 "
 
 RRECOMMENDS_${PN} += "oxygen qtsvg-plugins"
