@@ -8,6 +8,7 @@ RDEPENDS_${PN} = " \
     ark \
     dolphin \
     dolphin-plugins \
+    dragon \
     filelight \
     kate \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
