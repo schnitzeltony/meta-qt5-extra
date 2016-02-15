@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1"
 inherit kde-kf5-porting-aids perlnative
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "332bd1a8e3d131a5cd7774f3d1092bc3"
-SRC_URI[sha256sum] = "c23439fe7373d5e1e153e7e0f67ee6bb573da901659bb67068740f0dbda0097d"
+SRC_URI[md5sum] = "c81cc309513c4c7f075e0e922a3bceff"
+SRC_URI[sha256sum] = "4eb91a5337a9d35946a0b810991ddb8f0102d7197b3c2040dd452c28cc09a022"
 SRC_URI += "file://0001-create_hash_table-avoid-polution-of-files-with-build.patch"

@@ -22,6 +22,6 @@ FILES_${PN}-dbg += " \
 CMAKE_ALIGN_SYSROOT[1] = "KF5Sonnet, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Sonnet, -S${includedir}, -S${STAGING_INCDIR}"
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "hunspell"
 PACKAGECONFIG[hunspell] = "-DBUILD_HUNSPELL=ON,-DBUILD_HUNSPELL=OFF, hunspell"
 

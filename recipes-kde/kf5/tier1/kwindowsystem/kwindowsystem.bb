@@ -10,8 +10,8 @@ DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx1
 
 PV = "${KF5_VERSION}"
 SRC_URI += "file://0001-config-kwindowsystem.h.cmake-fix-path-to-plugins.patch"
-SRC_URI[md5sum] = "c1a5c3dee013ee189d3279a9e58189e3"
-SRC_URI[sha256sum] = "67567ba32268d0a5365106b7e98e69eb77880271580c68adbf0d128f32691f06"
+SRC_URI[md5sum] = "5e4a9cbe3d4217062c8656833db641f8"
+SRC_URI[sha256sum] = "9039b4bc6143ccccb98af60d4bcc813ea6c211b4f425c335fb499293c9d0bd84"
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}"
 FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/*/*/.debug"

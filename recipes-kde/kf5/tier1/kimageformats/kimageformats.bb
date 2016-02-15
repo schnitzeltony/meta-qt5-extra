@@ -9,8 +9,8 @@ inherit kde-kf5
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "023449bdce8c1dd8241bafafed7c006a"
-SRC_URI[sha256sum] = "cc5e4977fe26278374f1b18cc1225a7e921b5401cea2bc95f35893ae0960dff8"
+SRC_URI[md5sum] = "678b42ebec88ce18ac0c85d539fada01"
+SRC_URI[sha256sum] = "656fffdc4fc60535afdbd17f7e031a9d399f88f0080a33bf6a9659b00cfbb1f9"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \

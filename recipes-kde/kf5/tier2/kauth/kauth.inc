@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "2732f1ad8224a63fe7a89e7471b6c29c"
-SRC_URI[sha256sum] = "96803c911621798ea1dc4df17c93691c762e4abc8d2ae010613a0cbed8f17b92"
+SRC_URI[md5sum] = "ab6498a04ed69236cb582677df829c91"
+SRC_URI[sha256sum] = "5a7777cc81a5c96876ae670ab56fc5c2ae92c347dca3e468bd59c009058ca93a"
 
 SRC_URI += " \
 	file://0001-Make-autotests-optional.patch \

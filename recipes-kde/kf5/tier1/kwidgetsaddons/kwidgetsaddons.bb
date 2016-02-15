@@ -10,8 +10,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "qttools"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "13f7cdb060d00905021f63ce24705219"
-SRC_URI[sha256sum] = "61eebbe729dba31fccfdd1178e50d4c2c9e4b221f193f2a0d2e57ec6d9f9d819"
+SRC_URI[md5sum] = "b1b37d5c240ad5dea9c43012282beb7e"
+SRC_URI[sha256sum] = "7547ee8fb0e532fa95bb6e3fd00ede672c1b4c7fdfc38a5dfcf715d9c0b3052d"
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5WidgetsAddons, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5WidgetsAddons, -S${includedir}, -S${STAGING_INCDIR}"
