@@ -30,7 +30,7 @@ SRC_URI[sha256sum] = "800eb9971497719c26c380cac168fa5530ae057b8643f18f83ea31dd08
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
-    ${datadir}/kxmlgui5 \
+    ${datadir}/k*5 \
     ${datadir}/icons \
 "
 
