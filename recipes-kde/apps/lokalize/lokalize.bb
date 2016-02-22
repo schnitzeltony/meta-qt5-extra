@@ -33,3 +33,5 @@ FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
     ${datadir}/icons \
 "
+
+RDEPENDS_${PN} += "translate-toolkit"
