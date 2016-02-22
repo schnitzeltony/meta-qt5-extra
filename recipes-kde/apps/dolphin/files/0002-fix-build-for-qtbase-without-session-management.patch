@@ -21,7 +21,7 @@ index f7a7613..127cd85 100644
      // by the session manager because the session is closed
      bool closedByUser = true;
 +#ifndef QT_NO_SESSIONMANAGER
-     if (qApp->isSessionRestored()) {
+     if (qApp->isSavingSession()) {
          closedByUser = false;
      }
 +#endif
