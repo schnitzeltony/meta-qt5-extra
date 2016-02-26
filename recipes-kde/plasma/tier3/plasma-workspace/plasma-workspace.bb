@@ -49,10 +49,9 @@ SRC_URI += " \
     \
     file://0002-align-phonon-path.patch \
     file://0003-startkde-add-meta-qt5-standard-binary-path-to-PATH.patch \
-    file://0004-startkde-fix-path-for-start_kdeinit_wrapper.patch \
-    file://0005-startkde-create-kde-s-home.patch \
-    file://0006-startkde-enable-starting-X.patch \
-    file://0007-startkde-remove-CMAKE_INSTALL_PREFIX-in-XDG_DATA_DIR.patch \
+    file://0004-startkde-create-kde-s-home.patch \
+    file://0005-startkde-enable-starting-X.patch \
+    file://0006-startkde-remove-CMAKE_INSTALL_PREFIX-in-XDG_DATA_DIR.patch \
 "
 
 # cross libs / headers
