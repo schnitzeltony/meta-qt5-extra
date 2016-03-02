@@ -41,8 +41,8 @@ DEPENDS += " \
 # MobileBroadbandProviderInfo
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "70287df57f1869801d4cab8179c20f2e"
-SRC_URI[sha256sum] = "61e0e2e4c39ac378ba6d038293505daa5a77946dd5590f1889a4e3bc95664e2e"
+SRC_URI[md5sum] = "aca9ce83f32cef45ee48b7bad3bcdfa5"
+SRC_URI[sha256sum] = "84a7c845eb5f5043a48189c4ffb0ace30a5766da81396a9081a3ac1bb8f3ce75"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

@@ -14,8 +14,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "5a2b6d89e9ae11abe0d4b04c372fbaa8"
-SRC_URI[sha256sum] = "5e3a5489680a418b5d5144dc3d8d862d9781a2b02e5a738d39f6d587e53b7b1f"
+SRC_URI[md5sum] = "2a2b4ede7e3e00942d78311af62ebf8f"
+SRC_URI[sha256sum] = "482ee3482eca54714327a72e35deab59df15c388cef5b5cc9f4c15df9da554c6"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
