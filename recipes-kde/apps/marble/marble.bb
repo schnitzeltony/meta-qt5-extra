@@ -37,6 +37,9 @@ PACKAGES =+ " \
     ${PN}-designer-plugin-dbg ${PN}-designer-plugin \
 "
 
+FILES_SOLIBSDEV = ""
+
+FILES_${PN}-dev += "${libdir}/libastro.so ${libdir}/libmarblewidget-qt5.so"
 FILES_${PN}-mobile = "${bindir}/${BPN}-mobile"
 FILES_${PN}-qt = "${bindir}/${BPN}-qt"
 FILES_${PN}-touch = "${bindir}/${BPN}-touch"
@@ -46,6 +49,7 @@ FILES_${PN} += " \
     ${datadir}/icons \
     ${datadir}/k*5 \
     ${datadir}/appdata \
+    ${libdir}/libmarbledeclarative.so \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
