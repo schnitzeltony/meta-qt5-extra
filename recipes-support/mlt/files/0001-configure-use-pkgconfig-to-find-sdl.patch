@@ -24,8 +24,8 @@ index ef3ec8d..be28cbb 100755
  
  		case $targetos in
  		Darwin)
--		echo "CFLAGS+=-fPIC -D__DARWIN__ `sdl-config --cflags`"
-+		echo "CFLAGS+=-fPIC -D__DARWIN__ `pkg-config --cflags sdl`"
+-                echo "CFLAGS+=-fPIC `sdl-config --cflags`"
++                echo "CFLAGS+=-fPIC `pkg-config --cflags sdl`"
  		echo "SHFLAGS=-dynamiclib"
 -		echo "LDFLAGS+=`sdl-config --libs`"
 +		echo "LDFLAGS+=`pkg-config --libs sdl`"

@@ -27,8 +27,8 @@ SRC_URI = " \
     https://github.com/mltframework/${BPN}/archive/v${PV}.tar.gz \
     file://0001-configure-use-pkgconfig-to-find-sdl.patch \
 "
-SRC_URI[md5sum] = "57397f2f0fa0545c248c5e9b59c140d5"
-SRC_URI[sha256sum] = "1214d6ad7fd1c3d36f0b1e64fd1c8d8a7ab6290e8452396003e79d58c0d21074"
+SRC_URI[md5sum] = "df4909bbf3dacb1186b5c1bd2aeef568"
+SRC_URI[sha256sum] = "34f0cb60eb2e7400e9964de5ee439851b3e51a942206cccc2961fd41b42ee5d2"
 
 inherit autotools-brokensep pkgconfig
 
