@@ -1,24 +1,26 @@
-From 80a6a407f3e868be9203c98d38f5471141e2014c Mon Sep 17 00:00:00 2001
+From 09db90cefb2d466e143ee655e3a10220d86fb88b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 22 Jul 2015 00:53:39 +0200
-Subject: [PATCH] align binary installation folders
+Date: Sat, 5 Mar 2016 22:28:58 +0100
+Subject: [PATCH 3/3] align binary installation folders
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Upstream-Status: Inappropriate [configuration]
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- qt/antimony.pro | 6 +++---
+ app/app.pro | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/qt/antimony.pro b/qt/antimony.pro
-index 9d586f4..9c423f8 100644
---- a/qt/antimony.pro
-+++ b/qt/antimony.pro
-@@ -125,11 +125,11 @@ macx {
- }
+diff --git a/app/app.pro b/app/app.pro
+index 5559ab2..e425c55 100644
+--- a/app/app.pro
++++ b/app/app.pro
+@@ -39,11 +39,11 @@ linux {
+     # Rename file from "Antimony" to "antimony"
+     QMAKE_POST_LINK += $(MOVE) $$OUT_PWD/$${TARGET} $$OUT_PWD/$$lower($${TARGET})
  
- linux {
 -    executable.path = /usr/local/bin
 +    executable.path = /usr/bin
      executable.files = antimony
@@ -31,5 +33,5 @@ index 9d586f4..9c423f8 100644
      INSTALLS += executable nodes_folder fab_folder
  }
 -- 
-1.9.3
+2.5.0
 

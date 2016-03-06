@@ -1,0 +1,33 @@
+From f2e5c5cf4db97d328dc171d42360b8bb09125f4d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 6 Mar 2016 22:40:18 +0100
+Subject: [PATCH] do not hard link to python version we don't have
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ qt/python.pri | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/qt/python.pri b/qt/python.pri
+index d51935a..f28bb25 100644
+--- a/qt/python.pri
++++ b/qt/python.pri
+@@ -17,10 +17,6 @@ linux {
+     QMAKE_CXXFLAGS += $$system(python3-config --includes)
+     QMAKE_LFLAGS   += $$system(python3-config --ldflags)
+ 
+-    # Even though this is in QMAKE_LFLAGS, the linker is picky about
+-    # library ordering (so it needs to be here too).
+-    LIBS += -lpython3.4m
+-
+     # ldconfig is being used to find libboost_python, but it's in a different
+     # place in different distros (and is not in the default $PATH on Debian).
+     # First, check to see if it's on the default $PATH.
+-- 
+2.5.0
+
