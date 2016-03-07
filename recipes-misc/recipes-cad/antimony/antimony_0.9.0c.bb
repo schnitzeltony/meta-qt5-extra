@@ -12,7 +12,8 @@ SRC_URI = " \
     file://0002-hardcode-boost_python3-library-detection-wont-t-work.patch \
     file://0003-align-binary-installation-folders.patch \
     file://0004-do-not-hard-link-to-python-version-we-don-t-have.patch \
-    file://0005-Change-isinf-to-std-isinf.patch \
+    file://0005-v2syntax-add-missing-include.patch \
+    file://0006-Change-isinf-to-std-isinf.patch \
 "
 SRC_URI[md5sum] = "2df03f0a8b6d7db21c24dcf20142297e"
 SRC_URI[sha256sum] = "78f22836ede812fa5bb283779ea6ada8568caf76fa4ab0473ee00d2d544b0aa4"

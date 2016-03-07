@@ -1,0 +1,45 @@
+From 275eee8b5efbd765f71918068758cbcf724fb9c4 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 7 Mar 2016 09:51:42 +0100
+Subject: [PATCH] v2syntax: add missing include
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+| ../../../antimony-0.9.0c/lib/fab/src/tree/v2syntax.c:1130:46: error: 'memset' was not declared in this scope
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ lib/fab/src/tree/v2syntax.l | 1 +
+ lib/fab/src/tree/v2syntax.y | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/lib/fab/src/tree/v2syntax.l b/lib/fab/src/tree/v2syntax.l
+index c8e69be..0fbe7bb 100644
+--- a/lib/fab/src/tree/v2syntax.l
++++ b/lib/fab/src/tree/v2syntax.l
+@@ -2,6 +2,7 @@
+ %{
+ 	#include <math.h>
+ 	#include <stdlib.h>
++	#include <string.h>
+ 	#include "fab/tree/v2parser.hpp"
+ 	#include "v2syntax.lemon.hpp"
+ %}
+diff --git a/lib/fab/src/tree/v2syntax.y b/lib/fab/src/tree/v2syntax.y
+index 2e698a9..30c8f16 100644
+--- a/lib/fab/src/tree/v2syntax.y
++++ b/lib/fab/src/tree/v2syntax.y
+@@ -2,6 +2,7 @@
+ 	#include <math.h>
+ 	#include <cassert>
+ 	#include <iostream>
++	#include <string.h>
+ 	#include "fab/tree/v2parser.hpp"
+ 
+ 	extern "C"
+-- 
+2.5.0
+
