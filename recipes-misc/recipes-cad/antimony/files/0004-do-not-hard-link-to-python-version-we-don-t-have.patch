@@ -17,17 +17,15 @@ diff --git a/qt/python.pri b/qt/python.pri
 index d51935a..f28bb25 100644
 --- a/qt/python.pri
 +++ b/qt/python.pri
-@@ -17,10 +17,6 @@ linux {
-     QMAKE_CXXFLAGS += $$system(python3-config --includes)
-     QMAKE_LFLAGS   += $$system(python3-config --ldflags)
+@@ -19,7 +19,7 @@ linux {
  
--    # Even though this is in QMAKE_LFLAGS, the linker is picky about
--    # library ordering (so it needs to be here too).
+     # Even though this is in QMAKE_LFLAGS, the linker is picky about
+     # library ordering (so it needs to be here too).
 -    LIBS += -lpython3.4m
--
++    LIBS += -lpython3.5m
+ 
      # ldconfig is being used to find libboost_python, but it's in a different
      # place in different distros (and is not in the default $PATH on Debian).
-     # First, check to see if it's on the default $PATH.
 -- 
 2.5.0
 
