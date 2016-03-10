@@ -8,8 +8,8 @@ inherit lxqt cmake-lib pkgconfig distro_features_check
 
 DEPENDS += "qtx11extras glib-2.0 libfm menu-cache"
 
-SRCREV = "a197e6d919d28b83dd5c97984d424ece5c2d9b69"
-PV = "0.10.0+git${SRCPV}"
+SRCREV = "6f4782e12b9a1789a6d49e51e1f98e04ede2e896"
+PV = "0.11.0"
 
 CMAKE_ALIGN_SYSROOT[1] = "fm-qt, -S${includedir}, -S${STAGING_INCDIR}"
 CMAKE_ALIGN_SYSROOT[2] = "fm-qt, -S${libdir}, -S${STAGING_LIBDIR}"
