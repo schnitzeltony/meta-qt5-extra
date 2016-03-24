@@ -1,0 +1,25 @@
+From 1df061b358085e23b19b50359e54a24721172755 Mon Sep 17 00:00:00 2001
+From: "Luis Gustavo S. Barreto" <gustavo@ossystems.com.br>
+Date: Wed, 23 Mar 2016 18:02:28 -0300
+Subject: [PATCH] Fix kdeinit path
+
+---
+ startkde/startkde.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/startkde/startkde.cmake b/startkde/startkde.cmake
+index 48e45b1..1361e1c 100644
+--- a/startkde/startkde.cmake
++++ b/startkde/startkde.cmake
+@@ -365,7 +365,7 @@ fi
+ 
+ # We set LD_BIND_NOW to increase the efficiency of kdeinit.
+ # kdeinit unsets this variable before loading applications.
+-LD_BIND_NOW=true @CMAKE_INSTALL_FULL_LIBEXECDIR_KF5@/start_kdeinit_wrapper --kded +kcminit_startup
++LD_BIND_NOW=true @CMAKE_INSTALL_LIBDIR@/kinit/kf5/start_kdeinit_wrapper --kded +kcminit_startup
+ if test $? -ne 0; then
+   # Startup error
+   echo 'startkde: Could not start kdeinit5. Check your installation.'  1>&2
+-- 
+2.1.4
+

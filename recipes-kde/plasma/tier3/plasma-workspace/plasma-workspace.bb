@@ -52,6 +52,7 @@ SRC_URI += " \
     file://0004-startkde-create-kde-s-home.patch \
     file://0005-startkde-enable-starting-X.patch \
     file://0006-startkde-remove-CMAKE_INSTALL_PREFIX-in-XDG_DATA_DIR.patch \
+    file://0007-startkde-fix-kdeinit-path.patch \
 "
 
 # cross libs / headers
@@ -102,5 +103,5 @@ FILES_${PN}-dev = " \
 RDEPENDS_${PN} += " \
     qttools-tools \
     kconfig-bin \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsetroot xmessage", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsetroot xmessage xprop", "", d)} \
 "
