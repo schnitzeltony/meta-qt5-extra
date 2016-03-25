@@ -19,6 +19,10 @@ SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz"
 # extra-cmake-modules cause dependent to check for python
 inherit cmake_qt5 cmake-extra-sanity pythonnative
 
+do_compile_prepend() {
+    export XDG_DATA_HOME=${STAGING_DATADIR}
+}
+
 FILES_${PN} += "${libdir}/plugins/kf5 ${datadir}/kf5"
 FILES_${PN}-dev += "${libdir}/cmake"
 FILES_${PN}-dbg += "${libdir}/plugins/kf5/.debug"
