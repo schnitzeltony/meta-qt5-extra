@@ -20,8 +20,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "c5efd59dd9f2687aa2efae4a5356ce9f"
-SRC_URI[sha256sum] = "5b116ba498ed57dbc33ef9a7f24c0571f52b03bd986a7b8e14f799a039a82f3f"
+SRC_URI[md5sum] = "d98489d1ef939d5f4a20a2969b93c68d"
+SRC_URI[sha256sum] = "72b60541af670cf45151420e3fbef9526a648efb4a0dcf70229173660b5dd7a8"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Notifications, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

@@ -17,15 +17,15 @@ diff --git a/src/kdeinit/kinit.cpp b/src/kdeinit/kinit.cpp
 index 3c3c913..cd1dc9c 100644
 --- a/src/kdeinit/kinit.cpp
 +++ b/src/kdeinit/kinit.cpp
-@@ -657,7 +657,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
-                     //     https://sourceware.org/bugzilla/show_bug.cgi?id=13945
-                     //     - so we try hacking it in ourselves
-                     QString install_lib_dir = QFile::decodeName(
--                            CMAKE_INSTALL_PREFIX "/" LIB_INSTALL_DIR "/");
-+                            LIB_INSTALL_DIR "/");
-                     libpath = install_lib_dir + libpath;
-                     l.setFileName(libpath);
-                     l.load();
+@@ -662,7 +662,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
+                 //     https://sourceware.org/bugzilla/show_bug.cgi?id=13945
+                 //     - so we try hacking it in ourselves
+                 QString install_lib_dir = QFile::decodeName(
+-                        CMAKE_INSTALL_PREFIX "/" LIB_INSTALL_DIR "/");
++                        LIB_INSTALL_DIR "/");
+                 QString orig_libpath = libpath;
+                 libpath = install_lib_dir + libpath;
+                 l.setFileName(libpath);
 @@ -1555,7 +1555,7 @@ static int initXconnection()
  // Completely unrelated to plugins.
  static QString findSharedLib(const QString &lib)

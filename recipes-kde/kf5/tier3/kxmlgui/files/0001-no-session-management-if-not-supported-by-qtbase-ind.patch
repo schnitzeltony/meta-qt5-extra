@@ -11,42 +11,43 @@ Upstream-Status: pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- src/kmainwindow.cpp | 15 ++++++++++++++-
- 1 file changed, 14 insertions(+), 1 deletion(-)
+ src/kmainwindow.cpp | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
 diff --git a/src/kmainwindow.cpp b/src/kmainwindow.cpp
-index 7c86841..4035561 100644
+index c384b67..a745762 100644
 --- a/src/kmainwindow.cpp
 +++ b/src/kmainwindow.cpp
-@@ -119,8 +119,10 @@ bool DockResizeListener::eventFilter(QObject *watched, QEvent *event)
+@@ -119,10 +119,12 @@ bool DockResizeListener::eventFilter(QObject *watched, QEvent *event)
  
  KMWSessionManager::KMWSessionManager()
  {
 +#ifndef QT_NO_SESSIONMANAGER
      connect(qApp, SIGNAL(saveStateRequest(QSessionManager&)),
              this, SLOT(saveState(QSessionManager&)));
+     connect(qApp, SIGNAL(commitDataRequest(QSessionManager&)),
+             this, SLOT(commitData(QSessionManager&)));
 +#endif
  }
  
  KMWSessionManager::~KMWSessionManager()
-@@ -129,6 +131,7 @@ KMWSessionManager::~KMWSessionManager()
+@@ -131,6 +133,7 @@ KMWSessionManager::~KMWSessionManager()
  
- bool KMWSessionManager::saveState(QSessionManager &sm)
+ void KMWSessionManager::saveState(QSessionManager &sm)
  {
 +#ifndef QT_NO_SESSIONMANAGER
      KConfigGui::setSessionConfig(sm.sessionId(), sm.sessionKey());
  
      KConfig *config = KConfigGui::sessionConfig();
-@@ -158,7 +161,7 @@ bool KMWSessionManager::saveState(QSessionManager &sm)
+@@ -160,6 +163,7 @@ void KMWSessionManager::saveState(QSessionManager &sm)
          discard << localFilePath;
          sm.setDiscardCommand(discard);
      }
--
 +#endif
-     return true;
  }
  
-@@ -387,6 +390,9 @@ QMenu *KMainWindow::customHelpMenu(bool showWhatsThis)
+ void KMWSessionManager::commitData(QSessionManager &sm)
+@@ -433,6 +437,9 @@ QMenu *KMainWindow::customHelpMenu(bool showWhatsThis)
  
  bool KMainWindow::canBeRestored(int number)
  {
@@ -56,7 +57,7 @@ index 7c86841..4035561 100644
      if (!qApp->isSessionRestored()) {
          return false;
      }
-@@ -398,10 +404,14 @@ bool KMainWindow::canBeRestored(int number)
+@@ -444,10 +451,14 @@ bool KMainWindow::canBeRestored(int number)
      KConfigGroup group(config, "Number");
      const int n = group.readEntry("NumberOfWindows", 1);
      return number >= 1 && number <= n;
@@ -71,7 +72,7 @@ index 7c86841..4035561 100644
      if (!qApp->isSessionRestored()) {
          return QString();
      }
-@@ -416,10 +426,12 @@ const QString KMainWindow::classNameOfToplevel(int number)
+@@ -462,10 +473,12 @@ const QString KMainWindow::classNameOfToplevel(int number)
      } else {
          return group.readEntry("ClassName");
      }
@@ -80,11 +81,11 @@ index 7c86841..4035561 100644
  
  bool KMainWindow::restore(int number, bool show)
  {
-+#ifndef QT_NO_SESSIONMANAGER
++#ifdef QT_NO_SESSIONMANAGER
      if (!canBeRestored(number)) {
          return false;
      }
-@@ -430,6 +442,7 @@ bool KMainWindow::restore(int number, bool show)
+@@ -476,6 +489,7 @@ bool KMainWindow::restore(int number, bool show)
          }
          return false;
      }
@@ -93,5 +94,5 @@ index 7c86841..4035561 100644
  }
  
 -- 
-1.9.3
+2.5.0
 

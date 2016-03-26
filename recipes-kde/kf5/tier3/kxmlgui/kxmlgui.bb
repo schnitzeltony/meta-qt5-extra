@@ -21,13 +21,15 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "8e29c5073c871cb1a2128c717500b325"
-SRC_URI[sha256sum] = "503d623d793c0b50abaf135a275c7d0e6fb31eba0adba4f6fd836e1f5dec82aa"
+SRC_URI[md5sum] = "0faf3974771268f42db7c1d4f52f3b9c"
+SRC_URI[sha256sum] = "84d186d92969570a47f314c20f7f444d3d82182e47b6f065ab3537bdbc221c14"
 
 # REVISIT remove ugly hack for wayland-only environments
+# REVISIT remove 0003-kmainwindow.. as soon as meta-qt5 hasmoved to 5.6
 SRC_URI += " \
     file://0001-no-session-management-if-not-supported-by-qtbase-ind.patch \
     file://0002-fix-path-to-ksendbugmail.patch \
+    file://0003-kmainwindow-remove-usage-of-QGuiApplication-setFallb.patch \
 "
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"

@@ -33,6 +33,10 @@ DEPENDS += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 
+SRC_URI += " \
+	file://0004-kmainwindow.cpp-remove-usage-of-QGuiApplication-setF.patch \
+"
+
 # uncomment for broken gelib getaddr / AI_PASSIVE
 #EXTRA_OECMAKE += "-DHAVE_GOOD_GETADDRINFO=OFF"
 

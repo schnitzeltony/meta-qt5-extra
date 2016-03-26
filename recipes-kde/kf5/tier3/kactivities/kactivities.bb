@@ -1,7 +1,9 @@
 SUMMARY = "Runtime and library to organize the user work in separate activities"
-LICENSE = "GPLv2"
+LICENSE = "GPLv2 & LGPLv2+"
 LIC_FILES_CHKSUM = " \
-	file://src/service/Activities.h;endline=18;md5=32a623707dcb9832168ad37f924f5745 \
+	file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+	file://COPYING.LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
+	file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
 inherit kde-kf5 cmake-lib
@@ -9,8 +11,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "boost kconfig kcoreaddons ki18n kservice kwindowsystem kglobalaccel kxmlgui kio kdbusaddons kdeclarative kcmutils"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "b5ceb59e0b354858849c6728d7df2c3d"
-SRC_URI[sha256sum] = "43cff33c5c4a232206bf6ffdaa1ea3f50e40339e4568a7376992fc61970eb47a"
+SRC_URI[md5sum] = "7dc889ce8dc8d58fc74270b2462acef7"
+SRC_URI[sha256sum] = "5b0a664f77749c441d61417f9dce5cb8a11668f7e7db1a7613378f555dac3795"
 
 SRC_URI += "file://0001-replace-try_run-by-try_compile-in-compiler-feature-c.patch"
 

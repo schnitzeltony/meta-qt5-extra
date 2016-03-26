@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "${BPN}-native kconfig kcoreaddons kcrash kdbusaddons kdoctools kinit kservice"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "941612d0df418b20981dfe9430f94263"
-SRC_URI[sha256sum] = "1fa66b42312bc7c1ba23fe02dca04d9bd52c98e7a6a9754ac6c763252078db5b"
+SRC_URI[md5sum] = "ecaf1a671b4b8a156b5652da4f6d28be"
+SRC_URI[sha256sum] = "a3abd8ad7656da34387374857f5f537cc8247b22b9f1ca076717cb6f41d77865"
 SRC_URI += "file://0001-hardcode-path-to-kconf_update.patch"
 
 # cross libs / headers
