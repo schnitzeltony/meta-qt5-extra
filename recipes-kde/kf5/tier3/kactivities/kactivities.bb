@@ -20,18 +20,10 @@ SRC_URI += "file://0001-replace-try_run-by-try_compile-in-compiler-feature-c.pat
 CMAKE_ALIGN_SYSROOT[1] = "KF5Activities, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Activities, -S${includedir}, -S${STAGING_INCDIR}"
 
-FILES_SOLIBSDEV = "${libdir}/libKF5Activities*${SOLIBSDEV}"
-
 FILES_${PN} += " \
     ${datadir}/k*5 \
-    ${libdir}/libkactivitymanagerd_plugin.so \
-    ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML}/org/kde \
 "
 FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
     ${OE_QMAKE_PATH_QML}/org/kde/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/*/*/.debug \
 "
