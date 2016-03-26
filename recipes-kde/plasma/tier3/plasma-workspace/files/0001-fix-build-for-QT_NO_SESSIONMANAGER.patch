@@ -10,19 +10,19 @@ Upstream-Status: pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- klipper/klipper.cpp                     | 2 ++
- klipper/main.cpp                        | 4 ++++
- krunner/main.cpp                        | 4 ++++
- shell/main.cpp                          | 5 ++++-
- 5 files changed, 18 insertions(+), 1 deletion(-)
+ klipper/klipper.cpp | 2 ++
+ klipper/main.cpp    | 4 ++++
+ krunner/main.cpp    | 4 ++++
+ shell/main.cpp      | 5 +++++
+ 4 files changed, 15 insertions(+)
 
 diff --git a/klipper/klipper.cpp b/klipper/klipper.cpp
-index 46321ac..752bd77 100644
+index c80d2c7..89de369 100644
 --- a/klipper/klipper.cpp
 +++ b/klipper/klipper.cpp
-@@ -225,10 +225,12 @@ Klipper::Klipper(QObject* parent, const KSharedConfigPtr& config, KlipperMode mo
- #endif
-     m_popup->plugAction( m_quitAction );
+@@ -223,10 +223,12 @@ Klipper::Klipper(QObject* parent, const KSharedConfigPtr& config, KlipperMode mo
+         m_popup->plugAction( m_quitAction );
+     }
  
 +#ifndef QT_NO_SESSIONMANAGER
      // session manager interaction
@@ -34,7 +34,7 @@ index 46321ac..752bd77 100644
  
  Klipper::~Klipper()
 diff --git a/klipper/main.cpp b/klipper/main.cpp
-index 50c0f24..a8478ad 100644
+index fe7863f..f63e557 100644
 --- a/klipper/main.cpp
 +++ b/klipper/main.cpp
 @@ -27,7 +27,9 @@
@@ -47,10 +47,10 @@ index 50c0f24..a8478ad 100644
  
  #include "tray.h"
  #include "klipper.h"
-@@ -70,11 +72,13 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
-                       "mgraesslin@kde.org");
-   KAboutData::setApplicationData(aboutData);
- 
+@@ -76,11 +78,13 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
+ #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+   QGuiApplication::setFallbackSessionManagementEnabled(false);
+ #endif
 +#ifndef QT_NO_SESSIONMANAGER
    auto disableSessionManagement = [](QSessionManager &sm) {
        sm.setRestartHint(QSessionManager::RestartNever);
@@ -62,7 +62,7 @@ index 50c0f24..a8478ad 100644
  
    QCommandLineParser parser;
 diff --git a/krunner/main.cpp b/krunner/main.cpp
-index fd851c0..90c9233 100644
+index e902583..67226d2 100644
 --- a/krunner/main.cpp
 +++ b/krunner/main.cpp
 @@ -25,7 +25,9 @@
@@ -74,11 +74,11 @@ index fd851c0..90c9233 100644
 +#endif
  
  #include <KAuthorized>
- #include <kdbusservice.h>
-@@ -57,11 +59,13 @@ int main(int argc, char **argv)
-     parser.addVersionOption();
-     parser.process(app);
- 
+ #include <KAboutData>
+@@ -69,11 +71,13 @@ int main(int argc, char **argv)
+ #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+     QGuiApplication::setFallbackSessionManagementEnabled(false);
+ #endif
 +#ifndef QT_NO_SESSIONMANAGER
      auto disableSessionManagement = [](QSessionManager &sm) {
          sm.setRestartHint(QSessionManager::RestartNever);
@@ -90,10 +90,10 @@ index fd851c0..90c9233 100644
      View view;
      view.setVisible(false);
 diff --git a/shell/main.cpp b/shell/main.cpp
-index 005f908..6b5e57c 100644
+index 89c8c54..c55c0bf 100644
 --- a/shell/main.cpp
 +++ b/shell/main.cpp
-@@ -20,7 +20,9 @@
+@@ -21,7 +21,9 @@
  #include <QApplication>
  #include <QCommandLineParser>
  #include <QQuickWindow>
@@ -101,23 +101,23 @@ index 005f908..6b5e57c 100644
  #include <QSessionManager>
 +#endif
  #include <QDebug>
+ #include <QMessageBox>
  
- #include <kdbusservice.h>
-@@ -97,12 +99,13 @@ int main(int argc, char *argv[])
-         qInstallMsgHandler(noMessageOutput);
-     }
- 
+@@ -104,11 +106,14 @@ int main(int argc, char *argv[])
+ #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+     QGuiApplication::setFallbackSessionManagementEnabled(false);
+ #endif
 +#ifndef QT_NO_SESSIONMANAGER
      auto disableSessionManagement = [](QSessionManager &sm) {
          sm.setRestartHint(QSessionManager::RestartNever);
      };
      QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
      QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
--
 +#endif
-     ShellManager::s_crashes = cliOptions.value(crashOption).toInt();
-     ShellManager::s_forceWindowed = cliOptions.isSet(winOption);
-     ShellManager::s_noRespawn = cliOptions.isSet(respawnOption);
++
+ 
+     ShellManager::s_fixedShell = cliOptions.value(shellPluginOption);
+ 
 -- 
-1.8.3.1
+2.5.0
 

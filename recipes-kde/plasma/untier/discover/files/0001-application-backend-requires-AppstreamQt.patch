@@ -1,0 +1,45 @@
+From fff2d8abcb807097265e4edc11bd1d1ac45aaabb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sat, 26 Mar 2016 22:37:43 +0100
+Subject: [PATCH] application backend requires AppstreamQt
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt                      | 2 +-
+ libdiscover/backends/CMakeLists.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e0fbca9..dec206e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -73,7 +73,7 @@ set_package_properties(AkabeiClient PROPERTIES
+ set_package_properties(packagekitqt5 PROPERTIES
+     DESCRIPTION "Library that exposes PackageKit resources"
+     URL "http://www.packagekit.org"
+-    PURPOSE "Required to build the PackageKit backend"
++    PURPOSE "Required to build the PackageKit/Application backends"
+     TYPE OPTIONAL)
+ set_package_properties(AppstreamQt PROPERTIES
+     DESCRIPTION "Library that lists Appstream resources"
+diff --git a/libdiscover/backends/CMakeLists.txt b/libdiscover/backends/CMakeLists.txt
+index 24a85b1..d310f78 100644
+--- a/libdiscover/backends/CMakeLists.txt
++++ b/libdiscover/backends/CMakeLists.txt
+@@ -16,7 +16,7 @@ if(KF5Attica_FOUND AND KF5NewStuff_FOUND)
+     add_subdirectory(KNSBackend)
+ endif()
+ 
+-if(QApt_FOUND)
++if(QApt_FOUND AND AppstreamQt_FOUND)
+     add_subdirectory(ApplicationBackend)
+ endif()
+ 
+-- 
+2.5.5
+

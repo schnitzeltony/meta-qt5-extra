@@ -1,0 +1,63 @@
+From 298d648da66d9115d8ff15de165788f5efda1fbf Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 25 Mar 2016 19:18:48 +0100
+Subject: [PATCH] remove usage of
+ QGuiApplication::setFallbackSessionManagementEnabled
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+meta-qt5 does not yet have a qtbase supporting this
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ klipper/main.cpp | 3 ---
+ krunner/main.cpp | 3 ---
+ shell/main.cpp   | 3 ---
+ 3 files changed, 9 deletions(-)
+
+diff --git a/klipper/main.cpp b/klipper/main.cpp
+index f63e557..598c0a8 100644
+--- a/klipper/main.cpp
++++ b/klipper/main.cpp
+@@ -75,9 +75,6 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
+ 
+   KAboutData::setApplicationData(aboutData);
+ 
+-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+-  QGuiApplication::setFallbackSessionManagementEnabled(false);
+-#endif
+ #ifndef QT_NO_SESSIONMANAGER
+   auto disableSessionManagement = [](QSessionManager &sm) {
+       sm.setRestartHint(QSessionManager::RestartNever);
+diff --git a/krunner/main.cpp b/krunner/main.cpp
+index 67226d2..924a980 100644
+--- a/krunner/main.cpp
++++ b/krunner/main.cpp
+@@ -68,9 +68,6 @@ int main(int argc, char **argv)
+ 
+     KAboutData::setApplicationData(aboutData);
+ 
+-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+-    QGuiApplication::setFallbackSessionManagementEnabled(false);
+-#endif
+ #ifndef QT_NO_SESSIONMANAGER
+     auto disableSessionManagement = [](QSessionManager &sm) {
+         sm.setRestartHint(QSessionManager::RestartNever);
+diff --git a/shell/main.cpp b/shell/main.cpp
+index c55c0bf..24c562a 100644
+--- a/shell/main.cpp
++++ b/shell/main.cpp
+@@ -103,9 +103,6 @@ int main(int argc, char *argv[])
+     cliOptions.process(app);
+     aboutData.processCommandLine(&cliOptions);
+ 
+-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+-    QGuiApplication::setFallbackSessionManagementEnabled(false);
+-#endif
+ #ifndef QT_NO_SESSIONMANAGER
+     auto disableSessionManagement = [](QSessionManager &sm) {
+         sm.setRestartHint(QSessionManager::RestartNever);
+-- 
+2.5.0
+

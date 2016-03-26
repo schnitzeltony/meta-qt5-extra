@@ -14,19 +14,19 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index f60ac41..e04d6af 100644
+index 15977ae..9f8f072 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -7,7 +7,8 @@ set(PROJECT_VERSION_MAJOR 5)
- set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules" )
+@@ -10,7 +10,8 @@ set (CMAKE_MODULE_PATH ${ECM_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
+ include(KDEInstallDirs)
  
  find_package(PAM REQUIRED)
 -find_package(LibGcrypt 1.5.0 REQUIRED)
 +find_package(PkgConfig REQUIRED)
 +pkg_search_module(LIBGCRYPT REQUIRED libgcrypt)
- include(GNUInstallDirs)
  
- include_directories (
+ find_program(SOCAT_EXECUTABLE socat)
+ 
 -- 
-2.1.0
+2.5.0
 

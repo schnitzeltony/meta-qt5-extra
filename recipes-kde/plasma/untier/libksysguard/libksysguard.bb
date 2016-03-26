@@ -25,10 +25,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI += "file://0001-signalplotter-Use-std-namespaced-isnan-and-isinf.patch"
-SRC_URI[md5sum] = "ff6c11140a83928c7b240ced2f06b3e8"
-SRC_URI[sha256sum] = "4286691ad71f104b54ab5d9cdd8cb8c153984308a4bd998012ea01d36a377e9a"
-
+SRC_URI[md5sum] = "d2297d1a4996d5ac855a5d98cf1d9581"
+SRC_URI[sha256sum] = "b64ffae6d127b640627868c47de256d159a2be87a8239116d29a0c60cbce8585"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5SysGuard, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

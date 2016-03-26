@@ -13,11 +13,12 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "981b99beb45af1a11a3d13d0e100bc3a"
-SRC_URI[sha256sum] = "1b2f7c3e5c6f5807b1a917ea79de929988d8fdc8fd06249a763212be0d045bb6"
+SRC_URI[md5sum] = "78424f1562b2aea71ec5b384ef01c3ae"
+SRC_URI[sha256sum] = "e9231a4748c32410623e0192ccceafe2caf4924e779fa2a415e7668cf6b6cee4"
 
 SRC_URI += " \
-    file://0001-fix-configuration-build-on-x-less-systems.patch \
+    file://0001-make-kwayland-support-optional.patch \
+    file://0002-fix-configuration-build-on-x-less-systems.patch \
 "
 
 

@@ -21,22 +21,19 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "24d8a45d50c83c6e4367acc6544a427c"
-SRC_URI[sha256sum] = "4a088917a6bc64a40204326a8582b43045d811b72b11c1bd04f9293293b14b2b"
-
-FILES_SOLIBSDEV = "${libdir}/libmuonprivate${SOLIBSDEV}"
+SRC_URI[md5sum] = "afad2be536e324dfbea25af96c2fe9b4"
+SRC_URI[sha256sum] = "73dbff5178f3157501b698f1f77c57129d81ebac87e86c04b6b50f182ee2c4ba"
+SRC_URI += "file://0001-application-backend-requires-AppstreamQt.patch"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/icons \
     ${datadir}/k*5 \
     ${datadir}/libdiscover \
-    ${datadir}/muondiscover \
     ${datadir}/plasma \
-    ${datadir}/polkit-1 \
+    ${datadir}/plasmadiscover \
     \
-    ${libdir}/libDiscoverCommon.so \
-    ${libdir}/libDiscoverNotifiers.so \
+    ${libdir}/plasma-discover \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
 "

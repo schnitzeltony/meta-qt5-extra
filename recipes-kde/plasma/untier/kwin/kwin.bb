@@ -50,13 +50,12 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "c753e4cb07fd551f0d7edeb9e69da701"
-SRC_URI[sha256sum] = "759772e263c14e853803e2beb9ef9c02da3cb59ca1a62ee533df657013c6e9c4"
+SRC_URI[md5sum] = "1add44b5f04bf60eb98dd7432bd45a56"
+SRC_URI[sha256sum] = "d0224ad1f567caed19f644558b721bcc3cd995e0be9b6d3a00f6568941cde644"
 
 SRC_URI += " \
     file://0001-fix-build-for-qtbase-without-session-management.patch \
-    file://0002-eglonxbackend-add-debug-output.patch \
-    file://0003-Make-building-of-QPA-wayland-plugin-an-option.patch \
+    file://0002-Make-building-of-QPA-wayland-plugin-an-option.patch \
 "
 
 # pure X11 environments fail to build wayland plugin

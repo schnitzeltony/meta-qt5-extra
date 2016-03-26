@@ -41,8 +41,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "545d25677c194f9dec4b17dcab8d48c8"
-SRC_URI[sha256sum] = "bed1e65d878b963dbbb85129c206dc70db71461de29c19e95b6053c9c4fe7b26"
+SRC_URI[md5sum] = "59a5f026b88158c3a1675fff52846cbf"
+SRC_URI[sha256sum] = "3bb49dfb59b48d88097685acf303b0cef1a45ee8bc43d34b6785cc04d7b6529d"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
@@ -52,6 +52,7 @@ SRC_URI += " \
     file://0004-startkde-create-kde-s-home.patch \
     file://0005-startkde-enable-starting-X.patch \
     file://0006-startkde-remove-CMAKE_INSTALL_PREFIX-in-XDG_DATA_DIR.patch \
+    file://0007-remove-usage-of-QGuiApplication-setFallbackSessionMa.patch \
 "
 
 # cross libs / headers

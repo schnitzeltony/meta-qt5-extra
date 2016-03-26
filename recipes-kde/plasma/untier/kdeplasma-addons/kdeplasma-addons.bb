@@ -23,13 +23,14 @@ DEPENDS += " \
     kdelibs4support \
     kross \
     knewstuff \
+    plasma-workspace \
     \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "61c3cd59e56ae1d4af951d24c36123c1"
-SRC_URI[sha256sum] = "5d47e27632c11dd69bbe1b58884d983a77eb7d1e210c77e494748f0ea23b62d0"
+SRC_URI[md5sum] = "9e1892505d9277a650f5de2a991dfb10"
+SRC_URI[sha256sum] = "e773f541dd1832b33e364fb2371d024887e4dfcc63caa37f67d4281974483587"
 
 FILES_${PN} += " \
     ${datadir}/kwin \

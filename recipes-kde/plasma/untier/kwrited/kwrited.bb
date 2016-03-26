@@ -15,10 +15,13 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "453e68203c502e0d4708333ffa974282"
-SRC_URI[sha256sum] = "236a0979813fad0c57a1afcb217bcdf06ede866b508d1a4e710d2b6ca72c189e"
+SRC_URI[md5sum] = "cb7831be19e51c6d4ec2f62024726998"
+SRC_URI[sha256sum] = "41bcde691465598fe817aab1306c4761a928c70d8d6092909a50ade961bb754b"
 
-SRC_URI += "file://0001-fix-build-for-qtbase-without-session-management.patch"
+SRC_URI += " \
+    file://0001-fix-build-for-qtbase-without-session-management.patch \
+    file://0002-remove-usage-of-QGuiApplication-setFallbackSessionMa.patch \
+"
 
 FILES_${PN} += " \
     ${datadir}/knotifications5 \

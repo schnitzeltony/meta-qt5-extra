@@ -20,21 +20,22 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 0da858d..f0bb39a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -23,10 +23,11 @@ include(KDEInstallDirs)
- include(KDECMakeSettings)
- include(KDECompilerSettings)
+@@ -26,11 +26,12 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
+ # Set KI18n translation domain
+ add_definitions(-DTRANSLATION_DOMAIN=\"kde-gtk-config\")
  
 +find_package(GTK2)
 +find_package(GTK3)
 +
  set(kcm_SRCS
       src/iconthemesmodel.cpp
+      src/cursorthemesmodel.cpp
 -     src/appearancegtk3.cpp
 -     src/appearancegtk2.cpp
       src/appearencegtk.cpp
       src/abstractappearance.cpp
       src/thread.cpp
-@@ -37,6 +38,16 @@ set(kcm_SRCS
+@@ -41,6 +42,16 @@ set(kcm_SRCS
       src/fontshelpers.cpp
  )
  
@@ -51,7 +52,7 @@ index 0da858d..f0bb39a 100644
  set(GHNS_FILES 
       cgcicon.knsrc
       cgctheme.knsrc
-@@ -58,7 +69,11 @@ install(TARGETS kcm_kdegtkconfig DESTINATION ${PLUGIN_INSTALL_DIR})
+@@ -62,8 +73,12 @@ install(TARGETS kcm_kdegtkconfig DESTINATION ${PLUGIN_INSTALL_DIR})
  install(FILES ${GHNS_FILES} DESTINATION ${CONFIG_INSTALL_DIR})
  install(FILES kde-gtk-config.desktop DESTINATION ${SERVICES_INSTALL_DIR})
  
@@ -63,6 +64,7 @@ index 0da858d..f0bb39a 100644
 +endif()
  add_subdirectory(icons)
  add_subdirectory(tests)
+ 
 diff --git a/config-gtk.h.cmake b/config-gtk.h.cmake
 new file mode 100644
 index 0000000..1b2389d

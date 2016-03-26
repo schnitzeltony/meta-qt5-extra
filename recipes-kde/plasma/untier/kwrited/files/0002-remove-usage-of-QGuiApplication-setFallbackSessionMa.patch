@@ -1,0 +1,33 @@
+From f3f6e591734312578470f9026c31042b97bed3b8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 25 Mar 2016 23:09:52 +0100
+Subject: [PATCH] remove usage of
+ QGuiApplication::setFallbackSessionManagementEnabled
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+meta-qt5 does not yet have a qtbase supporting this
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ kwrited.cpp | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/kwrited.cpp b/kwrited.cpp
+index 77f7264..6785bc4 100644
+--- a/kwrited.cpp
++++ b/kwrited.cpp
+@@ -73,9 +73,6 @@ int main(int argc, char **argv)
+     KAboutData::setApplicationData(aboutData());
+     QApplication::setDesktopSettingsAware(false);
+     QApplication a(argc, argv);
+-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+-    QGuiApplication::setFallbackSessionManagementEnabled(false);
+-#endif
+ #ifndef QT_NO_SESSIONMANAGER
+     auto disableSessionManagement = [](QSessionManager &sm) {
+             sm.setRestartHint(QSessionManager::RestartNever);
+-- 
+2.5.0
+
