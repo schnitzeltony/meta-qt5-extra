@@ -16,7 +16,6 @@ TIER_1 = " \
     kguiaddons \
     ki18n \
     kidletime \
-    kimageformats \
     kitemmodels \
     kitemviews \
     kplotting \
@@ -35,6 +34,7 @@ TIER_2 = " \
     kcrash \
     kdoctools \
     kfilemetadata \
+    kimageformats \
     kjobwidgets \
     kpackage \
     kpty \
