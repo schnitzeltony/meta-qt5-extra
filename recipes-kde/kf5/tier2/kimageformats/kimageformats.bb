@@ -6,7 +6,10 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5
 
-DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
+DEPENDS += " \
+    karchive \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)} \
+"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "72be30ed58c068675af34fc3d6430ad0"
