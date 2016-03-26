@@ -12,6 +12,7 @@ TIER_2 = " \
 "
 
 TIER_3 = " \
+    kactivitymanagerd \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "plasma-workspace", "",d)} \
 "
 
