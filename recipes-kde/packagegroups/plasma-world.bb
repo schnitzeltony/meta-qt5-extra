@@ -19,6 +19,7 @@ UNTIER = " \
     bluedevil \
     breeze \
     breeze-gtk \
+    breeze-plymouth \
     discover \
     kde-cli-tools \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kde-gtk-config", "",d)} \
