@@ -58,5 +58,6 @@ RDEPENDS_${PN} += " \
     qtbase-fonts \
     qtdeclarative-plugins \
     qtdeclarative-qmlplugins \
+    pam-plugin-tally \
 "
 
