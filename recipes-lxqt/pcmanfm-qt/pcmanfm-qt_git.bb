@@ -8,7 +8,7 @@ inherit lxqt pkgconfig distro_features_check
 
 DEPENDS += "qtx11extras libxcb libfm-qt"
 
-SRCREV = "a7533049f24bc02933ce00f61d123a069b51553a"
-PV = "0.10.1"
+SRCREV = "7ef9555f031eb9b3227f1e85d58aedc60bbf805f"
+PV = "0.11.0"
 
 RRECOMMENDS_${PN} = "gvfs gvfsd-trash eject"
