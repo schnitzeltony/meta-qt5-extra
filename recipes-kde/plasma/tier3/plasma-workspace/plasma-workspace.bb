@@ -103,5 +103,5 @@ FILES_${PN}-dev = " \
 RDEPENDS_${PN} += " \
     qttools-tools \
     kconfig-bin \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsetroot xmessage", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsetroot xmessage xprop", "", d)} \
 "

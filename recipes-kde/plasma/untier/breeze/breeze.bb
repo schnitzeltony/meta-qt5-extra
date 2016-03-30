@@ -46,3 +46,5 @@ FILES_${PN}-dbg += " \
     ${libdir}/*/*/.debug \
     ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
 "
+
+RDEPENDS_${PN} += "milou"

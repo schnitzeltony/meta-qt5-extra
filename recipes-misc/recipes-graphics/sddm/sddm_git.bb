@@ -18,6 +18,7 @@ SRC_URI = " \
     git://github.com/sddm/${BPN}.git;protocol=git;branch=master \
     file://0001-fix-qml-install-dir.patch \
     file://sddm.pam \
+    file://sddm-autologin.pam \
     file://sddm.conf \
 "
 SRCREV = "f3c810407e4e79597dcdc76508f08c33152fe3cd"
@@ -38,6 +39,7 @@ do_install_append() {
 
     install -d ${D}${sysconfdir}/pam.d
     install -m 644 ${WORKDIR}/sddm.pam ${D}${sysconfdir}/pam.d/sddm
+    install -m 644 ${WORKDIR}/sddm-autologin.pam ${D}${sysconfdir}/pam.d/sddm-autologin
 
     install -d ${D}${localstatedir}/lib/sddm
     chown -R sddm:sddm ${D}${localstatedir}/lib/sddm
@@ -56,5 +58,6 @@ RDEPENDS_${PN} += " \
     qtbase-fonts \
     qtdeclarative-plugins \
     qtdeclarative-qmlplugins \
+    pam-plugin-tally \
 "
 
