@@ -47,6 +47,10 @@ SRC_URI[sha256sum] = "184a6d4406ce5bbb98e52660be75cf22459ec832cbed2cc49cd363e5da
 
 SRC_URI += "file://0001-Ensure-xkb_base-is-not-empty-instead-of-checking-if-.patch"
 
+do_install_append() {
+    rm ${D}${datadir}/locale/*/LC_MESSAGES/kactivities5.*
+}
+
 FILES_SOLIBSDEV = "${libdir}/libkfont*${SOLIBSDEV}"
 
 FILES_${PN} += " \
