@@ -6,4 +6,7 @@ SRC_URI += " \
     file://0002-native-build-and-install-icemaker-only.patch \
 "
 
-DEPENDS += "libpcre-native"
+DEPENDS += " \
+    libpcre-native \
+    kdoctools \
+"
