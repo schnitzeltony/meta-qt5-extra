@@ -34,9 +34,9 @@ UNTIER = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kscreenlocker", "",d)} \
     ksshaskpass \
     ksysguard \
+    kwallet-pam \
     kwayland \
     kwayland-integration \
-    kwallet-pam \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
     kwrited \
     libkscreen \
