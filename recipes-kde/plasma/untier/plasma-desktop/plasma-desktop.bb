@@ -42,14 +42,10 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "459a7ee12a9e404164d5843b4c22500a"
-SRC_URI[sha256sum] = "184a6d4406ce5bbb98e52660be75cf22459ec832cbed2cc49cd363e5da5af160"
+SRC_URI[md5sum] = "1fb59e7d35f746366d954bb41d43fa90"
+SRC_URI[sha256sum] = "5962ab7c83deb87efdb56df8b219bd359edcafb95b4c0692901f128ae1ef7800"
 
 SRC_URI += "file://0001-Ensure-xkb_base-is-not-empty-instead-of-checking-if-.patch"
-
-do_install_append() {
-    rm ${D}${datadir}/locale/*/LC_MESSAGES/kactivities5.*
-}
 
 FILES_SOLIBSDEV = "${libdir}/libkfont*${SOLIBSDEV}"
 
