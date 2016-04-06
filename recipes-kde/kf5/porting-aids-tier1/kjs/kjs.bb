@@ -2,7 +2,7 @@ require ${BPN}.inc
 
 inherit cmake-lib
 
-DEPENDS += "${BPN}-native libpcre kdoctools"
+DEPENDS += "${BPN}-native libpcre"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5JS, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
