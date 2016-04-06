@@ -10,6 +10,7 @@ RDEPENDS_${PN} = " \
     dolphin-plugins \
     dragon \
     filelight \
+    gwenview \
     kate \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
     konsole \
