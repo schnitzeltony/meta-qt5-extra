@@ -19,6 +19,7 @@ SRC_URI[sha256sum] = "6f2c8e0455aab9b2a14218665ff3fb836514e49aaf476d8e9f3e45464f
 SRC_URI += " \
     file://0001-make-kwayland-support-optional.patch \
     file://0002-fix-configuration-build-on-x-less-systems.patch \
+    file://0003-avoid-autotests.patch \
 "
 
 

@@ -1,0 +1,28 @@
+From 1c862f12c3370aee33d92ff06cbf4afccfd730a2 Mon Sep 17 00:00:00 2001
+From: "Luis Gustavo S. Barreto" <gustavo@ossystems.com.br>
+Date: Fri, 1 Apr 2016 19:39:32 +0000
+Subject: [PATCH] avoid tests
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Luis Gustavo S. Barreto <gustavo@ossystems.com.br>
+---
+ CMakeLists.txt | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8592aa9..c7f3541 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -54,8 +54,6 @@ endif (_HAVE_VISIBILITY AND NOT WIN32)
+ 
+ add_subdirectory(src)
+ add_subdirectory(backends)
+-add_subdirectory(autotests)
+-add_subdirectory(tests)
+ 
+ set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Screen")
+ ecm_configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KF5ScreenConfig.cmake.in"
+-- 
+2.1.4
+
