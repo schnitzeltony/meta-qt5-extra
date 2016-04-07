@@ -14,6 +14,7 @@ inherit kde-apps
 DEPENDS += " \
     qtsvg \
     \
+    exiv2 \
     karchive \
     kconfig \
     kconfigwidgets \
