@@ -6,4 +6,6 @@ inherit cmake_qt5 cmake-extra-sanity pkgconfig
 
 EXTRA_OECMAKE += " \
     -DQML_INSTALL_DIR=${OE_QMAKE_PATH_QML} \
+    -DECM_MKSPECS_INSTALL_DIR=${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/modules \
+    -DPLUGIN_INSTALL_DIR=${OE_QMAKE_PATH_PLUGINS} \
 "
