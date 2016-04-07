@@ -1,0 +1,73 @@
+From 79a00446364852a51c58835b2c778a8be99ff911 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 7 Apr 2016 23:01:29 +0200
+Subject: [PATCH] waylandcompositor: remove property
+ useHardwareIntegrationExtension for non GL (GLES) builds
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/greenisland/0.7.90+gitAUTOINC+c39760ad84-r0/git/src/waylandcompositor/compositor_api/qwaylandcompositor.cpp:817:15: error: 'const class QWaylandCompositorPrivate' has no member named 'use_hw_integration_extension'
+     return d->use_hw_integration_extension;
+               ^
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/greenisland/0.7.90+gitAUTOINC+c39760ad84-r0/git/src/waylandcompositor/compositor_api/qwaylandcompositor.cpp: In member function 'void QWaylandCompositor::setUseHardwareIntegrationExtension(bool)':
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/greenisland/0.7.90+gitAUTOINC+c39760ad84-r0/git/src/waylandcompositor/compositor_api/qwaylandcompositor.cpp:823:19: error: 'class QWaylandCompositorPrivate' has no member named 'use_hw_integration_extension'
+     if (use == d->use_hw_integration_extension)
+                   ^
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/greenisland/0.7.90+gitAUTOINC+c39760ad84-r0/git/src/waylandcompositor/compositor_api/qwaylandcompositor.cpp:829:8: error: 'class QWaylandCompositorPrivate' has no member named 'use_hw_integration_extension'
+     d->use_hw_integration_extension = use;
+        ^
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/waylandcompositor/compositor_api/qwaylandcompositor.cpp | 2 ++
+ src/waylandcompositor/compositor_api/qwaylandcompositor.h   | 4 ++++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/src/waylandcompositor/compositor_api/qwaylandcompositor.cpp b/src/waylandcompositor/compositor_api/qwaylandcompositor.cpp
+index ab789c3..dee85f7 100644
+--- a/src/waylandcompositor/compositor_api/qwaylandcompositor.cpp
++++ b/src/waylandcompositor/compositor_api/qwaylandcompositor.cpp
+@@ -794,6 +794,7 @@ QWaylandInputDevice *QWaylandCompositor::inputDeviceFor(QInputEvent *inputEvent)
+     return dev;
+ }
+ 
++#ifdef QT_COMPOSITOR_WAYLAND_GL
+ /*!
+  * \qmlproperty bool QtWaylandCompositor::WaylandCompositor::useHardwareIntegrationExtension
+  *
+@@ -829,5 +830,6 @@ void QWaylandCompositor::setUseHardwareIntegrationExtension(bool use)
+     d->use_hw_integration_extension = use;
+     useHardwareIntegrationExtensionChanged();
+ }
++#endif
+ 
+ QT_END_NAMESPACE
+diff --git a/src/waylandcompositor/compositor_api/qwaylandcompositor.h b/src/waylandcompositor/compositor_api/qwaylandcompositor.h
+index 5eae20e..3d305fb 100644
+--- a/src/waylandcompositor/compositor_api/qwaylandcompositor.h
++++ b/src/waylandcompositor/compositor_api/qwaylandcompositor.h
+@@ -74,7 +74,9 @@ class Q_WAYLAND_COMPOSITOR_EXPORT QWaylandCompositor : public QWaylandObject
+     Q_PROPERTY(QByteArray socketName READ socketName WRITE setSocketName)
+     Q_PROPERTY(bool retainedSelection READ retainedSelectionEnabled WRITE setRetainedSelectionEnabled)
+     Q_PROPERTY(QWaylandOutput *defaultOutput READ defaultOutput WRITE setDefaultOutput NOTIFY defaultOutputChanged)
++#ifdef QT_COMPOSITOR_WAYLAND_GL
+     Q_PROPERTY(bool useHardwareIntegrationExtension READ useHardwareIntegrationExtension WRITE setUseHardwareIntegrationExtension NOTIFY useHardwareIntegrationExtensionChanged)
++#endif
+     Q_PROPERTY(QWaylandInputDevice *defaultInputDevice READ defaultInputDevice NOTIFY defaultInputDeviceChanged)
+ 
+ public:
+@@ -115,8 +117,10 @@ public:
+ 
+     QWaylandInputDevice *inputDeviceFor(QInputEvent *inputEvent);
+ 
++#ifdef QT_COMPOSITOR_WAYLAND_GL
+     bool useHardwareIntegrationExtension() const;
+     void setUseHardwareIntegrationExtension(bool use);
++#endif
+ 
+ public Q_SLOTS:
+     void processWaylandEvents();
+-- 
+2.5.5
+

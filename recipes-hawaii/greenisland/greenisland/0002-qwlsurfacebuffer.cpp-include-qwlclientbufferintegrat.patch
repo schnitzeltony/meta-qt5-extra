@@ -1,0 +1,35 @@
+From be70976f2bbbe9e7ff6826e9a4b5863a2dd5b70e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 7 Apr 2016 23:48:18 +0200
+Subject: [PATCH] qwlsurfacebuffer.cpp: include qwlclientbufferintegration_p.h
+ unconditionoally
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+In GLESv2 environment I get:
+
+<...>/src/waylandcompositor/wayland_wrapper/qwlsurfacebuffer.cpp:104:22: error: invalid use of incomplete type 'class QtWayland::ClientBufferIntegration'
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/waylandcompositor/wayland_wrapper/qwlsurfacebuffer.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/waylandcompositor/wayland_wrapper/qwlsurfacebuffer.cpp b/src/waylandcompositor/wayland_wrapper/qwlsurfacebuffer.cpp
+index cf0c566..42591c3 100644
+--- a/src/waylandcompositor/wayland_wrapper/qwlsurfacebuffer.cpp
++++ b/src/waylandcompositor/wayland_wrapper/qwlsurfacebuffer.cpp
+@@ -36,8 +36,8 @@
+ 
+ #include "qwlsurfacebuffer_p.h"
+ 
+-#ifdef QT_COMPOSITOR_WAYLAND_GL
+ #include "hardware_integration/qwlclientbufferintegration_p.h"
++#ifdef QT_COMPOSITOR_WAYLAND_GL
+ #include <qpa/qplatformopenglcontext.h>
+ #endif
+ 
+-- 
+2.5.5
+

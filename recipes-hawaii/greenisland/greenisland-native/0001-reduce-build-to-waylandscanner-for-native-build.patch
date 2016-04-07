@@ -1,0 +1,64 @@
+From 60bf186466bf236582eef59f3822719cb531ed09 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 11 Mar 2016 18:55:42 +0100
+Subject: [PATCH] reduce build to waylandscanner for native build
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt       | 19 +++----------------
+ tools/CMakeLists.txt |  1 -
+ 2 files changed, 3 insertions(+), 17 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 895ff5e..1dc5935 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -72,8 +72,9 @@ endif()
+ 
+ # Find Qt5
+ set(REQUIRED_QT_VERSION 5.6.0)
+-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core DBus Gui Qml Quick)
++find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
+ 
++if(False)
+ # OpenGL
+ find_package(OpenGL)
+ set_package_properties(OpenGL PROPERTIES
+@@ -151,23 +152,9 @@ add_feature_info("systemd" systemd_FOUND "Required for systemd integration")
+ # xkbcommon
+ pkg_check_modules(xkbcommon xkbcommon REQUIRED)
+ add_feature_info("xkbcommon" xkbcommon_FOUND "Required for keymap support")
++endif()
+ 
+-# Subdirectories
+-if(ENABLE_ONLY_EGLDEVICEINTEGRATION)
+-    add_subdirectory(plugins)
+-else()
+-    add_subdirectory(compositor)
+-    add_subdirectory(data)
+-    add_subdirectory(declarative)
+-    add_subdirectory(headers)
+-    add_subdirectory(launcher)
+-    add_subdirectory(plugins)
+-    add_subdirectory(qpa)
+-    add_subdirectory(shells)
+-    add_subdirectory(src)
+-    add_subdirectory(tests)
+     add_subdirectory(tools)
+-endif()
+ 
+ # Display featute summary
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+diff --git a/tools/CMakeLists.txt b/tools/CMakeLists.txt
+index f8b167c..3bdf127 100644
+--- a/tools/CMakeLists.txt
++++ b/tools/CMakeLists.txt
+@@ -1,2 +1 @@
+-add_subdirectory(screencaster)
+ add_subdirectory(waylandscanner)
+-- 
+2.5.5
+
