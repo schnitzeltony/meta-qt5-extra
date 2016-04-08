@@ -55,8 +55,3 @@ FILES_${PN} += " \
     ${systemd_unitdir} \
     ${OE_QMAKE_PATH_QML} \
 "
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_QML}/*/*/.debug \
-    ${OE_QMAKE_PATH_QML}/*/*/*/.debug \
-"
