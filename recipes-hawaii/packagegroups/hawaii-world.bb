@@ -9,7 +9,7 @@ RDEPENDS_${PN} = " \
     eyesight \
     greenisland \
     hawaii-baseapps \
-    hawaii-icon-themes \
+    hawaii-icon-theme \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "hawaii-shell", "",d)} \
     hawaii-system-preferences \
     hawaii-terminal \
