@@ -7,10 +7,14 @@ LIC_FILES_CHKSUM = " \
 
 inherit hawaii
 
-DEPENDS += "polkit-qt-1 kscreen"
+DEPENDS += " \
+    libhawaii \
+    polkit-qt-1 \
+    kscreen \
+"
 
-SRCREV = "5d9d32762151f7306fcb0c6798d2e4a940f57f2f"
-PV = "0.4.0+git${SRCPV}"
+SRCREV = "17da37ea0e44f8bc2d20a0018d11944bee4e810e"
+PV = "0.6.90+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DQt5LinguistTools_DIR=${STAGING_LIBDIR_NATIVE}/cmake/Qt5LinguistTools"
@@ -19,6 +23,10 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
 "
 
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_QML}/org/hawaii/systempreferences/*/.debug \
+FILES_${PN}-dev += " \
+    ${libdir}/cmake \
 "
+
+# cross libs / headers
+CMAKE_ALIGN_SYSROOT[1] = "HawaiiSystemPreferences, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "HawaiiSystemPreferences, -S${includedir}, -S${STAGING_INCDIR}"
