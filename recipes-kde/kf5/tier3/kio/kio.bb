@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 cmake-lib cmake-auto-align-paths
 
 DEPENDS += " \
+    qttools-native \
     karchive \
     kcodecs \
     kconfig \
