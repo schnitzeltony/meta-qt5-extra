@@ -1,21 +1,19 @@
 SUMMARY = "Hawaii desktop environment shell"
 LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = " \
-	file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-	file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c \
+	file://LICENSE.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+	file://LICENSE.LGPLv2.1;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit hawaii pythonnative cmake-lib distro_features_check
-#inherit systemd
+inherit hawaii systemd pythonnative distro_features_check
 
-# weston fails for missing wayland-egl
 REQUIRED_DISTRO_FEATURES = "wayland"
 
 SRC_URI += " \
     file://0001-find-host-s-git.patch \
 "
-SRCREV = "8a33b1b5a292db4bac87943515586d32259d5ada"
-PV = "0.5.91+git${SRCPV}"
+SRCREV = "2c4fc11957193263c02dead910a2ca1b3a383d7a"
+PV = "0.6.90+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -24,9 +22,8 @@ DEPENDS += " \
     wayland \
     libqtxdg \
     solid \
+    libhawaii \
     greenisland \
-    networkmanager-qt \
-    modemmanager-qt \
 "
 
 # REVISIT optionals
@@ -35,40 +32,31 @@ DEPENDS += " \
     pulseaudio \
 "
 
-PACKAGECONFIG[nm_qt] = "-DENABLE_NETWORK_MANAGER=ON,-DENABLE_NETWORK_MANAGER=OFF,networkmanager-qt"
+EXTRA_OECMAKE += " \
+    -DSYSTEMD_USER_UNIT_DIR=${systemd_system_unitdir} \
+"
+
+PACKAGECONFIG[nm_qt] = "-DENABLE_NETWORK_MANAGER=ON,-DENABLE_NETWORK_MANAGER=OFF,networkmanager-qt modemmanager-qt"
 PACKAGECONFIG ??= "nm_qt"
 
-# REVISIT/HACK: for unkown reasons libqtxdg libs are not found
-LDFLAGS += "-lQt5Xdg"
+SYSTEMD_SERVICE_${PN} = "hawaii.service"
 
-# starter scripts rely on bash qdbus catchsegv
-RDEPENDS_${PN} = "bash qttools-tools qtwayland-plugins catchsegv"
+# for starter scripts
+RDEPENDS_${PN} = "qttools-tools qtwayland-plugins"
 
 # REVISIT optionals
 RRECOMMENDS_${PN} += " \
     hawaii-wallpapers \
     hawaii-icon-themes \
-    weston \
 "
 
 FILES_${PN} += " \
     ${datadir} \
+    ${systemd_unitdir} \
     ${OE_QMAKE_PATH_QML} \
-    ${libdir}/plugins \
-    ${libdir}/systemd \
 "
 
 FILES_${PN}-dbg += " \
-    ${libdir}/plugins/*/.debug \
     ${OE_QMAKE_PATH_QML}/*/*/.debug \
     ${OE_QMAKE_PATH_QML}/*/*/*/.debug \
 "
-
-FILES_${PN}-dev += " \
-    ${libdir}/cmake \
-"
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "Hawaii, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "Hawaii, -S${includedir}, -S${STAGING_INCDIR}"
-
