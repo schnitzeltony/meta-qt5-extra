@@ -14,9 +14,6 @@ DEPENDS += " \
 SRC_URI = " \
     git://github.com/greenisland/${BPN}.git;protocol=git;branch=master \
     file://0001-find-native-greenisland-wayland-scanner.patch \
-    file://0002-qwlsurfacebuffer.cpp-include-qwlclientbufferintegrat.patch \
-    file://0003-waylandcompositor-remove-property-useHardwareIntegra.patch \
-    file://0004-hardwareintegration-glx-compositor-does-not-build-in.patch \
 "
 
 # we don't have wayland-protocols yet - revisit
