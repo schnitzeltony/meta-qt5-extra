@@ -8,7 +8,6 @@ RDEPENDS_${PN} = " \
     cinema \
     eyesight \
     greenisland \
-    hawaii-baseapps \
     hawaii-icon-theme \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "hawaii-shell", "",d)} \
     hawaii-system-preferences \

@@ -27,3 +27,7 @@ FILES_${PN} += " \
     ${datadir}/desktop-directories \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
+
+RREPLACES_${PN} = "hawaii-baseapps"
+RPROVIDES_${PN} = "hawaii-baseapps"
+RCONFLICTS_${PN} = "hawaii-baseapps"
