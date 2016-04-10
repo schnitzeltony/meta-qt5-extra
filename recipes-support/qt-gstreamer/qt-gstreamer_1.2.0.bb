@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 inherit cmake_qt5  cmake-lib
 
 DEPENDS += " \
+    boost \
     qtbase \
+    qtquick1 \
     qtdeclarative \
     glib-2.0 \
     gstreamer1.0 \
@@ -28,6 +30,7 @@ EXTRA_OECMAKE += " \
 FILES_${PN} += " \
     ${libdir}/gstreamer-1.0 \
     ${OE_QMAKE_PATH_QML} \
+    ${OE_QMAKE_PATH_IMPORTS} \
 "
 
 FILES_${PN}-dev += " \
