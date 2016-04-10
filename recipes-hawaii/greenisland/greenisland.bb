@@ -14,6 +14,7 @@ DEPENDS += " \
 SRC_URI = " \
     git://github.com/greenisland/${BPN}.git;protocol=git;branch=master \
     file://0001-find-native-greenisland-wayland-scanner.patch \
+    file://0002-RaspberryPi-Don-t-suggest-closed-source-gles-driver-.patch \
 "
 
 # we don't have wayland-protocols yet - revisit
