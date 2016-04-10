@@ -30,6 +30,7 @@ TIER_1 = " \
 "
 
 TIER_2 = " \
+    kactivities-stats \
     kauth \
     kcompletion \
     kcrash \
