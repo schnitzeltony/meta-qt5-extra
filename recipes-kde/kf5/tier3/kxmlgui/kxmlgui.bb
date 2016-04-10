@@ -21,8 +21,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "0faf3974771268f42db7c1d4f52f3b9c"
-SRC_URI[sha256sum] = "84d186d92969570a47f314c20f7f444d3d82182e47b6f065ab3537bdbc221c14"
+SRC_URI[md5sum] = "df170e2072519d5b48e6fee2bd0d1a5c"
+SRC_URI[sha256sum] = "d2f94ec1d93430ba29368178bad705f8e2f6296f83c1b51af27d3b6702b066b1"
 
 # REVISIT remove ugly hack for wayland-only environments
 # REVISIT remove 0003-kmainwindow.. as soon as meta-qt5 hasmoved to 5.6

@@ -20,8 +20,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "ac7a5cd20b06661edf13faad77d4ac89"
-SRC_URI[sha256sum] = "2399f03bce17b5aae32f6785bef5017dd8b81caf0541192192c9a794c9c141e4"
+SRC_URI[md5sum] = "3bbbe20155703ae8b013c6bced6e7a11"
+SRC_URI[sha256sum] = "3d2e4fead4c7d85f617482f1db8621f1804a6d2d6a7ede58239febefa25a2f30"
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5Kross, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Kross, -S${includedir}, -S${STAGING_INCDIR}"

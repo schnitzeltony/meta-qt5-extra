@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "qtdeclarative"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "0bcf42d89dc6276dbba3b9f8259d67ab"
-SRC_URI[sha256sum] = "cd16aab3cf6340073d7d2851a3c734124ccd03121731d6be68a895f3878361e6"
+SRC_URI[md5sum] = "0b83cbdd8985c9a2b115523da9db02a9"
+SRC_URI[sha256sum] = "5914713e9090be468bf0e3c287ff7de811ba0f16ba4a4c7979db647d1cfb298f"
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5Solid, -S${libdir}, -S${STAGING_LIBDIR}"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Solid, -S${includedir}, -S${STAGING_INCDIR}"

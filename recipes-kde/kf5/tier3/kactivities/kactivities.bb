@@ -11,10 +11,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "boost kconfig kcoreaddons ki18n kservice kwindowsystem kglobalaccel kxmlgui kio kdbusaddons kdeclarative kcmutils"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "7dc889ce8dc8d58fc74270b2462acef7"
-SRC_URI[sha256sum] = "5b0a664f77749c441d61417f9dce5cb8a11668f7e7db1a7613378f555dac3795"
-
-SRC_URI += "file://0001-replace-try_run-by-try_compile-in-compiler-feature-c.patch"
+SRC_URI[md5sum] = "ef38903e74bb1afafb99be31204c6c38"
+SRC_URI[sha256sum] = "d3b3e5f339429be8dd8969e0027dbb698198df64015e990e5acd39b54d3d5926"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Activities, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
