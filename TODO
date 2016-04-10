@@ -14,15 +14,8 @@ kde missing:
 
 issues:
 
-plasma-desktop:
-* crashing as non priviledged user
-* kwin crashing / window decorations not repainted / compositng disabled (only for OpenGL ES > 2.0??)
-
 hawaii:
 * unable to start session
-
-antimony:
-* not finding python modules
 
 ..........
 
