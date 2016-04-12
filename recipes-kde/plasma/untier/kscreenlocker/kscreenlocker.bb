@@ -26,12 +26,20 @@ PV = "${PLASMA_VERSION}"
 SRC_URI[md5sum] = "173888c9ce09eb9979c90735b0664d65"
 SRC_URI[sha256sum] = "3ae7c40c4394c32eafe560694b58aafa841f613451a9543d7fbf5d68e79e4bb2"
 
+SRC_URI += "file://kde.pam"
+
+do_install_append() {
+    install -d ${D}${sysconfdir}/pam.d
+    install -m 644 ${WORKDIR}/kde.pam ${D}${sysconfdir}/pam.d/kde
+}
+
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/kconf_update \
     ${datadir}/k*5 \
     ${datadir}/plasma \
     ${datadir}/ksmserver \
+    ${sysconfdir} \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
