@@ -21,6 +21,7 @@ DEPENDS += " \
     libav \
     poppler \
     taglib \
+    exiv2 \
 "
 
 # cross libs / headers
