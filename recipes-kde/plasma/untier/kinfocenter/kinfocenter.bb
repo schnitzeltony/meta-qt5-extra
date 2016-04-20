@@ -34,8 +34,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "113a36e617b3166ae52abf486cba3bba"
-SRC_URI[sha256sum] = "1295f646f15b46d8a39434f8220a936d54b23b9e5f4bfbdfe8cf5eeb24e63fc9"
+SRC_URI[md5sum] = "42f209cffa1b8c2b14b5461e14ea5ff6"
+SRC_URI[sha256sum] = "253289a79ee420411ad92d11d54bb5249e77dcaecb688d945d0aa5ac93ec71e7"
 SRC_URI += "file://0001-fix-build-in-x11-less-environments.patch"
 
 FILES_${PN} += " \

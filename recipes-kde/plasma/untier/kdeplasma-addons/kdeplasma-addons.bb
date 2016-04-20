@@ -29,8 +29,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "b9c62d27891e2040c3ea169ce878227a"
-SRC_URI[sha256sum] = "2c9d594b57d154a291bb001a06a926a73bb2ff3565d03c1f0802053b6fb4073f"
+SRC_URI[md5sum] = "55e5b27c57ab9cee8aef94c458098379"
+SRC_URI[sha256sum] = "9a3d7026e99a8c113b17d3b912465254b0c9c3bfd92ee5d28334351892aee0dc"
 
 FILES_${PN} += " \
     ${datadir}/kwin \

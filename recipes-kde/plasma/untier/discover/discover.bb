@@ -21,8 +21,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "cef43f86ae5ab785afd9bf9ae7f84941"
-SRC_URI[sha256sum] = "f9014903f64b1774c6c66ecf96089bb204edba4e999c2d9a40ae3e378cf3b566"
+SRC_URI[md5sum] = "7e305965d9000f07a41d0b878bf7977f"
+SRC_URI[sha256sum] = "ef89f849d05d95242f545866a735a2806c00c9dfa0ebf6f0544a2f25bb10f6e6"
 SRC_URI += "file://0001-application-backend-requires-AppstreamQt.patch"
 
 FILES_${PN} += " \
