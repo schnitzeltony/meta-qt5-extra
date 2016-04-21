@@ -77,4 +77,5 @@ FILES_${PN}-dbg += " \
 
 RDEPENDS_${PN} += " \
     qtgraphicaleffects \
+    qtquickcontrols-qmlplugins \
 "
