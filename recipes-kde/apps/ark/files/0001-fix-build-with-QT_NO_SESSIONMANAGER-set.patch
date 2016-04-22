@@ -10,32 +10,33 @@ Upstream-Status: Pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- app/main.cpp | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ app/main.cpp | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/app/main.cpp b/app/main.cpp
-index 4a95063..c3d3a61 100644
+index a9539b5..91f96ab 100644
 --- a/app/main.cpp
 +++ b/app/main.cpp
-@@ -175,6 +175,7 @@ int main(int argc, char **argv)
+@@ -178,6 +178,7 @@ int main(int argc, char **argv)
+     // This is needed to prevent Dolphin from freezing when opening an archive.
      KDBusService dbusService(KDBusService::Multiple);
  
-     //session restoring
 +#ifndef QT_NO_SESSIONMANAGER
+     // Session restoring.
      if (application.isSessionRestored()) {
          if (!KMainWindow::canBeRestored(1)) {
-             return -1;
-@@ -186,7 +187,9 @@ int main(int argc, char **argv)
+@@ -190,8 +191,9 @@ int main(int argc, char **argv)
              delete window;
              return -1;
          }
--    } else { //new ark window (no restored session)
-+    } else
+-    } else { // New ark window (no restored session).
+-
++    } else // New ark window (no restored session).
 +#endif
-+    { //new ark window (no restored session)
- 
-         // open any given URLs
++    {
+         // Open any given URLs.
          const QStringList urls = parser.positionalArguments();
+ 
 -- 
-2.1.0
+2.5.5
 

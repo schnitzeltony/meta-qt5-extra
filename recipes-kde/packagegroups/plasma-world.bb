@@ -26,7 +26,6 @@ UNTIER = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kde-gtk-config", "",d)} \
     kdeplasma-addons \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kgamma5", "",d)} \
-    khelpcenter \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "khotkeys", "",d)} \
     kinfocenter \
     kmenuedit \

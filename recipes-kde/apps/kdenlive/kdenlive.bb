@@ -9,12 +9,14 @@ inherit kde-apps gtk-icon-cache
 DEPENDS += "\
     mlt \
     qtsvg \
+    qtwebkit \
     karchive \
     kbookmarks \
     kcoreaddons \
     kconfig \
     kconfigwidgets \
     kdbusaddons \
+    kfilemetadata \
     kio \
     kwidgetsaddons \
     kplotting \
@@ -26,11 +28,12 @@ DEPENDS += "\
     ktextwidgets \
     kiconthemes \
     kdoctools \
+    xapian-core \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "768180060ceb067f75c82d19f71e58c5"
-SRC_URI[sha256sum] = "b7acb52e68d22b7d114ecb883e3c9d5114bf3903b5516f57250a62a06b437c6b"
+SRC_URI[md5sum] = "c57ae037598ee76a266d19c850174749"
+SRC_URI[sha256sum] = "ae44f417a4821d1b757f35bd8e360fb609778138ec24c91493295b76b402434f"
 
 SRC_URI += " \
     file://0001-CMakeLists.txt-make-MLT_PREFIX-configurable.patch \

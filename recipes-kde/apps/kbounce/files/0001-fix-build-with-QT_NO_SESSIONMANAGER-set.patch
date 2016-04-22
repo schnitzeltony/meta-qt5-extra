@@ -14,23 +14,23 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/main.cpp b/main.cpp
-index 0a02928..9614c70 100644
+index 311268d..e0257f1 100644
 --- a/main.cpp
 +++ b/main.cpp
-@@ -78,9 +78,12 @@ int main(int argc, char **argv)
+@@ -84,9 +84,12 @@ int main(int argc, char **argv)
  
-   KDBusService service;
+     KDBusService service;
  
 +#ifndef QT_NO_SESSIONMANAGER
-   if (app.isSessionRestored())
-       RESTORE(KBounceMainWindow)
--  else {
-+  else
+     if (app.isSessionRestored())
+         RESTORE(KBounceMainWindow)
+-    else {
++    else
 +#endif
-+  {
-       KBounceMainWindow *w = new KBounceMainWindow;
-       w->show();
-   }
++    {
+         KBounceMainWindow *w = new KBounceMainWindow;
+         w->show();
+     }
 -- 
-2.1.0
+2.5.5
 

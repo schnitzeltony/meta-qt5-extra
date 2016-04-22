@@ -13,6 +13,7 @@ DEPENDS += " \
     kdbusaddons \
     knotifications \
     kconfig \
+    kdeclarative \
     ki18n \
     kio \
     kxmlgui \
@@ -27,8 +28,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "f5335ec21b56fdf0513b46e95d20b260"
-SRC_URI[sha256sum] = "d6a0f2447ed052387e140174181b889a0db0b1077217a20a107df977c160de63"
+SRC_URI[md5sum] = "231a565255ff420b2a8b0974530b1c28"
+SRC_URI[sha256sum] = "eab96b07eff41e98057ebbc3fb81d2ee6227559d0858d23ea82a8ad1e4ab1830"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \

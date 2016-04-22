@@ -15,6 +15,7 @@ DEPENDS += " \
     qtsvg \
     \
     exiv2 \
+    kactivities \
     karchive \
     kconfig \
     kconfigwidgets \
@@ -43,8 +44,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "923f3af3c0287678ab2633bd41996c3b"
-SRC_URI[sha256sum] = "0769e7d6aeb01d303ef6f9c30f3a6b8e3d1a793a27fe09a83f4fbbead22b0fd2"
+SRC_URI[md5sum] = "f15d31f670fbbad9e8ebda0f03568d1e"
+SRC_URI[sha256sum] = "d221f49feb7da25baa26fe1f244080aece4de51c8cd7782d451fd732f7d03546"
 
 FILES_${PN} += " \
     ${datadir}/kio_bookmarks \

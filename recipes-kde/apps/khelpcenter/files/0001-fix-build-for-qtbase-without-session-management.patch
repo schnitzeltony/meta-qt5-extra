@@ -12,10 +12,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 4 insertions(+)
 
 diff --git a/application.cpp b/application.cpp
-index d29234d..5570879 100644
+index 373910a..1e8a247 100644
 --- a/application.cpp
 +++ b/application.cpp
-@@ -54,10 +54,12 @@ void Application::activate(const QStringList& args, const QString &workingDirect
+@@ -66,10 +66,12 @@ void Application::activate(const QStringList& args, const QString &workingDirect
  
    if( !mMainWindow )
    {
@@ -28,9 +28,9 @@ index d29234d..5570879 100644
      mMainWindow = new MainWindow;
    }
  
-@@ -92,10 +94,12 @@ extern "C" int Q_DECL_EXPORT kdemain( int argc, char **argv )
+@@ -112,10 +114,12 @@ extern "C" int Q_DECL_EXPORT kdemain( int argc, char **argv )
  
-   app.activate(app.arguments(), QDir::currentPath());
+   QObject::connect( &service, &KDBusService::activateRequested, &app, &Application::activate );
  
 +#ifndef QT_NO_SESSIONMANAGER
    if ( app.isSessionRestored() )
@@ -42,5 +42,5 @@ index d29234d..5570879 100644
    return app.exec();
  }
 -- 
-1.8.3.1
+2.5.5
 

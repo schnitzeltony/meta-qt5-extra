@@ -13,23 +13,23 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/main.cpp b/main.cpp
-index 826f6f8..a0e66e6 100644
+index ec62c67..fd0c921 100644
 --- a/main.cpp
 +++ b/main.cpp
-@@ -86,9 +86,12 @@ int main(int argc, char **argv)
-   }
-   else
-   {
+@@ -89,9 +89,12 @@ int main(int argc, char **argv)
+     }
+     else
+     {
 +#ifndef QT_NO_SESSIONMANAGER
-       if ( app.isSessionRestored() )
-           RESTORE(AtomTopLevel)
--      else {
-+      else
+         if ( app.isSessionRestored() )
+             RESTORE(AtomTopLevel)
+-        else {
++        else
 +#endif
-+      {
-           AtomTopLevel *top = new AtomTopLevel;
-           if ( parser.isSet( "hackmode" ) )
-               top->enableHackMode();
++        {
+             AtomTopLevel *top = new AtomTopLevel;
+             if ( parser.isSet( QStringLiteral("hackmode") ) )
+                 top->enableHackMode();
 -- 
-1.9.3
+2.5.5
 
