@@ -19,6 +19,7 @@ RDEPENDS_${PN} = " \
     kwalletmanager \
     lokalize \
     marble \
+    minuet \
     spectacle \
     umbrello \
 "
