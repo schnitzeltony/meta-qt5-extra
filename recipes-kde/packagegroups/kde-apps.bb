@@ -12,6 +12,7 @@ RDEPENDS_${PN} = " \
     filelight \
     gwenview \
     kate \
+    kcolorchooser \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
     khelpcenter \
     konsole \
