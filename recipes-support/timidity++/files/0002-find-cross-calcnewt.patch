@@ -1,0 +1,48 @@
+From 5c670df3951800766c1e7d031fb96a22b4d933bb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 24 Apr 2016 00:16:38 +0200
+Subject: [PATCH] find cross calcnewt
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ timidity/Makefile.am | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/timidity/Makefile.am b/timidity/Makefile.am
+index 757dcb2..1b9f376 100644
+--- a/timidity/Makefile.am
++++ b/timidity/Makefile.am
+@@ -444,21 +444,21 @@ resample.c: newton_table.c
+ 
+ if VCPP
+ newton_table.c: calcnewt$(EXEEXT)
+-	./calcnewt $@
++	calcnewt $@
+ 
+ else
+ if POCC
+ newton_table.c: calcnewt$(EXEEXT)
+-	./calcnewt $@
++	calcnewt $@
+ 
+ else
+ if WATCOM_C
+ newton_table.c: calcnewt$(EXEEXT)
+-	./calcnewt > $@
++	calcnewt > $@
+ 
+ else
+ newton_table.c: calcnewt$(EXEEXT)
+-	./calcnewt > $@
++	calcnewt > $@
+ 
+ endif
+ endif
+-- 
+2.5.5
+

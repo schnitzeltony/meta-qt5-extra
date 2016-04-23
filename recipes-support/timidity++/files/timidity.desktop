@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=TiMidity++ GTK UI
+Comment=Real-time software synthesizer
+Icon=timidity
+Type=Application
+Exec=timidity -ig
+Terminal=false
+Categories=Audio;AudioVideo;Midi;X-Synthesis;X-Jack;
