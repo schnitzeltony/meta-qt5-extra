@@ -8,6 +8,8 @@ inherit kde-apps
 
 DEPENDS += " \
     grantlee \
+    xapian-core \
+    \
     karchive \
     kbookmarks \
     kconfig \
