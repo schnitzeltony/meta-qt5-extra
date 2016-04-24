@@ -103,5 +103,6 @@ FILES_${PN}-dev = " \
 RDEPENDS_${PN} += " \
     qttools-tools \
     kconfig-bin \
+    kinit \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsetroot xmessage xprop", "", d)} \
 "
