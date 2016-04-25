@@ -1,0 +1,32 @@
+From c1e36f4aeec194f26b6347dfa5be1246fa21da05 Mon Sep 17 00:00:00 2001
+From: "Luis Gustavo S. Barreto" <gustavo@ossystems.com.br>
+Date: Fri, 15 Apr 2016 16:02:52 -0300
+Subject: [PATCH] Revert "Don't import an nonexistent layout"
+
+This reverts commit 309c64f5e90453c5253baf19e6c01759e8aa6f83.
+
+Upstream-Status: Submitted [https://git.reviewboard.kde.org/r/127345]
+
+Signed-off-by: Luis Gustavo S. Barreto <gustavo@ossystems.com.br>
+---
+ src/plasma/corona.cpp | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/src/plasma/corona.cpp b/src/plasma/corona.cpp
+index 1784516..5d17550 100644
+--- a/src/plasma/corona.cpp
++++ b/src/plasma/corona.cpp
+@@ -176,9 +176,7 @@ void Corona::loadLayout(const QString &configName)
+     }
+ 
+     KConfigGroup conf(config(), QString());
+-    if (!config()->groupList().isEmpty()) {
+-        d->importLayout(conf, false);
+-    }
++    d->importLayout(conf, false);
+ 
+     KConfigGroup cg(config(), "General");
+     setImmutability((Plasma::Types::ImmutabilityType)cg.readEntry("immutability", (int)Plasma::Types::Mutable));
+-- 
+2.7.4
+
