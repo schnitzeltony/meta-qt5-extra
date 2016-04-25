@@ -11,5 +11,3 @@ DEPENDS += " \
 SRC_URI += " \
 	file://0003-only-build-kf5-config-for-native.patch \
 "
-
-EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
