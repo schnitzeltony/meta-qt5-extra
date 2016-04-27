@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/schnitzeltony/qtiohelper.git"
 
 DEPENDS += "qtbase"
 
-PV = "0.0.1+git${SRCPV}"
-SRCREV = "2b26d6e95fc0c651ee80982ec0dba775462e1d32"
+PV = "0.1.0+git${SRCPV}"
+SRCREV = "3f188d7c41c8e6cfc5205bdde42a6c051c511edf"
 
 S="${WORKDIR}/git"
