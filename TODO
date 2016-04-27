@@ -1,9 +1,5 @@
 qt5.6:
 
-* remove kmxlgui 0003...patch
-* remove kdelibs4support 0004...patch
-* remove plasma-workspace 0007...patch
-* remove kwrited 0002...patch
 * check build wayland only / no session management
 
 

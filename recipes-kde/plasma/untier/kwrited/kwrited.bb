@@ -20,7 +20,6 @@ SRC_URI[sha256sum] = "e305d6fd109b5a318604201e4688a1fd37c77fe15981a285c6f47f63d5
 
 SRC_URI += " \
     file://0001-fix-build-for-qtbase-without-session-management.patch \
-    file://0002-remove-usage-of-QGuiApplication-setFallbackSessionMa.patch \
 "
 
 FILES_${PN} += " \

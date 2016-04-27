@@ -52,7 +52,6 @@ SRC_URI += " \
     file://0004-startkde-create-kde-s-home.patch \
     file://0005-startkde-enable-starting-X.patch \
     file://0006-startkde-remove-CMAKE_INSTALL_PREFIX-in-XDG_DATA_DIR.patch \
-    file://0007-remove-usage-of-QGuiApplication-setFallbackSessionMa.patch \
 "
 
 # cross libs / headers
