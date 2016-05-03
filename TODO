@@ -1,7 +1,12 @@
+qmmp: PACKAGECONFIGIZE:
+WARNING: qmmp-1.0.9-r0 do_package_qa: QA Issue: qmmp rdepends on libfaad, but it isn't a build dependency, missing faad2 in DEPENDS or PACKAGECONFIG? [build-deps]
+WARNING: qmmp-1.0.9-r0 do_package_qa: QA Issue: qmmp rdepends on wavpack, but it isn't a build dependency, missing wavpack in DEPENDS or PACKAGECONFIG? [build-deps]
+WARNING: qmmp-1.0.9-r0 do_package_qa: QA Issue: qmmp rdepends on libmms, but it isn't a build dependency, missing libmms in DEPENDS or PACKAGECONFIG? [build-deps]
+WARNING: qmmp-1.0.9-r0 do_package_qa: QA Issue: qmmp rdepends on libmodplug, but it isn't a build dependency, missing libmodplug in DEPENDS or PACKAGECONFIG? [build-deps]
+
+
 qt5.6:
-
 * check build wayland only / no session management
-
 
 kde missing:
 * plasma-sdk
