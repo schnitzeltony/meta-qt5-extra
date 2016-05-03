@@ -11,6 +11,7 @@ RDEPENDS_${PN} = " \
     hexalate \
     kde-world \
     lxqt-world \
+    qmmp \
     qpdfview \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sddm", "",d)} \
 "
