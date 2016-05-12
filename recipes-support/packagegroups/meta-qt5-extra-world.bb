@@ -13,5 +13,6 @@ RDEPENDS_${PN} = " \
     lxqt-world \
     qmmp \
     qpdfview \
+    qtiohelper \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sddm", "",d)} \
 "
