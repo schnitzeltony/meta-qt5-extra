@@ -28,8 +28,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "9e5cbf06ebb8972f3b1b17ef4484db1d"
-SRC_URI[sha256sum] = "f9751db6b2407467d5506b631c9c02e21c104d684c642272d74ada1040802d16"
+SRC_URI[md5sum] = "e80d534d76fec1a1a39945ecd20229ac"
+SRC_URI[sha256sum] = "477ba9bae3642d7e17b7b4564136ec8ab9f9af18ed8a3363a50ba4e70c65b0a0"
 SRC_URI += "file://0001-align-path-of-designer-plugins.patch"
 
 PACKAGES =+ " \
@@ -49,6 +49,7 @@ FILES_${PN} += " \
     ${datadir}/icons \
     ${datadir}/k*5 \
     ${datadir}/appdata \
+    ${datadir}/mime \
     ${libdir}/libmarbledeclarative.so \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
