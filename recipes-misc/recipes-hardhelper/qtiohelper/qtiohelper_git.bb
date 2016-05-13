@@ -10,6 +10,6 @@ SRC_URI = "git://github.com/schnitzeltony/${BPN}.git"
 DEPENDS += "qtbase"
 
 PV = "0.1.0+git${SRCPV}"
-SRCREV = "d05c789a7f8f99ece9bfe14402065c40ab8a9b00"
+SRCREV = "7e7df21650c4ea202cf87ced94b7273e7407df76"
 
 S="${WORKDIR}/git"
