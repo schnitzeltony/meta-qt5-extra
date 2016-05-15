@@ -22,6 +22,7 @@ RDEPENDS_${PN} = " \
     lokalize \
     marble \
     minuet \
+    okteta \
     spectacle \
     umbrello \
 "
