@@ -17,6 +17,7 @@ RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
     khelpcenter \
     konsole \
+    ksystemlog \
     kwalletmanager \
     lokalize \
     marble \
