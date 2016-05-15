@@ -64,6 +64,7 @@ TIER_3 = " \
     knotifyconfig \
     kparts \
     kpeople \
+    krunner \
     kservice \
     ktexteditor \
     ktextwidgets \
@@ -86,7 +87,6 @@ PORTING_AIDS_TIER_3 = " \
     khtml \
     kjsembed \
     kross \
-    krunner \
 "
 
 UNTIER = " \

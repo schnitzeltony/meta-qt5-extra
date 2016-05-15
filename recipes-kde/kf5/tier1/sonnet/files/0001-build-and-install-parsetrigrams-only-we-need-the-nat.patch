@@ -12,8 +12,7 @@ Upstream-Status: Inappropriate [cross-specific]
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
  CMakeLists.txt      | 10 +++-------
- data/CMakeLists.txt |  2 +-
- 2 files changed, 4 insertions(+), 8 deletions(-)
+ 1 files changed, 3 insertions(+), 7 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 index b7d1d70..1c7a32e 100644
@@ -47,19 +46,6 @@ index b7d1d70..1c7a32e 100644
  
  feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 +endif()
-diff --git a/data/CMakeLists.txt b/data/CMakeLists.txt
-index edf4b9a..bd82228 100644
---- a/data/CMakeLists.txt
-+++ b/data/CMakeLists.txt
-@@ -3,7 +3,7 @@ project(sonnetdata)
- add_executable(parsetrigrams parsetrigrams.cpp)
- 
- TARGET_LINK_LIBRARIES(parsetrigrams PUBLIC Qt5::Core)
--#INSTALL(TARGETS parsetrigrams DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-+INSTALL(TARGETS parsetrigrams DESTINATION ${BIN_INSTALL_DIR})
- 
- macro(create_trigrams_map _target_name _in_DIR _out_FILE)
-     get_target_property(PARSETRIGRAMS_EXECUTABLE parsetrigrams LOCATION)
 -- 
 1.8.3.1
 

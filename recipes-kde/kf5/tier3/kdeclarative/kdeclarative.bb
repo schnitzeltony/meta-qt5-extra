@@ -12,8 +12,8 @@ DEPENDS += "qtdeclarative kconfig ki18n kiconthemes kio kwidgetsaddons kwindowsy
 SRC_URI += "file://0001-kpackagelauncherqml-Add-include-of-QDebug.patch"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "1a2b4592d7095426f29a872135d21be0"
-SRC_URI[sha256sum] = "72e2b2d3bd4b2639a1a6b56cc88544d24330d05e45f76d40082eda369196c1d4"
+SRC_URI[md5sum] = "0643d9394a76b52080ec70cea60942fc"
+SRC_URI[sha256sum] = "416daf8d77136b34347461aa4f8633cec79ac91f8564b59ad950d4863ce6c61a"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Declarative, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

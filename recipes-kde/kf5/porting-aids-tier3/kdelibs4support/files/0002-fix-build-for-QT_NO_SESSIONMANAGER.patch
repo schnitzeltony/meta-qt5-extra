@@ -40,16 +40,16 @@ index 6ffaf6e..7e872ee 100644
      foreach (KSessionManager *it, KSessionManager::sessionClients()) {
          if ((canceled = !it->commitData(sm))) {
              break;
-@@ -597,9 +602,11 @@ void KApplication::commitData(QSessionManager &sm)
-     } else {
-         sm.setRestartHint(QSessionManager::RestartIfRunning);
+@@ -612,9 +612,11 @@ void KApplication::commitData(QSessionManager &sm)
+     if (canceled) {
+         sm.cancel();
      }
 +#endif // QT_NO_SESSIONMANAGER
      d->session_save = false;
  }
  
 +#ifndef QT_NO_SESSIONMANAGER
- #if HAVE_X11
+ #if HAVE_X11 && QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
  static void checkRestartVersion(QSessionManager &sm)
  {
 @@ -634,6 +641,7 @@ static void checkRestartVersion(QSessionManager &sm)
