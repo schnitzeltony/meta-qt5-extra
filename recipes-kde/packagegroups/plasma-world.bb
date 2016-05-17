@@ -34,7 +34,6 @@ UNTIER = " \
     ksshaskpass \
     ksysguard \
     kwallet-pam \
-    kwayland \
     kwayland-integration \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
     kwrited \

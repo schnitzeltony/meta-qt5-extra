@@ -20,6 +20,7 @@ TIER_1 = " \
     kitemmodels \
     kitemviews \
     kplotting \
+    kwayland \
     kwidgetsaddons \
     kwindowsystem \
     modemmanager-qt \
