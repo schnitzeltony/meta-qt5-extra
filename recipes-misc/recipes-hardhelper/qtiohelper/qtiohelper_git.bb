@@ -7,9 +7,9 @@ require recipes-qt/qt5/qt5.inc
 
 SRC_URI = "git://github.com/schnitzeltony/${BPN}.git"
 
-DEPENDS += "qtbase"
+DEPENDS += "qtbase qtserialport"
 
 PV = "0.1.0+git${SRCPV}"
-SRCREV = "7e7df21650c4ea202cf87ced94b7273e7407df76"
+SRCREV = "30626f2c812efe124e084e74004a2d6ead8f6ca7"
 
 S="${WORKDIR}/git"
