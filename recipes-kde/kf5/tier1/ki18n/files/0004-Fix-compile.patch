@@ -1,0 +1,28 @@
+From 1adc1477a022db76db7b3f595d49fdf6f4409b88 Mon Sep 17 00:00:00 2001
+From: Christoph Feck <cfeck@kde.org>
+Date: Sat, 7 May 2016 21:09:42 +0200
+Subject: [PATCH 3/3] Fix compile
+
+---
+ src/gettext.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/gettext.h b/src/gettext.h
+index 57d985d..fd15bda 100644
+--- a/src/gettext.h
++++ b/src/gettext.h
+@@ -160,10 +160,10 @@ dnpgettext_expr(const char *domain,
+     size_t msgctxt_len = strlen(msgctxt) + 1;
+     size_t msgid_len = strlen(msgid) + 1;
+     const char *translation;
++    int translation_found;
+ #if _LIBGETTEXT_HAVE_VARIABLE_SIZE_ARRAYS
+     char msg_ctxt_id[msgctxt_len + msgid_len];
+ #else
+-    int translation_found;
+     char buf[1024];
+     char *msg_ctxt_id =
+         (msgctxt_len + msgid_len <= sizeof(buf)
+-- 
+2.5.5
+
