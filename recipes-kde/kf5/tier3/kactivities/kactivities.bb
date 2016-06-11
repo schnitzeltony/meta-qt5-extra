@@ -14,6 +14,11 @@ SRC_URI[sha256sum] = "b95e76570963a9f8797f103e32ddf58382c104e935fc27de3f48eea3db
 
 SRC_URI += "file://0001-replace-try_run-by-try_compile-in-compiler-feature-c.patch"
 
+do_compile_prepend() {
+    # Error: Could not locate service type file kservicetypes5/ "kfileitemactionplugin.desktop" , tried ...
+    export XDG_DATA_HOME=${STAGING_DATADIR}
+}
+
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Activities, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Activities, -S${includedir}, -S${STAGING_INCDIR}"
