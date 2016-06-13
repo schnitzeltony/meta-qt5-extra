@@ -16,6 +16,7 @@ RDEPENDS_${PN} = " \
     kcolorchooser \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
     khelpcenter \
+    kmix \
     konsole \
     ksystemlog \
     kwalletmanager \
