@@ -19,8 +19,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "310a695f923f03d083c0c7b4bacfe61b"
-SRC_URI[sha256sum] = "4c99a56fcd147d79610f2672020595fb11c6eda2d2ffbbf194e402e09ef1e1b8"
+SRC_URI[md5sum] = "4072959e05d8a561fca95919fc8fad18"
+SRC_URI[sha256sum] = "c3d2e5fc2fa71e6d1d2cca2e5654f90cbe4d4dd5607898365e062d4471a48f7d"
 
 SRC_URI += " \
     file://0001-return-WAYLAND_DISPLAY-if-all-known-options-fail.patch \

@@ -7,8 +7,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "qtdeclarative"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "ad970e31bd8e15c9a1d119baba5cfca2"
-SRC_URI[sha256sum] = "040c83b713211bfb4313a2a70c4b35a0c49d1bd38322933c435262e1c49b33d3"
+SRC_URI[md5sum] = "a7c7afc02a3842119607c62f2f1191b2"
+SRC_URI[sha256sum] = "89ece8748558eb3a8e081dc6eb4e7bd4104301373ce49d55d66b4bb197b933cb"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
 FILES_${PN}-dbg += "${OE_QMAKE_PATH_QML}/org/kde/bluezqt/.debug"

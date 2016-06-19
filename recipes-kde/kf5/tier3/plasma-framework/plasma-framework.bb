@@ -31,8 +31,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "f0105f7d17db98efe37e7a791c7f1949"
-SRC_URI[sha256sum] = "ec1f9398221c9d6ef2e369b95ca925bb0d46fe5f88e6db8acc883730c08ac7f2"
+SRC_URI[md5sum] = "ff844df8d38596734e541a0c53131e32"
+SRC_URI[sha256sum] = "80294a22cd6c2eb4765bbce236f5a7b74a90c59481d8d4428c7addd9c96b2807"
 
 SRC_URI += "file://0001-Revert-Don-t-import-an-nonexistent-layout.patch"
 

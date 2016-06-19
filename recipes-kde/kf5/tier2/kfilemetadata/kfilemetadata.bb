@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 cmake-lib pkgconfig
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "cbd5e85e3bf7234b5d9f4dddad1b719e"
-SRC_URI[sha256sum] = "cc8945e0a326574eefe3035d2f4c911f12e78ff33c1d3ee13369948d450eda5c"
+SRC_URI[md5sum] = "4aef6d8fbce1de5906c31318a0dd8e95"
+SRC_URI[sha256sum] = "fad84cbc477c36aa967a1f4facd7bfa6825346bdddae87b1fd9db64d9dc2688f"
 
 # TODO: optionals PACKAGECONFIG (poppler-qt5 / exiv2 / ffmpeg / epub)
 DEPENDS += " \

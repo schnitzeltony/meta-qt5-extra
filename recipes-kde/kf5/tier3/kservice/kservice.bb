@@ -11,8 +11,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "kconfig kcoreaddons kcrash kdbusaddons ki18n kdoctools"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "36ab06f4b4e8c3f9a13e4ec5fb1ed272"
-SRC_URI[sha256sum] = "e92937741dda4f5d79f031e3ab7252e9b3d258f57dc9aa6a1c512ef83a43b8b0"
+SRC_URI[md5sum] = "d0642716404ae604d6db198139ce20f7"
+SRC_URI[sha256sum] = "3836f73746a9fd099f6b078e5e456808ec0fef69d8710f5a7904b3d9c3976fce"
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5Service, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Service, -S${includedir}, -S${STAGING_INCDIR}"
