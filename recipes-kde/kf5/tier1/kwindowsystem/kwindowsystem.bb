@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib cmake-auto-align-paths
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "a94136e4f5af55dab34929fc5521d115"
-SRC_URI[sha256sum] = "5dd42aa08abc8a98f03972abaf8825f53a9a22edc34e8c7217945e165d5e02fe"
+SRC_URI[md5sum] = "65da4c0f405fe373138e05c7fb7bd09a"
+SRC_URI[sha256sum] = "bf191b760eb5de97e7a2cdda8c8a59d50597e46d7714510c1e1b20aa2baabe70"
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}"
 FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/*/*/.debug"

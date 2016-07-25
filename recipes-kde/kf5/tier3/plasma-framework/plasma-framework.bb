@@ -31,10 +31,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "ff844df8d38596734e541a0c53131e32"
-SRC_URI[sha256sum] = "80294a22cd6c2eb4765bbce236f5a7b74a90c59481d8d4428c7addd9c96b2807"
-
-SRC_URI += "file://0001-Revert-Don-t-import-an-nonexistent-layout.patch"
+SRC_URI[md5sum] = "ead321090ad7069b772eb20ae84b90e3"
+SRC_URI[sha256sum] = "8b15c3da53b274ed9ddd354b7e5b1397c7554057da854c61fc2d900240dd0125"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Plasma, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

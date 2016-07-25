@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1"
 inherit kde-kf5 cmake-lib
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "4acdf183309dfbee324dfae7f2169cf5"
-SRC_URI[sha256sum] = "46b0d39298e6877c09c766e3a70f72a7aa6994c621674d630c5a35a656b622ec"
+SRC_URI[md5sum] = "5e3d90a28ed3f2cd61a2cff93aacb850"
+SRC_URI[sha256sum] = "42f9f3e22c23effe53ebaf4fa73febcb8e7942a8c3dfc39ad165113813befe3e"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Plotting, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

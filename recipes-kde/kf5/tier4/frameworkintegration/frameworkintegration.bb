@@ -17,8 +17,8 @@ DEPENDS += " \
 RRECCOMENDS_${PN} += "oxygen-fonts"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "16af94413983986c36a3a2b9279a3b7b"
-SRC_URI[sha256sum] = "48b472cbdfc2407b68247dc40bcee8b6e9f951c2e20f97030c68f95f7d283b28"
+SRC_URI[md5sum] = "bc3793fb4adf756511fdd042cb710afc"
+SRC_URI[sha256sum] = "f27be34e1f8e7dbc1d74dae3d73f85e71777c40103fa8d314acd805a007e382f"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5FrameworkIntegration, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

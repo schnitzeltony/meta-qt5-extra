@@ -7,8 +7,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "qtdeclarative kconfig kcoreaddons ki18n kio kservice plasma-framework solid threadweaver"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "5b3cadf4d586d15729b97b8c152e82b7"
-SRC_URI[sha256sum] = "52ac6b5a7c99fa0cb9e776b06348511fe5373fc9acc2842be760c7ae60a2d9dd"
+SRC_URI[md5sum] = "c397c4a9b647e6bb35d7f022c5556693"
+SRC_URI[sha256sum] = "d4a96534676ac4c58b7faef154640edd2ffbecc3ef09fe8debf29026653cc839"
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5Runner, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5Runner, -S${includedir}, -S${STAGING_INCDIR}"
