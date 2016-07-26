@@ -1,0 +1,155 @@
+From a13f4cb491973ece28266bef9aa54706f0393fc6 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 7 Jun 2016 00:04:14 +0200
+Subject: [PATCH] fix build with GLES2
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ libs/ui/canvas/kis_mirror_axis.cpp           | 15 -------
+ libs/ui/opengl/kis_opengl_canvas2.cpp        |  6 +--
+ libs/ui/opengl/kis_opengl_image_textures.cpp | 60 +++-------------------------
+ 3 files changed, 8 insertions(+), 73 deletions(-)
+
+diff --git a/libs/ui/canvas/kis_mirror_axis.cpp b/libs/ui/canvas/kis_mirror_axis.cpp
+index 468dbf4..4823f39 100644
+--- a/libs/ui/canvas/kis_mirror_axis.cpp
++++ b/libs/ui/canvas/kis_mirror_axis.cpp
+@@ -144,16 +144,6 @@ void KisMirrorAxis::drawDecoration(QPainter& gc, const QRectF& updateArea, const
+     gc.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+ 
+     QOpenGLContext *ctx = QOpenGLContext::currentContext();
+-    bool hasMultisample = ((gc.paintEngine()->type() == QPaintEngine::OpenGL2) &&
+-                           (ctx->hasExtension("GL_ARB_multisample")));
+-
+-    // QPainter cannot anti-alias the edges of circles etc. when using OpenGL
+-    // So instead, use native OpenGL anti-aliasing when available.
+-    if (hasMultisample) {
+-        gc.beginNativePainting();
+-        ctx->functions()->glEnable(GL_MULTISAMPLE);
+-        gc.endNativePainting();
+-    }
+ 
+     float halfHandleSize = d->handleSize / 2;
+ 
+@@ -207,11 +197,6 @@ void KisMirrorAxis::drawDecoration(QPainter& gc, const QRectF& updateArea, const
+         }
+     }
+ 
+-    if (hasMultisample) {
+-        gc.beginNativePainting();
+-        ctx->functions()->glDisable(GL_MULTISAMPLE);
+-        gc.endNativePainting();
+-    }
+ 
+ }
+ 
+diff --git a/libs/ui/opengl/kis_opengl_canvas2.cpp b/libs/ui/opengl/kis_opengl_canvas2.cpp
+index 91149c3..0f6d0f0 100644
+--- a/libs/ui/opengl/kis_opengl_canvas2.cpp
++++ b/libs/ui/opengl/kis_opengl_canvas2.cpp
+@@ -303,7 +303,7 @@ void KisOpenGLCanvas2::paintToolOutline(const QPainterPath &path)
+     modelMatrix = projectionMatrix * modelMatrix;
+     cursorShader->setUniformValue(d->cursorShaderModelViewProjectionUniform, modelMatrix);
+ 
+-    glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
++    /*glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+ 
+     // XXX: glLogicOp not in ES 2.0 -- it would be better to use another method.
+     // It is defined in 3.1 core profile onward.
+@@ -312,7 +312,7 @@ void KisOpenGLCanvas2::paintToolOutline(const QPainterPath &path)
+     glEnable(GL_COLOR_LOGIC_OP);
+     if (ptr_glLogicOp) {
+         ptr_glLogicOp(GL_XOR);
+-    }
++    }*/
+ 
+     // setup the array of vertices
+     QVector<QVector3D> vertices;
+@@ -331,7 +331,7 @@ void KisOpenGLCanvas2::paintToolOutline(const QPainterPath &path)
+         vertices.clear();
+     }
+ 
+-    glDisable(GL_COLOR_LOGIC_OP);
++    //glDisable(GL_COLOR_LOGIC_OP);
+ 
+     cursorShader->release();
+ 
+diff --git a/libs/ui/opengl/kis_opengl_image_textures.cpp b/libs/ui/opengl/kis_opengl_image_textures.cpp
+index 835d41e..c16d0e7 100644
+--- a/libs/ui/opengl/kis_opengl_image_textures.cpp
++++ b/libs/ui/opengl/kis_opengl_image_textures.cpp
+@@ -511,63 +511,13 @@ void KisOpenGLImageTextures::updateTextureFormat()
+     dbgUI << "Choosing texture format:";
+ 
+     if (colorModelId == RGBAColorModelID) {
+-        if (colorDepthId == Float16BitsColorDepthID) {
+-
+-            if (ctx->hasExtension("GL_ARB_texture_float")) {
+-                m_texturesInfo.internalFormat = GL_RGBA16F_ARB;
+-                dbgUI << "Using ARB half";
+-            }
+-            else if (ctx->hasExtension("GL_ATI_texture_float")) {
+-                m_texturesInfo.internalFormat = GL_RGBA_FLOAT16_ATI;
+-                dbgUI << "Using ATI half";
+-            }
+-
+-            bool haveBuiltInOpenExr = false;
+-#ifdef HAVE_OPENEXR
+-            haveBuiltInOpenExr = true;
+-#endif
+-
+-            if (haveBuiltInOpenExr && ctx->hasExtension("GL_ARB_half_float_pixel")) {
+-                m_texturesInfo.type = GL_HALF_FLOAT_ARB;
+-                destinationColorDepthId = Float16BitsColorDepthID;
+-                dbgUI << "Pixel type half";
+-            } else {
+-                m_texturesInfo.type = GL_FLOAT;
+-                destinationColorDepthId = Float32BitsColorDepthID;
+-                dbgUI << "Pixel type float";
+-            }
++        if (colorDepthId == Float16BitsColorDepthID ||
++            colorDepthId == Float32BitsColorDepthID) {
++			m_texturesInfo.type = GL_FLOAT;
++			destinationColorDepthId = Float32BitsColorDepthID;
++			dbgUI << "Pixel type float";
+             m_texturesInfo.format = GL_RGBA;
+         }
+-        else if (colorDepthId == Float32BitsColorDepthID) {
+-            if (ctx->hasExtension("GL_ARB_texture_float")) {
+-                m_texturesInfo.internalFormat = GL_RGBA32F_ARB;
+-                dbgUI << "Using ARB float";
+-            } else if (ctx->hasExtension("GL_ATI_texture_float")) {
+-                m_texturesInfo.internalFormat = GL_RGBA_FLOAT32_ATI;
+-                dbgUI << "Using ATI float";
+-            }
+-
+-            m_texturesInfo.type = GL_FLOAT;
+-            m_texturesInfo.format = GL_RGBA;
+-            destinationColorDepthId = Float32BitsColorDepthID;
+-        }
+-        else if (colorDepthId == Integer16BitsColorDepthID) {
+-            m_texturesInfo.internalFormat = GL_RGBA16;
+-            m_texturesInfo.type = GL_UNSIGNED_SHORT;
+-            m_texturesInfo.format = GL_BGRA;
+-            destinationColorDepthId = Integer16BitsColorDepthID;
+-            dbgUI << "Using 16 bits rgba";
+-        }
+-    }
+-    else {
+-        // We will convert the colorspace to 16 bits rgba, instead of 8 bits
+-        if (colorDepthId == Integer16BitsColorDepthID) {
+-            m_texturesInfo.internalFormat = GL_RGBA16;
+-            m_texturesInfo.type = GL_UNSIGNED_SHORT;
+-            m_texturesInfo.format = GL_BGRA;
+-            destinationColorDepthId = Integer16BitsColorDepthID;
+-            dbgUI << "Using conversion to 16 bits rgba";
+-        }
+     }
+ 
+     if (!m_internalColorManagementActive &&
+-- 
+2.5.5
+

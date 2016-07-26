@@ -28,8 +28,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "70cbf9250425925d49cbeb54a3c1560a"
-SRC_URI[sha256sum] = "32a006c0b105bd9f19913ff620e5eee8a2c09acc3b28fabe5645dceb4f188f13"
+SRC_URI[md5sum] = "e2e6315ba8277027f03ee2b5fe9c84a6"
+SRC_URI[sha256sum] = "5a3dabcf0a28b5446030ab1831be13f0d0d4589d57da9f3a2e71e53629f331cb"
 SRC_URI += "file://0001-align-path-of-designer-plugins.patch"
 
 PACKAGES =+ " \
