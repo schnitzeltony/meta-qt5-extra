@@ -4,7 +4,7 @@ inherit cmake-lib cmake-auto-align-paths
 
 DEPENDS += " \
     ${BPN}-native \
-    ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
     wayland \
     qtwayland \
     libkscreen \
