@@ -41,8 +41,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "9a1dec8b5961ee33faff91258f617ff6"
-SRC_URI[sha256sum] = "1b058bd04a7d5a7b358fa8763c4a9f21fa34889eeacb4e110263a10c47e030e7"
+SRC_URI[md5sum] = "2649ef60cc1ce18295e162ce937db3cc"
+SRC_URI[sha256sum] = "1e18eeb6d1aa6560fabff3a899039a8c42a58b365cb9dac2cc3abfc5b47903cc"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
@@ -59,6 +59,9 @@ CMAKE_ALIGN_SYSROOT[1] = "LibKWorkspace, -S${libdir}/lib, -S${STAGING_LIBDIR}/li
 CMAKE_ALIGN_SYSROOT[2] = "LibKWorkspace, -S${includedir}, -S${STAGING_INCDIR}"
 CMAKE_ALIGN_SYSROOT[3] = "LibTaskManager, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[4] = "LibTaskManager, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[5] = "LibLegacyTaskManager, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[6] = "LibLegacyTaskManager, -S${includedir}, -S${STAGING_INCDIR}"
+
 
 # REVISIT
 FILES_${PN} += " \
@@ -76,6 +79,7 @@ FILES_${PN} += " \
     ${datadir}/sddm \
     ${datadir}/plasma \
     ${datadir}/ksmserver \
+    ${datadir}/kdevappwizard \
     \
     ${libdir}/libkdeinit5*.so \
     ${OE_QMAKE_PATH_PLUGINS} \
@@ -96,6 +100,7 @@ FILES_${PN}-dev = " \
     ${libdir}/libweather_ion.so \
     ${libdir}/libplasma-geolocation-interface.so \
     ${libdir}/libtaskmanager.so \
+    ${libdir}/liblegacytaskmanager.so \
 "
 
 # startkde requires:

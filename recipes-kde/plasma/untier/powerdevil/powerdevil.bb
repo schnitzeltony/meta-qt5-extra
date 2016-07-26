@@ -23,8 +23,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "3816d501714b32d71b88d8d913f280ae"
-SRC_URI[sha256sum] = "a5864679d3cd7752c4d6601853c18f18239606f153d347010c1f1da31de3607b"
+SRC_URI[md5sum] = "05aeefefa7ebd86f775ab36f9aed672b"
+SRC_URI[sha256sum] = "6b2792cc3c5c4ba5a3196bd2f4a2f76c4b1a34ecb4e728367207918a1b0a538c"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

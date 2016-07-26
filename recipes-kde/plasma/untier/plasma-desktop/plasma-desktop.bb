@@ -30,6 +30,7 @@ DEPENDS += " \
     kemoticons \
     baloo \
     kpeople \
+    kactivities-stats \
     \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver libxcb qtx11extras", "", d)} \
 "
@@ -42,8 +43,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "f6083c7f337c721337783cdd03c16ab2"
-SRC_URI[sha256sum] = "fc6aec02a6747f24271e399feea9150f45840a0ce3f98a0f81b17f8cb8f04876"
+SRC_URI[md5sum] = "0563d5d12ef9b1822c63598075997ef8"
+SRC_URI[sha256sum] = "2715035fbdd04899925ea12f03d8648ca35185266398d0fe6d580cbb03247c4e"
 
 SRC_URI += "file://0001-Ensure-xkb_base-is-not-empty-instead-of-checking-if-.patch"
 

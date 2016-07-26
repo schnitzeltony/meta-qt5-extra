@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma
 
 DEPENDS += " \
+    breeze \
     kconfig \
     kconfigwidgets \
     ki18n \
@@ -18,8 +19,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "7a24ff9cfe4e1650b98164c916993fe8"
-SRC_URI[sha256sum] = "95f434801f23f2ffbbb2df6dcb19ef1373ef942919bc5a133adca8c59e1a1bab"
+SRC_URI[md5sum] = "222c4bb5f3195c3a05ba5af062aa853a"
+SRC_URI[sha256sum] = "cfd8a328041a6793a17f20e9502cece94d7f302d395468a49f87b6de00030ac9"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
