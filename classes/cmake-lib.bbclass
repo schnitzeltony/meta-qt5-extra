@@ -70,7 +70,7 @@ def get_align_flags(d):
 
 # global helper to check CMAKE_ALIGN_SYSROOT array contains 'ignore'
 def get_flags_ignore(flags):
-    if flags and flags.values().count('ignore') > 0:
+    if flags and list(flags.values()).count('ignore') > 0:
         return True
     return False
 
