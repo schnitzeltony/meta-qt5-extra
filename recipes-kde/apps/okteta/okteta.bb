@@ -38,3 +38,8 @@ FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
     ${datadir}/mime \
 "
+
+FILES_${PN}-dbg += " \
+    ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
+"
