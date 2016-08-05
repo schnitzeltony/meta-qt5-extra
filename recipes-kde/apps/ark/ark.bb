@@ -38,5 +38,6 @@ FILES_${PN} += " \
 
 FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_PLUGINS}/.debug \
+    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
     ${OE_QMAKE_PATH_PLUGINS}/kf5/kio_dnd/.debug \
 "
