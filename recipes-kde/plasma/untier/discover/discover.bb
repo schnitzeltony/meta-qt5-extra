@@ -32,6 +32,7 @@ FILES_${PN} += " \
 "
 
 FILES_${PN}-dbg += " \
+    ${libdir}/plasma-discover/.debug \
     ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
     ${OE_QMAKE_PATH_QML}/org/kde/*/.debug \
 "
