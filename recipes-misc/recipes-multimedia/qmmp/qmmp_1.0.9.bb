@@ -13,6 +13,11 @@ DEPENDS += " \
     libcdio-paranoia \
     libcddb \
     libmad \
+    faad2 \
+    wavpack \
+    libmms \
+    libmodplug \
+    libvorbis \
 "
 
 SRC_URI = " \
