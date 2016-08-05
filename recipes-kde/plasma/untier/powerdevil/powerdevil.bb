@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma
 
 DEPENDS += " \
+    bluez-qt \
     kactivities \
     kauth \
     kidletime \
