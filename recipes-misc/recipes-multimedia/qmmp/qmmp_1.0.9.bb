@@ -30,3 +30,7 @@ SRC_URI[sha256sum] = "419913e6becc91061a361afaf59b3471cfb6d28dcca1fb6201f4155632
 inherit cmake_qt5
 
 FILES_${PN} += "${datadir}"
+
+FILES_${PN}-dbg += " \
+    ${libdir}/qmmp/*/.debug \
+"
