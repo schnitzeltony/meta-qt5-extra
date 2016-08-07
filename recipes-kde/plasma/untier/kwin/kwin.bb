@@ -34,7 +34,6 @@ DEPENDS += " \
     knewstuff \
     kxmlgui \
     kdecoration \
-	kwayland \
     kscreenlocker \
 "
 

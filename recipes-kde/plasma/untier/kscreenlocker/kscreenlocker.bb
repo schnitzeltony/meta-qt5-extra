@@ -18,8 +18,7 @@ DEPENDS += " \
     kglobalaccel \
     libxcb \
     qtx11extras \
-    kwayland \
-    wayland \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "kwayland", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"

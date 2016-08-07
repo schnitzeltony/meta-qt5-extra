@@ -29,7 +29,7 @@ DEPENDS += " \
 
 # REVISIT optionals
 DEPENDS += " \
-    kwayland \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "kwayland", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)} \
 "
 

@@ -15,7 +15,7 @@ DEPENDS += " \
     kio \
     knotifications \
     kwidgetsaddons \
-    kwayland \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "kwayland", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"

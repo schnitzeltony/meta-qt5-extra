@@ -34,8 +34,8 @@ DEPENDS += " \
     networkmanager-qt \
     libksysguard \
     libkscreen \
-    kwayland \
     libdbusmenu-qt5 \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "kwayland", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver libsm libxcb kwin", "", d)} \
     zlib \
 "
