@@ -54,6 +54,7 @@ USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --home ${localstatedir}/lib/sddm --shell /bin/false --user-group --groups video sddm"
 
 RDEPENDS_${PN} += " \
+    xauth \
     qtbase-plugins \
     qtbase-fonts \
     qtdeclarative-plugins \
