@@ -52,6 +52,7 @@ FILES_SOLIBSDEV = "${libdir}/libkfont*${SOLIBSDEV}"
 
 FILES_${PN} += " \
     ${datadir}/k* \
+    ${datadir}/appdata \
     ${datadir}/config.kcfg \
     ${datadir}/color-schemes \
     ${datadir}/plasma \
