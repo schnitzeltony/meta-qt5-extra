@@ -20,4 +20,5 @@ FILES_${PN} += " \
     ${datadir}/lxqt \
 "
 
+RDEPENDS_${PN} += "xinit"
 RRECOMMENDS_${PN} += "oxygen qtsvg-plugins"
