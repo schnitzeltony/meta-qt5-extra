@@ -13,8 +13,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "46e55a772399efc9f017b214eacef7a6"
-SRC_URI[sha256sum] = "2ad615811937bbbb2ab12becc7f0d47db0ff10e36fd516c1d697fa087453b77a"
+SRC_URI[md5sum] = "f40f3015e4c0cbadba893ea9aec37ec2"
+SRC_URI[sha256sum] = "b1c7003126c3b83ababe031a003a038e714c9d7db07b8769ecd52c271686bffe"
 
 SRC_URI += " \
     file://0001-make-kwayland-support-optional.patch \
