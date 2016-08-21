@@ -1,0 +1,129 @@
+From f79f0fa7a121f939f8b833b06400045ce8e3d8c1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 21 Aug 2016 21:12:11 +0200
+Subject: [PATCH] find native qt build tools by configure options - auto
+ detection does not work
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ configure.ac | 66 +++++++++++++++---------------------------------------------
+ 1 file changed, 16 insertions(+), 50 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index b02c1eb..6812734 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -212,16 +212,10 @@ done
+ # A common error message:
+ ac_errmsg="not found in current PATH. Maybe QT development environment isn't available."
+ 
+-if test "x$ac_qt4" = "xyes"; then
+-   AC_PATH_PROG(ac_qmake, qmake-qt4, [no], $ac_path)
+-fi
+-if test "x$ac_qt5" = "xyes"; then
+-   AC_PATH_PROG(ac_qmake, qmake-qt5, [no], $ac_path)
+-fi
+-if test "x$ac_qmake" = "xno"; then
+-   AC_PATH_PROG(ac_cv_qmake, qmake, [no], $ac_path)
+-   ac_qmake=$ac_cv_qmake
+-fi
++AC_ARG_WITH(qmake,
++  AC_HELP_STRING([--with-qmake=PATH], [use alternate qmake path]),
++  [ac_qmake="$withval"], [ac_qmake="no"])
++
+ if test "x$ac_qmake" = "xno"; then
+    AC_MSG_ERROR([qmake $ac_errmsg])
+ fi
+@@ -240,13 +234,6 @@ if test -d $ac_qt_install_bins; then
+    ac_path="$ac_qt_install_bins:$ac_path"
+ fi
+ 
+-# Check it again, now with updated PATH, just in case...
+-AC_PATH_PROG(ac_cv_qmake, qmake, [no], $ac_path)
+-ac_qmake=$ac_cv_qmake
+-if test "x$ac_qmake" = "xno"; then
+-   AC_MSG_ERROR([qmake $ac_errmsg])
+-fi
+-
+ AC_SUBST(ac_qmake)
+ 
+ ac_qt_install_headers=`$ac_qmake -query QT_INSTALL_HEADERS`
+@@ -262,58 +249,37 @@ if test -d $ac_qt_install_libs; then
+    ac_libs="-L$ac_qt_install_libs $ac_libs"
+ fi
+ 
+-# Check for proper Qt4/5 version.
+-if test "x$ac_qt4" = "xyes"; then
+-   AC_CACHE_CHECK([for Qt library version >= 4.4],
+-      ac_cv_qtversion, [
+-      AC_TRY_COMPILE([#include "QtCore/qglobal.h"], [
+-         #if QT_VERSION < 0x040400 || QT_VERSION >= 0x050000
+-         #error Qt library 4.4 or greater required.
+-         #endif
+-      ], ac_cv_qtversion="yes", [
+-         echo "no; Qt 4.4 or greater is required"
+-         exit 1
+-      ])
+-   ])
+-fi
+- 
+-if test "x$ac_qt5" = "xyes"; then
+-   AC_CACHE_CHECK([for Qt library version >= 5.1],
+-      ac_cv_qtversion, [
+-      AC_TRY_COMPILE([#include "QtCore/qglobal.h"], [
+-         #if QT_VERSION < 0x050100 || QT_VERSION >= 0x060000
+-         #error Qt library 5.1 or greater required.
+-         #endif
+-      ], ac_cv_qtversion="yes", [
+-         echo "no; Qt 5.1 or greater is required"
+-         exit 1
+-      ])
+-   ])
+-fi
+-
+ # Check for Qt moc utility.
+-AC_PATH_PROG(ac_moc, moc, [no], $ac_path)
++AC_ARG_WITH(moc,
++  AC_HELP_STRING([--with-moc=PATH], [use alternate moc path]),
++  [ac_moc="$withval"], [ac_moc="no"])
+ if test "x$ac_moc" = "xno"; then
+    AC_MSG_ERROR([moc $ac_errmsg])
+ fi
+ AC_SUBST(ac_moc)
+ 
+ # Check for Qt uic utility.
+-AC_PATH_PROG(ac_uic, uic, [no], $ac_path)
++AC_ARG_WITH(uic,
++  AC_HELP_STRING([--with-uic=PATH], [use alternate uic path]),
++  [ac_uic="$withval"], [ac_uic="no"])
+ if test "x$ac_uic" = "xno"; then
+    AC_MSG_ERROR([uic $ac_errmsg])
+ fi
+ AC_SUBST(ac_uic)
+ 
+ # Check for Qt lupdate utility.
+-AC_PATH_PROG(ac_lupdate, lupdate, [no], $ac_path)
++AC_ARG_WITH(lupdate,
++  AC_HELP_STRING([--with-lupdate=PATH], [use alternate lupdate path]),
++  [ac_lupdate="$withval"], [ac_lupdate="no"])
+ if test "x$ac_lupdate" = "xno"; then
+    AC_MSG_ERROR([lupdate $ac_errmsg])
+ fi
+ AC_SUBST(ac_lupdate)
+ 
+ # Check for Qt lrelease utility.
+-AC_PATH_PROG(ac_lrelease, lrelease, [no], $ac_path)
++AC_ARG_WITH(lrelease,
++  AC_HELP_STRING([--with-lrelease=PATH], [use alternate lrelease path]),
++  [ac_lrelease="$withval"], [ac_lrelease="no"])
+ if test "x$ac_release" = "xno"; then
+    AC_MSG_ERROR([lrelease $ac_errmsg])
+ fi
+-- 
+2.5.5
+
