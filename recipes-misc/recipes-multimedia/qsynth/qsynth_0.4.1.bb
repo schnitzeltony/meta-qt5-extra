@@ -1,8 +1,10 @@
 SUMMARY = "Qt GUI Interface for FluidSynth"
+HOMEPAGE = "http://qsynth.sourceforge.net/qsynth-index.html"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 DEPENDS += " \
+    fluidsynth \
 "
 
 inherit cmake_qt5
