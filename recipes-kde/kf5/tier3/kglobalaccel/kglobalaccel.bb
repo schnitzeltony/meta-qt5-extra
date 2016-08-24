@@ -11,12 +11,13 @@ DEPENDS += " \
     kcoreaddons \
     kcrash \
     kdbusaddons \
+    kservice \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "4e0306fba1f06f2bbfe45624372df220"
-SRC_URI[sha256sum] = "ac048607d96529732c5990fc750fc4d3edc8a8c10f57d0465d10211c1a057b88"
+SRC_URI[md5sum] = "8b2a252d99308aece33663cf9522c43a"
+SRC_URI[sha256sum] = "687a063cd8c390c0d0a99bacb1ef9c589a0720fbfb499668a3845026ab0f9c70"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5GlobalAccel, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

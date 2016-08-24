@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "wayland wayland-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "81812023afe9582eb42651414bd5f82a"
-SRC_URI[sha256sum] = "02fb6ad40b99d3a3d06c87342c59552ea2ec34dba3d0d027d281b29ef1b2aac0"
+SRC_URI[md5sum] = "d70abca43cbf6e6a6eba9d79830bf1a1"
+SRC_URI[sha256sum] = "756c711c2796629090169ae5b348bf3e1bdd03011f89f5b8bc71cbfd8d4f1d61"
 SRC_URI += "file://0001-do-not-perform-runtime-tests.patch"
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5Wayland, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

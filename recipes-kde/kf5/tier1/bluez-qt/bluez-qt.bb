@@ -7,8 +7,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "qtdeclarative"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "fcf7ebc8c0e93dfdd80cfb47455f7bc0"
-SRC_URI[sha256sum] = "1f20dd0bf773f47890bc3cfffdd8f9f85006e4d923161a04707472cee8a9c03f"
+SRC_URI[md5sum] = "2e03661752de63494541649158d712fa"
+SRC_URI[sha256sum] = "45c4145db2da69dd4e9e6f632740a1e71365eca1efb8c57a6e43a2b477be4b41"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 

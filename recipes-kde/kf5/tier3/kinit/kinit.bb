@@ -19,12 +19,11 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "9d1d3fa10ac9c949f2f2eaa9001bcc9f"
-SRC_URI[sha256sum] = "7634f22b5250fc8d283d9d12cacee72d9427ef0b86b0c0e97339c3d2e233f4c4"
+SRC_URI[md5sum] = "0b8fcc6d1ef2ff1775ec23dfa34b5de6"
+SRC_URI[sha256sum] = "dda2b28923d06521d4f501f76e3b20e44ef9ace59b9285635d7d173ef975bcfd"
 
 SRC_URI += " \
-    file://0001-return-WAYLAND_DISPLAY-if-all-known-options-fail.patch \
-    file://0002-kdeinit-fix-paths-to-libraries.patch \
+    file://0001-kdeinit-fix-paths-to-libraries.patch \
 "
 
 FILES_${PN} += "${datadir}/dbus-1 ${libdir}/libkdeinit5_klauncher.so"

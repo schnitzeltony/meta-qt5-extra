@@ -7,8 +7,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "ki18n"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "c37f92e09f9d2ab2420cb2abcddb46ca"
-SRC_URI[sha256sum] = "080a72c619dc22599eeab11729b8607eee9f635a80efdcd817549b4a8995ae0d"
+SRC_URI[md5sum] = "e4a9229d95ae7ebaa094d104eb8bc633"
+SRC_URI[sha256sum] = "c3c2248b82aae17ff14b5c64ffbee40f5418450a26baa9f8fab3110ae88d7895"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5UnitConversion, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

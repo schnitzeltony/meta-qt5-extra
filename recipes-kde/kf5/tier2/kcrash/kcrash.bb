@@ -9,8 +9,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "kcoreaddons kwindowsystem"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "10119826a766faeda888c7a6125fd6f2"
-SRC_URI[sha256sum] = "1c5044a6d6cf97df3bd877534c70d8cb13aaf3b97f1222a8ce65a54bb97b50d1"
+SRC_URI[md5sum] = "ecf5dde757c1cf5e3d00d3cfe661474d"
+SRC_URI[sha256sum] = "a84a9a5b73c51678d84cfe9d87a945f992e6035a9dbd29040bbe5dbcfd38ba6e"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "KF5Crash, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"

@@ -10,8 +10,8 @@ inherit kde-kf5 cmake-lib
 DEPENDS += "avahi"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "69aaa1205564792c18ddfdaac7d60d61"
-SRC_URI[sha256sum] = "b5341091e70ede689dcae61f7315a269e2eec40ba98ab607eb5785011e286605"
+SRC_URI[md5sum] = "31c35cb2b97f150d103484501cc55aca"
+SRC_URI[sha256sum] = "256a5c9c1598b0b4f55730efc198e5c6d27aea38bd245725b204e29dc0a517de"
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5DNSSD, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "KF5DNSSD, -S${includedir}, -S${STAGING_INCDIR}"
