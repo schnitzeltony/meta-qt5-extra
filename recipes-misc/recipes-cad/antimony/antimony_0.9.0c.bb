@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://README.md;beginline=23;endline=48;md5=9b0a0f10af772bd
 
 inherit qmake5 python3native
 
-DEPENDS = "qtbase python3 boost lemon"
+DEPENDS = "qtbase python3 boost lemon-native"
 
 SRC_URI = " \
     https://github.com/mkeeter/${BPN}/archive/${PV}.tar.gz \
