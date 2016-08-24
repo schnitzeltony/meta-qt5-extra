@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma cmake-lib
 
 DEPENDS += " \
-    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "kwayland", "", d)} \
+    kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 
