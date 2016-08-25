@@ -19,8 +19,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "20774653ecf548ceeeae6b0fcdccd87b"
-SRC_URI[sha256sum] = "146aa96420d3af800371ec37964e35484309db975d71761ac3bb2ff9c95f9209"
+SRC_URI[md5sum] = "bb7b1709ea33dba876b45095f6fe61b6"
+SRC_URI[sha256sum] = "81071902de333d762bf2823d0f41e6115f0dc9177a36529bb67a9082b506c146"
 
 SRC_URI += " \
     file://0001-Fix-package-name.patch  \

@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-apps gtk-icon-cache
 
 DEPENDS += "\
+    fluidsynth \
     drumstick \
     ki18n \
     kxmlgui \
@@ -17,12 +18,13 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "785934edebfeaa7fef125f489cf42d3a"
-SRC_URI[sha256sum] = "84270171fec23544b991715d8e29dbfba04d65a9304d575ae24347af8a025f8f"
+SRC_URI[md5sum] = "0e714f8ab026d7580000c5d6e332a086"
+SRC_URI[sha256sum] = "a02466662750768339cbd30154dcea39c8483d8cdca4c42be785de19e72f061e"
+SRC_URI += "file://0001-reduce-minimim-version-of-Qt-to-5.6.1.patch"
 
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
     ${datadir}/icons \
 "
 
-RDEPENDS_${PN} += "timidity++"
+RDEPENDS_${PN} += "timidity++ qtquickcontrols2-qmlplugins"
