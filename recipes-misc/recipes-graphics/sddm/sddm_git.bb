@@ -56,7 +56,6 @@ USERADD_PARAM_${PN} = "--system --home ${localstatedir}/lib/sddm --shell /bin/fa
 RDEPENDS_${PN} += " \
     xauth \
     qtbase-plugins \
-    qtbase-fonts \
     qtdeclarative-plugins \
     qtdeclarative-qmlplugins \
     pam-plugin-tally \
