@@ -34,4 +34,10 @@ EXTRA_OECMAKE += " \
     -DKDE_INSTALL_QTPLUGINDIR=${OE_QMAKE_PATH_PLUGINS} \
     -DKDE_INSTALL_QMLDIR=${OE_QMAKE_PATH_QML} \
 "
+
+FILES_${PN} += " \
+    ${datadir}/appdata \
+    ${datadir}/metainfo \
+"
+
 FILES_${PN}-dev += "${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs"
