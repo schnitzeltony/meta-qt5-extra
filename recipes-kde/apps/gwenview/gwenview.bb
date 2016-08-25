@@ -33,7 +33,6 @@ CXXFLAGS += "-isystem ${STAGING_INCDIR}/phonon4qt5/KDE"
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/icons \
-    ${datadir}/appdata \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 

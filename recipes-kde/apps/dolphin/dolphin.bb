@@ -46,7 +46,6 @@ FILES_${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/k*5 \
     ${datadir}/dbus-1 \
-    ${datadir}/appdata \
     ${libdir}/libkdeinit5_dolphin.so \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

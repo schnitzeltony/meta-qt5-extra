@@ -36,7 +36,6 @@ FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/solid \
     ${datadir}/icons \
-    ${datadir}/appdata \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 

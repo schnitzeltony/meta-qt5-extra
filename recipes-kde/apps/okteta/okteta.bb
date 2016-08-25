@@ -33,7 +33,6 @@ SRC_URI[sha256sum] = "b034e0ab9f6989012437f790c346deaec2511e764c939a9774fa0fa5bc
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
-    ${datadir}/appdata \
     ${datadir}/config.kcfg \
     ${datadir}/kxmlgui5 \
     ${datadir}/mime \

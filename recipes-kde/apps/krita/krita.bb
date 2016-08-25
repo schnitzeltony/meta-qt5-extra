@@ -33,9 +33,3 @@ SRC_URI = " \
 "
 SRC_URI[md5sum] = "beb7140471d1b6b0ae92d664743c067f"
 SRC_URI[sha256sum] = "4cea85623b709d6d32084c98a0fd76b97ad96d11be9808fca9fcaad2839a9c5a"
-
-FILES_${PN} += " \
-"
-
-FILES_${PN}-dbg += " \
-"

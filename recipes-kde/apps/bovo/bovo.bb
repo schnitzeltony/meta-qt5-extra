@@ -23,5 +23,4 @@ SRC_URI[sha256sum] = "5167e9bfbaf450db0c47549072e9ffdab79e1771c5dd114b516ed2fb29
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
     ${datadir}/icons \
-    ${datadir}/appdata \
 "

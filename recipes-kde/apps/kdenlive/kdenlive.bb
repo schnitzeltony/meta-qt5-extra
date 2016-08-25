@@ -46,7 +46,6 @@ FILES_${PN} += " \
     ${datadir}/mime \
     ${datadir}/menu \
     ${datadir}/icons \
-    ${datadir}/appdata \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 

@@ -33,5 +33,4 @@ FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
     ${datadir}/kconf_update \
     ${datadir}/icons \
-    ${datadir}/appdata \
 "

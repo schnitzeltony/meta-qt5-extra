@@ -45,8 +45,6 @@ FILES_SOLIBSDEV = ""
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
-    ${datadir}/appdata \
-    ${datadir}/metainfo \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${libdir}/libkdeinit5_konsole.so \
 "

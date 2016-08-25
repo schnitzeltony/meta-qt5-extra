@@ -29,10 +29,8 @@ SRC_URI[sha256sum] = "799c2272ddb66439a04ebae5d24fe6113aa67678eb296225b20168a2e0
 SRC_URI += "file://0001-fix-build-with-QT_NO_SESSIONMANAGER-set.patch"
 
 FILES_${PN} += " \
-    ${datadir}/appdata \
     ${datadir}/config.kcfg \
     ${datadir}/icons \
-    ${datadir}/metainfo \
     ${datadir}/k*5 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

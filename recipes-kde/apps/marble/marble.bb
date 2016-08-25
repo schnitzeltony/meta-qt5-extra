@@ -48,7 +48,6 @@ FILES_${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/icons \
     ${datadir}/k*5 \
-    ${datadir}/appdata \
     ${datadir}/mime \
     ${libdir}/libmarbledeclarative.so \
     ${OE_QMAKE_PATH_PLUGINS} \

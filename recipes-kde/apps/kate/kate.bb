@@ -46,7 +46,6 @@ FILES_${PN} += " \
     ${datadir}/plasma \
     ${datadir}/katexmltools \
     ${datadir}/icons \
-    ${datadir}/appdata \
     \
     ${libdir}/libkdeinit5*.so \
     ${OE_QMAKE_PATH_PLUGINS} \

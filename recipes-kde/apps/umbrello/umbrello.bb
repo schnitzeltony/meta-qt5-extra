@@ -32,5 +32,4 @@ EXTRA_OECMAKE += "-DBUILD_KF5=1"
 
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
-    ${datadir}/appdata \
 "

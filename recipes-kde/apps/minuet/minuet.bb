@@ -23,7 +23,6 @@ SRC_URI[sha256sum] = "84270171fec23544b991715d8e29dbfba04d65a9304d575ae24347af8a
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
     ${datadir}/icons \
-    ${datadir}/appdata \
 "
 
 RDEPENDS_${PN} += "timidity++"
