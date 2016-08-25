@@ -33,3 +33,5 @@ EXTRA_OECONF = " \
 FILES_${PN} += " \
     ${datadir}/appdata \
 "
+
+RDEPENDS_${PN} += "jack-server"
