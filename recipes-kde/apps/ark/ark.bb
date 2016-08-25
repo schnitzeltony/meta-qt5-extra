@@ -32,6 +32,7 @@ FILES_${PN} += " \
     ${datadir}/appdata \
     ${datadir}/config.kcfg \
     ${datadir}/icons \
+    ${datadir}/metainfo \
     ${datadir}/k*5 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
