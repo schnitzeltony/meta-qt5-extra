@@ -1,0 +1,41 @@
+From 938ed57e8985770b1e9824a1d1de3d67b3b2f2f7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 25 Aug 2016 11:30:33 +0200
+Subject: [PATCH] do build kpackagetool only on native
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt     | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c7f2236..f8af062 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -107,6 +107,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kpackage_version.h
+ # make package_version.h available
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
++if (false)
+ ################# list the subdirectories #################
+ if (KF5DocTools_FOUND)
+     add_subdirectory(docs)
+@@ -119,7 +120,10 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+     endif()
+ endif()
+ 
++endif()
+ add_subdirectory(src)
++if (false)
+ add_subdirectory(autotests)
++endif()
+ 
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+-- 
+2.7.4
+
