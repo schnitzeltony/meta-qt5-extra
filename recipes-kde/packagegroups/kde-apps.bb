@@ -15,8 +15,10 @@ RDEPENDS_${PN} = " \
     kcalc \
     kcolorchooser \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
+    kdf \
     khelpcenter \
     kmix \
+    kolourpaint \
     konsole \
     ksystemlog \
     kwalletmanager \
