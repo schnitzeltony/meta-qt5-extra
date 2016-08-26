@@ -4,8 +4,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
 
 SRC_URI = "http://oligarchy.co.uk/xapian/${PV}/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "54ec8333757eb94dbde76d31d185af91"
-SRC_URI[sha256sum] = "4a78260388ff1b042f0ab5d18afdd524a530ae609690d0339990ddc147a54785"
+SRC_URI[md5sum] = "5308261e78337604bd8f845dd6b4aafc"
+SRC_URI[sha256sum] = "10584f57112aa5e9c0e8a89e251aecbf7c582097638bfee79c1fe39a8b6a6477"
 
 inherit autotools cmake-lib
 
