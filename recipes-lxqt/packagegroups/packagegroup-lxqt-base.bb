@@ -6,7 +6,6 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     qtbase-plugins \
-    qtbase-fonts \
     qtimageformats-plugins \
     \
     lxqt-world \
