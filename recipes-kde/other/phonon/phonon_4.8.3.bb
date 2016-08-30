@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-base cmake-lib
+inherit kde-base
 
 SRC_URI += " \
     file://0001-fix-PHONON_LIBRARY_PATH-was-usr-usr-lib-qt5-plugins.patch \
@@ -20,15 +20,6 @@ PACKAGECONFIG[qml-plugin] = "-DPHONON_BUILD_DECLARATIVE_PLUGIN=ON,-DPHONON_BUILD
 PACKAGECONFIG[designer-plugin] = "-DPHONON_BUILD_DESIGNER_PLUGIN=ON,-DPHONON_BUILD_DESIGNER_PLUGIN=OFF,qttools"
 
 PACKAGECONFIG ??= ""
-
-do_install_append() {
-	# somebody with a better solution?
-	sed -i 's:${_IMPORT_PREFIX}:${prefix}:g' ${D}${libdir}/cmake/phonon4qt5/PhononTargets.cmake
-}
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "phonon4qt5, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "phonon4qt5, -S${includedir}, -S${STAGING_INCDIR}"
 
 PACKAGES =+ "${PN}-designer-plugin-dbg ${PN}-designer-plugin"
 FILES_${PN}-designer-plugin = "${OE_QMAKE_PATH_PLUGINS}/designer"
