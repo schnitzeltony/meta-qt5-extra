@@ -17,13 +17,10 @@ do_configure_append() {
     sed -i 's:${STAGING_DIR_TARGET}::g' ${B}/config-kdoctools.h
 }
 
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "KF5DocTools, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "KF5DocTools, -S${includedir}, -S${STAGING_INCDIR}"
 # native binaries
-CMAKE_ALIGN_SYSROOT[3] = "KF5DocTools, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5DocTools, -s${_IMPORT_PREFIX}/bin, -S${STAGING_BINDIR_NATIVE}"
 
 # make meinproc5 find kdoctools data
-CMAKE_ALIGN_SYSROOT[4] = "KF5DocToolsMacros.cmake, -sCOMMAND ${KDOCTOOLS_MEINPROC_EXECUTABLE}, -SCOMMAND ${KDOCTOOLS_MEINPROC_EXECUTABLE} --srcdir ${STAGING_DATADIR}/kf5/kdoctools"
+CMAKE_ALIGN_SYSROOT[2] = "KF5DocToolsMacros.cmake, -sCOMMAND ${KDOCTOOLS_MEINPROC_EXECUTABLE}, -SCOMMAND ${KDOCTOOLS_MEINPROC_EXECUTABLE} --srcdir ${STAGING_DATADIR}/kf5/kdoctools"
 
 FILES_${PN}-dev += "${datadir}/kf5/kdoctools/customization"

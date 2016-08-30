@@ -19,9 +19,7 @@ FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_PLUGINS}/kf5/sonnet/.debug \
 "
 
-CMAKE_ALIGN_SYSROOT[1] = "KF5Sonnet, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "KF5Sonnet, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_ALIGN_SYSROOT[3] = "KF5Sonnet, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Sonnet, -s${_IMPORT_PREFIX}/bin, -S${STAGING_BINDIR_NATIVE}"
 
 PACKAGECONFIG ??= "hunspell"
 PACKAGECONFIG[hunspell] = "-DBUILD_HUNSPELL=ON,-DBUILD_HUNSPELL=OFF, hunspell"

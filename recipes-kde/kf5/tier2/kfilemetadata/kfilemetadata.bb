@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 
-inherit kde-kf5 cmake-lib pkgconfig
+inherit kde-kf5 pkgconfig
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "12517175cb2a93341bea3c60de105d07"
@@ -23,10 +23,6 @@ DEPENDS += " \
     taglib \
     exiv2 \
 "
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "KF5FileMetaData, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "KF5FileMetaData, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/kf5"
 FILES_${PN}-dbg += " \

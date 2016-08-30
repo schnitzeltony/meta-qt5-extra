@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5 cmake-lib cmake-auto-align-paths
+inherit kde-kf5 cmake-auto-align-paths
 
 DEPENDS += " \
     qttools-native \
@@ -40,10 +40,6 @@ do_configure_append() {
     # fix sysroot path
     sed -i 's:${STAGING_BINDIR_NATIVE}:${bindir}:g' ${B}/src/ioslaves/help/config-help.h
 }
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "KF5KIO, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "KF5KIO, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \

@@ -46,12 +46,8 @@ do_configure_append() {
     sed -i 's:${STAGING_LIBDIR_NATIVE}:${libdir}:g' ${B}/src/config-kstandarddirs.h
 }
 
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "KDELibs4, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_ALIGN_SYSROOT[2] = "KDELibs4, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-
 # native executables
-CMAKE_ALIGN_SYSROOT[3] = "KF5KDELibs4Support, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5KDELibs4Support, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5-porting-aids cmake-lib perlnative
+inherit kde-kf5-porting-aids perlnative
 
 DEPENDS += " \
     karchive \
@@ -34,9 +34,6 @@ DEPENDS += " \
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "e9b1763b2649d7e21e6cda3e0c5773bf"
 SRC_URI[sha256sum] = "95af84cde953f9ddbff9e6237e7ac395877f0e8b753f8c5473070ecd1329ad5e"
-
-CMAKE_ALIGN_SYSROOT[1] = "KF5KHtml, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "KF5KHtml, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

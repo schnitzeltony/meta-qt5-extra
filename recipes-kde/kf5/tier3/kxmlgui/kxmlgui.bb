@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5 cmake-lib
+inherit kde-kf5
 
 DEPENDS += " \
     kitemviews \
@@ -31,10 +31,6 @@ SRC_URI += " \
 "
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "KF5XmlGui, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "KF5XmlGui, -S${includedir}, -S${STAGING_INCDIR}"
 
 # evt. put ksendbugmail to separate package later
 FILES_${PN}-dbg += "${libdir}/kxmlgui/kf5/.debug/"

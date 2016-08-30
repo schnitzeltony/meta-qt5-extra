@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LGPL-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
-inherit kde-kf5 cmake-lib
+inherit kde-kf5
 
 DEPENDS += " \
     boost \
@@ -17,7 +17,3 @@ DEPENDS += " \
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "fbda904a579120cc23eb6ec9bc660f67"
 SRC_URI[sha256sum] = "8f27195f4245a726f682e51c15a8b526dd38cca515c65ef1ab4e85479fcf5348"
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "KF5ActivitiesStats, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "KF5ActivitiesStats, -S${includedir}, -S${STAGING_INCDIR}"

@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5 cmake-lib
+inherit kde-kf5
 
 DEPENDS += " \
     qtdeclarative \
@@ -33,10 +33,6 @@ DEPENDS += " \
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "b67b2fc56b005b9fd47a9b64cc39bc40"
 SRC_URI[sha256sum] = "1209805e4f62b251360193f4912b06a7d4c86296f4a926bc5d523e7a26d6a087"
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "KF5Plasma, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "KF5Plasma, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
     ${datadir}/kdevappwizard \
