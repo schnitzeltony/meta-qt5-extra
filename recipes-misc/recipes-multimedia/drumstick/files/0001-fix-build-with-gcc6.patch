@@ -1,0 +1,58 @@
+From f8e2a41b8f17f0f6f726d3ac03ea71bce08f6560 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 31 Aug 2016 11:37:14 +0200
+Subject: [PATCH] fix build with gcc6
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+stolen at [1]
+
+[1] http://pkgs.fedoraproject.org/cgit/rpms/drumstick.git/plain/drumstick-1.0.2-gcc6.patch
+
+Upstream-Status:Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ library/file/qove.cpp           | 4 ++--
+ utils/testevents/testevents.cpp | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/library/file/qove.cpp b/library/file/qove.cpp
+index 516ebd7..c369c08 100644
+--- a/library/file/qove.cpp
++++ b/library/file/qove.cpp
+@@ -11356,7 +11356,7 @@ void QOve::convertSignatures() {
+ 				OVE::MeasureData* measureData = d->ove.getMeasureData(i, j, k);
+ 				QList<OVE::MusicData*> tempoPtrs = measureData->getMusicDatas(OVE::MusicData_Tempo);
+ 
+-				if (k == 0 || (k > 0 && abs(measure->getTypeTempo()	- d->ove.getMeasure(k - 1)->getTypeTempo()) > 0.01)) {
++				if (k == 0 || (k > 0 && std::abs(measure->getTypeTempo()	- d->ove.getMeasure(k - 1)->getTypeTempo()) > 0.01)) {
+ 					int tick = d->mtt.getTick(k, 0);
+ 					int tempo = (int) measure->getTypeTempo();
+ 					tempos[tick] = tempo;
+@@ -11739,7 +11739,7 @@ void QOve::convertNotes(int trackNo, int measureTick, OVE::NoteContainer* contai
+ 				}
+ 				case OVE::Articulation_Arpeggio: {
+ 					//if( art->getChangeSoundEffect() ) {
+-						unsigned int soundEffect = abs(art->getSoundEffect().first) + abs(art->getSoundEffect().second);
++						unsigned int soundEffect = std::abs(art->getSoundEffect().first) + std::abs(art->getSoundEffect().second);
+ 						int tickAmount = (soundEffect / notes.size()) * ((notes.size() - i) - 1);
+ 						startTick -= tickAmount;
+ 					//}
+diff --git a/utils/testevents/testevents.cpp b/utils/testevents/testevents.cpp
+index b980211..2435725 100644
+--- a/utils/testevents/testevents.cpp
++++ b/utils/testevents/testevents.cpp
+@@ -262,7 +262,7 @@ void QTestEvents::run()
+     dumpEvent(new KeyPressEvent(5, 60, 124));
+     dumpEvent(new ChanPressEvent(6, 111));
+     dumpEvent(new PitchBendEvent(7, 1234));
+-    char sysex[] = {0xf0, 0x41, 0x10, 0x42, 0x12, 0x40, 0, 0x7f, 0, 0x41, 0xf7};
++    char sysex[] = {'\xf0', '\x41', '\x10', '\x42', '\x12', '\x40', '\0', '\x7f', '\0', '\x41', '\xf7'};
+     dumpEvent(new SysExEvent(QByteArray(sysex, sizeof(sysex))));
+     QString text = "This can be a copyright, song name, instrument, lyric...";
+     TextEvent te(text, 3);
+-- 
+2.5.5
+

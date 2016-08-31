@@ -10,8 +10,10 @@ DEPENDS += " \
     qtsvg \
     fluidsynth \
 "
-
-SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${PV}/${BPN}-${PV}.tar.bz2"
+SRC_URI = " \
+    ${SOURCEFORGE_MIRROR}/project/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \
+    file://0001-fix-build-with-gcc6.patch \
+"
 SRC_URI[md5sum] = "f8e6d9de7943853146c39e52242cb705"
 SRC_URI[sha256sum] = "34aab5812c35ba16f8e606632a56c38879f470e3e395d580412c73ef937f8750"
 
