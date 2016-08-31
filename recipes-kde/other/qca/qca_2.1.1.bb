@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
 "
 
-inherit kde-base cmake-lib
+inherit kde-base
 
 # TBD: PACKAGECONFIG
 DEPENDS += " \
@@ -26,7 +26,3 @@ EXTRA_OECMAKE += "-DQCA_FEATURE_INSTALL_DIR=${libdir}${QT_DIR_NAME}/mkspecs/feat
 
 FILES_${PN} += "${libdir}/qca-qt5/crypto"
 FILES_${PN}-dbg += "${libdir}/qca-qt5/crypto/.debug"
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "Qca-qt5, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "Qca-qt5, -S${includedir}, -S${STAGING_INCDIR}"

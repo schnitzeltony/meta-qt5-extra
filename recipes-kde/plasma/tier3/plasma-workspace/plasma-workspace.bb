@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma cmake-lib distro_features_check
+inherit kde-plasma distro_features_check
 
 DEPENDS += " \
     baloo \
@@ -53,15 +53,6 @@ SRC_URI += " \
     file://0005-startkde-enable-starting-X.patch \
     file://0006-startkde-remove-CMAKE_INSTALL_PREFIX-in-XDG_DATA_DIR.patch \
 "
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "LibKWorkspace, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "LibKWorkspace, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_ALIGN_SYSROOT[3] = "LibTaskManager, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[4] = "LibTaskManager, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_ALIGN_SYSROOT[5] = "LibLegacyTaskManager, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[6] = "LibLegacyTaskManager, -S${includedir}, -S${STAGING_INCDIR}"
-
 
 # REVISIT
 FILES_${PN} += " \

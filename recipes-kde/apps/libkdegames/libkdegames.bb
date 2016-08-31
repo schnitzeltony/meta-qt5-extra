@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-apps cmake-lib
+inherit kde-apps
 
 DEPENDS += "\
     kcoreaddons \
@@ -56,6 +56,3 @@ FILES_${PN} += " \
 FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_QML}/*/*/*/*/.debug \
 "
-
-CMAKE_ALIGN_SYSROOT[1] = "KF5KDEGames, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "KF5KDEGames, -S${includedir}, -S${STAGING_INCDIR}"

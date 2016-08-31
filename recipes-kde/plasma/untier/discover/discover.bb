@@ -3,7 +3,7 @@ require ${BPN}.inc
 inherit gtk-icon-cache
 
 DEPENDS += " \
-	${BPN}-native \
+    ${BPN}-native \
     qtsvg \
     qtdeclarative \
     \

@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
 "
 
-inherit kde-base cmake-lib
+inherit kde-base
 
 DEPENDS += " \
     xapian-core \
@@ -47,7 +47,3 @@ FILES_${PN} += " \
 FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "QApt, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "QApt, -S${includedir}, -S${STAGING_INCDIR}"

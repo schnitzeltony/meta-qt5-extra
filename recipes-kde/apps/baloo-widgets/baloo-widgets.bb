@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit kde-apps cmake-lib
+inherit kde-apps
 
 DEPENDS += "\
     kconfig \
@@ -20,8 +20,3 @@ DEPENDS += "\
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "19fff67b67df658d9c5ee6258e431d92"
 SRC_URI[sha256sum] = "ed389a98418fd8faa796421c1529fe810bcf600b398c73a813e892f027074e35"
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "KF5BalooWidgets, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "KF5BalooWidgets, -S${includedir}, -S${STAGING_INCDIR}"
-

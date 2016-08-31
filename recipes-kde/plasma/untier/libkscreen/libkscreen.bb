@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 "
 
-inherit kde-plasma cmake-lib
+inherit kde-plasma
 
 DEPENDS += " \
     kwayland \
@@ -32,7 +32,3 @@ FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_PLUGINS}/kf5/kscreen/.debug \
     ${libexecdir}/kf5/.debug \
 "
-
-CMAKE_ALIGN_SYSROOT[1] = "KF5Screen, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_ALIGN_SYSROOT[2] = "KF5Screen, -S${libdir}, -S${STAGING_LIBDIR}"
-

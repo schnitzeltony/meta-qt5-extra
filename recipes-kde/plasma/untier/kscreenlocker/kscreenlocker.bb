@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma distro_features_check cmake-lib
+inherit kde-plasma distro_features_check
 
 DEPENDS += " \
     plasma-framework \
@@ -45,7 +45,3 @@ FILES_${PN} += " \
 FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "KScreenLocker, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "KScreenLocker, -S${includedir}, -S${STAGING_INCDIR}"
