@@ -1,0 +1,82 @@
+From 9abcd06081d7e0c8d47493b3af776e6a8c1470a4 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 31 Aug 2016 11:10:39 +0200
+Subject: [PATCH] rework qCWarning to fix build with gcc-6
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+fixes multiple occurances of
+
+| error: ISO C++11 requires at least one argument for the "..." in a variadic macro
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ templates/lib/customtyperegistry.cpp | 6 ++----
+ templates/lib/qtlocalizer.cpp        | 2 +-
+ templates/lib/template.cpp           | 4 ++--
+ 3 files changed, 5 insertions(+), 7 deletions(-)
+
+diff --git a/templates/lib/customtyperegistry.cpp b/templates/lib/customtyperegistry.cpp
+index 519061c..2cd3c05 100644
+--- a/templates/lib/customtyperegistry.cpp
++++ b/templates/lib/customtyperegistry.cpp
+@@ -57,16 +57,14 @@ QVariant CustomTypeRegistry::lookup(const QVariant &object,
+ 
+   {
+     if (!types.contains(id)) {
+-      qCWarning(GRANTLEE_CUSTOMTYPE) << "Don't know how to handle metatype"
+-                                     << QMetaType::typeName(id);
++      qCWarning(GRANTLEE_CUSTOMTYPE, "Don't know how to handle metatype %s", QMetaType::typeName(id));
+       // :TODO: Print out error message
+       return QVariant();
+     }
+ 
+     const CustomTypeInfo &info = types[id];
+     if (!info.lookupFunction) {
+-      qCWarning(GRANTLEE_CUSTOMTYPE) << "No lookup function for metatype"
+-                                     << QMetaType::typeName(id);
++      qCWarning(GRANTLEE_CUSTOMTYPE, "No lookup function for metatype %s", QMetaType::typeName(id));
+       lf = 0;
+       // :TODO: Print out error message
+       return QVariant();
+diff --git a/templates/lib/qtlocalizer.cpp b/templates/lib/qtlocalizer.cpp
+index 23999ec..53789e5 100644
+--- a/templates/lib/qtlocalizer.cpp
++++ b/templates/lib/qtlocalizer.cpp
+@@ -67,7 +67,7 @@ class QtLocalizerPrivate
+   {
+     Q_ASSERT(!m_locales.isEmpty());
+     if (m_locales.isEmpty()) {
+-      qCWarning(GRANTLEE_LOCALIZER) << "Invalid Locale";
++      qCWarning(GRANTLEE_LOCALIZER, "Invalid Locale");
+       return QLocale();
+     }
+     return m_locales.last()->locale;
+diff --git a/templates/lib/template.cpp b/templates/lib/template.cpp
+index 107f0cf..90da6e2 100644
+--- a/templates/lib/template.cpp
++++ b/templates/lib/template.cpp
+@@ -66,7 +66,7 @@ void TemplateImpl::setContent(const QString &templateString)
+     d->m_nodeList = d->compileString(templateString);
+     d->setError(NoError, QString());
+   } catch (Grantlee::Exception &e) {
+-    qCWarning(GRANTLEE_TEMPLATE) << e.what();
++    qCWarning(GRANTLEE_TEMPLATE, "%s", qPrintable(e.what()));
+     d->setError(e.errorCode(), e.what());
+   }
+ }
+@@ -92,7 +92,7 @@ OutputStream *TemplateImpl::render(OutputStream *stream, Context *c) const
+     d->m_nodeList.render(stream, c);
+     d->setError(NoError, QString());
+   } catch (Grantlee::Exception &e) {
+-    qCWarning(GRANTLEE_TEMPLATE) << e.what();
++    qCWarning(GRANTLEE_TEMPLATE, "%s", qPrintable(e.what()));
+     d->setError(e.errorCode(), e.what());
+   }
+ 
+-- 
+2.5.5
+
