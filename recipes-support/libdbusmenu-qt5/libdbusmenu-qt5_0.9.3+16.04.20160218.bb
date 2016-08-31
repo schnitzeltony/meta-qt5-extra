@@ -7,7 +7,7 @@ SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/libd/libdbusmenu-qt/libdbu
 SRC_URI[md5sum] = "8b90312bd8654e026d814d4db986ce5e"
 SRC_URI[sha256sum] = "a8e6358a31c44ccdf1bfc46c95a77a6bfc7fc1f536aadb913ed4f4405c570cf6"
 
-inherit cmake_qt5 cmake-extra-sanity
+inherit cmake_qt5 cmake_extra_sanity
 
 S = "${WORKDIR}/libdbusmenu-qt-${PV}"
 

@@ -2,7 +2,7 @@ SUMMARY = "libqtxdg is An Qt implementation of freedesktop.org xdg specification
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0964c689fcf4c21c6797ea87408416b6"
 
-inherit lxqt cmake-lib
+inherit lxqt cmake_lib
 
 # libmagic is supplied by file
 DEPENDS += "file"

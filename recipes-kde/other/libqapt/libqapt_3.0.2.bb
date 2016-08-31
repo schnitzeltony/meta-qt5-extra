@@ -28,12 +28,13 @@ DEPENDS += " \
     glib-2.0 \
 "
 
-SRC_URI[md5sum] = "91016b23f2c30b2a59a8a5c9c2558781"
-SRC_URI[sha256sum] = "19aeb20f8a9a0c7377f21e3d03d2319aa80348561872938363c540cb6340b97c"
+SRC_URI[md5sum] = "638a3d8244efe0e8fa99375a5660fd3c"
+SRC_URI[sha256sum] = "e0fa67518601fcde2c45aa613261022f2cfada54d3e1ea3cf0540805ba6663f3"
+SRC_URI += "file://0001-include-random-for-std-default_random_engine.patch"
 
 do_configure_append() {
     # apt sets absolute paths - we should fix that at apt...
-    sed -i 's:${STAGING_LIBDIR}/::g' ${B}/CMakeFiles/Export/_usr/lib/cmake/QApt/QAptTargets.cmake
+    sed -i 's:${STAGING_LIBDIR}/::g' ${B}/CMakeFiles/Export/lib/cmake/QApt/QAptTargets.cmake
 }
 
 FILES_${PN} += " \

@@ -55,9 +55,7 @@
 #   CMAKE_ALIGN_SYSROOT[<unique-id>] = "ignore"
 #
 
-
-# filename for the file containg full names of all cmakefiles staged
-CMAKEINSTALLED = "${WORKDIR}/staged_cmake_files"
+inherit cmake_sysroot
 
 # global helper to get CMAKE_ALIGN_SYSROOT array
 def get_align_flags(d):
@@ -89,25 +87,10 @@ python () {
             if num != 3:
                 bb.fatal('CMAKE_ALIGN_SYSROOT[%s] requires 3 parameters (dir, search, replace) in %s' % (flag, pn))
     else:
-        bb.fatal('The recipe %s inherits cmake-lib but does not set CMAKE_ALIGN_SYSROOT' % pn)
+        bb.fatal('The recipe %s inherits cmake_lib but does not set CMAKE_ALIGN_SYSROOT' % pn)
 }
 
-# 2. remove tmp file from last build
-python do_populate_sysroot_prepend() {
-    tmpfile = d.getVar('CMAKEINSTALLED', True)
-    if os.path.isfile(tmpfile):
-        os.remove(tmpfile)
-}
-
-# 3. keep cmake files staged to sysroot
-sysroot_stage_dir_append() {
-    # avoid doubles causing double replacement
-    for file in `find $dest -name '*.cmake'`; do
-        if ! grep -q "$file" ${CMAKEINSTALLED} ; then
-            echo "$file" >> ${CMAKEINSTALLED}
-        fi
-    done
-}
+# 2. 3. in cmake_sysroot
 
 # 4. Handle CMAKE_ALIGN_SYSROOT
 python do_populate_sysroot_append() {

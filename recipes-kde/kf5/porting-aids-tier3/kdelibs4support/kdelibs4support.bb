@@ -1,6 +1,6 @@
 require ${BPN}.inc
 
-inherit cmake-lib
+inherit cmake_lib
 
 DEPENDS += " \
     ${BPN}-native \
@@ -47,7 +47,8 @@ do_configure_append() {
 }
 
 # native executables
-CMAKE_ALIGN_SYSROOT[1] = "KF5KDELibs4Support, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5KDELibs4Support, -s${_IMPORT_PREFIX}/bin, -S${STAGING_BINDIR_NATIVE}"
+CMAKE_ALIGN_SYSROOT[2] = "KDELibs4, -s${_IMPORT_PREFIX}/bin, -S${STAGING_BINDIR_NATIVE}"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

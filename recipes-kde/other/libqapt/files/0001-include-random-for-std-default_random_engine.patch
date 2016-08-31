@@ -1,0 +1,25 @@
+From a58eab74ee9881d10e0f24a3ed216ed71ba03bf5 Mon Sep 17 00:00:00 2001
+From: Pino Toscano <pino@kde.org>
+Date: Sun, 15 May 2016 16:26:28 +0200
+Subject: [PATCH] include <random> for std::default_random_engine
+
+apparently it was implicitly pulled by other (apt?) headers
+---
+ src/package.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/package.cpp b/src/package.cpp
+index 1e43a28..0526f9d 100644
+--- a/src/package.cpp
++++ b/src/package.cpp
+@@ -46,6 +46,7 @@
+ #include <apt-pkg/versionmatch.h>
+ 
+ #include <algorithm>
++#include <random>
+ 
+ // Own includes
+ #include "backend.h"
+-- 
+2.5.5
+

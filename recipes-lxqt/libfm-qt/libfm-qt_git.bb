@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit lxqt cmake-lib pkgconfig distro_features_check
+inherit lxqt cmake_lib pkgconfig distro_features_check
 
 DEPENDS += "qtx11extras glib-2.0 libfm menu-cache"
 

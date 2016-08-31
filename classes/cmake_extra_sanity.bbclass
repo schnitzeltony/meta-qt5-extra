@@ -1,3 +1,5 @@
+inherit cmake_sysroot
+
 # do_install_append_class-cross does not work so hack
 do_install_prepend_class-native() {
     no_staging_check=true
@@ -34,10 +36,36 @@ do_install_append() {
                 bbwarn "$f contains links to build host sysroot!"
                 error=true
             fi
+
         done
 
         if [ x != x$error ] ; then
             bbfatal "One or more files contain links to build host sysroot ${STAGING_DIR}"
         fi
+    fi
+}
+
+do_populate_sysroot[postfuncs] += "do_sysroot_cmake_sanity "
+
+# check sysroot cmake files for links not relative and not to sysroots
+
+do_sysroot_cmake_sanity() {
+    error=
+    for f in `cat ${CMAKEINSTALLED}` ; do
+        if grep -q ';${libdir}' "$f" ; then
+            bbwarn "$f contains links to ${libdir}!"
+            error=true
+        fi
+        if grep -q ';${includedir}' "$f" ; then
+            bbwarn "$f contains links to ${includedir}!"
+            error=true
+        fi
+        if grep -q '\"${includedir}' "$f" ; then
+            bbwarn "$f contains links to ${includedir}!"
+            error=true
+        fi
+    done
+    if [ x != x$error ] ; then
+        bbfatal "One or more files in sysroot contain links to ${prefix}"
     fi
 }

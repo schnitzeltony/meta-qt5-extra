@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit hawaii cmake-lib
+inherit hawaii cmake_lib
 
 DEPENDS += "dconf"
 

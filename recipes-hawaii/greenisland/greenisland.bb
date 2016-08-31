@@ -1,6 +1,6 @@
 require greenisland.inc
 
-inherit cmake-lib cmake-auto-align-paths
+inherit cmake_lib cmake_auto_align_paths
 
 DEPENDS += " \
     ${BPN}-native \

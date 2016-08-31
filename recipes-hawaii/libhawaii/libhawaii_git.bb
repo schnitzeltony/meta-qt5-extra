@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
-inherit hawaii cmake-lib
+inherit hawaii cmake_lib
 
 PV = "0.6.90+git${SRCPV}"
 

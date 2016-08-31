@@ -2,7 +2,7 @@ SUMMARY = "Daemon used to register global keyboard shortcuts"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
 
-inherit lxqt cmake-lib distro_features_check
+inherit lxqt cmake_lib distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 

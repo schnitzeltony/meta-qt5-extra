@@ -2,7 +2,7 @@ SUMMARY = "Core utility library for all LXQt components"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=435ed639f84d4585d93824e7da3d85da"
 
-inherit lxqt cmake-lib
+inherit lxqt cmake_lib
 
 DEPENDS += "libqtxdg kwindowsystem"
 SRC_URI += "file://0001-remove-Qt5X11Extras-dependency-it-is-not-required.patch"
