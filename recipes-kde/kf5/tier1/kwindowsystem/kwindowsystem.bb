@@ -12,7 +12,6 @@ PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "ae52891201ea66b15d94a4f5a2717a5f"
 SRC_URI[sha256sum] = "b8228dddcc6487e234f81239bea7ca7ae261af8fef7b9e5d7a8b49aa3ac5d0dd"
 
-# hack: cmake_lib does not accept empty strings yet
 CMAKE_ALIGN_SYSROOT[1] = "KF5WindowSystem, -S${includedir}, -s${_IMPORT_PREFIX}/include"
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}"
