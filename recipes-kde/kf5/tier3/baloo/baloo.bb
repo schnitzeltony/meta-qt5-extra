@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit kde-kf5 cmake_auto_align_paths gtk-icon-cache
+inherit kde-kf5 cmake_auto_align_paths cmake_lib gtk-icon-cache
 
 DEPENDS += " \
     ki18n \
@@ -30,6 +30,8 @@ SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
     file://0002-Baloo.pc.cmake-fix-paths-for-Libs-and-Cflags.patch \
 "
+
+CMAKE_ALIGN_SYSROOT[1] = "KF5Baloo, -S${libdir}, -S${STAGING_LIBDIR}"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
