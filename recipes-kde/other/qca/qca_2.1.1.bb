@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
 "
 
-inherit kde-base cmake_auto_align_paths
+inherit kde-base cmake_lib cmake_auto_align_paths
 
 # TBD: PACKAGECONFIG
 DEPENDS += " \
@@ -25,3 +25,6 @@ SRC_URI += " \
 EXTRA_OECMAKE += "-DQCA_FEATURE_INSTALL_DIR=${libdir}${QT_DIR_NAME}/mkspecs/features"
 
 FILES_${PN} += "${libdir}/qca-qt5/crypto"
+
+CMAKE_ALIGN_SYSROOT[1] = "Qca-qt5, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "Qca-qt5, -S${includedir}, -S${STAGING_INCDIR}"
