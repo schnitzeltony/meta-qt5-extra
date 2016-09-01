@@ -56,6 +56,10 @@ do_sysroot_cmake_sanity() {
             bbwarn "$f contains links to ${libdir}!"
             error=true
         fi
+        if grep -q '\"${libdir}/lib' "$f" ; then
+            bbwarn "$f contains links to ${libdir}!"
+            error=true
+        fi
         if grep -q ';${includedir}' "$f" ; then
             bbwarn "$f contains links to ${includedir}!"
             error=true
