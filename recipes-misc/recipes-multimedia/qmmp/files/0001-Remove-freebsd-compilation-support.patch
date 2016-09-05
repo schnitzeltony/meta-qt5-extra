@@ -9,7 +9,7 @@ Signed-off-by: Luis Gustavo S. Barreto <gustavo@ossystems.com.br>
  1 file changed, 4 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 00167d0..5de0265 100644
+index 5976e69..0711b11 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -1,9 +1,5 @@
@@ -19,9 +19,9 @@ index 00167d0..5de0265 100644
 -include_directories(SYSTEM /usr/local/include)
 -SET(CMAKE_REQUIRED_INCLUDES ${CMAKE_REQUIRED_INCLUDES} /usr/local/include)
 -
- #Qt5 modules
- SET(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} /opt/qt56/lib/cmake)
- 
+ #macports support
+ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+   SET(CMAKE_REQUIRED_INCLUDES ${CMAKE_REQUIRED_INCLUDES} /opt/local/include)
 -- 
 2.1.4
 
