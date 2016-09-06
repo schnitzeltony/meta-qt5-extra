@@ -1,0 +1,48 @@
+From 7240f951277e47f2f37523b3ca5408bfe5fc3c53 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 6 Sep 2016 01:04:42 +0200
+Subject: [PATCH 2/2] fix compilation du to unkown functions
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ pm_linux/finddefault.c | 3 +++
+ pm_linux/pmlinux.c     | 2 ++
+ 2 files changed, 5 insertions(+)
+
+diff --git a/pm_linux/finddefault.c b/pm_linux/finddefault.c
+index 6340316..89ca43a 100644
+--- a/pm_linux/finddefault.c
++++ b/pm_linux/finddefault.c
+@@ -5,10 +5,13 @@
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <string.h>
++#include <ctype.h>
+ #include "portmidi.h"
+ 
+ #define STRING_MAX 256
+ 
++int pm_find_default_device(char *pattern, int is_input);
++
+ /* skip over spaces, return first non-space */
+ void skip_spaces(FILE *inf)
+ {
+diff --git a/pm_linux/pmlinux.c b/pm_linux/pmlinux.c
+index 49e266d..42c0906 100755
+--- a/pm_linux/pmlinux.c
++++ b/pm_linux/pmlinux.c
+@@ -26,6 +26,8 @@
+ PmDeviceID pm_default_input_device_id = -1;
+ PmDeviceID pm_default_output_device_id = -1;
+ 
++PmDeviceID find_default_device(char *path, int input, PmDeviceID id);
++
+ void pm_init()
+ {
+     /* Note: it is not an error for PMALSA to fail to initialize. 
+-- 
+2.5.5
+

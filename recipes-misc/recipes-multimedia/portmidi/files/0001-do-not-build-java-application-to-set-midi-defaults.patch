@@ -1,0 +1,97 @@
+From 908d5fcdfeac32d7ab5cff307d0a46a962ed600f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 6 Sep 2016 00:08:16 +0200
+Subject: [PATCH] do not build java application to set midi defaults
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+dragging in whole java environment for a small tool not everybody misses
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt           |  2 --
+ pm_common/CMakeLists.txt | 18 +-----------------
+ pm_dylib/CMakeLists.txt  | 14 --------------
+ 3 files changed, 1 insertion(+), 33 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4919b78..2137ce4 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -72,6 +72,4 @@ add_subdirectory(pm_test)
+ 
+ add_subdirectory(pm_dylib)
+ 
+-# Cannot figure out how to make an xcode Java application with CMake
+-add_subdirectory(pm_java)
+ 
+diff --git a/pm_common/CMakeLists.txt b/pm_common/CMakeLists.txt
+index bfd4ab9..9ea9030 100644
+--- a/pm_common/CMakeLists.txt
++++ b/pm_common/CMakeLists.txt
+@@ -67,15 +67,6 @@ if(UNIX)
+     message(STATUS "SYSROOT: " ${CMAKE_OSX_SYSROOT})
+   else(APPLE)
+     # LINUX settings...
+-    include(FindJNI)
+-    message(STATUS "JAVA_JVM_LIB_PATH is " ${JAVA_JVM_LIB_PATH})
+-    message(STATUS "JAVA_INCLUDE_PATH is " ${JAVA_INCLUDE_PATH})
+-    message(STATUS "JAVA_INCLUDE_PATH2 is " ${JAVA_INCLUDE_PATH2})
+-    message(STATUS "JAVA_JVM_LIBRARY is " ${JAVA_JVM_LIBRARY})
+-    set(JAVA_INCLUDE_PATHS ${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
+-    # libjvm.so is found relative to JAVA_INCLUDE_PATH:
+-    set(JAVAVM_LIB ${JAVA_JVM_LIBRARY}/libjvm.so)
+-
+     set(LINUXSRC pmlinuxalsa pmlinux finddefault)
+     prepend_path(LIBSRC ../pm_linux/ ${LINUXSRC})
+     list(APPEND LIBSRC ../porttime/ptlinux)
+@@ -109,17 +100,10 @@ add_library(portmidi-static ${LIBSRC})
+ set_target_properties(portmidi-static PROPERTIES OUTPUT_NAME "portmidi_s")
+ target_link_libraries(portmidi-static ${PM_NEEDED_LIBS})
+ 
+-# define the jni library
+-include_directories(${JAVA_INCLUDE_PATHS})
+-
+-set(JNISRC ${LIBSRC} ../pm_java/pmjni/pmjni.c)
+-add_library(pmjni SHARED ${JNISRC})
+-target_link_libraries(pmjni ${JNI_EXTRA_LIBS})
+-set_target_properties(pmjni PROPERTIES EXECUTABLE_EXTENSION "jnilib")
+ 
+ # install the libraries (Linux and Mac OS X command line)
+ if(UNIX)
+-  INSTALL(TARGETS portmidi-static pmjni
++  INSTALL(TARGETS portmidi-static
+     LIBRARY DESTINATION ${LIB_INSTALL_DIR}
+     ARCHIVE DESTINATION ${LIB_INSTALL_DIR})
+ # .h files installed by pm_dylib/CMakeLists.txt, so don't need them here
+diff --git a/pm_dylib/CMakeLists.txt b/pm_dylib/CMakeLists.txt
+index a0c615e..8ad415f 100644
+--- a/pm_dylib/CMakeLists.txt
++++ b/pm_dylib/CMakeLists.txt
+@@ -63,20 +63,6 @@ if(UNIX)
+     message(STATUS "SYSROOT: " ${CMAKE_OSX_SYSROOT})
+   else(APPLE)
+     # LINUX settings...
+-    include(FindJNI)
+-    # message(STATUS "JAVA_JVM_LIB_PATH is " ${JAVA_JVM_LIB_PATH})
+-    # message(STATUS "JAVA_INCLUDE_PATH is " ${JAVA_INCLUDE_PATH})
+-    # note: should use JAVA_JVM_LIB_PATH, but it is not set properly
+-    # note: user might need to set JAVA_INCLUDE_PATH manually
+-    #
+-    # this will probably break on BSD and other Unix systems; the fix
+-    # depends on whether FindJNI can find Java or not. If yes, then
+-    # we should try to rely on automatically set JAVA_INCLUDE_PATH and
+-    # JAVA_INCLUDE_PATH2; if no, then we need to make both JAVA_INCLUDE_PATH
+-    # and JAVA_INCLUDE_PATH2 set by user (will need clear documentation
+-    # because JAVA_INCLUDE_PATH2 is pretty obscure)
+-    set(JAVAVM_LIB ${JAVA_JVM_LIBRARY})
+-
+     set(LINUXSRC pmlinuxalsa pmlinux finddefault)
+     prepend_path(LIBSRC ../pm_linux/ ${LINUXSRC})
+     list(APPEND LIBSRC ../porttime/ptlinux)
+-- 
+2.5.5
+
