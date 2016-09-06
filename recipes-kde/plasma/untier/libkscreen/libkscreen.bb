@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma
 
 DEPENDS += " \
-    kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 
@@ -17,9 +16,8 @@ SRC_URI[md5sum] = "f40f3015e4c0cbadba893ea9aec37ec2"
 SRC_URI[sha256sum] = "b1c7003126c3b83ababe031a003a038e714c9d7db07b8769ecd52c271686bffe"
 
 SRC_URI += " \
-    file://0001-make-kwayland-support-optional.patch \
-    file://0002-fix-configuration-build-on-x-less-systems.patch \
-    file://0003-avoid-autotests.patch \
+    file://0001-fix-configuration-build-on-x-less-systems.patch \
+    file://0002-avoid-autotests.patch \
 "
 
 

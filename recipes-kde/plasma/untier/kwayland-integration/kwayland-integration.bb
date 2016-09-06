@@ -10,7 +10,6 @@ inherit kde-plasma
 DEPENDS += " \
     kidletime \
     kwindowsystem \
-    kwayland \
 "
 
 PV = "${PLASMA_VERSION}"
