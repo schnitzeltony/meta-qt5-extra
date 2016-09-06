@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-apps
+inherit kde-apps cmake_lib
 
 DEPENDS += " \
     qtsvg \
@@ -36,6 +36,9 @@ PACKAGES =+ " \
     ${PN}-mobile ${PN}-qt ${PN}-touch \
     ${PN}-designer-plugin-dbg ${PN}-designer-plugin \
 "
+
+CMAKE_ALIGN_SYSROOT[1] = "Marble, -S${includedir}, -s${_IMPORT_PREFIX}/include"
+CMAKE_ALIGN_SYSROOT[2] = "Astro, -S${includedir}, -s${_IMPORT_PREFIX}/include"
 
 FILES_SOLIBSDEV = ""
 
