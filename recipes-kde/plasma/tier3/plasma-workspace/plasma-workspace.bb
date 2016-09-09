@@ -40,8 +40,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "5ed64282b5aa36bb77bd3a89334b851d"
-SRC_URI[sha256sum] = "9894214edb8a7f57cff189790d9b46dd87d4bb1bc5c129ebb510114a373e9042"
+SRC_URI[md5sum] = "c2639e1838538df7a07d30fe99998796"
+SRC_URI[sha256sum] = "5785b5dd3cd44847720f4e639ad4ccf4bdd842624abda5b78ffd49362c0f0e3d"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
@@ -51,6 +51,7 @@ SRC_URI += " \
     file://0004-startkde-create-kde-s-home.patch \
     file://0005-startkde-enable-starting-X.patch \
     file://0006-startkde-remove-CMAKE_INSTALL_PREFIX-in-XDG_DATA_DIR.patch \
+    file://0007-startplasmacompositor-add-qt5-bin-path-to-PATH.patch \
 "
 
 # REVISIT

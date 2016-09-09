@@ -1,0 +1,45 @@
+From 13f3dc717f866f51795f257ccfbe1c90b523e96d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 15 Aug 2016 22:43:04 +0200
+Subject: [PATCH] startplasmacompositor: add qt5 bin path to PATH
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ startkde/startplasmacompositor.cmake | 16 +++++-----------
+ 1 file changed, 5 insertions(+), 11 deletions(-)
+
+diff --git a/startkde/startplasmacompositor.cmake b/startkde/startplasmacompositor.cmake
+index 535d1c1..6f43f50 100644
+--- a/startkde/startplasmacompositor.cmake
++++ b/startkde/startplasmacompositor.cmake
+@@ -4,17 +4,11 @@
+ #
+ 
+ # in case we have been started with full pathname spec without being in PATH
+-bindir=`echo "$0" | sed -n 's,^\(/.*\)/[^/][^/]*$,\1,p'`
+-if [ -n "$bindir" ]; then
+-  qbindir=`qtpaths --binaries-dir`
+-  qdbus=$qbindir/qdbus
+-  case $PATH in
+-    $bindir|$bindir:*|*:$bindir|*:$bindir:*) ;;
+-    *) PATH=$bindir:$PATH; export PATH;;
+-  esac
+-else
+-  qdbus=qdbus
+-fi
++
++# meta-qt5 specific
++PATH=$PATH:@CMAKE_INSTALL_FULL_BINDIR@/qt5; export PATH
++
++qdbus=qdbus
+ 
+ # We need to create config folder so we can write startupconfigkeys
+ if [  ${XDG_CONFIG_HOME} ]; then
+-- 
+2.5.5
+
