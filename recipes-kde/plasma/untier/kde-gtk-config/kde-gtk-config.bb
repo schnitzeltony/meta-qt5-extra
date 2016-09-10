@@ -10,6 +10,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 inherit kde-plasma distro_features_check
 
 DEPENDS += " \
+    gtk+ \
     gtk+3 \
     ki18n \
     kconfigwidgets \
