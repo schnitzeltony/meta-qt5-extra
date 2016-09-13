@@ -25,11 +25,11 @@ index 5e95df8..8334c80 100644
  )
  target_compile_definitions(kdeinit_kded5 PRIVATE
 -    KCONF_UPDATE_EXE="$<TARGET_FILE:KF5::kconf_update>"
-+    KCONF_UPDATE_EXE="${LIBEXEC_INSTALL_DIR}/kf5/kconf_update"
++    KCONF_UPDATE_EXE="${CMAKE_INSTALL_FULL_LIBEXECDIR}/kf5/kconf_update"
  )
  target_compile_definitions(kded5 PRIVATE
 -    KCONF_UPDATE_EXE="$<TARGET_FILE:KF5::kconf_update>"
-+    KCONF_UPDATE_EXE="${LIBEXEC_INSTALL_DIR}/kf5/kconf_update"
++    KCONF_UPDATE_EXE="${CMAKE_INSTALL_FULL_LIBEXECDIR}/kf5/kconf_update"
  )
  
  install(TARGETS kdeinit_kded5 EXPORT KDEDTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
