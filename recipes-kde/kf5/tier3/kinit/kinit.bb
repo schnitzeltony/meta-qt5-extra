@@ -22,10 +22,6 @@ PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "0b8fcc6d1ef2ff1775ec23dfa34b5de6"
 SRC_URI[sha256sum] = "dda2b28923d06521d4f501f76e3b20e44ef9ace59b9285635d7d173ef975bcfd"
 
-SRC_URI += " \
-    file://0001-kdeinit-fix-paths-to-libraries.patch \
-"
-
 FILES_${PN} += "${datadir}/dbus-1 ${libdir}/libkdeinit5_klauncher.so"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
 FILES_${PN}-dev = "${libdir}/cmake"
