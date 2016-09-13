@@ -98,6 +98,7 @@ FILES_${PN}-dev = " \
 # startkde requires:
 RDEPENDS_${PN} += " \
     xinit \
+    xset \
     qttools-tools \
     kconfig-bin \
     kinit \
