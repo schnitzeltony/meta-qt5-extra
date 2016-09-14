@@ -14,8 +14,8 @@ DEPENDS += " \
     qt-gstreamer \
 "
 
-SRCREV = "c882b526c131d860d584197d8141120535be324d"
-PV = "0.6.90+git${SRCPV}"
+SRCREV = "6dd502e199596dabab8be77efaf164823a8ead65"
+PV = "0.8.1"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += " \
