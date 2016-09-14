@@ -8,13 +8,14 @@ LIC_FILES_CHKSUM = " \
 inherit hawaii
 
 DEPENDS += " \
+    greenisland \
     libhawaii \
     polkit-qt-1 \
     kscreen \
 "
 
-SRCREV = "17da37ea0e44f8bc2d20a0018d11944bee4e810e"
-PV = "0.6.90+git${SRCPV}"
+SRCREV = "f1ce43687a0c9dcdbf0cd5640d38bbbc348dd123"
+PV = "0.8.0"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DQt5LinguistTools_DIR=${STAGING_LIBDIR_NATIVE}/cmake/Qt5LinguistTools"
