@@ -50,8 +50,7 @@ SRC_URI += " \
     file://0003-startkde-add-meta-qt5-standard-binary-path-to-PATH.patch \
     file://0004-startkde-create-kde-s-home.patch \
     file://0005-startkde-enable-starting-X.patch \
-    file://0006-startkde-remove-CMAKE_INSTALL_PREFIX-in-XDG_DATA_DIR.patch \
-    file://0007-startplasmacompositor-add-qt5-bin-path-to-PATH.patch \
+    file://0006-startplasmacompositor-add-qt5-bin-path-to-PATH.patch \
 "
 
 # REVISIT
