@@ -20,7 +20,6 @@ DEPENDS += " \
     kconfigwidgets \
     kservice \
     plasma-framework \
-    kauth \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras libxres", "", d)} \
 "
 
@@ -32,6 +31,4 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \
     ${datadir}/ksysguard \
-    ${libdir}/kauth \
 "
-FILES_${PN}-dbg += "${libdir}/kauth/.debug"
