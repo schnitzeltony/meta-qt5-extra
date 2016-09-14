@@ -1,0 +1,86 @@
+From 5be9827d217e140c1d3d060f9366cc0632a847af Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 14 Sep 2016 19:34:55 +0200
+Subject: [PATCH] waylandcompositor: fix non GL (GLES) builds
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+qwaylandquickcompositor.cpp:159:20: error: 'class QWaylandBufferRef' has no member named 'bindToTexture'
+             buffer.bindToTexture();
+                    ^~~~~~~~~~~~~
+
+qwaylandquickitem.cpp:314:24: error: 'const class QWaylandBufferRef' has no member named 'bindToTexture'
+                 buffer.bindToTexture();
+                        ^~~~~~~~~~~~~
+
+qwaylandquickitem.cpp:1126:40: error: 'class QWaylandBufferRef' has no member named 'textureForPlane'
+                 if (uint texture = ref.textureForPlane(plane))
+                                        ^~~~~~~~~~~~~~~
+
+qwaylandquickitem.cpp:1129:17: error: 'class QWaylandBufferRef' has no member named 'bindToTexture'
+             ref.bindToTexture();
+                 ^~~~~~~~~~~~~
+
+qwaylandquickitem.cpp:1132:13: error: 'class QWaylandBufferRef' has no member named 'updateTexture'
+         ref.updateTexture();
+             ^~~~~~~~~~~~~
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/waylandcompositor/compositor_api/qwaylandquickcompositor.cpp | 2 ++
+ src/waylandcompositor/compositor_api/qwaylandquickitem.cpp       | 8 ++++++++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/src/waylandcompositor/compositor_api/qwaylandquickcompositor.cpp b/src/waylandcompositor/compositor_api/qwaylandquickcompositor.cpp
+index e015a8f..69099db 100644
+--- a/src/waylandcompositor/compositor_api/qwaylandquickcompositor.cpp
++++ b/src/waylandcompositor/compositor_api/qwaylandquickcompositor.cpp
+@@ -156,7 +156,9 @@ void QWaylandQuickCompositor::grabSurface(QWaylandSurfaceGrabber *grabber, const
+             glGenTextures(1, &texture);
+             glBindTexture(GL_TEXTURE_2D, texture);
+             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
++#ifdef QT_WAYLAND_COMPOSITOR_GL
+             buffer.bindToTexture();
++#endif
+             blitter.blit(texture, QMatrix4x4(), surfaceOrigin);
+ 
+             blitter.release();
+diff --git a/src/waylandcompositor/compositor_api/qwaylandquickitem.cpp b/src/waylandcompositor/compositor_api/qwaylandquickitem.cpp
+index 942a5d1..1e15b0f 100644
+--- a/src/waylandcompositor/compositor_api/qwaylandquickitem.cpp
++++ b/src/waylandcompositor/compositor_api/qwaylandquickitem.cpp
+@@ -311,7 +311,9 @@ public:
+                 GLuint texture;
+                 glGenTextures(1, &texture);
+                 glBindTexture(GL_TEXTURE_2D, texture);
++#ifdef QT_WAYLAND_COMPOSITOR_GL
+                 buffer.bindToTexture();
++#endif
+                 m_sgTex = surfaceItem->window()->createTextureFromId(texture , QSize(surfaceItem->width(), surfaceItem->height()), opt);
+             }
+         }
+@@ -1122,14 +1124,20 @@ QSGNode *QWaylandQuickItem::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeDat
+ 
+         if (d->newTexture) {
+             d->newTexture = false;
++#ifdef QT_WAYLAND_COMPOSITOR_GL
+             for (int plane = 0; plane < bufferTypes[ref.bufferFormatEgl()].planeCount; plane++)
+                 if (uint texture = ref.textureForPlane(plane))
+                     material->setTextureForPlane(plane, texture);
++#endif
+             material->bind();
++#ifdef QT_WAYLAND_COMPOSITOR_GL
+             ref.bindToTexture();
++#endif
+         }
+ 
++#ifdef QT_WAYLAND_COMPOSITOR_GL
+         ref.updateTexture();
++#endif
+         QSGGeometry::updateTexturedRectGeometry(geometry, rect, QRectF(0, 0, 1, 1));
+ 
+         node->setGeometry(geometry);
+-- 
+2.5.5
+
