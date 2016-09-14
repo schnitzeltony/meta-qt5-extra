@@ -6,13 +6,36 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     antimony \
+    \
     gottet \
-    hawaii-world \
     hexalate \
+    \
+    compton \
+    qpdfview \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sddm", "",d)} \
+    xcb-util-cursor \
+    \
+    qtiohelper \
+    \
+    drumstick\
+    qmmp \
+    qt-gstreamer \
+    timidity++ \
+    \
+    exiv2 \
+    grantlee \
+    libcddb \
+    libcdio-paranoia \
+    libdbusmenu-qt5 \
+    libpwquality \
+    libraw \
+    libstatgrab \
+    lmdb \
+    mlt \
+    translate-toolkit \
+    xapian-core \
+    \
+    hawaii-world \
     kde-world \
     lxqt-world \
-    qmmp \
-    qpdfview \
-    qtiohelper \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sddm", "",d)} \
 "
