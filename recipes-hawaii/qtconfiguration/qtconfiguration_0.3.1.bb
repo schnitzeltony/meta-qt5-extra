@@ -13,9 +13,8 @@ DEPENDS += "dconf"
 
 SRC_URI = " \
     git://github.com/hawaii-desktop/${BPN}.git \
-    file://0001-fix-build-with-qt-5.5.patch \
 "
-SRCREV = "804739d73de982fc144ff45653c243cefcfa79cb"
+SRCREV = "fd37e4f7a19b593e44f35e59a5a19aecc4f268a9"
 
 S = "${WORKDIR}/git"
 
