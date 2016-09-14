@@ -28,7 +28,6 @@ SRC_URI[sha256sum] = "8fef4b655660d6f2f05a5af794ab578afa2f9be7b665ed0313ce79e654
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
-    file://0002-Baloo.pc.cmake-fix-paths-for-Libs-and-Cflags.patch \
 "
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5Baloo, -S${libdir}, -S${STAGING_LIBDIR}"
