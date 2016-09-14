@@ -36,7 +36,6 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/icons \
     ${datadir}/kservices5 \
-    ${libdir}/kauth \
     ${OE_QMAKE_PATH_QML}/org/kde/baloo \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
