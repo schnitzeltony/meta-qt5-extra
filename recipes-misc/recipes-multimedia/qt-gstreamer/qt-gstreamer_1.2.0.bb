@@ -3,7 +3,7 @@ SUMMARY = "QtGStreamer is a set of libraries providing C++ bindings for GStreame
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
-inherit cmake_qt5  cmake_lib
+inherit cmake_qt5
 
 DEPENDS += " \
     boost \
@@ -36,5 +36,3 @@ FILES_${PN} += " \
 FILES_${PN}-dev += " \
     ${libdir}/cmake \
 "
-
-CMAKE_ALIGN_SYSROOT[1] = "Qt5GStreamer, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
