@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 
 inherit hawaii gtk-icon-cache
 
-SRCREV = "dfa9938a4ccc47c7b8ce7974afe1f6836b1e58cf"
-PV = "v0.6.90+git${SRCPV}"
+SRCREV = "4a0d806c28f25aa072d9c5b849ec48a565721b30"
+PV = "v0.8.0"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += "${datadir}/icons"
