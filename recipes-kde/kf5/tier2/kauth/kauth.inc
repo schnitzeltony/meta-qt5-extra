@@ -12,7 +12,6 @@ SRC_URI[sha256sum] = "1d62b32d88ba6c1e71e7b3ef67366710b9ce4488bcf82280fbe70d79b5
 
 SRC_URI += " \
 	file://0001-Make-autotests-optional.patch \
-	file://0002-align-installation-location-for-helpers.patch \
 "
 
 EXTRA_OECMAKE += "-DAUTOTESTS=OFF"
