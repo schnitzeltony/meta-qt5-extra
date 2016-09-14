@@ -27,7 +27,6 @@ SRC_URI[sha256sum] = "1ff1f07fc1bede0cb0b498de2d2b0db088639b91d0f7c39a90abfc032d
 # REVISIT remove ugly hack for wayland-only environments
 SRC_URI += " \
     file://0001-no-session-management-if-not-supported-by-qtbase-ind.patch \
-    file://0002-fix-path-to-ksendbugmail.patch \
 "
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
