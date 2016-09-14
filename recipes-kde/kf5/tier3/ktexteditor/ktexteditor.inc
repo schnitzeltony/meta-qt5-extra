@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 perlnative
 
-DEPENDS += "karchive kconfig kguiaddons ki18n kio kparts sonnet"
+DEPENDS += "karchive kconfig kguiaddons ki18n kio kparts sonnet libgit2"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "c34217c409480ac45f48693c72e3ed8a"
