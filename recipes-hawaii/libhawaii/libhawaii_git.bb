@@ -5,18 +5,13 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
-inherit hawaii cmake_lib
+inherit hawaii
 
-PV = "0.6.90+git${SRCPV}"
+PV = "0.8.0"
 
 SRC_URI = "git://github.com/hawaii-desktop/${BPN}.git"
-SRCREV = "9886e727d0232208d393b8e63b0fe0f28311d8a6"
+SRCREV = "f9cb7389a7881bf924ead7ae4b409c83b7e7a454"
 S = "${WORKDIR}/git"
-
-CMAKE_ALIGN_SYSROOT[1] = "Hawaii, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "Hawaii, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
 FILES_${PN}-dev += "${libdir}/cmake"
-#FILES_${PN}-dbg += "${libdir}/hawaii/qml/Hawaii/Shell/Applications/.debug ${libdir}/hawaii/qml/Hawaii/Shell/Core/.debug"
-
