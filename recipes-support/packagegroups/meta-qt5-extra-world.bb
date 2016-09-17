@@ -17,6 +17,7 @@ RDEPENDS_${PN} = " \
     \
     qtiohelper \
     \
+    chromaprint \
     drumstick\
     qmmp \
     qt-gstreamer \
