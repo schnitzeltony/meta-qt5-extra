@@ -1,0 +1,75 @@
+From f3cbe95449fd6346933179f13d9ce23216a148fc Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 18 Sep 2016 22:14:59 +0200
+Subject: [PATCH] do not pin build flags - use defaults
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstrem-Status: Inappropriate [cross-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/makefile | 14 +++++---------
+ 1 file changed, 5 insertions(+), 9 deletions(-)
+
+diff --git a/src/makefile b/src/makefile
+index 886237f..ace5266 100644
+--- a/src/makefile
++++ b/src/makefile
+@@ -15,8 +15,6 @@ INSTALL_BINARY_DIR	=	/usr/bin/
+ 
+ INCLUDES	=	-I.
+ LIBRARIES	=	-ldl -lm
+-CFLAGS		=	$(INCLUDES) -Wall -Werror -O3 -fPIC
+-CXXFLAGS	=	$(CFLAGS)
+ PLUGINS		=	../plugins/amp.so				\
+ 			../plugins/delay.so				\
+ 			../plugins/filter.so				\
+@@ -25,8 +23,6 @@ PLUGINS		=	../plugins/amp.so				\
+ PROGRAMS	=	../bin/analyseplugin				\
+ 			../bin/applyplugin 				\
+ 			../bin/listplugins
+-CC		=	cc
+-CPP		=	c++
+ 
+ ###############################################################################
+ #
+@@ -35,11 +31,11 @@ CPP		=	c++
+ 
+ ../plugins/%.so:	plugins/%.c ladspa.h
+ 	$(CC) $(CFLAGS) -o plugins/$*.o -c plugins/$*.c
+-	$(LD) -o ../plugins/$*.so plugins/$*.o -shared
++	$(LD) -o ../plugins/$*.so plugins/$*.o -shared $(LDLDFLAGS)
+ 
+ ../plugins/%.so:	plugins/%.cpp ladspa.h
+ 	$(CPP) $(CXXFLAGS) -o plugins/$*.o -c plugins/$*.cpp
+-	$(CPP) -o ../plugins/$*.so plugins/$*.o -shared
++	$(CPP) -o ../plugins/$*.so plugins/$*.o -shared $(LDFLAGS)
+ 
+ ###############################################################################
+ #
+@@ -90,17 +86,17 @@ targets:	$(PLUGINS) $(PROGRAMS)
+ #
+ 
+ ../bin/applyplugin:	applyplugin.o load.o default.o
+-	$(CC) $(CFLAGS) $(LIBRARIES)					\
++	$(CC) $(CFLAGS) $(LDFLAGS)					\
+ 		-o ../bin/applyplugin					\
+ 		applyplugin.o load.o default.o
+ 
+ ../bin/analyseplugin:	analyseplugin.o load.o default.o
+-	$(CC) $(CFLAGS) $(LIBRARIES)					\
++	$(CC) $(CFLAGS) $(LDFLAGS)					\
+ 		-o ../bin/analyseplugin 				\
+ 		analyseplugin.o load.o default.o
+ 
+ ../bin/listplugins:	listplugins.o search.o
+-	$(CC) $(CFLAGS) $(LIBRARIES)					\
++	$(CC) $(CFLAGS) $(LDFLAGS)					\
+ 		-o ../bin/listplugins	 				\
+ 		listplugins.o search.o
+ 
+-- 
+2.5.5
+

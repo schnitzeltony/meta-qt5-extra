@@ -1,0 +1,55 @@
+From 3a3b4f3895ab18a60a734017fcaa22c1fdbabf6f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 19 Sep 2016 00:06:04 +0200
+Subject: [PATCH] Use fallback for plugindir in case env. var LADSPA_PATH is
+ not set
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Same as [1]
+
+[1] https://git.archlinux.org/svntogit/packages.git/tree/trunk/fallback-ladspa-path.patch?h=packages/ladspa
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/load.c   | 4 +++-
+ src/search.c | 5 +----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/src/load.c b/src/load.c
+index c2a5aa7..72c4896 100644
+--- a/src/load.c
++++ b/src/load.c
+@@ -54,7 +54,9 @@ dlopenLADSPA(const char * pcFilename, int iFlag) {
+        to search. */
+ 
+     pcLADSPAPath = getenv("LADSPA_PATH");
+-    
++    if (! pcLADSPAPath)
++      pcLADSPAPath = "/usr/lib/ladspa";
++
+     if (pcLADSPAPath) {
+ 
+       pcStart = pcLADSPAPath;
+diff --git a/src/search.c b/src/search.c
+index 0006712..009f2c6 100644
+--- a/src/search.c
++++ b/src/search.c
+@@ -99,10 +99,7 @@ LADSPAPluginSearch(LADSPAPluginSearchCallbackFunction fCallbackFunction) {
+ 
+   pcLADSPAPath = getenv("LADSPA_PATH");
+   if (!pcLADSPAPath) {
+-    fprintf(stderr,
+-	    "Warning: You do not have a LADSPA_PATH "
+-	    "environment variable set.\n");
+-    return;
++    pcLADSPAPath = "/usr/lib/ladspa";
+   }
+   
+   pcStart = pcLADSPAPath;
+-- 
+2.5.5
+
