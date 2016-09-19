@@ -27,3 +27,9 @@ EXTRA_OECMAKE += " \
     -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=Release \
     -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=Release \
 "
+
+do_install_append() {
+    ln -s libportmidi.so.0. "${D}/${libdir}/libporttime.so"
+    ln -s libportmidi.so.0. "${D}/${libdir}/libporttime.so.0"
+    ln -s libportmidi.so.0. "${D}/${libdir}/libporttime.so.0."
+}
