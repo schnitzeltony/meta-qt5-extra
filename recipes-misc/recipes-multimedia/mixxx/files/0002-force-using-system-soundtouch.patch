@@ -1,0 +1,41 @@
+From bf659102f80fa2c104c2725e71943453ed8b9caf Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 19 Sep 2016 23:46:11 +0200
+Subject: [PATCH] force using system soundtouch
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+For unknown reasons soundtouch is not properly found - maybe
+PKG_CONFIG_PATH gets lost in some scons depth - no idea.
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ build/depends.py | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+
+diff --git a/build/depends.py b/build/depends.py
+index a053970..3edb64e 100644
+--- a/build/depends.py
++++ b/build/depends.py
+@@ -490,12 +490,9 @@ class SoundTouch(Dependence):
+             env = build.env
+ 
+         if build.platform_is_linux:
+-            # Try using system lib
+-            if conf.CheckForPKG('soundtouch', '1.8.0'):
+-                # System Lib found
+-                build.env.ParseConfig('pkg-config soundtouch --silence-errors \
+-                                      --cflags --libs')
+-                self.INTERNAL_LINK = False
++            build.env.ParseConfig('pkg-config soundtouch --silence-errors \
++                                  --cflags --libs')
++            self.INTERNAL_LINK = False
+ 
+         if self.INTERNAL_LINK:
+             env.Append(CPPPATH=[self.SOUNDTOUCH_INTERNAL_PATH])
+-- 
+2.5.5
+
