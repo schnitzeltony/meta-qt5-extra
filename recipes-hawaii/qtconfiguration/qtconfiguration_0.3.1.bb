@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit hawaii cmake_lib
+inherit hawaii
 
 DEPENDS += "dconf"
 
@@ -17,8 +17,6 @@ SRC_URI = " \
 SRCREV = "fd37e4f7a19b593e44f35e59a5a19aecc4f268a9"
 
 S = "${WORKDIR}/git"
-
-CMAKE_ALIGN_SYSROOT[1] = "QtConfiguration, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 
 FILES_${PN} += "${libdir}/hawaii/qml/Hawaii/Configuration"
 FILES_${PN}-dbg += "${libdir}/hawaii/qml/Hawaii/Configuration/.debug"
