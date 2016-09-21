@@ -19,9 +19,14 @@ RDEPENDS_${PN} = " \
     \
     chromaprint \
     drumstick\
+    ladspa-sdk \
+    mixxx \
     qmmp \
     qt-gstreamer \
+    rubberband \
+    soundtouch \
     timidity++ \
+    vamp-plugin-sdk \
     \
     exiv2 \
     grantlee \
