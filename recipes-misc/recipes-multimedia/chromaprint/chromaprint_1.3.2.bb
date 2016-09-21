@@ -1,12 +1,13 @@
 SUMMARY = "Chromaprint is library that extracts fingerprints from audio sources"
 HOMEPAGE = "https://acoustid.org/chromaprint"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2d5025d4aa3495befef8f17206a5b0a1"
+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=4fbd65380cdd255951079008b364516c"
 
 inherit cmake
 
 DEPENDS += " \
-    virtual/fftw \
+    fftw \
+    ffmpeg \
 "
 
 SRC_URI = "https://bitbucket.org/acoustid/${BPN}/downloads/${BPN}-${PV}.tar.gz"
