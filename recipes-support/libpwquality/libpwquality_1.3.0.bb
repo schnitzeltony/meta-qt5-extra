@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "74d2ea90e103323c1f2d6a6cc9617cdae6877573eddb31aaf31a40f354
 
 inherit autotools-brokensep pkgconfig gettext pythonnative
 
-DEPENDS = "zlib cracklib libpam"
+DEPENDS = "zlib cracklib libpam python"
 
 EXTRA_OECONF = " \
     --with-securedir=${base_libdir}/security \
