@@ -1,7 +1,7 @@
 SUMMARY = "Rubber Band Library library for audio time-stretching and pitch-shifting"
 HOMEPAGE = "http://breakfastquay.com/rubberband/"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2d5025d4aa3495befef8f17206a5b0a1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=28f6289fba0406b8f491e9b2d5767488"
 
 inherit autotools-brokensep pkgconfig
 
