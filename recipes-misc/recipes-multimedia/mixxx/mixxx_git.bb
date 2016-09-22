@@ -13,7 +13,6 @@ DEPENDS += " \
     hidapi \
     upower \
     sqlite \
-    gperftools \
     libid3tag \
     taglib \
     libmad \
@@ -29,6 +28,8 @@ DEPENDS += " \
     rubberband \
     soundtouch \
 "
+# causes segfault trying to find debug libs
+#    gperftools
 
 SRC_URI = " \
     git://github.com/mixxxdj/${BPN}.git \
@@ -52,11 +53,10 @@ EXTRA_OESCONS += " \
     shoutcast=0 \
     localecompare=0 \
     faad=1 \
-    perftools=1 \
     ${EXTRA_OESCONS_GL} \
 "
+#    perftools=1
 
-# TODO faad not detected libmp4v2
 
 do_install_prepend() {
     install -d ${D}${prefix}
