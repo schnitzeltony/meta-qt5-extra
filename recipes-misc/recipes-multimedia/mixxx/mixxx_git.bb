@@ -35,9 +35,8 @@ SRC_URI = " \
     git://github.com/mixxxdj/${BPN}.git \
     file://0001-do-not-check-for-known-machine-types.patch \
     file://0002-force-using-system-soundtouch.patch \
-    file://0003-coverart.cpp-fix-build-with-gcc-6-for-Qt5.patch \
 "
-SRCREV = "ba6150137a5a85bce292cde34f0efd107aa89143"
+SRCREV = "14e10b29b57ae46ff8bb9ac0b815f8a4cb475848"
 S = "${WORKDIR}/git"
 PV = "2.0.0+git${SRCPV}"
 
