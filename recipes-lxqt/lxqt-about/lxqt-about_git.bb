@@ -8,7 +8,5 @@ DEPENDS += " \
     liblxqt \
 "
 
-SRCREV = "df906c2884cf2389825532e040920be6bd198a0e"
-PV = "0.10.0"
-
-FILES_${PN}-dev += "${datadir}/lxqt/lxqt-about/KF5WindowSystemTargets-noconfig.cmake"
+SRCREV = "7153a71e061113d9daea3b7d4c22cf83c987b97d"
+PV = "0.11.0"
