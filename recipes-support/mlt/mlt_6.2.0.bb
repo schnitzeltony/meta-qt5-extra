@@ -18,7 +18,7 @@ DEPENDS = " \
     libsdl libsdl-image \
     libexif \
     libsamplerate0 \
-    virtual/fftw \
+    fftw \
 "
 
 # TBD sox not found due to missing pkgconfig / others - see log.do_configure
