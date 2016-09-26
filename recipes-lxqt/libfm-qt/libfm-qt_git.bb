@@ -6,9 +6,10 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 inherit lxqt pkgconfig distro_features_check
 
-DEPENDS += "qtx11extras glib-2.0 libfm menu-cache"
+DEPENDS += "qtx11extras glib-2.0 libfm menu-cache libxcb liblxqt"
 
-SRCREV = "6f4782e12b9a1789a6d49e51e1f98e04ede2e896"
-PV = "0.11.0"
+SRC_URI += "file://0001-src-CMakeLists.txt-hard-code-xcb-link-target.patch"
+SRCREV = "ff6beead85f37830c08a59592883b649ecda0733"
+PV = "0.11.1"
 
 RRECOMMENDS_${PN} = "gvfs gvfsd-trash eject"
