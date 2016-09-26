@@ -4,5 +4,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=435ed639f84d4585d93824e7da3d85da"
 
 inherit lxqt
 
-SRCREV = "7b173f36872f5943792b61ef760ee3ed8da4e3ae"
-PV = "0.3.1"
+SRCREV = "9e644cbcbeb9723714431598cd254dac448efb15"
+PV = "0.3.2"
