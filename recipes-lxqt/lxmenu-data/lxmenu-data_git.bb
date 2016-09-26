@@ -9,7 +9,7 @@ DEPENDS = "glib-2.0 intltool-native"
 SRC_URI = "git://github.com/lxde/${BPN}.git;protocol=git;branch=master"
 S = "${WORKDIR}/git"
 
-SRCREV = "4f3a96e53b6414365f33e04901ee3c0db4c0d3ea"
-PV = "0.1.4+git${SRCPV}"
+SRCREV = "3b14415ff9862e6b79577fd4b9a097965001b270"
+PV = "0.1.5"
 
 FILES_${PN} += "${datadir}/desktop-directories"
