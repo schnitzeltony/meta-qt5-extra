@@ -2,14 +2,20 @@ SUMMARY = "Core utility library for all LXQt components"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=435ed639f84d4585d93824e7da3d85da"
 
-inherit lxqt cmake_lib
+inherit lxqt cmake_lib distro_features_check
 
-DEPENDS += "libqtxdg kwindowsystem"
-SRC_URI += "file://0001-remove-Qt5X11Extras-dependency-it-is-not-required.patch"
+REQUIRED_DISTRO_FEATURES = "x11"
 
-SRCREV = "3cf7384336628043971e6f43df8573563c8a6129"
-PV = "0.10.0"
+DEPENDS += "libqtxdg kwindowsystem libxscrnsaver"
 
-EXTRA_OECMAKE += "-DCMAKE_INSTALL_DATAROOTDIR=share -DLXQT_ETC_XDG_DIR=${sysconfdir}/xdg"
+SRCREV = "24c1c943b87ffc4492ca0db1747691534ce3e77e"
+PV = "0.11.0"
+
+EXTRA_OECMAKE += " \
+    -DPULL_TRANSLATIONS=Off \
+    -DCLEAN_TRANSLATIONS=Off \
+    -DCMAKE_INSTALL_DATAROOTDIR=share \
+    -DLXQT_ETC_XDG_DIR=${sysconfdir}/xdg \
+"
 
 CMAKE_ALIGN_SYSROOT[1] = "lxqt, -S${datadir}/cmake, -S${STAGING_DATADIR}/cmake"
