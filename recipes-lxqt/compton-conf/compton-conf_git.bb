@@ -6,8 +6,13 @@ inherit lxqt pkgconfig
 
 DEPENDS += "libconfig"
 
-SRCREV = "6fe880a827f4a003707c9f44b0be4ac5dcfd57a8"
-PV = "0.1.0+git${SRCPV}"
+SRCREV = "e71ee4c9a6e3a3b579543bb0e6d969b585ff3209"
+PV = "0.2.0"
+
+EXTRA_OECMAKE += " \
+    -DPULL_TRANSLATIONS=Off \
+    -DCLEAN_TRANSLATIONS=Off \
+"
 
 FILES_${PN} += "${datadir}/${BPN}/compton.conf.example"
 
