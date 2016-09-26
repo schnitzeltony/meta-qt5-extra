@@ -6,9 +6,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 inherit lxqt pkgconfig distro_features_check gtk-icon-cache mime
 
-DEPENDS += "qtx11extras glib-2.0 libexif pcmanfm-qt libxfixes"
+DEPENDS += "qtx11extras qtsvg libfm-qt libexif libxfixes"
 
-SRCREV = "9c4fc7cb60480c787cd87062dc63d62dcc699a78"
-PV = "0.4.0+git${SRCPV}"
+SRCREV = "7d7260744543710e89e7f09d53757a18b6825ac4"
+PV = "0.5.0"
 
 FILES_${PN} += "${datadir}/icons"
