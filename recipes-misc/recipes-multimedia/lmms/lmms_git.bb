@@ -8,7 +8,7 @@ inherit cmake_qt5
 DEPENDS += " \
     qtbase \
     jack \
-    virtual/fftw \
+    fftw \
 "
 
 SRC_URI = "git://github.com/LMMS/${BPN}.git"
