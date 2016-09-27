@@ -1,0 +1,31 @@
+From 22ce88122c616771e715873cc715b1ded65f0b52 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 27 Sep 2016 18:02:39 +0200
+Subject: [PATCH] do not check for xdg-udser-dirs at build time - it is a
+ runtime dependency
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1ad07be..62710e4 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -21,7 +21,6 @@ find_package(Qt5X11Extras REQUIRED QUIET)
+ find_package(Qt5LinguistTools REQUIRED QUIET)
+ 
+ find_package(lxqt REQUIRED QUIET)
+-find_package(XdgUserDirs REQUIRED QUIET)
+ 
+ include(LXQtCompilerSettings NO_POLICY_SCOPE)
+ include(LXQtTranslate)
+-- 
+2.5.5
+
