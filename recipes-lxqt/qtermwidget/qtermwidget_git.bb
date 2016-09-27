@@ -1,22 +1,16 @@
 SUMMARY = "The qterminal widget"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=4641e94ec96f98fabc56ff9cc48be14b"
 
-inherit cmake_qt5 cmake_lib cmake_extra_sanity
+inherit lxqt cmake_lib
 
-DEPENDS = "qtbase"
+SRCREV = "97d96dfb889fb1d6f1a6c6fc857defd6a8192342"
+PV = "0.7.0"
 
-SRC_URI = "git://github.com/lxde/${BPN}.git"
-SRCREV = "72ffc262eb6cd5deaf3489068f7fe6a91f734998"
-PV = "0.6.0+git${SRCPV}"
-
-S = "${WORKDIR}/git"
-
-EXTRA_OECMAKE += "-DUSE_QT5=ON -DBUILD_DESIGNER_PLUGIN=OFF"
+#EXTRA_OECMAKE += "-DUSE_QT5=ON -DBUILD_DESIGNER_PLUGIN=OFF"
 
 FILES_${PN} += " \
     ${datadir}/qtermwidget5 \
-    ${datadir}/cmake \
 "
 
 CMAKE_ALIGN_SYSROOT[1] = "qtermwidget5, -S${includedir}, -S${STAGING_INCDIR}"
