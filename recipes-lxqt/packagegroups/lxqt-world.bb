@@ -6,15 +6,17 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "compton-conf", "",d)} \
-    liblxqt \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "liblxqt", "",d)} \
     libqtxdg \
     libsysstat \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lximage-qt", "",d)} \
     lxmenu-data \
     lxqt-about \
+    lxqt-admin \
     lxqt-common \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-config", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-globalkeys", "",d)} \
+    lxqt-l10n \
     lxqt-notificationd \
     lxqt-openssh-askpass \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-panel", "",d)} \
@@ -26,6 +28,7 @@ RDEPENDS_${PN} = " \
     lxqt-sudo \
     menu-cache \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "obconf-qt", "",d)} \
+    pavucontrol-qt \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pcmanfm-qt", "",d)} \
     qtermwidget \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qterminal", "",d)} \
