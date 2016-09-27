@@ -9,7 +9,7 @@ DEPENDS += "qtx11extras openbox"
 SRC_URI += " \
     file://0001-finding-sed-does-not-work-and-is-not-neccessary.patch \
 "
-SRCREV = "32749a56c90134b7e52df19825f834ad93f36a1f"
-PV = "0.9.0+git${SRCPV}"
+SRCREV = "8af9fa5a84d03a77ed001058b18078cc47189a95"
+PV = "0.11.0"
 
 FILES_${PN} += "${datadir}/icons"
