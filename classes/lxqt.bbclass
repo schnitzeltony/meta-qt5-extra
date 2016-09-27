@@ -1,4 +1,4 @@
-inherit cmake_qt5 cmake_extra_sanity qt5-translation
+inherit cmake_qt5 cmake_extra_sanity
 
 HOMEPAGE = "http://lxqt.org/"
 
@@ -12,5 +12,6 @@ EXTRA_OECMAKE += " \
     -DCLEAN_TRANSLATIONS=Off \
 "
 
-# REVISIT: configure to use only ${libdir}/cmake
 FILES_${PN}-dev += "${datadir}/cmake ${libdir}/cmake"
+
+RDEPENDS_${PN} += "lxqt-l10n"
