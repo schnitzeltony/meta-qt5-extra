@@ -1,5 +1,7 @@
 # translations -> locale packages
 
+DEPENDS += "qttools-native"
+
 # default location
 QT_TRANSLATION_FILES ??= "${datadir}/*/translations/*.qm ${datadir}/*/translations/*/*.qm ${datadir}/*/translations/*/*/*.qm"
 
