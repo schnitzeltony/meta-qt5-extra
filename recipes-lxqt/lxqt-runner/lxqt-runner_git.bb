@@ -6,10 +6,10 @@ inherit lxqt pkgconfig distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "qtscript libqtxdg lxqt-globalkeys menu-cache"
+DEPENDS += "qtscript libqtxdg lxqt-globalkeys menu-cache muparser"
 
-SRCREV = "cd490a9324d304453693c691f8e68a2517c8fb18"
-PV = "0.10.0"
+SRCREV = "ad6321d083b8a86889cf62164c21fd31090bff44"
+PV = "0.11.0"
 
 # REVISIT: These are poluted by host paths
 FILES_${PN}-dev += "${datadir}/lxqt/lxqt-runner/*.cmake"
