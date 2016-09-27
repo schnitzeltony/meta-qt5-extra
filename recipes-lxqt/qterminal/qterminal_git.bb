@@ -2,21 +2,17 @@ SUMMARY = "Lightweight terminal emulator written in Qt"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-inherit cmake_qt5 cmake_extra_sanity distro_features_check
+inherit lxqt gtk-icon-cache
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS = "qtbase qttools-native qtermwidget"
+DEPENDS += "qtermwidget"
 
-SRC_URI = "git://github.com/lxde/${BPN}.git"
-SRCREV = "7f2c9e03e193df4d98cfb665d2acfa45e7153d91"
-PV = "0.6.0+git${SRCPV}"
+SRCREV = "eb6ac8037a071779a357cbe943d969a11497f799"
+PV = "0.7.0"
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECMAKE += "-DUSE_SYSTEM_QXT=OFF -DUSE_QT5=ON"
-
 FILES_${PN} += " \
     ${datadir}/appdata \
-    ${datadir}/icons \
 "
