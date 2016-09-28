@@ -14,3 +14,4 @@ PV = "0.11.0"
 FILES_${PN} += "${datadir}/polkit-1"
 
 RDEPENDS_${PN} += "lxqt-policykit"
+RRECOMMENDS_${PN} += "polkit-group-rule-datetime"
