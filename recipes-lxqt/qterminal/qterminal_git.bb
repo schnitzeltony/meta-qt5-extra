@@ -1,6 +1,6 @@
 SUMMARY = "Lightweight terminal emulator written in Qt"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=4641e94ec96f98fabc56ff9cc48be14b"
 
 inherit lxqt gtk-icon-cache
 
