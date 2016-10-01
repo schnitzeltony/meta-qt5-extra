@@ -7,5 +7,5 @@ inherit kde-kf5
 DEPENDS += "ki18n"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "e4a9229d95ae7ebaa094d104eb8bc633"
-SRC_URI[sha256sum] = "c3c2248b82aae17ff14b5c64ffbee40f5418450a26baa9f8fab3110ae88d7895"
+SRC_URI[md5sum] = "a7f022b0fb127a60f4bc3a09eb89114a"
+SRC_URI[sha256sum] = "914ce8fc2929b145d668a4018febcc2903c633c09ae164b67abb126a4e14cd22"
