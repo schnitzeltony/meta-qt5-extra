@@ -9,6 +9,7 @@ RDEPENDS_${PN} = " \
     \
     gottet \
     hexalate \
+    peg-e \
     simsu \
     \
     compton \
