@@ -9,6 +9,7 @@ RDEPENDS_${PN} = " \
     \
     gottet \
     hexalate \
+    simsu \
     \
     compton \
     qpdfview \
