@@ -9,8 +9,8 @@ inherit kde-plasma
 DEPENDS += "plymouth"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "40045a4af417080e040d4ab751a6ed85"
-SRC_URI[sha256sum] = "ed7e02eafd44715e16067bc0194ad2526beb56d0fd9b7bfcc5e3ab2ba9d37d21"
+SRC_URI[md5sum] = "f330fbac27c38519281d88611cc2985d"
+SRC_URI[sha256sum] = "c83340a13c7a6ce3f9630ffc18b4215b3b083eca903c89424ac592e44e7a0d5c"
 
 FILES_${PN} += " \
     ${datadir}/plymouth \

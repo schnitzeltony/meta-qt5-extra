@@ -11,13 +11,13 @@ Upstream-Status: pending
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
  klipper/klipper.cpp | 2 ++
- klipper/main.cpp    | 4 ++++
+ klipper/main.cpp    | 3 +++
  krunner/main.cpp    | 4 ++++
- shell/main.cpp      | 5 +++++
- 4 files changed, 15 insertions(+)
+ shell/main.cpp      | 4 ++++
+ 4 files changed, 13 insertions(+)
 
 diff --git a/klipper/klipper.cpp b/klipper/klipper.cpp
-index c80d2c7..89de369 100644
+index 79060d8..336adae 100644
 --- a/klipper/klipper.cpp
 +++ b/klipper/klipper.cpp
 @@ -223,10 +223,12 @@ Klipper::Klipper(QObject* parent, const KSharedConfigPtr& config, KlipperMode mo
@@ -34,10 +34,10 @@ index c80d2c7..89de369 100644
  
  Klipper::~Klipper()
 diff --git a/klipper/main.cpp b/klipper/main.cpp
-index fe7863f..f63e557 100644
+index 58a0778..c647d72 100644
 --- a/klipper/main.cpp
 +++ b/klipper/main.cpp
-@@ -27,7 +27,9 @@
+@@@ -27,7 +27,9 @@
  
  #include <QApplication>
  #include <QCommandLineParser>
@@ -47,13 +47,15 @@ index fe7863f..f63e557 100644
  
  #include "tray.h"
  #include "klipper.h"
-@@ -76,11 +78,13 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
- #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-   QGuiApplication::setFallbackSessionManagementEnabled(false);
- #endif
+@@ -73,6 +75,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
+ 
+   KAboutData::setApplicationData(aboutData);
+ 
 +#ifndef QT_NO_SESSIONMANAGER
+   QGuiApplication::setFallbackSessionManagementEnabled(false);
+ 
    auto disableSessionManagement = [](QSessionManager &sm) {
-       sm.setRestartHint(QSessionManager::RestartNever);
+@@ -80,6 +83,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
    };
    QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
    QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
@@ -62,10 +64,10 @@ index fe7863f..f63e557 100644
  
    QCommandLineParser parser;
 diff --git a/krunner/main.cpp b/krunner/main.cpp
-index e902583..67226d2 100644
+index b63156d..4edc1a8 100644
 --- a/krunner/main.cpp
 +++ b/krunner/main.cpp
-@@ -25,7 +25,9 @@
+@@ -24,7 +24,9 @@
  #include <QUrl>
  #include <QDebug>
  #include <QQuickWindow>
@@ -75,13 +77,15 @@ index e902583..67226d2 100644
  
  #include <KAuthorized>
  #include <KAboutData>
-@@ -69,11 +71,13 @@ int main(int argc, char **argv)
- #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-     QGuiApplication::setFallbackSessionManagementEnabled(false);
- #endif
+@@ -76,6 +78,7 @@ int main(int argc, char **argv)
+ 
+     KAboutData::setApplicationData(aboutData);
+ 
 +#ifndef QT_NO_SESSIONMANAGER
+     QGuiApplication::setFallbackSessionManagementEnabled(false);
+ 
      auto disableSessionManagement = [](QSessionManager &sm) {
-         sm.setRestartHint(QSessionManager::RestartNever);
+@@ -83,6 +86,7 @@ int main(int argc, char **argv)
      };
      QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
      QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
@@ -90,7 +94,7 @@ index e902583..67226d2 100644
      View view;
      view.setVisible(false);
 diff --git a/shell/main.cpp b/shell/main.cpp
-index 89c8c54..c55c0bf 100644
+index ec117f3..93791b2 100644
 --- a/shell/main.cpp
 +++ b/shell/main.cpp
 @@ -21,7 +21,9 @@
@@ -103,21 +107,22 @@ index 89c8c54..c55c0bf 100644
  #include <QDebug>
  #include <QMessageBox>
  
-@@ -104,11 +106,14 @@ int main(int argc, char *argv[])
- #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-     QGuiApplication::setFallbackSessionManagementEnabled(false);
- #endif
+@@ -110,6 +112,7 @@ int main(int argc, char *argv[])
+     cliOptions.process(app);
+     aboutData.processCommandLine(&cliOptions);
+ 
 +#ifndef QT_NO_SESSIONMANAGER
+     QGuiApplication::setFallbackSessionManagementEnabled(false);
+ 
      auto disableSessionManagement = [](QSessionManager &sm) {
-         sm.setRestartHint(QSessionManager::RestartNever);
+@@ -117,6 +120,7 @@ int main(int argc, char *argv[])
      };
      QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
      QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
 +#endif
-+
  
      ShellManager::s_fixedShell = cliOptions.value(shellPluginOption);
  
 -- 
-2.5.0
+2.5.5
 

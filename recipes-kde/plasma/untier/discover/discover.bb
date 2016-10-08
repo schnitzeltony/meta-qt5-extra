@@ -13,7 +13,6 @@ DEPENDS += " \
     \
     attica \
     knewstuff \
-    plasma-framework \
 "
 
 SRC_URI += "file://0001-application-backend-requires-AppstreamQt.patch"
@@ -37,4 +36,4 @@ FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_QML}/org/kde/*/.debug \
 "
 
-RDEPENDS_${PN} += "python3"
+RDEPENDS_${PN} += "python3 kirigami"
