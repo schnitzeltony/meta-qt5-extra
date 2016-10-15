@@ -20,7 +20,7 @@ diff --git a/klipper/klipper.cpp b/klipper/klipper.cpp
 index 79060d8..336adae 100644
 --- a/klipper/klipper.cpp
 +++ b/klipper/klipper.cpp
-@@ -223,10 +223,12 @@ Klipper::Klipper(QObject* parent, const KSharedConfigPtr& config, KlipperMode mo
+@@ -224,10 +224,12 @@ Klipper::Klipper(QObject* parent, const KSharedConfigPtr& config, KlipperMode mo
          m_popup->plugAction( m_quitAction );
      }
  
@@ -30,9 +30,9 @@ index 79060d8..336adae 100644
          connect(qApp, &QGuiApplication::commitDataRequest, this, &Klipper::saveSession);
      }
 +#endif
- }
  
- Klipper::~Klipper()
+     connect(this, &Klipper::passivePopup, this,
+         [this] (const QString &caption, const QString &text) {
 diff --git a/klipper/main.cpp b/klipper/main.cpp
 index 58a0778..c647d72 100644
 --- a/klipper/main.cpp
