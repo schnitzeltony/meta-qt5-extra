@@ -11,14 +11,14 @@ Upstream-Status: Pending
 
 Signed-off-by: Luis Gustavo S. Barreto <gustavo@ossystems.com.br>
 ---
- lib/CMakeLists.txt | 68 +++++++++++++++++++++++++++++++++---------------------
- 1 file changed, 42 insertions(+), 26 deletions(-)
+ lib/CMakeLists.txt | 71 ++++++++++++++++++++++++++++++++----------------------
+ 1 file changed, 42 insertions(+), 29 deletions(-)
 
 diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
-index cd2dbcb..0adbd3c 100644
+index d51b80d..db3ac7b 100644
 --- a/lib/CMakeLists.txt
 +++ b/lib/CMakeLists.txt
-@@ -10,40 +10,56 @@ message(STATUS "Looking for libjpeg version in ${JPEG_INCLUDE_DIR}/jpeglib.h")
+@@ -10,42 +10,55 @@ message(STATUS "Looking for libjpeg version in ${JPEG_INCLUDE_DIR}/jpeglib.h")
  # found in (between libjpeg, libjpeg-turbo and various multilib header
  # forwarding schemes seen in distros), have a simple program print out the
  # right version.
@@ -27,9 +27,6 @@ index cd2dbcb..0adbd3c 100644
 -#include <stdio.h>
 -#include <stdlib.h>
 -#include <jpeglib.h>
- 
--int main(void) { printf(\"%d\\\n\", JPEG_LIB_VERSION); }
--")
 +function(JPEGVersionCheck Ret Op Version)
 +    set(JPEGLIB_VERSION_CHECK_PATH "${CMAKE_CURRENT_BINARY_DIR}/jpeglib-version-check.c")
 +    file(WRITE ${JPEGLIB_VERSION_CHECK_PATH} "
@@ -45,51 +42,52 @@ index cd2dbcb..0adbd3c 100644
 +    }
 +    ")
  
+-int main(void) { printf(\"%d\\\n\", JPEG_LIB_VERSION); }
+-")
++try_compile(COMPILE_RESULT_VAR
++     "${CMAKE_BINARY_DIR}" "${JPEGLIB_VERSION_CHECK_PATH}"
++      COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS}"
++      OUTPUT_VARIABLE COMPILE_OUT)
+ 
 -try_run(JPEGLIB_RUN_RESULT JPEGLIB_COMPILE_RESULT
 -    ${CMAKE_CURRENT_BINARY_DIR} ${JPEGLIB_VERSION_CHECK_PATH}
+-    CMAKE_FLAGS -DINCLUDE_DIRECTORIES:PATH=${JPEG_INCLUDE_DIR}
 -    RUN_OUTPUT_VARIABLE jpeglib_version)
-+    try_compile(COMPILE_RESULT_VAR
-+        "${CMAKE_BINARY_DIR}" "${JPEGLIB_VERSION_CHECK_PATH}"
-+         COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS}"
-+         OUTPUT_VARIABLE COMPILE_OUT)
++    set(${Ret} ${COMPILE_OUT} PARENT_SCOPE)
++endfunction()
  
 -if ((${JPEGLIB_COMPILE_RESULT} EQUAL FALSE) OR ("${JPEGLIB_RUN_RESULT}" EQUAL FAILED_TO_RUN) OR "${jpeglib_version}" STREQUAL "")
 -    message(FATAL_ERROR "Could not find jpeglib.h. This file comes with libjpeg.")
 -endif()
-+    set(${Ret} ${COMPILE_OUT} PARENT_SCOPE)
-+endfunction()
- 
--if ("${jpeglib_version}" LESS 80)
--    set(GV_JPEG_DIR libjpeg-62)
--endif()
 +find_package(JPEG REQUIRED)
- 
--if ("${jpeglib_version}" EQUAL 80)
--    set(GV_JPEG_DIR libjpeg-80)
--endif()
 +if(JPEG_FOUND)
 +    JPEGVersionCheck(JPEG_LIB_VERSION < 80)
 +    if (${JPEG_LIB_VERSION} MATCHES "#error")
 +      set(GV_JPEG_DIR libjpeg-62)
 +    endif()
  
--if ("${jpeglib_version}" EQUAL 90)
--    set(GV_JPEG_DIR libjpeg-90)
+-if ("${jpeglib_version}" LESS 80)
+-    set(GV_JPEG_DIR libjpeg-62)
 -endif()
 +    JPEGVersionCheck(JPEG_LIB_VERSION == 80)
 +    if (${JPEG_LIB_VERSION} MATCHES "#error")
 +      set(GV_JPEG_DIR libjpeg-80)
 +    endif()
  
--if ("${GV_JPEG_DIR}" STREQUAL "")
--    message(FATAL_ERROR "Unknown libjpeg version: ${jpeglib_version}")
+-if ("${jpeglib_version}" EQUAL 80)
+-    set(GV_JPEG_DIR libjpeg-80)
 -endif()
 +    JPEGVersionCheck(JPEG_LIB_VERSION == 90)
 +    if (${JPEG_LIB_VERSION} MATCHES "#error")
 +      set(GV_JPEG_DIR libjpeg-90)
 +    endif()
  
--message(STATUS "libjpeg version: ${jpeglib_version}")
+-if ("${jpeglib_version}" EQUAL 90)
+-    set(GV_JPEG_DIR libjpeg-90)
+-endif()
+-
+-if ("${GV_JPEG_DIR}" STREQUAL "")
+-    message(FATAL_ERROR "Unknown libjpeg version: ${jpeglib_version}")
 +    if ("${GV_JPEG_DIR}" STREQUAL "")
 +        message(FATAL_ERROR "Unknown libjpeg version")
 +    else()
@@ -97,10 +95,14 @@ index cd2dbcb..0adbd3c 100644
 +    endif()
 +else(JPEG_FOUND)
 +    message(FATAL_ERROR "Could not find jpeglib.h. This file comes with libjpeg.")
-+endif()
- 
+ endif()
+-
+-message(STATUS "libjpeg version: ${jpeglib_version}")
+-
++ 
  add_definitions(-Dlibjpeg_EXPORTS)
  include_directories(
+     ${CMAKE_CURRENT_SOURCE_DIR}/${GV_JPEG_DIR}
 -- 
-2.1.4
+2.5.5
 
