@@ -9,8 +9,8 @@ inherit kde-kf5 cmake_lib
 DEPENDS += "${BPN}-native kconfig kcoreaddons kcrash kdbusaddons kdoctools kinit kservice"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "3497297ffd42fb64b6628a0d0b1c535e"
-SRC_URI[sha256sum] = "145892109c2984ee62e3cb485b2f62f9c29a9d88e181c7e475989bb700946866"
+SRC_URI[md5sum] = "f75a6d4cc978ca86639a754df4798b75"
+SRC_URI[sha256sum] = "82818fd1ea3386a7f806d601add69dc976f58fd1394126b6f57bdca462c7c491"
 SRC_URI += "file://0001-hardcode-path-to-kconf_update.patch"
 
 # kded's kded5 is not required for build -> point to native dummy to make cmake happy

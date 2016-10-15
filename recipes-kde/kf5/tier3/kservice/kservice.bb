@@ -11,8 +11,8 @@ inherit kde-kf5
 DEPENDS += "kconfig kcoreaddons kcrash kdbusaddons ki18n kdoctools"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "2f1c29b271e4cad9352d92768f389cbf"
-SRC_URI[sha256sum] = "f96d1df9b4815aa77a62b610e21ca8cd4832963c22eaf13772977f02b9957080"
+SRC_URI[md5sum] = "0b19bdee1e062b1f0ea267ba82e1132f"
+SRC_URI[sha256sum] = "a61ba9711259b9a9d2cda80bd408cd2e6ad5ad44fea96aa3f8138b2372932b89"
 
 FILES_${PN} += "${datadir}/kservicetypes5"
 

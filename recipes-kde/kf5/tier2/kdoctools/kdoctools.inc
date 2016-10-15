@@ -11,19 +11,20 @@ inherit kde-kf5 perlnative
 DEPENDS += "docbook-xml-dtd4 docbook-xsl-stylesheets liburi-perl-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "861231008c9c8fc120ff1f87988e2a88"
-SRC_URI[sha256sum] = "48c9f4c3f5c68c9f82cd526bf9bfe136319fd64b16acc5f7ec0c70c5c353068c"
+SRC_URI[md5sum] = "c719c59151cc6bbb6fa660c0ce1e0b03"
+SRC_URI[sha256sum] = "555de687230109e224f5945774bc5d4826b925c52418f151af2824a05a0aefc1"
 
 SRC_URI += " \
 	file://0001-Add-cmdline-param-to-help-find-xsl.patch \
-	file://0002-build-meinproc5-it-works-fine-in-our-environment.patch \
 "
 
 # allarch packages do only install into machine sysroot
 # for xml4
 OECMAKE_EXTRA_ROOT_PATH = "${STAGING_DIR}/${MACHINE}"
 # for xsl (we have to hardcode /usr - ${prefix} is aligned by native.bbclase
-EXTRA_OECMAKE += "-DOE_ROOT_PATH_PREFIX=${STAGING_DIR}/${MACHINE}/usr"
-
-EXTRA_OECMAKE += "-DCMAKE_AR:FILEPATH=${AR}"
+EXTRA_OECMAKE += " \
+    -DOE_ROOT_PATH_PREFIX=${STAGING_DIR}/${MACHINE}/usr \
+    -DCMAKE_AR:FILEPATH=${AR} \
+    -DINSTALL_INTERNAL_TOOLS=ON \
+"
 

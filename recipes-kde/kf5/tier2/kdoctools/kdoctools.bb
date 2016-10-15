@@ -5,7 +5,7 @@ DEPENDS += "${BPN}-native karchive ki18n libxslt libxml2"
 inherit cmake_lib
 
 SRC_URI += " \
-	file://0005-set-meinproc5-executable-so-that-it-can-be-found-for.patch \
+	file://0004-set-meinproc5-executable-so-that-it-can-be-found-for.patch \
 "
 
 do_configure_append() {
