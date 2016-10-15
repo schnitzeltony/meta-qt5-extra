@@ -10,6 +10,7 @@ inherit kde-plasma
 DEPENDS += " \
     glib-2.0 \
     pulseaudio \
+    libcanberra \
     \
     kcoreaddons \
     kdeclarative \
