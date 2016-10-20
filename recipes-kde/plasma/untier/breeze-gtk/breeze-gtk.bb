@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "9b3e9e33f7175c7991215a4793423117"
-SRC_URI[sha256sum] = "5f63e047cc3ae280ff8fb2caf5f250c918ee1bdd7dc48cfd38b4e03d1334ae5a"
+SRC_URI[md5sum] = "d9956c2e658e94982940608ddbc4fe83"
+SRC_URI[sha256sum] = "f36c98a0f1d41c6c6084341f26f179439456a308526d665a970cd91da03db6ed"
 
 FILES_${PN} += " \
     ${datadir}/kconf_update \

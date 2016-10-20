@@ -20,8 +20,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "d286f6f843d8faf872fd90b99acbb60c"
-SRC_URI[sha256sum] = "9538a5c237ef54602a233c025eb38a4426b51195a12b6d153e5b988a5325b95d"
+SRC_URI[md5sum] = "ad3ebd2e14a464e554f8c61809b5fbfa"
+SRC_URI[sha256sum] = "4c53828d5ab9f2beab592b8690c769c8af20ee72af298d12a1e0b7d9dbededb5"
 SRC_URI += "file://0001-replace-try_run-by-try_compile-in-compiler-feature-c.patch"
 
 FILES_SOLIBSDEV = ""
