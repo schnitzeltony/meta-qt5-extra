@@ -44,7 +44,6 @@ UNTIER = " \
     oxygen-fonts \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "plasma-desktop", "",d)} \
     plasma-integration \
-    plasma-mediacenter \
     plasma-nm \
     plasma-pa \
     plasma-workspace-wallpapers \
