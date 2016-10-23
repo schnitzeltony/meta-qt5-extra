@@ -1,0 +1,82 @@
+From edd199d0369a2198f2033bf2e7e5420a33d9316c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 24 Oct 2016 00:06:38 +0200
+Subject: [PATCH] fix build wit gcc-6
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/libprojectM/Common.hpp                       |  3 ++-
+ src/libprojectM/MilkdropPresetFactory/Parser.cpp | 10 +++++-----
+ 2 files changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/src/libprojectM/Common.hpp b/src/libprojectM/Common.hpp
+index b292495..abc153e 100755
+--- a/src/libprojectM/Common.hpp
++++ b/src/libprojectM/Common.hpp
+@@ -63,7 +63,8 @@ extern FILE *fmemopen(void *buf, size_t len, const char *pMode);
+ 
+ #ifdef LINUX
+ #include <cstdlib>
+-#define projectM_isnan isnan
++#include <cmath>
++#define projectM_isnan std::isnan
+ 
+ #endif
+ 
+diff --git a/src/libprojectM/MilkdropPresetFactory/Parser.cpp b/src/libprojectM/MilkdropPresetFactory/Parser.cpp
+index 16c3c82..8e0bc6a 100755
+--- a/src/libprojectM/MilkdropPresetFactory/Parser.cpp
++++ b/src/libprojectM/MilkdropPresetFactory/Parser.cpp
+@@ -1406,7 +1406,7 @@ PerFrameEqn * Parser::parse_implicit_per_frame_eqn(std::istream &  fs, char * pa
+   PerFrameEqn * per_frame_eqn;
+   GenExpr * gen_expr;
+ 
+-  if (fs == NULL)
++  if (!fs)
+     return NULL;
+   if (param_string == NULL)
+     return NULL;
+@@ -1561,7 +1561,7 @@ InitCond * Parser::parse_per_frame_init_eqn(std::istream &  fs, MilkdropPreset *
+ 
+   if (preset == NULL)
+     return NULL;
+-  if (fs == NULL)
++  if (!fs)
+     return NULL;
+ 
+   if ((token = parseToken(fs, name)) != tEq)
+@@ -1875,7 +1875,7 @@ int Parser::parse_shapecode(char * token, std::istream &  fs, MilkdropPreset * p
+   /* Null argument checks */
+   if (preset == NULL)
+     return PROJECTM_FAILURE;
+-  if (fs == NULL)
++  if (!fs)
+     return PROJECTM_FAILURE;
+   if (token == NULL)
+     return PROJECTM_FAILURE;
+@@ -2166,7 +2166,7 @@ int Parser::parse_wave(char * token, std::istream &  fs, MilkdropPreset * preset
+ 
+   if (token == NULL)
+     return PROJECTM_FAILURE;
+-  if (fs == NULL)
++  if (!fs)
+     return PROJECTM_FAILURE;
+   if (preset == NULL)
+     return PROJECTM_FAILURE;
+@@ -2348,7 +2348,7 @@ int Parser::parse_shape(char * token, std::istream &  fs, MilkdropPreset * prese
+   if (token == NULL)
+ 
+     return PROJECTM_FAILURE;
+-  if (fs == NULL)
++  if (!fs)
+     return PROJECTM_FAILURE;
+   if (preset == NULL)
+     return PROJECTM_FAILURE;
+-- 
+2.5.5
+
