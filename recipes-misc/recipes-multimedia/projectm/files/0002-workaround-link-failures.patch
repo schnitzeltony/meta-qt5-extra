@@ -1,0 +1,29 @@
+From 09d2274828a7d0bdb4b42c7c2871d11170f681cf Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 25 Oct 2016 01:18:41 +0200
+Subject: [PATCH] workaround link failures
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/projectM-sdl/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/projectM-sdl/CMakeLists.txt b/src/projectM-sdl/CMakeLists.txt
+index 64c2feb..1960431 100644
+--- a/src/projectM-sdl/CMakeLists.txt
++++ b/src/projectM-sdl/CMakeLists.txt
+@@ -23,7 +23,7 @@ FIND_PACKAGE(SDL2 REQUIRED)
+ 
+ # link in projectM
+ # i have no idea if this is correct
+-TARGET_LINK_LIBRARIES(projectMSDL projectM ${OPENGL_LIBRARIES} ${SDL2_LIBRARY})
++TARGET_LINK_LIBRARIES(projectMSDL ${SDL2_LIBRARY} projectM ${OPENGL_LIBRARIES})
+ SET(PROJECTM_LINK ${LIBPROJECTM_LDFLAGS})
+ INCLUDE_DIRECTORIES(${PROJECTM_INCLUDE} ${SDL2_INCLUDE_DIR})
+ LINK_DIRECTORIES(${PROJECTM_LINK})
+-- 
+2.5.5
+
