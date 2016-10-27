@@ -52,3 +52,5 @@ FILES_${PN} += " \
 FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "
+
+RRECOMMENDS_${PN} += "ffmpeg"
