@@ -11,6 +11,7 @@ DEPENDS += " \
     ftgl \
     libvisual \
     libsdl \
+    libsdl2 \
 "
 
 SRC_URI = " \
