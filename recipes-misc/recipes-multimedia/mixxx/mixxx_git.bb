@@ -9,6 +9,7 @@ DEPENDS += " \
     qtbase \
     qtscript \
     qtsvg \
+    qtxmlpatterns \
     libusb1 \
     hidapi \
     upower \
