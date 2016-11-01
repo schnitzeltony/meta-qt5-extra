@@ -8,5 +8,5 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "143c4916451cbb7153a33ad16fb100f4"
-SRC_URI[sha256sum] = "045c60e726e840b4a5ac31007b22fd1fa9534a289f68cd2c66f98cd84c6ef503"
+SRC_URI[md5sum] = "555043b0cdeb1cfdb00ee45ec5dec7c6"
+SRC_URI[sha256sum] = "b0cbc515af77d7542f68dfb0b81c8db47e4c136a75a86af05d0e0e2e4bc8d8a1"

@@ -21,8 +21,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "9ec376c42707531247a5857da642a982"
-SRC_URI[sha256sum] = "99cfd99f1c5631894fe0f83a759b6edf2a87e7668acf85860f8d60aa2eff220e"
+SRC_URI[md5sum] = "326efe93eb24f777b819a23793c1df62"
+SRC_URI[sha256sum] = "de06798fa6d73b9dafcf25c90ff1739bdea0d78082a2aa9e453e28db7b6fb41e"
 
 FILES_${PN} += " \
     ${datadir}/kcm_kscreen \
