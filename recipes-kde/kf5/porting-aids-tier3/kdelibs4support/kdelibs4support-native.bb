@@ -3,6 +3,8 @@ require ${BPN}.inc
 inherit native
 
 DEPENDS += " \
+    intltool-native \
+    libsm-native \
     kconfig-native \
     kcoreaddons-native \
     ki18n-native \
