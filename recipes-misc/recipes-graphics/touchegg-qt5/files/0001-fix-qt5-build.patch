@@ -1,0 +1,47 @@
+From dee672a83f65a861adf3347d646a6f918f21c107 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 25 Jan 2016 15:07:48 +0100
+Subject: [PATCH] fix qt5 build
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/touchegg/util/Include.h | 4 +++-
+ touchegg.pro                | 2 +-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/touchegg/util/Include.h b/src/touchegg/util/Include.h
+index 4fb27d5..27bccf6 100644
+--- a/src/touchegg/util/Include.h
++++ b/src/touchegg/util/Include.h
+@@ -23,8 +23,10 @@
+     // Qt
+     #include <QtCore>
+     #include <QtGui>
+-    #include <QtGui/QX11Info>
++    #include <QX11Info>
+     #include <QtXml>
++    #include <QApplication>
++    #include <QDesktopWidget>
+ 
+     // Xlib
+     #include <X11/Xlib.h>
+diff --git a/touchegg.pro b/touchegg.pro
+index 696ea1a..4565083 100644
+--- a/touchegg.pro
++++ b/touchegg.pro
+@@ -1,6 +1,6 @@
+ TEMPLATE     = app
+ TARGET       = touchegg
+-QT          += gui core xml
++QT          += gui core xml widgets x11extras
+ LIBS        += -lgeis -lX11 -lXtst -lXext
+ //DEFINES      = QT_NO_DEBUG_OUTPUT
+ 
+-- 
+2.5.0
+
