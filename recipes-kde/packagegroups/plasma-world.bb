@@ -4,6 +4,10 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
 
 inherit packagegroup
 
+OTHER = " \
+    plasma-mobile \
+"
+
 TIER_1 = " \
     kdecoration \
 "
@@ -55,6 +59,7 @@ UNTIER = " \
 "
 
 RDEPENDS_${PN} = " \
+    ${OTHER} \
     ${TIER_1} \
     ${TIER_2} \
     ${TIER_3} \
