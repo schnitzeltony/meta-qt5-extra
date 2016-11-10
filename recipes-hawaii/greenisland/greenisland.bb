@@ -14,8 +14,7 @@ DEPENDS += " \
 SRC_URI = " \
     git://github.com/greenisland/${BPN}.git;protocol=git;branch=master \
     file://0001-find-native-greenisland-wayland-scanner.patch \
-    file://0002-waylandcompositor-fix-non-GL-GLES-builds.patch \
-    file://0003-compositorlauncher-work-corrrectly-with-RaspberryPi-.patch \
+    file://0002-compositorlauncher-work-corrrectly-with-RaspberryPi-.patch \
 "
 
 # we don't have wayland-protocols yet - revisit
