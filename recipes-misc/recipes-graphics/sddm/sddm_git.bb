@@ -1,9 +1,8 @@
 SUMMARY = "SDDM is a modern display manager for X11"
-LICENSE = "GPLv2 & CC-BY-3.0 & CC-BY-NC-SA-3.0"
+LICENSE = "GPLv2 & CC-BY-3.0"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING-CC-BY-3.0;md5=3f91257948001a369d427b9028de84b2 \
-    file://COPYING-CC-BY-SA-3.0;md5=c0e44077d8998dd1cd1324f7bc4d7b67 \
+    file://LICENSE;md5=4641e94ec96f98fabc56ff9cc48be14b \
+    file://LICENSE.CC-BY-3.0;md5=36b7342d5619a3a0d3b581e89803ec25 \
 "
 
 REQUIRED_DISTRO_FEATURES = "x11"
@@ -14,15 +13,19 @@ DEPENDS += "qtbase qtdeclarative qttools-native libxcb"
 # REVISIT optionals
 DEPENDS += "libpam"
 
+# Note: we should check default config changes by running sddm --example-config on target.
+# This is usually done during build but does not work for our cross environment
 SRC_URI = " \
     git://github.com/sddm/${BPN}.git;protocol=git;branch=master \
     file://0001-fix-qml-install-dir.patch \
+    file://0002-do-not-create-example-configutation-we-cannot-run-sd.patch \
+    file://0003-autologin-try-last-successful-session-if-no-autologi.patch \
     file://sddm.pam \
     file://sddm-autologin.pam \
     file://sddm.conf \
 "
-SRCREV = "f3c810407e4e79597dcdc76508f08c33152fe3cd"
-PV = "0.13.0"
+SRCREV = "43c900569081cdbf889c88c08c631888b56c4a8e"
+PV = "0.14.0"
 
 S = "${WORKDIR}/git"
 
