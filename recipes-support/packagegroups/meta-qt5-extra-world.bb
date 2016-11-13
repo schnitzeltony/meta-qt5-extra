@@ -74,6 +74,7 @@ RDEPENDS_${PN} = " \
     xapian-core \
     \
     hawaii-world \
+    liri-world \
     kde-world \
     lxqt-world \
 "
