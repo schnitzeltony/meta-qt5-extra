@@ -9,7 +9,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 inherit cmake_qt5 cmake_extra_sanity pkgconfig systemd useradd distro_features_check
 
-DEPENDS += "qtbase qtdeclarative qttools-native libxcb"
+DEPENDS += "extra-cmake-modules-native qtbase qtdeclarative qttools libxcb"
 # REVISIT optionals
 DEPENDS += "libpam"
 
