@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma
 
 DEPENDS += " \
+    boost \
     kdbusaddons \
     ki18n \
     kcoreaddons \
