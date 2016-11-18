@@ -19,14 +19,15 @@ DEPENDS += " \
     libmms \
     libmodplug \
     libvorbis \
+    projectm \
 "
 
 SRC_URI = " \
     http://qmmp.ylsoftware.com/files/${BPN}-${PV}.tar.bz2 \
     file://0001-Remove-freebsd-compilation-support.patch \
 "
-SRC_URI[md5sum] = "3b751d7864fdbe56e13566cd172b4bcb"
-SRC_URI[sha256sum] = "8b48bd208506a9e98428480b1aa21daa96e3866b4cc3a11e8cb008ef564c13aa"
+SRC_URI[md5sum] = "2e2bc8fbeac43a72a9b53b9ca615a9be"
+SRC_URI[sha256sum] = "9b1288f432799980a5d58d131b56b4b590055d7e66c5fe50e9199b9daa35ddbd"
 
 inherit cmake_qt5
 
