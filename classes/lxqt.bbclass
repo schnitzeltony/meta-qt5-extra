@@ -13,5 +13,3 @@ EXTRA_OECMAKE += " \
 "
 
 FILES_${PN}-dev += "${datadir}/cmake ${libdir}/cmake"
-
-RDEPENDS_${PN} += "lxqt-l10n"

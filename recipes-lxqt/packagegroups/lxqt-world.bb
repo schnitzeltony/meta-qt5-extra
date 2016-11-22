@@ -32,4 +32,5 @@ RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pcmanfm-qt", "",d)} \
     qtermwidget \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qterminal", "",d)} \
+    lxqt-l10n \
 "
