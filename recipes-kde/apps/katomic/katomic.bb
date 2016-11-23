@@ -25,8 +25,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "c378be59dc002b65446d8f6db1f4ecc2"
-SRC_URI[sha256sum] = "868fd312d06d2057c9efd4e22ced900606ea91f8806269a0f05b7b4b8ff3d21e"
+SRC_URI[md5sum] = "063d1263e9d949f9ea76696d9a84b0f9"
+SRC_URI[sha256sum] = "1f48198160bbe1364ce70a262f22a9796101bd82ceabdc16afaa6f401a7f059f"
 SRC_URI += "file://0001-fix-build-for-qtbase-build-without-session-support-Q.patch"
 
 FILES_${PN} += " \

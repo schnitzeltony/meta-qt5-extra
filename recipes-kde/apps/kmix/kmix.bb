@@ -26,8 +26,8 @@ PACKAGECONFIG = "pulseaudio"
 PACKAGECONFIG[pulseaudio] = ",,pulseaudio"
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "190bfacf5449b8a77413b897926a1de1"
-SRC_URI[sha256sum] = "20091aa8e4fcd311eecec0941b0c0b05690720e710c93e591587c5dd37fbfb39"
+SRC_URI[md5sum] = "ebb85f1c5d33f668a608f7107c3e1334"
+SRC_URI[sha256sum] = "734c87e918088ea663f78c598bb0286a1753c2cd98e7e7e1e59d734f28656fdc"
 
 SRC_URI += "file://0001-fix-build-with-QT_NO_SESSIONMANAGER-set.patch"
 
