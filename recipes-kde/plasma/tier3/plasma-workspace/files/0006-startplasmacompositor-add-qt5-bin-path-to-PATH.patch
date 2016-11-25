@@ -17,7 +17,7 @@ diff --git a/startkde/startplasmacompositor.cmake b/startkde/startplasmacomposit
 index 535d1c1..6f43f50 100644
 --- a/startkde/startplasmacompositor.cmake
 +++ b/startkde/startplasmacompositor.cmake
-@@ -4,17 +4,11 @@
+@@ -4,17 +4,9 @@
  #
  
  # in case we have been started with full pathname spec without being in PATH
@@ -34,9 +34,7 @@ index 535d1c1..6f43f50 100644
 -fi
 +
 +# meta-qt5 specific
-+PATH=$PATH:@CMAKE_INSTALL_FULL_BINDIR@/qt5; export PATH
-+
-+qdbus=qdbus
++qdbus=@CMAKE_INSTALL_FULL_BINDIR@/qt5/qdbus
  
  # We need to create config folder so we can write startupconfigkeys
  if [  ${XDG_CONFIG_HOME} ]; then
