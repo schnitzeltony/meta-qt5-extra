@@ -10,8 +10,8 @@ inherit kde-kf5
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb qtx11extras libxscrnsaver", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "6892d4e820e491d3025fe10cb3bafa76"
-SRC_URI[sha256sum] = "dcc94797c73244cfc7a53e409eea66facf70a5d879814d6cf5fb7ceab76866b3"
+SRC_URI[md5sum] = "f915c788749b3e29b5aae15504beac78"
+SRC_URI[sha256sum] = "07733899b22cb01814199be3f8c4a4cfcbd4a3479aeef8558cb9d7a8b7449833"
 
 SRC_URI += "file://0001-Do-not-search-for-Qt5X11Extras-in-x-less-environment.patch"
 

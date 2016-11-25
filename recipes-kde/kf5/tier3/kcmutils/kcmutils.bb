@@ -9,7 +9,7 @@ inherit kde-kf5
 DEPENDS += "kitemviews kconfigwidgets kcoreaddons ki18n kiconthemes kservice kxmlgui kdeclarative"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "ae53fa18d7dd319afd7f65355581bfc3"
-SRC_URI[sha256sum] = "ddc141af1d58b44e906d5f08a0712d84b96a254518227c4114fa2b331068cb12"
+SRC_URI[md5sum] = "5cd7908f7bb316f6c41bf42dfaa33c76"
+SRC_URI[sha256sum] = "4a99e11bfff6b77acc6b45b05a8557df2ce66c4593276f4649f8ac3f7d714372"
 
 FILES_${PN} += "${datadir}/kservicetypes5"

@@ -10,8 +10,8 @@ inherit kde-kf5
 DEPENDS += "karchive kconfig kservice kcoreaddons"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "9eecf81c6bb1c06529ed51f172a44fc1"
-SRC_URI[sha256sum] = "98a7bc195e82f36eae2b4025010dad19695659d3a005d34df1b13747c7135c66"
+SRC_URI[md5sum] = "c6330f659f9c70c0c2ed139d07564dc8"
+SRC_URI[sha256sum] = "dbaf7ba6814f8f7a5d00053aa452e2a8cd580738a0219702796be97570aa1d83"
 
 FILES_${PN} += " \
     ${datadir}/emoticons \
