@@ -11,8 +11,7 @@ DEPENDS += " \
     virtual/egl \
     libinput \
 "
-SRC_URI = " \
-    git://github.com/greenisland/${BPN}.git;protocol=git;branch=master \
+SRC_URI += " \
     file://0001-find-native-greenisland-wayland-scanner.patch \
     file://0002-compositorlauncher-work-corrrectly-with-RaspberryPi-.patch \
 "

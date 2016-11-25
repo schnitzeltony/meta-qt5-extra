@@ -10,10 +10,10 @@ LIC_FILES_CHKSUM = " \
 inherit hawaii pythonnative pkgconfig
 
 SRC_URI = " \
-    git://github.com/greenisland/${BPN}.git;protocol=git;branch=master \
+    git://github.com/greenisland/${BPN}.git;protocol=git;branch=develop \
 "
 
-SRCREV = "2ef91aa2756ab4455274f47c290d0f274e1ef226"
+SRCREV = "10e55c545177d037769e277bdbd8b4e3008f285d"
 PV = "0.8.1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
