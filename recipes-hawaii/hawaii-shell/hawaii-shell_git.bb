@@ -46,6 +46,7 @@ RDEPENDS_${PN} = "qttools-tools qtwayland-plugins"
 
 # REVISIT optionals
 RRECOMMENDS_${PN} += " \
+    fluid \
     hawaii-wallpapers \
     hawaii-icon-theme \
 "
