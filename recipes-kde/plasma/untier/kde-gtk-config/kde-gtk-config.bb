@@ -20,8 +20,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "27124671877ab154355d9debdb1a21cc"
-SRC_URI[sha256sum] = "6d548f2143c0f7f2624aa857cb54c79a40cdb868942f68ab487eac86fef47d78"
+SRC_URI[md5sum] = "2620e8f308e860e507345a4e434f5229"
+SRC_URI[sha256sum] = "c4366e00569d8d9159ca05d183e48a1fcb5aa2e97b3851d9ca89ca31373f5c96"
 
 SRC_URI += "file://0001-fix-for-gtk2-only-and-gtk3-only-environments.patch"
 
