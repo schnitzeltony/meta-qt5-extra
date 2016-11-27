@@ -1,0 +1,58 @@
+From 6fa680366dcfb6aa5e9121ed0759a81f9d6f6393 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 27 Nov 2016 21:52:14 +0100
+Subject: [PATCH] do nor try run for float / sse detection
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ configure.ac | 19 +++----------------
+ 1 file changed, 3 insertions(+), 16 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 99b3e5a..35416ff 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -564,14 +564,7 @@ fi
+ AC_SUBST(ac_lrelease)
+ 
+ 
+-# Check for IEEE 32bit float optimizations.
+-AC_CACHE_CHECK([for IEEE 32bit float optimizations],
+-   ac_cv_float32, [
+-   AC_TRY_RUN([
+-      int main() { return (sizeof(float) == 4 ? 0 : 1); }
+-   ], ac_cv_float32="yes", ac_cv_float32="no")
+-])
+-ac_float32=$ac_cv_float32
++ac_float32=yes
+ if test "x$ac_float32" = "xyes"; then
+    AC_DEFINE(CONFIG_FLOAT32, 1, [Define if IEEE 32bit float optimizations are enabled.])
+ fi
+@@ -585,19 +578,13 @@ if test "x$ac_sse" = "xyes"; then
+    CPPFLAGS="$ac_sse_cflags $CPPFLAGS"
+    AC_CACHE_CHECK([for SSE optimization],
+       ac_cv_sse, [
+-      AC_TRY_RUN([
++      AC_TRY_COMPILE([
+          #include <xmmintrin.h>
+          #if !defined(__SSE__)
+          #error SSE optimization disabled.
+          #endif
+          int main() {
+-            unsigned int a, b, c, d;
+-            __asm__ __volatile__ (
+-              "movl %%ebx, %%esi\n\t" \
+-              "cpuid\n\t" \
+-              "xchgl %%ebx, %%esi" \
+-              : "=a" (a), "=S" (b), "=c" (c), "=d" (d) : "0" (1));
+-            return ((d & (1 << 25)) ? 0 : 1);
++            return 0;
+          }
+       ], ac_cv_sse="yes", ac_cv_sse="no")
+    ])
+-- 
+2.5.5
+
