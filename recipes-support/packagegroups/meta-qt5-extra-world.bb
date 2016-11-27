@@ -20,13 +20,27 @@ RDEPENDS_${PN} = " \
     qtiohelper \
     \
     chromaprint \
+    drumkv1 \
     drumstick\
+    ftgl \
     ladspa-sdk \
+    libmp4v2 \
+    libvisual \
+    libxmp \
+    lmms \
+    lv2 \
     mixxx \
+    portmidi \
+    projectm \
+    qjackctl \
     qmmp \
+    qsynth \
     qt-gstreamer \
+    qtractor \
     rubberband \
+    samplv1 \
     soundtouch \
+    synthv1 \
     timidity++ \
     vamp-plugin-sdk \
     \
