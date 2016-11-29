@@ -10,6 +10,7 @@ DEPENDS += " \
     lilv \
     libmad \
     rubberband \
+    dssi \
 "
 
 inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache
