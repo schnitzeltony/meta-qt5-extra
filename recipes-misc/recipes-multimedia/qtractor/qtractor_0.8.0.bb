@@ -7,7 +7,7 @@ DEPENDS += " \
     qtbase \
     qtx11extras \
     jack \
-    lv2 \
+    lilv \
     libmad \
     rubberband \
 "
