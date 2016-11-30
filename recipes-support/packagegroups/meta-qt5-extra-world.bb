@@ -22,11 +22,15 @@ RDEPENDS_${PN} = " \
     chromaprint \
     drumkv1 \
     drumstick\
+    dssi \
     ftgl \
+    hexter \
     ladspa-sdk \
+    liblo \
     libmp4v2 \
     libvisual \
     libxmp \
+    lilv \
     lmms \
     lv2 \
     mixxx \
@@ -39,7 +43,10 @@ RDEPENDS_${PN} = " \
     qtractor \
     rubberband \
     samplv1 \
+    serd \
+    sord \
     soundtouch \
+    sratom \
     synthv1 \
     timidity++ \
     vamp-plugin-sdk \
