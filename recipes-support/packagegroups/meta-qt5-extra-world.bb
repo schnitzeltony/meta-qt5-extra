@@ -50,6 +50,7 @@ RDEPENDS_${PN} = " \
     synthv1 \
     timidity++ \
     vamp-plugin-sdk \
+    whysynth \
     \
     exiv2 \
     grantlee \
