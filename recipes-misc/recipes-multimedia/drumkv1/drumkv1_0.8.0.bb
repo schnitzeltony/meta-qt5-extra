@@ -7,6 +7,7 @@ DEPENDS += " \
     qtbase \
     jack \
     lv2 \
+    liblo \
 "
 
 inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache
