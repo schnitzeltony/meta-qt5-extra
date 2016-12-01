@@ -27,6 +27,7 @@ DEPENDS += " \
     kxmlgui \
     knotifications \
     kpackage \
+    kwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 
