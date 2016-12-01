@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ebc7934238811c788037421c6c548ddf"
 
 inherit waf
 
-DEPENDS += "serd sord"
+DEPENDS += "lv2 serd sord"
 
 SRC_URI = "http://download.drobilla.net/${BPN}-${PV}.tar.bz2"
 SRC_URI[md5sum] = "76f085e6d41bba57f4dc2a5ffeff9dde"
