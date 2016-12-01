@@ -10,6 +10,7 @@ DEPENDS += " \
     libsndfile1 \
     libsamplerate0 \
     liblo \
+    ladspa-sdk \
 "
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
