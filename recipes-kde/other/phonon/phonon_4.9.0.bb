@@ -6,12 +6,13 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-base
 
+SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}.tar.xz"
 SRC_URI += " \
     file://0001-fix-PHONON_LIBRARY_PATH-was-usr-usr-lib-qt5-plugins.patch \
-    file://fix-qt-5.4.2-or-newer.patch \
+    file://fix-qt-5.8-build.patch \
 "
-SRC_URI[md5sum] = "88bb9867261803eed61ff53a7c026338"
-SRC_URI[sha256sum] = "a1149c961ca1570968d070bbd23671e614aa506f847ca93748960e309f85da16"
+SRC_URI[md5sum] = "8abeb7b1eaf4935668c7fb441fc2491a"
+SRC_URI[sha256sum] = "bb74b40f18ade1d9ab89ffcd7aeb7555be797ca395f1224c488b394da6deb0e0"
 
 EXTRA_OECMAKE += "-DPHONON_BUILD_DEMOS=ON -DPHONON_BUILD_PHONON4QT5=ON -D__KDE_HAVE_GCC_VISIBILITY=NO"
 
@@ -26,4 +27,4 @@ FILES_${PN}-designer-plugin = "${OE_QMAKE_PATH_PLUGINS}/designer"
 FILES_${PN}-designer-plugin-dbg = "${OE_QMAKE_PATH_PLUGINS}/designer/.debug"
 
 FILES_${PN} += "${datadir}/dbus-1"
-FILES_${PN}-dev += "${datadir}${QT_DIR_NAME}/mkspecs ${datadir}/phonon4qt5/buildsystem"
+FILES_${PN}-dev += "${datadir}/qt5/mkspecs ${OE_QMAKE_PATH_ARCHDATA}/mkspecs ${datadir}/phonon4qt5/buildsystem"
