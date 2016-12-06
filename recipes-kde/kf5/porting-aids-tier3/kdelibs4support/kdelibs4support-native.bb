@@ -8,6 +8,7 @@ DEPENDS += " \
     kconfig-native \
     kcoreaddons-native \
     ki18n-native \
+    liburi-perl-native \
 "
 
 SRC_URI += " \
