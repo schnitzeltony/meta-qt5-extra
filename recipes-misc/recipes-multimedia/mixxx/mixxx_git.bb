@@ -3,13 +3,14 @@ HOMEPAGE = "http://mixxx.org/"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bb18019490a2ef1942831060527e3feb"
 
-inherit scons
+inherit scons qmake5_paths
 
 DEPENDS += " \
     qtbase \
     qtscript \
     qtsvg \
     qtxmlpatterns \
+    qttools-native \
     libusb1 \
     hidapi \
     upower \
@@ -21,7 +22,7 @@ DEPENDS += " \
     libmp4v2 \
     libogg \
     libvorbis \
-    protobuf \
+    protobuf protobuf-native \
     fftw \
     portaudio-v19 \
     portmidi \
@@ -36,6 +37,7 @@ SRC_URI = " \
     git://github.com/mixxxdj/${BPN}.git \
     file://0001-do-not-check-for-known-machine-types.patch \
     file://0002-force-using-system-soundtouch.patch \
+    file://0003-align-path-of-qt-build-tools-to-our-needs.patch \
 "
 SRCREV = "14e10b29b57ae46ff8bb9ac0b815f8a4cb475848"
 S = "${WORKDIR}/git"
@@ -50,13 +52,13 @@ EXTRA_OESCONS += " \
     target=linux \
     machine=${TARGET_ARCH} \
     qt5=1 \
+    qtdir=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS} \
     shoutcast=0 \
     localecompare=0 \
     faad=1 \
     ${EXTRA_OESCONS_GL} \
 "
 #    perftools=1
-
 
 do_install_prepend() {
     install -d ${D}${prefix}

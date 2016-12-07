@@ -1,0 +1,31 @@
+From 5c81f8bf6b60dbc289ec0ad7657362bec169a35b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 7 Dec 2016 18:33:04 +0100
+Subject: [PATCH] align path of qt build tools to our needs
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ build/qt5.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/build/qt5.py b/build/qt5.py
+index aa70a42..da96996 100644
+--- a/build/qt5.py
++++ b/build/qt5.py
+@@ -704,7 +704,7 @@ def generate(env):
+     def locateQt5Command(env, command, qtdir) :
+         triedPaths = []
+         for suffix in suffixes :
+-            fullpath = os.path.join(qtdir,'bin',command + suffix)
++            fullpath = os.path.join(qtdir,command + suffix)
+             if os.access(fullpath, os.X_OK) :
+                 return fullpath
+             triedPaths.append(fullpath)
+-- 
+2.7.4
+
