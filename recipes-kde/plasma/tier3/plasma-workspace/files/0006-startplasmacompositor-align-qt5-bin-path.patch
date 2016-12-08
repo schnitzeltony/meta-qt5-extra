@@ -1,7 +1,7 @@
-From 13f3dc717f866f51795f257ccfbe1c90b523e96d Mon Sep 17 00:00:00 2001
+From 3fabfaa8f0beb09513bf0dd770f6273682edd12a Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Mon, 15 Aug 2016 22:43:04 +0200
-Subject: [PATCH] startplasmacompositor: add qt5 bin path to PATH
+Subject: [PATCH] startplasmacompositor: align qt5 bin path
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -10,11 +10,11 @@ Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- startkde/startplasmacompositor.cmake | 16 +++++-----------
- 1 file changed, 5 insertions(+), 11 deletions(-)
+ startkde/startplasmacompositor.cmake | 16 ++++------------
+ 1 file changed, 4 insertions(+), 12 deletions(-)
 
 diff --git a/startkde/startplasmacompositor.cmake b/startkde/startplasmacompositor.cmake
-index 535d1c1..6f43f50 100644
+index 5bcf26a..6252d79 100644
 --- a/startkde/startplasmacompositor.cmake
 +++ b/startkde/startplasmacompositor.cmake
 @@ -4,17 +4,9 @@
@@ -38,6 +38,15 @@ index 535d1c1..6f43f50 100644
  
  # We need to create config folder so we can write startupconfigkeys
  if [  ${XDG_CONFIG_HOME} ]; then
+@@ -148,7 +140,7 @@ fi
+ # better use the Autostart folder.
+ 
+ # TODO: Use GenericConfigLocation once we depend on Qt 5.4
+-scriptpath=`qtpaths --paths ConfigLocation | tr ':' '\n' | sed 's,$,/plasma-workspace,g'`
++scriptpath=`@CMAKE_INSTALL_FULL_BINDIR@/qt5/qtpaths --paths ConfigLocation | tr ':' '\n' | sed 's,$,/plasma-workspace,g'`
+ 
+ # Add /env/ to the directory to locate the scripts to be sourced
+ for prefix in `echo $scriptpath`; do
 -- 
-2.5.5
+2.7.4
 

@@ -50,7 +50,7 @@ SRC_URI += " \
     file://0003-startkde-add-meta-qt5-standard-binary-path-to-PATH.patch \
     file://0004-startkde-create-kde-s-home.patch \
     file://0005-startkde-enable-starting-X.patch \
-    file://0006-startplasmacompositor-add-qt5-bin-path-to-PATH.patch \
+    file://0006-startplasmacompositor-align-qt5-bin-path.patch \
 "
 
 # REVISIT
