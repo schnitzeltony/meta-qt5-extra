@@ -30,7 +30,7 @@ do_compile_append() {
 PACKAGECONFIG ??= " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xwayland", "",d)} \
 "
-PACKAGECONFIG[xwayland] = "-DENABLE_XWAYLAND=ON,-DENABLE_XWAYLAND=OFF,libxcb"
+PACKAGECONFIG[xwayland] = "-DENABLE_XWAYLAND=ON,-DENABLE_XWAYLAND=OFF,libxcb,xserver-xorg-xwayland"
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "GreenIsland, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
