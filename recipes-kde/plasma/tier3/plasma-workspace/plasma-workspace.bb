@@ -94,7 +94,7 @@ FILES_${PN}-dev = " \
     ${libdir}/liblegacytaskmanager.so \
 "
 
-# startkde requires:
+# startkde/startplasmacompositor require:
 RDEPENDS_${PN} += " \
     xinit \
     xset \
@@ -102,4 +102,5 @@ RDEPENDS_${PN} += " \
     kconfig-bin \
     kinit \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsetroot xmessage xprop", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland", "xserver-xorg-xwayland", "", d)} \
 "
