@@ -34,7 +34,8 @@ PACKAGECONFIG[xwayland] = "-DENABLE_XWAYLAND=ON,-DENABLE_XWAYLAND=OFF,libxcb,xse
 
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "GreenIsland, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "GreenIsland, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[2] = "GreenIsland, -S;${base_libdir}/lib, -S;${STAGING_BASELIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[3] = "GreenIsland, -S${includedir}, -S${STAGING_INCDIR}"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
