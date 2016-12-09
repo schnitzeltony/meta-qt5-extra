@@ -9,6 +9,9 @@ LIC_FILES_CHKSUM = " \
 
 inherit hawaii pythonnative pkgconfig
 
+DEPENDS += " \
+    extra-cmake-modules-native \
+"
 SRC_URI = " \
     git://github.com/greenisland/${BPN}.git;protocol=git;branch=develop \
 "
