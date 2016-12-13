@@ -1,0 +1,51 @@
+From 7fb3f68ad7d5f9c46afc95e8e067e3ee03857c1c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 14 Dec 2016 00:07:33 +0100
+Subject: [PATCH] native: build and install qrcAlias only
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6d2a06c..2bef486 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -26,7 +26,8 @@ if(BINARY_ICONS_RESOURCE)
+     find_package(Qt5 NO_MODULE REQUIRED Core)
+     add_executable(qrcAlias qrcAlias.cpp)
+     target_link_libraries(qrcAlias PUBLIC Qt5::Core)
+-
++    install(TARGETS qrcAlias DESTINATION "${CMAKE_INSTALL_BINDIR}")
++if(False)
+ function(generate_binary_resource target outfile)
+     set(RESOURCES_WORKING_DIR ${CMAKE_CURRENT_BINARY_DIR}/res)
+     set(RESOURCE_FILE ${RESOURCES_WORKING_DIR}/breeze-${target}.qrc)
+@@ -63,6 +64,7 @@ function(generate_binary_resource target outfile)
+     set(${outfile} ${BINARY_RESOURCE_FILE} PARENT_SCOPE)
+ endfunction()
+ endif()
++endif()
+ 
+ find_program(BASH_EXE bash)
+ if (BASH_EXE)
+@@ -74,8 +76,10 @@ if (BASH_EXE)
+     )
+ endif()
+ 
++if(False)
+ add_subdirectory(autotests)
+ add_subdirectory(icons)
+ add_subdirectory(icons-dark)
++endif()
+ 
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+-- 
+2.5.5
+

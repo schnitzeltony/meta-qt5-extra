@@ -10,5 +10,5 @@ inherit kde-kf5
 DEPENDS += "avahi"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "c682939017dc4ad5dee2b3e362d40fa0"
-SRC_URI[sha256sum] = "1940abb275db1c45d179f207913dfbea0fec27f14a79b5f234cad1873e7378be"
+SRC_URI[md5sum] = "83a1653f9b8d33e47820541ed0c584ab"
+SRC_URI[sha256sum] = "4aee47cb9229302e9075159654859ed0e2342952b5d880c0163e0ef26cf9e3ad"

@@ -7,8 +7,8 @@ inherit kde-kf5
 DEPENDS += "qtdeclarative kconfig kcoreaddons ki18n kio kservice plasma-framework solid threadweaver"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "0c44e78e610504ee8b2f2e5f040c602c"
-SRC_URI[sha256sum] = "295fe3cf3feb4a905ad9075739ddc442f9512b0465bc2d68201f24c0dfcdabd6"
+SRC_URI[md5sum] = "32aca2b360f3fd8cd98de94d778bf11e"
+SRC_URI[sha256sum] = "1d8fa44211300c28471098fa97f987899858343845be79bfb966049586a05fce"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
