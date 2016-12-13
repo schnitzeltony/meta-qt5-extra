@@ -25,8 +25,10 @@ TIER_1 = " \
     kwindowsystem \
     modemmanager-qt \
     networkmanager-qt \
+    prison \
     solid \
     sonnet \
+    syntax-highlighting \
     threadweaver \
 "
 
