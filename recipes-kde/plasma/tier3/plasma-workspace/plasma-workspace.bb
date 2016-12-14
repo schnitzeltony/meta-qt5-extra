@@ -31,6 +31,7 @@ DEPENDS += " \
     kdelibs4support \
     kxmlrpcclient \
     kcrash \
+    prison \
     networkmanager-qt \
     libksysguard \
     libkscreen \
