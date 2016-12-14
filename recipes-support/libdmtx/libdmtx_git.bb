@@ -1,6 +1,6 @@
 SUMMARY = "libdmtx is a library for reading and writing Data Matrix barcodes"
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=625f055f41728f84a8d7938acc35bdc2"
+LICENSE = "BSD-2-Clause"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=1c8a135723039c12792b01a2c688251b"
 
 inherit autotools pkgconfig
 
