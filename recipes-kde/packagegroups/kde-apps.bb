@@ -6,6 +6,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     ark \
+    baloo-widgets \
     dolphin \
     dolphin-plugins \
     dragon \
@@ -17,15 +18,19 @@ RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
     kdf \
     khelpcenter \
+    kio-extras \
     kmix \
     kolourpaint \
     konsole \
+    krita \
     ksystemlog \
     kwalletmanager \
+    libkexiv2 \
     lokalize \
     marble \
     minuet \
     okteta \
+    oxygen-icons \
     spectacle \
     umbrello \
 "

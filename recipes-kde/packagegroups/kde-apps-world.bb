@@ -7,7 +7,4 @@ inherit packagegroup
 RDEPENDS_${PN} = " \
     kde-apps \
     kde-games \
-    baloo-widgets \
-    kio-extras \
-    oxygen-icons \
 "
