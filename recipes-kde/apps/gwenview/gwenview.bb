@@ -19,13 +19,12 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "bc094c329acfd145e0767e3e03a6fba3"
-SRC_URI[sha256sum] = "a31fa161d657ad89e659360956660bfc679e3e97e0f3d38664d5380e59695688"
+SRC_URI[md5sum] = "a34c7ef9c17b45ae0b7903c7a4b091a9"
+SRC_URI[sha256sum] = "d6ca5a4c27cd1390eb2180da87fac6d23fa3bc2a86562926630e136096c31f5f"
 
 SRC_URI += " \
-    file://0001-Fix-package-name.patch  \
-    file://0002-Set-Kipi-package-properties.patch  \
-    file://0003-Avoid-try_run.patch \
+    file://0001-Set-Kipi-package-properties.patch  \
+    file://0002-Avoid-try_run.patch \
 "
 
 CXXFLAGS += "-isystem ${STAGING_INCDIR}/phonon4qt5/KDE"

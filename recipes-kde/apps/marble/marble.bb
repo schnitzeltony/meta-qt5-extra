@@ -28,12 +28,14 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "23cb0d66bde02cd6c1f99f2de77a21ae"
-SRC_URI[sha256sum] = "1c2d3263a55cde6511b703548399f48a1d9d0c33cb57283cc304d07189e8aa53"
+SRC_URI[md5sum] = "bb38cb17158abe2e02d8155562d2d4ca"
+SRC_URI[sha256sum] = "1d4167254399556ee1ed89920047f27ecab92e280a171eb51be60ba330e7171a"
 SRC_URI += "file://0001-align-path-of-designer-plugins.patch"
 
+EXTRA_OECMAKE += "-DMARBLE_PRI_INSTALL_DIR=${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/modules"
+
 PACKAGES =+ " \
-    ${PN}-mobile ${PN}-qt ${PN}-touch \
+    ${PN}-qt \
     ${PN}-designer-plugin-dbg ${PN}-designer-plugin \
 "
 
@@ -43,17 +45,17 @@ CMAKE_ALIGN_SYSROOT[2] = "Astro, -S${includedir}, -s${_IMPORT_PREFIX}/include"
 FILES_SOLIBSDEV = ""
 
 FILES_${PN}-dev += "${libdir}/libastro.so ${libdir}/libmarblewidget-qt5.so"
-FILES_${PN}-mobile = "${bindir}/${BPN}-mobile"
 FILES_${PN}-qt = "${bindir}/${BPN}-qt"
-FILES_${PN}-touch = "${bindir}/${BPN}-touch"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/icons \
     ${datadir}/k*5 \
     ${datadir}/mime \
+    ${datadir}/plasma \
     ${libdir}/libmarbledeclarative.so \
     ${OE_QMAKE_PATH_PLUGINS} \
+    ${OE_QMAKE_PATH_QML} \
 "
 
 FILES_${PN}-dbg += " \

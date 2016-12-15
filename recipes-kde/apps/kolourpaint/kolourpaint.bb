@@ -20,11 +20,12 @@ DEPENDS += "\
     knotifications \
     kwidgetsaddons \
     kxmlgui \
+    libkexiv2 \
 " 
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "1c21e7c87886beca31a90d5d5337ca57"
-SRC_URI[sha256sum] = "db2fb22b4620519d733019e5c18c7dec2e71fd7695647beaa61e72982d0afb45"
+SRC_URI[md5sum] = "2a544eb95709c73cc9a16416ee5e5869"
+SRC_URI[sha256sum] = "8e5644951d3327329b45cec28519796a8866e2276d046278a523ce00456f5775"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

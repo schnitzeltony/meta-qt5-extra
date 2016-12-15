@@ -44,8 +44,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "757265320841382f52f8edc08fc55b86"
-SRC_URI[sha256sum] = "b313aaa72c0b945ab2eaacf285f9eb8f1a7a23f05a62a033e9c6e13d8e9ea5e5"
+SRC_URI[md5sum] = "3988cabcb1a6c641b07921b24b133859"
+SRC_URI[sha256sum] = "7d34ae5a2527c258a37f9a5aea3ef9ad0444009e70878b750d7195bdf0ef9d3c"
 
 FILES_${PN} += " \
     ${datadir}/kio_bookmarks \
