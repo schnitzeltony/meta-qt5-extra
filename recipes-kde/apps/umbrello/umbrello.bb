@@ -10,6 +10,7 @@ inherit kde-apps gtk-icon-cache
 
 DEPENDS += " \
     qtsvg \
+    qtwebkit \
     \
     karchive \
     kcompletion \
