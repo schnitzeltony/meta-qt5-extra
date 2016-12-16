@@ -45,6 +45,3 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML}/org \
 "
-
-FILES_${PN}-dbg += " \
-"
