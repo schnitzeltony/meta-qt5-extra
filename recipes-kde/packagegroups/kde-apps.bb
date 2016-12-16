@@ -30,6 +30,7 @@ RDEPENDS_${PN} = " \
     marble \
     minuet \
     okteta \
+    okular \
     oxygen-icons \
     spectacle \
     umbrello \
