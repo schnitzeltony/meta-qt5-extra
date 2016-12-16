@@ -25,6 +25,7 @@ RDEPENDS_${PN} = " \
     krita \
     ksystemlog \
     kwalletmanager \
+    kwave \
     libkexiv2 \
     lokalize \
     marble \
