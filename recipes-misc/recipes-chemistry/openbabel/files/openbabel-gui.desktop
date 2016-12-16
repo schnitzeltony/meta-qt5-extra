@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=OpenBabel
+GenericName=Molecule Format Converter
+Comment=Convert between many known molecule data formats
+Exec=obgui
+Icon=babel
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Education;Science;Chemistry;Physics;Biology;
+
+Name[en_US]=openbabel-gui

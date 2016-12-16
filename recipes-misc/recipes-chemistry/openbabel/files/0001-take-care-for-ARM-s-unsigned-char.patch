@@ -1,0 +1,58 @@
+From 52851a453a1da3452d55e44f13323389b3a689c2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 16 Dec 2016 18:39:34 +0100
+Subject: [PATCH] take care for ARM's unsigned char
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Stolen from [1]
+
+[1] http://pkgs.fedoraproject.org/cgit/rpms/openbabel.git/tree/openbabel-narrowing-conversion.patch
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/formats/pngformat.cpp    | 2 +-
+ src/formats/yasaraformat.cpp | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/formats/pngformat.cpp b/src/formats/pngformat.cpp
+index 49bff17..375d42c 100644
+--- a/src/formats/pngformat.cpp
++++ b/src/formats/pngformat.cpp
+@@ -218,7 +218,7 @@ bool PNGFormat::ReadMolecule(OBBase* pOb, OBConversion* pConv)
+     _count=0;
+     _hasInputPngFile=true;
+   }
+-  const char pngheader[] = {-119,80,78,71,13,10,26,10,0};
++  const signed char pngheader[] = {-119,80,78,71,13,10,26,10,0};
+   char readbytes[9];
+   ifs.read(readbytes, 8);
+ 
+diff --git a/src/formats/yasaraformat.cpp b/src/formats/yasaraformat.cpp
+index cfc0a53..5a4d413 100644
+--- a/src/formats/yasaraformat.cpp
++++ b/src/formats/yasaraformat.cpp
+@@ -472,7 +472,7 @@ bool YOBFormat::WriteMolecule(OBBase* pOb, OBConversion* pConv)
+ 
+   //  bool hetatom;
+   char buffer[32],/*resname[4],*/atomname[5];
+-  char double1[8]={0,0,0,0,0,0,-16,0x3f};
++  const signed char double1[8]={0,0,0,0,0,0,-16,0x3f};
+   //   char *str;
+   int i,j,/*m,q,*/pos;
+   int /*resno,chainNum,link,linktype,*/atoms,element,links/*,chain*/;
+@@ -500,7 +500,7 @@ bool YOBFormat::WriteMolecule(OBBase* pOb, OBConversion* pConv)
+   mem_set(buffer,0,8);
+   for (i=0;i<4;i++)
+   { for (j=0;j<4;j++)
+-    { if (i==j) ofs.write(double1,8);
++    { if (i==j) ofs.write(reinterpret_cast<const char*>(double1),8);
+       else ofs.write(buffer,8); } }
+   storeint32le(buffer,MOB_INFOEND);
+   storeint32le(&buffer[4],MOB_INFOENDSIZE);
+-- 
+2.5.5
+
