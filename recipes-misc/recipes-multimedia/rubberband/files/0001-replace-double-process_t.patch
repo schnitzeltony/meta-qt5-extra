@@ -1,0 +1,33 @@
+From 305ecda9ccc039e95129a17a46ebdc3a90e2c912 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 26 Dec 2016 21:09:09 +0100
+Subject: [PATCH] replace double->process_t
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+fixes builds for -DPROCESS_SAMPLE_TYPE=float
+
+Upstram-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/StretcherProcess.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/StretcherProcess.cpp b/src/StretcherProcess.cpp
+index 36b224a..801029a 100644
+--- a/src/StretcherProcess.cpp
++++ b/src/StretcherProcess.cpp
+@@ -930,7 +930,7 @@ RubberBandStretcher::Impl::formantShiftChunk(size_t channel)
+ 
+     v_scale(dblbuf, factor, cutoff);
+ 
+-    double *spare = (double *)alloca((hs + 1) * sizeof(double));
++    process_t *spare = (process_t *)alloca((hs + 1) * sizeof(process_t));
+     cd.fft->forward(dblbuf, envelope, spare);
+ 
+     v_exp(envelope, hs + 1);
+-- 
+2.5.5
+
