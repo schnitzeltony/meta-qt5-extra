@@ -34,6 +34,7 @@ do_install_append() {
 
     install -d ${D}/${bindir}
     ln -s jack-dssi-host ${D}/${bindir}/hexter
+
     install -m 755 ${S}/extra/tx_edit ${D}/${bindir}
 }
 
