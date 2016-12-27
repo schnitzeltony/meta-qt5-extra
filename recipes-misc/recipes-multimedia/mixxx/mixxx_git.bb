@@ -38,6 +38,7 @@ SRC_URI = " \
     file://0001-do-not-check-for-known-machine-types.patch \
     file://0002-force-using-system-soundtouch.patch \
     file://0003-align-path-of-qt-build-tools-to-our-needs.patch \
+    file://0004-add-vamp-float-math-build-option-to-force-vamp-calcu.patch \
 "
 SRCREV = "14e10b29b57ae46ff8bb9ac0b815f8a4cb475848"
 S = "${WORKDIR}/git"
@@ -45,6 +46,10 @@ PV = "2.0.0+git${SRCPV}"
 
 EXTRA_OESCONS_GL ??= " \
     opengles=1 \
+"
+
+EXTRA_OESCONS_MATH ??= " \
+    vampfloatmath=1 \
 "
 
 EXTRA_OESCONS += " \
@@ -57,6 +62,7 @@ EXTRA_OESCONS += " \
     localecompare=0 \
     faad=1 \
     ${EXTRA_OESCONS_GL} \
+    ${EXTRA_OESCONS_MATH} \
 "
 #    perftools=1
 

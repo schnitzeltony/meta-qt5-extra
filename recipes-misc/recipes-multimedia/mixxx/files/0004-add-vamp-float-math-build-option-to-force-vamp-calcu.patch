@@ -1,0 +1,4009 @@
+From 47a367d5c9687bf49beb5a83b1a3fed3483b7a62 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 27 Dec 2016 15:33:26 +0100
+Subject: [PATCH] add vamp-float-math build option to force vamp calculations
+ single precision
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+On ARM platforms single precision performs better without significant
+loss of accuracy.
+
+* ~6min mp3 analyse was reduced from 74s downto 64s
+* Tunes displayed in log remained same for several files
+* Maximum tempo difference was 0.01 bpm
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ SConstruct                                        |   5 +-
+ build/features.py                                 |  24 +++-
+ vamp-plugins/dsp/chromagram/CQprecalc.cpp         |  26 +++--
+ vamp-plugins/dsp/chromagram/Chromagram.cpp        |  34 +++---
+ vamp-plugins/dsp/chromagram/Chromagram.h          |  34 +++---
+ vamp-plugins/dsp/chromagram/ConstantQ.cpp         |  76 ++++++-------
+ vamp-plugins/dsp/chromagram/ConstantQ.h           |  32 +++---
+ vamp-plugins/dsp/keydetection/GetKeyMode.cpp      |  52 ++++-----
+ vamp-plugins/dsp/keydetection/GetKeyMode.h        |  33 +++---
+ vamp-plugins/dsp/onsets/DetectionFunction.cpp     |  82 +++++++-------
+ vamp-plugins/dsp/onsets/DetectionFunction.h       |  48 ++++----
+ vamp-plugins/dsp/onsets/PeakPicking.cpp           |  24 ++--
+ vamp-plugins/dsp/onsets/PeakPicking.h             |  28 ++---
+ vamp-plugins/dsp/phasevocoder/PhaseVocoder.cpp    |  42 +++----
+ vamp-plugins/dsp/phasevocoder/PhaseVocoder.h      |  28 ++---
+ vamp-plugins/dsp/signalconditioning/DFProcess.cpp |  24 ++--
+ vamp-plugins/dsp/signalconditioning/DFProcess.h   |  23 ++--
+ vamp-plugins/dsp/signalconditioning/FiltFilt.cpp  |  10 +-
+ vamp-plugins/dsp/signalconditioning/FiltFilt.h    |   7 +-
+ vamp-plugins/dsp/signalconditioning/Filter.cpp    |   8 +-
+ vamp-plugins/dsp/signalconditioning/Filter.h      |  16 +--
+ vamp-plugins/dsp/signalconditioning/Framer.cpp    |  10 +-
+ vamp-plugins/dsp/signalconditioning/Framer.h      |  11 +-
+ vamp-plugins/dsp/tempotracking/DownBeat.cpp       |  20 ++--
+ vamp-plugins/dsp/tempotracking/DownBeat.h         |  17 +--
+ vamp-plugins/dsp/tempotracking/TempoTrack.cpp     | 132 +++++++++++-----------
+ vamp-plugins/dsp/tempotracking/TempoTrack.h       |  45 ++++----
+ vamp-plugins/dsp/tempotracking/TempoTrackV2.cpp   |  62 +++++-----
+ vamp-plugins/dsp/tempotracking/TempoTrackV2.h     |  40 +++----
+ vamp-plugins/dsp/transforms/FFT.cpp               |  30 ++---
+ vamp-plugins/dsp/transforms/FFT.h                 |  16 +--
+ vamp-plugins/maths/Correlation.cpp                |   6 +-
+ vamp-plugins/maths/Correlation.h                  |   4 +-
+ vamp-plugins/maths/CosineDistance.cpp             |   6 +-
+ vamp-plugins/maths/CosineDistance.h               |   5 +-
+ vamp-plugins/maths/KLDivergence.cpp               |  26 ++---
+ vamp-plugins/maths/KLDivergence.h                 |  13 ++-
+ vamp-plugins/maths/MathAliases.h                  |   9 +-
+ vamp-plugins/maths/MathUtilities.cpp              |  96 ++++++++--------
+ vamp-plugins/maths/MathUtilities.h                |  35 +++---
+ vamp-plugins/maths/Polyfit.h                      |  61 +++++-----
+ vamp-plugins/plugins/BarBeatTrack.cpp             |  26 +++--
+ vamp-plugins/plugins/BarBeatTrack.h               |   9 +-
+ vamp-plugins/plugins/BeatTrack.cpp                |  26 ++---
+ vamp-plugins/plugins/BeatTrack.h                  |   7 +-
+ vamp-plugins/plugins/KeyDetect.cpp                |   6 +-
+ vamp-plugins/plugins/KeyDetect.h                  |   3 +-
+ vamp-plugins/plugins/TonalChangeDetect.cpp        |  15 ++-
+ 48 files changed, 728 insertions(+), 664 deletions(-)
+
+diff --git a/SConstruct b/SConstruct
+index 301fd3d..7fc552a 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -63,8 +63,9 @@ available_features = [features.Mad,
+                       features.IPod,
+                       features.FFMPEG,
+ 
+-		     # Experimental features
+-		     features.OpenGLES
++                      # Experimental features
++                      features.OpenGLES,
++                      features.VampFloat
+                       ]
+ 
+ build = mixxx.MixxxBuild(target, machine, build_type,
+diff --git a/build/features.py b/build/features.py
+index e6ee0f9..5a7c0ad 100644
+--- a/build/features.py
++++ b/build/features.py
+@@ -26,6 +26,29 @@ class OpenGLES(Feature):
+     def sources(self, build):
+         return []
+ 
++
++class VampFloat(Feature):
++    def description(self):
++        return "Vamp single precision [Experimental]"
++
++    def enabled(self, build):
++        build.flags['vampfloatmath'] = util.get_flags(build.env, 'vampfloatmath', 0)
++        return int(build.flags['vampfloatmath'])
++
++    def add_options(self, build, vars):
++        vars.Add('vampfloatmath', 'Set to 1 to force single precision for vamp analysers [Experimental]', 0)
++
++    def configure(self, build, conf):
++        if self.enabled(build):
++            build.env.Append(CPPDEFINES='VAMP_FLOAT_MATH')
++            build.env.Append(CPPDEFINES='kiss_fft_scalar=float')
++        else:
++            build.env.Append(CPPDEFINES='kiss_fft_scalar=double')
++
++    def sources(self, build):
++        return []
++
++
+ class HSS1394(Feature):
+     def description(self):
+         return "HSS1394 MIDI device support"
+@@ -390,7 +413,6 @@ class Vamp(Feature):
+             return
+ 
+         build.env.Append(CPPDEFINES='__VAMP__')
+-        build.env.Append(CPPDEFINES='kiss_fft_scalar=double')
+ 
+         # If there is no system vamp-hostdk installed, then we'll directly link
+         # the vamp-hostsdk.
+diff --git a/vamp-plugins/dsp/chromagram/CQprecalc.cpp b/vamp-plugins/dsp/chromagram/CQprecalc.cpp
+index 96d41b5..43d031c 100644
+--- a/vamp-plugins/dsp/chromagram/CQprecalc.cpp
++++ b/vamp-plugins/dsp/chromagram/CQprecalc.cpp
+@@ -6,6 +6,8 @@
+ // ifdef it out, just in case...
+ 
+ #include <vector>
++#include "maths/MathAliases.h"
++
+ using std::vector;
+ static unsigned int sk_i_76_16384[5818] = {
+     1301, 1302, 1303, 1304, 1305, 1306, 1307, 1308, 
+@@ -1467,7 +1469,7 @@ static unsigned int sk_j_76_16384[5818] = {
+     2, 2, 1, 1, 1, 1, 0, 0, 
+     0, 0
+ };
+-static double sk_real_76_16384[5818] = {
++static fl_t sk_real_76_16384[5818] = {
+     -2.98380368866392746083889085e-07, -3.396726812577747388223329324e-07, 
+     -3.831260220191425602085798403e-07, -4.287883740329997630272252859e-07, 
+     -4.767071767215039994072215291e-07, -5.269292761072692996208283699e-07, 
+@@ -4378,7 +4380,7 @@ static double sk_real_76_16384[5818] = {
+     -9.223924688472666074453426566e-06, -2.62740357136916911136737679e-05, 
+     -2.011971371315550584759138109e-05, -3.181257463964725953458603444e-06
+ };
+-static double sk_imag_76_16384[5818] = {
++static fl_t sk_imag_76_16384[5818] = {
+     -1.825221792065962184803640201e-07, -2.082073267903970926499330118e-07, 
+     -2.353062909868493366734700303e-07, -2.638514604822589222893997832e-07, 
+     -2.938748508324594157467861064e-07, -3.254080704368191661763893945e-07, 
+@@ -7289,7 +7291,7 @@ static double sk_imag_76_16384[5818] = {
+     -6.015162065217372746120123167e-06, -1.71418848289032934705672373e-05, 
+     -1.313154270639261426490470436e-05, -2.077650618608197017055409447e-06
+ };
+-static void push_76_16384(vector<unsigned int> &is, vector<unsigned int> &js, vector<double> &real, vector<double> &imag)
++static void push_76_16384(vector<unsigned int> &is, vector<unsigned int> &js, vector<fl_t> &real, vector<fl_t> &imag)
+ {
+     is.reserve(5818);
+     js.reserve(5818);
+@@ -8686,7 +8688,7 @@ static unsigned int sk_j_144_4096[5514] = {
+     1, 1, 1, 0, 0, 0, 0, 0, 
+     0, 0
+ };
+-static double sk_real_144_4096[5514] = {
++static fl_t sk_real_144_4096[5514] = {
+     -1.276854318074318983720840011e-06, -1.848579231831243740159201501e-06, 
+     -2.511229201739359953430598404e-06, -3.270498571947986431288123502e-06, 
+     -4.131824163225621270750277658e-06, -5.10033167801671453756321914e-06, 
+@@ -11445,7 +11447,7 @@ static double sk_real_144_4096[5514] = {
+     -2.507775120220060330691359829e-05, -2.17305528767511086827516481e-05, 
+     -1.15256739727669549376923297e-05, -2.964253839102821422372665075e-06
+ };
+-static double sk_imag_144_4096[5514] = {
++static fl_t sk_imag_144_4096[5514] = {
+     3.852361648279443537509791375e-07, 5.490052449345238505461447125e-07, 
+     7.349849741973374727698246033e-07, 9.442880096155110208338439616e-07, 
+     1.177951274237130525269676672e-06, 1.436924727685139301758916394e-06, 
+@@ -14204,7 +14206,7 @@ static double sk_imag_144_4096[5514] = {
+     0.0001284332347275661144123115598, 0.0001113490506780185517647988047, 
+     5.903971082771604638470344661e-05, 1.513580302365292566148507331e-05
+ };
+-static void push_144_4096(vector<unsigned int> &is, vector<unsigned int> &js, vector<double> &real, vector<double> &imag)
++static void push_144_4096(vector<unsigned int> &is, vector<unsigned int> &js, vector<fl_t> &real, vector<fl_t> &imag)
+ {
+     is.reserve(5514);
+     js.reserve(5514);
+@@ -18417,7 +18419,7 @@ static unsigned int sk_j_65_2048[16779] = {
+     2, 2, 2, 1, 1, 1, 1, 0, 
+     0, 0, 0
+ };
+-static double sk_real_65_2048[16779] = {
++static fl_t sk_real_65_2048[16779] = {
+     -2.548138930709444523809426822e-08, -2.1247586413145832150012191e-08, 
+     -1.678722298450883775146073233e-08, -1.209937589513242630076954071e-08, 
+     -7.183183625390783201200822078e-09, -2.03784723546205247808566852e-09, 
+@@ -26809,7 +26811,7 @@ static double sk_real_65_2048[16779] = {
+     -0.0002144701136411362400041591414, -0.0002195682557207893610771304305, 
+     -3.859081848650226283107059211e-05
+ };
+-static double sk_imag_65_2048[16779] = {
++static fl_t sk_imag_65_2048[16779] = {
+     -2.665529251635959592250067762e-06, -2.717000814822801218963339853e-06, 
+     -2.768097707302428943040590453e-06, -2.818812480404949057934908124e-06, 
+     -2.869137738782188844536506084e-06, -2.919066141390052772629790448e-06, 
+@@ -35201,7 +35203,7 @@ static double sk_imag_65_2048[16779] = {
+     2.941036399668936192428742027e-05, 2.980686894347843947958125177e-05, 
+     5.155515102046551195085280495e-06
+ };
+-static void push_65_2048(vector<unsigned int> &is, vector<unsigned int> &js, vector<double> &real, vector<double> &imag)
++static void push_65_2048(vector<unsigned int> &is, vector<unsigned int> &js, vector<fl_t> &real, vector<fl_t> &imag)
+ {
+     is.reserve(16779);
+     js.reserve(16779);
+@@ -38140,7 +38142,7 @@ static unsigned int sk_j_84_65536[11688] = {
+     2, 2, 2, 2, 1, 1, 1, 1, 
+     1, 1, 0, 0, 0, 0, 0, 0
+ };
+-static double sk_real_84_65536[11688] = {
++static fl_t sk_real_84_65536[11688] = {
+     -7.397597585818890266433903906e-08, -7.90402876292946252692017922e-08, 
+     -8.423836969089997767537827435e-08, -8.957174316065795383940860083e-08, 
+     -9.504192136817438780086944464e-08, -1.006504094633496332810993824e-07, 
+@@ -43986,7 +43988,7 @@ static double sk_real_84_65536[11688] = {
+     -6.684877866759907254277754685e-06, -5.723985786975308105088526556e-06, 
+     -2.037323873781822476609947373e-06, -9.125197483291080411455691631e-08
+ };
+-static double sk_imag_84_65536[11688] = {
++static fl_t sk_imag_84_65536[11688] = {
+     -4.655480713554488930281904349e-08, -4.976733655823976326531296686e-08, 
+     -5.306689833202148532653109523e-08, -5.645449803238407175246568303e-08, 
+     -5.993113604056783513545112818e-08, -6.349780728327434548225930268e-08, 
+@@ -49832,7 +49834,7 @@ static double sk_imag_84_65536[11688] = {
+     -4.326701123113231743709354571e-06, -3.704727434869093990451932238e-06, 
+     -1.31864263245586871123088326e-06, -5.90742303951375254115853451e-08
+ };
+-static void push_84_65536(vector<unsigned int> &is, vector<unsigned int> &js, vector<double> &real, vector<double> &imag)
++static void push_84_65536(vector<unsigned int> &is, vector<unsigned int> &js, vector<fl_t> &real, vector<fl_t> &imag)
+ {
+     is.reserve(11688);
+     js.reserve(11688);
+diff --git a/vamp-plugins/dsp/chromagram/Chromagram.cpp b/vamp-plugins/dsp/chromagram/Chromagram.cpp
+index a8597a5..13ba843 100644
+--- a/vamp-plugins/dsp/chromagram/Chromagram.cpp
++++ b/vamp-plugins/dsp/chromagram/Chromagram.cpp
+@@ -37,7 +37,7 @@ int Chromagram::initialise( ChromaConfig Config )
+     m_uK = ( unsigned int ) ceil( m_BPO * log(m_FMax/m_FMin)/log(2.0));	
+ 
+     // Create array for chroma result
+-    m_chromadata = new double[ m_BPO ];
++    m_chromadata = new fl_t[ m_BPO ];
+ 
+     // Create Config Structure for ConstantQ operator
+     CQConfig ConstantQConfig;
+@@ -60,10 +60,10 @@ int Chromagram::initialise( ChromaConfig Config )
+     // Initialise FFT object	
+     m_FFT = new FFTReal(m_frameSize);
+ 
+-    m_FFTRe = new double[ m_frameSize ];
+-    m_FFTIm = new double[ m_frameSize ];
+-    m_CQRe  = new double[ m_uK ];
+-    m_CQIm  = new double[ m_uK ];
++    m_FFTRe = new fl_t[ m_frameSize ];
++    m_FFTIm = new fl_t[ m_frameSize ];
++    m_CQRe  = new fl_t[ m_uK ];
++    m_CQIm  = new fl_t[ m_uK ];
+ 
+     m_window = 0;
+     m_windowbuf = 0;
+@@ -96,19 +96,19 @@ int Chromagram::deInitialise()
+ 
+ //----------------------------------------------------------------------------------
+ // returns the absolute value of complex number xx + i*yy
+-double Chromagram::kabs(double xx, double yy)
++fl_t Chromagram::kabs(fl_t xx, fl_t yy)
+ {
+-    double ab = sqrt(xx*xx + yy*yy);
++    fl_t ab = sqrt(xx*xx + yy*yy);
+     return(ab);
+ }
+ //-----------------------------------------------------------------------------------
+ 
+ 
+-void Chromagram::unityNormalise(double *src)
++void Chromagram::unityNormalise(fl_t *src)
+ {
+-    double min, max;
++    fl_t min, max;
+ 
+-    double val = 0;
++    fl_t val = 0;
+ 
+     MathUtilities::getFrameMinMax( src, m_BPO, & min, &max );
+ 
+@@ -121,7 +121,7 @@ void Chromagram::unityNormalise(double *src)
+ }
+ 
+ 
+-double* Chromagram::process( const double *data )
++fl_t* Chromagram::process( const fl_t *data )
+ {
+     if (!m_skGenerated) {
+         // Generate CQ Kernel 
+@@ -130,8 +130,8 @@ double* Chromagram::process( const double *data )
+     }
+ 
+     if (!m_window) {
+-        m_window = new Window<double>(HammingWindow, m_frameSize);
+-        m_windowbuf = new double[m_frameSize];
++        m_window = new Window<fl_t>(HammingWindow, m_frameSize);
++        m_windowbuf = new fl_t[m_frameSize];
+     }
+ 
+     for (int i = 0; i < m_frameSize; ++i) {
+@@ -144,7 +144,7 @@ double* Chromagram::process( const double *data )
+     return process(m_FFTRe, m_FFTIm);
+ }
+ 
+-double* Chromagram::process( const double *real, const double *imag )
++fl_t* Chromagram::process( const fl_t *real, const fl_t *imag )
+ {
+     if (!m_skGenerated) {
+         // Generate CQ Kernel 
+@@ -155,13 +155,13 @@ double* Chromagram::process( const double *real, const double *imag )
+     // initialise chromadata to 0
+     for (unsigned i = 0; i < m_BPO; i++) m_chromadata[i] = 0;
+ 
+-    double cmax = 0.0;
+-    double cval = 0;
++    fl_t cmax = 0.0;
++    fl_t cval = 0;
+     // Calculate ConstantQ frame
+     m_ConstantQ->process( real, imag, m_CQRe, m_CQIm );
+ 	
+     // add each octave of cq data into Chromagram
+-    const unsigned octaves = (int)floor(double( m_uK/m_BPO))-1;
++    const unsigned octaves = (int)floor(fl_t( m_uK/m_BPO))-1;
+     for (unsigned octave = 0; octave <= octaves; octave++) 
+     {
+ 	unsigned firstBin = octave*m_BPO;
+diff --git a/vamp-plugins/dsp/chromagram/Chromagram.h b/vamp-plugins/dsp/chromagram/Chromagram.h
+index bd928f5..289cff1 100644
+--- a/vamp-plugins/dsp/chromagram/Chromagram.h
++++ b/vamp-plugins/dsp/chromagram/Chromagram.h
+@@ -19,13 +19,15 @@
+ #include "dsp/transforms/FFT.h"
+ #include "base/Window.h"
+ #include "ConstantQ.h"
++#include "maths/MathAliases.h"
++
+ 
+ struct ChromaConfig{
+     unsigned int FS;
+-    double min;
+-    double max;
++    fl_t min;
++    fl_t max;
+     unsigned int BPO;
+-    double CQThresh;
++    fl_t CQThresh;
+     MathUtilities::NormaliseType normalise;
+ };
+ 
+@@ -36,12 +38,12 @@ public:
+     Chromagram( ChromaConfig Config );
+     ~Chromagram();
+ 	
+-    double* process( const double *data ); // time domain
+-    double* process( const double *real, const double *imag ); // frequency domain
+-    void unityNormalise( double* src );
++    fl_t* process( const fl_t *data ); // time domain
++    fl_t* process( const fl_t *real, const fl_t *imag ); // frequency domain
++    void unityNormalise( fl_t* src );
+ 
+     // Complex arithmetic
+-    double kabs( double real, double imag );
++    fl_t kabs( fl_t real, fl_t imag );
+ 	
+     // Results
+     unsigned int getK() { return m_uK;}
+@@ -52,12 +54,12 @@ private:
+     int initialise( ChromaConfig Config );
+     int deInitialise();
+ 
+-    Window<double> *m_window;
+-    double *m_windowbuf;
++    Window<fl_t> *m_window;
++    fl_t *m_windowbuf;
+ 	
+-    double* m_chromadata;
+-    double m_FMin;
+-    double m_FMax;
++    fl_t* m_chromadata;
++    fl_t m_FMin;
++    fl_t m_FMax;
+     unsigned int m_BPO;
+     unsigned int m_uK;
+ 
+@@ -69,10 +71,10 @@ private:
+     FFTReal* m_FFT;
+     ConstantQ* m_ConstantQ;
+ 
+-    double* m_FFTRe;
+-    double* m_FFTIm;
+-    double* m_CQRe;
+-    double* m_CQIm;
++    fl_t* m_FFTRe;
++    fl_t* m_FFTIm;
++    fl_t* m_CQRe;
++    fl_t* m_CQIm;
+ 
+     bool m_skGenerated;
+ };
+diff --git a/vamp-plugins/dsp/chromagram/ConstantQ.cpp b/vamp-plugins/dsp/chromagram/ConstantQ.cpp
+index b764235..10572ad 100644
+--- a/vamp-plugins/dsp/chromagram/ConstantQ.cpp
++++ b/vamp-plugins/dsp/chromagram/ConstantQ.cpp
+@@ -25,8 +25,8 @@
+ static bool push_precalculated(int uk, int fftlength,
+                                std::vector<unsigned> &is,
+                                std::vector<unsigned> &js,
+-                               std::vector<double> &real,
+-                               std::vector<double> &imag)
++                               std::vector<fl_t> &real,
++                               std::vector<fl_t> &imag)
+ {
+     if (uk == 76 && fftlength == 16384) {
+         push_76_16384(is, js, real, imag);
+@@ -50,12 +50,12 @@ static bool push_precalculated(int uk, int fftlength,
+ 
+ //---------------------------------------------------------------------------
+ // nextpow2 returns the smallest integer n such that 2^n >= x.
+-static double nextpow2(double x) {
+-    double y = ceil(log(x)/log(2.0));
++static fl_t nextpow2(fl_t x) {
++    fl_t y = ceil(log(x)/log(2.0));
+     return(y);
+ }
+ 
+-static double squaredModule(const double & xx, const double & yy) {
++static fl_t squaredModule(const fl_t & xx, const fl_t & yy) {
+     return xx*xx + yy*yy;
+ }
+ 
+@@ -91,10 +91,10 @@ void ConstantQ::sparsekernel()
+     //generates spectral kernel matrix (upside down?)
+     // initialise temporal kernel with zeros, twice length to deal w. complex numbers
+ 
+-    double* hammingWindowRe = new double [ m_FFTLength ];
+-    double* hammingWindowIm = new double [ m_FFTLength ];
+-    double* transfHammingWindowRe = new double [ m_FFTLength ];
+-    double* transfHammingWindowIm = new double [ m_FFTLength ];
++    fl_t* hammingWindowRe = new fl_t [ m_FFTLength ];
++    fl_t* hammingWindowIm = new fl_t [ m_FFTLength ];
++    fl_t* transfHammingWindowRe = new fl_t [ m_FFTLength ];
++    fl_t* transfHammingWindowIm = new fl_t [ m_FFTLength ];
+ 
+     for (unsigned u=0; u < m_FFTLength; u++) 
+     {
+@@ -113,7 +113,7 @@ void ConstantQ::sparsekernel()
+     // for each bin value K, calculate temporal kernel, take its fft to
+     //calculate the spectral kernel then threshold it to make it sparse and 
+     //add it to the sparse kernels matrix
+-    double squareThreshold = m_CQThresh * m_CQThresh;
++    fl_t squareThreshold = m_CQThresh * m_CQThresh;
+ 
+     FFT m_FFT(m_FFTLength);
+ 	
+@@ -126,22 +126,22 @@ void ConstantQ::sparsekernel()
+         }
+         
+ 	// Computing a hamming window
+-	const unsigned hammingLength = (int) ceil( m_dQ * m_FS / ( m_FMin * pow(2,((double)(k))/(double)m_BPO)));
++	const unsigned hammingLength = (int) ceil( m_dQ * m_FS / ( m_FMin * pow(2,((fl_t)(k))/(fl_t)m_BPO)));
+ 
+         unsigned origin = m_FFTLength/2 - hammingLength/2;
+ 
+ 	for (unsigned i=0; i<hammingLength; i++) 
+ 	{
+-	    const double angle = 2*PI*m_dQ*i/hammingLength;
+-	    const double real = cos(angle);
+-	    const double imag = sin(angle);
+-	    const double absol = hamming(hammingLength, i)/hammingLength;
++	    const fl_t angle = 2*PI*m_dQ*i/hammingLength;
++	    const fl_t real = cos(angle);
++	    const fl_t imag = sin(angle);
++	    const fl_t absol = hamming(hammingLength, i)/hammingLength;
+ 	    hammingWindowRe[ origin + i ] = absol*real;
+ 	    hammingWindowIm[ origin + i ] = absol*imag;
+ 	}
+ 
+         for (unsigned i = 0; i < m_FFTLength/2; ++i) {
+-            double temp = hammingWindowRe[i];
++            fl_t temp = hammingWindowRe[i];
+             hammingWindowRe[i] = hammingWindowRe[i + m_FFTLength/2];
+             hammingWindowRe[i + m_FFTLength/2] = temp;
+             temp = hammingWindowIm[i];
+@@ -156,10 +156,10 @@ void ConstantQ::sparsekernel()
+ 	for (unsigned j=0; j<( m_FFTLength ); j++) 
+ 	{
+ 	    // perform thresholding
+-	    const double squaredBin = squaredModule( transfHammingWindowRe[ j ], transfHammingWindowIm[ j ]);
++	    const fl_t squaredBin = squaredModule( transfHammingWindowRe[ j ], transfHammingWindowIm[ j ]);
+ 	    if (squaredBin <= squareThreshold) continue;
+ 		
+-	    // Insert non-zero position indexes, doubled because they are floats
++	    // Insert non-zero position indexes, fl_td because they are floats
+ 	    sk->is.push_back(j);
+ 	    sk->js.push_back(k);
+ 
+@@ -206,7 +206,7 @@ void ConstantQ::sparsekernel()
+ 
+     w = 2;
+     n = sk->real.size();
+-    cout << "static double sk_real_" << m_uK << "_" << m_FFTLength << "[" << n << "] = {" << endl;
++    cout << "static fl_t sk_real_" << m_uK << "_" << m_FFTLength << "[" << n << "] = {" << endl;
+     for (int i = 0; i < n; ++i) {
+         if (i % w == 0) cout << "    ";
+         cout << sk->real[i];
+@@ -217,7 +217,7 @@ void ConstantQ::sparsekernel()
+     cout << "};" << endl;
+ 
+     n = sk->imag.size();
+-    cout << "static double sk_imag_" << m_uK << "_" << m_FFTLength << "[" << n << "] = {" << endl;
++    cout << "static fl_t sk_imag_" << m_uK << "_" << m_FFTLength << "[" << n << "] = {" << endl;
+     for (int i = 0; i < n; ++i) {
+         if (i % w == 0) cout << "    ";
+         cout << sk->imag[i];
+@@ -227,7 +227,7 @@ void ConstantQ::sparsekernel()
+     if (n % w != 0) cout << endl;
+     cout << "};" << endl;
+ 
+-    cout << "static void push_" << m_uK << "_" << m_FFTLength << "(vector<unsigned int> &is, vector<unsigned int> &js, vector<double> &real, vector<double> &imag)" << endl;
++    cout << "static void push_" << m_uK << "_" << m_FFTLength << "(vector<unsigned int> &is, vector<unsigned int> &js, vector<fl_t> &real, vector<fl_t> &imag)" << endl;
+     cout << "{\n    is.reserve(" << n << ");\n";
+     cout << "    js.reserve(" << n << ");\n";
+     cout << "    real.reserve(" << n << ");\n";
+@@ -247,7 +247,7 @@ void ConstantQ::sparsekernel()
+ }
+ 
+ //-----------------------------------------------------------------------------
+-double* ConstantQ::process( const double* fftdata )
++fl_t* ConstantQ::process( const fl_t* fftdata )
+ {
+     if (!m_sparseKernel) {
+         std::cerr << "ERROR: ConstantQ::process: Sparse kernel has not been initialised" << std::endl;
+@@ -263,18 +263,18 @@ double* ConstantQ::process( const double* fftdata )
+     }
+     const unsigned *fftbin = &(sk->is[0]);
+     const unsigned *cqbin  = &(sk->js[0]);
+-    const double   *real   = &(sk->real[0]);
+-    const double   *imag   = &(sk->imag[0]);
++    const fl_t   *real   = &(sk->real[0]);
++    const fl_t   *imag   = &(sk->imag[0]);
+     const unsigned int sparseCells = sk->real.size();
+ 	
+     for (unsigned i = 0; i<sparseCells; i++)
+     {
+ 	const unsigned row = cqbin[i];
+ 	const unsigned col = fftbin[i];
+-	const double & r1  = real[i];
+-	const double & i1  = imag[i];
+-	const double & r2  = fftdata[ (2*m_FFTLength) - 2*col - 2 ];
+-	const double & i2  = fftdata[ (2*m_FFTLength) - 2*col - 2 + 1 ];
++	const fl_t & r1  = real[i];
++	const fl_t & i1  = imag[i];
++	const fl_t & r2  = fftdata[ (2*m_FFTLength) - 2*col - 2 ];
++	const fl_t & i2  = fftdata[ (2*m_FFTLength) - 2*col - 2 + 1 ];
+ 	// add the multiplication
+ 	m_CQdata[ 2*row  ] += (r1*r2 - i1*i2);
+ 	m_CQdata[ 2*row+1] += (r1*i2 + i1*r2);
+@@ -292,7 +292,7 @@ void ConstantQ::initialise( CQConfig Config )
+     m_BPO = Config.BPO;		// bins per octave
+     m_CQThresh = Config.CQThresh;// ConstantQ threshold for kernel generation
+ 
+-    m_dQ = 1/(pow(2,(1/(double)m_BPO))-1);	// Work out Q value for Filter bank
++    m_dQ = 1/(pow(2,(1/(fl_t)m_BPO))-1);	// Work out Q value for Filter bank
+     m_uK = (unsigned int) ceil(m_BPO * log(m_FMax/m_FMin)/log(2.0));	// No. of constant Q bins
+ 
+ //    std::cerr << "ConstantQ::initialise: rate = " << m_FS << ", fmin = " << m_FMin << ", fmax = " << m_FMax << ", bpo = " << m_BPO << ", K = " << m_uK << ", Q = " << m_dQ << std::endl;
+@@ -305,7 +305,7 @@ void ConstantQ::initialise( CQConfig Config )
+ //    std::cerr << "ConstantQ::initialise: -> fft length = " << m_FFTLength << ", hop = " << m_hop << std::endl;
+ 
+     // allocate memory for cqdata
+-    m_CQdata = new double [2*m_uK];
++    m_CQdata = new fl_t [2*m_uK];
+ }
+ 
+ void ConstantQ::deInitialise()
+@@ -314,8 +314,8 @@ void ConstantQ::deInitialise()
+     delete m_sparseKernel;
+ }
+ 
+-void ConstantQ::process(const double *FFTRe, const double* FFTIm,
+-                        double *CQRe, double *CQIm)
++void ConstantQ::process(const fl_t *FFTRe, const fl_t* FFTIm,
++                        fl_t *CQRe, fl_t *CQIm)
+ {
+     if (!m_sparseKernel) {
+         std::cerr << "ERROR: ConstantQ::process: Sparse kernel has not been initialised" << std::endl;
+@@ -332,18 +332,18 @@ void ConstantQ::process(const double *FFTRe, const double* FFTIm,
+ 
+     const unsigned *fftbin = &(sk->is[0]);
+     const unsigned *cqbin  = &(sk->js[0]);
+-    const double   *real   = &(sk->real[0]);
+-    const double   *imag   = &(sk->imag[0]);
++    const fl_t   *real   = &(sk->real[0]);
++    const fl_t   *imag   = &(sk->imag[0]);
+     const unsigned int sparseCells = sk->real.size();
+ 	
+     for (unsigned i = 0; i<sparseCells; i++)
+     {
+ 	const unsigned row = cqbin[i];
+ 	const unsigned col = fftbin[i];
+-	const double & r1  = real[i];
+-	const double & i1  = imag[i];
+-	const double & r2  = FFTRe[ m_FFTLength - col - 1 ];
+-	const double & i2  = FFTIm[ m_FFTLength - col - 1 ];
++	const fl_t & r1  = real[i];
++	const fl_t & i1  = imag[i];
++	const fl_t & r2  = FFTRe[ m_FFTLength - col - 1 ];
++	const fl_t & i2  = FFTIm[ m_FFTLength - col - 1 ];
+ 	// add the multiplication
+ 	CQRe[ row ] += (r1*r2 - i1*i2);
+ 	CQIm[ row ] += (r1*i2 + i1*r2);
+diff --git a/vamp-plugins/dsp/chromagram/ConstantQ.h b/vamp-plugins/dsp/chromagram/ConstantQ.h
+index c06f60a..c4e1048 100644
+--- a/vamp-plugins/dsp/chromagram/ConstantQ.h
++++ b/vamp-plugins/dsp/chromagram/ConstantQ.h
+@@ -22,33 +22,33 @@
+ 
+ struct CQConfig{
+     unsigned int FS;   // samplerate
+-    double min;        // minimum frequency
+-    double max;        // maximum frequency
++    fl_t min;        // minimum frequency
++    fl_t max;        // maximum frequency
+     unsigned int BPO;  // bins per octave
+-    double CQThresh;   // threshold
++    fl_t CQThresh;   // threshold
+ };
+ 
+ class ConstantQ {
+ 	
+ //public functions incl. sparsekernel so can keep out of loop in main
+ public:
+-    void process( const double* FFTRe, const double* FFTIm,
+-                  double* CQRe, double* CQIm );
++    void process( const fl_t* FFTRe, const fl_t* FFTIm,
++                  fl_t* CQRe, fl_t* CQIm );
+ 
+     ConstantQ( CQConfig Config );
+     ~ConstantQ();
+ 
+-    double* process( const double* FFTData );
++    fl_t* process( const fl_t* FFTData );
+ 
+     void sparsekernel();
+ 
+-    double hamming(int len, int n) {
+-	double out = 0.54 - 0.46*cos(2*PI*n/len);
++    fl_t hamming(int len, int n) {
++	fl_t out = 0.54 - 0.46*cos(2*PI*n/len);
+ 	return(out);
+     }
+ 	
+     int getnumwin() { return m_numWin;}
+-    double getQ() { return m_dQ;}
++    fl_t getQ() { return m_dQ;}
+     int getK() {return m_uK ;}
+     int getfftlength() { return m_FFTLength;}
+     int gethop() { return m_hop;}
+@@ -57,12 +57,12 @@ private:
+     void initialise( CQConfig Config );
+     void deInitialise();
+ 	
+-    double* m_CQdata;
++    fl_t* m_CQdata;
+     unsigned int m_FS;
+-    double m_FMin;
+-    double m_FMax;
+-    double m_dQ;
+-    double m_CQThresh;
++    fl_t m_FMin;
++    fl_t m_FMax;
++    fl_t m_dQ;
++    fl_t m_CQThresh;
+     unsigned int m_numWin;
+     unsigned int m_hop;
+     unsigned int m_BPO;
+@@ -72,8 +72,8 @@ private:
+     struct SparseKernel {
+         std::vector<unsigned> is;
+         std::vector<unsigned> js;
+-        std::vector<double> imag;
+-        std::vector<double> real;
++        std::vector<fl_t> imag;
++        std::vector<fl_t> real;
+     };
+ 
+     SparseKernel *m_sparseKernel;
+diff --git a/vamp-plugins/dsp/keydetection/GetKeyMode.cpp b/vamp-plugins/dsp/keydetection/GetKeyMode.cpp
+index cf3580e..004eb29 100644
+--- a/vamp-plugins/dsp/keydetection/GetKeyMode.cpp
++++ b/vamp-plugins/dsp/keydetection/GetKeyMode.cpp
+@@ -23,13 +23,13 @@
+ #include <cstdlib>
+ 
+ // Chords profile
+-static double MajProfile[36] = 
++static fl_t MajProfile[36] = 
+ { 0.0384, 0.0629, 0.0258, 0.0121, 0.0146, 0.0106, 0.0364, 0.0610, 0.0267,
+   0.0126, 0.0121, 0.0086, 0.0364, 0.0623, 0.0279, 0.0275, 0.0414, 0.0186, 
+   0.0173, 0.0248, 0.0145, 0.0364, 0.0631, 0.0262, 0.0129, 0.0150, 0.0098,
+   0.0312, 0.0521, 0.0235, 0.0129, 0.0142, 0.0095, 0.0289, 0.0478, 0.0239};
+ 
+-static double MinProfile[36] =
++static fl_t MinProfile[36] =
+ { 0.0375, 0.0682, 0.0299, 0.0119, 0.0138, 0.0093, 0.0296, 0.0543, 0.0257,
+   0.0292, 0.0519, 0.0246, 0.0159, 0.0234, 0.0135, 0.0291, 0.0544, 0.0248,
+   0.0137, 0.0176, 0.0104, 0.0352, 0.0670, 0.0302, 0.0222, 0.0349, 0.0164,
+@@ -42,7 +42,7 @@ static double MinProfile[36] =
+ //////////////////////////////////////////////////////////////////////
+ 
+ GetKeyMode::GetKeyMode( int sampleRate, float tuningFrequency,
+-			double hpcpAverage, double medianAverage ) :
++			fl_t hpcpAverage, fl_t medianAverage ) :
+     m_hpcpAverage( hpcpAverage ),
+     m_medianAverage( medianAverage ),
+     m_ChrPointer(0),
+@@ -60,7 +60,7 @@ GetKeyMode::GetKeyMode( int sampleRate, float tuningFrequency,
+         
+     // Chromagram configuration parameters
+     m_ChromaConfig.normalise = MathUtilities::NormaliseUnitMax;
+-    m_ChromaConfig.FS = lrint(sampleRate/(double)m_DecimationFactor);
++    m_ChromaConfig.FS = lrint(sampleRate/(fl_t)m_DecimationFactor);
+     if (m_ChromaConfig.FS < 1) m_ChromaConfig.FS = 1;
+ 
+     // Set C (= MIDI #12) as our base :
+@@ -94,16 +94,16 @@ GetKeyMode::GetKeyMode( int sampleRate, float tuningFrequency,
+     m_MedianBufferFilling = 0;
+ 
+     // Spawn objectc/arrays
+-    m_DecimatedBuffer = new double[m_ChromaFrameSize];
++    m_DecimatedBuffer = new fl_t[m_ChromaFrameSize];
+     
+-    m_ChromaBuffer = new double[m_BPO * m_ChromaBuffersize];
+-    memset( m_ChromaBuffer, 0, sizeof(double) * m_BPO * m_ChromaBuffersize);
++    m_ChromaBuffer = new fl_t[m_BPO * m_ChromaBuffersize];
++    memset( m_ChromaBuffer, 0, sizeof(fl_t) * m_BPO * m_ChromaBuffersize);
+     
+-    m_MeanHPCP = new double[m_BPO];
++    m_MeanHPCP = new fl_t[m_BPO];
+     
+-    m_MajCorr = new double[m_BPO];
+-    m_MinCorr = new double[m_BPO];
+-    m_Keys  = new double[2*m_BPO];
++    m_MajCorr = new fl_t[m_BPO];
++    m_MinCorr = new fl_t[m_BPO];
++    m_Keys  = new fl_t[2*m_BPO];
+     
+     m_MedianFilterBuffer = new int[ m_MedianWinsize ];
+     memset( m_MedianFilterBuffer, 0, sizeof(int)*m_MedianWinsize);
+@@ -114,7 +114,7 @@ GetKeyMode::GetKeyMode( int sampleRate, float tuningFrequency,
+     m_Decimator = new Decimator
+         ( m_ChromaFrameSize*m_DecimationFactor, m_DecimationFactor );
+ 
+-    m_keyStrengths = new double[24];
++    m_keyStrengths = new fl_t[24];
+ }
+ 
+ GetKeyMode::~GetKeyMode()
+@@ -135,17 +135,17 @@ GetKeyMode::~GetKeyMode()
+     delete[] m_keyStrengths;
+ }
+ 
+-double GetKeyMode::krumCorr(double *pData1, double *pData2, unsigned int length)
++fl_t GetKeyMode::krumCorr(fl_t *pData1, fl_t *pData2, unsigned int length)
+ {
+-    double retVal= 0.0;
++    fl_t retVal= 0.0;
+     
+-    double num = 0;
+-    double den = 0;
+-    double mX = MathUtilities::mean( pData1, length );
+-    double mY = MathUtilities::mean( pData2, length );
++    fl_t num = 0;
++    fl_t den = 0;
++    fl_t mX = MathUtilities::mean( pData1, length );
++    fl_t mY = MathUtilities::mean( pData2, length );
+     
+-    double sum1 = 0;
+-    double sum2 = 0;
++    fl_t sum1 = 0;
++    fl_t sum2 = 0;
+     
+     for( unsigned int i = 0; i <length; i++ )
+     {
+@@ -166,7 +166,7 @@ double GetKeyMode::krumCorr(double *pData1, double *pData2, unsigned int length)
+     return retVal;
+ }
+ 
+-int GetKeyMode::process(double *PCMData)
++int GetKeyMode::process(fl_t *PCMData)
+ {
+     int key;
+ 
+@@ -210,13 +210,13 @@ int GetKeyMode::process(double *PCMData)
+     //calculate mean 		
+     for( k = 0; k < m_BPO; k++ )
+     {
+-        double mnVal = 0.0;
++        fl_t mnVal = 0.0;
+         for( j = 0; j < m_ChromaBufferFilling; j++ )
+         {
+             mnVal += m_ChromaBuffer[ k + (j*m_BPO) ];
+         }
+ 
+-        m_MeanHPCP[k] = mnVal/(double)m_ChromaBufferFilling;
++        m_MeanHPCP[k] = mnVal/(fl_t)m_ChromaBufferFilling;
+     }
+ 
+ 
+@@ -265,9 +265,9 @@ int GetKeyMode::process(double *PCMData)
+   }
+   std::cout << std::endl;
+ */
+-    double dummy;
++    fl_t dummy;
+     // '1 +' because we number keys 1-24, not 0-23.
+-    key = 1 + (int)ceil( (double)MathUtilities::getMax( m_Keys, 2* m_BPO, &dummy )/3 );
++    key = 1 + (int)ceil( (fl_t)MathUtilities::getMax( m_Keys, 2* m_BPO, &dummy )/3 );
+ 
+ //    std::cout << "key pre-sorting: " << key << std::endl;
+ 
+@@ -306,7 +306,7 @@ int GetKeyMode::process(double *PCMData)
+   std::cout << std::endl;
+ */
+     int sortlength = m_MedianBufferFilling;
+-    int midpoint = (int)ceil((double)sortlength/2);
++    int midpoint = (int)ceil((fl_t)sortlength/2);
+ 
+ //  std::cout << "midpoint = " << midpoint << endl;
+ 
+diff --git a/vamp-plugins/dsp/keydetection/GetKeyMode.h b/vamp-plugins/dsp/keydetection/GetKeyMode.h
+index bc19208..e8f1f04 100644
+--- a/vamp-plugins/dsp/keydetection/GetKeyMode.h
++++ b/vamp-plugins/dsp/keydetection/GetKeyMode.h
+@@ -13,6 +13,7 @@
+ #define GETKEYMODE_H
+ 
+ 
++#include "maths/MathAliases.h"
+ #include "dsp/rateconversion/Decimator.h"
+ #include "dsp/chromagram/Chromagram.h"
+ 
+@@ -21,30 +22,30 @@ class GetKeyMode
+ {
+ public:
+ 	GetKeyMode( int sampleRate, float tuningFrequency,
+-		    double hpcpAverage, double medianAverage );
++		    fl_t hpcpAverage, fl_t medianAverage );
+ 
+ 	virtual ~GetKeyMode();
+ 
+-	int process( double* PCMData );
++	int process( fl_t* PCMData );
+ 
+-	double krumCorr( double* pData1, double* pData2, unsigned int length );
++	fl_t krumCorr( fl_t* pData1, fl_t* pData2, unsigned int length );
+ 
+ 	unsigned int getBlockSize() { return m_ChromaFrameSize*m_DecimationFactor; }
+ 	unsigned int getHopSize() { return m_ChromaHopSize*m_DecimationFactor; }
+ 
+-	double* getChroma() { return m_ChrPointer; }
++	fl_t* getChroma() { return m_ChrPointer; }
+ 	unsigned int getChromaSize() { return m_BPO; }
+ 
+-	double* getMeanHPCP() { return m_MeanHPCP; }
++	fl_t* getMeanHPCP() { return m_MeanHPCP; }
+ 
+-	double *getKeyStrengths() { return m_keyStrengths; }
++	fl_t *getKeyStrengths() { return m_keyStrengths; }
+ 
+ 	bool isModeMinor( int key ); 
+ 
+ protected:
+ 
+-	double m_hpcpAverage;
+-	double m_medianAverage;
++	fl_t m_hpcpAverage;
++	fl_t m_medianAverage;
+ 	unsigned int m_DecimationFactor;
+ 
+ 	//Decimator (fixed)
+@@ -57,7 +58,7 @@ protected:
+ 	Chromagram* m_Chroma;
+ 
+ 	//Chromagram output pointer
+-	double* m_ChrPointer;
++	fl_t* m_ChrPointer;
+ 
+ 	//Framesize
+ 	unsigned int m_ChromaFrameSize;
+@@ -75,17 +76,17 @@ protected:
+ 	unsigned int m_MedianBufferFilling;
+ 	
+ 
+-	double* m_DecimatedBuffer;
+-	double* m_ChromaBuffer;
+-	double* m_MeanHPCP;
++	fl_t* m_DecimatedBuffer;
++	fl_t* m_ChromaBuffer;
++	fl_t* m_MeanHPCP;
+ 
+-	double* m_MajCorr;
+-	double* m_MinCorr;
+-	double* m_Keys;
++	fl_t* m_MajCorr;
++	fl_t* m_MinCorr;
++	fl_t* m_Keys;
+ 	int* m_MedianFilterBuffer;
+ 	int* m_SortedBuffer;
+ 
+-	double *m_keyStrengths;
++	fl_t *m_keyStrengths;
+ };
+ 
+ #endif // !defined GETKEYMODE_H
+diff --git a/vamp-plugins/dsp/onsets/DetectionFunction.cpp b/vamp-plugins/dsp/onsets/DetectionFunction.cpp
+index dfcd4da..5e3a839 100644
+--- a/vamp-plugins/dsp/onsets/DetectionFunction.cpp
++++ b/vamp-plugins/dsp/onsets/DetectionFunction.cpp
+@@ -52,26 +52,26 @@ void DetectionFunction::initialise( DFConfig Config )
+     if (m_whitenRelaxCoeff < 0) m_whitenRelaxCoeff = 0.9997;
+     if (m_whitenFloor < 0) m_whitenFloor = 0.01;
+ 
+-    m_magHistory = new double[ m_halfLength ];
+-    memset(m_magHistory,0, m_halfLength*sizeof(double));
++    m_magHistory = new fl_t[ m_halfLength ];
++    memset(m_magHistory,0, m_halfLength*sizeof(fl_t));
+ 		
+-    m_phaseHistory = new double[ m_halfLength ];
+-    memset(m_phaseHistory,0, m_halfLength*sizeof(double));
++    m_phaseHistory = new fl_t[ m_halfLength ];
++    memset(m_phaseHistory,0, m_halfLength*sizeof(fl_t));
+ 
+-    m_phaseHistoryOld = new double[ m_halfLength ];
+-    memset(m_phaseHistoryOld,0, m_halfLength*sizeof(double));
++    m_phaseHistoryOld = new fl_t[ m_halfLength ];
++    memset(m_phaseHistoryOld,0, m_halfLength*sizeof(fl_t));
+ 
+-    m_magPeaks = new double[ m_halfLength ];
+-    memset(m_magPeaks,0, m_halfLength*sizeof(double));
++    m_magPeaks = new fl_t[ m_halfLength ];
++    memset(m_magPeaks,0, m_halfLength*sizeof(fl_t));
+ 
+     m_phaseVoc = new PhaseVocoder(m_dataLength, m_stepSize);
+ 
+-    m_magnitude = new double[ m_halfLength ];
+-    m_thetaAngle = new double[ m_halfLength ];
+-    m_unwrapped = new double[ m_halfLength ];
++    m_magnitude = new fl_t[ m_halfLength ];
++    m_thetaAngle = new fl_t[ m_halfLength ];
++    m_unwrapped = new fl_t[ m_halfLength ];
+ 
+-    m_window = new Window<double>(HanningWindow, m_dataLength);
+-    m_windowed = new double[ m_dataLength ];
++    m_window = new Window<fl_t>(HanningWindow, m_dataLength);
++    m_windowed = new fl_t[ m_dataLength ];
+ }
+ 
+ void DetectionFunction::deInitialise()
+@@ -91,7 +91,7 @@ void DetectionFunction::deInitialise()
+     delete m_window;
+ }
+ 
+-double DetectionFunction::processTimeDomain(const double *samples)
++fl_t DetectionFunction::processTimeDomain(const fl_t *samples)
+ {
+     m_window->cut(samples, m_windowed);
+ 
+@@ -103,8 +103,8 @@ double DetectionFunction::processTimeDomain(const double *samples)
+     return runDF();
+ }
+ 
+-double DetectionFunction::processFrequencyDomain(const double *reals,
+-                                                 const double *imags)
++fl_t DetectionFunction::processFrequencyDomain(const fl_t *reals,
++                                                 const fl_t *imags)
+ {
+     m_phaseVoc->processFrequencyDomain(reals, imags,
+                                        m_magnitude, m_thetaAngle, m_unwrapped);
+@@ -117,7 +117,7 @@ double DetectionFunction::processFrequencyDomain(const double *reals,
+ void DetectionFunction::whiten()
+ {
+     for (unsigned int i = 0; i < m_halfLength; ++i) {
+-        double m = m_magnitude[i];
++        fl_t m = m_magnitude[i];
+         if (m < m_magPeaks[i]) {
+             m = m + (m_magPeaks[i] - m) * m_whitenRelaxCoeff;
+         }
+@@ -127,9 +127,9 @@ void DetectionFunction::whiten()
+     }
+ }
+ 
+-double DetectionFunction::runDF()
++fl_t DetectionFunction::runDF()
+ {
+-    double retVal = 0;
++    fl_t retVal = 0;
+ 
+     switch( m_DFType )
+     {
+@@ -161,10 +161,10 @@ double DetectionFunction::runDF()
+     return retVal;
+ }
+ 
+-double DetectionFunction::HFC(unsigned int length, double *src)
++fl_t DetectionFunction::HFC(unsigned int length, fl_t *src)
+ {
+     unsigned int i;
+-    double val = 0;
++    fl_t val = 0;
+ 
+     for( i = 0; i < length; i++)
+     {
+@@ -173,12 +173,12 @@ double DetectionFunction::HFC(unsigned int length, double *src)
+     return val;
+ }
+ 
+-double DetectionFunction::specDiff(unsigned int length, double *src)
++fl_t DetectionFunction::specDiff(unsigned int length, fl_t *src)
+ {
+     unsigned int i;
+-    double val = 0.0;
+-    double temp = 0.0;
+-    double diff = 0.0;
++    fl_t val = 0.0;
++    fl_t temp = 0.0;
++    fl_t diff = 0.0;
+ 
+     for( i = 0; i < length; i++)
+     {
+@@ -197,14 +197,14 @@ double DetectionFunction::specDiff(unsigned int length, double *src)
+ }
+ 
+ 
+-double DetectionFunction::phaseDev(unsigned int length, double *srcPhase)
++fl_t DetectionFunction::phaseDev(unsigned int length, fl_t *srcPhase)
+ {
+     unsigned int i;
+-    double tmpPhase = 0;
+-    double tmpVal = 0;
+-    double val = 0;
++    fl_t tmpPhase = 0;
++    fl_t tmpVal = 0;
++    fl_t val = 0;
+ 
+-    double dev = 0;
++    fl_t dev = 0;
+ 
+     for( i = 0; i < length; i++)
+     {
+@@ -230,15 +230,15 @@ double DetectionFunction::phaseDev(unsigned int length, double *srcPhase)
+ }
+ 
+ 
+-double DetectionFunction::complexSD(unsigned int length, double *srcMagnitude, double *srcPhase)
++fl_t DetectionFunction::complexSD(unsigned int length, fl_t *srcMagnitude, fl_t *srcPhase)
+ {
+     unsigned int i;
+-    double val = 0;
+-    double tmpPhase = 0;
+-    double tmpReal = 0;
+-    double tmpImag = 0;
++    fl_t val = 0;
++    fl_t tmpPhase = 0;
++    fl_t tmpReal = 0;
++    fl_t tmpImag = 0;
+    
+-    double dev = 0;
++    fl_t dev = 0;
+     ComplexData meas = ComplexData( 0, 0 );
+     ComplexData j = ComplexData( 0, 1 );
+ 
+@@ -262,13 +262,13 @@ double DetectionFunction::complexSD(unsigned int length, double *srcMagnitude, d
+     return val;
+ }
+ 
+-double DetectionFunction::broadband(unsigned int length, double *src)
++fl_t DetectionFunction::broadband(unsigned int length, fl_t *src)
+ {
+-    double val = 0;
++    fl_t val = 0;
+     for (unsigned int i = 0; i < length; ++i) {
+-        double sqrmag = src[i] * src[i];
++        fl_t sqrmag = src[i] * src[i];
+         if (m_magHistory[i] > 0.0) {
+-            double diff = 10.0 * log10(sqrmag / m_magHistory[i]);
++            fl_t diff = 10.0 * log10(sqrmag / m_magHistory[i]);
+             if (diff > m_dbRise) val = val + 1;
+         }
+         m_magHistory[i] = sqrmag;
+@@ -276,7 +276,7 @@ double DetectionFunction::broadband(unsigned int length, double *src)
+     return val;
+ }        
+ 
+-double* DetectionFunction::getSpectrumMagnitude()
++fl_t* DetectionFunction::getSpectrumMagnitude()
+ {
+     return m_magnitude;
+ }
+diff --git a/vamp-plugins/dsp/onsets/DetectionFunction.h b/vamp-plugins/dsp/onsets/DetectionFunction.h
+index 3a91a6b..fe5e0ef 100644
+--- a/vamp-plugins/dsp/onsets/DetectionFunction.h
++++ b/vamp-plugins/dsp/onsets/DetectionFunction.h
+@@ -31,16 +31,16 @@ struct DFConfig{
+     unsigned int stepSize; // DF step in samples
+     unsigned int frameLength; // DF analysis window - usually 2*step. Must be even!
+     int DFType; // type of detection function ( see defines )
+-    double dbRise; // only used for broadband df (and required for it)
++    fl_t dbRise; // only used for broadband df (and required for it)
+     bool adaptiveWhitening; // perform adaptive whitening
+-    double whiteningRelaxCoeff; // if < 0, a sensible default will be used
+-    double whiteningFloor; // if < 0, a sensible default will be used
++    fl_t whiteningRelaxCoeff; // if < 0, a sensible default will be used
++    fl_t whiteningFloor; // if < 0, a sensible default will be used
+ };
+ 
+ class DetectionFunction  
+ {
+ public:
+-    double* getSpectrumMagnitude();
++    fl_t* getSpectrumMagnitude();
+     DetectionFunction( DFConfig Config );
+     virtual ~DetectionFunction();
+ 
+@@ -48,23 +48,23 @@ public:
+      * Process a single time-domain frame of audio, provided as
+      * frameLength samples.
+      */
+-    double processTimeDomain(const double* samples);
++    fl_t processTimeDomain(const fl_t* samples);
+ 
+     /**
+      * Process a single frequency-domain frame, provided as
+      * frameLength/2+1 real and imaginary component values.
+      */
+-    double processFrequencyDomain(const double* reals, const double* imags);
++    fl_t processFrequencyDomain(const fl_t* reals, const fl_t* imags);
+ 
+ private:
+     void whiten();
+-    double runDF();
++    fl_t runDF();
+ 
+-    double HFC( unsigned int length, double* src);
+-    double specDiff( unsigned int length, double* src);
+-    double phaseDev(unsigned int length, double *srcPhase);
+-    double complexSD(unsigned int length, double *srcMagnitude, double *srcPhase);
+-    double broadband(unsigned int length, double *srcMagnitude);
++    fl_t HFC( unsigned int length, fl_t* src);
++    fl_t specDiff( unsigned int length, fl_t* src);
++    fl_t phaseDev(unsigned int length, fl_t *srcPhase);
++    fl_t complexSD(unsigned int length, fl_t *srcMagnitude, fl_t *srcPhase);
++    fl_t broadband(unsigned int length, fl_t *srcMagnitude);
+ 	
+ private:
+     void initialise( DFConfig Config );
+@@ -74,22 +74,22 @@ private:
+     unsigned int m_dataLength;
+     unsigned int m_halfLength;
+     unsigned int m_stepSize;
+-    double m_dbRise;
++    fl_t m_dbRise;
+     bool m_whiten;
+-    double m_whitenRelaxCoeff;
+-    double m_whitenFloor;
++    fl_t m_whitenRelaxCoeff;
++    fl_t m_whitenFloor;
+ 
+-    double* m_magHistory;
+-    double* m_phaseHistory;
+-    double* m_phaseHistoryOld;
+-    double* m_magPeaks;
++    fl_t* m_magHistory;
++    fl_t* m_phaseHistory;
++    fl_t* m_phaseHistoryOld;
++    fl_t* m_magPeaks;
+ 
+-    double* m_windowed; // Array for windowed analysis frame
+-    double* m_magnitude; // Magnitude of analysis frame ( frequency domain )
+-    double* m_thetaAngle;// Phase of analysis frame ( frequency domain )
+-    double* m_unwrapped; // Unwrapped phase of analysis frame
++    fl_t* m_windowed; // Array for windowed analysis frame
++    fl_t* m_magnitude; // Magnitude of analysis frame ( frequency domain )
++    fl_t* m_thetaAngle;// Phase of analysis frame ( frequency domain )
++    fl_t* m_unwrapped; // Unwrapped phase of analysis frame
+ 
+-    Window<double> *m_window;
++    Window<fl_t> *m_window;
+     PhaseVocoder* m_phaseVoc;	// Phase Vocoder
+ };
+ 
+diff --git a/vamp-plugins/dsp/onsets/PeakPicking.cpp b/vamp-plugins/dsp/onsets/PeakPicking.cpp
+index e30e715..be5cb7e 100644
+--- a/vamp-plugins/dsp/onsets/PeakPicking.cpp
++++ b/vamp-plugins/dsp/onsets/PeakPicking.cpp
+@@ -62,8 +62,8 @@ void PeakPicking::initialise( PPickParams Config )
+ 
+     m_DFSmoothing = new DFProcess( m_DFProcessingParams );
+ 
+-    m_workBuffer = new double[ m_DFLength ];
+-    memset( m_workBuffer, 0, sizeof(double)*m_DFLength);
++    m_workBuffer = new fl_t[ m_DFLength ];
++    memset( m_workBuffer, 0, sizeof(fl_t)*m_DFLength);
+ }
+ 
+ void PeakPicking::deInitialise()
+@@ -73,11 +73,11 @@ void PeakPicking::deInitialise()
+     m_workBuffer = NULL;
+ }
+ 
+-void PeakPicking::process( double* src, unsigned int len, vector<int> &onsets )
++void PeakPicking::process( fl_t* src, unsigned int len, vector<int> &onsets )
+ {
+     if (len < 4) return;
+ 
+-    vector <double> m_maxima;	
++    vector <fl_t> m_maxima;	
+ 
+     // Signal conditioning 
+     m_DFSmoothing->process( src, m_workBuffer );
+@@ -95,16 +95,16 @@ void PeakPicking::process( double* src, unsigned int len, vector<int> &onsets )
+     }
+ }
+ 
+-int PeakPicking::quadEval( vector<double> &src, vector<int> &idx )
++int PeakPicking::quadEval( vector<fl_t> &src, vector<int> &idx )
+ {
+     unsigned int maxLength;
+ 
+     vector <int> m_maxIndex;
+     vector <int> m_onsetPosition;
+ 	
+-    vector <double> m_maxFit;
+-    vector <double> m_poly;
+-    vector <double> m_err;
++    vector <fl_t> m_maxFit;
++    vector <fl_t> m_poly;
++    vector <fl_t> m_err;
+ 
+     m_poly.push_back(0);
+     m_poly.push_back(0);
+@@ -112,7 +112,7 @@ int PeakPicking::quadEval( vector<double> &src, vector<int> &idx )
+ 
+     for(  int t = -2; t < 3; t++)
+     {
+-	m_err.push_back( (double)t );
++	m_err.push_back( (fl_t)t );
+     }
+     for( unsigned int i = 2; i < src.size() - 2; i++)
+     {
+@@ -125,7 +125,7 @@ int PeakPicking::quadEval( vector<double> &src, vector<int> &idx )
+ 
+     maxLength = m_maxIndex.size();
+ 
+-    double selMax = 0;
++    fl_t selMax = 0;
+ 
+     for( unsigned int j = 0; j < maxLength ; j++)
+     {
+@@ -137,8 +137,8 @@ int PeakPicking::quadEval( vector<double> &src, vector<int> &idx )
+ 
+ 	TPolyFit::PolyFit2(m_err, m_maxFit, m_poly);
+ 
+-	double f = m_poly[0];
+-	double h = m_poly[2];
++	fl_t f = m_poly[0];
++	fl_t h = m_poly[2];
+ 
+ 	if (h < -Qfilta || f > Qfiltc)
+ 	{
+diff --git a/vamp-plugins/dsp/onsets/PeakPicking.h b/vamp-plugins/dsp/onsets/PeakPicking.h
+index b7c959f..1a02e97 100644
+--- a/vamp-plugins/dsp/onsets/PeakPicking.h
++++ b/vamp-plugins/dsp/onsets/PeakPicking.h
+@@ -47,11 +47,11 @@ struct PPWinThresh
+ 
+ struct QFitThresh
+ {
+-    double a;
+-    double b;
+-    double c;
++    fl_t a;
++    fl_t b;
++    fl_t c;
+ 
+-    QFitThresh(double x, double y, double z) :
++    QFitThresh(fl_t x, fl_t y, fl_t z) :
+         a(x),
+         b(y),
+         c(z)
+@@ -62,12 +62,12 @@ struct QFitThresh
+ struct PPickParams
+ {
+     unsigned int length; //Detection FunctionLength
+-    double tau; // time resolution of the detection function
++    fl_t tau; // time resolution of the detection function
+     unsigned int alpha; //alpha-norm parameter
+-    double cutoff;//low-pass Filter cutoff freq
++    fl_t cutoff;//low-pass Filter cutoff freq
+     unsigned int LPOrd; // low-pass Filter order
+-    double* LPACoeffs; //low pass Filter den coefficients
+-    double* LPBCoeffs; //low pass Filter num coefficients
++    fl_t* LPACoeffs; //low pass Filter den coefficients
++    fl_t* LPBCoeffs; //low pass Filter num coefficients
+     PPWinThresh WinT;//window size in frames for adaptive thresholding [pre post]:
+     QFitThresh QuadThresh;
+     float delta; //delta threshold used as an offset when computing the smoothed detection function
+@@ -93,23 +93,23 @@ public:
+     PeakPicking( PPickParams Config );
+     virtual ~PeakPicking();
+ 	
+-    void process( double* src, unsigned int len, vector<int> &onsets  );
++    void process( fl_t* src, unsigned int len, vector<int> &onsets  );
+ 
+ 
+ private:
+     void initialise( PPickParams Config  );
+     void deInitialise();
+-    int  quadEval( vector<double> &src, vector<int> &idx );
++    int  quadEval( vector<fl_t> &src, vector<int> &idx );
+ 	
+     DFProcConfig m_DFProcessingParams;
+ 
+     unsigned int m_DFLength ;
+-    double Qfilta ;
+-    double Qfiltb;
+-    double Qfiltc;
++    fl_t Qfilta ;
++    fl_t Qfiltb;
++    fl_t Qfiltc;
+ 
+ 
+-    double* m_workBuffer;
++    fl_t* m_workBuffer;
+ 	
+     DFProcess*	m_DFSmoothing;
+ };
+diff --git a/vamp-plugins/dsp/phasevocoder/PhaseVocoder.cpp b/vamp-plugins/dsp/phasevocoder/PhaseVocoder.cpp
+index 7ee0be2..18ab389 100644
+--- a/vamp-plugins/dsp/phasevocoder/PhaseVocoder.cpp
++++ b/vamp-plugins/dsp/phasevocoder/PhaseVocoder.cpp
+@@ -29,11 +29,11 @@ PhaseVocoder::PhaseVocoder(int n, int hop) :
+     m_hop(hop)
+ {
+     m_fft = new FFTReal(m_n);
+-    m_time = new double[m_n];
+-    m_real = new double[m_n];
+-    m_imag = new double[m_n];
+-    m_phase = new double[m_n/2 + 1];
+-    m_unwrapped = new double[m_n/2 + 1];
++    m_time = new fl_t[m_n];
++    m_real = new fl_t[m_n];
++    m_imag = new fl_t[m_n];
++    m_phase = new fl_t[m_n/2 + 1];
++    m_unwrapped = new fl_t[m_n/2 + 1];
+ 
+     for (int i = 0; i < m_n/2 + 1; ++i) {
+         m_phase[i] = 0.0;
+@@ -53,19 +53,19 @@ PhaseVocoder::~PhaseVocoder()
+     delete m_fft;
+ }
+ 
+-void PhaseVocoder::FFTShift(double *src)
++void PhaseVocoder::FFTShift(fl_t *src)
+ {
+     const int hs = m_n/2;
+     for (int i = 0; i < hs; ++i) {
+-        double tmp = src[i];
++        fl_t tmp = src[i];
+         src[i] = src[i + hs];
+         src[i + hs] = tmp;
+     }
+ }
+ 
+-void PhaseVocoder::processTimeDomain(const double *src,
+-                                     double *mag, double *theta,
+-                                     double *unwrapped)
++void PhaseVocoder::processTimeDomain(const fl_t *src,
++                                     fl_t *mag, fl_t *theta,
++                                     fl_t *unwrapped)
+ {
+     for (int i = 0; i < m_n; ++i) {
+         m_time[i] = src[i];
+@@ -77,10 +77,10 @@ void PhaseVocoder::processTimeDomain(const double *src,
+     unwrapPhases(theta, unwrapped);
+ }
+ 
+-void PhaseVocoder::processFrequencyDomain(const double *reals, 
+-                                          const double *imags,
+-                                          double *mag, double *theta,
+-                                          double *unwrapped)
++void PhaseVocoder::processFrequencyDomain(const fl_t *reals, 
++                                          const fl_t *imags,
++                                          fl_t *mag, fl_t *theta,
++                                          fl_t *unwrapped)
+ {
+     for (int i = 0; i < m_n/2 + 1; ++i) {
+         m_real[i] = reals[i];
+@@ -98,33 +98,33 @@ void PhaseVocoder::reset()
+         // behind so that a signal with initial phase at zero matches
+         // the expected values. This is completely unnecessary for any
+         // analytical purpose, it's just tidier.
+-        double omega = (2 * M_PI * m_hop * i) / m_n;
++        fl_t omega = (2 * M_PI * m_hop * i) / m_n;
+         m_phase[i] = -omega;
+         m_unwrapped[i] = -omega;
+     }
+ }
+ 
+-void PhaseVocoder::getMagnitudes(double *mag)
++void PhaseVocoder::getMagnitudes(fl_t *mag)
+ {	
+     for (int i = 0; i < m_n/2 + 1; i++) {
+ 	mag[i] = sqrt(m_real[i] * m_real[i] + m_imag[i] * m_imag[i]);
+     }
+ }
+ 
+-void PhaseVocoder::getPhases(double *theta)
++void PhaseVocoder::getPhases(fl_t *theta)
+ {
+     for (int i = 0; i < m_n/2 + 1; i++) {
+ 	theta[i] = atan2(m_imag[i], m_real[i]);
+     }	
+ }
+ 
+-void PhaseVocoder::unwrapPhases(double *theta, double *unwrapped)
++void PhaseVocoder::unwrapPhases(fl_t *theta, fl_t *unwrapped)
+ {
+     for (int i = 0; i < m_n/2 + 1; ++i) {
+ 
+-        double omega = (2 * M_PI * m_hop * i) / m_n;
+-        double expected = m_phase[i] + omega;
+-        double error = MathUtilities::princarg(theta[i] - expected);
++        fl_t omega = (2 * M_PI * m_hop * i) / m_n;
++        fl_t expected = m_phase[i] + omega;
++        fl_t error = MathUtilities::princarg(theta[i] - expected);
+ 
+         unwrapped[i] = m_unwrapped[i] + omega + error;
+ 
+diff --git a/vamp-plugins/dsp/phasevocoder/PhaseVocoder.h b/vamp-plugins/dsp/phasevocoder/PhaseVocoder.h
+index 2024217..bdd1bec 100644
+--- a/vamp-plugins/dsp/phasevocoder/PhaseVocoder.h
++++ b/vamp-plugins/dsp/phasevocoder/PhaseVocoder.h
+@@ -16,6 +16,8 @@
+ #ifndef PHASEVOCODER_H
+ #define PHASEVOCODER_H
+ 
++#include "maths/MathAliases.h"
++
+ class FFTReal;
+ 
+ class PhaseVocoder  
+@@ -36,8 +38,8 @@ public:
+      * enough space for size/2 + 1 values. The redundant conjugate
+      * half of the output is not returned.
+      */
+-    void processTimeDomain(const double *src,
+-                           double *mag, double *phase, double *unwrapped);
++    void processTimeDomain(const fl_t *src,
++                           fl_t *mag, fl_t *phase, fl_t *unwrapped);
+ 
+     /**
+      * Given one frame of frequency-domain samples, return the
+@@ -50,8 +52,8 @@ public:
+      * mag, phase, and unwrapped must each be non-NULL and point to
+      * enough space for size/2+1 values.
+      */
+-    void processFrequencyDomain(const double *reals, const double *imags,
+-                                double *mag, double *phase, double *unwrapped);
++    void processFrequencyDomain(const fl_t *reals, const fl_t *imags,
++                                fl_t *mag, fl_t *phase, fl_t *unwrapped);
+ 
+     /**
+      * Reset the stored phases to zero. Note that this may be
+@@ -62,19 +64,19 @@ public:
+     void reset();
+ 
+ protected:
+-    void FFTShift(double *src);
+-    void getMagnitudes(double *mag);
+-    void getPhases(double *theta);
+-    void unwrapPhases(double *theta, double *unwrapped);
++    void FFTShift(fl_t *src);
++    void getMagnitudes(fl_t *mag);
++    void getPhases(fl_t *theta);
++    void unwrapPhases(fl_t *theta, fl_t *unwrapped);
+ 
+     int m_n;
+     int m_hop;
+     FFTReal *m_fft;
+-    double *m_time;
+-    double *m_imag;
+-    double *m_real;
+-    double *m_phase;
+-    double *m_unwrapped;
++    fl_t *m_time;
++    fl_t *m_imag;
++    fl_t *m_real;
++    fl_t *m_phase;
++    fl_t *m_unwrapped;
+ };
+ 
+ #endif
+diff --git a/vamp-plugins/dsp/signalconditioning/DFProcess.cpp b/vamp-plugins/dsp/signalconditioning/DFProcess.cpp
+index 4ca2159..f828bcd 100644
+--- a/vamp-plugins/dsp/signalconditioning/DFProcess.cpp
++++ b/vamp-plugins/dsp/signalconditioning/DFProcess.cpp
+@@ -57,8 +57,8 @@ void DFProcess::initialise( DFProcConfig Config )
+ 
+     m_isMedianPositive = Config.isMedianPositive;
+ 
+-    filtSrc = new double[ m_length ];
+-    filtDst = new double[ m_length ];
++    filtSrc = new fl_t[ m_length ];
++    filtDst = new fl_t[ m_length ];
+ 
+ 	
+     //Low Pass Smoothing Filter Config
+@@ -85,7 +85,7 @@ void DFProcess::deInitialise()
+     delete m_FiltFilt;
+ }
+ 
+-void DFProcess::process(double *src, double* dst)
++void DFProcess::process(fl_t *src, fl_t* dst)
+ {
+     if (m_length == 0) return;
+ 
+@@ -97,17 +97,17 @@ void DFProcess::process(double *src, double* dst)
+ }
+ 
+ 
+-void DFProcess::medianFilter(double *src, double *dst)
++void DFProcess::medianFilter(fl_t *src, fl_t *dst)
+ {
+     int i,k,j,l;
+     int index = 0;
+ 
+-    double val = 0;
++    fl_t val = 0;
+ 
+-    double* y = new double[ m_winPost + m_winPre + 1];
+-    memset( y, 0, sizeof( double ) * ( m_winPost + m_winPre + 1) );
++    fl_t* y = new fl_t[ m_winPost + m_winPre + 1];
++    memset( y, 0, sizeof( fl_t ) * ( m_winPost + m_winPre + 1) );
+ 
+-    double* scratch = new double[ m_length ];
++    fl_t* scratch = new fl_t[ m_length ];
+ 
+     for( i = 0; i < m_winPre; i++)
+     {
+@@ -184,11 +184,11 @@ void DFProcess::medianFilter(double *src, double *dst)
+ }
+ 
+ 
+-void DFProcess::removeDCNormalize( double *src, double*dst )
++void DFProcess::removeDCNormalize( fl_t *src, fl_t*dst )
+ {
+-    double DFmax = 0;
+-    double DFMin = 0;
+-    double DFAlphaNorm = 0;
++    fl_t DFmax = 0;
++    fl_t DFMin = 0;
++    fl_t DFAlphaNorm = 0;
+ 
+     MathUtilities::getFrameMinMax( src, m_length, &DFMin, &DFmax );
+ 
+diff --git a/vamp-plugins/dsp/signalconditioning/DFProcess.h b/vamp-plugins/dsp/signalconditioning/DFProcess.h
+index b93b535..a5f0d76 100644
+--- a/vamp-plugins/dsp/signalconditioning/DFProcess.h
++++ b/vamp-plugins/dsp/signalconditioning/DFProcess.h
+@@ -25,16 +25,17 @@
+ #define CDFPROCESS_H
+ 
+ #include <stdio.h>
++#include "maths/MathAliases.h"
+ #include "FiltFilt.h"
+ 
+ struct DFProcConfig{
+     unsigned int length; 
+     unsigned int LPOrd; 
+-    double *LPACoeffs; 
+-    double *LPBCoeffs; 
++    fl_t *LPACoeffs; 
++    fl_t *LPBCoeffs; 
+     unsigned int winPre;
+     unsigned int winPost; 
+-    double AlphaNormParam;
++    fl_t AlphaNormParam;
+     bool isMedianPositive;
+     float delta; //delta threshold used as an offset when computing the smoothed detection function
+ 
+@@ -58,14 +59,14 @@ public:
+     DFProcess( DFProcConfig Config );
+     virtual ~DFProcess();
+ 
+-    void process( double* src, double* dst );
++    void process( fl_t* src, fl_t* dst );
+ 
+ 	
+ private:
+     void initialise( DFProcConfig Config );
+     void deInitialise();
+-    void removeDCNormalize( double *src, double*dst );
+-    void medianFilter( double* src, double* dst );
++    void removeDCNormalize( fl_t *src, fl_t*dst );
++    void medianFilter( fl_t* src, fl_t* dst );
+ 
+     int m_length;
+     int m_FFOrd;
+@@ -73,13 +74,13 @@ private:
+     int m_winPre;
+     int m_winPost;
+ 
+-    double m_alphaNormParam;
++    fl_t m_alphaNormParam;
+ 
+-    double* filtSrc;
+-    double* filtDst;
++    fl_t* filtSrc;
++    fl_t* filtDst;
+ 
+-    double* m_filtScratchIn;
+-    double* m_filtScratchOut;
++    fl_t* m_filtScratchIn;
++    fl_t* m_filtScratchOut;
+ 
+     FilterConfig m_FilterConfigParams;
+ 
+diff --git a/vamp-plugins/dsp/signalconditioning/FiltFilt.cpp b/vamp-plugins/dsp/signalconditioning/FiltFilt.cpp
+index 89076c1..9e779a9 100644
+--- a/vamp-plugins/dsp/signalconditioning/FiltFilt.cpp
++++ b/vamp-plugins/dsp/signalconditioning/FiltFilt.cpp
+@@ -49,7 +49,7 @@ void FiltFilt::deInitialise()
+ }
+ 
+ 
+-void FiltFilt::process(double *src, double *dst, unsigned int length)
++void FiltFilt::process(fl_t *src, fl_t *dst, unsigned int length)
+ {	
+     unsigned int i;
+ 
+@@ -59,8 +59,8 @@ void FiltFilt::process(double *src, double *dst, unsigned int length)
+     unsigned int nFact = 3 * ( nFilt - 1);
+     unsigned int nExt	= length + 2 * nFact;
+ 
+-    m_filtScratchIn = new double[ nExt ];
+-    m_filtScratchOut = new double[ nExt ];
++    m_filtScratchIn = new fl_t[ nExt ];
++    m_filtScratchOut = new fl_t[ nExt ];
+ 
+ 	
+     for( i = 0; i< nExt; i++ ) 
+@@ -70,8 +70,8 @@ void FiltFilt::process(double *src, double *dst, unsigned int length)
+     }
+ 
+     // Edge transients reflection
+-    double sample0 = 2 * src[ 0 ];
+-    double sampleN = 2 * src[ length - 1 ];
++    fl_t sample0 = 2 * src[ 0 ];
++    fl_t sampleN = 2 * src[ length - 1 ];
+ 
+     unsigned int index = 0;
+     for( i = nFact; i > 0; i-- )
+diff --git a/vamp-plugins/dsp/signalconditioning/FiltFilt.h b/vamp-plugins/dsp/signalconditioning/FiltFilt.h
+index e5a3812..36cf2c3 100644
+--- a/vamp-plugins/dsp/signalconditioning/FiltFilt.h
++++ b/vamp-plugins/dsp/signalconditioning/FiltFilt.h
+@@ -16,6 +16,7 @@
+ #ifndef FILTFILT_H
+ #define FILTFILT_H
+ 
++#include "maths/MathAliases.h"
+ #include "Filter.h"
+ 
+ /**
+@@ -30,7 +31,7 @@ public:
+     virtual ~FiltFilt();
+ 
+     void reset();
+-    void process( double* src, double* dst, unsigned int length );
++    void process( fl_t* src, fl_t* dst, unsigned int length );
+ 
+ private:
+     void initialise( FilterConfig Config );
+@@ -40,8 +41,8 @@ private:
+ 
+     Filter* m_filter;
+ 
+-    double* m_filtScratchIn;
+-    double* m_filtScratchOut;
++    fl_t* m_filtScratchIn;
++    fl_t* m_filtScratchOut;
+ 
+     FilterConfig m_filterConfig;
+ };
+diff --git a/vamp-plugins/dsp/signalconditioning/Filter.cpp b/vamp-plugins/dsp/signalconditioning/Filter.cpp
+index fcc12e5..7348104 100644
+--- a/vamp-plugins/dsp/signalconditioning/Filter.cpp
++++ b/vamp-plugins/dsp/signalconditioning/Filter.cpp
+@@ -39,8 +39,8 @@ void Filter::initialise( FilterConfig Config )
+     m_ACoeffs = Config.ACoeffs;
+     m_BCoeffs = Config.BCoeffs;
+ 
+-    m_inBuffer = new double[ m_ord + 1 ];
+-    m_outBuffer = new double[ m_ord + 1 ];
++    m_inBuffer = new fl_t[ m_ord + 1 ];
++    m_outBuffer = new fl_t[ m_ord + 1 ];
+ 
+     reset();
+ }
+@@ -57,11 +57,11 @@ void Filter::reset()
+     for(unsigned int  i = 0; i < m_ord+1; i++ ){ m_outBuffer[ i ] = 0.0; }
+ }
+ 
+-void Filter::process( double *src, double *dst, unsigned int length )
++void Filter::process( fl_t *src, fl_t *dst, unsigned int length )
+ {
+     unsigned int SP,i,j;
+ 
+-    double xin,xout;
++    fl_t xin,xout;
+ 
+     for (SP=0;SP<length;SP++)
+     {
+diff --git a/vamp-plugins/dsp/signalconditioning/Filter.h b/vamp-plugins/dsp/signalconditioning/Filter.h
+index 9f25945..63fb407 100644
+--- a/vamp-plugins/dsp/signalconditioning/Filter.h
++++ b/vamp-plugins/dsp/signalconditioning/Filter.h
+@@ -16,6 +16,8 @@
+ #ifndef FILTER_H
+ #define FILTER_H
+ 
++#include "maths/MathAliases.h"
++
+ #ifndef NULL
+ #define NULL 0
+ #endif
+@@ -28,8 +30,8 @@
+  */
+ struct FilterConfig{
+     unsigned int ord;
+-    double* ACoeffs;
+-    double* BCoeffs;
++    fl_t* ACoeffs;
++    fl_t* BCoeffs;
+ };
+ 
+ /**
+@@ -43,7 +45,7 @@ public:
+ 
+     void reset();
+ 
+-    void process( double *src, double *dst, unsigned int length );
++    void process( fl_t *src, fl_t *dst, unsigned int length );
+ 
+ private:
+     void initialise( FilterConfig Config );
+@@ -51,11 +53,11 @@ private:
+ 
+     unsigned int m_ord;
+ 
+-    double* m_inBuffer;
+-    double* m_outBuffer;
++    fl_t* m_inBuffer;
++    fl_t* m_outBuffer;
+ 
+-    double* m_ACoeffs;
+-    double* m_BCoeffs;
++    fl_t* m_ACoeffs;
++    fl_t* m_BCoeffs;
+ };
+ 
+ #endif
+diff --git a/vamp-plugins/dsp/signalconditioning/Framer.cpp b/vamp-plugins/dsp/signalconditioning/Framer.cpp
+index e352278..eae17e9 100644
+--- a/vamp-plugins/dsp/signalconditioning/Framer.cpp
++++ b/vamp-plugins/dsp/signalconditioning/Framer.cpp
+@@ -47,17 +47,17 @@ void Framer::configure( unsigned int frameLength, unsigned int hop )
+ 	delete [] m_dataFrame;	
+ 	m_dataFrame = NULL;
+     }
+-    m_dataFrame = new double[ m_frameLength ];
++    m_dataFrame = new fl_t[ m_frameLength ];
+ 
+     if( m_strideFrame != NULL )
+     {
+ 	delete [] m_strideFrame;	
+ 	m_strideFrame = NULL;
+     }
+-    m_strideFrame = new double[ m_stepSize ];
++    m_strideFrame = new fl_t[ m_stepSize ];
+ }
+ 
+-void Framer::getFrame(double *dst)
++void Framer::getFrame(fl_t *dst)
+ {
+ 
+     if( (m_ulSrcIndex + ( m_frameLength) ) < m_ulSampleLen )
+@@ -100,10 +100,10 @@ unsigned int Framer::getMaxNoFrames()
+     return m_maxFrames;
+ }
+ 
+-void Framer::setSource(double *src, unsigned int length)
++void Framer::setSource(fl_t *src, unsigned int length)
+ {
+     m_srcBuffer = src;
+     m_ulSampleLen = length;
+ 
+-    m_maxFrames = (unsigned int)ceil( (double)m_ulSampleLen/(double)m_stepSize ) ;
++    m_maxFrames = (unsigned int)ceil( (fl_t)m_ulSampleLen/(fl_t)m_stepSize ) ;
+ }
+diff --git a/vamp-plugins/dsp/signalconditioning/Framer.h b/vamp-plugins/dsp/signalconditioning/Framer.h
+index 7da0718..3ebd447 100644
+--- a/vamp-plugins/dsp/signalconditioning/Framer.h
++++ b/vamp-plugins/dsp/signalconditioning/Framer.h
+@@ -19,14 +19,15 @@
+ //#include <io.h>
+ #include <fcntl.h>
+ #include <stdio.h>
++#include "maths/MathAliases.h"
+ 
+ 
+ class Framer  
+ {
+ public:
+-    void setSource( double* src, unsigned int length );
++    void setSource( fl_t* src, unsigned int length );
+     unsigned int getMaxNoFrames();
+-    void getFrame( double* dst );
++    void getFrame( fl_t* dst );
+     void configure( unsigned int frameLength, unsigned int hop );
+     Framer();
+     virtual ~Framer();
+@@ -38,9 +39,9 @@ private:
+     unsigned long	m_ulSampleLen;		// DataLength (samples)
+     unsigned int	m_framesRead;		// Read Frames Index
+ 
+-    double*			m_srcBuffer;
+-    double*			m_dataFrame;		// Analysis Frame Buffer
+-    double*			m_strideFrame;		// Stride Frame Buffer
++    fl_t*			m_srcBuffer;
++    fl_t*			m_dataFrame;		// Analysis Frame Buffer
++    fl_t*			m_strideFrame;		// Stride Frame Buffer
+     unsigned int	m_frameLength;		// Analysis Frame Length
+     unsigned int	m_stepSize;		// Analysis Frame Stride
+ 
+diff --git a/vamp-plugins/dsp/tempotracking/DownBeat.cpp b/vamp-plugins/dsp/tempotracking/DownBeat.cpp
+index 8570da6..97391b2 100644
+--- a/vamp-plugins/dsp/tempotracking/DownBeat.cpp
++++ b/vamp-plugins/dsp/tempotracking/DownBeat.cpp
+@@ -48,9 +48,9 @@ DownBeat::DownBeat(float originalSampleRate,
+         m_beatframesize = 2;
+     }
+ //    std::cerr << "rate = " << m_rate << ", dec = " << decimationFactor << ", bfs = " << m_beatframesize << std::endl;
+-    m_beatframe = new double[m_beatframesize];
+-    m_fftRealOut = new double[m_beatframesize];
+-    m_fftImagOut = new double[m_beatframesize];
++    m_beatframe = new fl_t[m_beatframesize];
++    m_fftRealOut = new fl_t[m_beatframesize];
++    m_fftImagOut = new fl_t[m_beatframesize];
+     m_fft = new FFTReal(m_beatframesize);
+ }
+ 
+@@ -183,7 +183,7 @@ DownBeat::findDownBeats(const float *audio,
+ 
+ //        float rms = 0;
+         for (size_t j = 0; j < beatlen && j < m_beatframesize; ++j) {
+-            double mul = 0.5 * (1.0 - cos(TWO_PI * (double(j) / double(beatlen))));
++            fl_t mul = 0.5 * (1.0 - cos(TWO_PI * (fl_t(j) / fl_t(beatlen))));
+             m_beatframe[j] = audio[beatstart + j] * mul;
+ //            rms += m_beatframe[j] * m_beatframe[j];
+         }
+@@ -255,7 +255,7 @@ DownBeat::findDownBeats(const float *audio,
+     }
+ }
+ 
+-double
++fl_t
+ DownBeat::measureSpecDiff(d_vec_t oldspec, d_vec_t newspec)
+ {
+     // JENSEN-SHANNON DIVERGENCE BETWEEN SPECTRAL FRAMES
+@@ -264,11 +264,11 @@ DownBeat::measureSpecDiff(d_vec_t oldspec, d_vec_t newspec)
+     if (SPECSIZE > oldspec.size()/4) {
+         SPECSIZE = oldspec.size()/4;
+     }
+-    double SD = 0.;
+-    double sd1 = 0.;
++    fl_t SD = 0.;
++    fl_t sd1 = 0.;
+ 
+-    double sumnew = 0.;
+-    double sumold = 0.;
++    fl_t sumnew = 0.;
++    fl_t sumold = 0.;
+   
+     for (unsigned int i = 0;i < SPECSIZE;i++)
+     {
+@@ -304,7 +304,7 @@ DownBeat::measureSpecDiff(d_vec_t oldspec, d_vec_t newspec)
+ }
+ 
+ void
+-DownBeat::getBeatSD(vector<double> &beatsd) const
++DownBeat::getBeatSD(vector<fl_t> &beatsd) const
+ {
+     for (int i = 0; i < (int)m_beatsd.size(); ++i) beatsd.push_back(m_beatsd[i]);
+ }
+diff --git a/vamp-plugins/dsp/tempotracking/DownBeat.h b/vamp-plugins/dsp/tempotracking/DownBeat.h
+index fc1d7b2..8044466 100644
+--- a/vamp-plugins/dsp/tempotracking/DownBeat.h
++++ b/vamp-plugins/dsp/tempotracking/DownBeat.h
+@@ -20,6 +20,7 @@
+ #include <cstddef>
+ 
+ #include "dsp/rateconversion/Decimator.h"
++#include "maths/MathAliases.h"
+ 
+ using std::vector;
+ 
+@@ -71,7 +72,7 @@ public:
+      */
+     void findDownBeats(const float *audio, // downsampled
+                        size_t audioLength, // after downsampling
+-                       const vector<double> &beats,
++                       const vector<fl_t> &beats,
+                        vector<int> &downbeats);
+ 
+     /**
+@@ -83,7 +84,7 @@ public:
+      * difference between region prior to the beat's nominal position
+      * and the region following it.
+      */
+-    void getBeatSD(vector<double> &beatsd) const;
++    void getBeatSD(vector<fl_t> &beatsd) const;
+     
+     /**
+      * For your downsampling convenience: call this function
+@@ -109,11 +110,11 @@ public:
+ private:
+     typedef vector<int> i_vec_t;
+     typedef vector<vector<int> > i_mat_t;
+-    typedef vector<double> d_vec_t;
+-    typedef vector<vector<double> > d_mat_t;
++    typedef vector<fl_t> d_vec_t;
++    typedef vector<vector<fl_t> > d_mat_t;
+ 
+     void makeDecimators();
+-    double measureSpecDiff(d_vec_t oldspec, d_vec_t newspec);
++    fl_t measureSpecDiff(d_vec_t oldspec, d_vec_t newspec);
+ 
+     int m_bpb;
+     float m_rate;
+@@ -126,10 +127,10 @@ private:
+     size_t m_bufsiz;
+     size_t m_buffill;
+     size_t m_beatframesize;
+-    double *m_beatframe;
++    fl_t *m_beatframe;
+     FFTReal *m_fft;
+-    double *m_fftRealOut;
+-    double *m_fftImagOut;
++    fl_t *m_fftRealOut;
++    fl_t *m_fftImagOut;
+     d_vec_t m_beatsd;
+ };
+ 
+diff --git a/vamp-plugins/dsp/tempotracking/TempoTrack.cpp b/vamp-plugins/dsp/tempotracking/TempoTrack.cpp
+index 389403e..12a01f8 100644
+--- a/vamp-plugins/dsp/tempotracking/TempoTrack.cpp
++++ b/vamp-plugins/dsp/tempotracking/TempoTrack.cpp
+@@ -64,11 +64,11 @@ void TempoTrack::initialise( TTParams Params )
+     m_sigma = sqrt(3.9017);
+     m_DFWVNnorm = exp( ( log( 2.0 ) / m_rayparam ) * ( m_winLength + 2 ) );
+ 
+-    m_rawDFFrame = new double[ m_winLength ];
+-    m_smoothDFFrame = new double[ m_winLength ];
+-    m_frameACF = new double[ m_winLength ];
+-    m_tempoScratch = new double[ m_lagLength ];
+-	m_smoothRCF = new double[ m_lagLength ];
++    m_rawDFFrame = new fl_t[ m_winLength ];
++    m_smoothDFFrame = new fl_t[ m_winLength ];
++    m_frameACF = new fl_t[ m_winLength ];
++    m_tempoScratch = new fl_t[ m_lagLength ];
++	m_smoothRCF = new fl_t[ m_lagLength ];
+ 
+ 
+     unsigned int winPre = Params.WinT.pre;
+@@ -120,7 +120,7 @@ void TempoTrack::deInitialise()
+ 
+ }
+ 
+-void TempoTrack::createCombFilter(double* Filter, unsigned int winLength, unsigned int TSig, double beatLag)
++void TempoTrack::createCombFilter(fl_t* Filter, unsigned int winLength, unsigned int TSig, fl_t beatLag)
+ {
+     unsigned int i;
+ 
+@@ -136,23 +136,23 @@ void TempoTrack::createCombFilter(double* Filter, unsigned int winLength, unsign
+ 	m_sigma = beatLag/4;
+ 	for( i = 0; i < winLength; i++ )
+ 	{
+-	    double dlag = (double)(i+1) - beatLag;
++	    fl_t dlag = (fl_t)(i+1) - beatLag;
+ 	    Filter[ i ] =  exp(-0.5 * pow(( dlag / m_sigma), 2.0) ) / (sqrt( 2 * PI) * m_sigma);
+ 	}
+     }
+ }
+ 
+-double TempoTrack::tempoMM(double* ACF, double* weight, int tsig)
++fl_t TempoTrack::tempoMM(fl_t* ACF, fl_t* weight, int tsig)
+ {
+ 
+-    double period = 0;
+-    double maxValRCF = 0.0;
++    fl_t period = 0;
++    fl_t maxValRCF = 0.0;
+     unsigned int maxIndexRCF = 0;
+ 
+-    double* pdPeaks;
++    fl_t* pdPeaks;
+ 
+     unsigned int maxIndexTemp;
+-    double	maxValTemp;
++    fl_t	maxValTemp;
+     unsigned int count; 
+ 	
+     unsigned int numelem,i,j;
+@@ -184,7 +184,7 @@ double TempoTrack::tempoMM(double* ACF, double* weight, int tsig)
+ 	    {
+ 		if( tsig == 0 )
+ 		{					
+-		    m_tempoScratch[i] += ACF[a*(i+1)+b-1] * (1.0 / (2.0 * (double)a-1)) * weight[i];
++		    m_tempoScratch[i] += ACF[a*(i+1)+b-1] * (1.0 / (2.0 * (fl_t)a-1)) * weight[i];
+ 		}
+ 		else
+ 		{
+@@ -216,13 +216,13 @@ double TempoTrack::tempoMM(double* ACF, double* weight, int tsig)
+ 	}
+ 	else // using rayleigh weighting
+ 	{
+-		vector <vector<double> > rcfMat;
++		vector <vector<fl_t> > rcfMat;
+ 	
+-		double sumRcf = 0.;
++		fl_t sumRcf = 0.;
+ 	
+-		double maxVal = 0.;
++		fl_t maxVal = 0.;
+ 		// now find the two values which minimise rcfMat
+-		double minVal = 0.;
++		fl_t minVal = 0.;
+ 		int p_i = 1; // periodicity for row i;
+ 		int p_j = 1; //periodicity for column j;
+ 	
+@@ -246,7 +246,7 @@ double TempoTrack::tempoMM(double* ACF, double* weight, int tsig)
+ 		// create a matrix to store m_tempoScratchValues modified by log2 ratio
+ 		for ( i=0; i<m_lagLength; i++)
+ 		{
+-			rcfMat.push_back  ( vector<double>() ); // adds a new row...
++			rcfMat.push_back  ( vector<fl_t>() ); // adds a new row...
+ 		}
+ 	
+ 		for (i=0; i<m_lagLength; i++)
+@@ -262,7 +262,7 @@ double TempoTrack::tempoMM(double* ACF, double* weight, int tsig)
+ 		{
+ 			for (j=1; j<m_lagLength; j++)
+ 			{
+-				double log2PeriodRatio = log( static_cast<double>(i)/static_cast<double>(j) ) / log(2.0);
++				fl_t log2PeriodRatio = log( static_cast<fl_t>(i)/static_cast<fl_t>(j) ) / log(2.0);
+ 				rcfMat[i][j] = ( abs(1.0-abs(log2PeriodRatio)) );
+ 				rcfMat[i][j] += ( 0.01*( 1./(m_tempoScratch[i]+m_tempoScratch[j]) ) );
+ 			}
+@@ -316,7 +316,7 @@ double TempoTrack::tempoMM(double* ACF, double* weight, int tsig)
+ 	}
+ 
+ 
+-    double locked = 5168.f / maxIndexRCF;
++    fl_t locked = 5168.f / maxIndexRCF;
+     if (locked >= 30 && locked <= 180) {
+         m_lockedTempo = locked;
+     }
+@@ -339,10 +339,10 @@ std::cerr << "tempoMM: maxIndexRCF = " << maxIndexRCF << std::endl;
+         std::cerr << "tsig == 4" << std::endl;
+ #endif
+ 
+-	pdPeaks = new double[ 4 ];
++	pdPeaks = new fl_t[ 4 ];
+ 	for( i = 0; i < 4; i++ ){ pdPeaks[ i ] = 0.0;}
+ 
+-	pdPeaks[ 0 ] = ( double )maxIndexRCF + 1;
++	pdPeaks[ 0 ] = ( fl_t )maxIndexRCF + 1;
+ 
+ 	maxIndexTemp = 0;
+ 	maxValTemp = 0.0;
+@@ -357,7 +357,7 @@ std::cerr << "tempoMM: maxIndexRCF = " << maxIndexRCF << std::endl;
+ 	    }
+ 	    count++;
+ 	}
+-	pdPeaks[ 1 ] = (double)( maxIndexTemp + 1 + ( (2 * maxIndexRCF + 1 ) - 2 ) + 1 )/2;
++	pdPeaks[ 1 ] = (fl_t)( maxIndexTemp + 1 + ( (2 * maxIndexRCF + 1 ) - 2 ) + 1 )/2;
+ 
+ 	maxIndexTemp = 0;
+ 	maxValTemp = 0.0;
+@@ -372,7 +372,7 @@ std::cerr << "tempoMM: maxIndexRCF = " << maxIndexRCF << std::endl;
+ 	    }
+ 	    count++;
+ 	}
+-	pdPeaks[ 2 ] = (double)( maxIndexTemp + 1 + ( (3 * maxIndexRCF + 2) - 4 ) + 1 )/3;
++	pdPeaks[ 2 ] = (fl_t)( maxIndexTemp + 1 + ( (3 * maxIndexRCF + 2) - 4 ) + 1 )/3;
+ 
+ 	maxIndexTemp = 0;
+ 	maxValTemp = 0.0;
+@@ -387,7 +387,7 @@ std::cerr << "tempoMM: maxIndexRCF = " << maxIndexRCF << std::endl;
+ 	    }
+ 	    count++;
+ 	}
+-	pdPeaks[ 3 ] = (double)( maxIndexTemp + 1 + ( (4 * maxIndexRCF + 3) - 9 ) + 1 )/4 ;
++	pdPeaks[ 3 ] = (fl_t)( maxIndexTemp + 1 + ( (4 * maxIndexRCF + 3) - 9 ) + 1 )/4 ;
+ 
+ 
+ 	period = MathUtilities::mean( pdPeaks, 4 );
+@@ -398,10 +398,10 @@ std::cerr << "tempoMM: maxIndexRCF = " << maxIndexRCF << std::endl;
+        std::cerr << "tsig != 4" << std::endl;
+ #endif
+ 
+-	pdPeaks = new double[ 3 ];
++	pdPeaks = new fl_t[ 3 ];
+ 	for( i = 0; i < 3; i++ ){ pdPeaks[ i ] = 0.0;}
+ 
+-	pdPeaks[ 0 ] = ( double )maxIndexRCF + 1;
++	pdPeaks[ 0 ] = ( fl_t )maxIndexRCF + 1;
+ 
+ 	maxIndexTemp = 0;
+ 	maxValTemp = 0.0;
+@@ -416,7 +416,7 @@ std::cerr << "tempoMM: maxIndexRCF = " << maxIndexRCF << std::endl;
+ 	    }
+ 	    count++;
+ 	}
+-	pdPeaks[ 1 ] = (double)( maxIndexTemp + 1 + ( (2 * maxIndexRCF + 1 ) - 2 ) + 1 )/2;
++	pdPeaks[ 1 ] = (fl_t)( maxIndexTemp + 1 + ( (2 * maxIndexRCF + 1 ) - 2 ) + 1 )/2;
+ 
+ 	maxIndexTemp = 0;
+ 	maxValTemp = 0.0;
+@@ -431,7 +431,7 @@ std::cerr << "tempoMM: maxIndexRCF = " << maxIndexRCF << std::endl;
+ 	    }
+ 	    count++;
+ 	}
+-	pdPeaks[ 2 ] = (double)( maxIndexTemp + 1 + ( (3 * maxIndexRCF + 2) - 4 ) + 1 )/3;
++	pdPeaks[ 2 ] = (fl_t)( maxIndexTemp + 1 + ( (3 * maxIndexRCF + 2) - 4 ) + 1 )/3;
+ 
+ 
+ 	period = MathUtilities::mean( pdPeaks, 3 );
+@@ -442,9 +442,9 @@ std::cerr << "tempoMM: maxIndexRCF = " << maxIndexRCF << std::endl;
+     return period;
+ }
+ 
+-void TempoTrack::stepDetect( double* periodP, double* periodG, int currentIdx, int* flag )
++void TempoTrack::stepDetect( fl_t* periodP, fl_t* periodG, int currentIdx, int* flag )
+ {
+-    double stepthresh = 1 * 3.9017;
++    fl_t stepthresh = 1 * 3.9017;
+ 
+     if( *flag )
+     {
+@@ -462,9 +462,9 @@ void TempoTrack::stepDetect( double* periodP, double* periodG, int currentIdx, i
+     }
+ }
+ 
+-void TempoTrack::constDetect( double* periodP, int currentIdx, int* flag )
++void TempoTrack::constDetect( fl_t* periodP, int currentIdx, int* flag )
+ {
+-    double constthresh = 2 * 3.9017;
++    fl_t constthresh = 2 * 3.9017;
+ 
+     if( fabs( 2 * periodP[ currentIdx ] - periodP[ currentIdx - 1] - periodP[ currentIdx - 2] ) < constthresh)
+     {
+@@ -476,24 +476,24 @@ void TempoTrack::constDetect( double* periodP, int currentIdx, int* flag )
+     }
+ }
+ 
+-int TempoTrack::findMeter(double *ACF, unsigned int len, double period)
++int TempoTrack::findMeter(fl_t *ACF, unsigned int len, fl_t period)
+ {
+     int i;
+     int p = (int)MathUtilities::round( period );
+     int tsig;
+ 
+-    double Energy_3 = 0.0;
+-    double Energy_4 = 0.0;
++    fl_t Energy_3 = 0.0;
++    fl_t Energy_4 = 0.0;
+ 
+-    double temp3A = 0.0;
+-    double temp3B = 0.0;
+-    double temp4A = 0.0;
+-    double temp4B = 0.0;
++    fl_t temp3A = 0.0;
++    fl_t temp3B = 0.0;
++    fl_t temp4A = 0.0;
++    fl_t temp4B = 0.0;
+ 
+-    double* dbf = new double[ len ]; int t = 0;
++    fl_t* dbf = new fl_t[ len ]; int t = 0;
+     for( unsigned int u = 0; u < len; u++ ){ dbf[ u ] = 0.0; }
+ 
+-    if( (double)len < 6 * p + 2 )
++    if( (fl_t)len < 6 * p + 2 )
+     {
+ 	for( i = ( 3 * p - 2 ); i < ( 3 * p + 2 ) + 1; i++ )
+ 	{
+@@ -548,7 +548,7 @@ int TempoTrack::findMeter(double *ACF, unsigned int len, double period)
+     return tsig;
+ }
+ 
+-void TempoTrack::createPhaseExtractor(double *Filter, unsigned int winLength, double period, unsigned int fsp, unsigned int lastBeat)
++void TempoTrack::createPhaseExtractor(fl_t *Filter, unsigned int winLength, fl_t period, unsigned int fsp, unsigned int lastBeat)
+ {	
+     int p = (int)MathUtilities::round( period );
+     int predictedOffset = 0;
+@@ -562,13 +562,13 @@ void TempoTrack::createPhaseExtractor(double *Filter, unsigned int winLength, do
+         period = 5168 / 120;
+     }
+ 
+-    double* phaseScratch = new double[ p*2 + 2 ];
++    fl_t* phaseScratch = new fl_t[ p*2 + 2 ];
+     for (int i = 0; i < p*2 + 2; ++i) phaseScratch[i] = 0.0;
+ 
+ 	
+     if( lastBeat != 0 )
+     {
+-	lastBeat = (int)MathUtilities::round((double)lastBeat );///(double)winLength);
++	lastBeat = (int)MathUtilities::round((fl_t)lastBeat );///(fl_t)winLength);
+ 
+         predictedOffset = lastBeat + p - fsp;
+ 
+@@ -581,11 +581,11 @@ void TempoTrack::createPhaseExtractor(double *Filter, unsigned int winLength, do
+     if( lastBeat != 0 )
+     {
+ 	int mu = p;
+-	double sigma = (double)p/8;
+-	double PhaseMin = 0.0;
+-	double PhaseMax = 0.0;
++	fl_t sigma = (fl_t)p/8;
++	fl_t PhaseMin = 0.0;
++	fl_t PhaseMax = 0.0;
+ 	unsigned int scratchLength = p*2;
+-	double temp = 0.0;
++	fl_t temp = 0.0;
+ 
+ 	for(  int i = 0; i < scratchLength; i++ )
+ 	{
+@@ -624,19 +624,19 @@ void TempoTrack::createPhaseExtractor(double *Filter, unsigned int winLength, do
+     delete [] phaseScratch;
+ }
+ 
+-int TempoTrack::phaseMM(double *DF, double *weighting, unsigned int winLength, double period)
++int TempoTrack::phaseMM(fl_t *DF, fl_t *weighting, unsigned int winLength, fl_t period)
+ {
+     int alignment = 0;
+     int p = (int)MathUtilities::round( period );
+ 
+-    double temp = 0.0;
++    fl_t temp = 0.0;
+ 
+-    double* y = new double[ winLength ];
+-    double* align = new double[ p ];
++    fl_t* y = new fl_t[ winLength ];
++    fl_t* align = new fl_t[ p ];
+ 
+     for( int i = 0; i < winLength; i++ )
+     {	
+-	y[ i ] = (double)( -i + winLength  )/(double)winLength;
++	y[ i ] = (fl_t)( -i + winLength  )/(fl_t)winLength;
+ 	y[ i ] = pow(y [i ],2.0); // raise to power 2.
+     }
+ 
+@@ -651,7 +651,7 @@ int TempoTrack::phaseMM(double *DF, double *weighting, unsigned int winLength, d
+     }
+ 
+ 
+-    double valTemp = 0.0;
++    fl_t valTemp = 0.0;
+     for(int i = 0; i < p; i++)
+     {
+ 	if( align[ i ] > valTemp )
+@@ -667,7 +667,7 @@ int TempoTrack::phaseMM(double *DF, double *weighting, unsigned int winLength, d
+     return alignment;
+ }
+ 
+-int TempoTrack::beatPredict(unsigned int FSP0, double alignment, double period, unsigned int step )
++int TempoTrack::beatPredict(unsigned int FSP0, fl_t alignment, fl_t period, unsigned int step )
+ {
+     int beat = 0;
+ 
+@@ -693,21 +693,21 @@ int TempoTrack::beatPredict(unsigned int FSP0, double alignment, double period,
+ 
+ 
+ 
+-vector<int> TempoTrack::process( vector <double> DF,
+-                                 vector <double> *tempoReturn )
++vector<int> TempoTrack::process( vector <fl_t> DF,
++                                 vector <fl_t> *tempoReturn )
+ {
+     m_dataLength = DF.size();
+ 	
+     m_lockedTempo = 0.0;
+ 
+-    double	period = 0.0;
++    fl_t	period = 0.0;
+     int stepFlag = 0;
+     int constFlag = 0;
+     int FSP = 0;
+     int tsig = 0;
+     int lastBeat = 0;
+ 
+-    vector <double> causalDF;
++    vector <fl_t> causalDF;
+ 
+     causalDF = DF;
+ 
+@@ -720,13 +720,13 @@ vector<int> TempoTrack::process( vector <double> DF,
+     }
+ 	
+ 	
+-    double* RW = new double[ m_lagLength ];
++    fl_t* RW = new fl_t[ m_lagLength ];
+     for( unsigned int clear = 0; clear < m_lagLength; clear++){ RW[ clear ] = 0.0;}
+ 
+-    double* GW = new double[ m_lagLength ];
++    fl_t* GW = new fl_t[ m_lagLength ];
+     for(unsigned int clear = 0; clear < m_lagLength; clear++){ GW[ clear ] = 0.0;}
+ 
+-    double* PW = new double[ m_lagLength ];
++    fl_t* PW = new fl_t[ m_lagLength ];
+     for(unsigned clear = 0; clear < m_lagLength; clear++){ PW[ clear ] = 0.0;}
+ 
+     m_DFFramer.setSource( &causalDF[0], m_dataLength );
+@@ -737,13 +737,13 @@ vector<int> TempoTrack::process( vector <double> DF,
+     std::cerr << "TTFrames = " << TTFrames << std::endl;
+ #endif
+ 	
+-    double* periodP = new double[ TTFrames ];
++    fl_t* periodP = new fl_t[ TTFrames ];
+     for(unsigned clear = 0; clear < TTFrames; clear++){ periodP[ clear ] = 0.0;}
+ 	
+-    double* periodG = new double[ TTFrames ];
++    fl_t* periodG = new fl_t[ TTFrames ];
+     for(unsigned clear = 0; clear < TTFrames; clear++){ periodG[ clear ] = 0.0;}
+ 	
+-    double* alignment = new double[ TTFrames ];
++    fl_t* alignment = new fl_t[ TTFrames ];
+     for(unsigned clear = 0; clear < TTFrames; clear++){ alignment[ clear ] = 0.0;}
+ 
+     m_beats.clear();
+diff --git a/vamp-plugins/dsp/tempotracking/TempoTrack.h b/vamp-plugins/dsp/tempotracking/TempoTrack.h
+index 0c31571..222c189 100644
+--- a/vamp-plugins/dsp/tempotracking/TempoTrack.h
++++ b/vamp-plugins/dsp/tempotracking/TempoTrack.h
+@@ -22,6 +22,7 @@
+ 
+ #include "dsp/signalconditioning/DFProcess.h"
+ #include "maths/Correlation.h"
++#include "maths/MathAliases.h"
+ #include "dsp/signalconditioning/Framer.h"
+ 
+ 
+@@ -40,8 +41,8 @@ struct TTParams
+     unsigned int lagLength; //Lag & Stride size
+     unsigned int alpha; //alpha-norm parameter
+     unsigned int LPOrd; // low-pass Filter order
+-    double* LPACoeffs; //low pass Filter den coefficients
+-    double* LPBCoeffs; //low pass Filter num coefficients
++    fl_t* LPACoeffs; //low pass Filter den coefficients
++    fl_t* LPBCoeffs; //low pass Filter num coefficients
+     WinThresh WinT;//window size in frames for adaptive thresholding [pre post]:
+ };
+ 
+@@ -52,45 +53,45 @@ public:
+     TempoTrack( TTParams Params );
+     virtual ~TempoTrack();
+ 
+-    vector<int> process( vector <double> DF, vector <double> *tempoReturn = 0);
++    vector<int> process( vector <fl_t> DF, vector <fl_t> *tempoReturn = 0);
+ 
+ 	
+ private:
+     void initialise( TTParams Params );
+     void deInitialise();
+ 
+-    int beatPredict( unsigned int FSP, double alignment, double period, unsigned int step);
+-    int phaseMM( double* DF, double* weighting, unsigned int winLength, double period );
+-    void createPhaseExtractor( double* Filter, unsigned int winLength,  double period,  unsigned int fsp, unsigned int lastBeat );
+-    int findMeter( double* ACF,  unsigned int len, double period );
+-    void constDetect( double* periodP, int currentIdx, int* flag );
+-    void stepDetect( double* periodP, double* periodG, int currentIdx, int* flag );
+-    void createCombFilter( double* Filter, unsigned int winLength, unsigned int TSig, double beatLag );
+-    double tempoMM( double* ACF, double* weight, int sig );
++    int beatPredict( unsigned int FSP, fl_t alignment, fl_t period, unsigned int step);
++    int phaseMM( fl_t* DF, fl_t* weighting, unsigned int winLength, fl_t period );
++    void createPhaseExtractor( fl_t* Filter, unsigned int winLength,  fl_t period,  unsigned int fsp, unsigned int lastBeat );
++    int findMeter( fl_t* ACF,  unsigned int len, fl_t period );
++    void constDetect( fl_t* periodP, int currentIdx, int* flag );
++    void stepDetect( fl_t* periodP, fl_t* periodG, int currentIdx, int* flag );
++    void createCombFilter( fl_t* Filter, unsigned int winLength, unsigned int TSig, fl_t beatLag );
++    fl_t tempoMM( fl_t* ACF, fl_t* weight, int sig );
+ 	
+     unsigned int m_dataLength;
+     unsigned int m_winLength;
+     unsigned int m_lagLength;
+ 
+-    double		 m_rayparam;
+-    double		 m_sigma;
+-    double		 m_DFWVNnorm;
++    fl_t		 m_rayparam;
++    fl_t		 m_sigma;
++    fl_t		 m_DFWVNnorm;
+ 
+     vector<int>	 m_beats; // Vector of detected beats
+ 
+-    double m_lockedTempo;
++    fl_t m_lockedTempo;
+ 
+-    double* m_tempoScratch;
+-    double* m_smoothRCF; // Smoothed Output of Comb Filterbank (m_tempoScratch)
++    fl_t* m_tempoScratch;
++    fl_t* m_smoothRCF; // Smoothed Output of Comb Filterbank (m_tempoScratch)
+ 	
+     // Processing Buffers 
+-    double* m_rawDFFrame; // Original Detection Function Analysis Frame
+-    double* m_smoothDFFrame; // Smoothed Detection Function Analysis Frame
+-    double* m_frameACF; // AutoCorrelation of Smoothed Detection Function 
++    fl_t* m_rawDFFrame; // Original Detection Function Analysis Frame
++    fl_t* m_smoothDFFrame; // Smoothed Detection Function Analysis Frame
++    fl_t* m_frameACF; // AutoCorrelation of Smoothed Detection Function 
+ 
+     //Low Pass Coefficients for DF Smoothing
+-    double* m_ACoeffs;
+-    double* m_BCoeffs;
++    fl_t* m_ACoeffs;
++    fl_t* m_BCoeffs;
+ 	
+     // Objetcs/operators declaration
+     Framer m_DFFramer;
+diff --git a/vamp-plugins/dsp/tempotracking/TempoTrackV2.cpp b/vamp-plugins/dsp/tempotracking/TempoTrackV2.cpp
+index 5466930..3cfde00 100644
+--- a/vamp-plugins/dsp/tempotracking/TempoTrackV2.cpp
++++ b/vamp-plugins/dsp/tempotracking/TempoTrackV2.cpp
+@@ -42,10 +42,10 @@ TempoTrackV2::filter_df(d_vec_t &df)
+     b[1] = 0.4131;
+     b[2] = 0.2066;
+ 
+-    double inp1 = 0.;
+-    double inp2 = 0.;
+-    double out1 = 0.;
+-    double out2 = 0.;
++    fl_t inp1 = 0.;
++    fl_t inp2 = 0.;
++    fl_t out1 = 0.;
++    fl_t out2 = 0.;
+ 
+ 
+     // forwards filtering
+@@ -98,10 +98,10 @@ TempoTrackV2::filter_df(d_vec_t &df)
+ // Note, if inputtempo = 120 and constraintempo = false, then functionality is
+ // as it was before
+ void
+-TempoTrackV2::calculateBeatPeriod(const vector<double> &df,
+-                                  vector<double> &beat_period,
+-                                  vector<double> &tempi,
+-                                  double inputtempo, bool constraintempo)
++TempoTrackV2::calculateBeatPeriod(const vector<fl_t> &df,
++                                  vector<fl_t> &beat_period,
++                                  vector<fl_t> &tempi,
++                                  fl_t inputtempo, bool constraintempo)
+ {
+     // to follow matlab.. split into 512 sample frames with a 128 hop size
+     // calculate the acf,
+@@ -117,7 +117,7 @@ TempoTrackV2::calculateBeatPeriod(const vector<double> &df,
+     // accordingly.
+     // note: 60*44100/512 is a magic number
+     // this might (will?) break if a user specifies a different frame rate for the onset detection function
+-    double rayparam = (60*44100/512)/inputtempo;
++    fl_t rayparam = (60*44100/512)/inputtempo;
+ 
+     // these debug statements can be removed.
+ //    std::cerr << "inputtempo" << inputtempo << std::endl;
+@@ -135,7 +135,7 @@ TempoTrackV2::calculateBeatPeriod(const vector<double> &df,
+         {
+             // MEPD 28/11/12
+             // do a gaussian weighting instead of rayleigh
+-            wv[i] = exp( (-1.*pow((static_cast<double> (i)-rayparam),2.)) / (2.*pow(rayparam/4.,2.)) );
++            wv[i] = exp( (-1.*pow((static_cast<fl_t> (i)-rayparam),2.)) / (2.*pow(rayparam/4.,2.)) );
+         }
+     }
+     else
+@@ -144,7 +144,7 @@ TempoTrackV2::calculateBeatPeriod(const vector<double> &df,
+         {
+             // MEPD 28/11/12
+             // standard rayleigh weighting over periodicities
+-            wv[i] = (static_cast<double> (i) / pow(rayparam,2.)) * exp((-1.*pow(-static_cast<double> (i),2.)) / (2.*pow(rayparam,2.)));
++            wv[i] = (static_cast<fl_t> (i) / pow(rayparam,2.)) * exp((-1.*pow(-static_cast<fl_t> (i),2.)) / (2.*pow(rayparam,2.)));
+         }
+     }
+ 
+@@ -200,15 +200,15 @@ TempoTrackV2::get_rcf(const d_vec_t &dfframe_in, const d_vec_t &wv, d_vec_t &rcf
+ 
+     for (unsigned int lag=0; lag<dfframe.size(); lag++)
+     {
+-        double sum = 0.;
+-        double tmp = 0.;
++        fl_t sum = 0.;
++        fl_t tmp = 0.;
+ 
+         for (unsigned int n=0; n<(dfframe.size()-lag); n++)
+         {
+             tmp = dfframe[n] * dfframe[n+lag];
+             sum += tmp;
+         }
+-        acf[lag] = static_cast<double> (sum/ (dfframe.size()-lag));
++        acf[lag] = static_cast<fl_t> (sum/ (dfframe.size()-lag));
+     }
+ 
+     // now apply comb filtering
+@@ -228,7 +228,7 @@ TempoTrackV2::get_rcf(const d_vec_t &dfframe_in, const d_vec_t &wv, d_vec_t &rcf
+     // apply adaptive threshold to rcf
+     MathUtilities::adaptiveThreshold(rcf);
+ 
+-    double rcfsum =0.;
++    fl_t rcfsum =0.;
+     for (unsigned int i=0; i<rcf.size(); i++)
+     {
+         rcf[i] += EPS ;
+@@ -261,13 +261,13 @@ TempoTrackV2::viterbi_decode(const d_mat_t &rcfmat, const d_vec_t &wv, d_vec_t &
+ 
+     // variance of Gaussians in transition matrix
+     // formed of Gaussians on diagonal - implies slow tempo change
+-    double sigma = 8.;
++    fl_t sigma = 8.;
+     // don't want really short beat periods, or really long ones
+     for (unsigned int i=20;i <wv.size()-20; i++)
+     {
+         for (unsigned int j=20; j<wv.size()-20; j++)
+         {
+-            double mu = static_cast<double>(i);
++            fl_t mu = static_cast<fl_t>(i);
+             tmat[i][j] = exp( (-1.*pow((j-mu),2.)) / (2.*pow(sigma,2.)) );
+         }
+     }
+@@ -302,7 +302,7 @@ TempoTrackV2::viterbi_decode(const d_mat_t &rcfmat, const d_vec_t &wv, d_vec_t &
+         psi[0][j] = 0;
+     }
+ 
+-    double deltasum = 0.;
++    fl_t deltasum = 0.;
+     for (unsigned int i=0; i<Q; i++)
+     {
+         deltasum += delta[0][i];
+@@ -332,7 +332,7 @@ TempoTrackV2::viterbi_decode(const d_mat_t &rcfmat, const d_vec_t &wv, d_vec_t &
+         }
+ 
+         // normalise current delta column
+-        double deltasum = 0.;
++        fl_t deltasum = 0.;
+         for (unsigned int i=0; i<Q; i++)
+         {
+             deltasum += delta[t][i];
+@@ -386,10 +386,10 @@ TempoTrackV2::viterbi_decode(const d_mat_t &rcfmat, const d_vec_t &wv, d_vec_t &
+     }
+ }
+ 
+-double
++fl_t
+ TempoTrackV2::get_max_val(const d_vec_t &df)
+ {
+-    double maxval = 0.;
++    fl_t maxval = 0.;
+     for (unsigned int i=0; i<df.size(); i++)
+     {
+         if (maxval < df[i])
+@@ -404,7 +404,7 @@ TempoTrackV2::get_max_val(const d_vec_t &df)
+ int
+ TempoTrackV2::get_max_ind(const d_vec_t &df)
+ {
+-    double maxval = 0.;
++    fl_t maxval = 0.;
+     int ind = 0;
+     for (unsigned int i=0; i<df.size(); i++)
+     {
+@@ -421,7 +421,7 @@ TempoTrackV2::get_max_ind(const d_vec_t &df)
+ void
+ TempoTrackV2::normalise_vec(d_vec_t &df)
+ {
+-    double sum = 0.;
++    fl_t sum = 0.;
+     for (unsigned int i=0; i<df.size(); i++)
+     {
+         sum += df[i];
+@@ -438,9 +438,9 @@ TempoTrackV2::normalise_vec(d_vec_t &df)
+ // of the dynamic program to be set by the user
+ // the default value of alpha = 0.9 and tightness = 4
+ void
+-TempoTrackV2::calculateBeats(const vector<double> &df,
+-                             const vector<double> &beat_period,
+-                             vector<double> &beats, double alpha, double tightness)
++TempoTrackV2::calculateBeats(const vector<fl_t> &df,
++                             const vector<fl_t> &beat_period,
++                             vector<fl_t> &beats, fl_t alpha, fl_t tightness)
+ {
+     if (df.empty() || beat_period.empty()) return;
+ 
+@@ -454,8 +454,8 @@ TempoTrackV2::calculateBeats(const vector<double> &df,
+         backlink[i] = -1;
+     }
+ 
+-    //double tightness = 4.;
+-    //double alpha = 0.9;
++    //fl_t tightness = 4.;
++    //fl_t alpha = 0.9;
+     // MEPD 28/11/12
+     // debug statements that can be removed.
+ //    std::cerr << "alpha" << alpha << std::endl;
+@@ -473,7 +473,7 @@ TempoTrackV2::calculateBeats(const vector<double> &df,
+ 
+         for (unsigned int j=0;j<txwt.size();j++)
+         {
+-            double mu = static_cast<double> (beat_period[i]);
++            fl_t mu = static_cast<fl_t> (beat_period[i]);
+             txwt[j] = exp( -0.5*pow(tightness * log((round(2*mu)-j)/mu),2));
+ 
+             // IF IN THE ALLOWED RANGE, THEN LOOK AT CUMSCORE[I+PRANGE_MIN+J
+@@ -487,7 +487,7 @@ TempoTrackV2::calculateBeats(const vector<double> &df,
+         }
+ 
+         // find max value and index of maximum value
+-        double vv = get_max_val(scorecands);
++        fl_t vv = get_max_val(scorecands);
+         int xx = get_max_ind(scorecands);
+ 
+         cumscore[i] = alpha*vv + (1.-alpha)*localscore[i];
+@@ -524,7 +524,7 @@ TempoTrackV2::calculateBeats(const vector<double> &df,
+     // REVERSE SEQUENCE OF IBEATS AND STORE AS BEATS
+     for (unsigned int i=0; i<ibeats.size(); i++)
+     {
+-        beats.push_back( static_cast<double>(ibeats[ibeats.size()-i-1]) );
++        beats.push_back( static_cast<fl_t>(ibeats[ibeats.size()-i-1]) );
+     }
+ }
+ 
+diff --git a/vamp-plugins/dsp/tempotracking/TempoTrackV2.h b/vamp-plugins/dsp/tempotracking/TempoTrackV2.h
+index 5f30ba7..815cb9f 100644
+--- a/vamp-plugins/dsp/tempotracking/TempoTrackV2.h
++++ b/vamp-plugins/dsp/tempotracking/TempoTrackV2.h
+@@ -18,12 +18,14 @@
+ #define TEMPOTRACKV2_H
+ 
+ #include <vector>
++#include "maths/MathAliases.h"
++
+ using namespace std;
+ 
+ //!!! Question: how far is this actually sample rate dependent?  I
+ // think it does produce plausible results for e.g. 48000 as well as
+ // 44100, but surely the fixed window sizes and comb filtering will
+-// make it prefer double or half time when run at e.g. 96000?
++// make it prefer fl_t or half time when run at e.g. 96000?
+ 
+ class TempoTrackV2
+ {
+@@ -40,51 +42,51 @@ public:
+     ~TempoTrackV2();
+ 
+     // Returned beat periods are given in df increment units; inputtempo and tempi in bpm
+-    void calculateBeatPeriod(const vector<double> &df,
+-                             vector<double> &beatPeriod,
+-                             vector<double> &tempi) {
++    void calculateBeatPeriod(const vector<fl_t> &df,
++                             vector<fl_t> &beatPeriod,
++                             vector<fl_t> &tempi) {
+         calculateBeatPeriod(df, beatPeriod, tempi, 120.0, false);
+     }
+ 
+     // Returned beat periods are given in df increment units; inputtempo and tempi in bpm
+     // MEPD 28/11/12 Expose inputtempo and constraintempo parameters
+     // Note, if inputtempo = 120 and constraintempo = false, then functionality is as it was before
+-    void calculateBeatPeriod(const vector<double> &df,
+-                             vector<double> &beatPeriod,
+-                             vector<double> &tempi,
+-                             double inputtempo, bool constraintempo);
++    void calculateBeatPeriod(const vector<fl_t> &df,
++                             vector<fl_t> &beatPeriod,
++                             vector<fl_t> &tempi,
++                             fl_t inputtempo, bool constraintempo);
+ 
+     // Returned beat positions are given in df increment units
+-    void calculateBeats(const vector<double> &df,
+-                        const vector<double> &beatPeriod,
+-                        vector<double> &beats) {
++    void calculateBeats(const vector<fl_t> &df,
++                        const vector<fl_t> &beatPeriod,
++                        vector<fl_t> &beats) {
+         calculateBeats(df, beatPeriod, beats, 0.9, 4.0);
+     }
+ 
+     // Returned beat positions are given in df increment units
+     // MEPD 28/11/12 Expose alpha and tightness parameters
+     // Note, if alpha = 0.9 and tightness = 4, then functionality is as it was before
+-    void calculateBeats(const vector<double> &df,
+-                        const vector<double> &beatPeriod,
+-                        vector<double> &beats,
+-                        double alpha, double tightness);
++    void calculateBeats(const vector<fl_t> &df,
++                        const vector<fl_t> &beatPeriod,
++                        vector<fl_t> &beats,
++                        fl_t alpha, fl_t tightness);
+ 
+ private:
+     typedef vector<int> i_vec_t;
+     typedef vector<vector<int> > i_mat_t;
+-    typedef vector<double> d_vec_t;
+-    typedef vector<vector<double> > d_mat_t;
++    typedef vector<fl_t> d_vec_t;
++    typedef vector<vector<fl_t> > d_mat_t;
+ 
+     float m_rate;
+     size_t m_increment;
+ 
+     void adapt_thresh(d_vec_t &df);
+-    double mean_array(const d_vec_t &dfin, int start, int end);
++    fl_t mean_array(const d_vec_t &dfin, int start, int end);
+     void filter_df(d_vec_t &df);
+     void get_rcf(const d_vec_t &dfframe, const d_vec_t &wv, d_vec_t &rcf);
+     void viterbi_decode(const d_mat_t &rcfmat, const d_vec_t &wv,
+                         d_vec_t &bp, d_vec_t &tempi);
+-    double get_max_val(const d_vec_t &df);
++    fl_t get_max_val(const d_vec_t &df);
+     int get_max_ind(const d_vec_t &df);
+     void normalise_vec(d_vec_t &df);
+ };
+diff --git a/vamp-plugins/dsp/transforms/FFT.cpp b/vamp-plugins/dsp/transforms/FFT.cpp
+index f5bbc3d..d33ba8c 100644
+--- a/vamp-plugins/dsp/transforms/FFT.cpp
++++ b/vamp-plugins/dsp/transforms/FFT.cpp
+@@ -37,10 +37,10 @@ public:
+     }
+ 
+     void process(bool inverse,
+-                 const double *ri,
+-                 const double *ii,
+-                 double *ro,
+-                 double *io) {
++                 const fl_t *ri,
++                 const fl_t *ii,
++                 fl_t *ro,
++                 fl_t *io) {
+ 
+         for (int i = 0; i < m_n; ++i) {
+             m_kin[i].r = ri[i];
+@@ -60,7 +60,7 @@ public:
+ 
+             kiss_fft(m_plani, m_kin, m_kout);
+ 
+-            double scale = 1.0 / m_n;
++            fl_t scale = 1.0 / m_n;
+ 
+             for (int i = 0; i < m_n; ++i) {
+                 ro[i] = m_kout[i].r * scale;
+@@ -89,8 +89,8 @@ FFT::~FFT()
+ 
+ void
+ FFT::process(bool inverse,
+-             const double *p_lpRealIn, const double *p_lpImagIn,
+-             double *p_lpRealOut, double *p_lpImagOut)
++             const fl_t *p_lpRealIn, const fl_t *p_lpImagIn,
++             fl_t *p_lpRealOut, fl_t *p_lpImagOut)
+ {
+     m_d->process(inverse,
+                  p_lpRealIn, p_lpImagIn,
+@@ -116,7 +116,7 @@ public:
+         delete[] m_c;
+     }
+ 
+-    void forward(const double *ri, double *ro, double *io) {
++    void forward(const fl_t *ri, fl_t *ro, fl_t *io) {
+ 
+         kiss_fftr(m_planf, ri, m_c);
+ 
+@@ -131,9 +131,9 @@ public:
+         }
+     }
+ 
+-    void forwardMagnitude(const double *ri, double *mo) {
++    void forwardMagnitude(const fl_t *ri, fl_t *mo) {
+ 
+-        double *io = new double[m_n];
++        fl_t *io = new fl_t[m_n];
+ 
+         forward(ri, mo, io);
+ 
+@@ -144,7 +144,7 @@ public:
+         delete[] io;
+     }
+ 
+-    void inverse(const double *ri, const double *ii, double *ro) {
++    void inverse(const fl_t *ri, const fl_t *ii, fl_t *ro) {
+ 
+         // kiss_fftr.h says
+         // "input freqdata has nfft/2+1 complex points"
+@@ -156,7 +156,7 @@ public:
+         
+         kiss_fftri(m_plani, m_c, ro);
+ 
+-        double scale = 1.0 / m_n;
++        fl_t scale = 1.0 / m_n;
+ 
+         for (int i = 0; i < m_n; ++i) {
+             ro[i] *= scale;
+@@ -181,19 +181,19 @@ FFTReal::~FFTReal()
+ }
+ 
+ void
+-FFTReal::forward(const double *ri, double *ro, double *io)
++FFTReal::forward(const fl_t *ri, fl_t *ro, fl_t *io)
+ {
+     m_d->forward(ri, ro, io);
+ }
+ 
+ void
+-FFTReal::forwardMagnitude(const double *ri, double *mo)
++FFTReal::forwardMagnitude(const fl_t *ri, fl_t *mo)
+ {
+     m_d->forwardMagnitude(ri, mo);
+ }
+ 
+ void
+-FFTReal::inverse(const double *ri, const double *ii, double *ro)
++FFTReal::inverse(const fl_t *ri, const fl_t *ii, fl_t *ro)
+ {
+     m_d->inverse(ri, ii, ro);
+ }
+diff --git a/vamp-plugins/dsp/transforms/FFT.h b/vamp-plugins/dsp/transforms/FFT.h
+index c8956ac..c391f65 100644
+--- a/vamp-plugins/dsp/transforms/FFT.h
++++ b/vamp-plugins/dsp/transforms/FFT.h
+@@ -9,6 +9,8 @@
+ #ifndef FFT_H
+ #define FFT_H
+ 
++#include "maths/MathAliases.h"
++
+ class FFT  
+ {
+ public:
+@@ -35,8 +37,8 @@ public:
+      * The inverse transform is scaled by 1/nsamples.
+      */
+     void process(bool inverse,
+-                 const double *realIn, const double *imagIn,
+-                 double *realOut, double *imagOut);
++                 const fl_t *realIn, const fl_t *imagIn,
++                 fl_t *realOut, fl_t *imagOut);
+     
+ private:
+     class D;
+@@ -65,8 +67,8 @@ public:
+      * compatibility with existing code, the conjugate half of the
+      * output is returned even though it is redundant.
+      */
+-    void forward(const double *realIn,
+-                 double *realOut, double *imagOut);
++    void forward(const fl_t *realIn,
++                 fl_t *realOut, fl_t *imagOut);
+ 
+     /**
+      * Carry out a forward real-to-complex transform of size nsamples,
+@@ -78,7 +80,7 @@ public:
+      * compatibility with existing code, the conjugate half of the
+      * output is returned even though it is redundant.
+      */
+-    void forwardMagnitude(const double *realIn, double *magOut);
++    void forwardMagnitude(const fl_t *realIn, fl_t *magOut);
+ 
+     /**
+      * Carry out an inverse real transform (i.e. complex-to-real) of
+@@ -94,8 +96,8 @@ public:
+      *
+      * The inverse transform is scaled by 1/nsamples.
+      */
+-    void inverse(const double *realIn, const double *imagIn,
+-                 double *realOut);
++    void inverse(const fl_t *realIn, const fl_t *imagIn,
++                 fl_t *realOut);
+ 
+ private:
+     class D;
+diff --git a/vamp-plugins/maths/Correlation.cpp b/vamp-plugins/maths/Correlation.cpp
+index 17ee28f..6fdcbe7 100644
+--- a/vamp-plugins/maths/Correlation.cpp
++++ b/vamp-plugins/maths/Correlation.cpp
+@@ -29,10 +29,10 @@ Correlation::~Correlation()
+ 
+ }
+ 
+-void Correlation::doAutoUnBiased(double *src, double *dst, unsigned int length)
++void Correlation::doAutoUnBiased(fl_t *src, fl_t *dst, unsigned int length)
+ {
+-    double tmp = 0.0;
+-    double outVal = 0.0;
++    fl_t tmp = 0.0;
++    fl_t outVal = 0.0;
+ 
+     unsigned int i,j;
+ 
+diff --git a/vamp-plugins/maths/Correlation.h b/vamp-plugins/maths/Correlation.h
+index 85fcc73..e46ecf0 100644
+--- a/vamp-plugins/maths/Correlation.h
++++ b/vamp-plugins/maths/Correlation.h
+@@ -16,12 +16,14 @@
+ #ifndef CORRELATION_H
+ #define CORRELATION_H
+ 
++#include "MathAliases.h"
++
+ #define  EPS  2.2204e-016
+ 
+ class Correlation  
+ {
+ public:
+-    void doAutoUnBiased( double* src, double* dst, unsigned int length );
++    void doAutoUnBiased( fl_t* src, fl_t* dst, unsigned int length );
+     Correlation();
+     virtual ~Correlation();
+ 
+diff --git a/vamp-plugins/maths/CosineDistance.cpp b/vamp-plugins/maths/CosineDistance.cpp
+index 13ab9ce..2a61b65 100644
+--- a/vamp-plugins/maths/CosineDistance.cpp
++++ b/vamp-plugins/maths/CosineDistance.cpp
+@@ -20,11 +20,11 @@
+ 
+ using std::cerr;
+ 
+-double CosineDistance::distance(const vector<double> &v1,
+-                                const vector<double> &v2)
++fl_t CosineDistance::distance(const vector<fl_t> &v1,
++                                const vector<fl_t> &v2)
+ {
+     dist = 1.0; dDenTot = 0; dDen1 = 0; dDen2 = 0; dSum1 =0;
+-    double small = 1e-20;
++    fl_t small = 1e-20;
+ 
+     //check if v1, v2 same size
+     if (v1.size() != v2.size())
+diff --git a/vamp-plugins/maths/CosineDistance.h b/vamp-plugins/maths/CosineDistance.h
+index 4cdfd4f..280ce1a 100644
+--- a/vamp-plugins/maths/CosineDistance.h
++++ b/vamp-plugins/maths/CosineDistance.h
+@@ -18,6 +18,7 @@
+ 
+ #include <vector>
+ #include <math.h>
++#include "MathAliases.h"
+ 
+ using std::vector;
+ 
+@@ -27,10 +28,10 @@ public:
+     CosineDistance() { }
+     ~CosineDistance() { }
+ 
+-    double distance(const vector<double> &v1, const vector<double> &v2);
++    fl_t distance(const vector<fl_t> &v1, const vector<fl_t> &v2);
+ 
+ protected:
+-    double dist, dDenTot, dDen1, dDen2, dSum1;
++    fl_t dist, dDenTot, dDen1, dDen2, dSum1;
+ };
+ 
+ #endif
+diff --git a/vamp-plugins/maths/KLDivergence.cpp b/vamp-plugins/maths/KLDivergence.cpp
+index 3c3cb13..8af1f8e 100644
+--- a/vamp-plugins/maths/KLDivergence.cpp
++++ b/vamp-plugins/maths/KLDivergence.cpp
+@@ -17,21 +17,21 @@
+ 
+ #include <cmath>
+ 
+-double KLDivergence::distanceGaussian(const vector<double> &m1,
+-                                      const vector<double> &v1,
+-                                      const vector<double> &m2,
+-                                      const vector<double> &v2)
++fl_t KLDivergence::distanceGaussian(const vector<fl_t> &m1,
++                                      const vector<fl_t> &v1,
++                                      const vector<fl_t> &m2,
++                                      const vector<fl_t> &v2)
+ {
+     int sz = m1.size();
+ 
+-    double d = -2.0 * sz;
+-    double small = 1e-20;
++    fl_t d = -2.0 * sz;
++    fl_t small = 1e-20;
+ 
+     for (int k = 0; k < sz; ++k) {
+ 
+-        double kv1 = v1[k] + small;
+-        double kv2 = v2[k] + small;
+-        double km = (m1[k] - m2[k]) + small;
++        fl_t kv1 = v1[k] + small;
++        fl_t kv2 = v2[k] + small;
++        fl_t km = (m1[k] - m2[k]) + small;
+ 
+         d += kv1 / kv2 + kv2 / kv1;
+         d += km * (1.0 / kv1 + 1.0 / kv2) * km;
+@@ -42,14 +42,14 @@ double KLDivergence::distanceGaussian(const vector<double> &m1,
+     return d;
+ }
+ 
+-double KLDivergence::distanceDistribution(const vector<double> &d1,
+-                                          const vector<double> &d2,
++fl_t KLDivergence::distanceDistribution(const vector<fl_t> &d1,
++                                          const vector<fl_t> &d2,
+                                           bool symmetrised)
+ {
+     int sz = d1.size();
+ 
+-    double d = 0;
+-    double small = 1e-20;
++    fl_t d = 0;
++    fl_t small = 1e-20;
+     
+     for (int i = 0; i < sz; ++i) {
+         d += d1[i] * log10((d1[i] + small) / (d2[i] + small));
+diff --git a/vamp-plugins/maths/KLDivergence.h b/vamp-plugins/maths/KLDivergence.h
+index 6f03429..66a1af1 100644
+--- a/vamp-plugins/maths/KLDivergence.h
++++ b/vamp-plugins/maths/KLDivergence.h
+@@ -17,6 +17,7 @@
+ #define KLDIVERGENCE_H
+ 
+ #include <vector>
++#include "MathAliases.h"
+ 
+ using std::vector;
+ 
+@@ -34,10 +35,10 @@ public:
+      * models based on mean and variance vectors.  All input vectors
+      * must be of equal size.
+      */
+-    double distanceGaussian(const vector<double> &means1,
+-                            const vector<double> &variances1,
+-                            const vector<double> &means2,
+-                            const vector<double> &variances2);
++    fl_t distanceGaussian(const vector<fl_t> &means1,
++                            const vector<fl_t> &variances1,
++                            const vector<fl_t> &means2,
++                            const vector<fl_t> &variances2);
+ 
+     /**
+      * Calculate a Kullback-Leibler divergence of two probability
+@@ -45,8 +46,8 @@ public:
+      * symmetrised is true, the result will be the symmetrised
+      * distance (equal to KL(d1, d2) + KL(d2, d1)).
+      */
+-    double distanceDistribution(const vector<double> &d1,
+-                                const vector<double> &d2,
++    fl_t distanceDistribution(const vector<fl_t> &d1,
++                                const vector<fl_t> &d2,
+                                 bool symmetrised);
+ };
+ 
+diff --git a/vamp-plugins/maths/MathAliases.h b/vamp-plugins/maths/MathAliases.h
+index 8660129..edb1333 100644
+--- a/vamp-plugins/maths/MathAliases.h
++++ b/vamp-plugins/maths/MathAliases.h
+@@ -19,9 +19,14 @@
+ #include <cmath>
+ #include <complex>
+ 
+-using namespace std;
+-typedef complex<double> ComplexData;
++#ifdef VAMP_FLOAT_MATH
++typedef float fl_t;
++#else
++typedef double fl_t;
++#endif
+ 
++using namespace std;
++typedef complex<fl_t> ComplexData;
+ 
+ #ifndef PI
+ #define PI (3.14159265358979232846)
+diff --git a/vamp-plugins/maths/MathUtilities.cpp b/vamp-plugins/maths/MathUtilities.cpp
+index cb35a2a..428d965 100644
+--- a/vamp-plugins/maths/MathUtilities.cpp
++++ b/vamp-plugins/maths/MathUtilities.cpp
+@@ -21,61 +21,61 @@
+ #include <cmath>
+ 
+ 
+-double MathUtilities::mod(double x, double y)
++fl_t MathUtilities::mod(fl_t x, fl_t y)
+ {
+-    double a = floor( x / y );
++    fl_t a = floor( x / y );
+ 
+-    double b = x - ( y * a );
++    fl_t b = x - ( y * a );
+     return b;
+ }
+ 
+-double MathUtilities::princarg(double ang)
++fl_t MathUtilities::princarg(fl_t ang)
+ {
+-    double ValOut;
++    fl_t ValOut;
+ 
+     ValOut = mod( ang + M_PI, -2 * M_PI ) + M_PI;
+ 
+     return ValOut;
+ }
+ 
+-void MathUtilities::getAlphaNorm(const double *data, unsigned int len, unsigned int alpha, double* ANorm)
++void MathUtilities::getAlphaNorm(const fl_t *data, unsigned int len, unsigned int alpha, fl_t* ANorm)
+ {
+     unsigned int i;
+-    double temp = 0.0;
+-    double a=0.0;
++    fl_t temp = 0.0;
++    fl_t a=0.0;
+ 	
+     for( i = 0; i < len; i++)
+     {
+ 	temp = data[ i ];
+ 		
+-	a  += ::pow( fabs(temp), double(alpha) );
++	a  += ::pow( fabs(temp), fl_t(alpha) );
+     }
+-    a /= ( double )len;
+-    a = ::pow( a, ( 1.0 / (double) alpha ) );
++    a /= ( fl_t )len;
++    a = ::pow( a, ( 1.0 / (fl_t) alpha ) );
+ 
+     *ANorm = a;
+ }
+ 
+-double MathUtilities::getAlphaNorm( const std::vector <double> &data, unsigned int alpha )
++fl_t MathUtilities::getAlphaNorm( const std::vector <fl_t> &data, unsigned int alpha )
+ {
+     unsigned int i;
+     unsigned int len = data.size();
+-    double temp = 0.0;
+-    double a=0.0;
++    fl_t temp = 0.0;
++    fl_t a=0.0;
+ 	
+     for( i = 0; i < len; i++)
+     {
+ 	temp = data[ i ];
+ 		
+-	a  += ::pow( fabs(temp), double(alpha) );
++	a  += ::pow( fabs(temp), fl_t(alpha) );
+     }
+-    a /= ( double )len;
+-    a = ::pow( a, ( 1.0 / (double) alpha ) );
++    a /= ( fl_t )len;
++    a = ::pow( a, ( 1.0 / (fl_t) alpha ) );
+ 
+     return a;
+ }
+ 
+-double MathUtilities::round(double x)
++fl_t MathUtilities::round(fl_t x)
+ {
+     if (x < 0) {
+         return -floor(-x + 0.5);
+@@ -84,11 +84,11 @@ double MathUtilities::round(double x)
+     }
+ }
+ 
+-double MathUtilities::median(const double *src, unsigned int len)
++fl_t MathUtilities::median(const fl_t *src, unsigned int len)
+ {
+     if (len == 0) return 0;
+     
+-    std::vector<double> scratch;
++    std::vector<fl_t> scratch;
+     for (int i = 0; i < len; ++i) scratch.push_back(src[i]);
+     std::sort(scratch.begin(), scratch.end());
+ 
+@@ -100,10 +100,10 @@ double MathUtilities::median(const double *src, unsigned int len)
+     }
+ }
+ 
+-double MathUtilities::sum(const double *src, unsigned int len)
++fl_t MathUtilities::sum(const fl_t *src, unsigned int len)
+ {
+     unsigned int i ;
+-    double retVal =0.0;
++    fl_t retVal =0.0;
+ 
+     for(  i = 0; i < len; i++)
+     {
+@@ -113,24 +113,24 @@ double MathUtilities::sum(const double *src, unsigned int len)
+     return retVal;
+ }
+ 
+-double MathUtilities::mean(const double *src, unsigned int len)
++fl_t MathUtilities::mean(const fl_t *src, unsigned int len)
+ {
+-    double retVal =0.0;
++    fl_t retVal =0.0;
+ 
+     if (len == 0) return 0;
+ 
+-    double s = sum( src, len );
++    fl_t s = sum( src, len );
+ 	
+-    retVal =  s  / (double)len;
++    retVal =  s  / (fl_t)len;
+ 
+     return retVal;
+ }
+ 
+-double MathUtilities::mean(const std::vector<double> &src,
++fl_t MathUtilities::mean(const std::vector<fl_t> &src,
+                            unsigned int start,
+                            unsigned int count)
+ {
+-    double sum = 0.;
++    fl_t sum = 0.;
+ 	
+     if (count == 0) return 0;
+     
+@@ -142,10 +142,10 @@ double MathUtilities::mean(const std::vector<double> &src,
+     return sum / count;
+ }
+ 
+-void MathUtilities::getFrameMinMax(const double *data, unsigned int len, double *min, double *max)
++void MathUtilities::getFrameMinMax(const fl_t *data, unsigned int len, fl_t *min, fl_t *max)
+ {
+     unsigned int i;
+-    double temp = 0.0;
++    fl_t temp = 0.0;
+ 
+     if (len == 0) {
+         *min = *max = 0;
+@@ -171,13 +171,13 @@ void MathUtilities::getFrameMinMax(const double *data, unsigned int len, double
+     }
+ }
+ 
+-int MathUtilities::getMax( double* pData, unsigned int Length, double* pMax )
++int MathUtilities::getMax( fl_t* pData, unsigned int Length, fl_t* pMax )
+ {
+ 	unsigned int index = 0;
+ 	unsigned int i;
+-	double temp = 0.0;
++	fl_t temp = 0.0;
+ 	
+-	double max = pData[0];
++	fl_t max = pData[0];
+ 
+ 	for( i = 0; i < Length; i++)
+ 	{
+@@ -197,13 +197,13 @@ int MathUtilities::getMax( double* pData, unsigned int Length, double* pMax )
+ 	return index;
+ }
+ 
+-int MathUtilities::getMax( const std::vector<double> & data, double* pMax )
++int MathUtilities::getMax( const std::vector<fl_t> & data, fl_t* pMax )
+ {
+ 	unsigned int index = 0;
+ 	unsigned int i;
+-	double temp = 0.0;
++	fl_t temp = 0.0;
+ 	
+-	double max = data[0];
++	fl_t max = data[0];
+ 
+ 	for( i = 0; i < data.size(); i++)
+ 	{
+@@ -223,10 +223,10 @@ int MathUtilities::getMax( const std::vector<double> & data, double* pMax )
+ 	return index;
+ }
+ 
+-void MathUtilities::circShift( double* pData, int length, int shift)
++void MathUtilities::circShift( fl_t* pData, int length, int shift)
+ {
+ 	shift = shift % length;
+-	double temp;
++	fl_t temp;
+ 	int i,n;
+ 
+ 	for( i = 0; i < shift; i++)
+@@ -247,7 +247,7 @@ int MathUtilities::compareInt (const void * a, const void * b)
+   return ( *(int*)a - *(int*)b );
+ }
+ 
+-void MathUtilities::normalise(double *data, int length, NormaliseType type)
++void MathUtilities::normalise(fl_t *data, int length, NormaliseType type)
+ {
+     switch (type) {
+ 
+@@ -255,7 +255,7 @@ void MathUtilities::normalise(double *data, int length, NormaliseType type)
+ 
+     case NormaliseUnitSum:
+     {
+-        double sum = 0.0;
++        fl_t sum = 0.0;
+         for (int i = 0; i < length; ++i) {
+             sum += data[i];
+         }
+@@ -269,7 +269,7 @@ void MathUtilities::normalise(double *data, int length, NormaliseType type)
+ 
+     case NormaliseUnitMax:
+     {
+-        double max = 0.0;
++        fl_t max = 0.0;
+         for (int i = 0; i < length; ++i) {
+             if (fabs(data[i]) > max) {
+                 max = fabs(data[i]);
+@@ -286,7 +286,7 @@ void MathUtilities::normalise(double *data, int length, NormaliseType type)
+     }
+ }
+ 
+-void MathUtilities::normalise(std::vector<double> &data, NormaliseType type)
++void MathUtilities::normalise(std::vector<fl_t> &data, NormaliseType type)
+ {
+     switch (type) {
+ 
+@@ -294,7 +294,7 @@ void MathUtilities::normalise(std::vector<double> &data, NormaliseType type)
+ 
+     case NormaliseUnitSum:
+     {
+-        double sum = 0.0;
++        fl_t sum = 0.0;
+         for (int i = 0; i < (int)data.size(); ++i) sum += data[i];
+         if (sum != 0.0) {
+             for (int i = 0; i < (int)data.size(); ++i) data[i] /= sum;
+@@ -304,7 +304,7 @@ void MathUtilities::normalise(std::vector<double> &data, NormaliseType type)
+ 
+     case NormaliseUnitMax:
+     {
+-        double max = 0.0;
++        fl_t max = 0.0;
+         for (int i = 0; i < (int)data.size(); ++i) {
+             if (fabs(data[i]) > max) max = fabs(data[i]);
+         }
+@@ -317,12 +317,12 @@ void MathUtilities::normalise(std::vector<double> &data, NormaliseType type)
+     }
+ }
+ 
+-void MathUtilities::adaptiveThreshold(std::vector<double> &data)
++void MathUtilities::adaptiveThreshold(std::vector<fl_t> &data)
+ {
+     int sz = int(data.size());
+     if (sz == 0) return;
+ 
+-    std::vector<double> smoothed(sz);
++    std::vector<fl_t> smoothed(sz);
+ 	
+     int p_pre = 8;
+     int p_post = 7;
+@@ -379,11 +379,11 @@ MathUtilities::nearestPowerOfTwo(int x)
+     else return n1;
+ }
+ 
+-double
++fl_t
+ MathUtilities::factorial(int x)
+ {
+     if (x < 0) return 0;
+-    double f = 1;
++    fl_t f = 1;
+     for (int i = 1; i <= x; ++i) {
+ 	f = f * i;
+     }
+diff --git a/vamp-plugins/maths/MathUtilities.h b/vamp-plugins/maths/MathUtilities.h
+index fac710a..a2b72a4 100644
+--- a/vamp-plugins/maths/MathUtilities.h
++++ b/vamp-plugins/maths/MathUtilities.h
+@@ -19,6 +19,7 @@
+ #include <vector>
+ 
+ #include "nan-inf.h"
++#include "MathAliases.h"
+ 
+ /**
+  * Static helper functions for simple mathematical calculations.
+@@ -29,57 +30,57 @@ public:
+     /**
+      * Round x to the nearest integer.
+      */
+-    static double round( double x );
++    static fl_t round( fl_t x );
+ 
+     /**
+      * Return through min and max pointers the highest and lowest
+      * values in the given array of the given length.
+      */
+-    static void	  getFrameMinMax( const double* data, unsigned int len,  double* min, double* max );
++    static void	  getFrameMinMax( const fl_t* data, unsigned int len,  fl_t* min, fl_t* max );
+ 
+     /**
+      * Return the mean of the given array of the given length.
+      */
+-    static double mean( const double* src, unsigned int len );
++    static fl_t mean( const fl_t* src, unsigned int len );
+ 
+     /**
+      * Return the mean of the subset of the given vector identified by
+      * start and count.
+      */
+-    static double mean( const std::vector<double> &data,
++    static fl_t mean( const std::vector<fl_t> &data,
+                         unsigned int start, unsigned int count );
+     
+     /**
+      * Return the sum of the values in the given array of the given
+      * length.
+      */
+-    static double sum( const double* src, unsigned int len );
++    static fl_t sum( const fl_t* src, unsigned int len );
+ 
+     /**
+      * Return the median of the values in the given array of the given
+      * length. If the array is even in length, the returned value will
+      * be half-way between the two values adjacent to median.
+      */
+-    static double median( const double* src, unsigned int len );
++    static fl_t median( const fl_t* src, unsigned int len );
+ 
+     /**
+      * The principle argument function. Map the phase angle ang into
+      * the range [-pi,pi).
+      */
+-    static double princarg( double ang );
++    static fl_t princarg( fl_t ang );
+ 
+     /**
+      * Floating-point division modulus: return x % y.
+      */
+-    static double mod( double x, double y);
++    static fl_t mod( fl_t x, fl_t y);
+ 
+-    static void	  getAlphaNorm(const double *data, unsigned int len, unsigned int alpha, double* ANorm);
+-    static double getAlphaNorm(const std::vector <double> &data, unsigned int alpha );
++    static void	  getAlphaNorm(const fl_t *data, unsigned int len, unsigned int alpha, fl_t* ANorm);
++    static fl_t getAlphaNorm(const std::vector <fl_t> &data, unsigned int alpha );
+ 
+-    static void   circShift( double* data, int length, int shift);
++    static void   circShift( fl_t* data, int length, int shift);
+ 
+-    static int	  getMax( double* data, unsigned int length, double* max = 0 );
+-    static int	  getMax( const std::vector<double> &data, double* max = 0 );
++    static int	  getMax( fl_t* data, unsigned int length, fl_t* max = 0 );
++    static int	  getMax( const std::vector<fl_t> &data, fl_t* max = 0 );
+     static int    compareInt(const void * a, const void * b);
+ 
+     enum NormaliseType {
+@@ -88,17 +89,17 @@ public:
+         NormaliseUnitMax
+     };
+ 
+-    static void normalise(double *data, int length,
++    static void normalise(fl_t *data, int length,
+                           NormaliseType n = NormaliseUnitMax);
+ 
+-    static void normalise(std::vector<double> &data,
++    static void normalise(std::vector<fl_t> &data,
+                           NormaliseType n = NormaliseUnitMax);
+ 
+     /**
+      * Threshold the input/output vector data against a moving-mean
+      * average filter.
+      */
+-    static void adaptiveThreshold(std::vector<double> &data);
++    static void adaptiveThreshold(std::vector<fl_t> &data);
+ 
+     /** 
+      * Return true if x is 2^n for some integer n >= 0.
+@@ -126,7 +127,7 @@ public:
+     /**
+      * Return x!
+      */
+-    static double factorial(int x); // returns double in case it is large
++    static fl_t factorial(int x); // returns fl_t in case it is large
+ 
+     /**
+      * Return the greatest common divisor of natural numbers a and b.
+diff --git a/vamp-plugins/maths/Polyfit.h b/vamp-plugins/maths/Polyfit.h
+index 5cf97d9..df325b6 100644
+--- a/vamp-plugins/maths/Polyfit.h
++++ b/vamp-plugins/maths/Polyfit.h
+@@ -41,17 +41,18 @@ E-mail:    davidtaylor@writeme.com
+  ///////////////////////////////////////////////////////////////////////////////
+ 
+ #include <iostream>
++#include "MathAliases.h"
+ 
+ using std::vector;
+ 
+ class TPolyFit
+ {
+-    typedef vector<vector<double> > Matrix;
++    typedef vector<vector<fl_t> > Matrix;
+ public:
+ 
+-    static double PolyFit2 (const vector<double> &x,  // does the work
+-			    const vector<double> &y,
+-			    vector<double> &coef);
++    static fl_t PolyFit2 (const vector<fl_t> &x,  // does the work
++			    const vector<fl_t> &y,
++			    vector<fl_t> &coef);
+ 
+                    
+ private:
+@@ -61,19 +62,19 @@ private:
+ 
+   
+     static void Square (const Matrix &x,              // Matrix multiplication routine
+-			const vector<double> &y,
++			const vector<fl_t> &y,
+ 			Matrix &a,                    // A = transpose X times X
+-			vector<double> &g,         // G = Y times X
++			vector<fl_t> &g,         // G = Y times X
+ 			const int nrow, const int ncol);
+     // Forms square coefficient matrix
+ 
+     static bool GaussJordan (Matrix &b,                  // square matrix of coefficients
+-			     const vector<double> &y, // constant vector
+-			     vector<double> &coef);   // solution vector
++			     const vector<fl_t> &y, // constant vector
++			     vector<fl_t> &coef);   // solution vector
+     // returns false if matrix singular
+ 
+     static bool GaussJordan2(Matrix &b,
+-			     const vector<double> &y,
++			     const vector<fl_t> &y,
+ 			     Matrix &w,
+ 			     vector<vector<int> > &index);
+ };
+@@ -82,12 +83,12 @@ private:
+ 
+ namespace NSUtility
+ {
+-    inline void swap(double &a, double &b) {double t = a; a = b; b = t;}
+-    void zeroise(vector<double> &array, int n);
++    inline void swap(fl_t &a, fl_t &b) {fl_t t = a; a = b; b = t;}
++    void zeroise(vector<fl_t> &array, int n);
+     void zeroise(vector<int> &array, int n);
+-    void zeroise(vector<vector<double> > &matrix, int m, int n);
++    void zeroise(vector<vector<fl_t> > &matrix, int m, int n);
+     void zeroise(vector<vector<int> > &matrix, int m, int n);
+-    inline double sqr(const double &x) {return x * x;}
++    inline fl_t sqr(const fl_t &x) {return x * x;}
+ };
+ 
+ //---------------------------------------------------------------------------
+@@ -99,20 +100,20 @@ using namespace NSUtility;
+ 
+ // main PolyFit routine
+ 
+-double TPolyFit::PolyFit2 (const vector<double> &x,
+-			   const vector<double> &y,
+-			   vector<double> &coefs)
++fl_t TPolyFit::PolyFit2 (const vector<fl_t> &x,
++			   const vector<fl_t> &y,
++			   vector<fl_t> &coefs)
+ // nterms = coefs.size()
+ // npoints = x.size()
+ {
+     int i, j;
+-    double xi, yi, yc, srs, sum_y, sum_y2;
++    fl_t xi, yi, yc, srs, sum_y, sum_y2;
+     Matrix xmatr;        // Data matrix
+     Matrix a;
+-    vector<double> g;      // Constant vector
++    vector<fl_t> g;      // Constant vector
+     const int npoints(x.size());
+     const int nterms(coefs.size());
+-    double correl_coef;
++    fl_t correl_coef;
+     zeroise(g, nterms);
+     zeroise(a, nterms, nterms);
+     zeroise(xmatr, npoints, nterms);
+@@ -175,9 +176,9 @@ double TPolyFit::PolyFit2 (const vector<double> &x,
+ // Form square coefficient matrix
+ 
+ void TPolyFit::Square (const Matrix &x,
+-		       const vector<double> &y,
++		       const vector<fl_t> &y,
+ 		       Matrix &a,
+-		       vector<double> &g,
++		       vector<fl_t> &g,
+ 		       const int nrow,
+ 		       const int ncol)
+ {
+@@ -203,8 +204,8 @@ void TPolyFit::Square (const Matrix &x,
+ 
+ 
+ bool TPolyFit::GaussJordan (Matrix &b,
+-			    const vector<double> &y,
+-			    vector<double> &coef)
++			    const vector<fl_t> &y,
++			    vector<fl_t> &coef)
+ //b square matrix of coefficients
+ //y constant vector
+ //coef solution vector
+@@ -268,16 +269,16 @@ bool TPolyFit::GaussJordan (Matrix &b,
+ 
+ 
+ bool TPolyFit::GaussJordan2(Matrix &b,
+-			    const vector<double> &y,
++			    const vector<fl_t> &y,
+ 			    Matrix &w,
+ 			    vector<vector<int> > &index)
+ {
+     //GaussJordan2;         // first half of GaussJordan
+     // actual start of gaussj
+  
+-    double big, t;
+-    double pivot;
+-    double determ;
++    fl_t big, t;
++    fl_t pivot;
++    fl_t determ;
+     int irow, icol;
+     int ncol(b.size());
+     int nv = 1;                  // single constant vector
+@@ -363,7 +364,7 @@ bool TPolyFit::GaussJordan2(Matrix &b,
+ //--------------------------------------------------------------------------
+ 
+ // fills a vector with zeros.
+-void NSUtility::zeroise(vector<double> &array, int n)
++void NSUtility::zeroise(vector<fl_t> &array, int n)
+ {
+     array.clear();
+     for(int j = 0; j < n; ++j)
+@@ -381,9 +382,9 @@ void NSUtility::zeroise(vector<int> &array, int n)
+ //--------------------------------------------------------------------------
+ 
+ // fills a (m by n) matrix with zeros.
+-void NSUtility::zeroise(vector<vector<double> > &matrix, int m, int n)
++void NSUtility::zeroise(vector<vector<fl_t> > &matrix, int m, int n)
+ {
+-    vector<double> zero;
++    vector<fl_t> zero;
+     zeroise(zero, n);
+     matrix.clear();
+     for(int j = 0; j < m; ++j)
+diff --git a/vamp-plugins/plugins/BarBeatTrack.cpp b/vamp-plugins/plugins/BarBeatTrack.cpp
+index 72fa565..4e78ec6 100644
+--- a/vamp-plugins/plugins/BarBeatTrack.cpp
++++ b/vamp-plugins/plugins/BarBeatTrack.cpp
+@@ -58,7 +58,7 @@ public:
+     DFConfig dfConfig;
+     DetectionFunction *df;
+     DownBeat *downBeat;
+-    vector<double> dfOutput;
++    vector<fl_t> dfOutput;
+     Vamp::RealTime origin;
+ };
+ 
+@@ -337,20 +337,24 @@ BarBeatTracker::process(const float *const *inputBuffers,
+ 
+     // We use time domain input, because DownBeat requires it -- so we
+     // use the time-domain version of DetectionFunction::process which
+-    // does its own FFT.  It requires doubles as input, so we need to
++    // does its own FFT.  It requires fl_ts as input, so we need to
+     // make a temporary copy
+ 
+     // We only support a single input channel
+ 
+     const int fl = m_d->dfConfig.frameLength;
++#ifdef FLOAT_SAMPLES
++    float output = m_d->df->processTimeDomain(inputBuffers[0]);
++#else
+ #ifndef __GNUC__
+-    double *dfinput = (double *)alloca(fl * sizeof(double));
++    fl_t *dfinput = (fl_t *)alloca(fl * sizeof(fl_t));
+ #else
+-    double dfinput[fl];
++    fl_t dfinput[fl];
+ #endif
+     for (int i = 0; i < fl; ++i) dfinput[i] = inputBuffers[0][i];
+ 
+-    double output = m_d->df->processTimeDomain(dfinput);
++    fl_t output = m_d->df->processTimeDomain(dfinput);
++#endif
+ 
+     if (m_d->dfOutput.empty()) m_d->origin = timestamp;
+ 
+@@ -385,9 +389,9 @@ BarBeatTracker::getRemainingFeatures()
+ BarBeatTracker::FeatureSet
+ BarBeatTracker::barBeatTrack()
+ {
+-    vector<double> df;
+-    vector<double> beatPeriod;
+-    vector<double> tempi;
++    vector<fl_t> df;
++    vector<fl_t> beatPeriod;
++    vector<fl_t> tempi;
+ 
+     for (size_t i = 2; i < m_d->dfOutput.size(); ++i) { // discard first two elts
+         df.push_back(m_d->dfOutput[i]);
+@@ -400,13 +404,13 @@ BarBeatTracker::barBeatTrack()
+     // changes are as per the BeatTrack.cpp - allow m_inputtempo and m_constraintempo to be set be the user
+     tt.calculateBeatPeriod(df, beatPeriod, tempi, m_inputtempo, m_constraintempo);
+ 
+-    vector<double> beats;
++    vector<fl_t> beats;
+     // changes are as per the BeatTrack.cpp - allow m_alpha and m_tightness to be set be the user
+     tt.calculateBeats(df, beatPeriod, beats, m_alpha, m_tightness);
+ 
+  //   tt.calculateBeatPeriod(df, beatPeriod, tempi, 0., 0); // use default parameters
+ 
+-  //  vector<double> beats;
++  //  vector<fl_t> beats;
+    // tt.calculateBeats(df, beatPeriod, beats, 0.9, 4.); // use default parameters until i fix this plugin too
+ 
+     vector<int> downbeats;
+@@ -414,7 +418,7 @@ BarBeatTracker::barBeatTrack()
+     const float *downsampled = m_d->downBeat->getBufferedAudio(downLength);
+     m_d->downBeat->findDownBeats(downsampled, downLength, beats, downbeats);
+ 
+-    vector<double> beatsd;
++    vector<fl_t> beatsd;
+     m_d->downBeat->getBeatSD(beatsd);
+ 
+ //    std::cerr << "BarBeatTracker: found downbeats at: ";
+diff --git a/vamp-plugins/plugins/BarBeatTrack.h b/vamp-plugins/plugins/BarBeatTrack.h
+index 0edc70a..f36a830 100644
+--- a/vamp-plugins/plugins/BarBeatTrack.h
++++ b/vamp-plugins/plugins/BarBeatTrack.h
+@@ -16,6 +16,7 @@
+ #define _BAR_BEAT_TRACK_PLUGIN_H_
+ 
+ #include <vamp-sdk/Plugin.h>
++#include "maths/MathAliases.h"
+ 
+ class BarBeatTrackerData;
+ 
+@@ -59,10 +60,10 @@ protected:
+ 
+     // MEPD new protected parameters to allow the user to control these advanced parameters of the beat tracker
+     // changes are as per the BeatTrack.h
+-    double m_alpha;
+-    double m_tightness;
+-    double m_inputtempo;
+-    bool m_constraintempo;
++    fl_t m_alpha;
++    fl_t m_tightness;
++    fl_t m_inputtempo;
++    fl_t m_constraintempo;
+ };
+ 
+ 
+diff --git a/vamp-plugins/plugins/BeatTrack.cpp b/vamp-plugins/plugins/BeatTrack.cpp
+index 00ff40d..b94aac4 100644
+--- a/vamp-plugins/plugins/BeatTrack.cpp
++++ b/vamp-plugins/plugins/BeatTrack.cpp
+@@ -47,7 +47,7 @@ public:
+ 
+     DFConfig dfConfig;
+     DetectionFunction *df;
+-    vector<double> dfOutput;
++    vector<fl_t> dfOutput;
+     Vamp::RealTime origin;
+ };
+ 
+@@ -369,8 +369,8 @@ BeatTracker::process(const float *const *inputBuffers,
+ 
+     size_t len = m_d->dfConfig.frameLength / 2 + 1;
+ 
+-    double *reals = new double[len];
+-    double *imags = new double[len];
++    fl_t *reals = new fl_t[len];
++    fl_t *imags = new fl_t[len];
+ 
+     // We only support a single input channel
+ 
+@@ -379,7 +379,7 @@ BeatTracker::process(const float *const *inputBuffers,
+         imags[i] = inputBuffers[0][i*2+1];
+     }
+ 
+-    double output = m_d->df->processFrequencyDomain(reals, imags);
++    fl_t output = m_d->df->processFrequencyDomain(reals, imags);
+ 
+     delete[] reals;
+     delete[] imags;
+@@ -415,8 +415,8 @@ BeatTracker::getRemainingFeatures()
+ BeatTracker::FeatureSet
+ BeatTracker::beatTrackOld()
+ {
+-    double aCoeffs[] = { 1.0000, -0.5949, 0.2348 };
+-    double bCoeffs[] = { 0.1600,  0.3200, 0.1600 };
++    fl_t aCoeffs[] = { 1.0000, -0.5949, 0.2348 };
++    fl_t bCoeffs[] = { 0.1600,  0.3200, 0.1600 };
+ 
+     TTParams ttParams;
+     ttParams.winLength = 512;
+@@ -430,7 +430,7 @@ BeatTracker::beatTrackOld()
+ 
+     TempoTrack tempoTracker(ttParams);
+ 
+-    vector<double> tempi;
++    vector<fl_t> tempi;
+     vector<int> beats = tempoTracker.process(m_d->dfOutput, &tempi);
+ 
+     FeatureSet returnFeatures;
+@@ -468,7 +468,7 @@ BeatTracker::beatTrackOld()
+     returnFeatures[0].push_back(feature); // beats are output 0
+     }
+ 
+-    double prevTempo = 0.0;
++    fl_t prevTempo = 0.0;
+ 
+     for (size_t i = 0; i < tempi.size(); ++i) {
+ 
+@@ -495,9 +495,9 @@ BeatTracker::beatTrackOld()
+ BeatTracker::FeatureSet
+ BeatTracker::beatTrackNew()
+ {
+-    vector<double> df;
+-    vector<double> beatPeriod;
+-    vector<double> tempi;
++    vector<fl_t> df;
++    vector<fl_t> beatPeriod;
++    vector<fl_t> tempi;
+ 
+     size_t nonZeroCount = m_d->dfOutput.size();
+     while (nonZeroCount > 0) {
+@@ -521,7 +521,7 @@ BeatTracker::beatTrackNew()
+     // MEPD - note this function is now passed 2 new parameters, m_inputtempo and m_constraintempo
+     tt.calculateBeatPeriod(df, beatPeriod, tempi, m_inputtempo, m_constraintempo);
+ 
+-    vector<double> beats;
++    vector<fl_t> beats;
+ 
+     // MEPD - note this function is now passed 2 new parameters, m_alpha and m_tightness
+     tt.calculateBeats(df, beatPeriod, beats, m_alpha, m_tightness);
+@@ -561,7 +561,7 @@ BeatTracker::beatTrackNew()
+     returnFeatures[0].push_back(feature); // beats are output 0
+     }
+ 
+-    double prevTempo = 0.0;
++    fl_t prevTempo = 0.0;
+ 
+     for (size_t i = 0; i < tempi.size(); ++i) {
+ 
+diff --git a/vamp-plugins/plugins/BeatTrack.h b/vamp-plugins/plugins/BeatTrack.h
+index f14fc29..af5ccc2 100644
+--- a/vamp-plugins/plugins/BeatTrack.h
++++ b/vamp-plugins/plugins/BeatTrack.h
+@@ -16,6 +16,7 @@
+ #define _BEAT_TRACK_PLUGIN_H_
+ 
+ #include <vamp-sdk/Plugin.h>
++#include "maths/MathAliases.h"
+ 
+ class BeatTrackerData;
+ 
+@@ -57,9 +58,9 @@ protected:
+     int m_dfType;
+ 
+     // MEPD new protected parameters to allow the user to control these advanced parameters of the beat tracker
+-    double m_alpha;
+-    double m_tightness;
+-    double m_inputtempo;
++    fl_t m_alpha;
++    fl_t m_tightness;
++    fl_t m_inputtempo;
+     bool m_constraintempo;
+ 
+     bool m_whiten;
+diff --git a/vamp-plugins/plugins/KeyDetect.cpp b/vamp-plugins/plugins/KeyDetect.cpp
+index a339784..5735a97 100644
+--- a/vamp-plugins/plugins/KeyDetect.cpp
++++ b/vamp-plugins/plugins/KeyDetect.cpp
+@@ -168,7 +168,7 @@ KeyDetector::initialise(size_t channels, size_t stepSize, size_t blockSize)
+         return false;
+     }
+ 
+-    m_inputFrame = new double[m_blockSize];
++    m_inputFrame = new fl_t[m_blockSize];
+ 
+     m_prevKey = -1;
+     m_first = true;
+@@ -285,7 +285,7 @@ KeyDetector::process(const float *const *inputBuffers,
+     FeatureSet returnFeatures;
+ 
+     for ( unsigned int i = 0 ; i < m_blockSize; i++ ) {
+-        m_inputFrame[i] = (double)inputBuffers[0][i];
++        m_inputFrame[i] = (fl_t)inputBuffers[0][i];
+     }
+ 
+ //    int key = (m_getKeyMode->process(m_inputFrame) % 24);
+@@ -330,7 +330,7 @@ KeyDetector::process(const float *const *inputBuffers,
+ 
+     Feature ksf;
+     ksf.values.reserve(25);
+-    double *keystrengths = m_getKeyMode->getKeyStrengths();
++    fl_t *keystrengths = m_getKeyMode->getKeyStrengths();
+     for (int i = 0; i < 24; ++i) {
+         if (i == 12) ksf.values.push_back(-1);
+         ksf.values.push_back(keystrengths[conversion[i]-1]);
+diff --git a/vamp-plugins/plugins/KeyDetect.h b/vamp-plugins/plugins/KeyDetect.h
+index 7983ac3..b9a1495 100644
+--- a/vamp-plugins/plugins/KeyDetect.h
++++ b/vamp-plugins/plugins/KeyDetect.h
+@@ -17,6 +17,7 @@
+ 
+ #include <vamp-sdk/Plugin.h>
+ 
++#include "maths/MathAliases.h"
+ #include <dsp/keydetection/GetKeyMode.h>
+ 
+ class KeyDetector : public Vamp::Plugin
+@@ -60,7 +61,7 @@ protected:
+     std::string getKeyName(int index, bool minor, bool includeMajMin) const;
+ 
+     GetKeyMode* m_getKeyMode;
+-    double* m_inputFrame;
++    fl_t* m_inputFrame;
+     int m_prevKey;
+     bool m_first;
+ };
+diff --git a/vamp-plugins/plugins/TonalChangeDetect.cpp b/vamp-plugins/plugins/TonalChangeDetect.cpp
+index 7b0cd23..5a58be7 100644
+--- a/vamp-plugins/plugins/TonalChangeDetect.cpp
++++ b/vamp-plugins/plugins/TonalChangeDetect.cpp
+@@ -15,6 +15,7 @@
+ #include "TonalChangeDetect.h"
+ 
+ #include <base/Pitch.h>
++#include "maths/MathAliases.h"
+ #include <dsp/chromagram/Chromagram.h>
+ #include <dsp/tonal/ChangeDetectionFunction.h>
+ 
+@@ -290,7 +291,7 @@ TonalChangeDetect::OutputList TonalChangeDetect::getOutputDescriptors() const
+     d.hasKnownExtents = false;
+     d.isQuantized = false;
+     d.sampleType = OutputDescriptor::VariableSampleRate;
+-    double dStepSecs = double(getPreferredStepSize()) / m_inputSampleRate;
++    fl_t dStepSecs = fl_t(getPreferredStepSize()) / m_inputSampleRate;
+     d.sampleRate = 1.0f / dStepSecs;
+ 	
+     OutputDescriptor changes;
+@@ -325,6 +326,9 @@ TonalChangeDetect::process(const float *const *inputBuffers,
+ 
+     if (!m_haveOrigin) m_origin = timestamp;
+ 
++#ifdef VAMP_FLOAT_MATH
++    float *output = m_chromagram->process(inputBuffers[0]);
++#else
+     // convert float* to double*
+     double *tempBuffer = new double[m_block];
+     for (size_t i = 0; i < m_block; ++i) {
+@@ -333,6 +337,7 @@ TonalChangeDetect::process(const float *const *inputBuffers,
+ 
+     double *output = m_chromagram->process(tempBuffer);
+     delete[] tempBuffer;
++#endif
+ 
+     for (size_t i = 0; i < 12; i++)
+     {
+@@ -403,7 +408,7 @@ TonalChangeDetect::FeatureSet TonalChangeDetect::getRemainingFeatures()
+     }
+ 	
+     ChangeDFConfig dfc;
+-    dfc.smoothingWidth = double(m_iSmoothingWidth);
++    dfc.smoothingWidth = fl_t(m_iSmoothingWidth);
+     ChangeDetectionFunction df(dfc);
+     ChangeDistance d = df.process(m_TCSGram);
+ 	
+@@ -411,9 +416,9 @@ TonalChangeDetect::FeatureSet TonalChangeDetect::getRemainingFeatures()
+ 	
+     for (int i = 0; i < d.size(); i++)
+     {
+-        double dCurrent = d[i];
+-        double dPrevious = d[i > 0 ? i - 1 : i];
+-        double dNext = d[i < d.size()-1 ? i + 1 : i];
++        fl_t dCurrent = d[i];
++        fl_t dPrevious = d[i > 0 ? i - 1 : i];
++        fl_t dNext = d[i < d.size()-1 ? i + 1 : i];
+ 		
+         Feature feature;
+         feature.label = "";
+-- 
+2.5.5
+
