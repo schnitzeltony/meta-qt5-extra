@@ -1,4 +1,4 @@
-From 47a367d5c9687bf49beb5a83b1a3fed3483b7a62 Mon Sep 17 00:00:00 2001
+From 1d07d25a5217cca00fd024566b640aa5c23b1035 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Tue, 27 Dec 2016 15:33:26 +0100
 Subject: [PATCH] add vamp-float-math build option to force vamp calculations
@@ -7,12 +7,14 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On ARM platforms single precision performs better without significant
+At least on ARM machines single precision performs better without significant
 loss of accuracy.
 
-* ~6min mp3 analyse was reduced from 74s downto 64s
-* Tunes displayed in log remained same for several files
-* Maximum tempo difference was 0.01 bpm
+* ~6min mp3 analysis time reduces from 84s downto 72s
+* Tunes displayed on screen and log remain same for several files
+* Tests show maximum tempo deviation of 0.01 bpm compared to double precisision
+* For now this option is marked as experimental as there might be unknown side
+  effects.
 
 Upstream-Status: Pending
 
