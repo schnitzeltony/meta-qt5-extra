@@ -23,6 +23,7 @@ RDEPENDS_${PN} = " \
     drumkv1 \
     drumstick\
     dssi \
+    fluidsynth-dssi \
     ftgl \
     hexter \
     ladspa-sdk \
