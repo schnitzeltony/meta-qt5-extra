@@ -4,9 +4,11 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5
+inherit kde-kf5 distro_features_check
 
-DEPENDS += "kcoreaddons kwindowsystem"
+REQUIRED_DISTRO_FEATURE = "x11"
+
+DEPENDS += "kcoreaddons kwindowsystem libxcb"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "d85c85ecfe38a796c3bce4313df8ece7"
