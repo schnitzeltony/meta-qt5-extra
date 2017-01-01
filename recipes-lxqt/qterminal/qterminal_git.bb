@@ -6,7 +6,7 @@ inherit lxqt gtk-icon-cache distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "qtermwidget"
+DEPENDS += "qtermwidget qtx11extras"
 
 SRCREV = "eb6ac8037a071779a357cbe943d969a11497f799"
 PV = "0.7.0"
