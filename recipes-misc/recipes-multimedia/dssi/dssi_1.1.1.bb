@@ -16,3 +16,12 @@ DEPENDS += " \
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
 SRC_URI[md5sum] = "619ab73c883b02dc37ddb37001591f8b"
 SRC_URI[sha256sum] = "f2c82b073a947c8255284249097667f9b14e660bf86186f3fcd3b3b3e087814e"
+
+PACKAGES =+ "${PN}-examples"
+FILES_${PN}-examples = " \
+    ${bindir}/dssi_* \
+    ${bindir}/karplong \
+    ${bindir}/*trivial* \
+    \
+    ${libdir}/dssi/*.so \
+"
