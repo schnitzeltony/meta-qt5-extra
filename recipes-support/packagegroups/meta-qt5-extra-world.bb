@@ -34,6 +34,7 @@ RDEPENDS_${PN} = " \
     libxmp \
     lilv \
     lmms \
+    lrdf \
     lv2 \
     mixxx \
     portmidi \
@@ -43,6 +44,7 @@ RDEPENDS_${PN} = " \
     qsynth \
     qt-gstreamer \
     qtractor \
+    rosegarden \
     rubberband \
     samplv1 \
     serd \
