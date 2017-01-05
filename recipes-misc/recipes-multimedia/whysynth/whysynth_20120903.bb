@@ -19,6 +19,8 @@ SRC_URI = " \
 SRC_URI[md5sum] = "b521b63ade13b09062a64c46d2eabee2"
 SRC_URI[sha256sum] = "acc0a4c8df1c8f36619861dfa32e3d2850783d462e2afec50c2210b2e3dd8686"
 
+CFLAGS += "-ftree-vectorize"
+
 do_install_append() {
     install -d ${D}/${datadir}/applications
     install -m 755 ${WORKDIR}/whysynth.desktop ${D}/${datadir}/applications/
