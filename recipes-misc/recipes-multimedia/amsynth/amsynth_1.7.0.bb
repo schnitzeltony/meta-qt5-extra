@@ -10,7 +10,12 @@ DEPENDS += " \
     intltool-native \
 "
 
-SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/release-${PV}/${BPN}-${PV}.tar.bz2"
+SRC_URI = " \
+    https://github.com/${BPN}/${BPN}/releases/download/release-${PV}/${BPN}-${PV}.tar.bz2 \
+    file://0001-Preset-return-reference-to-mName.patch \
+    file://0002-dssi-report-presets-correctly.patch \
+    file://0003-dssi-fix-preset-selection.patch \
+"
 SRC_URI[md5sum] = "4856f582caed59fca79dfe3ca4597938"
 SRC_URI[sha256sum] = "08ec3fdc56b5eec89abed67d356458652ac5ebac2971aff4a147b9f8bcaa6169"
 
