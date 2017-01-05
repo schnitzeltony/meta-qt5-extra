@@ -37,6 +37,7 @@ RDEPENDS_${PN} = " \
     lrdf \
     lv2 \
     mixxx \
+    muse \
     portmidi \
     projectm \
     qjackctl \
