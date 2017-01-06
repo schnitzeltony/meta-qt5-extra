@@ -26,6 +26,10 @@ S = "${WORKDIR}/git/muse3"
 
 #ENABLE_LV2 ENABLE_FLUID
 
+EXTRA_OECMAKE += " \
+    -DLIB_INSTALL_DIR=${libdir} \
+"
+
 # Have no idea where flags are lost. Anyway driver would fail
 # | driver/libmuse_driver.so: error: undefined reference to 'pthread_cancel'
 # | driver/libmuse_driver.so: error: undefined reference to 'pthread_create'
