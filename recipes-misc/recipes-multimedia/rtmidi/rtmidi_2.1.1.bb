@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://readme;beginline=32;endline=59;md5=753303f2b9263cfe98
 
 inherit autotools pkgconfig
 
-DEPENDS += " \
-    alsa-lib \
-"
+PACKAGECONFIG ??= "alsa jack"
+PACKAGECONFIG[alsa] = "--with-alsa,--without-alsa,alsa-lib"
+PACKAGECONFIG[jack] = "--with-jack,--without-jack,jack"
 
 SRC_URI = " \
     http://www.music.mcgill.ca/~gary/${BPN}/release/${BPN}-${PV}.tar.gz \
