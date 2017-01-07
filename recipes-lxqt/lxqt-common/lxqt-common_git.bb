@@ -1,6 +1,6 @@
 SUMMARY = "Common files for LXQt"
 LICENSE = "CC-BY-SA-3.0"
-LIC_FILES_CHKSUM = "file://README.md;;beginline=9;endline=9;md5=1468be559d088410c64a6db10364f77c"
+LIC_FILES_CHKSUM = "file://README.md;beginline=9;endline=9;md5=1468be559d088410c64a6db10364f77c"
 
 inherit lxqt gtk-icon-cache
 
