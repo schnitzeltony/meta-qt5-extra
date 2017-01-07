@@ -1,0 +1,7 @@
+libdir=%libdir%
+includedir=%includedir%
+
+Name: qcustomplot-qt5
+Version: 2.0.0-beta
+Cflags: -I${includedir}
+Libs: -L${libdir} -lqcustomplot
