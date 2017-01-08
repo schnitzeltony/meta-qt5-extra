@@ -1,0 +1,37 @@
+From f85ca25ff74f3d3fc7dd021172a1459eb5f58bea Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 8 Jan 2017 01:42:07 +0100
+Subject: [PATCH] configure.ac: fix shared library name
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ configure.ac | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 39fba08..25ffd1a 100755
+--- a/configure.ac
++++ b/configure.ac
+@@ -111,11 +111,11 @@ CXXFLAGS="$CXXFLAGS $cxxflag"
+ 
+ AC_CANONICAL_HOST
+ 
+-basesharedname="libstk-\$(RELEASE)"
++basesharedname="libstk.so.\$(RELEASE)"
+ 
+ AC_SUBST( sharedlib, ["libstk.so"] )
+-AC_SUBST( sharedname, [${basesharedname}.so] )
+-AC_SUBST( libflags, ["-shared -Wl,-soname,${basesharedname}.so -o $sharedname"] )
++AC_SUBST( sharedname, [${basesharedname}] )
++AC_SUBST( libflags, ["-shared -Wl,-soname,${basesharedname} -o $sharedname"] )
+ case $host in
+   *-apple*)
+   AC_SUBST( sharedlib, ["libstk.dylib"] )
+-- 
+2.5.5
+

@@ -1,0 +1,41 @@
+From 9e17bf3e93be8492682f253a8cb07394d8e5ff6a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 8 Jan 2017 01:24:21 +0100
+Subject: [PATCH] avoid /usr/usr paths
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/Makefile.in | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/src/Makefile.in b/src/Makefile.in
+index 739fa74..5657364 100755
+--- a/src/Makefile.in
++++ b/src/Makefile.in
+@@ -93,13 +93,13 @@ $(SHAREDLIB) : $(OBJECTS)
+ 	$(LN) -s @sharedname@ $(SHAREDLIB)
+ 
+ install-headers:
+-	install -d $(DESTDIR)$(PREFIX)$(INCLUDEDIR)/stk
+-	cp -r ../include/*.h $(DESTDIR)$(PREFIX)$(INCLUDEDIR)/stk
++	install -d $(DESTDIR)$(INCLUDEDIR)/stk
++	cp -r ../include/*.h $(DESTDIR)$(INCLUDEDIR)/stk
+ 
+ install: $(SHAREDLIB) install-headers
+-	install -d $(DESTDIR)$(PREFIX)$(LIBDIR)
+-	install -m 644 @sharedname@ $(DESTDIR)$(PREFIX)$(LIBDIR)
+-	ln -sf @sharedname@ $(DESTDIR)$(PREFIX)$(LIBDIR)/$(SHAREDLIB)
++	install -d $(DESTDIR)$(LIBDIR)
++	install -m 644 @sharedname@ $(DESTDIR)$(LIBDIR)
++	ln -sf @sharedname@ $(DESTDIR)$(LIBDIR)/$(SHAREDLIB)
+ 
+ 
+ $(OBJECTS) : Stk.h
+-- 
+2.5.5
+
