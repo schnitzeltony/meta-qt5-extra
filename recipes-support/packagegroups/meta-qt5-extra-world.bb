@@ -38,6 +38,7 @@ RDEPENDS_${PN} = " \
     lv2 \
     mixxx \
     muse \
+    polyphone \
     portmidi \
     projectm \
     qjackctl \
