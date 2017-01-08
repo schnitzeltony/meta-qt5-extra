@@ -1,0 +1,30 @@
+From b99b13e109d4104904be39e8d3b3e71ceed2cd70 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 8 Jan 2017 22:24:08 +0100
+Subject: [PATCH] don not build cross calfmakerdf
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/Makefile.am | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 794e668..ef8a3cd 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -30,9 +30,6 @@ endif
+ endif
+ 
+ AM_CXXFLAGS += $(GLIB_DEPS_CFLAGS)
+-noinst_PROGRAMS += calfmakerdf
+-calfmakerdf_SOURCES = makerdf.cpp
+-calfmakerdf_LDADD = calf.la
+ 
+ calfbenchmark_SOURCES = benchmark.cpp
+ calfbenchmark_LDADD = calf.la
+-- 
+2.5.5
+
