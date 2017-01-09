@@ -18,7 +18,7 @@ EXTRA_OECONF += "--enable-experimental"
 do_compile_append() {
     # we need native calfmakerdf at the position where the build expects it so
     # link it there
-    ln -s ${STAGING_BINDIR_NATIVE}/calfmakerdf ${B}/src/calfmakerdf
+    ln -fs ${STAGING_BINDIR_NATIVE}/calfmakerdf ${B}/src/calfmakerdf
 }
 
 FILES_${PN} += "${libdir}/lv2"
