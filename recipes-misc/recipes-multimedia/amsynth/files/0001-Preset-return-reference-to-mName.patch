@@ -10,6 +10,10 @@ Otherwise we get temporary objects with non deterministic lifetime. Errors
 caused are e.g mangled names in dssi get_program. Not easy to debug believe
 me!
 
+Upstream-Status: Applied [1]
+
+https://github.com/amsynth/amsynth/pull/56
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
  src/Preset.h | 2 +-

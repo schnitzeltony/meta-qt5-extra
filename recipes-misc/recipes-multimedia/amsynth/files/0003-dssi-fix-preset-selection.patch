@@ -6,6 +6,10 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Upstream-Status: Applied [1]
+
+https://github.com/amsynth/amsynth/pull/57
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
  src/dssi.cpp | 5 ++++-
