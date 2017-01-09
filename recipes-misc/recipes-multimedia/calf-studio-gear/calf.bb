@@ -11,7 +11,7 @@ DEPENDS += " \
     ladspa-sdk \
 "
 
-SRC_URI += "file://0002-don-not-build-cross-calfmakerdf.patch"
+SRC_URI += "file://0003-don-not-build-cross-calfmakerdf.patch"
 
 EXTRA_OECONF += "--enable-experimental"
 
