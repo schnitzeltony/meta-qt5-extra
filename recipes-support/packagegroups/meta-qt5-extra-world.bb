@@ -20,6 +20,7 @@ RDEPENDS_${PN} = " \
     qtiohelper \
     \
     amsynth \
+    calf \
     chromaprint \
     drumkv1 \
     drumstick\
