@@ -8,8 +8,8 @@ inherit autotools pkgconfig
 DEPENDS = "raptor2"
 
 SRC_URI = "git://github.com/swh/LRDF.git"
-SRCREV = "7ebc03286f4ec180acae27565028f8d45055df2e"
-PV = "0.5.0"
+SRCREV = "1057b8e542f7dd27e3e591e93c07d58bd2143b76"
+PV = "0.5.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 do_install_append() {
