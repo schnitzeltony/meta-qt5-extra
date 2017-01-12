@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=328283dc167a7b37ffdc59f524a7fc4d"
 
 DEPENDS += " \
     qtbase \
-    qttools-native \
+    qttools qttools-native \
     jack \
     liblo \
     dssi \
@@ -13,7 +13,10 @@ DEPENDS += " \
     fluidsynth \
     serd \
     lilv \
+    lv2 \
+    lmms \
 "
+# Note: lmms is in DEPENDS for supplying VST header aeffectx.h only
 
 inherit cmake_qt5 pkgconfig gtk-icon-cache distro_features_check mime qt5-translation
 
@@ -24,11 +27,16 @@ SRCREV = "ee2773a62bb8bb4dc38383cb42a8d4b35b083902"
 PV = "3.0.0pre2"
 S = "${WORKDIR}/git/muse3"
 
-#ENABLE_LV2 ENABLE_FLUID
-
 EXTRA_OECMAKE += " \
     -DLIB_INSTALL_DIR=${libdir} \
+    \
+    -DENABLE_LV2=1 \
+    -DENABLE_DSSI=1 \
+    -DENABLE_FLUID=1 \
 "
+#    -DENABLE_EXPERIMENTAL=1 won't work
+#    -DENABLE_LV2_SUPPLIED=1 won't work
+#    -DENABLE_VST_NATIVE=1 
 
 # Have no idea where flags are lost. Anyway driver would fail
 # | driver/libmuse_driver.so: error: undefined reference to 'pthread_cancel'
