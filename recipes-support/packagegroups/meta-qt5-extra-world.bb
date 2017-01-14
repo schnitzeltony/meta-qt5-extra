@@ -25,6 +25,7 @@ RDEPENDS_${PN} = " \
     drumkv1 \
     drumstick\
     dssi \
+    dssi-vst \
     fluidsynth-dssi \
     ftgl \
     hexter \
