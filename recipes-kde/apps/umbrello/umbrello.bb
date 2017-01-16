@@ -25,9 +25,10 @@ DEPENDS += " \
     kxmlgui \
 "
 
-PV = "16.12.0"
-SRC_URI[md5sum] = "d8262de2ca40e1143f2e7ecfbb5a1f07"
-SRC_URI[sha256sum] = "c61503074550ba4a4210bd7c2a009f49934f559ee7dcfe6f5518fc181ecdf307"
+PV = "${KDE_APP_VERSION}"
+SRC_URI += "file://0001-Use-gcc-buildin-null-pointer-check-to-remove-x86-lim.patch"
+SRC_URI[md5sum] = "d4cd9ef531b22ab14b3b6b1f6259ea8e"
+SRC_URI[sha256sum] = "2ccd645ab52544885e3b373b0da543ae171d8b41a0bdeb93ae45170f8cd30bb9"
 
 EXTRA_OECMAKE += "-DBUILD_KF5=1"
 
