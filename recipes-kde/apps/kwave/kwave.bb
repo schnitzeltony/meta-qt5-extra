@@ -32,8 +32,8 @@ DEPENDS += "\
 
 PV = "${KDE_APP_VERSION}"
 SRC_URI += "file://0001-FIND_REQUIRED_PROGRAM-is-broken-use-the-tools-direct.patch"
-SRC_URI[md5sum] = "2f0234e19dc849752c8e5ba70911028f"
-SRC_URI[sha256sum] = "0ee93a05de9dfcf30af5d19a7e576f4aab0457f7db5dda4af5b0156c49309d1f"
+SRC_URI[md5sum] = "b6277f92208fd86c53af5b68532e3e86"
+SRC_URI[sha256sum] = "e28aa2b91219b2a3df0b70da265bf8db48a4abb9980aba01096ed493e54b21eb"
 
 FILES_${PN} += " \
     ${datadir}/kservicetypes5 \

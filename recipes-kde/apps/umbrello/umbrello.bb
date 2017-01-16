@@ -25,7 +25,7 @@ DEPENDS += " \
     kxmlgui \
 "
 
-PV = "${KDE_APP_VERSION}"
+PV = "16.12.0"
 SRC_URI[md5sum] = "d8262de2ca40e1143f2e7ecfbb5a1f07"
 SRC_URI[sha256sum] = "c61503074550ba4a4210bd7c2a009f49934f559ee7dcfe6f5518fc181ecdf307"
 
