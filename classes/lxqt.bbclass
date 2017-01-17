@@ -2,7 +2,7 @@ inherit cmake_qt5 cmake_extra_sanity
 
 HOMEPAGE = "http://lxqt.org/"
 
-DEPENDS += "qtbase"
+DEPENDS += "lxqt-build-tools qtbase"
 
 SRC_URI = "git://github.com/lxde/${BPN}.git;protocol=git;branch=master"
 S = "${WORKDIR}/git"
