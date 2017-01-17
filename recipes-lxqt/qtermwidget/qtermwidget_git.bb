@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4641e94ec96f98fabc56ff9cc48be14b"
 
 inherit lxqt cmake_lib
 
-SRCREV = "97d96dfb889fb1d6f1a6c6fc857defd6a8192342"
-PV = "0.7.0"
+SRCREV = "2d5717931128ea28af9daaea4c3464d3ea4d8315"
+PV = "0.7.1"
 
 #EXTRA_OECMAKE += "-DUSE_QT5=ON -DBUILD_DESIGNER_PLUGIN=OFF"
 
