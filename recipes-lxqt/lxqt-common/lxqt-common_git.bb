@@ -10,8 +10,8 @@ SRC_URI += " \
     file://0001-startlxqt-enable-starting-from-console.patch \
     file://0002-slightly-change-theme-defaults.patch \
 "
-SRCREV = "ab29c86d09edda7fb3e59c8f487aa0dbf071486e"
-PV = "0.11.0"
+SRCREV = "e6e6a97d01482497d4fd45c68e1eee0aaed458a4"
+PV = "0.11.2"
 
 FILES_${PN} += " \
     ${datadir}/kdm \
