@@ -13,20 +13,20 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  2 files changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 789b14f..0f78001 100644
+index 912e8f7..ebde50e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -2,8 +2,6 @@ project(obconf-qt)
  # newer cmake is required for CMAKE_AUTOMOC Qt support
- cmake_minimum_required(VERSION 2.8.6)
+ cmake_minimum_required(VERSION 2.8.12)
  
 -find_program(SED_PROGRAM sed)
 -
- # additional cmake files
- list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+ include(GNUInstallDirs)
  
+ set(LXQTBT_MINIMUM_VERSION "0.1.0")
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index d2843a2..ac0eb85 100644
+index 20ca9f3..a744b17 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -46,7 +46,7 @@ endif()
@@ -39,5 +39,5 @@ index d2843a2..ac0eb85 100644
    # DEPENDS
    MAIN_DEPENDENCY ${obconf-qt_UI_H}
 -- 
-1.9.3
+2.7.4
 
