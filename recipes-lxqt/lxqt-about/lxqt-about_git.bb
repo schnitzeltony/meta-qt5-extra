@@ -8,5 +8,5 @@ DEPENDS += " \
     liblxqt \
 "
 
-SRCREV = "7153a71e061113d9daea3b7d4c22cf83c987b97d"
-PV = "0.11.0"
+SRCREV = "970b15031c3ea45fc3c39940c49b4143c96ec440"
+PV = "0.11.1"
