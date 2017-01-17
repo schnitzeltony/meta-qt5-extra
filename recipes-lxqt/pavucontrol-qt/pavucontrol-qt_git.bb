@@ -6,6 +6,5 @@ inherit lxqt
 
 DEPENDS += "glib-2.0 liblxqt pulseaudio"
 
-SRC_URI += "file://0001-CMakeLists-Remove-XdgUserDirs-requirement.patch"
-SRCREV = "4ce124ce49071a97f9185a6e619608e8481a337a"
-PV = "0.1.0"
+SRCREV = "16e2a518f84b6992954e67731111a12e625a9def"
+PV = "0.2.0"
