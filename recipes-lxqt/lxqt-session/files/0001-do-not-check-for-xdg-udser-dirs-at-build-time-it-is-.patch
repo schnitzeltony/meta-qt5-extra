@@ -11,21 +11,29 @@ Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- CMakeLists.txt | 1 -
- 1 file changed, 1 deletion(-)
+ CMakeLists.txt | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1ad07be..62710e4 100644
+index d62552f..0f8a569 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -21,7 +21,6 @@ find_package(Qt5X11Extras REQUIRED QUIET)
- find_package(Qt5LinguistTools REQUIRED QUIET)
+@@ -1,4 +1,5 @@
+ cmake_minimum_required(VERSION 3.0.2 FATAL_ERROR)
++cmake_minimum_required(VERSION 3.0.2 FATAL_ERROR)
  
- find_package(lxqt REQUIRED QUIET)
--find_package(XdgUserDirs REQUIRED QUIET)
+ project(lxqt-session)
  
+@@ -26,9 +27,6 @@ find_package(KF5WindowSystem REQUIRED)
+ 
+ find_package(lxqt REQUIRED)
+ 
+-# Please don't move, must be after lxqt
+-find_package(XdgUserDirs REQUIRED)
+-
  include(LXQtCompilerSettings NO_POLICY_SCOPE)
- include(LXQtTranslate)
+ 
+ # Translations **********************************
 -- 
-2.5.5
+2.7.4
 
