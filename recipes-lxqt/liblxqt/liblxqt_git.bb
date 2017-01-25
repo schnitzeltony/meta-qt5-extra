@@ -6,7 +6,7 @@ inherit lxqt distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "libqtxdg kwindowsystem libxscrnsaver"
+DEPENDS += "qttools libqtxdg kwindowsystem libxscrnsaver"
 
 SRCREV = "6568246eab84a21a1d3cd1febbe58f7d948fda19"
 PV = "0.11.1"
