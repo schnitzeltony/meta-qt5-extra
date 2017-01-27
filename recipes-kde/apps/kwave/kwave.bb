@@ -39,3 +39,5 @@ FILES_${PN} += " \
     ${datadir}/kservicetypes5 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
+
+RDEPENDS_${PN} += "pulseaudio-server"
