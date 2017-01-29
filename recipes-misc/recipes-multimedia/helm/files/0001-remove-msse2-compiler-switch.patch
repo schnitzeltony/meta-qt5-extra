@@ -1,0 +1,132 @@
+From 7c9926e9c49d345c2a3b136dbca80cbb212c513b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 29 Jan 2017 20:01:34 +0100
+Subject: [PATCH 1/3] remove -msse2 compiler switch
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ builds/linux/LV2/Makefile.binary | 8 ++++----
+ builds/linux/VST/Makefile        | 8 ++++----
+ helm.jucer                       | 2 +-
+ standalone/builds/linux/Makefile | 8 ++++----
+ standalone/helm.jucer            | 2 +-
+ 5 files changed, 14 insertions(+), 14 deletions(-)
+
+diff --git a/builds/linux/LV2/Makefile.binary b/builds/linux/LV2/Makefile.binary
+index 7b45128..bc7a551 100644
+--- a/builds/linux/LV2/Makefile.binary
++++ b/builds/linux/LV2/Makefile.binary
+@@ -20,9 +20,9 @@ ifeq ($(CONFIG),Debug)
+   endif
+ 
+   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_1D79FBD2=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -D "JucePlugin_Build_LV2=1" -D "JucePlugin_LV2URI=\"http://tytel.org/helm\"" -D "JucePlugin_LV2Category=\"InstrumentPlugin\"" -D "JucePlugin_WantsLV2Presets=1" -D "JucePlugin_WantsLV2State=1" -D "JucePlugin_WantsLV2TimePos=1" -I /usr/include -I /usr/include/freetype2 -I ../../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../mopo/src -I ../../../concurrentqueue -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
+-  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -fPIC -O0 $(DEBCXXFLAGS) -ffast-math -msse2
++  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -fPIC -O0 $(DEBCXXFLAGS) -ffast-math
+   CXXFLAGS += $(CFLAGS) -std=c++11
+-  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math -msse2
++  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math
+ 
+   TARGET := helm.so
+   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
+@@ -40,9 +40,9 @@ ifeq ($(CONFIG),Release)
+   endif
+ 
+   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_1D79FBD2=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -D "JucePlugin_Build_LV2=1" -D "JucePlugin_LV2URI=\"http://tytel.org/helm\"" -D "JucePlugin_LV2Category=\"InstrumentPlugin\"" -D "JucePlugin_WantsLV2Presets=1" -D "JucePlugin_WantsLV2State=1" -D "JucePlugin_WantsLV2TimePos=1" -I /usr/include -I /usr/include/freetype2 -I ../../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../mopo/src -I ../../../concurrentqueue -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
+-  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -fPIC -O3 $(DEBCXXFLAGS) -ffast-math -msse2
++  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -fPIC -O3 $(DEBCXXFLAGS) -ffast-math
+   CXXFLAGS += $(CFLAGS) -std=c++11
+-  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math -msse2
++  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math
+ 
+   TARGET := helm.so
+   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
+diff --git a/builds/linux/VST/Makefile b/builds/linux/VST/Makefile
+index 1c81bab..fee0ed6 100644
+--- a/builds/linux/VST/Makefile
++++ b/builds/linux/VST/Makefile
+@@ -19,9 +19,9 @@ ifeq ($(CONFIG),Debug)
+   endif
+ 
+   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_1D79FBD2=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -I /usr/include -I /usr/include/freetype2 -I ~/srcs/VST3\ SDK -I ../../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../mopo/src -I ../../../concurrentqueue -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
+-  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -fPIC -O0 $(DEBCXXFLAGS) -ffast-math -msse2
++  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -fPIC -O0 $(DEBCXXFLAGS) -ffast-math
+   CXXFLAGS += $(CFLAGS) -std=c++11
+-  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math -msse2
++  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math
+ 
+   TARGET := helm.so
+   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
+@@ -39,9 +39,9 @@ ifeq ($(CONFIG),Release)
+   endif
+ 
+   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_1D79FBD2=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -I /usr/include -I /usr/include/freetype2 -I ~/srcs/VST3\ SDK -I ../../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../mopo/src -I ../../../concurrentqueue -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
+-  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -fPIC -O3 $(DEBCXXFLAGS) -ffast-math -msse2
++  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -fPIC -O3 $(DEBCXXFLAGS) -ffast-math
+   CXXFLAGS += $(CFLAGS) -std=c++11
+-  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math -msse2
++  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math
+ 
+   TARGET := helm.so
+   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
+diff --git a/helm.jucer b/helm.jucer
+index 00224db..fb3094e 100644
+--- a/helm.jucer
++++ b/helm.jucer
+@@ -424,7 +424,7 @@
+   </MAINGROUP>
+   <EXPORTFORMATS>
+     <LINUX_MAKE targetFolder="builds/linux/VST" vstFolder="~/srcs/VST3 SDK" vst3Folder="~/srcs/VST3 SDK"
+-                extraCompilerFlags="$(DEBCXXFLAGS) -ffast-math -msse2" extraLinkerFlags="$(DEBLDFLAGS) -ffast-math -msse2"
++                extraCompilerFlags="$(DEBCXXFLAGS) -ffast-math" extraLinkerFlags="$(DEBLDFLAGS) -ffast-math"
+                 extraDefs="JUCE_USE_XRANDR=0">
+       <CONFIGURATIONS>
+         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
+diff --git a/standalone/builds/linux/Makefile b/standalone/builds/linux/Makefile
+index 2e23a98..8fe1699 100644
+--- a/standalone/builds/linux/Makefile
++++ b/standalone/builds/linux/Makefile
+@@ -19,9 +19,9 @@ ifeq ($(CONFIG),Debug)
+   endif
+ 
+   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D JUCE_JACK_CLIENT_NAME=\"Helm\" -D JUCE_ALSA_MIDI_INPUT_NAME=\"Helm\" -D JUCE_ALSA_MIDI_OUTPUT_NAME=\"Helm\" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_6B3E762A=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../concurrentqueue -I ../../../mopo/src -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
+-  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0 $(DEBCXXFLAGS) -ffast-math -msse2
++  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0 $(DEBCXXFLAGS) -ffast-math
+   CXXFLAGS += $(CFLAGS) -std=c++11
+-  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math -msse2
++  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math
+ 
+   TARGET := helm
+   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
+@@ -39,9 +39,9 @@ ifeq ($(CONFIG),Release)
+   endif
+ 
+   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D JUCE_JACK_CLIENT_NAME=\"Helm\" -D JUCE_ALSA_MIDI_INPUT_NAME=\"Helm\" -D JUCE_ALSA_MIDI_OUTPUT_NAME=\"Helm\" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_6B3E762A=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../concurrentqueue -I ../../../mopo/src -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
+-  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3 $(DEBCXXFLAGS) -ffast-math -msse2
++  CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3 $(DEBCXXFLAGS) -ffast-math
+   CXXFLAGS += $(CFLAGS) -std=c++11
+-  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math -msse2
++  LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math
+ 
+   TARGET := helm
+   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
+diff --git a/standalone/helm.jucer b/standalone/helm.jucer
+index 14843d4..50289aa 100644
+--- a/standalone/helm.jucer
++++ b/standalone/helm.jucer
+@@ -473,7 +473,7 @@
+       </MODULEPATHS>
+     </VS2012>
+     <LINUX_MAKE targetFolder="builds/linux" bigIcon="JqKIEw" smallIcon="oFf3hH"
+-                extraCompilerFlags="$(DEBCXXFLAGS) -ffast-math -msse2" extraLinkerFlags="$(DEBLDFLAGS) -ffast-math -msse2"
++                extraCompilerFlags="$(DEBCXXFLAGS) -ffast-math" extraLinkerFlags="$(DEBLDFLAGS) -ffast-math -msse2"
+                 extraDefs="JUCE_JACK_CLIENT_NAME=\&quot;Helm\&quot;,&#10;JUCE_ALSA_MIDI_INPUT_NAME=\&quot;Helm\&quot;&#10;JUCE_ALSA_MIDI_OUTPUT_NAME=\&quot;Helm\&quot;&#10;JUCE_USE_XRANDR=0">
+       <CONFIGURATIONS>
+         <CONFIGURATION name="Debug" libraryPath="/usr/X11R6/lib/" isDebug="1" optimisation="1"
+-- 
+2.5.5
+

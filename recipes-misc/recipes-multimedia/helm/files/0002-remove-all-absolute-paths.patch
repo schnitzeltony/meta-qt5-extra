@@ -1,0 +1,484 @@
+From c6fb0333ed02430bb80904a042fea617b273cb8a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 29 Jan 2017 20:15:25 +0100
+Subject: [PATCH 2/3] remove all absolute paths
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ JUCE/examples/BouncingBallWavetableDemo/Builds/Linux/Makefile         | 4 ++--
+ JUCE/examples/Demo/Builds/Linux/Makefile                              | 4 ++--
+ JUCE/examples/HelloWorld/Builds/Linux/Makefile                        | 4 ++--
+ JUCE/examples/MPETest/Builds/LinuxMakefile/Makefile                   | 4 ++--
+ JUCE/examples/MidiTest/Builds/LinuxMakefile/Makefile                  | 4 ++--
+ JUCE/examples/NetworkGraphicsDemo/Builds/LinuxMakefile/Makefile       | 4 ++--
+ JUCE/examples/OSCMonitor/Builds/LinuxMakefile/Makefile                | 4 ++--
+ JUCE/examples/OSCReceiver/Builds/LinuxMakefile/Makefile               | 4 ++--
+ JUCE/examples/OSCSender/Builds/LinuxMakefile/Makefile                 | 4 ++--
+ JUCE/examples/PlugInSamples/Surround/Builds/LinuxMakefile/Makefile    | 4 ++--
+ JUCE/examples/audio plugin demo/Builds/Linux/Makefile                 | 4 ++--
+ JUCE/examples/audio plugin host/Builds/Linux/Makefile                 | 4 ++--
+ JUCE/extras/AudioPerformanceTest/Builds/LinuxMakefile/Makefile        | 4 ++--
+ JUCE/extras/Introjucer/Builds/Linux/Makefile                          | 4 ++--
+ .../Introjucer/Source/Project Saving/jucer_ProjectExport_CodeBlocks.h | 3 ---
+ .../Introjucer/Source/Project Saving/jucer_ProjectExport_Make.h       | 3 ---
+ JUCE/extras/UnitTestRunner/Builds/LinuxMakefile/Makefile              | 4 ++--
+ JUCE/extras/binarybuilder/Builds/Linux/Makefile                       | 4 ++--
+ builds/linux/LV2/Makefile.binary                                      | 4 ++--
+ builds/linux/VST/Makefile                                             | 4 ++--
+ standalone/builds/linux/Makefile                                      | 4 ++--
+ 21 files changed, 38 insertions(+), 44 deletions(-)
+
+diff --git a/JUCE/examples/BouncingBallWavetableDemo/Builds/Linux/Makefile b/JUCE/examples/BouncingBallWavetableDemo/Builds/Linux/Makefile
+index 9d5177e..f4bed8d 100644
+--- a/JUCE/examples/BouncingBallWavetableDemo/Builds/Linux/Makefile
++++ b/JUCE/examples/BouncingBallWavetableDemo/Builds/Linux/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/examples/Demo/Builds/Linux/Makefile b/JUCE/examples/Demo/Builds/Linux/Makefile
+index 7e8a973..f740467 100644
+--- a/JUCE/examples/Demo/Builds/Linux/Makefile
++++ b/JUCE/examples/Demo/Builds/Linux/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCE_UNIT_TESTS=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=3.0.0" -D "JUCE_APP_VERSION_HEX=0x30000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCE_UNIT_TESTS=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=3.0.0" -D "JUCE_APP_VERSION_HEX=0x30000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCE_UNIT_TESTS=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=3.0.0" -D "JUCE_APP_VERSION_HEX=0x30000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCE_UNIT_TESTS=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=3.0.0" -D "JUCE_APP_VERSION_HEX=0x30000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/examples/HelloWorld/Builds/Linux/Makefile b/JUCE/examples/HelloWorld/Builds/Linux/Makefile
+index f282081..b6ba235 100644
+--- a/JUCE/examples/HelloWorld/Builds/Linux/Makefile
++++ b/JUCE/examples/HelloWorld/Builds/Linux/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/examples/MPETest/Builds/LinuxMakefile/Makefile b/JUCE/examples/MPETest/Builds/LinuxMakefile/Makefile
+index a8e2c8d..d68379a 100644
+--- a/JUCE/examples/MPETest/Builds/LinuxMakefile/Makefile
++++ b/JUCE/examples/MPETest/Builds/LinuxMakefile/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/examples/MidiTest/Builds/LinuxMakefile/Makefile b/JUCE/examples/MidiTest/Builds/LinuxMakefile/Makefile
+index 847bf15..61d0c9d 100644
+--- a/JUCE/examples/MidiTest/Builds/LinuxMakefile/Makefile
++++ b/JUCE/examples/MidiTest/Builds/LinuxMakefile/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/examples/NetworkGraphicsDemo/Builds/LinuxMakefile/Makefile b/JUCE/examples/NetworkGraphicsDemo/Builds/LinuxMakefile/Makefile
+index e8ee94e..29bef5f 100644
+--- a/JUCE/examples/NetworkGraphicsDemo/Builds/LinuxMakefile/Makefile
++++ b/JUCE/examples/NetworkGraphicsDemo/Builds/LinuxMakefile/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/examples/OSCMonitor/Builds/LinuxMakefile/Makefile b/JUCE/examples/OSCMonitor/Builds/LinuxMakefile/Makefile
+index 0bdce8b..88f2398 100644
+--- a/JUCE/examples/OSCMonitor/Builds/LinuxMakefile/Makefile
++++ b/JUCE/examples/OSCMonitor/Builds/LinuxMakefile/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/examples/OSCReceiver/Builds/LinuxMakefile/Makefile b/JUCE/examples/OSCReceiver/Builds/LinuxMakefile/Makefile
+index 6741875..8c05fe2 100644
+--- a/JUCE/examples/OSCReceiver/Builds/LinuxMakefile/Makefile
++++ b/JUCE/examples/OSCReceiver/Builds/LinuxMakefile/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/examples/OSCSender/Builds/LinuxMakefile/Makefile b/JUCE/examples/OSCSender/Builds/LinuxMakefile/Makefile
+index d0e73a0..43d66f3 100644
+--- a/JUCE/examples/OSCSender/Builds/LinuxMakefile/Makefile
++++ b/JUCE/examples/OSCSender/Builds/LinuxMakefile/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/examples/PlugInSamples/Surround/Builds/LinuxMakefile/Makefile b/JUCE/examples/PlugInSamples/Surround/Builds/LinuxMakefile/Makefile
+index f20d38f..87e5629 100644
+--- a/JUCE/examples/PlugInSamples/Surround/Builds/LinuxMakefile/Makefile
++++ b/JUCE/examples/PlugInSamples/Surround/Builds/LinuxMakefile/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ~/SDKs/VST3\ SDK -I ../../JuceLibraryCode -I ../../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ~/SDKs/VST3\ SDK -I ../../JuceLibraryCode -I ../../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -fPIC -O0 -Wall -Wshadow -Wno-missing-field-initializers -Wshadow -Wshorten-64-to-32 -Wstrict-aliasing -Wuninitialized -Wunused-parameter -Wconversion -Wsign-compare -Wint-conversion -Woverloaded-virtual -Wreorder -Wconstant-conversion -Wsign-conversion
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ~/SDKs/VST3\ SDK -I ../../JuceLibraryCode -I ../../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ~/SDKs/VST3\ SDK -I ../../JuceLibraryCode -I ../../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -fPIC -O3 -Wall -Wshadow -Wno-missing-field-initializers -Wshadow -Wshorten-64-to-32 -Wstrict-aliasing -Wuninitialized -Wunused-parameter -Wconversion -Wsign-compare -Wint-conversion -Woverloaded-virtual -Wreorder -Wconstant-conversion -Wsign-conversion
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -fvisibility=hidden -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/examples/audio plugin demo/Builds/Linux/Makefile b/JUCE/examples/audio plugin demo/Builds/Linux/Makefile
+index f7696b1..a65c689 100644
+--- a/JUCE/examples/audio plugin demo/Builds/Linux/Makefile	
++++ b/JUCE/examples/audio plugin demo/Builds/Linux/Makefile	
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ~/SDKs/VST3\ SDK -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I ~/SDKs/VST3\ SDK -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -fPIC -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ~/SDKs/VST3\ SDK -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I ~/SDKs/VST3\ SDK -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -fPIC -O3
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/examples/audio plugin host/Builds/Linux/Makefile b/JUCE/examples/audio plugin host/Builds/Linux/Makefile
+index d0f517e..5442e97 100644
+--- a/JUCE/examples/audio plugin host/Builds/Linux/Makefile	
++++ b/JUCE/examples/audio plugin host/Builds/Linux/Makefile	
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ~/SDKs/VST3\ SDK -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I ~/SDKs/VST3\ SDK -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ~/SDKs/VST3\ SDK -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I ~/SDKs/VST3\ SDK -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/extras/AudioPerformanceTest/Builds/LinuxMakefile/Makefile b/JUCE/extras/AudioPerformanceTest/Builds/LinuxMakefile/Makefile
+index 4802bc0..5bcb882 100644
+--- a/JUCE/extras/AudioPerformanceTest/Builds/LinuxMakefile/Makefile
++++ b/JUCE/extras/AudioPerformanceTest/Builds/LinuxMakefile/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/extras/Introjucer/Builds/Linux/Makefile b/JUCE/extras/Introjucer/Builds/Linux/Makefile
+index 4ad0484..ff1db1e 100644
+--- a/JUCE/extras/Introjucer/Builds/Linux/Makefile
++++ b/JUCE/extras/Introjucer/Builds/Linux/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := 
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=4.1.0" -D "JUCE_APP_VERSION_HEX=0x40100" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=4.1.0" -D "JUCE_APP_VERSION_HEX=0x40100"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0 -std=gnu++0x -Wreorder -Wuninitialized -Wunused-parameter -Wstrict-aliasing -Wshadow -Wsign-compare
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt -lcurl 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := 
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=4.1.0" -D "JUCE_APP_VERSION_HEX=0x40100" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=4.1.0" -D "JUCE_APP_VERSION_HEX=0x40100"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3 -std=gnu++0x -Wreorder -Wuninitialized -Wunused-parameter -Wstrict-aliasing -Wshadow -Wsign-compare
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -ldl -lfreetype -lpthread -lrt -lcurl 
+diff --git a/JUCE/extras/Introjucer/Source/Project Saving/jucer_ProjectExport_CodeBlocks.h b/JUCE/extras/Introjucer/Source/Project Saving/jucer_ProjectExport_CodeBlocks.h
+index 5c1d35f..b76f32a 100644
+--- a/JUCE/extras/Introjucer/Source/Project Saving/jucer_ProjectExport_CodeBlocks.h	
++++ b/JUCE/extras/Introjucer/Source/Project Saving/jucer_ProjectExport_CodeBlocks.h	
+@@ -242,9 +242,6 @@ private:
+ 
+         paths.addArray (config.getHeaderSearchPaths());
+ 
+-        if (! isCodeBlocksWindows())
+-            paths.add ("/usr/include/freetype2");
+-
+         return getCleanedStringArray (paths);
+     }
+ 
+diff --git a/JUCE/extras/Introjucer/Source/Project Saving/jucer_ProjectExport_Make.h b/JUCE/extras/Introjucer/Source/Project Saving/jucer_ProjectExport_Make.h
+index ec0614c..9c949aa 100644
+--- a/JUCE/extras/Introjucer/Source/Project Saving/jucer_ProjectExport_Make.h	
++++ b/JUCE/extras/Introjucer/Source/Project Saving/jucer_ProjectExport_Make.h	
+@@ -158,9 +158,6 @@ private:
+         StringArray searchPaths (extraSearchPaths);
+         searchPaths.addArray (config.getHeaderSearchPaths());
+ 
+-        searchPaths.insert (0, "/usr/include/freetype2");
+-        searchPaths.insert (0, "/usr/include");
+-
+         searchPaths = getCleanedStringArray (searchPaths);
+ 
+         for (int i = 0; i < searchPaths.size(); ++i)
+diff --git a/JUCE/extras/UnitTestRunner/Builds/LinuxMakefile/Makefile b/JUCE/extras/UnitTestRunner/Builds/LinuxMakefile/Makefile
+index 1fa5af8..de85c1a 100644
+--- a/JUCE/extras/UnitTestRunner/Builds/LinuxMakefile/Makefile
++++ b/JUCE/extras/UnitTestRunner/Builds/LinuxMakefile/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCE_UNIT_TESTS=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCE_UNIT_TESTS=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCE_UNIT_TESTS=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCE_UNIT_TESTS=1" -D "JUCER_LINUX_MAKE_6D53C8B4=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lGL -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt 
+diff --git a/JUCE/extras/binarybuilder/Builds/Linux/Makefile b/JUCE/extras/binarybuilder/Builds/Linux/Makefile
+index 90b901f..3e7d0fb 100644
+--- a/JUCE/extras/binarybuilder/Builds/Linux/Makefile
++++ b/JUCE/extras/binarybuilder/Builds/Linux/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -ldl -lpthread -lrt 
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := -march=native
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../../modules
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -D "JUCE_APP_VERSION=1.0.0" -D "JUCE_APP_VERSION_HEX=0x10000"   -I ../../JuceLibraryCode -I ../../../../modules
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -ldl -lpthread -lrt 
+diff --git a/builds/linux/LV2/Makefile.binary b/builds/linux/LV2/Makefile.binary
+index bc7a551..3f49d71 100644
+--- a/builds/linux/LV2/Makefile.binary
++++ b/builds/linux/LV2/Makefile.binary
+@@ -19,7 +19,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := 
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_1D79FBD2=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -D "JucePlugin_Build_LV2=1" -D "JucePlugin_LV2URI=\"http://tytel.org/helm\"" -D "JucePlugin_LV2Category=\"InstrumentPlugin\"" -D "JucePlugin_WantsLV2Presets=1" -D "JucePlugin_WantsLV2State=1" -D "JucePlugin_WantsLV2TimePos=1" -I /usr/include -I /usr/include/freetype2 -I ../../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../mopo/src -I ../../../concurrentqueue -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_1D79FBD2=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -D "JucePlugin_Build_LV2=1" -D "JucePlugin_LV2URI=\"http://tytel.org/helm\"" -D "JucePlugin_LV2Category=\"InstrumentPlugin\"" -D "JucePlugin_WantsLV2Presets=1" -D "JucePlugin_WantsLV2State=1" -D "JucePlugin_WantsLV2TimePos=1"  -I ../../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../mopo/src -I ../../../concurrentqueue -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -fPIC -O0 $(DEBCXXFLAGS) -ffast-math
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math
+@@ -39,7 +39,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH :=
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_1D79FBD2=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -D "JucePlugin_Build_LV2=1" -D "JucePlugin_LV2URI=\"http://tytel.org/helm\"" -D "JucePlugin_LV2Category=\"InstrumentPlugin\"" -D "JucePlugin_WantsLV2Presets=1" -D "JucePlugin_WantsLV2State=1" -D "JucePlugin_WantsLV2TimePos=1" -I /usr/include -I /usr/include/freetype2 -I ../../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../mopo/src -I ../../../concurrentqueue -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_1D79FBD2=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -D "JucePlugin_Build_LV2=1" -D "JucePlugin_LV2URI=\"http://tytel.org/helm\"" -D "JucePlugin_LV2Category=\"InstrumentPlugin\"" -D "JucePlugin_WantsLV2Presets=1" -D "JucePlugin_WantsLV2State=1" -D "JucePlugin_WantsLV2TimePos=1"  -I ../../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../mopo/src -I ../../../concurrentqueue -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -fPIC -O3 $(DEBCXXFLAGS) -ffast-math
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math
+diff --git a/builds/linux/VST/Makefile b/builds/linux/VST/Makefile
+index fee0ed6..ee0a6aa 100644
+--- a/builds/linux/VST/Makefile
++++ b/builds/linux/VST/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := 
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_1D79FBD2=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -I /usr/include -I /usr/include/freetype2 -I ~/srcs/VST3\ SDK -I ../../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../mopo/src -I ../../../concurrentqueue -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_1D79FBD2=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -I ~/srcs/VST3\ SDK -I ../../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../mopo/src -I ../../../concurrentqueue -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -fPIC -O0 $(DEBCXXFLAGS) -ffast-math
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := 
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_1D79FBD2=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -I /usr/include -I /usr/include/freetype2 -I ~/srcs/VST3\ SDK -I ../../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../mopo/src -I ../../../concurrentqueue -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_1D79FBD2=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -I ~/srcs/VST3\ SDK -I ../../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../mopo/src -I ../../../concurrentqueue -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -fPIC -O3 $(DEBCXXFLAGS) -ffast-math
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -Wl,--no-undefined -shared -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math
+diff --git a/standalone/builds/linux/Makefile b/standalone/builds/linux/Makefile
+index 8fe1699..40c15f7 100644
+--- a/standalone/builds/linux/Makefile
++++ b/standalone/builds/linux/Makefile
+@@ -18,7 +18,7 @@ ifeq ($(CONFIG),Debug)
+     TARGET_ARCH := 
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D JUCE_JACK_CLIENT_NAME=\"Helm\" -D JUCE_ALSA_MIDI_INPUT_NAME=\"Helm\" -D JUCE_ALSA_MIDI_OUTPUT_NAME=\"Helm\" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_6B3E762A=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../concurrentqueue -I ../../../mopo/src -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D JUCE_JACK_CLIENT_NAME=\"Helm\" -D JUCE_ALSA_MIDI_INPUT_NAME=\"Helm\" -D JUCE_ALSA_MIDI_OUTPUT_NAME=\"Helm\" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_6B3E762A=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806"  -I ../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../concurrentqueue -I ../../../mopo/src -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0 $(DEBCXXFLAGS) -ffast-math
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math
+@@ -38,7 +38,7 @@ ifeq ($(CONFIG),Release)
+     TARGET_ARCH := 
+   endif
+ 
+-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D JUCE_JACK_CLIENT_NAME=\"Helm\" -D JUCE_ALSA_MIDI_INPUT_NAME=\"Helm\" -D JUCE_ALSA_MIDI_OUTPUT_NAME=\"Helm\" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_6B3E762A=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806" -I /usr/include -I /usr/include/freetype2 -I ../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../concurrentqueue -I ../../../mopo/src -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
++  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D JUCE_JACK_CLIENT_NAME=\"Helm\" -D JUCE_ALSA_MIDI_INPUT_NAME=\"Helm\" -D JUCE_ALSA_MIDI_OUTPUT_NAME=\"Helm\" -D "JUCE_USE_XRANDR=0" -D "JUCER_LINUX_MAKE_6B3E762A=1" -D "JUCE_APP_VERSION=0.8.6" -D "JUCE_APP_VERSION_HEX=0x806"  -I ../../JuceLibraryCode -I ../../../JUCE/modules -I ../../../concurrentqueue -I ../../../mopo/src -I ../../../src -I ../../../src/common -I ../../../src/editor_components -I ../../../src/editor_sections -I ../../../src/look_and_feel -I ../../../src/standalone -I ../../../src/synthesis
+   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -O3 $(DEBCXXFLAGS) -ffast-math
+   CXXFLAGS += $(CFLAGS) -std=c++11
+   LDFLAGS += $(TARGET_ARCH) -L$(BINDIR) -L$(LIBDIR) -fvisibility=hidden -L/usr/X11R6/lib/ -lX11 -lXext -lXinerama -lasound -ldl -lfreetype -lpthread -lrt $(DEBLDFLAGS) -ffast-math
+-- 
+2.5.5
+
