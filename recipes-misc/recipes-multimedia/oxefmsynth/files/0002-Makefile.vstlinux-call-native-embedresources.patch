@@ -1,0 +1,47 @@
+From 6cdfbc326d24f83221ee85798eaa3800bd5642bd Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 29 Jan 2017 17:46:32 +0100
+Subject: [PATCH] Makefile.vstlinux: call native embedresources
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ Makefile.standalone | 3 +--
+ Makefile.vstlinux   | 3 +--
+ 2 files changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/Makefile.standalone b/Makefile.standalone
+index 1758736..e7de5e6 100644
+--- a/Makefile.standalone
++++ b/Makefile.standalone
+@@ -110,8 +110,7 @@ endif
+ 
+ bitmaps.cpp:
+ 	@$(CXX) -o embedresources src/toolkits/embedresources.cpp
+-	@./embedresources $@
+-	@rm embedresources
++	@embedresources $@
+ 
+ cocoatoolkit.o:
+ 	@gcc -c -o $@ $(OBJCSOURCES) $(INCLUDES) $(OBJCFLAGS)
+diff --git a/Makefile.vstlinux b/Makefile.vstlinux
+index 1200108..971562c 100644
+--- a/Makefile.vstlinux
++++ b/Makefile.vstlinux
+@@ -72,8 +72,7 @@ oxevst: bitmaps.cpp
+ 
+ bitmaps.cpp:
+ 	@$(CXX) -o embedresources src/toolkits/embedresources.cpp
+-	@./embedresources $@
+-	@rm embedresources
++	@embedresources $@
+ 
+ clean:
+ 	@rm -f oxevst*.so embedresources resources.h
+-- 
+2.5.5
+

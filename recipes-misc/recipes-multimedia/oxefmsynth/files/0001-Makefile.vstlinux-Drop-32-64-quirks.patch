@@ -1,0 +1,44 @@
+From 3a88038e83c24bf882bea8dc6fe3576d03b0e9eb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 29 Jan 2017 17:27:10 +0100
+Subject: [PATCH] Makefile.vstlinux: Drop 32/64 quirks
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ Makefile.vstlinux | 14 +++-----------
+ 1 file changed, 3 insertions(+), 11 deletions(-)
+
+diff --git a/Makefile.vstlinux b/Makefile.vstlinux
+index a3a8a2d..1200108 100644
+--- a/Makefile.vstlinux
++++ b/Makefile.vstlinux
+@@ -65,18 +65,10 @@ else
+     CFLAGS+=-s -O3
+ endif
+ 
+-ARCH := $(shell getconf LONG_BIT)
+-ifneq ($(ARCH),32)
+-    BITS:=-m32
+-endif
+-
+-all: oxevst$(ARCH)
+-
+-oxevst32: bitmaps.cpp
+-	@$(CXX) -shared $(BITS) -o oxevst32.so $(CFLAGS) $(SOURCES) $(INCLUDES) $(LIBS)
++all: oxevst
+ 
+-oxevst64: bitmaps.cpp
+-	@$(CXX) -shared -m64    -o oxevst64.so $(CFLAGS) $(SOURCES) $(INCLUDES) $(LIBS)
++oxevst: bitmaps.cpp
++	@$(CXX) -shared -o oxevst.so $(CFLAGS) $(SOURCES) $(INCLUDES) $(LIBS)
+ 
+ bitmaps.cpp:
+ 	@$(CXX) -o embedresources src/toolkits/embedresources.cpp
+-- 
+2.5.5
+
