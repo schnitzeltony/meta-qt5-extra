@@ -11,5 +11,5 @@ REQUIRED_DISTRO_FEATURE = "x11"
 DEPENDS += "kcoreaddons kwindowsystem virtual/libx11"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "d85c85ecfe38a796c3bce4313df8ece7"
-SRC_URI[sha256sum] = "3bdb5421b0909fa4e0d7bfb8bba708f9b95c4edf9ca1580aac8229512c49e224"
+SRC_URI[md5sum] = "6f42a5e7da6e8e02ceacd678e782919a"
+SRC_URI[sha256sum] = "04a22615e03dc9db29daccfc437fd6d952e35b3dd39f52d95ea24115037aac42"

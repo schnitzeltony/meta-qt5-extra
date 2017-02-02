@@ -1,0 +1,32 @@
+From ccaed10501ee608b1c3ea795a3a12e93ecca938d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 1 Feb 2017 17:51:27 +0100
+Subject: [PATCH] make autotests optional by BUILD_TESTING
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c8cc674..94d0295 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -31,7 +31,9 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KCONFIG
+ 
+ 
+ add_subdirectory(src)
++if(BUILD_TESTING)
+ add_subdirectory(autotests)
++endif()
+ 
+ include (ECMPoQmTools)
+ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+-- 
+2.7.4
+

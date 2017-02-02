@@ -12,13 +12,14 @@ DEPENDS += " \
     kio \
     knotifications \
     kwidgetsaddons \
+    knewstuff \
 "
 
 RRECCOMENDS_${PN} += "oxygen-fonts"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "2be21b2a9635084e9c2009c3ae8fbc2b"
-SRC_URI[sha256sum] = "ebb89e4b236163c067402cf78d67cddc443ef4fda0778001980948efc3cf5a52"
+SRC_URI[md5sum] = "53f7c85f3891587fe147b9157e0d2e84"
+SRC_URI[sha256sum] = "d3b5a0e22fc37396b40018fdf6b5cfe1da401d655c828fa34537596952c33fa9"
 
 FILES_${PN} += " \
     ${datadir}/knotifications5 \

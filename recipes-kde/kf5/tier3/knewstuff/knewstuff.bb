@@ -20,8 +20,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "b650d2219ec0113ea8a57664575eaa49"
-SRC_URI[sha256sum] = "8165785151bb8cce05e43d306b2bbe0bf4a8eb81940c999b5a14901bdabdd3b1"
+SRC_URI[md5sum] = "914fc8d7aa78c12c1ffd89b041772799"
+SRC_URI[sha256sum] = "2f19359286631831e4090d1a9448cfb72ac037b2fb76c5fe8a9694861b4a30eb"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML}/org/kde/newstuff \

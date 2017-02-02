@@ -10,5 +10,5 @@ inherit kde-kf5
 DEPENDS += "kcoreaddons ki18n"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "7a6702b8b9bed61ce39057ac5a4a0b88"
-SRC_URI[sha256sum] = "f1c077b1c15fb7182c1272fd311ee5c51bf8de149b7f63ddcce4a557c6c36821"
+SRC_URI[md5sum] = "19b3dea73a09b9f5c174491ee0b1861c"
+SRC_URI[sha256sum] = "c06ce55010745aedf787005d940241e49963fb06b8c3294411e2d1638142ca36"
