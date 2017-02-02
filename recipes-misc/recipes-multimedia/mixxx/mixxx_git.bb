@@ -1,7 +1,7 @@
 SUMMARY = "Qt based DJ software"
 HOMEPAGE = "http://mixxx.org/"
 LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=bb18019490a2ef1942831060527e3feb"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=16afb79bc15f82862549f246a6d0062f"
 
 inherit scons qmake5_paths
 
@@ -40,7 +40,7 @@ SRC_URI = " \
     file://0003-align-path-of-qt-build-tools-to-our-needs.patch \
     file://0004-add-vamp-float-math-build-option-to-force-vamp-calcu.patch \
 "
-SRCREV = "89e54e8fd924acc305d7ddab6dc96002b774ce35"
+SRCREV = "60b30896ac570bea52de7a0050433acd477d556d"
 S = "${WORKDIR}/git"
 PV = "2.0.0+git${SRCPV}"
 
