@@ -19,5 +19,5 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "bdafdc215db3e3d011465447576876cf"
-SRC_URI[sha256sum] = "b0abeaba2a3eff16e233e047b41c20bf4065b4529e706929f4c0e6a9884324bf"
+SRC_URI[md5sum] = "67ef20f3150b87c4a3dfdbddda013393"
+SRC_URI[sha256sum] = "75a98037ed29ececc7254e9772a2835c80a9bd7d9ecf65b933137b1e4cfa8d9c"

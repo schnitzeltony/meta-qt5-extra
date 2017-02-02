@@ -1,8 +1,7 @@
 SUMMARY = "Qt Platform Theme integration plugins for the Plasma workspaces"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPLv3"
 LIC_FILES_CHKSUM = " \
-    file://COPYING.LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-    file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://COPYING.LGPL-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
 inherit kde-plasma
@@ -18,8 +17,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "5ebf18175efae874c1ba4d19d6cac3d5"
-SRC_URI[sha256sum] = "cb4da56f940e87e1195a0ba19e07ea3384fed1dcd26ca91dee1d7dee8f00a7ea"
+SRC_URI[md5sum] = "c76b62ddbb6c5266c9165806f037b57c"
+SRC_URI[sha256sum] = "0e41a63076bcad8362ad081988afc2a647eb8acaeb958d9f310048692d447a57"
 
 FILES_${PN} += " \
     ${datadir}/kconf_update \

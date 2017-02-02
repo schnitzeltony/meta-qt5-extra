@@ -41,8 +41,8 @@ DEPENDS += " \
 # MobileBroadbandProviderInfo
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "c345a4d5f6a4fed3adf6f3fef7cf4e54"
-SRC_URI[sha256sum] = "6c2fee26ed36ebc7929f8d8da42d29ed475fe8dd6ab3e8987f1a0a8fd8f73ebc"
+SRC_URI[md5sum] = "65b24bab1510e860146e7c207a889676"
+SRC_URI[sha256sum] = "1a30ab88ae8fe8f99e0425eb920d5d4a1d930dd411e223b9ce372776970e4bd5"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
@@ -50,6 +50,7 @@ FILES_SOLIBSDEV = ""
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/plasma \
+    ${datadir}/kcm_networkmanagement/qml \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
     ${libdir}/*.so \

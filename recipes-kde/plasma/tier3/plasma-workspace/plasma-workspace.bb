@@ -41,8 +41,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "387d99d5acc5fc28901e72757b286506"
-SRC_URI[sha256sum] = "6d25077205436e3e721d7dfa4dffce7aea62a6e652ee7897952885e52b2f6ea1"
+SRC_URI[md5sum] = "46e3794c6d72a491297e85673ac9e00b"
+SRC_URI[sha256sum] = "d8f210bf40c88208802b29ec1660efffe347a55b85e5f2e18ee9f475717ac2d3"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
@@ -71,8 +71,10 @@ FILES_${PN} += " \
     ${datadir}/plasma \
     ${datadir}/ksmserver \
     ${datadir}/kdevappwizard \
+    ${datadir}/kconf_update \
     \
     ${libdir}/libkdeinit5*.so \
+    ${libdir}/kconf_update_bin \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
 "

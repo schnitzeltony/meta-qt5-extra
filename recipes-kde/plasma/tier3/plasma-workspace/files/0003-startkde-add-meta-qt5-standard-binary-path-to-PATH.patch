@@ -24,9 +24,9 @@ index 046543e..2663348 100644
 +# meta-qt5 specific
 +PATH=$PATH:@CMAKE_INSTALL_FULL_BINDIR@/qt5; export PATH
 +
- if test "x$1" = x--failsafe; then
-     KDE_FAILSAFE=1 # General failsafe flag
-     KWIN_COMPOSE=N # Disable KWin's compositing
+ # When the X server dies we get a HUP signal from xinit. We must ignore it
+ # because we still need to do some cleanup.
+ trap 'echo GOT SIGHUP' HUP
 -- 
 1.9.3
 
