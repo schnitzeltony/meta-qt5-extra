@@ -15,6 +15,7 @@ DEPENDS += " \
     kauth \
     kconfigwidgets \
     kio \
+    knewstuff \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb virtual/xserver", "", d)} \
 "
 
