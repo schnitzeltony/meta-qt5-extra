@@ -23,6 +23,7 @@ EXTRA_OECONF += " \
     --with-module-dir=${libdir}/${BPN} \
     --enable-dynamic=gtk \
     --enable-portmidisyn \
+    --enable-alsaseq \
 "
 
 CFLAGS  += '-DCONFIG_FILE=\\"${sysconfdir}/timidity++.cfg\\"'
