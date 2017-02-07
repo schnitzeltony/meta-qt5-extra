@@ -1,0 +1,36 @@
+From 5bcffb9084b4b85f3006180d86df32295679ac35 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 7 Feb 2017 08:57:39 +0100
+Subject: [PATCH] message.c: ensure variables are set to fix build
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+| ../../src/message.c: In function 'lo_arg_pp_internal':
+| ../../src/message.c:1075:9: error: 'val64.f' may be used uninitialized in this function [-Werror=maybe-uninitialized]
+|          printf("%f", val64.f);
+|          ^~~~~~~~~~~~~~~~~~~~~
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/message.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/message.c b/src/message.c
+index 7980ccf..5de9998 100644
+--- a/src/message.c
++++ b/src/message.c
+@@ -1010,6 +1010,8 @@ void lo_arg_pp_internal(lo_type type, void *data, int bigendian)
+ {
+     lo_pcast32 val32;
+     lo_pcast64 val64;
++    val32.f = 0.0;
++    val64.f = 0.0;
+     lo_timetag valtt = { 0, 1 };
+     int size;
+     int i;
+-- 
+2.9.3
+
