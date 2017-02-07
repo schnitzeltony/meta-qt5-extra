@@ -5,11 +5,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb3014b036b6d2151d944aef6a84c36f"
 
 inherit autotools-brokensep pkgconfig
 
-DEPENDS += " \
+SRC_URI = " \
+    git://github.com/sergiomb2/${BPN}.git \
+    file://0001-add-a-configure-option-to-disable-build-of-man-pages.patch \
 "
-
-SRC_URI = "git://github.com/sergiomb2/${BPN}.git"
 SRCREV = "fc65e21b1fe12cb3d51a8bc8152efbebedabbd6f"
 S = "${WORKDIR}/git"
 PV = "2.1.0+git${SRCPV}"
 
+EXTRA_OECONF = "--disable-man"
