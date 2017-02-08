@@ -19,6 +19,7 @@ DEPENDS = " \
     libexif \
     libsamplerate0 \
     fftw \
+    jack \
 "
 
 # TBD sox not found due to missing pkgconfig / others - see log.do_configure
