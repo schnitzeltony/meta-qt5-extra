@@ -8,12 +8,12 @@ inherit liri systemd pythonnative distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "wayland pam"
 
-PV = "0.10.0+git${SRCPV}"
+PV = "0.9.0+git${SRCPV}"
 
 SRC_URI += " \
     file://0001-find-host-s-git.patch \
 "
-SRCREV = "ba7353b01c9c87c3ec8226a2f931dc8f2a72bf3b"
+SRCREV = "53a85487e7f4de25982cdb4490b9576be24459e7"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
