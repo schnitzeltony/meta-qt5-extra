@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = " \
 
 inherit liri gsettings
 
+SRC_URI += "file://0001-remove-Werror-from-build-flags.patch"
 PV = "0.9.0+git${SRCPV}"
-
 SRCREV = "3fe96923a1b6daef6e76b46ff29dd8ae97d8624c"
 S = "${WORKDIR}/git"
 
