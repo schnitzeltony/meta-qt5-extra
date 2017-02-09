@@ -9,6 +9,7 @@ inherit kde-plasma
 DEPENDS += " \
     libpwquality \
     kdelibs4support \
+    kcmutils \
 "
 
 PV = "${PLASMA_VERSION}"
