@@ -9,9 +9,9 @@ inherit liri distro_features_check cmake_auto_align_paths cmake_lib
 
 REQUIRED_DISTRO_FEATURES = "wayland"
 
-PV = "0.10.0+git${SRCPV}"
+PV = "0.9.0.1+git${SRCPV}"
 
-SRCREV = "d8c0464ceacd70266826671a6a8dcb999b471d03"
+SRCREV = "716c764b546b8bed0d6cd33acb5c684b831b1daa"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
