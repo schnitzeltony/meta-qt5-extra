@@ -15,7 +15,10 @@ DEPENDS += " \
     kwindowsystem \
 "
 
-SRC_URI += "file://0001-add-Qt5-X11Extras-to-QTX_LIBRARIES.patch"
+SRC_URI += " \
+    file://0001-add-Qt5-X11Extras-to-QTX_LIBRARIES.patch \
+    file://0002-plugin-kbindicator-Undef-the-explicit-workaround.patch \
+"
 SRCREV = "85b532485d97a9d4ffa477218911b46f1c0998cd"
 PV = "0.11.1"
 
