@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = " \
 
 inherit liri gsettings
 
-PV = "0.1.0+git${SRCPV}"
+PV = "0.0.0+git${SRCPV}"
 
-SRCREV = "e6b33d1700f454e2c50f74756aa2579fc4994996"
+SRCREV = "1b428ebf54b7768723f806abdf62e24bc9b1b48a"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
