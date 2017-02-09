@@ -1,0 +1,33 @@
+From e08d4bc54612c3442436210058e2245b228c2071 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 9 Feb 2017 21:30:53 +0100
+Subject: [PATCH] remove -Werror from build flags
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+workaround build for Raspi2/CortexA7
+
+| /usr/include/qt5/QtCore/qlist.h:495:34: error: cast from 'QList<QVariant>::Node*' to 'QVariant*' increases required alignment of target type [-Werror=cast-align]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e08aa59..6ec55e3 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -41,7 +41,7 @@ include(KDECompilerSettings)
+ include(KDECMakeSettings)
+ 
+ # Build flags
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden -Werror -Wall -Wextra -Wformat -Wswitch-default -Wunused-parameter -pedantic -std=c++11")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden -Wall -Wextra -Wformat -Wswitch-default -Wunused-parameter -pedantic -std=c++11")
+ 
+ # Assume release build by default
+ if(NOT CMAKE_BUILD_TYPE)
+-- 
+2.9.3
+
