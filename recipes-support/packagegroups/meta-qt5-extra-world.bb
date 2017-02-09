@@ -73,7 +73,7 @@ RDEPENDS_${PN} = " \
     translate-toolkit \
     xapian-core \
     \
-    hawaii-world \
+    liri-world \
     kde-world \
     lxqt-world \
 "
