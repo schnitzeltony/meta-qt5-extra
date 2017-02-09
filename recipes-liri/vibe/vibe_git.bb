@@ -8,8 +8,8 @@ inherit liri distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "pulseaudio"
 
+SRC_URI += "file://0001-remove-Werror-from-build-flags.patch"
 PV = "0.9.0+git${SRCPV}"
-
 SRCREV = "a2a8337b5356dd98e4ee2cfd424581b8ae2f4723"
 S = "${WORKDIR}/git"
 

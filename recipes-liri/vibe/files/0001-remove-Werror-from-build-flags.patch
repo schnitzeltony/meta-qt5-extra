@@ -1,0 +1,39 @@
+From d16f258df1e7e7069002ee87aacec5d5426d204e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 9 Feb 2017 22:10:26 +0100
+Subject: [PATCH] remove -Werror from build flags
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+workaround build for Raspi2/CortexA7 (hope I get all types)
+
+| vibe/0.9.0+gitAUTOINC+a2a8337b53-r0/git/declarative/policykit/listener_p.cpp:78:30: error: ISO C++11 requires at least one argument for the "..." in a variadic macro [-Werror]
+
+| /usr/include/qt5/QtCore/qlist.h:495:34: error: cast from 'QList<QVariant>::Node*' to 'QVariant*' increases required alignment of target type [-Werror=cast-align]
+
+| /usr/include/qt5/QtCore/qhash.h:235:16: error: cast from 'QHashData::Node*' to 'QHash<QString, QVariant>::Node* {aka QHashNode<QString, QVariant>*}' increases required alignment of target type [-Werror=cast-align]
+
+| /usr/include/qt5/QtCore/qobject_impl.h:163:13: error: switch missing default case [-Werror=switch-default]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e3c1959..e97c301 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -45,7 +45,7 @@ include(KDECMakeSettings)
+ find_package(PkgConfig)
+ 
+ # Build flags
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden -Werror -Wall -Wextra -Wformat -Wswitch-default -Wunused-parameter -pedantic -std=c++11")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden -Wall -Wextra -Wformat -Wswitch-default -Wunused-parameter -pedantic -std=c++11")
+ 
+ # qCDebug() uses zero variadic arguments, so we need to disable this warning
+ # as it would become an error with -Werror
+-- 
+2.9.3
+
