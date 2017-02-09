@@ -26,8 +26,8 @@ SRC_URI = " \
     http://qmmp.ylsoftware.com/files/${BPN}-${PV}.tar.bz2 \
     file://0001-Remove-freebsd-compilation-support.patch \
 "
-SRC_URI[md5sum] = "fc21287bfbca82173cf6389730e82770"
-SRC_URI[sha256sum] = "aff540547ed1e804b964edcb1eeb418c12906a88ab07e44fa4d88b066cd81015"
+SRC_URI[md5sum] = "bf31726a9039bc22853ad4cc9d32b152"
+SRC_URI[sha256sum] = "464f79d9a54e6456c5abcb570d7f062e48d3eaa3d60ad2b09c58bc62af5b87a7"
 
 inherit cmake_qt5
 
