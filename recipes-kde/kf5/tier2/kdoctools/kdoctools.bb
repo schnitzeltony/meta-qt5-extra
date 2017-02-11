@@ -1,6 +1,6 @@
 require ${BPN}.inc
 
-DEPENDS += "${BPN}-native karchive ki18n libxslt libxml2"
+DEPENDS += "${BPN}-native gettext-native karchive ki18n libxslt libxml2"
 
 inherit cmake_lib
 
