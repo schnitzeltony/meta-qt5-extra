@@ -19,3 +19,5 @@ SRC_URI[md5sum] = "c7879018cde844059495b3029b0b6503"
 SRC_URI[sha256sum] = "521ff7bd62c459ff5372e269c223e2a6107a6a99a36afdc2ae634a973af70c59"
 
 S = "${WORKDIR}/ftgl-2.1.3~rc5"
+
+CFLAGS += "-lm"
