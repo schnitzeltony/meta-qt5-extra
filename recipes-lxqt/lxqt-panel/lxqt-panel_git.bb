@@ -7,7 +7,7 @@ inherit lxqt distro_features_check pkgconfig
 REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += " \
-    qttools-native \
+    libxcomposite \
     liblxqt \
     lxqt-globalkeys \
     libdbusmenu-qt5 \
