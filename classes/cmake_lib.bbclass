@@ -57,6 +57,8 @@
 
 inherit cmake_sysroot
 
+SSTATE_SYSROOT = "${STAGING_DIR}-components/${PACKAGE_ARCH}/${PN}"
+
 # global helper to get CMAKE_ALIGN_SYSROOT array
 def get_align_flags(d):
     ret = {}
