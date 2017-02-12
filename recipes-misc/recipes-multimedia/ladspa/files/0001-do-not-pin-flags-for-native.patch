@@ -54,19 +54,19 @@ index 886237f..ace5266 100644
  
  ../bin/applyplugin:	applyplugin.o load.o default.o
 -	$(CC) $(CFLAGS) $(LIBRARIES)					\
-+	$(CC) $(CFLAGS) $(LDFLAGS)					\
++	$(CC) $(CFLAGS) $(LDFLAGS) -ldl					\
  		-o ../bin/applyplugin					\
  		applyplugin.o load.o default.o
  
  ../bin/analyseplugin:	analyseplugin.o load.o default.o
 -	$(CC) $(CFLAGS) $(LIBRARIES)					\
-+	$(CC) $(CFLAGS) $(LDFLAGS)					\
++	$(CC) $(CFLAGS) $(LDFLAGS) -ldl -lm					\
  		-o ../bin/analyseplugin 				\
  		analyseplugin.o load.o default.o
  
  ../bin/listplugins:	listplugins.o search.o
 -	$(CC) $(CFLAGS) $(LIBRARIES)					\
-+	$(CC) $(CFLAGS) $(LDFLAGS)					\
++	$(CC) $(CFLAGS) $(LDFLAGS) -ldl					\
  		-o ../bin/listplugins	 				\
  		listplugins.o search.o
  

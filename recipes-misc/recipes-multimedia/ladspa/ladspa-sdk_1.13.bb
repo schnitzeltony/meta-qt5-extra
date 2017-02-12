@@ -20,7 +20,6 @@ S = "${WORKDIR}/ladspa_sdk"
 
 CFLAGS += "-I. -fPIC"
 CXXFLAGS += "-I. -fPIC"
-LDFLAGS += "-ldl -lm"
 
 do_compile() {
     # ld does not accept -Wl -> remove (see patch)
