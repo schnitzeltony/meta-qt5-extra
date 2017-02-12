@@ -7,6 +7,7 @@ SRC_URI += "file://0001-Find-native-bin2res.patch"
 DEPENDS += " \
     ${BPN}-native \
     qtbase \
+    qttools-native \
     jack \
     fftw \
     stk \
