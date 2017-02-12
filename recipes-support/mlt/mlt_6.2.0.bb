@@ -20,6 +20,7 @@ DEPENDS = " \
     libsamplerate0 \
     fftw \
     jack \
+    ladspa-sdk \
 "
 
 # TBD sox not found due to missing pkgconfig / others - see log.do_configure
