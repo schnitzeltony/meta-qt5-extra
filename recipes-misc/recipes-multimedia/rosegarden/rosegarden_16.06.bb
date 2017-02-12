@@ -4,6 +4,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b33ec9f109e9943af917779ba6ec522e"
 
 DEPENDS += " \
+    qttools-native \
     qtbase \
     qtx11extras \
     virtual/libx11 \
