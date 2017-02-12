@@ -29,6 +29,7 @@ DEPENDS += " \
     chromaprint \
     rubberband \
     soundtouch \
+    libglu \
 "
 # causes segfault trying to find debug libs
 #    gperftools
