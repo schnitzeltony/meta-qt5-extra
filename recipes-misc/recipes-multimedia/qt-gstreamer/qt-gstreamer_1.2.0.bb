@@ -6,11 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 inherit cmake_qt5
 
 DEPENDS += " \
+    glib-2.0-native \
     boost \
     qtbase \
     qtquick1 \
     qtdeclarative \
-    glib-2.0 \
     gstreamer1.0 \
     gstreamer1.0-plugins-base \
 "
