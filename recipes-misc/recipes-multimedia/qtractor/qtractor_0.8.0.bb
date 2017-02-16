@@ -12,6 +12,7 @@ DEPENDS += " \
     libmad \
     rubberband \
     dssi \
+    suil \
 "
 
 inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache
@@ -20,6 +21,7 @@ SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     file://0002-do-nor-try-run-for-float-sse-detection.patch \
+    file://0003-do-nor-try-run-for-suil-libs-detection.patch \
 "
 SRC_URI[md5sum] = "e637e8c1c099d23579ab4ae7367c77d7"
 SRC_URI[sha256sum] = "4710f1c9f377b0e2c678517c6c094921b504aec3c16702048d9b611fe930659f"
