@@ -1,0 +1,213 @@
+From 1af04054ebaac13e11559948f212080ad19ba903 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 15 Feb 2017 22:10:28 +0100
+Subject: [PATCH] Add ARM NEON intrinsics
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+* More or less a 1/1 copy of SSE implementation
+* Runtime NEON detection is not easy to implement. The only implementations I
+  found did not work properly [1]. So let's trust the compiler.
+
+[1] http://git.openembedded.org/meta-openembedded/commit/meta-oe?id=cae9cafb9c536fd5ea40d1457c0ee1fcd6a6aa43
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/qtractorAudioEngine.cpp  | 40 +++++++++++++++++++
+ src/qtractorAudioMonitor.cpp | 95 ++++++++++++++++++++++++++++++++++++++++++--
+ 2 files changed, 131 insertions(+), 4 deletions(-)
+
+diff --git a/src/qtractorAudioEngine.cpp b/src/qtractorAudioEngine.cpp
+index e34da4b..6bbd65e 100644
+--- a/src/qtractorAudioEngine.cpp
++++ b/src/qtractorAudioEngine.cpp
+@@ -118,6 +118,38 @@ static inline void sse_buffer_add (
+ 
+ #endif
+ 
++#if defined(__ARM_NEON__)
++#include "arm_neon.h"
++
++// NEON enabled mix-down processor version.
++static inline void neon_buffer_add (
++	float **ppBuffer, float **ppFrames, unsigned int iFrames,
++	unsigned short iBuffers, unsigned short iChannels, unsigned int iOffset )
++{
++	unsigned short j = 0;
++
++	for (unsigned short i = 0; i < iChannels; ++i) {
++		float *pBuffer = ppBuffer[j] + iOffset;
++		float *pFrames = ppFrames[i] + iOffset;
++		unsigned int nframes = iFrames;
++		for (; (long(pBuffer) & 15) && (nframes > 0); --nframes)
++			*pBuffer++ += *pFrames++;
++		for (; nframes >= 4; nframes -= 4) {
++			vst1q_f32(pBuffer,
++				vaddq_f32(
++					vld1q_f32(pBuffer),
++					vld1q_f32(pFrames)));
++			pFrames += 4;
++			pBuffer += 4;
++		}
++		for (; nframes > 0; --nframes)
++			*pBuffer++ += *pFrames++;
++		if (++j >= iBuffers)
++			j = 0;
++	}
++}
++
++#endif
+ 
+ // Standard mix-down processor version.
+ static inline void std_buffer_add (
+@@ -162,6 +194,10 @@ public:
+ 			m_pfnBufferAdd = sse_buffer_add;
+ 		else
+ 	#endif
++#if defined(__ARM_NEON__)
++		m_pfnBufferAdd = neon_buffer_add;
++		if(false)
++#endif
+ 		m_pfnBufferAdd = std_buffer_add;
+ 	}
+ 
+@@ -2135,6 +2171,10 @@ qtractorAudioBus::qtractorAudioBus (
+ 		m_pfnBufferAdd = sse_buffer_add;
+ 	else
+ #endif
++#if defined(__ARM_NEON__)
++	m_pfnBufferAdd = neon_buffer_add;
++	if(false)
++#endif
+ 	m_pfnBufferAdd = std_buffer_add;
+ }
+ 
+diff --git a/src/qtractorAudioMonitor.cpp b/src/qtractorAudioMonitor.cpp
+index ec791f4..82cd5ef 100644
+--- a/src/qtractorAudioMonitor.cpp
++++ b/src/qtractorAudioMonitor.cpp
+@@ -53,7 +53,6 @@ static inline bool sse_enabled (void)
+ #endif
+ }
+ 
+-
+ // SSE enabled processor versions.
+ static inline void sse_process (
+ 	float *pFrames, unsigned int iFrames, float fGain, float *pfValue )
+@@ -122,6 +121,89 @@ static inline void sse_process_meter (
+ #endif
+ 
+ 
++#if defined(__ARM_NEON__)
++#include "arm_neon.h"
++
++// NEON enabled processor versions.
++static inline void neon_process (
++	float *pFrames, unsigned int iFrames, float fGain, float *pfValue )
++{
++	float32x4_t v0 = vld1q_dup_f32(&fGain);
++	float32x4_t v1 = vld1q_dup_f32(pfValue);
++	float32x4_t v2;
++
++	for (; (long(pFrames) & 15) && (iFrames > 0); --iFrames)
++		*pFrames++ *= fGain;
++
++	for (; iFrames >= 4; iFrames -= 4) {
++		v2 = vmulq_f32(vld1q_f32(pFrames), v0);
++		v1 = vmaxq_f32(v2, v1);
++		vst1q_f32(pFrames, v2);
++		pFrames += 4;
++	}
++
++	for (; iFrames > 0; --iFrames)
++		*pFrames++ *= fGain;
++
++	vst1q_lane_f32(pfValue, v1, 0); // CHEAT: take 1st of 4 possible values.
++}
++
++static inline void neon_process_ramp ( float *pFrames, unsigned int iFrames,
++	float fGainIter, float fGainLast, float *pfValue )
++{
++	const float fGainStepSingle = (fGainLast - fGainIter) / float(iFrames);
++
++	for (; (long(pFrames) & 15) && (iFrames > 0); --iFrames) {
++		*pFrames++ *= fGainIter;
++		fGainIter += fGainStepSingle;
++	}
++
++	float __attribute__ ((aligned (16))) fInitGainIter[4] = {
++		fGainIter,
++		fGainIter + fGainStepSingle,
++		fGainIter + 2.0 * fGainStepSingle,
++		fGainIter + 3.0 * fGainStepSingle };
++
++	const float fGainStep = 4.0f * fGainStepSingle;
++	float32x4_t vGainIter = vld1q_f32(fInitGainIter);
++	float32x4_t vGainStep = vld1q_dup_f32(&fGainStep);
++	float32x4_t v1 = vld1q_dup_f32(pfValue);
++	float32x4_t v2;
++
++	for (; iFrames >= 4; iFrames -= 4) {
++		v2 = vmulq_f32(vld1q_f32(pFrames), vGainIter);
++		v1 = vmaxq_f32(v2, v1);
++		vst1q_f32(pFrames, v2);
++		vGainIter += vGainStep;
++		pFrames += 4;
++	}
++
++	for (; iFrames > 0; --iFrames) {
++		*pFrames++ *= fGainIter;
++		fGainIter += fGainStepSingle;
++	}
++
++	vst1q_lane_f32(pfValue, v1, 3); // CHEAT: take 4th of 4 possible values.
++}
++
++static inline void neon_process_meter (
++	float *pFrames, unsigned int iFrames, float *pfValue )
++{
++	float32x4_t v1 = vld1q_dup_f32(pfValue);
++
++	for (; (long(pFrames) & 15) && (iFrames > 0); --iFrames)
++		++pFrames;
++
++	for (; iFrames >= 4; iFrames -= 4) {
++		v1 = vmaxq_f32(vld1q_f32(pFrames), v1);
++		pFrames += 4;
++	}
++
++	vst1q_lane_f32(pfValue, v1, 0); // CHEAT: take 1st of 4 possible values.
++}
++
++#endif
++
+ // Standard processor versions.
+ static inline void std_process (
+ 	float *pFrames, unsigned int iFrames, float fGain, float *pfValue )
+@@ -173,14 +255,19 @@ qtractorAudioMonitor::qtractorAudioMonitor ( unsigned short iChannels,
+ 		m_pfnProcess = sse_process;
+ 		m_pfnProcessRamp = sse_process_ramp;
+ 		m_pfnProcessMeter = sse_process_meter;
+-	} else {
++	} else
+ #endif
++#if defined(__ARM_NEON__)
++	m_pfnProcess = neon_process;
++	m_pfnProcessRamp = neon_process_ramp;
++	m_pfnProcessMeter = neon_process_meter;
++	if(false)
++#endif
++	{
+ 	m_pfnProcess = std_process;
+ 	m_pfnProcessRamp = std_process_ramp;
+ 	m_pfnProcessMeter = std_process_meter;
+-#if defined(__SSE__)
+ 	}
+-#endif
+ 
+ 	setChannels(iChannels);
+ }
+-- 
+2.9.3
+

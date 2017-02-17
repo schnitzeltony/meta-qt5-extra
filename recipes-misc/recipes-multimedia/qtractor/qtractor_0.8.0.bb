@@ -22,6 +22,7 @@ SRC_URI = " \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     file://0002-do-nor-try-run-for-float-sse-detection.patch \
     file://0003-do-nor-try-run-for-suil-libs-detection.patch \
+    file://0004-Add-ARM-NEON-intrinsics.patch \
 "
 SRC_URI[md5sum] = "e637e8c1c099d23579ab4ae7367c77d7"
 SRC_URI[sha256sum] = "4710f1c9f377b0e2c678517c6c094921b504aec3c16702048d9b611fe930659f"
