@@ -16,7 +16,7 @@ DEPENDS += " \
     kcoreaddons \
     phonon \
     libdbusmenu-qt5 \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras libxtst", "", d)} \
 "
 
 PV = "${KF5_VERSION}"
