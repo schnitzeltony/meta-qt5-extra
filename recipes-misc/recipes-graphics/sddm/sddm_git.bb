@@ -58,10 +58,14 @@ USERADD_PARAM_${PN} = "--system --home ${localstatedir}/lib/sddm --shell /bin/fa
 
 RDEPENDS_${PN} += " \
     bash \
+    packagegroup-core-x11-xserver \
+    xinit \
     xauth \
+    xmessage \
+    xrdb \
+    \
     qtbase-plugins \
     qtdeclarative-plugins \
     qtdeclarative-qmlplugins \
     pam-plugin-tally \
 "
-
