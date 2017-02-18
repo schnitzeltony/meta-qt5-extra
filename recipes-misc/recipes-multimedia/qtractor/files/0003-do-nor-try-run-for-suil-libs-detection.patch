@@ -12,13 +12,13 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 2 insertions(+), 22 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 35416ff..2b967a0 100644
+index bb23d72..a5bf793 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1249,17 +1249,7 @@ fi
+@@ -1250,17 +1250,7 @@ if test "x$ac_lv2_ui_show" = "xyes"; then
+ fi
+ 
  if test "x$ac_qt4" = "xno" -a "x$ac_suil" = "xyes"; then
-    ac_old_libs=$LIBS
-    LIBS=$ac_libs
 -   AC_CACHE_CHECK([for LV2 UI GTK2 support (libsuil_gtk2_in_qt5)],
 -      ac_cv_suil_gtk2_in_qt5, [
 -      AC_TRY_RUN([
@@ -31,13 +31,13 @@ index 35416ff..2b967a0 100644
 -      ], ac_cv_suil_gtk2_in_qt5="yes", ac_cv_suil_gtk2_in_qt5="no")
 -   ])
 +   ac_cv_suil_gtk2_in_qt5="yes"
-    LIBS=$ac_old_libs
     if test "x$ac_cv_suil_gtk2_in_qt5" = "xyes"; then
        AC_DEFINE(CONFIG_LIBSUIL_GTK2_IN_QT5, 1, [Define if libsuil_gtk2_in_qt5 is available.])
-@@ -1280,17 +1270,7 @@ fi
+    #  ac_lv2_ui_gtk2="no"
+@@ -1278,17 +1268,7 @@ else
+ fi
+ 
  if test "x$ac_qt4" = "xno" -a "x$ac_suil" = "xyes"; then
-    ac_old_libs=$LIBS
-    LIBS=$ac_libs
 -   AC_CACHE_CHECK([for LV2 UI X11 support (libsuil_x11_in_qt5)],
 -      ac_cv_suil_x11_in_qt5, [
 -      AC_TRY_RUN([
@@ -50,9 +50,9 @@ index 35416ff..2b967a0 100644
 -      ], ac_cv_suil_x11_in_qt5="yes", ac_cv_suil_x11_in_qt5="no")
 -   ])
 +   ac_cv_suil_x11_in_qt5="yes"
-    LIBS=$ac_old_libs
     if test "x$ac_cv_suil_x11_in_qt5" = "xyes"; then
        AC_DEFINE(CONFIG_LIBSUIL_X11_IN_QT5, 1, [Define if libsuil_x11_in_qt5 is available.])
+    #  ac_lv2_ui_x11="no"
 -- 
 2.9.3
 
