@@ -8,7 +8,7 @@ inherit liri
 
 SRC_URI += "file://0001-remove-Werror-from-build-flags.patch"
 PV = "0.9.0+git${SRCPV}"
-SRCREV = "db128f54be2c65b98bf32e5d60aa1b286f938bfa"
+SRCREV = "a6103bd412abe49932964b9f09f69b1a28db530a"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
@@ -22,4 +22,7 @@ do_configure_append() {
 }
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
-FILES_${PN}-dev += "${libdir}/cmake"
+FILES_${PN}-dev += " \
+    ${libdir}/cmake \
+    ${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs \
+"
