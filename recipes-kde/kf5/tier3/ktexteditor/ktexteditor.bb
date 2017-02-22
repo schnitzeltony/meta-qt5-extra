@@ -9,8 +9,8 @@ inherit kde-kf5
 DEPENDS += "qtxmlpatterns syntax-highlighting karchive kconfig kguiaddons ki18n kio kparts sonnet libgit2"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "0aa214089e2099767e2a29016e9214a3"
-SRC_URI[sha256sum] = "dadaa7521e88653468d6d00933e698031e4822b4bd1bc3c72dc9df3a1d660b2e"
+SRC_URI[md5sum] = "315aae6b286757696513ecc7ca69e68e"
+SRC_URI[sha256sum] = "966e1c687b670c07aebe3c773f984a4e9ff70562cce798d9be967c4439eb2a25"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 

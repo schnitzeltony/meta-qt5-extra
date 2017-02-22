@@ -9,8 +9,8 @@ inherit kde-kf5 cmake_auto_align_paths cmake_lib
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "45a4f50f3bef7d9ac902e8becbf6fc5a"
-SRC_URI[sha256sum] = "20ac7025f998f85e83f72609038b4bf7051f3c373dc039faf30340c595e7e16b"
+SRC_URI[md5sum] = "cd402e03c023354e9ee37b7d0d5de621"
+SRC_URI[sha256sum] = "caf2e0b260fda10304825f178fcd9edce1b52643895ed2b07caec3ff5dd3f04b"
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5WindowSystem, -S${includedir}, -s${_IMPORT_PREFIX}/include"
 

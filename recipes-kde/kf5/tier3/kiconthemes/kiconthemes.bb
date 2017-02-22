@@ -9,5 +9,5 @@ inherit kde-kf5
 DEPENDS += "qtsvg ki18n kconfig kconfigwidgets kwidgetsaddons kitemviews"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "d3053afcfd358e13bec0d055695727e7"
-SRC_URI[sha256sum] = "e969d2180f0d5b0802e7c57d63ff78314562cad4b50dbb3a0935d5edc4c33d6a"
+SRC_URI[md5sum] = "fa2e0994412b83dbb0e54aa277f4bff3"
+SRC_URI[sha256sum] = "25e3149ac3b34f9dac7077a27625928876345214b35b7af7e6eb435abf7e564d"

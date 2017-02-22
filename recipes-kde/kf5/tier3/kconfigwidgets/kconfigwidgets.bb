@@ -9,7 +9,7 @@ inherit kde-kf5
 DEPENDS += "kauth kconfig kcodecs kdoctools kguiaddons kwidgetsaddons"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "7ea2abe3515ad479b743d2447a194483"
-SRC_URI[sha256sum] = "021d85537faf01b9a88a9614edf9011a7e2dac752330f4928a287f4832263996"
+SRC_URI[md5sum] = "4deb8a01f99cb16bbcf80f1e11d90824"
+SRC_URI[sha256sum] = "5a2a4e2ba62407a23f8fe0f6217faf8c32a9c5faa75c1f3be2bf8ec570d1c3a7"
 
 RDEPENDS_${PN} += "perl"

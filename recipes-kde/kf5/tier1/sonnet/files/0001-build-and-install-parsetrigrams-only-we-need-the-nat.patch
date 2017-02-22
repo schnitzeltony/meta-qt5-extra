@@ -1,7 +1,7 @@
 From 3a6f33573dc8a15d7b283f546352ae9423257a55 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Mon, 1 Dec 2014 17:15:46 +0100
-Subject: [PATCH] build and install parsetrigrams only - we need the native one
+Date: Wed, 22 Feb 2017 17:16:03 +0100
+Subject: [PATCH] build and install parsetrigrams and gentrigrams only - we need the native ones
  for cross compilation
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -11,27 +11,27 @@ Upstream-Status: Inappropriate [cross-specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- CMakeLists.txt      | 10 +++-------
- 1 files changed, 3 insertions(+), 7 deletions(-)
+ CMakeLists.txt     | 6 +++---
+ src/CMakeLists.txt | 3 +--
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b7d1d70..1c7a32e 100644
+index 9dec6f6..4db53dc 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -12,7 +12,7 @@ include(KDEFrameworkCompilerSettings)
+@@ -17,7 +17,7 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
  include(KDECMakeSettings)
  
- set(REQUIRED_QT_VERSION 5.5.0)
+ set(REQUIRED_QT_VERSION 5.6.0)
 -find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Widgets)
 +find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
  
- include(FeatureSummary)
+ 
  include(GenerateExportHeader)
-@@ -33,12 +33,10 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
-     ecm_install_po_files_as_qm(po)
+@@ -37,11 +37,10 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
  endif()
  
--add_subdirectory(src)
+ add_subdirectory(src)
 -add_subdirectory(autotests)
  add_subdirectory(data)
 -add_subdirectory(examples)
@@ -41,11 +41,20 @@ index b7d1d70..1c7a32e 100644
  # create a Config.cmake and a ConfigVersion.cmake file and install them
  set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Sonnet")
  
-@@ -58,3 +56,4 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/sonnet_version.h
+@@ -61,3 +60,4 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/sonnet_version.h
          DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5} COMPONENT Devel )
  
  feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 +endif()
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index cf40289..8b421fc 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1,3 +1,2 @@
+ add_subdirectory(core)
+-add_subdirectory(plugins)
+-add_subdirectory(ui)
++
 -- 
-1.8.3.1
+2.7.4
 

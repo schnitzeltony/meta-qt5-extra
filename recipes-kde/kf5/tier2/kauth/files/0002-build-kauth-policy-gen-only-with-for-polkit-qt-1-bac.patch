@@ -12,39 +12,40 @@ Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- CMakeLists.txt            |  4 +++-
+ CMakeLists.txt            |  5 ++++-
  src/CMakeLists.txt        | 12 ++++++++----
  src/ConfigureChecks.cmake | 17 ++++-------------
- 3 files changed, 15 insertions(+), 18 deletions(-)
+ 3 files changed, 16 insertions(+), 18 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 7ad7b42..62a78e6 100644
+index 88242e6..7d4140b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -10,7 +10,7 @@ feature_summary(WHAT REQUIRED_PACKAGES_NOT_FOUND FATAL_ON_MISSING_REQUIRED_PACKA
+@@ -12,7 +12,7 @@ feature_summary(WHAT REQUIRED_PACKAGES_NOT_FOUND FATAL_ON_MISSING_REQUIRED_PACKA
  set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
  
- set(REQUIRED_QT_VERSION 5.5.0)
+ set(REQUIRED_QT_VERSION 5.6.0)
 -find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Widgets DBus)
 +find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED DBus)
  include(KDEInstallDirs)
- include(KDEFrameworkCompilerSettings)
+ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
  include(KDECMakeSettings)
-@@ -54,6 +54,7 @@ if(AUTOTESTS)
+@@ -52,6 +52,8 @@ add_subdirectory(src)
+ if(AUTOTESTS)
      add_subdirectory(autotests)
  endif()
- 
++
 +if(False)
- # create a Config.cmake and a ConfigVersion.cmake file and install them
- set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Auth")
+ add_subdirectory(examples)
  
-@@ -86,3 +87,4 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kauth_version.h
+ # create a Config.cmake and a ConfigVersion.cmake file and install them
+@@ -86,3 +88,4 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kauth_version.h
  
  
  feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 +endif()
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 1b6930d..23e78b0 100644
+index 10b7924..2945245 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -1,5 +1,5 @@
@@ -62,13 +63,15 @@ index 1b6930d..23e78b0 100644
  set(libkauth_SRCS
      kauthaction.cpp
      kauthactionreply.cpp
-@@ -48,12 +49,13 @@ ecm_generate_headers(KAuth_HEADERS
+@@ -48,6 +49,7 @@ ecm_generate_headers(KAuth_HEADERS
  
    REQUIRED_HEADERS KAuth_HEADERS
  )
 +endif()
  
- # KAuth policy generator executable
+ find_package(PythonModuleGeneration)
+ 
+@@ -76,7 +78,7 @@ endif()
  
  # Compile only if fake backend has not been selected
  
@@ -77,7 +80,7 @@ index 1b6930d..23e78b0 100644
      # KAUTH_POLICY_GEN_SRCS has been generated from ConfigureChecks.cmake
      add_executable(kauth-policy-gen ${KAUTH_POLICY_GEN_SRCS})
      add_executable(KF5::kauth-policy-gen ALIAS kauth-policy-gen)
-@@ -61,9 +63,10 @@ if (NOT "${KAUTH_BACKEND_NAME}" STREQUAL "FAKE")
+@@ -84,9 +86,10 @@ if (NOT "${KAUTH_BACKEND_NAME}" STREQUAL "FAKE")
      # KAUTH_POLICY_GEN_LIBRARIES has been generated from ConfigureChecks.cmake
      target_link_libraries( kauth-policy-gen PRIVATE ${KAUTH_POLICY_GEN_LIBRARIES} )
  
@@ -90,7 +93,7 @@ index 1b6930d..23e78b0 100644
  # KAuth backend plugin
  
  if (NOT "${KAUTH_BACKEND_NAME}" STREQUAL "FAKE")
-@@ -112,3 +115,4 @@ string(REPLACE "-pedantic" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+@@ -135,3 +138,4 @@ string(REPLACE "-pedantic" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
  include(ECMGeneratePriFile)
  ecm_generate_pri_file(BASE_NAME KAuth LIB_NAME KF5Auth DEPS "core KCoreAddons" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KAuth)
  install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
@@ -124,5 +127,5 @@ index d46761a..48f33a2 100644
  ########################
  # Helper backend probing
 -- 
-2.1.0
+2.7.4
 

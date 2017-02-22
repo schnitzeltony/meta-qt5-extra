@@ -14,10 +14,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b4a482b..0124800 100644
+index f7163ab..88242e6 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -32,6 +32,9 @@ ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KAUTH
+@@ -31,6 +31,9 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KAUTH
                          PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5AuthConfigVersion.cmake"
                          SOVERSION 5)
  
@@ -27,7 +27,7 @@ index b4a482b..0124800 100644
  find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
  
  set(KAUTH_HELPER_INSTALL_DIR "${KDE_INSTALL_LIBEXECDIR}/kauth")
-@@ -47,7 +50,9 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+@@ -46,7 +49,9 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
  endif()
  
  add_subdirectory(src)
@@ -35,9 +35,9 @@ index b4a482b..0124800 100644
 +if(AUTOTESTS)
 +    add_subdirectory(autotests)
 +endif()
+ add_subdirectory(examples)
  
  # create a Config.cmake and a ConfigVersion.cmake file and install them
- set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Auth")
 -- 
-2.1.0
+2.7.4
 

@@ -9,7 +9,7 @@ inherit kde-kf5
 DEPENDS += "kcoreaddons kwidgetsaddons ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "01f996ec574b17ea41e68e83851c0af4"
-SRC_URI[sha256sum] = "0e26aa3d496c6b651f57b11bb2ced5da49538c17be403b4067a7bb5475a09f46"
+SRC_URI[md5sum] = "cc2f41fd5b8ba6ad795a7835a68d4e8c"
+SRC_URI[sha256sum] = "ca31f5324ba4ad421006ed9993f3d5bc55557e0c5a987f1f419ae1ca18b5f999"
 
 FILES_${PN} += "${datadir}/dbus-1"
