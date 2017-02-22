@@ -26,9 +26,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI += "file://0001-Use-gcc-buildin-null-pointer-check-to-remove-x86-lim.patch"
-SRC_URI[md5sum] = "d4cd9ef531b22ab14b3b6b1f6259ea8e"
-SRC_URI[sha256sum] = "2ccd645ab52544885e3b373b0da543ae171d8b41a0bdeb93ae45170f8cd30bb9"
+SRC_URI[md5sum] = "8220dee29d3b970579297c284b1c3916"
+SRC_URI[sha256sum] = "dfd079eb57ea4429016276d721190f942aeb9d4e155b83e6a87f27b9ab2988bc"
 
 EXTRA_OECMAKE += "-DBUILD_KF5=1"
 
