@@ -26,6 +26,7 @@ RDEPENDS_${PN} = " \
     ksystemlog \
     kwalletmanager \
     kwave \
+    libkdcraw \
     libkexiv2 \
     lokalize \
     marble \
