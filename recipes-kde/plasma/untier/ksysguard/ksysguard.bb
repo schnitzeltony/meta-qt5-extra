@@ -24,8 +24,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "5d4e04cb54ad545f804d5f35ed71a978"
-SRC_URI[sha256sum] = "73987226abc2c008d57dffa9b18934127fc2a3420123c33626c84ff260195bee"
+SRC_URI[md5sum] = "abc2bb29f5e72c04840f24085b84a48c"
+SRC_URI[sha256sum] = "664763f003d863df6d8477cacd76f17e70767ee5ce1730886bc4ab8b7faa8c36"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

@@ -22,8 +22,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "2196a35ab3565aea4897eb1f83dd0383"
-SRC_URI[sha256sum] = "8a72a1ec222a0625c07fa93e51aa03be40a976945616d1597f993ca8e44a1011"
+SRC_URI[md5sum] = "9b5ea9445306520190a54e1e72b25d81"
+SRC_URI[sha256sum] = "2316c455f8656d3e59d7780be94e751197781b9d2bf5e991d1d3295fa9637c1a"
 
 FILES_${PN} += " \
     ${datadir}/bluedevilwizard \
