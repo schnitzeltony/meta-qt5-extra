@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-apps gtk-icon-cache
 
 DEPENDS += " \
+    qtmultimedia \
     curl \
     poppler \
     boost \
@@ -31,13 +32,13 @@ DEPENDS += " \
     kcrash \
 "
 
-PV = "3.1.1"
+PV = "3.1.2.1"
 SRC_URI = " \
-    ${KDE_MIRROR}/stable/krita/${PV}/${BPN}-${PV}.tar.gz \
+    ${KDE_MIRROR}/stable/krita/3.1.2/${BPN}-${PV}.tar.gz \
     file://0001-fix-build-with-GLES2.patch \
 "
-SRC_URI[md5sum] = "322831adc0bc5c7d7ed298f152d57fe7"
-SRC_URI[sha256sum] = "62ef2c4b9b19563c1e2e6dc0643dd0880e04469dd5798373401d8dd666720e8f"
+SRC_URI[md5sum] = "340c7199409daa94e4f66b479abcb726"
+SRC_URI[sha256sum] = "934ed82c3f4e55e7819b327c838ea2f307d3bf3d040722501378b01d76a3992d"
 
 # krita has lots of include_directories(SYSTEM ${FOO_DIR})
 # have no better way to make gcc6 happy
