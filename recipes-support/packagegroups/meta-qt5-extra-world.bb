@@ -28,6 +28,7 @@ RDEPENDS_${PN} = " \
     dssi-vst \
     fluidsynth-dssi \
     ftgl \
+    ganv \
     hexter \
     ladspa-sdk \
     liblo \
@@ -40,6 +41,7 @@ RDEPENDS_${PN} = " \
     lv2 \
     mixxx \
     muse \
+    patchage \
     polyphone \
     portmidi \
     projectm \
