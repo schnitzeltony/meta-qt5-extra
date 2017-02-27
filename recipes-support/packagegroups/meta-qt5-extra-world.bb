@@ -29,6 +29,7 @@ RDEPENDS_${PN} = " \
     fluidsynth-dssi \
     ftgl \
     ganv \
+    helm \
     hexter \
     ladspa-sdk \
     liblo \
@@ -61,6 +62,7 @@ RDEPENDS_${PN} = " \
     timidity++ \
     vamp-plugin-sdk \
     whysynth \
+    zynaddsubfx \
     \
     exiv2 \
     grantlee \
