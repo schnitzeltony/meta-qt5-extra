@@ -1,0 +1,31 @@
+From 358fe387d07b4906c823b2a664f3c57fd62acd3e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 27 Feb 2017 18:24:29 +0100
+Subject: [PATCH] don't loose our LDFLAGS
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ Makefile.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index 789677a..f3b3b62 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -25,7 +25,7 @@ CC		=	@CC@
+ CFLAGS		=	$(OPTIM) $(ARCHFLAGS) @CFLAGS@ @CPPFLAGS@ @PTHREAD_FLAGS@
+ CP		=	@CP@
+ DSO		=	@DSO@
+-DSOFLAGS	=	@DSOFLAGS@
++DSOFLAGS	=	$(LDFLAGS) @DSOFLAGS@
+ LDFLAGS		=	$(OPTIM) $(ARCHFLAGS) @LDFLAGS@
+ INSTALL		=	@INSTALL@
+ LIBMXML		=	@LIBMXML@
+-- 
+2.9.3
+

@@ -7,16 +7,14 @@ DEPENDS = ""
 SRC_URI = " \
     http://www.msweet.org/files/project3/${BPN}-${PV}.tar.gz \
     file://0001-avoid-testing-library-in-cross-environments.patch \
+    file://0002-don-t-loose-our-LDFLAGS.patch \
 "
 SRC_URI[md5sum] = "8804c961a24500a95690ef287d150abe"
 SRC_URI[sha256sum] = "267ff58b64ddc767170d71dab0c729c06f45e1df9a9b6f75180b564f09767891"
 
 inherit autotools-brokensep
 
-do_configure() {
-    # reconfigure fails - have no idea why
-    oe_runconf
-}
+EXTRA_AUTORECONF += "--exclude=autoheader"
 
 do_install() {
     install -d ${D}${includedir}
