@@ -13,6 +13,7 @@ DEPENDS += " \
     knotifications \
     kwidgetsaddons \
     knewstuff \
+    kpackage \
 "
 
 RRECCOMENDS_${PN} += "oxygen-fonts"
