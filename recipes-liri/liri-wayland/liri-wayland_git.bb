@@ -25,7 +25,13 @@ DEPENDS += " \
     libinput \
 "
 
+# egl packageconfig factored out to make it easy for BSP layers to pick what
+# machines need
+PACKAGECONFIG_EGL ?= "kms"
+
 PACKAGECONFIG ??= " \
+    protocols \
+    ${PACKAGECONFIG_EGL} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xwayland", "",d)} \
 "
 PACKAGECONFIG[kms] = "-DENABLE_EGLDEVICEINTEGRATION_KMS:BOOL=ON,-DENABLE_EGLDEVICEINTEGRATION_KMS:BOOL=OFF,drm libgbm virtual/egl"
