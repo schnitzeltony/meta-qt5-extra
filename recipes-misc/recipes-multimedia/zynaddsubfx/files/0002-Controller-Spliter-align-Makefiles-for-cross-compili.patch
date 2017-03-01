@@ -1,0 +1,71 @@
+From 7d23dbd4dc33750c4c541f1e80eccbd9d136e5bb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 28 Feb 2017 23:35:23 +0100
+Subject: [PATCH] Controller/Spliter: align Makefiles for cross-compiling
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ ExternalPrograms/Controller/Makefile | 8 ++++----
+ ExternalPrograms/Spliter/Makefile    | 8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/ExternalPrograms/Controller/Makefile b/ExternalPrograms/Controller/Makefile
+index 549607f..8d35e9d 100644
+--- a/ExternalPrograms/Controller/Makefile
++++ b/ExternalPrograms/Controller/Makefile
+@@ -1,17 +1,17 @@
+ controller: main.o Controller.o ControllerUI.o
+-	gcc -o controller *.o `fltk-config --ldflags` -lasound -lpthread -lm -lstdc++
++	$(CC) -o controller *.o `fltk-config --ldflags` -lasound -lpthread -lm -lstdc++ $(LDFLAGS)
+ 
+ ControllerUI.cxx ControllerUI.h: ControllerUI.fl
+ 	fluid -c ControllerUI.fl
+ 
+ ControllerUI.o: ControllerUI.cxx ControllerUI.h
+-	gcc `fltk-config --cflags` -c ControllerUI.cxx -o ControllerUI.o
++	$(CC) $(CFLAGS) `fltk-config --cflags` -c ControllerUI.cxx -o ControllerUI.o
+ 
+ Controller.o: Controller.C Controller.h
+-	gcc `fltk-config --cflags` -c Controller.C -o Controller.o
++	$(CC) $(CFLAGS) `fltk-config --cflags` -c Controller.C -o Controller.o
+ 
+ main.o: main.C Controller.h ControllerUI.h
+-	gcc `fltk-config --cflags` -c main.C -o main.o
++	$(CC) $(CFLAGS) `fltk-config --cflags` -c main.C -o main.o
+ 
+ clean:
+ 	rm -f *.o controller ControllerUI.cxx ControllerUI.h 
+diff --git a/ExternalPrograms/Spliter/Makefile b/ExternalPrograms/Spliter/Makefile
+index fe610d4..e81fc75 100644
+--- a/ExternalPrograms/Spliter/Makefile
++++ b/ExternalPrograms/Spliter/Makefile
+@@ -1,17 +1,17 @@
+ spliter: main.o Spliter.o SpliterUI.o
+-	gcc -o spliter *.o `fltk-config --ldflags` -lasound -lstdc++
++	$(CC) -o spliter *.o `fltk-config --ldflags` -lasound -lstdc++ $(LDFLAGS)
+ 
+ SplitterUI.cxx SpliterUI.h: SpliterUI.fl
+ 	fluid -c SpliterUI.fl
+ 
+ SpliterUI.o: SplitterUI.cxx SpliterUI.h
+-	gcc -g `fltk-config --cflags` -c SpliterUI.cxx -o SpliterUI.o
++	$(CC) $(CFLAGS) `fltk-config --cflags` -c SpliterUI.cxx -o SpliterUI.o
+ 
+ Spliter.o: Spliter.C Spliter.h
+-	gcc -g `fltk-config --cflags` -c Spliter.C -o Spliter.o
++	$(CC) $(CFLAGS) `fltk-config --cflags` -c Spliter.C -o Spliter.o
+ 
+ main.o: main.C Spliter.h SpliterUI.h
+-	gcc -g `fltk-config --cflags` -c main.C -o main.o
++	$(CC) $(CFLAGS) `fltk-config --cflags` -c main.C -o main.o
+ 
+ clean:
+ 	rm -f *.o spliter SpliterUI.cxx SpliterUI.h 
+-- 
+2.9.3
+

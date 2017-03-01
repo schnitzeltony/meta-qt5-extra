@@ -17,13 +17,15 @@ DEPENDS += " \
     lv2 \
     liblo \
     zlib \
-    fltk \
+    fltk fltk-native \
     mxml \
+    libxpm \
 "
 
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \
     file://0001-No-target-specific-asm.patch \
+    file://0002-Controller-Spliter-align-Makefiles-for-cross-compili.patch \
 "
 SRC_URI[md5sum] = "7dc757512e5b6f3013bfb168ed01cfa3"
 SRC_URI[sha256sum] = "014b1d9ad1750c310369676b46a4555ba6bec512c38ccba17ceb89c78552949a"
@@ -55,10 +57,21 @@ def qemu_run_binary_local(data, rootfs_path, binary):
             + binary
 
 do_compile_append() {
+    # Build Controller/Spliter
+    oe_runmake -C ${S}/ExternalPrograms/Controller
+    oe_runmake -C ${S}/ExternalPrograms/Spliter
+
+    # build ttl-files must be done in quemu (lv2-ttl-generator-data loads 
+    # so-files and calls functions to create ttl-files)
     for sofile in `cat ${WORKDIR}/lv2-ttl-generator-data | awk '{ print $2 }'`; do
         cd `dirname ${sofile}`
         ${@qemu_run_binary_local(d, '${STAGING_DIR_TARGET}', '${B}/src/Plugin/lv2-ttl-generator')} ${sofile}
     done
+}
+
+do_install_append() {
+    install -m 0755 ${S}/ExternalPrograms/Controller/controller ${D}${bindir}/zynaddsubfx-controller
+    install -m 0755 ${S}/ExternalPrograms/Spliter/spliter ${D}${bindir}/zynaddsubfx-spliter
 }
 
 # we are not linking against dssi - so
