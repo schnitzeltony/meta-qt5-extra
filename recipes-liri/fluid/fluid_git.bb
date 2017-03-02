@@ -17,7 +17,7 @@ DEPENDS += " \
     qtsvg \
 "
 
-do_configure_append() {
+do_configure_prepend() {
     (cd ${S} && ./scripts/fetch_icons.sh)
 }
 
