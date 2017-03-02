@@ -11,7 +11,7 @@ REQUIRED_DISTRO_FEATURES = "wayland"
 
 PV = "0.9.0.1+git${SRCPV}"
 
-SRCREV = "716c764b546b8bed0d6cd33acb5c684b831b1daa"
+SRCREV = "b506a5412f21a44da5bac5810bf566813f6d467c"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
