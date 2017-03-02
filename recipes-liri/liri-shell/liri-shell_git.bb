@@ -37,6 +37,7 @@ RDEPENDS_${PN} = "qttools-tools qtwayland-plugins"
 RRECOMMENDS_${PN} += " \
     liri-wallpapers \
     paper-icon-theme \
+    qtvirtualkeyboard-qmlplugins \
 "
 
 FILES_${PN} += " \
