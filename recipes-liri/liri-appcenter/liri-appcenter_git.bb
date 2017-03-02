@@ -10,7 +10,7 @@ REQUIRED_DISTRO_FEATURES = "flatpak"
 
 PV = "0.1.0+git${SRCPV}"
 
-SRCREV = "62bfde051cc5f7b8241b90752c7b266ac86e31fd"
+SRCREV = "1611f5ba49dc1e15e3b4f6668934f2d8192b5eee"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
