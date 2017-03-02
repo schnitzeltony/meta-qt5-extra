@@ -13,7 +13,7 @@ SRC_URI += " \
     file://0002-remove-Werror-from-build-flags.patch \
 "
 PV = "0.9.0+git${SRCPV}"
-SRCREV = "53a85487e7f4de25982cdb4490b9576be24459e7"
+SRCREV = "9f5ed08fe14820e6f5e03b91410dd280f3678430"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
