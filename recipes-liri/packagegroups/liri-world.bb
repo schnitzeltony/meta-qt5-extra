@@ -12,7 +12,7 @@ RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-settings", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-shell", "",d)} \
     liri-terminal \
-    liri-themes \
+    liri-themes-grub liri-themes-plymouth liri-themes-sddm \
     liri-wallpapers \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-wayland", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-workspace", "",d)} \
