@@ -10,7 +10,7 @@ REQUIRED_DISTRO_FEATURES = "pulseaudio"
 
 SRC_URI += "file://0001-remove-Werror-from-build-flags.patch"
 PV = "0.9.0+git${SRCPV}"
-SRCREV = "a2a8337b5356dd98e4ee2cfd424581b8ae2f4723"
+SRCREV = "8a2163a38d324869a247a103e65848f76ab1c432"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
