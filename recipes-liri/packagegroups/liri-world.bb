@@ -6,16 +6,19 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     fluid \
-    vibe \
-    qtaccountsservice \
-    paper-icon-theme \
-    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-wayland", "",d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-shell", "",d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-workspace", "",d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-settings", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "flatpak", "liri-appcenter", "",d)} \
+    liri-browser \
     liri-files \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-settings", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-shell", "",d)} \
     liri-terminal \
+    liri-themes \
+    liri-wallpapers \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-wayland", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-workspace", "",d)} \
+    paper-icon-theme \
+    qtaccountsservice \
+    vibe \
 "
 
 LAYERDEPENDS_meta-qt5-extra += "gnome-layer"
