@@ -8,7 +8,7 @@ inherit liri
 
 SRC_URI += "file://0001-remove-Werror-from-build-flags.patch"
 PV = "0.9.0+git${SRCPV}"
-SRCREV = "a6103bd412abe49932964b9f09f69b1a28db530a"
+SRCREV = "554a83ea46ff1db9c11f89654777911f984c6b16"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
