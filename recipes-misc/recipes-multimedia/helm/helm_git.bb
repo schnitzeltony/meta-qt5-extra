@@ -7,7 +7,16 @@ inherit autotools-brokensep qemu distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS = "virtual/libx11 libxext alsa-lib freetype qemu-native"
+DEPENDS = " \
+    virtual/libx11 \
+    libxext \
+    libxinerama \
+    libxcursor \
+    alsa-lib \
+    jack \
+    freetype \
+    qemu-native \
+"
 
 SRC_URI = " \
     git://github.com/mtytel/helm.git \
