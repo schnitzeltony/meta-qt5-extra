@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a6ba38606d63bb042c5d8cfee182e120"
 DEPENDS = ""
 
 SRC_URI = " \
-    http://www.msweet.org/files/project3/${BPN}-${PV}.tar.gz \
+    https://github.com/michaelrsweet/mxml/releases/download/release-${PV}/${BPN}-${PV}.tar.gz \
     file://0001-avoid-testing-library-in-cross-environments.patch \
     file://0002-don-t-loose-our-LDFLAGS.patch \
 "
