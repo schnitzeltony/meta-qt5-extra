@@ -1,0 +1,31 @@
+From e379780b23d37b09cf33fdd50152958ba5ccb3cb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 7 Mar 2017 19:36:47 +0100
+Subject: [PATCH] zynaddsubfx: link agains libraries necessary when linking with gold
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ plugins/zynaddsubfx/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/plugins/zynaddsubfx/CMakeLists.txt b/plugins/zynaddsubfx/CMakeLists.txt
+index 1fb8a61..2856737 100644
+--- a/plugins/zynaddsubfx/CMakeLists.txt
++++ b/plugins/zynaddsubfx/CMakeLists.txt
+@@ -155,7 +155,7 @@ ADD_EXECUTABLE(RemoteZynAddSubFx RemoteZynAddSubFx.cpp "${WINRC}")
+ INSTALL(TARGETS RemoteZynAddSubFx RUNTIME DESTINATION "${PLUGIN_DIR}")
+ SET(FLTK_FILTERED_LIBRARIES ${FLTK_LIBRARIES})
+ LIST(REMOVE_ITEM FLTK_FILTERED_LIBRARIES "${X11_X11_LIB}" "${X11_Xext_LIB}")
+-TARGET_LINK_LIBRARIES(RemoteZynAddSubFx zynaddsubfx_gui ZynAddSubFxCore ${FLTK_FILTERED_LIBRARIES} -lpthread )
++TARGET_LINK_LIBRARIES(RemoteZynAddSubFx zynaddsubfx_gui ZynAddSubFxCore ${FLTK_FILTERED_LIBRARIES} ${X11_LIBRARIES} -lXrender -lXft -lfontconfig -ldl -lpthread )
+ 
+ # link Qt libraries when on win32
+ IF(LMMS_BUILD_WIN32)
+-- 
+2.9.3
+

@@ -1,8 +1,11 @@
 require ${BPN}.inc
 
-inherit cmake_qt5 mime gtk-icon-cache
+inherit cmake_qt5 mime gtk-icon-cache pkgconfig
 
-SRC_URI += "file://0001-Find-native-bin2res.patch"
+SRC_URI += " \
+    file://0001-Find-native-bin2res.patch \
+    file://0002-zynaddsubfx-link-agains-X11.patch \
+"
 
 DEPENDS += " \
     ${BPN}-native \
@@ -14,6 +17,7 @@ DEPENDS += " \
     fluidsynth \
     portaudio-v19 \
     libsdl \
+    fltk fltk-native \
 "
 
 EXTRA_OECMAKE += " \
