@@ -1,0 +1,55 @@
+From b62bad67e2cb3fc0133c66d83b2d2b9312d29cea Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 7 Mar 2017 13:41:08 +0100
+Subject: [PATCH] Workaround build error for Qt5.8 / properly working
+ qdbuscpp2xml
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/qml/experimental/monitor.cpp      | 5 +++++
+ src/tools/balooctl/monitorcommand.cpp | 6 ++++++
+ 2 files changed, 11 insertions(+)
+
+diff --git a/src/qml/experimental/monitor.cpp b/src/qml/experimental/monitor.cpp
+index 7bc4b83..4c21984 100644
+--- a/src/qml/experimental/monitor.cpp
++++ b/src/qml/experimental/monitor.cpp
+@@ -111,7 +111,12 @@ void Monitor::balooStarted(const QString& service)
+     Q_ASSERT(service == QStringLiteral("org.kde.baloo"));
+ 
+     m_balooRunning = true;
++#if QT_VERSION >= 0x050800
++    QDBusMessage dummyMsg;
++    m_fileindexer->registerMonitor(dummyMsg);
++#else
+     m_fileindexer->registerMonitor();
++#endif
+ 
+     slotIndexerStateChanged(m_scheduler->state());
+     qDebug() << "fetched suspend state";
+diff --git a/src/tools/balooctl/monitorcommand.cpp b/src/tools/balooctl/monitorcommand.cpp
+index a9fdd74..14cf033 100644
+--- a/src/tools/balooctl/monitorcommand.cpp
++++ b/src/tools/balooctl/monitorcommand.cpp
+@@ -41,7 +41,13 @@ MonitorCommand::MonitorCommand(QObject *parent)
+         m_out << "Baloo is not running" << endl;
+         QCoreApplication::exit();
+     }
++#if QT_VERSION >= 0x050800
++    QDBusMessage dummyMsg;
++    m_interface->registerMonitor(dummyMsg);
++#else
+     m_interface->registerMonitor();
++#endif
++    
+     connect(m_interface, &org::kde::baloo::fileindexer::startedIndexingFile, this, &MonitorCommand::startedIndexingFile);
+     connect(m_interface, &org::kde::baloo::fileindexer::finishedIndexingFile, this, &MonitorCommand::finishedIndexingFile);
+     m_out << "Press ctrl+c to exit monitor" << endl;
+-- 
+2.9.3
+

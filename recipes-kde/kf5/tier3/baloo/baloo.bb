@@ -28,6 +28,7 @@ SRC_URI[sha256sum] = "7f399ba51dd85a01491755b36f5e46a32c6164a0bb2474651f33fef40e
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
+    file://0002-Workaround-build-error-for-Qt5.8-properly-working-qd.patch \
 "
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5Baloo, -S${libdir}, -S${STAGING_LIBDIR}"
