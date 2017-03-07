@@ -16,6 +16,7 @@ DEPENDS += " \
     kxmlgui \
     kfilemetadata \
     baloo \
+    libkdcraw \
 "
 
 PV = "${KDE_APP_VERSION}"
