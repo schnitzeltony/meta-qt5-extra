@@ -92,4 +92,7 @@ FILES_${PN}-dbg += " \
     ${libdir}/*/*/*/*/*/*/*/.debug \
 "
 
-REDEPENDS_${PN} += "qtmultimedia"
+REDEPENDS_${PN} += " \
+    qtmultimedia \
+    qtvirtualkeyboard-qmlplugins \
+"
