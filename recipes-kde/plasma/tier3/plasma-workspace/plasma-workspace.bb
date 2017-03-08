@@ -52,6 +52,7 @@ SRC_URI += " \
     file://0004-startkde-create-kde-s-home.patch \
     file://0005-startkde-enable-starting-X.patch \
     file://0006-startplasmacompositor-align-qt5-bin-path.patch \
+    file://0007-startplasma.cmake-fix-paths-to-qdbus.patch \
 "
 
 # REVISIT

@@ -1,0 +1,48 @@
+From d5f3d3a0a02f01a78bb867929b854bb7df4861c3 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 8 Mar 2017 15:45:49 +0100
+Subject: [PATCH] startplasma.cmake: fix paths to qdbus
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ startkde/startplasma.cmake | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/startkde/startplasma.cmake b/startkde/startplasma.cmake
+index 59dc7b7..edd400b 100644
+--- a/startkde/startplasma.cmake
++++ b/startkde/startplasma.cmake
+@@ -127,7 +127,7 @@ if test $? -ne 0; then
+   exit 1
+ fi
+ 
+-qdbus org.kde.KSplash /KSplash org.kde.KSplash.setStage kinit
++@CMAKE_INSTALL_FULL_BINDIR@/qt5/qdbus org.kde.KSplash /KSplash org.kde.KSplash.setStage kinit
+ 
+ # finally, give the session control to the session manager
+ # see kdebase/ksmserver for the description of the rest of the startup sequence
+@@ -156,13 +156,13 @@ if test x"$wait_drkonqi"x = x"true"x ; then
+     # wait for remaining drkonqi instances with timeout (in seconds)
+     wait_drkonqi_timeout=`kreadconfig5 --file startkderc --group WaitForDrKonqi --key Timeout --default 900`
+     wait_drkonqi_counter=0
+-    while qdbus | grep "^[^w]*org.kde.drkonqi" > /dev/null ; do
++    while @CMAKE_INSTALL_FULL_BINDIR@/qt5/qdbus | grep "^[^w]*org.kde.drkonqi" > /dev/null ; do
+         sleep 5
+         wait_drkonqi_counter=$((wait_drkonqi_counter+5))
+         if test "$wait_drkonqi_counter" -ge "$wait_drkonqi_timeout" ; then
+             # ask remaining drkonqis to die in a graceful way
+-            qdbus | grep 'org.kde.drkonqi-' | while read address ; do
+-                qdbus "$address" "/MainApplication" "quit"
++            @CMAKE_INSTALL_FULL_BINDIR@/qt5/qdbus | grep 'org.kde.drkonqi-' | while read address ; do
++                @CMAKE_INSTALL_FULL_BINDIR@/qt5/qdbus "$address" "/MainApplication" "quit"
+             done
+             break
+         fi
+-- 
+2.9.3
+
