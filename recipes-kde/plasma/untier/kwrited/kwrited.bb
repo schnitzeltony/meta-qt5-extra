@@ -15,8 +15,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "1eb7128d2133ba378e2d816a75241f40"
-SRC_URI[sha256sum] = "2b65b6c50180322c33c55278fead0f9b62e05665c8cb4ed3908ae5ed7a923ecd"
+SRC_URI[md5sum] = "e6f96af5608fe1fe608b6fe135040b41"
+SRC_URI[sha256sum] = "1825496d9af3dbeb921c04a1f2de62526fd7955daaa0bd11f1b49b4adad53852"
 
 SRC_URI += " \
     file://0001-fix-build-for-qtbase-without-session-management.patch \

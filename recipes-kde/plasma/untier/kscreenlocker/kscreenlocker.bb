@@ -21,8 +21,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "153146a388091bf167ada1f436394d11"
-SRC_URI[sha256sum] = "69c264e7c9f0fa5c826b912a5ebe5f1e582d338bd93214df8ece064bb4e7bcfd"
+SRC_URI[md5sum] = "edfc7dd466d31a8b17d20c8dad2b13ab"
+SRC_URI[sha256sum] = "2af875ce9112ef554ced3cb386d3274cb19300a3126b9478f407fc17ae7b9731"
 
 SRC_URI += "file://kde.pam"
 
