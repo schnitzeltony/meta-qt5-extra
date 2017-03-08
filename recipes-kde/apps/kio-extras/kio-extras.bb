@@ -13,6 +13,7 @@ inherit kde-apps
 
 DEPENDS += " \
     qtsvg \
+    qtwebengine \
     \
     exiv2 \
     kactivities \
