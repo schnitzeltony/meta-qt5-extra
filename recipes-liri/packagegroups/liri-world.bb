@@ -8,6 +8,7 @@ RDEPENDS_${PN} = " \
     fluid \
     ${@bb.utils.contains("DISTRO_FEATURES", "flatpak", "liri-appcenter", "",d)} \
     liri-browser \
+    liri-calculator \
     liri-files \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-settings", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-shell", "",d)} \
