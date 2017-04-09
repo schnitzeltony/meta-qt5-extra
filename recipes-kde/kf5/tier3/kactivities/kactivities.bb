@@ -11,8 +11,8 @@ inherit kde-kf5
 DEPENDS += "boost kconfig kcoreaddons ki18n kservice kwindowsystem kglobalaccel kxmlgui kio kdbusaddons kdeclarative kcmutils"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "db038305e6814e40719db3aa46af63e1"
-SRC_URI[sha256sum] = "e7a5a74fc15648d16f32834109c6f158354a6c99bc12c4b976fa03a9a0263676"
+SRC_URI[md5sum] = "9f6702ccaee660320b6c2c0e8a1433b2"
+SRC_URI[sha256sum] = "5fdf5e71538e70a58777ee9839c8e528182b2c2630b80ee3251597603f984f24"
 
 do_compile_prepend() {
     # Error: Could not locate service type file kservicetypes5/ "kfileitemactionplugin.desktop" , tried ...

@@ -7,8 +7,8 @@ inherit kde-kf5
 DEPENDS += "kcoreaddons kconfig kservice kwidgetsaddons ki18n kitemviews "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "ba2c83f2e58e012a009a8e8acaa2f432"
-SRC_URI[sha256sum] = "b3924b9f14e98d12b008a42f178e2668956c2bc52a9a00b67f524173f24711f7"
+SRC_URI[md5sum] = "fa4eb406e072788b7f74bdc2ed6a4e61"
+SRC_URI[sha256sum] = "87625cc19c958b3f3d4a5aa106563f9927746926e31c56382d500a1499796aa7"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

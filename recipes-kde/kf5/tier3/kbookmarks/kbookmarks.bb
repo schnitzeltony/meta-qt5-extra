@@ -9,5 +9,5 @@ inherit kde-kf5
 DEPENDS += "kconfigwidgets kconfig kiconthemes kxmlgui"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "890f0b6295c26bd185dd9b96b7dd13db"
-SRC_URI[sha256sum] = "9ccce2d638445763a961542bff5dd666417485ac8b96bb9c32644b062f11400d"
+SRC_URI[md5sum] = "3d6be7c72024f239a89ae0ac298fdc97"
+SRC_URI[sha256sum] = "02358a9d11271cb6dec820a2dfaeb0d58d06cafa937a40425c14dffc978bcda0"

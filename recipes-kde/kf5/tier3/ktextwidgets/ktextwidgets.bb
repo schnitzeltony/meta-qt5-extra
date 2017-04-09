@@ -9,7 +9,7 @@ inherit kde-kf5
 DEPENDS += "kcompletion kconfig kconfigwidgets ki18n kiconthemes kservice kwidgetsaddons kwindowsystem sonnet"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "080458511306645a49140fb8283b17cd"
-SRC_URI[sha256sum] = "f9cc5f8829acd49ccd7543a5e8ee292ec42fad97ae31b03bd37f3a482c694ee8"
+SRC_URI[md5sum] = "656cdbdf3d8ae056574b3204e80716cf"
+SRC_URI[sha256sum] = "5e66c9cc636f851d3f9aeb412e056dbe672e4fd572f1aae5e37fdd52ccc83227"
 
 FILES_${PN} += "${datadir}/kservicetypes5"

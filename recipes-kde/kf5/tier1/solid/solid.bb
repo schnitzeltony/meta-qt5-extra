@@ -9,8 +9,8 @@ inherit kde-kf5
 DEPENDS += "qtdeclarative"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "90c3da473102b4cc97ec20d2ef0e1598"
-SRC_URI[sha256sum] = "659310686464d12efd7223f652a82b3401094a57f36ba034e8f16d9577ac1eca"
+SRC_URI[md5sum] = "6cd1f5ef54727496bf51bf18d800e800"
+SRC_URI[sha256sum] = "b5e3c9411b856fc2c9d4a344cced364b057f16902eb5e93a8e99c36ab6946849"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
 FILES_${PN}-dbg += "${OE_QMAKE_PATH_QML}/org/kde/${BPN}/.debug"
