@@ -3,7 +3,7 @@ HOMEPAGE = "http://drobilla.net/software/sratom"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ebc7934238811c788037421c6c548ddf"
 
-inherit waf
+inherit waf pkgconfig
 
 DEPENDS += "lv2 serd sord"
 
