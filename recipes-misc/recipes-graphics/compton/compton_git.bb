@@ -2,7 +2,7 @@ SUMMARY = "Compton is a compositor for X"
 LICENSE = "NTP & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=51f8a6ef7a22968bea284609c6093146"
 
-inherit autotools-brokensep distro_features_check
+inherit autotools-brokensep pkgconfig distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
