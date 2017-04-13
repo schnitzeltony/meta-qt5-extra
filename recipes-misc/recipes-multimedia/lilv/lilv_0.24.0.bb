@@ -3,7 +3,7 @@ HOMEPAGE = "http://drobilla.net/software/lilv"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6b8d060e6d32fbd53684f9dc0443b6a3"
 
-inherit waf bash-completion
+inherit waf bash-completion pkgconfig
 
 DEPENDS += "lv2 serd sord sratom"
 
