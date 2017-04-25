@@ -34,7 +34,7 @@ index 5bcf26a..6252d79 100644
 -fi
 +
 +# meta-qt5 specific
-+qdbus=@CMAKE_INSTALL_FULL_BINDIR@/qt5/qdbus
++qdbus=@OE_QMAKE_PATH_QT_BINS@/qdbus
  
  # We need to create config folder so we can write startupconfigkeys
  if [  ${XDG_CONFIG_HOME} ]; then
@@ -43,7 +43,7 @@ index 5bcf26a..6252d79 100644
  
  # TODO: Use GenericConfigLocation once we depend on Qt 5.4
 -scriptpath=`qtpaths --paths ConfigLocation | tr ':' '\n' | sed 's,$,/plasma-workspace,g'`
-+scriptpath=`@CMAKE_INSTALL_FULL_BINDIR@/qt5/qtpaths --paths ConfigLocation | tr ':' '\n' | sed 's,$,/plasma-workspace,g'`
++scriptpath=`@OE_QMAKE_PATH_QT_BINS@/qtpaths --paths ConfigLocation | tr ':' '\n' | sed 's,$,/plasma-workspace,g'`
  
  # Add /env/ to the directory to locate the scripts to be sourced
  for prefix in `echo $scriptpath`; do
