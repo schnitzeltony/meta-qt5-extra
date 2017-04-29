@@ -12,17 +12,15 @@ DEPENDS += " \
     portaudio-v19 \
 "
 
-inherit autotools qmake5_base gtk-icon-cache
-
-B = "${S}"
+# autotools-brokensep must be after qmake5_base!
+inherit qmake5_base autotools-brokensep gtk-icon-cache
 
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
-    file://0002-configure.ac-do-not-der-absolute-default-paths.patch \
 "
-SRC_URI[md5sum] = "272cacd4878521e4ba43fd23b19da8a5"
-SRC_URI[sha256sum] = "cf1c4aff22f8410feba9122e447b1e28c8fa2c71b12cfc0551755d351f9eaf5e"
+SRC_URI[md5sum] = "2f8697891942403d7782e173704110c9"
+SRC_URI[sha256sum] = "c50da569ec8466ac6cc72c65e2d8212eb9c40149daed0a10fb7795ff9ddc4ab7"
 
 EXTRA_OECONF = " \
     --with-qmake=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/qmake \
