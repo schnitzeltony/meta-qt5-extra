@@ -12,6 +12,8 @@ SRC_URI = "git://github.com/tim-sueberkrueb/${BPN}.git"
 SRCREV = "9d2fd26da9c38b2e5c4c1c4d994b193213559e2f"
 S = "${WORKDIR}/git"
 
+DEPENDS += "qtbase"
+
 RDEPENDS_${PN} += " \
     qtwebengine-qmlplugins \
     qtdeclarative-qmlplugins \
