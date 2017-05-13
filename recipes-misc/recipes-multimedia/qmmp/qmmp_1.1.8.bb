@@ -21,6 +21,7 @@ DEPENDS += " \
     libmodplug \
     libvorbis \
     projectm \
+    enca \
 "
 
 SRC_URI = " \
