@@ -45,8 +45,13 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "f8a05f5eca2f2ae5bd99f00056acc40c"
-SRC_URI[sha256sum] = "5af7b4dac320ed6d0897c8940e6043ef45a4e1d3a4f9f12e8513215633a5d7d5"
+SRC_URI[md5sum] = "d9a8d4fbc462ae1fcdfde2c0ef40245d"
+SRC_URI[sha256sum] = "b8655413dd49f4b9d6a7ce2c630a113c327b351a3fed262fe2f4b0053337fc91"
+
+# gperf creates hard #line links
+do_install_prepend() {
+    no_staging_check=true
+}
 
 FILES_${PN} += " \
     ${datadir}/kio_bookmarks \

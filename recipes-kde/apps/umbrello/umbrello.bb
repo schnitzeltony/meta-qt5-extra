@@ -26,11 +26,12 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "95d41a83db99103d35c9a6b2456fdeff"
-SRC_URI[sha256sum] = "94813479532c69336d642ff215059172d2054aa90a0a7050d73b5c01ab8392a8"
+SRC_URI[md5sum] = "97eb76c8c953851c5f2ab004ed691def"
+SRC_URI[sha256sum] = "7bc0f0366035d0ade7f50c9cbb661e427f527e25a39ea453910400fbf26fb336"
 
 EXTRA_OECMAKE += "-DBUILD_KF5=1"
 
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
+    ${datadir}/umbrello5 \
 "

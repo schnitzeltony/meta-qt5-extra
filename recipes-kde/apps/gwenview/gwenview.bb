@@ -20,8 +20,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "df9792430641db14db4246ce6a2107bf"
-SRC_URI[sha256sum] = "79bdbc28cf01e00188a19c590982e9da5e399215d216e05fca06a697385d2e19"
+SRC_URI[md5sum] = "dd6201168825824947c8ed551c1049d4"
+SRC_URI[sha256sum] = "90d595035d3f69c21791830ac99a2419227c50f30a1ccbb453c5055e4227d011"
 
 SRC_URI += " \
     file://0001-Set-Kipi-package-properties.patch  \
@@ -33,6 +33,7 @@ CXXFLAGS += "-isystem ${STAGING_INCDIR}/phonon4qt5/KDE"
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/icons \
+    ${datadir}/solid \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
