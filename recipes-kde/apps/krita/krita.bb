@@ -1,9 +1,8 @@
 SUMMARY = "Krita is a free digital painting application"
-LICENSE = "GPLv2 & BSD & LGPL-2.0"
+LICENSE = "GPLv3 & BSD"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=8608b1f74c58ebcb11718f46e8619749 \
+    file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
     file://COPYING-CMAKE-SCRIPTS;md5=3775480a712fc46a69647678acb234cb \
-    file://COPYING.LIB;md5=cc4eecf2379e7a2a5f3d0441d680f82a \
 "
 
 inherit kde-apps gtk-icon-cache
@@ -32,13 +31,13 @@ DEPENDS += " \
     kcrash \
 "
 
-PV = "3.1.2.1"
+PV = "3.1.3"
 SRC_URI = " \
-    ${KDE_MIRROR}/stable/krita/3.1.2/${BPN}-${PV}.tar.gz \
+    ${KDE_MIRROR}/stable/krita/3.1.3/${BPN}-${PV}.tar.gz \
     file://0001-fix-build-with-GLES2.patch \
 "
-SRC_URI[md5sum] = "340c7199409daa94e4f66b479abcb726"
-SRC_URI[sha256sum] = "934ed82c3f4e55e7819b327c838ea2f307d3bf3d040722501378b01d76a3992d"
+SRC_URI[md5sum] = "e595cfeeb2f3c3b090a573e929db5607"
+SRC_URI[sha256sum] = "816b9fa9717b78d8dc3a9c4efd49f7a5e3b7f2a0965f2434c48b708598d1b288"
 
 # krita has lots of include_directories(SYSTEM ${FOO_DIR})
 # have no better way to make gcc6 happy
