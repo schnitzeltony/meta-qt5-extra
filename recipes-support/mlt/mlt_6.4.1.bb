@@ -2,8 +2,8 @@ SUMMARY = "MLT Multimedia Framework"
 HOMEPAGE = "http://www.mltframework.org"
 LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=dcf3c825659e82539645da41a7908589 \
-    file://GPL;md5=94d55d512a9ba36caa9b7df079bae19f \
+    file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d \
+    file://GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
 "
 
@@ -23,14 +23,9 @@ DEPENDS = " \
     ladspa-sdk \
 "
 
-# TBD sox not found due to missing pkgconfig / others - see log.do_configure
-
-SRC_URI = " \
-    https://github.com/mltframework/${BPN}/archive/v${PV}.tar.gz \
-    file://0001-configure-use-pkgconfig-to-find-sdl.patch \
-"
-SRC_URI[md5sum] = "a1c70e535c61dd9242ac9f6ae58899d0"
-SRC_URI[sha256sum] = "dd2ee742e89620de78a259790f92a7cadad67f0e0a6c1ea7ed932f96fb739fff"
+SRC_URI = "https://github.com/mltframework/${BPN}/archive/v${PV}.tar.gz"
+SRC_URI[md5sum] = "e9f0584739369c40b8f91f8cf50ea3ea"
+SRC_URI[sha256sum] = "87583af552695b2235f4ee3fc1e645d69e31702b109331d7e8785fb180cfa382"
 
 inherit autotools-brokensep pkgconfig
 
