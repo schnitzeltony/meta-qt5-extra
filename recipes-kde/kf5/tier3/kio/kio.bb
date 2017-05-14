@@ -24,8 +24,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "a47f7c25cef755159c235ad38029f178"
-SRC_URI[sha256sum] = "8e15ff51931192da0ef4635c0fcf76ca821e75a580113db99aee7c38a52f9ade"
+SRC_URI[md5sum] = "49c9c0a0f94cfb301ef92578d888eedd"
+SRC_URI[sha256sum] = "6acb28de757a0d5eccb1e3e533a1ef22b5f5de92e96c3aba804ebdb44aa343c4"
 
 PACKAGECONFIG[full] = "-DKIOCORE_ONLY=OFF,-DKIOCORE_ONLY=ON, kbookmarks kcompletion kconfigwidgets kiconthemes kitemviews kjobwidgets kwidgetsaddons kwindowsystem"
 # Note that kdeclarative fails without KIOWidgets

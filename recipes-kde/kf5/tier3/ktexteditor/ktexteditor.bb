@@ -9,13 +9,15 @@ inherit kde-kf5
 DEPENDS += "qtxmlpatterns syntax-highlighting karchive kconfig kguiaddons ki18n kio kparts sonnet libgit2"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "473453cb9558b827f4a72ebbf86497b6"
-SRC_URI[sha256sum] = "4557a2a737c5c798caf3f44793cd0e00cd5363c58a2749381abbcfaa3ac3cc89"
+SRC_URI[md5sum] = "da4b300b11c309f72484235313a27351"
+SRC_URI[sha256sum] = "bcf714ea30c249e9d52eda5f089a5321b6ed283453cf81950319b7e7b8064aa0"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
+    ${datadir}/dbus-1 \
+    ${datadir}/polkit-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 FILES_${PN}-dbg += " \

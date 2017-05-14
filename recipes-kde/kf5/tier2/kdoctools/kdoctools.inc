@@ -11,8 +11,8 @@ inherit kde-kf5 perlnative
 DEPENDS += "docbook-xml-dtd4 docbook-xsl-stylesheets liburi-perl-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "ce820973061aa356af1900f191cbc126"
-SRC_URI[sha256sum] = "69ddfd46bade7948974c6b141603f711fde82ffd5a9c72eee8e38856e243a411"
+SRC_URI[md5sum] = "52df5dd9721be1d372b7a2ce3bd29efc"
+SRC_URI[sha256sum] = "50000a2e43bae1dd49f37c4160b8569c482fc3125fae1f92641572d03494b290"
 
 SRC_URI += " \
 	file://0001-Add-cmdline-param-to-help-find-xsl.patch \
