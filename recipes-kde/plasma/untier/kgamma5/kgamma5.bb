@@ -15,8 +15,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "805b42535053c3dbeacfb7a2eb1d7ffb"
-SRC_URI[sha256sum] = "5b0259ae1974d0b75eaffcd8ae596ba7751b4c339f4761246a88302773938f63"
+SRC_URI[md5sum] = "795d650a2a817ea654d87d015a82e150"
+SRC_URI[sha256sum] = "45b612d3b92f71322e6795104f3ee00a0ca355e51eeb99bea327407c528ff8cf"
 
 FILES_${PN} += " \
     ${datadir}/kgamma \

@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gtk-icon-cache
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "bf72b471596b5a9115826a80e8a8c264"
-SRC_URI[sha256sum] = "eeffc7d22f8d63970f4f5c26b730e5aaccbe66bdcb318d2525a98ba1b8c2c2dd"
+SRC_URI[md5sum] = "b6a7eea4cfda21a16a28299ef1f5c0f1"
+SRC_URI[sha256sum] = "231ec1ba751769e3a382e8e44841c2ac0b8f8f5c0c9d68ce4d5b03dfa6ee8620"
 
 DEPENDS += " \
     qtsvg \

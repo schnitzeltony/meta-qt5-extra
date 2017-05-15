@@ -10,34 +10,17 @@ Upstream-Status: pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- klipper/klipper.cpp | 2 ++
- klipper/main.cpp    | 3 +++
- krunner/main.cpp    | 4 ++++
- shell/main.cpp      | 4 ++++
- 4 files changed, 13 insertions(+)
+ klipper/main.cpp          | 4 ++++
+ krunner/main.cpp          | 4 ++++
+ shell/main.cpp            | 4 ++++
+ xembed-sni-proxy/main.cpp | 5 ++++-
+ 4 files changed, 16 insertions(+), 1 deletion(-)
 
-diff --git a/klipper/klipper.cpp b/klipper/klipper.cpp
-index 79060d8..336adae 100644
---- a/klipper/klipper.cpp
-+++ b/klipper/klipper.cpp
-@@ -224,10 +224,12 @@ Klipper::Klipper(QObject* parent, const KSharedConfigPtr& config, KlipperMode mo
-         m_popup->plugAction( m_quitAction );
-     }
- 
-+#ifndef QT_NO_SESSIONMANAGER
-     // session manager interaction
-     if (m_mode == KlipperMode::Standalone) {
-         connect(qApp, &QGuiApplication::commitDataRequest, this, &Klipper::saveSession);
-     }
-+#endif
- 
-     connect(this, &Klipper::passivePopup, this,
-         [this] (const QString &caption, const QString &text) {
 diff --git a/klipper/main.cpp b/klipper/main.cpp
-index 58a0778..c647d72 100644
+index 58a0778..a1d1312 100644
 --- a/klipper/main.cpp
 +++ b/klipper/main.cpp
-@@@ -27,7 +27,9 @@
+@@ -27,7 +27,9 @@
  
  #include <QApplication>
  #include <QCommandLineParser>
@@ -123,6 +106,35 @@ index ec117f3..93791b2 100644
  
      ShellManager::s_fixedShell = cliOptions.value(shellPluginOption);
  
+diff --git a/xembed-sni-proxy/main.cpp b/xembed-sni-proxy/main.cpp
+index aa1d7f3..26ff777 100644
+--- a/xembed-sni-proxy/main.cpp
++++ b/xembed-sni-proxy/main.cpp
+@@ -19,7 +19,9 @@
+  */
+ 
+ #include <QGuiApplication>
++#ifndef QT_NO_SESSIONMANAGER
+ #include <QSessionManager>
++#endif
+ 
+ #include "fdoselectionmanager.h"
+ 
+@@ -47,12 +49,13 @@ int main(int argc, char ** argv)
+         qFatal("xembed-sni-proxy is only useful XCB. Aborting");
+     }
+ 
++#ifndef QT_NO_SESSIONMANAGER
+     auto disableSessionManagement = [](QSessionManager &sm) {
+         sm.setRestartHint(QSessionManager::RestartNever);
+     };
+     QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
+     QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
+-
++#endif
+ 
+     app.setDesktopSettingsAware(false);
+     app.setQuitOnLastWindowClosed(false);
 -- 
-2.5.5
+2.9.3
 
