@@ -10,10 +10,16 @@ DEPENDS += " \
     plasma-framework \
 "
 
+PV = "2.1.1"
+
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "04491f0180ba69cea095e9ed61f76c9f"
-SRC_URI[sha256sum] = "6677af0c486a4c9cfefe74a0951e85dad53435010031bf2b7fcdf9c5df6b3edd"
+SRC_URI[md5sum] = "f25e9dc6df1466f69b72ef8d70b034a6"
+SRC_URI[sha256sum] = "ea3796058f302dabf21b7c58a05e543da5d7407414a9001d26d4318962a872ad"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
 "
+
+RPROVIDES_${PN} += "kirigami"
+RREPLACES_${PN} += "kirigami"
+RCONFLICTS_${PN} += "kirigami"
