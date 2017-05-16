@@ -24,8 +24,8 @@ SRC_URI = " \
     file://0003-do-nor-try-run-for-suil-libs-detection.patch \
     file://0004-Add-ARM-NEON-intrinsics.patch \
 "
-SRC_URI[md5sum] = "89949777599c68208f120a6af93f8a12"
-SRC_URI[sha256sum] = "baf14db40d0ea5b6356482b2c5b9e53aeb5e58177f820b408a4cb9e94b4e7adf"
+SRC_URI[md5sum] = "4300eed100384e02a969ff528b1c8169"
+SRC_URI[sha256sum] = "030707a881861b8d8313761e0b08095fa252f8fe9dd082846def19916ccae76a"
 
 EXTRA_OECONF = " \
     --with-qmake=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/qmake \
