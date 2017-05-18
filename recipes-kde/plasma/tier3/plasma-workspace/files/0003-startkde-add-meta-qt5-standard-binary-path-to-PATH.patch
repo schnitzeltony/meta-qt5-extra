@@ -22,7 +22,7 @@ index 046543e..2663348 100644
  #
  
 +# meta-qt5 specific
-+PATH=$PATH:@CMAKE_INSTALL_FULL_BINDIR@/qt5; export PATH
++PATH=$PATH:@OE_QMAKE_PATH_QT_BINS@; export PATH
 +
  # When the X server dies we get a HUP signal from xinit. We must ignore it
  # because we still need to do some cleanup.
