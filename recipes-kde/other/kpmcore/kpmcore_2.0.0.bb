@@ -4,9 +4,12 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
 "
 
-inherit kde-base pkgconfig
+inherit kde-base pkgconfig gettext
 
 DEPENDS += " \
+    kconfig-native \
+    kauth-native \
+    kcoreaddons-native \
     ki18n \
     kiconthemes \
     kio \

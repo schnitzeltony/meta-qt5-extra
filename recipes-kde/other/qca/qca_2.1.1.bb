@@ -26,5 +26,5 @@ EXTRA_OECMAKE += "-DQCA_FEATURE_INSTALL_DIR=${libdir}${QT_DIR_NAME}/mkspecs/feat
 
 FILES_${PN} += "${libdir}/qca-qt5/crypto"
 
-CMAKE_ALIGN_SYSROOT[1] = "Qca-qt5, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "Qca-qt5, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "Qca-qt5, -S${libdir}/lib, -s${OE_QMAKE_PATH_HOST_LIBS}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "Qca-qt5, -S${includedir}, -s${KDE_PATH_HOST_HEADERS}"
