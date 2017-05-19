@@ -4,13 +4,15 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=393a5ca445f6965873eca0259a17f833 \
 "
 
-inherit kde-plasma
+inherit kde-plasma gettext
 
 DEPENDS += " \
     kcoreaddons \
+    kcoreaddons-native \
     ki18n \
     kwallet \
     kwidgetsaddons \
+    kdoctools-native \
 "
 
 # REVISIT optionals

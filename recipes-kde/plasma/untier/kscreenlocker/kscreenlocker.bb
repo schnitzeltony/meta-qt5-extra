@@ -6,9 +6,13 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma distro_features_check
+inherit kde-plasma distro_features_check gettext
 
 DEPENDS += " \
+    kauth-native \
+    kconfig-native \
+    kpackage-native \
+    sonnet-native \
     plasma-framework \
     kcmutils \
     kdeclarative \
@@ -17,7 +21,11 @@ DEPENDS += " \
     kcrash \
     kglobalaccel \
     libxcb \
+    systemd \
     qtx11extras \
+    libxcursor \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "wayland-native", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"

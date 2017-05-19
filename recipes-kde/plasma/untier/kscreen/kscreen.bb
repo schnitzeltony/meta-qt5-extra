@@ -5,11 +5,14 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit kde-plasma
+inherit kde-plasma gettext
 
-DEPENDS += " \
+DEPENDS += "\
     qtdeclarative \
     \
+    kauth-native \
+    kconfig-native \
+    kcoreaddons-native \
     libkscreen \
     kdbusaddons \
     kconfigwidgets \

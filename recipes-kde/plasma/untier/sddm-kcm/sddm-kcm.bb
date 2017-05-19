@@ -6,22 +6,27 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma distro_features_check
+inherit kde-plasma distro_features_check gettext
 
 DEPENDS += " \
     kcoreaddons \
+    kcoreaddons-native \
+    kconfig-native \
     ki18n \
     kxmlgui \
     kauth \
+    kauth-native \
     kconfigwidgets \
     kio \
     knewstuff \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb virtual/xserver", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcursor libxcb virtual/xserver", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"
 SRC_URI[md5sum] = "9edee202ac67e6764e9cf10f18ba0ee1"
 SRC_URI[sha256sum] = "66ea289f60f6c871fd23532ddc9e118d5ee45ef54e3aabc9da79b534081b1860"
+
+RDEPENDS_${PN} = "sddm"
 
 FILES_${PN} += " \
     ${datadir}/kservices5 \

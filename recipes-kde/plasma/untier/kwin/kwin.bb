@@ -7,20 +7,24 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma distro_features_check
+inherit kde-plasma distro_features_check gettext
 
 DEPENDS += " \
     libinput \
     \
+    kauth-native \
     kconfig \
+    kconfig-native \
     kconfigwidgets \
     kcoreaddons \
+    kcoreaddons-native \
     kcrash \
     kglobalaccel \
     ki18n \
     kinit \
     knotifications \
     kpackage \
+    kpackage-native \
     kservice \
     plasma-framework \
     kwidgetsaddons \
@@ -35,6 +39,7 @@ DEPENDS += " \
     kxmlgui \
     kdecoration \
     kscreenlocker \
+    sonnet-native \
 "
 
 # this condition matches always currently - it is kept in this way as a marker
@@ -44,8 +49,9 @@ DEPENDS += " \
 
 # REVISIT: PACKAGECONFIG for optionals
 DEPENDS += " \
-	kactivities \
-	kdoctools \
+    kactivities \
+    kdoctools \
+    kdoctools-native \
 "
 
 PV = "${PLASMA_VERSION}"
@@ -93,6 +99,8 @@ FILES_${PN}-dbg += " \
 "
 
 RDEPENDS_${PN} += " \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland", "xserver-xorg-xwayland", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "qtwayland", "",d)} \
     qtmultimedia \
     qtvirtualkeyboard-qmlplugins \
 "

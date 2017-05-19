@@ -5,16 +5,21 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit kde-plasma
+inherit kde-plasma gettext
 
 DEPENDS += " \
+    kauth-native \
     ki18n \
     kwindowsystem \
+    kconfig-native \
     kservice \
     kcompletion \
     kwidgetsaddons \
     kio \
     kcoreaddons \
+    kcoreaddons-native \
+    kpackage-native \
+    kdesignerplugin-native \
     kwallet \
     kitemviews \
     kitemmodels \
@@ -28,8 +33,10 @@ DEPENDS += " \
     kdeclarative \
     kinit \
     kdelibs4support \
+    kdelibs4support-native \
     modemmanager-qt \
     networkmanager-qt \
+    sonnet-native \
     qca \
     \
     networkmanager \
@@ -46,6 +53,8 @@ SRC_URI[sha256sum] = "1c605e69b08b12439191e417c9ad43809c203f9a7541a2cfe5dfb9ee6c
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
+
+RDEPENDS_${PN} = "networkmanager"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

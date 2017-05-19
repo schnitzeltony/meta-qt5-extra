@@ -8,11 +8,13 @@ inherit kde-base
 # Is that true: We are depending on plasma-framework and are a tier2??
 DEPENDS += " \
     plasma-framework \
+    kpackage-native \
+    qtquickcontrols2 \
 "
 
 PV = "2.1.1"
 
-SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${BPN}-${PV}.tar.xz"
+SRC_URI = "${KDE_MIRROR}/stable/kirigami/${BPN}-${PV}.tar.xz"
 SRC_URI[md5sum] = "f25e9dc6df1466f69b72ef8d70b034a6"
 SRC_URI[sha256sum] = "ea3796058f302dabf21b7c58a05e543da5d7407414a9001d26d4318962a872ad"
 

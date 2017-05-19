@@ -4,21 +4,25 @@ LIC_FILES_CHKSUM = " \
     file://HACKING;md5=ea929f30c0ac1f4fe1a778821aecc4cd \
 "
 
-inherit kde-plasma
+inherit kde-plasma gettext
 
 DEPENDS += " \
+    kauth-native \
+    kded-native \
     kcoreaddons \
+    kcoreaddons-native \
     kwidgetsaddons \
     kdbusaddons \
     knotifications \
     kwindowsystem \
     kiconthemes \
+    kpackage-native \
     plasma-framework \
     ki18n \
     kio \
     bluez-qt \
     kded \
-    shared-mime-info \
+    shared-mime-info-native \
 "
 
 PV = "${PLASMA_VERSION}"
