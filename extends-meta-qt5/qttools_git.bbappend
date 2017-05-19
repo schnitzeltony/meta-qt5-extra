@@ -12,5 +12,5 @@ SRC_URI_remove = " \
 CMAKE_ALIGN_SYSROOT_class-native[1] = "ignore"
 
 # cross -> native binaries
-CMAKE_ALIGN_SYSROOT[1] = "Qt5Help, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
-CMAKE_ALIGN_SYSROOT[2] = "Qt5LinguistTools, -S${bindir}, -S${STAGING_BINDIR_NATIVE}"
+CMAKE_ALIGN_SYSROOT[1] = "Qt5Help, -S${bindir}, -s${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}"
+CMAKE_ALIGN_SYSROOT[2] = "Qt5LinguistTools, -S${bindir}, -s${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}"
