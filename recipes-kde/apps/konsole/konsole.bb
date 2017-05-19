@@ -7,15 +7,19 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.Unicode;md5=ca09fbc4ba99ecc01ce41d513908dcd3 \
 "
 
-inherit kde-apps
+inherit kde-apps gettext
 
 DEPENDS += " \
+    kauth-native \
     kbookmarks \
     kcompletion \
     kconfig \
+    kconfig-native \
     kconfigwidgets \
     kcoreaddons \
+    kcoreaddons-native \
     kdoctools \
+    kdoctools-native \
     kguiaddons \
     ki18n \
     kiconthemes \
@@ -31,6 +35,7 @@ DEPENDS += " \
     kwidgetsaddons \
     kwindowsystem \
     kxmlgui \
+    sonnet-native \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)} \
 "
 

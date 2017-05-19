@@ -14,12 +14,14 @@ DEPENDS += "\
     libsamplerate0 \
     \
     kcompletion \
-    kconfig \
+    kconfig-native \
+    kauth-native \
     kconfigwidgets \
-    kcoreaddons \
+    kcoreaddons-native \
     kcrash \
     kdbusaddons \
-    kdoctools \
+    kdoctools-native \
+    sonnet-native \
     ki18n \
     kiconthemes \
     kio \

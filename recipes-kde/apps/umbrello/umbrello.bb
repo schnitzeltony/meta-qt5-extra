@@ -13,10 +13,12 @@ DEPENDS += " \
     qtwebkit \
     \
     karchive \
+    kauth-native \
     kcompletion \
-    kconfig \
-    kcoreaddons \
-    kdoctools \
+    kconfig-native \
+    kcoreaddons-native \
+    kdoctools-native \
+    sonnet-native \
     ki18n \
     kiconthemes \
     kio \

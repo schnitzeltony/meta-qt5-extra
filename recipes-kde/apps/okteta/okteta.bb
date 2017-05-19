@@ -10,12 +10,16 @@ inherit kde-apps gtk-icon-cache
 
 DEPENDS += " \
     qca \
+    kauth-native \
+    kconfig-native \
+    kcoreaddons-native \
     kbookmarks \
     kcodecs \
     kcompletion \
     kconfigwidgets \
     kdbusaddons \
-    kdoctools \
+    kdoctools-native \
+    sonnet-native \
     kiconthemes \
     ki18n \
     kcmutils \
@@ -25,6 +29,7 @@ DEPENDS += " \
     kservice \
     kwidgetsaddons \
     kxmlgui \
+    shared-mime-info-native \
 "
 
 PV = "${KDE_APP_VERSION}"

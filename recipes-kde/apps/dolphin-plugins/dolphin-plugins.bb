@@ -2,15 +2,20 @@ SUMMARY = "Plugins for Dolphin"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24"
 
-inherit kde-apps
+inherit kde-apps gettext
 
 DEPENDS += "\
+    kauth-native \
+    kconfig-native \
+    kcoreaddons-native \
+    kdesignerplugin-native \
+    sonnet-native \
     kxmlgui \
     ki18n \
     kio \
-    kdelibs4support \
+    kdelibs4support-native \
     dolphin \
-" 
+"
 
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "7dc1eef924dd7461bdf46beec4ee839b"

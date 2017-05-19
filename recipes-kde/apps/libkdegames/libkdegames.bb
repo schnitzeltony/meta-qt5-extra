@@ -5,11 +5,12 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-apps
+inherit kde-apps gettext
 
 DEPENDS += "\
-    kcoreaddons \
-    kconfig \
+    kcoreaddons-native \
+    kauth-native \
+    kconfig-native \
     kwidgetsaddons \
     kcodecs \
     karchive \
@@ -33,11 +34,12 @@ DEPENDS += "\
     kdelibs4support \
     kparts \
     solid \
+    sonnet-native \
     kxmlgui \
     kdoctools \
     \
     openal-soft \
-" 
+"
 
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "47226a0dd9f42f98bd287a3e83932c40"

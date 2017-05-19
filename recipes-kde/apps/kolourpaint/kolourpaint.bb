@@ -9,9 +9,14 @@ LIC_FILES_CHKSUM = " \
 inherit kde-apps gtk-icon-cache
 
 DEPENDS += "\
+    kauth-native \
+    kconfig-native \
+    kdesignerplugin-native \
+    sonnet-native \
     kdelibs4support \
+    kdelibs4support-native \
     kconfigwidgets \
-    kcoreaddons \
+    kcoreaddons-native \
     kdoctools \
     ki18n \
     kiconthemes \
@@ -21,7 +26,7 @@ DEPENDS += "\
     kwidgetsaddons \
     kxmlgui \
     libkexiv2 \
-" 
+"
 
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "56cf4b1c2d591595089431656a2bca2f"
