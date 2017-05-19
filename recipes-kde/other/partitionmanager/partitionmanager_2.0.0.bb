@@ -7,9 +7,11 @@ LIC_FILES_CHKSUM = " \
 inherit kde-base pkgconfig gtk-icon-cache
 
 DEPENDS += " \
-    kconfig \
+    kauth-native \
+    kconfig-native \
     kcrash \
-    kdoctools \
+    kdoctools-native \
+    kcoreaddons-native \
     ki18n \
     kiconthemes \
     kjobwidgets \
