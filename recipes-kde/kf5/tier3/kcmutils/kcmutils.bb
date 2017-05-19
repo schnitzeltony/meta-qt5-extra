@@ -4,9 +4,10 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5
+inherit kde-kf5 gettext
 
-DEPENDS += "kitemviews kconfigwidgets kcoreaddons ki18n kiconthemes kservice kxmlgui kdeclarative"
+DEPENDS += "kitemviews kconfigwidgets kcoreaddons ki18n kiconthemes kservice kxmlgui \
+            kdeclarative kcoreaddons-native kauth-native kconfig-native kpackage-native"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "c1afcc332098a7c0f104629d1f67e4ad"

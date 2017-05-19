@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 gettext
 
-DEPENDS += "kcoreaddons ki18n"
+DEPENDS += "kcoreaddons kcoreaddons-native ki18n"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "d921308e25f7a79a88f9bb8fffed8453"

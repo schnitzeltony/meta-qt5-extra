@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5
 
-DEPENDS += "kcompletion kconfig kconfigwidgets ki18n kiconthemes kservice kwidgetsaddons kwindowsystem sonnet"
+DEPENDS += "kcompletion kconfig kconfigwidgets ki18n kiconthemes kservice kwidgetsaddons \
+            kwindowsystem sonnet kconfig-native kcoreaddons-native kauth-native \
+            gettext-native sonnet-native"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "7cf308f1e3738ebed99c2ad08245ed6e"

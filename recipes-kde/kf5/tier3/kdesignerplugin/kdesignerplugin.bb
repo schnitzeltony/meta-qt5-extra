@@ -1,6 +1,6 @@
 require ${BPN}.inc
 
-inherit cmake_lib
+inherit cmake_lib gettext
 
 # required
 DEPENDS += " \
@@ -9,16 +9,18 @@ DEPENDS += " \
 
 # optional -> TBD packageconfig
 DEPENDS += " \
-	kcompletion \
-	kconfigwidgets \
-	kiconthemes \
-	kio \
-	kitemviews \
-	ktextwidgets \
-	kwidgetsaddons \
-	kxmlgui \
-	sonnet \
-	ki18n \
+    kcompletion \
+    kconfigwidgets \
+    kiconthemes \
+    kio \
+    kitemviews \
+    ktextwidgets \
+    kwidgetsaddons \
+    kxmlgui \
+    sonnet \
+    ki18n \
+    kauth-native \
+    sonnet-native \
 "
 
 SRC_URI += " \
@@ -31,7 +33,7 @@ PACKAGECONFIG[kplotting] = "-DWITH_KPLOTTING=ON,,kplotting"
 PACKAGECONFIG[kdewebkit] = "-DWITH_KDEWEBKIT=ON,,kdewebkit"
 
 # native binaries
-CMAKE_ALIGN_SYSROOT[1] = "KF5DesignerPlugin, -s${_IMPORT_PREFIX}/bin, -S${STAGING_BINDIR_NATIVE}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5DesignerPlugin, -s${_IMPORT_PREFIX}/bin, -s${KDE_PATH_EXTERNAL_HOST_BINS}"
 
 FILES_${PN} += "${libdir}/plugins/designer"
 FILES_${PN}-dbg += "${libdir}/plugins/designer/.debug"

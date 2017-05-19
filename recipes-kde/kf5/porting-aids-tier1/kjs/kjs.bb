@@ -1,3 +1,3 @@
 require ${BPN}.inc
 
-DEPENDS += "${BPN}-native libpcre"
+DEPENDS += "${BPN}-native libpcre kdoctools-native"

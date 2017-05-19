@@ -3,6 +3,9 @@ require ${BPN}.inc
 inherit native
 
 DEPENDS += " \
-	qttools-native \
+    qttools-native \
+    kcoreaddons-native \
+    kconfig-native \
+    kdoctools-native \
 "
 

@@ -7,17 +7,23 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5
 
 DEPENDS += " \
-	libgcrypt \
-	gpgme-native gpgme \
-	kconfig \
-	kcoreaddons \
-	kdbusaddons \
-	kiconthemes \
-	ki18n \
-	knotifications \
-	kservice \
-	kwidgetsaddons \
-	kwindowsystem \
+    libgcrypt \
+    gpgme \
+    gpgme-native \
+    kconfig \
+    kconfig-native \
+    kcoreaddons \
+    kcoreaddons-native \
+    kdbusaddons \
+    kiconthemes \
+    ki18n \
+    knotifications \
+    kservice \
+    kwidgetsaddons \
+    kwindowsystem \
+    gettext-native \
+    kdoctools-native \
+    kauth-native \
 "
 
 # TBD: add KF5Gpgmepp with PACKAGECONFIG??

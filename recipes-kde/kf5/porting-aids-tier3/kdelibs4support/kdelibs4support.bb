@@ -1,6 +1,6 @@
 require ${BPN}.inc
 
-inherit cmake_lib
+inherit cmake_lib gettext
 
 DEPENDS += " \
     ${BPN}-native \
@@ -11,6 +11,7 @@ DEPENDS += " \
     kconfigwidgets \
     kcrash \
     kdesignerplugin \
+    kdesignerplugin-native \
     kdbusaddons \
     kemoticons \
     kglobalaccel \
@@ -30,6 +31,9 @@ DEPENDS += " \
     kwindowsystem \
     kxmlgui \
     kded \
+    kded-native \
+    kauth-native \
+    sonnet-native \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 
@@ -47,7 +51,7 @@ do_configure_append() {
 }
 
 # native executables
-CMAKE_ALIGN_SYSROOT[1] = "KF5KDELibs4Support, -s${_IMPORT_PREFIX}/bin, -S${STAGING_BINDIR_NATIVE}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5KDELibs4Support, -s${_IMPORT_PREFIX}/bin, -s${KDE_PATH_EXTERNAL_HOST_BINS}"
 CMAKE_ALIGN_SYSROOT[2] = "KDELibs4, -s${_IMPORT_PREFIX}/bin, -S${STAGING_BINDIR_NATIVE}"
 
 FILES_${PN} += " \

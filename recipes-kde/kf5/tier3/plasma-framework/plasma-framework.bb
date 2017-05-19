@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5
+inherit kde-kf5 gettext
 
 DEPENDS += " \
     qtdeclarative \
@@ -14,11 +14,14 @@ DEPENDS += " \
     kactivities \
     karchive \
     kconfig \
+    kconfig-native \
     kconfigwidgets \
     kcoreaddons \
+    kcoreaddons-native \
     kdbusaddons \
     kdeclarative \
     kdoctools \
+    kdoctools-native \
     kglobalaccel \
     kguiaddons \
     ki18n \
@@ -27,7 +30,9 @@ DEPENDS += " \
     kxmlgui \
     knotifications \
     kpackage \
+    kpackage-native \
     kwayland \
+    kauth-native \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "
 

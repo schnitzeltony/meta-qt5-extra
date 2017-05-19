@@ -10,6 +10,7 @@ inherit kde-kf5
 DEPENDS += " \
     kitemviews \
     kconfig \
+    kconfig-native \
     kglobalaccel \
     kconfigwidgets \
     ki18n \
@@ -18,6 +19,10 @@ DEPENDS += " \
     kwidgetsaddons \
     kwindowsystem \
     attica \
+    kcoreaddons-native \
+    kauth-native \
+    sonnet-native \
+    gettext-native \
 "
 
 PV = "${KF5_VERSION}"
