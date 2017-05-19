@@ -4,9 +4,22 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5
+inherit kde-kf5 gettext
 
-DEPENDS += "qtxmlpatterns syntax-highlighting karchive kconfig kguiaddons ki18n kio kparts sonnet libgit2"
+DEPENDS += "qtxmlpatterns \
+            syntax-highlighting \
+            karchive \
+            kconfig \
+            kconfig-native \
+            kcoreaddons-native \
+            kauth-native \
+            kguiaddons \
+            ki18n \
+            kio \
+            kparts \
+            sonnet \
+            sonnet-native \
+            libgit2"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "da4b300b11c309f72484235313a27351"

@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5
+inherit kde-kf5 cmake_lib
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "51788f84902358d7840c1d4ed111a80d"
@@ -18,3 +18,6 @@ SRC_URI += " \
 "
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
+
+# native executables
+CMAKE_ALIGN_SYSROOT[1] = "KF5Config, -s${_IMPORT_PREFIX}/libexec/kf5, -s${KDE_PATH_EXTERNAL_HOST_LIBEXECS}/kf5"

@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5
 
-DEPENDS += "kcoreaddons kwidgetsaddons ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
+DEPENDS += "kcoreaddons kcoreaddons-native kwidgetsaddons \
+            ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "1c65bee5dfc02d7671228dd90c59e19b"

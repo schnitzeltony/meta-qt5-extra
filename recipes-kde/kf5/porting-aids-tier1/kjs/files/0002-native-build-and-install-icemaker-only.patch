@@ -10,17 +10,21 @@ Upstream-Status: Inappropriate [embedded-specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- CMakeLists.txt         | 3 ---
+ CMakeLists.txt         | 7 ++-----
  src/CMakeLists.txt     | 1 -
  src/kjs/CMakeLists.txt | 3 +++
- 3 files changed, 3 insertions(+), 4 deletions(-)
+ 3 files changed, 5 insertions(+), 6 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 9b9814c..d472ddc 100644
+index 11120f7..b6f277a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -48,9 +48,6 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII)
- find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
+@@ -51,12 +51,9 @@ option(KJS_FORCE_DISABLE_PCRE "Force building of KJS without PCRE. Doing this wi
+ # TODO: Remove these
+ remove_definitions(-DQT_NO_CAST_FROM_ASCII)
+ 
+-find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
++#find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
  
  add_subdirectory(src)
 -add_subdirectory(autotests)
@@ -29,6 +33,15 @@ index 9b9814c..d472ddc 100644
  
  # create a Config.cmake and a ConfigVersion.cmake file and install them
  set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5JS")
+@@ -77,7 +74,7 @@ install(EXPORT KF5JSTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5JST
+ 
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kjs_version.h DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5} COMPONENT Devel )
+ 
+-kdoctools_install(po)
++#kdoctools_install(po)
+ 
+ if ("${CMAKE_BINARY_DIR}" STREQUAL "${CMAKE_CURRENT_BINARY_DIR}")
+     feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 index de1d59f..ad1af7e 100644
 --- a/src/CMakeLists.txt
@@ -59,5 +72,5 @@ index a51a71d..fc74820 100644
  include(ECMGeneratePriFile)
  ecm_generate_pri_file(BASE_NAME KJS LIB_NAME KF5JS DEPS "core" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KJS)
 -- 
-1.9.3
+2.10.2
 

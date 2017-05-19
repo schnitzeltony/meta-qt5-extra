@@ -10,14 +10,17 @@ inherit kde-kf5 cmake_auto_align_paths cmake_lib gtk-icon-cache
 DEPENDS += " \
     ki18n \
     kconfig \
+    kconfig-native \
     kidletime \
     kauth \
+    kauth-native \
     kcrash \
     solid \
     kio \
     kdbusaddons \
     kitemmodels \
     kfilemetadata \
+    kcoreaddons-native \
     \
     xapian-core \
 "

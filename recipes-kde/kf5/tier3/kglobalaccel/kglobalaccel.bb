@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5
 
 DEPENDS += " \
-    kconfig \
-    kcoreaddons \
+    kconfig-native \
+    kcoreaddons-native \
     kcrash \
     kdbusaddons \
     kservice \

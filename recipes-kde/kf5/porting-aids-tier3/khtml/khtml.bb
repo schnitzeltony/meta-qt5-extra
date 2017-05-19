@@ -5,11 +5,14 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5-porting-aids perlnative
+inherit kde-kf5-porting-aids perlnative gettext
 
 DEPENDS += " \
+    kauth-native \
     karchive \
     kcodecs \
+    kconfig-native \
+    kcoreaddons-native \
     kglobalaccel \
     ki18n \
     kiconthemes \
@@ -24,6 +27,7 @@ DEPENDS += " \
     kwindowsystem \
     kxmlgui \
     phonon \
+    sonnet-native \
     jpeg \
     giflib \
     libpng \

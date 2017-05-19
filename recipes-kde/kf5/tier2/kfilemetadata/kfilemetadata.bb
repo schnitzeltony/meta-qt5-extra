@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LGPL-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
-
-inherit kde-kf5 pkgconfig
+inherit kde-kf5 pkgconfig gettext
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "a7341eb3e20f180066470ba38533447c"

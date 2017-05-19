@@ -10,4 +10,6 @@ inherit kde-kf5
 SRC_URI[md5sum] = "9d13ea7dcd31efb400e2f5a64db48179"
 SRC_URI[sha256sum] = "8acc1560ee349d4858025ac3525abaa5a7edd879e5589173e1337bb3dea3dffe"
 
+DEPENDS += "libxml2-native"
+
 PV = "${KF5_VERSION}"
