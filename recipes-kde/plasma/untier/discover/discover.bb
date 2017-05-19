@@ -12,16 +12,18 @@ SRC_URI[md5sum] = "b6a7eea4cfda21a16a28299ef1f5c0f1"
 SRC_URI[sha256sum] = "231ec1ba751769e3a382e8e44841c2ac0b8f8f5c0c9d68ce4d5b03dfa6ee8620"
 
 DEPENDS += " \
-    qtsvg \
-    qtdeclarative \
-    \
-    qca \
+    attica \
+    kconfig-native \
+    kcoreaddons-native \
+    kpackage-native \
+    kauth-native \
+    kitemmodels \
+    knewstuff \
     libdebconf-kde \
     libqapt \
-    \
-    attica \
-    knewstuff \
-    kitemmodels \
+    qca \
+    qtdeclarative \
+    qtsvg \
 "
 
 FILES_${PN} += " \

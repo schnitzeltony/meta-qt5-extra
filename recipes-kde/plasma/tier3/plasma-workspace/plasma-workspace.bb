@@ -8,12 +8,13 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma distro_features_check
+inherit kde-plasma distro_features_check gettext
 
 DEPENDS += " \
     baloo \
     kdeclarative \
     plasma-framework \
+    kauth-native \
     kconfig \
     kactivities \
     krunner \
@@ -36,7 +37,14 @@ DEPENDS += " \
     libksysguard \
     libkscreen \
     libdbusmenu-qt5 \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver libsm libxcb kwin", "", d)} \
+    kwin \
+    kpackage-native \
+    kdoctools-native \
+    kjsembed-native \
+    sonnet-native \
+    kdesignerplugin-native \
+    kdelibs4support-native \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver libsm libxcb", "", d)} \
     zlib \
 "
 
@@ -101,11 +109,14 @@ FILES_${PN}-dev = " \
 
 # startkde/startplasmacompositor require:
 RDEPENDS_${PN} += " \
+    kconfig-bin \
+    kded \
+    kinit \
+    kwin \
+    plasma-workspace-wallpapers \
+    qttools-tools \
     xinit \
     xset \
-    qttools-tools \
-    kconfig-bin \
-    kinit \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsetroot xmessage xprop", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland", "xserver-xorg-xwayland", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "qtwayland-plugins", "", d)} \

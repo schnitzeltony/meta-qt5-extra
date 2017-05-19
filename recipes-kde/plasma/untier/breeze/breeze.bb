@@ -5,20 +5,24 @@ LIC_FILES_CHKSUM = " \
     file://COPYING-ICONS;md5=3e7f6a3da5801872be1084a978cfc0eb \
 "
 
-inherit kde-plasma
+inherit kde-plasma gettext
 
-DEPENDS += " \
+DEPENDS += "\
+    kauth-native \
     plasma-framework \
     ki18n \
     kcoreaddons \
+    kcoreaddons-native \
     kguiaddons \
     kconfig \
+    kconfig-native \
     kwidgetsaddons \
     kwindowsystem \
     kconfigwidgets \
     kdecoration \
     frameworkintegration \
     kcmutils \
+    kpackage-native \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "",d)} \
 "
 

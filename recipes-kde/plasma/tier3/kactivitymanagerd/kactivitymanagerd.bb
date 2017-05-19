@@ -5,14 +5,17 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
 "
 
-inherit kde-plasma
+inherit kde-plasma gettext
 
 DEPENDS += " \
     boost \
     kdbusaddons \
     ki18n \
+    kauth-native \
     kcoreaddons \
+    kcoreaddons-native \
     kconfig \
+    kconfig-native \
     kxmlgui \
     kwindowsystem \
     kio \

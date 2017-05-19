@@ -5,11 +5,14 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-plasma
+inherit kde-plasma gettext
 
 DEPENDS += " \
     qtwebkit \
+    kauth-native \
+    kconfig-native \
     kcoreaddons \
+    kcoreaddons-native \
     kconfig \
     ki18n \
     kwindowsystem \
@@ -20,6 +23,7 @@ DEPENDS += " \
     kconfigwidgets \
     kservice \
     plasma-framework \
+    kpackage-native \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras libxres", "", d)} \
 "
 
