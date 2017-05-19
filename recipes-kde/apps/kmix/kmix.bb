@@ -6,15 +6,22 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
 "
 
-inherit kde-apps
+inherit kde-apps gettext
 
 DEPENDS += " \
     alsa-lib \
     libcanberra \
     \
+    kauth-native \
+    kconfig-native \
+    kcoreaddons-native \
     kconfigwidgets \
+    kpackage-native \
+    kdesignerplugin-native \
+    sonnet-native \
     kdbusaddons \
     kdelibs4support \
+    kdelibs4support-native \
     kglobalaccel \
     ki18n \
     kiconthemes \

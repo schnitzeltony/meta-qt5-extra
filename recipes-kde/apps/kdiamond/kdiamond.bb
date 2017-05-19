@@ -6,13 +6,14 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-apps
+inherit kde-apps gettext
 
 DEPENDS += "\
-    kcoreaddons \
-    kconfig \
+    kauth-native \
+    kconfig-native \
+    kcoreaddons-native \
     kdbusaddons \
-    kdoctools \
+    kdoctools-native \
     kwidgetsaddons \
     ki18n \
     kguiaddons \

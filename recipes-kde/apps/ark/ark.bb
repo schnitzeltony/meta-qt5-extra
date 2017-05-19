@@ -10,10 +10,12 @@ inherit kde-apps gtk-icon-cache
 DEPENDS += "\
     libarchive \
     karchive \
-    kconfig \
+    kauth-native \
+    kconfig-native \
+    kcoreaddons-native \
     kcrash \
     kdbusaddons \
-    kdoctools \
+    kdoctools-native \
     ki18n \
     kiconthemes \
     khtml \
@@ -22,7 +24,8 @@ DEPENDS += "\
     kpty \
     kwidgetsaddons \
     kitemmodels \
-" 
+    sonnet-native \
+"
 
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "68b5b557a813500e39f4af8f87f7a2b8"

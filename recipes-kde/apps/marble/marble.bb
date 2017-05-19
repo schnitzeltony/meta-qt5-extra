@@ -7,13 +7,14 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-apps cmake_lib
+inherit kde-apps cmake_lib gettext
 
 DEPENDS += " \
     qtsvg \
     qtwebkit \
     \
-    kconfig \
+    kconfig-native \
+    kauth-native \
     krunner \
     kservice \
     ki18n \
@@ -21,10 +22,12 @@ DEPENDS += " \
     knewstuff \
     kwallet \
     kparts \
-    kcoreaddons \
+    kcoreaddons-native \
     kparts \
     plasma-framework \
-    kdoctools \
+    kdoctools-native \
+    sonnet-native \
+    kpackage-native \
 "
 
 PV = "${KDE_APP_VERSION}"

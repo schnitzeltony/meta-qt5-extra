@@ -5,17 +5,19 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-apps
+inherit kde-apps gettext
 
 DEPENDS += " \
     phonon \
     \
-    kconfig \
+    kauth-native \
+    kconfig-native \
     kconfigwidgets \
-    kcoreaddons \
+    kcoreaddons-native \
     kcrash \
     kdbusaddons \
-    kdoctools \
+    kdoctools-native \
+    sonnet-native \
     ki18n \
     kjobwidgets \
     kio \
