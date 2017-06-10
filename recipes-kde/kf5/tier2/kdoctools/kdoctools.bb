@@ -32,7 +32,4 @@ do_install_append() {
 # native binaries
 CMAKE_ALIGN_SYSROOT[1] = "KF5DocTools, -s${_IMPORT_PREFIX}/bin, -s${KDE_PATH_EXTERNAL_HOST_BINS}"
 
-# make meinproc5 find kdoctools data
-CMAKE_ALIGN_SYSROOT[2] = "KF5DocToolsMacros.cmake, -sCOMMAND ${KDOCTOOLS_MEINPROC_EXECUTABLE}, -sCOMMAND ${KDOCTOOLS_MEINPROC_EXECUTABLE} --srcdir ${OE_QMAKE_PATH_DATA}/kf5/kdoctools"
-
 FILES_${PN}-dev += "${datadir}/kf5/kdoctools/customization"
