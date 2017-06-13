@@ -7,8 +7,10 @@ SRC_URI = "http://oligarchy.co.uk/xapian/${PV}/${BPN}-${PV}.tar.xz"
 SRC_URI[md5sum] = "5308261e78337604bd8f845dd6b4aafc"
 SRC_URI[sha256sum] = "10584f57112aa5e9c0e8a89e251aecbf7c582097638bfee79c1fe39a8b6a6477"
 
-inherit autotools
+inherit autotools cmake_lib
 
 DEPENDS = "util-linux zlib"
 
 FILES_${PN}-dev += "${libdir}/cmake"
+
+CMAKE_ALIGN_SYSROOT[1] = "xapian, -S${libdir}, -s${OE_QMAKE_PATH_HOST_LIBS}/"
