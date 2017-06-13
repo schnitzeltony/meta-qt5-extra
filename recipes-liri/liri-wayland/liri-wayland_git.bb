@@ -56,6 +56,5 @@ FILES_${PN}-dbg += " \
 "
 
 FILES_${PN}-dev += " \
-    ${libdir}/cmake \
     ${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs \
 "

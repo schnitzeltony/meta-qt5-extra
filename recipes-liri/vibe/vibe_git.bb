@@ -28,7 +28,6 @@ DEPENDS += " \
 RDEPENDS_${PN} += "pulseaudio-server"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
-FILES_${PN}-dev += "${libdir}/cmake"
 
 RREPLACES_${PN} = "libhawaii"
 RPROVIDES_${PN} = "libhawaii"

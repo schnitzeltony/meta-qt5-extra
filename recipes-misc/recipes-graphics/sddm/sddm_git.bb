@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit cmake_qt5 cmake_extra_sanity pkgconfig systemd useradd distro_features_check
+inherit cmake_qt5_extra pkgconfig systemd useradd distro_features_check
 
 DEPENDS += "extra-cmake-modules-native qtbase qtdeclarative qttools libxcb"
 # REVISIT optionals

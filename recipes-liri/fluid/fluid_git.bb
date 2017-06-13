@@ -23,6 +23,5 @@ do_configure_prepend() {
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
 FILES_${PN}-dev += " \
-    ${libdir}/cmake \
     ${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs \
 "

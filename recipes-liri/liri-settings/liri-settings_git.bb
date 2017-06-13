@@ -33,10 +33,6 @@ FILES_${PN}-dbg += " \
     ${OE_QMAKE_PATH_QML}/Liri/*/.debug \
 "
 
-FILES_${PN}-dev += " \
-    ${libdir}/cmake \
-"
-
 # cross libs / headers
 CMAKE_ALIGN_SYSROOT[1] = "LiriSettings, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
 CMAKE_ALIGN_SYSROOT[2] = "LiriSettings, -S${includedir}, -S${STAGING_INCDIR}"
