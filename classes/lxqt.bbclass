@@ -1,4 +1,4 @@
-inherit cmake_qt5_extra cmake_extra_sanity
+inherit cmake_qt5_extra
 
 HOMEPAGE = "http://lxqt.org/"
 

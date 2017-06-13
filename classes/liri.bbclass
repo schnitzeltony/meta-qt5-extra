@@ -4,7 +4,7 @@ SRC_URI = "git://github.com/lirios/${@'${BPN}'.replace('liri-', '')}.git;protoco
 
 DEPENDS += "qtbase qtdeclarative extra-cmake-modules-native"
 
-inherit cmake_qt5 cmake_extra_sanity pkgconfig
+inherit cmake_qt5_extra pkgconfig
 
 EXTRA_OECMAKE += " \
     -DQML_INSTALL_DIR=${OE_QMAKE_PATH_QML} \
