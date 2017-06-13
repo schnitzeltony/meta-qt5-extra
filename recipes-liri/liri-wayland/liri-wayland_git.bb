@@ -40,10 +40,10 @@ PACKAGECONFIG[protocols] = "-DUSE_LOCAL_WAYLAND_PROTOCOLS:BOOL=OFF,-DUSE_LOCAL_W
 PACKAGECONFIG[xwayland] = "-DENABLE_XWAYLAND:BOOL=ON,-DENABLE_XWAYLAND:BOOL=OFF,libxcb xserver-xorg,xserver-xorg-xwayland"
 
 # cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "LiriPlatform, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "LiriPlatform, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_ALIGN_SYSROOT[3] = "LiriWaylandClient, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_ALIGN_SYSROOT[4] = "LiriWaylandServer, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "LiriPlatform, -S${libdir}/lib, -s${OE_QMAKE_PATH_HOST_LIBS}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "LiriPlatform, -S${includedir}, -s${CMAKE_QT5_EX_PATH_HOST_HEADERS}"
+CMAKE_ALIGN_SYSROOT[3] = "LiriWaylandClient, -S${includedir}, -s${CMAKE_QT5_EX_PATH_HOST_HEADERS}"
+CMAKE_ALIGN_SYSROOT[4] = "LiriWaylandServer, -S${includedir}, -s${CMAKE_QT5_EX_PATH_HOST_HEADERS}"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
