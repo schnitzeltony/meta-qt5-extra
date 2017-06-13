@@ -17,7 +17,7 @@ ${KDE_MIRROR}	http://kde.c3sl.ufpr.br \n \
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz"
 
 # extra-cmake-modules cause dependent to check for python
-inherit cmake_qt5 cmake_extra_sanity pythonnative
+inherit cmake_qt5_extra cmake_extra_sanity pythonnative
 
 do_compile_prepend() {
     export XDG_DATA_HOME=${STAGING_DATADIR}
@@ -33,7 +33,6 @@ EXTRA_OECMAKE += " \
     -DCMAKE_INSTALL_DBUSINTERFACEDIR=share/dbus-1/interfaces \
     -DKDE_INSTALL_QTPLUGINDIR=${OE_QMAKE_PATH_PLUGINS} \
     -DKDE_INSTALL_QMLDIR=${OE_QMAKE_PATH_QML} \
-    -DKDE_PATH_HOST_HEADERS=${STAGING_INCDIR} \
     -DKDE_PATH_EXTERNAL_HOST_LIBEXECS=${STAGING_LIBEXECDIR_NATIVE} \
     -DKDE_PATH_EXTERNAL_HOST_BINS=${STAGING_BINDIR_NATIVE} \
 "
