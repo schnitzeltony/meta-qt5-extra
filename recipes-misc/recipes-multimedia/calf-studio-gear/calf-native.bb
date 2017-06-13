@@ -5,6 +5,7 @@ inherit autotools pkgconfig native
 DEPENDS += " \
     glib-2.0-native \
     lv2-native \
+    expat-native \
 "
 
 SRC_URI += " \
