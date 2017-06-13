@@ -17,6 +17,7 @@ SRCREV = "9f5ed08fe14820e6f5e03b91410dd280f3678430"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
+    qtwayland-native \
     qtaccountsservice \
     libpam \
     vibe \
