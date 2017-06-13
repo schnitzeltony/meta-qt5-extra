@@ -13,5 +13,3 @@ SRC_URI = "git://github.com/lxde/${BPN}.git;protocol=git;branch=master"
 SRCREV = "b38c9e0d12877702f0d12b749f69579626c36054"
 PV = "0.3.2"
 S = "${WORKDIR}/git"
-
-FILES_${PN}-dev += "${datadir}/cmake ${libdir}/cmake"
