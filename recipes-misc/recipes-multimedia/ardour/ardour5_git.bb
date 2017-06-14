@@ -30,6 +30,7 @@ REQUIRED_DISTRO_FEATURE = "x11"
 SRC_URI = " \
     git://github.com/Ardour/ardour.git \
     file://0001-remove-all-build-flags-that-cause-trouble-for-cross-.patch \
+    file://ardour5.desktop \
 "
 SRCREV = "0e4ddcf50679d136ab8fe2356d5a7921f91aa0cb"
 PV = "5.9"
@@ -37,7 +38,7 @@ S = "${WORKDIR}/git"
 
 
 # arch specific override - default (tested) is ARM -> no fpu-optimizations
-# can be something like i686 / x86_64 see fiel 'wscript' in sourcepath for more details
+# can be something like i686 / x86_64 see file 'wscript' in sourcepath for more details
 BUILD_DIST_TARGET = "none"
 
 EXTRA_OECONF = " \
@@ -50,6 +51,19 @@ EXTRA_OECONF = " \
     --with-backends="jack,alsa" \
     --dist-target=${BUILD_DIST_TARGET} \
 "
+
+do_install_append() {
+    # install icons to freedesktop locations
+    for s in 16 22 32 48 256 512; do
+        install -d  ${D}${datadir}/icons/hicolor/${s}x${s}/apps
+        ln -s ../../../../${BPN}/resources/Ardour-icon_${s}px.png \
+            ${D}${datadir}/icons/hicolor/${s}x${s}/apps/${BPN}.png
+    done
+
+    # install .desktop
+    install -d  ${D}${datadir}/applications
+    install -m 0644 ${WORKDIR}/ardour5.desktop ${D}${datadir}/applications
+}
 
 FILES_${PN} += " \
     ${datadir}/${BPN} \

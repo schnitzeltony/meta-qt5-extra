@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Ardour
+Comment=Record, mix and master audio
+Exec=ardour5
+Icon=ardour5
+Terminal=false
+MimeType=application/x-ardour;
+Type=Application
+Categories=AudioVideo;Audio;X-Recorders;X-Multitrack;X-Jack;X-AudioEditing;
+GenericName=Digital Audio Workstation
