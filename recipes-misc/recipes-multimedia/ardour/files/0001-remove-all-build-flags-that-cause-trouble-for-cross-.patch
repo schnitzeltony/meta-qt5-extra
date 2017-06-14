@@ -1,0 +1,75 @@
+From 24b6038dc7c235780038d3fce2d9c83fada6ac8b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 6 Feb 2017 23:33:45 +0100
+Subject: [PATCH] remove all build flags that cause trouble for cross
+ configure/build
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ tools/autowaf.py                                   |    1 +
+ wscript                                            |   26 -
+
+diff --git a/tools/autowaf.py b/tools/autowaf.py
+index f82b80a..626e951 100644
+--- a/tools/autowaf.py
++++ b/tools/autowaf.py
+@@ -93,6 +93,7 @@ def copyfile (task):
+ 
+ def check_header(conf, lang, name, define='', mandatory=True):
+     "Check for a header"
++    return True
+     includes = '' # search default system include paths
+     if sys.platform == "darwin":
+         includes = '/opt/local/include'
+diff --git a/wscript b/wscript
+index a7dd5e2..35acc51 100644
+--- a/wscript
++++ b/wscript
+@@ -440,31 +440,6 @@ int main() { return 0; }''',
+ 
+         compiler_flags.append ("-DARCH_X86")
+ 
+-        if platform == 'linux' :
+-
+-            #
+-            # determine processor flags via /proc/cpuinfo
+-            #
+-
+-            if conf.env['build_target'] != 'i386':
+-
+-                flag_line = os.popen ("cat /proc/cpuinfo | grep '^flags'").read()[:-1]
+-                x86_flags = flag_line.split (": ")[1:][0].split ()
+-
+-                if "mmx" in x86_flags:
+-                    compiler_flags.append ("-mmmx")
+-                if "sse" in x86_flags:
+-                    build_host_supports_sse = True
+-                if "3dnow" in x86_flags:
+-                    compiler_flags.append ("-m3dnow")
+-
+-            if cpu == "i586":
+-                compiler_flags.append ("-march=i586")
+-            elif cpu == "i686":
+-                compiler_flags.append ("-march=i686")
+-
+-        if not is_clang and ((conf.env['build_target'] == 'i686') or (conf.env['build_target'] == 'x86_64')) and build_host_supports_sse:
+-            compiler_flags.extend ([ flags_dict['sse'], flags_dict['fpmath-sse'], flags_dict['xmmintrinsics'] ])
+ 
+         if (conf.env['build_target'] == 'mingw'):
+             if (re.search ("(x86_64|AMD64)", cpu) != None):
+@@ -965,7 +940,6 @@ def configure(conf):
+             else:
+                 conf.check_cc(function_name='dlopen', header_name='dlfcn.h', lib='dl', uselib_store='DL')
+         conf.check_cxx(fragment = "#include <boost/version.hpp>\nint main(void) { return (BOOST_VERSION >= 103900 ? 0 : 1); }\n",
+-                  execute = "1",
+                   mandatory = True,
+                   msg = 'Checking for boost library >= 1.39',
+                   okmsg = 'ok',
+-- 
+2.9.3
+
