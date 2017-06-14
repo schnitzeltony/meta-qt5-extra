@@ -52,23 +52,23 @@ EXTRA_OECONF = " \
 "
 
 FILES_${PN} += " \
-    ${datadir}/ardour5 \
-    ${libdir}/ardour5 \
+    ${datadir}/${BPN} \
+    ${libdir}/${BPN} \
 "
 
 FILES_${PN}-dev += " \
-    ${libdir}/ardour5/libcanvas.so \
-    ${libdir}/ardour5/libevoral.so \
-    ${libdir}/ardour5/libgtkmm2ext.so \
-    ${libdir}/ardour5/libardour.so \
-    ${libdir}/ardour5/libptformat.so \
-    ${libdir}/ardour5/libardouralsautil.so \
-    ${libdir}/ardour5/libmidipp.so \
-    ${libdir}/ardour5/libaudiographer.so \
-    ${libdir}/ardour5/libpbd.so \
-    ${libdir}/ardour5/vamp/*.so \
+    ${libdir}/${BPN}/libcanvas.so \
+    ${libdir}/${BPN}/libevoral.so \
+    ${libdir}/${BPN}/libgtkmm2ext.so \
+    ${libdir}/${BPN}/libardour.so \
+    ${libdir}/${BPN}/libptformat.so \
+    ${libdir}/${BPN}/libardouralsautil.so \
+    ${libdir}/${BPN}/libmidipp.so \
+    ${libdir}/${BPN}/libaudiographer.so \
+    ${libdir}/${BPN}/libpbd.so \
+    ${libdir}/${BPN}/vamp/*.so \
 "
 
 FILES_${PN}-staticdev += " \
-    ${libdir}/ardour5/*.a \
+    ${libdir}/${BPN}/*.a \
 "
