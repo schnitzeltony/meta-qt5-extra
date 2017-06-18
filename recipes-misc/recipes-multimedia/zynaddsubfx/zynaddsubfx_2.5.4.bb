@@ -27,6 +27,7 @@ SRC_URI = " \
     file://0001-No-target-specific-asm.patch \
     file://0002-Controller-Spliter-align-Makefiles-for-cross-compili.patch \
     file://0003-Nio.cpp-Do-not-use-ps-aux-to-find-jack-busybox-s-ps-.patch \
+    file://0004-Keep-our-build-flags.patch \
 "
 SRC_URI[md5sum] = "7dc757512e5b6f3013bfb168ed01cfa3"
 SRC_URI[sha256sum] = "014b1d9ad1750c310369676b46a4555ba6bec512c38ccba17ceb89c78552949a"
