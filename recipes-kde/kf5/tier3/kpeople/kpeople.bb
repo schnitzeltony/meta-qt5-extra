@@ -2,9 +2,16 @@ SUMMARY = "Provides access to all contacts"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-inherit kde-kf5
+inherit kde-kf5 gettext
 
-DEPENDS += "kcoreaddons kconfig kservice kwidgetsaddons ki18n kitemviews "
+DEPENDS += "kcoreaddons \
+            kcoreaddons-native \
+            kconfig \
+            kconfig-native \
+            kservice \
+            kwidgetsaddons \
+            ki18n \
+            kitemviews"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "b03e735f9113b177a9a840c8910c8e02"

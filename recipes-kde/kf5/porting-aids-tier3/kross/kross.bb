@@ -4,12 +4,16 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5-porting-aids
+inherit kde-kf5-porting-aids gettext
 
-DEPENDS += " \
+DEPENDS += "\
+    kauth-native \
+    kconfig-native \
     kcompletion \
     kcoreaddons \
+    kcoreaddons-native \
     kdoctools \
+    kdoctools-native \
     ki18n \
     kiconthemes \
     kio \
@@ -17,6 +21,7 @@ DEPENDS += " \
     kservice \
     kwidgetsaddons \
     kxmlgui \
+    sonnet-native \
 "
 
 PV = "${KF5_VERSION}"

@@ -11,9 +11,11 @@ DEPENDS += " \
     kwindowsystem \
     kservice \
     kconfig \
+    kconfig-native \
     kiconthemes \
     kcodecs \
     kcoreaddons \
+    kcoreaddons-native \
     phonon \
     libdbusmenu-qt5 \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras libxtst", "", d)} \

@@ -7,13 +7,16 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma distro_features_check
+inherit kde-plasma distro_features_check gettext
 
 DEPENDS += " \
     gtk+ \
     gtk+3 \
     ki18n \
+    kauth-native \
+    kconfig-native \
     kconfigwidgets \
+    kcoreaddons-native \
     knewstuff \
     karchive \
     kcmutils \

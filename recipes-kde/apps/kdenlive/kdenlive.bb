@@ -11,9 +11,11 @@ DEPENDS += "\
     qtsvg \
     qtwebkit \
     karchive \
+    kauth-native \
+    sonnet-native \
     kbookmarks \
-    kcoreaddons \
-    kconfig \
+    kcoreaddons-native \
+    kconfig-native \
     kconfigwidgets \
     kdbusaddons \
     kfilemetadata \
@@ -27,8 +29,9 @@ DEPENDS += "\
     kguiaddons \
     ktextwidgets \
     kiconthemes \
-    kdoctools \
+    kdoctools-native \
     xapian-core \
+    shared-mime-info-native \
 "
 
 PV = "${KDE_APP_VERSION}"

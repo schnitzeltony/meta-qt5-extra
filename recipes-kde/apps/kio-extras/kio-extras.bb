@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
     file://man/LICENSE;md5=d975629b732b61cb58f9595c6baa9379 \
 "
 
-inherit kde-apps
+inherit kde-apps gettext
 
 DEPENDS += " \
     qtsvg \
@@ -18,21 +18,26 @@ DEPENDS += " \
     exiv2 \
     kactivities \
     karchive \
-    kconfig \
+    kauth-native \
+    kconfig-native \
     kconfigwidgets \
-    kcoreaddons \
+    kcoreaddons-native \
     kdbusaddons \
-    kdoctools \
+    kdoctools-native \
+    kdesignerplugin-native \
+    sonnet-native \
     kdnssd \
     kiconthemes \
     ki18n \
     kio \
     khtml \
     kdelibs4support \
+    kdelibs4support-native \
     kpty \
     solid \
     kbookmarks \
     kguiaddons \
+    shared-mime-info-native \
 "
 
 # REVISIT optionals

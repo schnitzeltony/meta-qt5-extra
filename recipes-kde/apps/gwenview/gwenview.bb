@@ -2,7 +2,7 @@ SUMMARY = "A fast and easy to use image viewer for KDE"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5a3169a2d39a757efd8b7aa66a69d97b"
 
-inherit kde-apps
+inherit kde-apps gettext
 
 DEPENDS += " \
     jpeg \
@@ -10,9 +10,14 @@ DEPENDS += " \
     lcms \
     phonon \
     kdelibs4support \
+    kdelibs4support-native \
     kded \
     kactivities \
-    kcoreaddons \
+    kcoreaddons-native \
+    kconfig-native \
+    kauth-native \
+    kdesignerplugin-native \
+    sonnet-native \
     kxmlgui \
     kfilemetadata \
     baloo \

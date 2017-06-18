@@ -13,7 +13,13 @@ DEPENDS += " \
     \
     kio \
     kdelibs4support \
+    kdelibs4support-native \
     kdbusaddons \
+    kcoreaddons-native \
+    kauth-native \
+    kconfig-native \
+    kdesignerplugin-native \
+    sonnet-native \
 "
 
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}.tar.xz"

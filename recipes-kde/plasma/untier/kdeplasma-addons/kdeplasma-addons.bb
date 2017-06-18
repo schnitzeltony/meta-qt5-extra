@@ -5,24 +5,31 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-plasma
+inherit kde-plasma gettext
 
 DEPENDS += " \
     qtdeclarative \
     \
+    kauth-native \
     kconfig \
+    kconfig-native \
     kconfigwidgets \
     kcoreaddons \
+    kcoreaddons-native \
     ki18n \
     kcmutils \
     plasma-framework \
     krunner \
     kservice \
+    kpackage-native \
     sonnet \
     kunitconversion \
     kdelibs4support \
+    kdelibs4support-native \
+    kdesignerplugin-native \
     kross \
     knewstuff \
+    sonnet-native \
     plasma-workspace \
     \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \

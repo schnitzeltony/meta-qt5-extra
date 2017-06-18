@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5
 
-DEPENDS += "kconfig kwidgetsaddons"
+DEPENDS += "kconfig kconfig-native kwidgetsaddons"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "34b9b0cc3d61210683a872976d27b9c9"

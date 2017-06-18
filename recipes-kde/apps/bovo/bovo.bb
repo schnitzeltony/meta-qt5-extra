@@ -9,9 +9,11 @@ LIC_FILES_CHKSUM = " \
 inherit kde-apps gtk-icon-cache
 
 DEPENDS += "\
-    kcoreaddons \
+    kauth-native \
+    kconfig-native \
+    kcoreaddons-native \
     kdbusaddons \
-    kdoctools \
+    kdoctools-native \
     kxmlgui \
     libkdegames \
 "

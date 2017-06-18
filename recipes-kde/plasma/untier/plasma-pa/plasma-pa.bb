@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-plasma
+inherit kde-plasma gettext
 
 DEPENDS += " \
     glib-2.0 \
@@ -13,8 +13,12 @@ DEPENDS += " \
     libcanberra \
     \
     kcoreaddons \
+    kcoreaddons-native \
+    kconfig-native \
+    kpackage-native \
     kdeclarative \
     kdoctools \
+    kdoctools-native \
     kglobalaccel \
     ki18n \
     plasma-framework \
@@ -25,6 +29,8 @@ SRC_URI[md5sum] = "f8bb78cd5c64a6ecc4c198e937e5b5f1"
 SRC_URI[sha256sum] = "3efbc5c46e4b67a8d153d7525502434c09108b4ffaff20c0b1bb9ad16c1e5575"
 
 FILES_SOLIBSDEV = ""
+
+RDEPENDS_${PN} = "pulseaudio-server"
 
 FILES_${PN} += " \
     ${datadir}/kpackage \

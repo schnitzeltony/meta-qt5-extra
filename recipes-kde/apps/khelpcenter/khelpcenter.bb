@@ -4,23 +4,25 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=7108e5acd7ce861dee282297d7c2f38c \
 "
 
-inherit kde-apps
+inherit kde-apps gettext
 
 DEPENDS += " \
     grantlee \
     xapian-core \
     \
+    kauth-native \
     karchive \
     kbookmarks \
-    kconfig \
-    kcoreaddons \
+    kconfig-native \
+    kcoreaddons-native \
     kdbusaddons \
-    kdoctools \
+    kdoctools-native \
     ki18n \
     kinit \
     khtml \
     kservice \
     kwindowsystem \
+    sonnet-native \
     \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
 "

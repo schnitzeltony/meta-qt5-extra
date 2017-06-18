@@ -11,18 +11,19 @@ DEPENDS += "\
     qtscript \
     hunspell \
 	\
+    kauth-native \
     ki18n \
     kio \
     kxmlgui \
     knotifications \
-    kconfig \
-    kcoreaddons \
-    kdoctools \
+    kconfig-native \
+    kcoreaddons-native \
+    kdoctools-native \
     kross \
-    sonnet \
+    sonnet-native \
     kdbusaddons \
     kcrash \
-" 
+"
 
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "3d234b7208c7450e6d44dfc4a19999a2"

@@ -7,17 +7,24 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-base gtk-icon-cache
 
-DEPENDS += " \
+DEPENDS += "\
     plasma-framework \
     kdeclarative \
     kio \
     kdelibs4support \
+    kdelibs4support-native \
     kactivities \
     baloo \
+    kcoreaddons-native \
+    kconfig-native \
+    kauth-native \
+    sonnet-native \
+    kpackage-native \
+    kdesignerplugin-native \
 "
 
 SRC_URI = "git://anongit.kde.org/${BPN}.git"
-SRCREV = "ac97dd0264d3273cc93a70f6efd722bb2215d806"
+SRCREV = "8005327e22c54b1e7e4be20c844819a43aa7d108"
 S = "${WORKDIR}/git"
 # Did not find version anywhere
 PV = "0.0.0+git${SRCPV}"

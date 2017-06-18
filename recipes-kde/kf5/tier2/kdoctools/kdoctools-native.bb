@@ -11,11 +11,12 @@ DEPENDS += " \
     docbook-xml-dtd4-native \
     docbook-xsl-stylesheets-native \
 "
+RDEPENDS_${PN} += "gettext-native"
 
 SRC_URI += " \
 	file://0003-don-t-build-documentation.patch \
 "
 
 # make meinproc5 find kdoctools data
-CMAKE_ALIGN_SYSROOT[1] = "KF5DocToolsMacros.cmake, -s--stylesheet, -S--srcdir ${STAGING_DATADIR_NATIVE}/kf5/kdoctools --stylesheet"
+CMAKE_ALIGN_SYSROOT[1] = "KF5DocToolsMacros.cmake, -s--stylesheet, -s--srcdir ${OE_QMAKE_PATH_DATA}/kf5/kdoctools --stylesheet"
 

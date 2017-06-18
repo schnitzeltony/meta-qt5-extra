@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-apps gtk-icon-cache
 
 DEPENDS += "\
+    kcoreaddons-native \
+    kdoctools-native \
     qtquickcontrols2 \
     fluidsynth \
     drumstick \

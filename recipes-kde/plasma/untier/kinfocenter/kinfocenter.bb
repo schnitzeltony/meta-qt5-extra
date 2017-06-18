@@ -6,20 +6,28 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-plasma
+inherit kde-plasma gettext
 
 DEPENDS += " \
     pciutils \
     kcompletion \
+    kauth-native \
     kconfig \
+    kconfig-native \
     kconfigwidgets \
     kcoreaddons \
+    kcoreaddons-native \
     kdbusaddons \
     kdoctools \
+    kdoctools-native \
     ki18n \
     kiconthemes \
     kcmutils \
     kdelibs4support \
+    kdelibs4support-native \
+    kdesignerplugin-native \
+    kpackage-native \
+    sonnet-native \
     kio \
     kservice \
     solid \

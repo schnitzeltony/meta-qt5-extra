@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
 "
 
-inherit kde-base
+inherit kde-base gettext
 
 DEPENDS += " \
     xapian-core \
@@ -15,7 +15,12 @@ DEPENDS += " \
 # REVISIT optionals PACKAGECONFIG
 DEPENDS += " \
     kauth \
+    kauth-native \
+    kconfig-native \
+    kpackage-native \
+    sonnet-native \
     kcoreaddons \
+    kcoreaddons-native \
     ki18n \
     kio \
     krunner \

@@ -18,11 +18,13 @@ DEPENDS += " \
     karchive \
     kbookmarks \
     kcompletion \
-    kconfig \
+    kconfig-native \
     kconfigwidgets \
-    kcoreaddons \
+    kauth-native \
+    kcoreaddons-native \
     kdbusaddons \
-    kdoctools \
+    kdoctools-native \
+    sonnet-native \
     kiconthemes \
     kjs \
     kio \

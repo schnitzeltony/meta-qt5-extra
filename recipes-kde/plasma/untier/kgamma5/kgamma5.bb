@@ -6,9 +6,13 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma distro_features_check
+inherit kde-plasma distro_features_check gettext
 
 DEPENDS += " \
+    kauth-native \
+    kconfig-native \
+    kcoreaddons-native \
+    kdoctools-native \
     kdelibs4support \
     kdoctools \
     virtual/libx11 \

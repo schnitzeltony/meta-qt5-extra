@@ -8,7 +8,7 @@ inherit kde-kf5 distro_features_check
 
 REQUIRED_DISTRO_FEATURE = "x11"
 
-DEPENDS += "kcoreaddons kwindowsystem virtual/libx11"
+DEPENDS += "kcoreaddons kcoreaddons-native kwindowsystem virtual/libx11"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "28a6ddd2560e283694ca6e0b97a432fc"

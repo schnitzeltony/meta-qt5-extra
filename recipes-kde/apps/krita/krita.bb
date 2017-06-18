@@ -17,11 +17,12 @@ DEPENDS += " \
     exiv2 \
     fftw \
     \
+    kauth-native \
     karchive \
-    kconfig \
+    kconfig-native \
     kwidgetsaddons \
     kcompletion \
-    kcoreaddons \
+    kcoreaddons-native \
     kguiaddons \
     ki18n \
     kitemmodels \

@@ -5,17 +5,20 @@ LIC_FILES_CHKSUM = " \
     file://COPYING-DOCS;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-apps
+inherit kde-apps gettext
 
 DEPENDS += "\
+    kauth-native \
+    kconfig-native \
+    kcoreaddons-native \
+    kdoctools-native \
+    sonnet-native \
     kio \
     kparts \
     solid \
     kxmlgui \
-    kcoreaddons \
-    kdoctools \
     ki18n \
-" 
+"
 
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "0e35b21fa574e2afcad2c0791475866a"

@@ -5,14 +5,16 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-base
+inherit kde-base gettext
 
 DEPENDS += " \
     kcoreaddons \
+    kcoreaddons-native \
     ki18n \
     kiconthemes \
     ktextwidgets \
     kwidgetsaddons \
+    sonnet-native \
 "
 
 SRC_URI[md5sum] = "3680540e33a6cd1f5633fad2fdd93e56"

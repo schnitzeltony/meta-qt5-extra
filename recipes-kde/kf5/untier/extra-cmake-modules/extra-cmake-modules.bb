@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING-CMAKE-SCRIPTS;md5=54c7042be62e169199200bc6477
 
 inherit kde-kf5
 
-DEPENDS = "qttools"
+DEPENDS = "qttools-native"
 
 SRC_URI[md5sum] = "fdbf1beac421ef98c41a3a1a3703fbb4"
 SRC_URI[sha256sum] = "05da02a2db64d20a7a92be6dc642df39da39f957dea8fba9bcb99fb3f3f66de4"

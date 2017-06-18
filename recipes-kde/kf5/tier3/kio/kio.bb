@@ -4,28 +4,32 @@ LIC_FILES_CHKSUM = " \
 	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-inherit kde-kf5 cmake_auto_align_paths
+inherit kde-kf5 cmake_auto_align_paths gettext
 
 DEPENDS += " \
     qttools-native \
     karchive \
     kcodecs \
-    kconfig \
-    kcoreaddons \
+    kconfig-native \
+    kcoreaddons-native \
     kdbusaddons \
-    kdoctools \
+    kdoctools-native \
     ki18n \
     knotifications \
     kservice \
     solid \
     kxmlgui \
     kwallet \
+    kauth-native \
+    sonnet-native \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)} \
 "
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "49c9c0a0f94cfb301ef92578d888eedd"
 SRC_URI[sha256sum] = "6acb28de757a0d5eccb1e3e533a1ef22b5f5de92e96c3aba804ebdb44aa343c4"
+
+SRC_URI += "file://0001-Extend-upstream-workaround-for-bug-371721-to-also-co.patch"
 
 PACKAGECONFIG[full] = "-DKIOCORE_ONLY=OFF,-DKIOCORE_ONLY=ON, kbookmarks kcompletion kconfigwidgets kiconthemes kitemviews kjobwidgets kwidgetsaddons kwindowsystem"
 # Note that kdeclarative fails without KIOWidgets

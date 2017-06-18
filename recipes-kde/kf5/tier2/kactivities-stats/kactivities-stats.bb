@@ -11,6 +11,7 @@ inherit kde-kf5
 DEPENDS += " \
     boost \
     kconfig \
+    kconfig-native \
     kactivities \
 "
 
