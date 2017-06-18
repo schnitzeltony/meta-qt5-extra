@@ -21,22 +21,22 @@ index 549607f..8d35e9d 100644
 @@ -1,17 +1,17 @@
  controller: main.o Controller.o ControllerUI.o
 -	gcc -o controller *.o `fltk-config --ldflags` -lasound -lpthread -lm -lstdc++
-+	$(CC) -o controller *.o `fltk-config --ldflags` -lasound -lpthread -lm -lstdc++ $(LDFLAGS)
++	$(CC) -o controller *.o -lfltk -lm -lX11 -lXext -lpthread -lXft -lXrender -lfontconfig -ldl -lasound -lpthread -lm -lstdc++ $(LDFLAGS)
  
  ControllerUI.cxx ControllerUI.h: ControllerUI.fl
  	fluid -c ControllerUI.fl
  
  ControllerUI.o: ControllerUI.cxx ControllerUI.h
 -	gcc `fltk-config --cflags` -c ControllerUI.cxx -o ControllerUI.o
-+	$(CC) $(CFLAGS) `fltk-config --cflags` -c $< -o $@
++	$(CC) $(CFLAGS) -c $< -o $@
  
  Controller.o: Controller.C Controller.h
 -	gcc `fltk-config --cflags` -c Controller.C -o Controller.o
-+	$(CC) $(CFLAGS) `fltk-config --cflags` -c $< -o $@
++	$(CC) $(CFLAGS) -c $< -o $@
  
  main.o: main.C Controller.h ControllerUI.h
 -	gcc `fltk-config --cflags` -c main.C -o main.o
-+	$(CC) $(CFLAGS) `fltk-config --cflags` -c $< -o $@
++	$(CC) $(CFLAGS) -c $< -o $@
  
  clean:
  	rm -f *.o controller ControllerUI.cxx ControllerUI.h 
@@ -47,7 +47,7 @@ index fe610d4..e60ce91 100644
 @@ -1,17 +1,17 @@
  spliter: main.o Spliter.o SpliterUI.o
 -	gcc -o spliter *.o `fltk-config --ldflags` -lasound -lstdc++
-+	$(CC) -o spliter *.o `fltk-config --ldflags` -lasound -lstdc++ $(LDFLAGS)
++	$(CC) -o spliter *.o -lfltk -lm -lX11 -lXext -lpthread -lXft -lXrender -lfontconfig -ldl -lasound -lstdc++ $(LDFLAGS)
  
 -SplitterUI.cxx SpliterUI.h: SpliterUI.fl
 +SpliterUI.cxx SpliterUI.h: SpliterUI.fl
@@ -56,15 +56,15 @@ index fe610d4..e60ce91 100644
 -SpliterUI.o: SplitterUI.cxx SpliterUI.h
 -	gcc -g `fltk-config --cflags` -c SpliterUI.cxx -o SpliterUI.o
 +SpliterUI.o: SpliterUI.cxx SpliterUI.h
-+	$(CC) $(CFLAGS) `fltk-config --cflags` -c $< -o $@
++	$(CC) $(CFLAGS) -c $< -o $@
  
  Spliter.o: Spliter.C Spliter.h
 -	gcc -g `fltk-config --cflags` -c Spliter.C -o Spliter.o
-+	$(CC) $(CFLAGS) `fltk-config --cflags` -c $< -o $@
++	$(CC) $(CFLAGS) -c $< -o $@
  
  main.o: main.C Spliter.h SpliterUI.h
 -	gcc -g `fltk-config --cflags` -c main.C -o main.o
-+	$(CC) $(CFLAGS) `fltk-config --cflags` -c $< -o $@
++	$(CC) $(CFLAGS) -c $< -o $@
  
  clean:
  	rm -f *.o spliter SpliterUI.cxx SpliterUI.h 
