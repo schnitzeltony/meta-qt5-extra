@@ -34,8 +34,8 @@ FILES_${PN}-dbg += " \
 "
 
 # cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "LiriSettings, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "LiriSettings, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "LiriSettings, -S${libdir}/lib, -s${OE_QMAKE_PATH_HOST_LIBS}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "LiriSettings, -S${includedir}, -s${CMAKE_QT5_EX_PATH_HOST_HEADERS}"
 
 RREPLACES_${PN} = "hawaii-system-preferences"
 RPROVIDES_${PN} = "hawaii-system-preferences"
