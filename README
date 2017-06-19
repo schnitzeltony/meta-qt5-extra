@@ -4,7 +4,7 @@ This layer depends on:
 
 URI: git://git.openembedded.org/openembedded-core
 branch: master
-revision: morty (recipe specific sysroot breaks most recipes build with cmake)
+revision: HEAD
 
 URI: git://github.com/meta-qt5/meta-qt5.git
 branch: master
