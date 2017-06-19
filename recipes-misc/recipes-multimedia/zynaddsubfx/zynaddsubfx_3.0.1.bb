@@ -22,21 +22,25 @@ DEPENDS += " \
     libxpm \
 "
 
+CXXFLAGS += "-ffast-math"
+
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \
     file://0001-No-target-specific-asm.patch \
     file://0002-Controller-Spliter-align-Makefiles-for-cross-compili.patch \
     file://0003-Nio.cpp-Do-not-use-ps-aux-to-find-jack-busybox-s-ps-.patch \
     file://0004-Keep-our-build-flags.patch \
+    file://0005-Set-UI-optimization-to-O1-explicitly.patch \
 "
-SRC_URI[md5sum] = "7dc757512e5b6f3013bfb168ed01cfa3"
-SRC_URI[sha256sum] = "014b1d9ad1750c310369676b46a4555ba6bec512c38ccba17ceb89c78552949a"
+SRC_URI[md5sum] = "bca8fc104bf31103d603a3d2bcc10027"
+SRC_URI[sha256sum] = "a8017f382be5af9e46e6e8771fb7d7c1fd2e480cf099bbb0c29606b217dd32e2"
 
 do_configure_prepend() {
     # We cannot run lv2-ttl-generator in cross environment so keep commands in 
     # shell script. Builddir is deleted so keep our script in ${WORKDIR}
 
 	# manipulate CMakeLists.txt to keep commands in script
+    sed -i 's|../../lv2-ttl-generator|lv2-ttl-generator|g' `find ${S} -name CMakeLists.txt`
     sed -i 's|lv2-ttl-generator $<TARGET_FILE.*|echo \"&\" >> ${WORKDIR}/lv2-ttl-generator-data|g' `find ${S} -name CMakeLists.txt`
 }
 

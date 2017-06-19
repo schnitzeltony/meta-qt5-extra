@@ -1,0 +1,34 @@
+From ffc923d2edf0646cda38a816d8a03d38e5aa67ac Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 20 Jun 2017 00:27:31 +0200
+Subject: [PATCH] Set UI optimization to -O1 explicitly
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+at least on ARM we see segfaults for higher optimizations
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/UI/CMakeLists.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/UI/CMakeLists.txt b/src/UI/CMakeLists.txt
+index 98b3d14..73c3a43 100644
+--- a/src/UI/CMakeLists.txt
++++ b/src/UI/CMakeLists.txt
+@@ -52,6 +52,9 @@ elseif(NtkGui)
+     install(TARGETS zynaddsubfx-ext-gui RUNTIME DESTINATION bin)
+ endif()
+ 
++# At least for ARM fltk-GUI is segfaulting for -O2 -O3
++set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O1")
++
+ add_library(zynaddsubfx_gui STATIC
+ 	${UI_objs}
+ 	${zynaddsubfx_gui_FLTK_UI_SRCS}
+-- 
+2.9.4
+
