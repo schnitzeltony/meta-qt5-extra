@@ -15,6 +15,6 @@ PV = "0.11.2"
 
 RRECOMMENDS_${PN} = "gvfs gvfsd-trash eject"
 
-CMAKE_ALIGN_SYSROOT[1] = "fm-qt, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "fm-qt, -S${libdir}/glib, -S${STAGING_LIBDIR}/glib"
-CMAKE_ALIGN_SYSROOT[3] = "fm-qt, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "fm-qt, -S${libdir}/lib, -s${OE_QMAKE_PATH_HOST_LIBS}/lib"
+CMAKE_ALIGN_SYSROOT[2] = "fm-qt, -S${libdir}/glib, -s${OE_QMAKE_PATH_HOST_LIBS}/glib"
+CMAKE_ALIGN_SYSROOT[3] = "fm-qt, -S${includedir}, -s${CMAKE_QT5_EX_PATH_HOST_HEADERS}"
