@@ -14,5 +14,5 @@ S = "${WORKDIR}/git"
 FILES_${PN} += "${OE_QMAKE_PATH_QML}/QtAccountsService"
 FILES_${PN}-dbg += "${OE_QMAKE_PATH_QML}/QtAccountsService/.debug"
 
-CMAKE_ALIGN_SYSROOT[1] = "QtAccountsService, -S${includedir}, -S${STAGING_INCDIR}"
-CMAKE_ALIGN_SYSROOT[2] = "QtAccountsService, -S${libdir}/lib, -S${STAGING_LIBDIR}/lib"
+CMAKE_ALIGN_SYSROOT[1] = "QtAccountsService, -S${includedir}, -s${CMAKE_QT5_EX_PATH_HOST_HEADERS}"
+CMAKE_ALIGN_SYSROOT[2] = "QtAccountsService, -S${libdir}/lib, -s${OE_QMAKE_PATH_HOST_LIBS}/lib"
