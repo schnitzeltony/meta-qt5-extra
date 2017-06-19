@@ -34,7 +34,7 @@ SRC_URI += " \
     file://0002-Workaround-build-error-for-Qt5.8-properly-working-qd.patch \
 "
 
-CMAKE_ALIGN_SYSROOT[1] = "KF5Baloo, -S${libdir}, -S${STAGING_LIBDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "KF5Baloo, -S${libdir}, -s${OE_QMAKE_PATH_HOST_LIBS}"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
