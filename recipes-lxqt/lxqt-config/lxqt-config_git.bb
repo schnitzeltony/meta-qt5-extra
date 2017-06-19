@@ -8,8 +8,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qtsvg liblxqt libkscreen libxcursor"
 
-SRCREV = "529f2dea846512dd4e82167c32535f2c530aa3e1"
-PV = "0.11.1"
+SRCREV = "66a1b23c133f91a471cabd58ec844d040b7cccfc"
+PV = "0.11.1+git${SRCPV}"
 
 # there are no dev files / pack liblxqt-config-cursor.so correctly
 FILES_${PN} += " \
