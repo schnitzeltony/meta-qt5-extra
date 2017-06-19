@@ -13,4 +13,4 @@ FILES_${PN} += " \
     ${datadir}/qtermwidget5 \
 "
 
-CMAKE_ALIGN_SYSROOT[1] = "qtermwidget5, -S${includedir}, -S${STAGING_INCDIR}"
+CMAKE_ALIGN_SYSROOT[1] = "qtermwidget5, -S${includedir}, -s${CMAKE_QT5_EX_PATH_HOST_HEADERS}"
