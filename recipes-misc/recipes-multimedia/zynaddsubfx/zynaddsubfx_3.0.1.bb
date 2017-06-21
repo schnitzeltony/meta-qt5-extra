@@ -22,7 +22,7 @@ DEPENDS += " \
     libxpm \
 "
 
-CXXFLAGS += "-ffast-math"
+CXXFLAGS += "-ffast-math -DNDEBUG"
 
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \
