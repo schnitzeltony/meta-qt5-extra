@@ -16,6 +16,7 @@ DEPENDS += " \
     stk \
     libvorbis \
     libogg \
+    unzip-native \
 "
 
 SRC_URI = " \
