@@ -3,7 +3,7 @@ HOMEPAGE = "http://tytel.org/helm/"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-inherit autotools-brokensep qemu distro_features_check
+inherit autotools-brokensep qemu distro_features_check gtk-icon-cache
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
@@ -15,11 +15,13 @@ DEPENDS = " \
     alsa-lib \
     jack \
     freetype \
+    hicolor-icon-theme \
     qemu-native \
 "
 
 SRC_URI = " \
     git://github.com/mtytel/helm.git \
+    file://helm.desktop \
     file://0001-remove-msse2-compiler-switch.patch \
     file://0002-remove-all-absolute-paths.patch \
     file://0003-do-not-create-ttl-files-it-won-t-work-fo-cross.patch \
@@ -52,4 +54,25 @@ do_compile_append() {
     cp *.ttl ${S}/builds/linux/LV2/helm.lv2/
 }
 
-FILES_${PN} += "${libdir}/lv2"
+do_install_append() {
+    # install icons to freedesktop locations
+    install -d  ${D}${datadir}/icons/hicolor/16x16/apps
+    ln -s ../../../../${BPN}/icons/helm_icon_16_1x.png ${D}${datadir}/icons/hicolor/16x16/apps/${BPN}.png
+    install -d  ${D}${datadir}/icons/hicolor/32x32/apps
+    ln -s ../../../../${BPN}/icons/helm_icon_32_1x.png ${D}${datadir}/icons/hicolor/32x32/apps/${BPN}.png
+    install -d  ${D}${datadir}/icons/hicolor/64x64/apps
+    ln -s ../../../../${BPN}/icons/helm_icon_32_2x.png ${D}${datadir}/icons/hicolor/64x64/apps/${BPN}.png
+    install -d  ${D}${datadir}/icons/hicolor/128x128/apps
+    ln -s ../../../../${BPN}/icons/helm_icon_128_1x.png ${D}${datadir}/icons/hicolor/128x128/apps/${BPN}.png
+    install -d  ${D}${datadir}/icons/hicolor/256x256/apps
+    ln -s ../../../../${BPN}/icons/helm_icon_128_2x.png ${D}${datadir}/icons/hicolor/256x256/apps/${BPN}.png
+
+    # install .desktop
+    install -d  ${D}${datadir}/applications
+    install -m 0644 ${WORKDIR}/helm.desktop ${D}${datadir}/applications
+}
+
+FILES_${PN} += " \
+    ${datadir}/icons \
+    ${libdir}/lv2 \
+"
