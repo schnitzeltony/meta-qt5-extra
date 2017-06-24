@@ -23,7 +23,7 @@ DEPENDS += " \
     libarchive \
 "
 
-inherit waf distro_features_check gtk-icon-cache
+inherit waf distro_features_check gtk-icon-cache pkgconfig
 
 REQUIRED_DISTRO_FEATURE = "x11"
 
