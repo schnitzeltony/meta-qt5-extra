@@ -1,0 +1,34 @@
+From 8ca73d78d0e7ce388654b2033cfbb78e3ed5d1f1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 25 Jun 2017 18:54:01 +0200
+Subject: [PATCH] Premake4.make: keep more of our build defaults
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ build/gmake.unix/Premake4.make | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/build/gmake.unix/Premake4.make b/build/gmake.unix/Premake4.make
+index bbc159b..80fc136 100644
+--- a/build/gmake.unix/Premake4.make
++++ b/build/gmake.unix/Premake4.make
+@@ -26,9 +26,9 @@ ifeq ($(config),release)
+   DEFINES   += -DNDEBUG -DLUA_USE_POSIX -DLUA_USE_DLOPEN
+   INCLUDES  += -I../../src/host/lua-5.1.4/src
+   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
+-  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall -Os
++  CFLAGS    += $(CPPFLAGS) $(ARCH) -Wall
+   CXXFLAGS  += $(CFLAGS) 
+-  LDFLAGS   += -s -rdynamic
++  LDFLAGS   += 
+   LIBS      += -lm -ldl
+   RESFLAGS  += $(DEFINES) $(INCLUDES) 
+   LDDEPS    += 
+-- 
+2.9.4
+
