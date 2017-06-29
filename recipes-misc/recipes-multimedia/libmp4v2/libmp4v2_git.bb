@@ -9,7 +9,7 @@ SRC_URI = " \
     git://github.com/sergiomb2/${BPN}.git \
     file://0001-add-a-configure-option-to-disable-build-of-man-pages.patch \
 "
-SRCREV = "fc65e21b1fe12cb3d51a8bc8152efbebedabbd6f"
+SRCREV = "855e9674232808ff3be7191b697dfb56917db21f"
 S = "${WORKDIR}/git"
 PV = "2.1.0+git${SRCPV}"
 
