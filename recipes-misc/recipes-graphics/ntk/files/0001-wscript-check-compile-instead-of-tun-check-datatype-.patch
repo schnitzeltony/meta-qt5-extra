@@ -1,0 +1,81 @@
+From 281158892d69815f4f8c40467c9900d105fb7f9b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 30 Jun 2017 22:40:22 +0200
+Subject: [PATCH] wscript: check compile- instead of tun-check datatype sizes
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+When cross compiling run checks are a challenge if not impossible
+
+Upstream-Status: Submitted [1]
+
+[1] https://github.com/original-male/ntk/pull/9
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ wscript | 42 +++++++++++++++++++++---------------------
+ 1 file changed, 21 insertions(+), 21 deletions(-)
+
+diff --git a/wscript b/wscript
+index 2b4e27d..3188af9 100644
+--- a/wscript
++++ b/wscript
+@@ -72,6 +72,21 @@ def options(opt):
+     opt.add_option('--enable-test', action='store_true', default=False, dest='ENABLE_TEST',
+                    help='Build test programs')
+ 
++# inspired by: http://www.gnu.org/software/autoconf-archive/ax_compile_check_sizeof.html
++def check_ctype_size(conf, datatype, define_name):
++    for bytesize in [1, 2, 4, 8, 16]:
++        code="#include <sys/types.h>\nint main (int argc,char **argv) { switch (0) case 0: case (sizeof (%s) == %i):; }" % (datatype, bytesize)
++        try:
++            conf.check(
++               fragment=code,
++               execute = False,
++               msg='Checking for %s has size %i' % (datatype, bytesize),
++               mandatory=True)
++            conf.define(define_name, bytesize)
++            break
++        except:
++            pass
++
+ def configure(conf):
+     conf.load('compiler_c')
+     conf.load('compiler_cxx')
+@@ -170,27 +186,11 @@ def configure(conf):
+     
+ #    print conf.env
+ 
+-    conf.check( fragment='#include <stdio.h>\n int main ( int argc, char **argv ) { printf("%u", (unsigned)sizeof(short)); return 0; }',
+-                   execute=True,
+-                   define_ret=True,
+-                   quote=False,
+-                   define_name='SIZEOF_SHORT',
+-                 msg='Checking sizeof short',
+-                               mandatory=True);
+-
+-    conf.check( fragment='#include <stdio.h>\n int main ( int argc, char **argv ) { printf("%u", (unsigned)sizeof(int)); return 0; }',
+-                   execute=True,
+-                   quote=False,
+-                   define_ret=True,
+-                 msg='Checking sizeof int',
+-                   define_name='SIZEOF_INT', mandatory=True );
+-
+-    conf.check( fragment='#include <stdio.h>\n int main ( int argc, char **argv ) { printf("%u", (unsigned)sizeof(long)); return 0; }',
+-                   quote=False,
+-                   execute=True,
+-                   define_ret=True,
+-                 msg='Checking sizeof long',
+-                   define_name='SIZEOF_LONG', mandatory=True );
++    check_ctype_size(conf, 'short', 'SIZEOF_SHORT')
++
++    check_ctype_size(conf, 'int', 'SIZEOF_INT')
++
++    check_ctype_size(conf, 'long', 'SIZEOF_LONG')
+     
+     if int(conf.get_define('SIZEOF_SHORT')) == 2:
+         conf.define( 'U16', 'unsigned short', quote=False )
+-- 
+2.9.4
+
