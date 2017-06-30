@@ -20,6 +20,7 @@ DEPENDS += " \
     fltk fltk-native \
     mxml \
     libxpm \
+    ntk \
 "
 
 CXXFLAGS += "-ffast-math -DNDEBUG"
