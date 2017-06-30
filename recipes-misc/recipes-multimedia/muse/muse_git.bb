@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=328283dc167a7b37ffdc59f524a7fc4d"
 DEPENDS += " \
     qtbase \
     qttools qttools-native \
+    qtsvg \
     jack \
     liblo \
     dssi \
@@ -23,7 +24,7 @@ inherit cmake_qt5 pkgconfig gtk-icon-cache distro_features_check mime qt5-transl
 SRC_URI = " \
     git://github.com/muse-sequencer/muse.git \
 "
-SRCREV = "ee2773a62bb8bb4dc38383cb42a8d4b35b083902"
+SRCREV = "454ebcc7233bf6be29666125a15a9cc72e33c262"
 PV = "3.0.0pre2"
 S = "${WORKDIR}/git/muse3"
 
