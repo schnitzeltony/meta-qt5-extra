@@ -32,8 +32,8 @@ SRC_URI = " \
     file://0001-remove-all-build-flags-that-cause-trouble-for-cross-.patch \
     file://ardour5.desktop \
 "
-SRCREV = "0e4ddcf50679d136ab8fe2356d5a7921f91aa0cb"
-PV = "5.9"
+SRCREV = "9c629c0c76808cc3e8f05e43bc760f849566dce6"
+PV = "5.10"
 S = "${WORKDIR}/git"
 
 
