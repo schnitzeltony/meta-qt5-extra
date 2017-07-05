@@ -1,0 +1,53 @@
+From 3df61dbaa5a3a0ce0737317ffe74e358b8ece037 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 5 Jul 2017 17:41:57 +0200
+Subject: [PATCH] fix build with gcc7
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/scopes/audioscopes/spectrogram.cpp | 4 ++--
+ src/scopes/audioscopes/spectrogram.cpp | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/src/profiles/tree/profiletreemodel.cpp b/src/profiles/tree/profiletreemodel.cpp
+index 47a5807..c7178b5 100644
+--- a/src/profiles/tree/profiletreemodel.cpp
++++ b/src/profiles/tree/profiletreemodel.cpp
+@@ -27,6 +27,7 @@
+ #include <QVector>
+ #include <array>
+ #include <KLocalizedString>
++#include <functional>
+ 
+ 
+ class ProfileItem
+diff --git a/src/scopes/audioscopes/spectrogram.cpp b/src/scopes/audioscopes/spectrogram.cpp
+index 1d3a0a2..489efca 100644
+--- a/src/scopes/audioscopes/spectrogram.cpp
++++ b/src/scopes/audioscopes/spectrogram.cpp
+@@ -241,7 +241,7 @@ QImage Spectrogram::renderHUD(uint)
+                 x = leftDist + (m_innerScopeRect.width() - 1) * ((float)hz) / m_freqMax;
+ 
+                 // Hide text if it would overlap with the text drawn at the mouse position
+-                hideText = m_aTrackMouse->isChecked() && m_mouseWithinWidget && abs(x - (leftDist + mouseX + 20)) < (int) minDistX + 16
++                hideText = m_aTrackMouse->isChecked() && m_mouseWithinWidget && abs(x - ((int) leftDist + (int) mouseX + 20)) < (int) minDistX + 16
+                            && mouseX < m_innerScopeRect.width() && mouseX >= 0;
+ 
+                 if (x <= rightBorder) {
+@@ -268,7 +268,7 @@ QImage Spectrogram::renderHUD(uint)
+             }
+             // Draw the line at the very right (maximum frequency)
+             x = leftDist + m_innerScopeRect.width() - 1;
+-            hideText = m_aTrackMouse->isChecked() && m_mouseWithinWidget && abs(x - (leftDist + mouseX + 30)) < (int) minDistX
++            hideText = m_aTrackMouse->isChecked() && m_mouseWithinWidget && abs(x - ((int) leftDist + (int) mouseX + 30)) < (int) minDistX
+                        && mouseX < m_innerScopeRect.width() && mouseX >= 0;
+             davinci.drawLine(x, topDist, x, topDist + m_innerScopeRect.height() + 6);
+             if (!hideText) {
+-- 
+2.9.4
+

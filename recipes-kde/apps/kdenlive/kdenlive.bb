@@ -35,12 +35,14 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "921e5ebb0cda53c578160eedc9358835"
-SRC_URI[sha256sum] = "1b1c79d5d25f6bab52f8999572f5df5b5cbfd3297f6ca18e84af96c7bf4aed08"
+SRC_URI[md5sum] = "bb67f11eb940fd6d7b4cb19eb95deeb9"
+SRC_URI[sha256sum] = "29ce6a4b3b86e20b8eac5332a22067dc8fbde297d6bc144f722bcbb64856fccb"
 
 SRC_URI += " \
     file://0001-CMakeLists.txt-make-MLT_PREFIX-configurable.patch \
+    file://0002-fix-build-with-gcc7.patch \
 "
+
 EXTRA_OECMAKE += "-DMLT_PREFIX=${prefix}"
 
 FILES_${PN} += " \
