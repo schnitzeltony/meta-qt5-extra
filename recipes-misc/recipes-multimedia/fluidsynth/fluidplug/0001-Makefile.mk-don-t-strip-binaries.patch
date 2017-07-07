@@ -1,0 +1,31 @@
+From b87efbacb351a64f0e0195c625ffb8ab77065fe1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 7 Jul 2017 23:07:48 +0200
+Subject: [PATCH] Makefile.mk: don't strip binaries
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ Makefile.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.mk b/Makefile.mk
+index a4f7e66..57f07e0 100644
+--- a/Makefile.mk
++++ b/Makefile.mk
+@@ -67,7 +67,7 @@ endif
+ 
+ BUILD_C_FLAGS   = $(BASE_FLAGS) -std=gnu99 $(CFLAGS)
+ BUILD_CXX_FLAGS = $(BASE_FLAGS) -std=gnu++0x $(CXXFLAGS)
+-LINK_FLAGS      = $(LINK_OPTS) $(LDFLAGS)
++LINK_FLAGS      = $(LDFLAGS)
+ 
+ ifneq ($(MACOS),true)
+ # Not available on MacOS
+-- 
+2.9.4
+
