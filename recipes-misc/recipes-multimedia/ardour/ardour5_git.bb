@@ -21,6 +21,9 @@ DEPENDS += " \
     suil \
     lilv \
     libarchive \
+    libltc \
+    qm-dsp \
+    fluidsynth \
 "
 
 inherit waf distro_features_check gtk-icon-cache pkgconfig
@@ -47,6 +50,8 @@ EXTRA_OECONF = " \
     --optimize \
     --cxx11 \
     --no-phone-home \
+    --use-external-libs \
+    --qm-dsp-include=${STAGING_INCDIR}/qm-dsp \
     \
     --with-backends="jack,alsa" \
     --dist-target=${BUILD_DIST_TARGET} \
