@@ -20,6 +20,8 @@ RDEPENDS_${PN} = " \
     qtiohelper \
     \
     amsynth \
+    ardour5 \
+    aubio \
     calf \
     chromaprint \
     drumkv1 \
@@ -27,6 +29,7 @@ RDEPENDS_${PN} = " \
     dssi \
     dssi-vst \
     fluidsynth-dssi \
+    fluidplug \
     ftgl \
     ganv \
     helm \
