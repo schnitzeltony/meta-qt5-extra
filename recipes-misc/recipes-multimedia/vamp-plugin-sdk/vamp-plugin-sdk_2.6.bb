@@ -14,7 +14,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "200d6f5980d8d8877d296975a7e2890b"
 SRC_URI[sha256sum] = "d0d3578137ac0c1e63f31561081a8d61da526a81152bc1dc9383b629bc07f85f"
 
-do_comile() {
+do_compile() {
     oe_runmake sdk plugins host rdfgen
 }
 
