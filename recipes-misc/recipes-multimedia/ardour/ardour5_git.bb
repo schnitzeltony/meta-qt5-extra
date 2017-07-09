@@ -33,6 +33,7 @@ REQUIRED_DISTRO_FEATURE = "x11"
 SRC_URI = " \
     git://github.com/Ardour/ardour.git \
     file://0001-remove-all-build-flags-that-cause-trouble-for-cross-.patch \
+    file://0002-Use-ARM-NEON-intrinsics-if-available-for-mixing-func.patch \
     file://ardour5.desktop \
 "
 SRCREV = "9c629c0c76808cc3e8f05e43bc760f849566dce6"
