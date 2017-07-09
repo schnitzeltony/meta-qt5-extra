@@ -1,0 +1,31 @@
+From 75f84a92ed744af96da3fd8949e35edf1ddd9cc2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 28 Jun 2017 02:06:50 +0200
+Subject: [PATCH] do not build drumsynth LV2-plugin - lv2_ttl_generator blocks
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ ports/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ports/Makefile b/ports/Makefile
+index 441a66e..114ee5f 100644
+--- a/ports/Makefile
++++ b/ports/Makefile
+@@ -27,7 +27,7 @@ lv2: libs
+ 	$(MAKE) -C drowaudio-flanger/LV2
+ 	$(MAKE) -C drowaudio-reverb/LV2
+ #	$(MAKE) -C drowaudio-tremolo/LV2
+-	$(MAKE) -C drumsynth/LV2
++#	$(MAKE) -C drumsynth/LV2
+ 	$(MAKE) -C easySSP/LV2
+ #	$(MAKE) -C eqinox/LV2
+ # 	$(MAKE) -C juce-demo-host/LV2
+-- 
+2.9.4
+

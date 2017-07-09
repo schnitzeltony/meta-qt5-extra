@@ -1,0 +1,32 @@
+From a3248f97e6b354a1042f21ba289411ad53603d17 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 28 Jun 2017 01:51:21 +0200
+Subject: [PATCH] do not build drowaudio-tremolo LV2-plugin - lv2_ttl_generator
+ blocks
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ ports/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ports/Makefile b/ports/Makefile
+index 750f323..df34f8f 100644
+--- a/ports/Makefile
++++ b/ports/Makefile
+@@ -26,7 +26,7 @@ lv2: libs
+ 	$(MAKE) -C drowaudio-distortionshaper/LV2
+ 	$(MAKE) -C drowaudio-flanger/LV2
+ 	$(MAKE) -C drowaudio-reverb/LV2
+-	$(MAKE) -C drowaudio-tremolo/LV2
++#	$(MAKE) -C drowaudio-tremolo/LV2
+ 	$(MAKE) -C drumsynth/LV2
+ 	$(MAKE) -C easySSP/LV2
+ #	$(MAKE) -C eqinox/LV2
+-- 
+2.9.4
+

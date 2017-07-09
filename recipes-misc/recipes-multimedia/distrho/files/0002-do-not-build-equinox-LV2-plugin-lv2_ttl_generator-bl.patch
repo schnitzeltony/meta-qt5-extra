@@ -1,0 +1,32 @@
+From 4e0fa02741751d9416afa0afcedb28b9194d4c0c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 27 Jun 2017 23:22:16 +0200
+Subject: [PATCH] do not build equinox LV2-plugin - lv2_ttl_generator blocks
+ forever
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ ports/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ports/Makefile b/ports/Makefile
+index f81013c..750f323 100644
+--- a/ports/Makefile
++++ b/ports/Makefile
+@@ -29,7 +29,7 @@ lv2: libs
+ 	$(MAKE) -C drowaudio-tremolo/LV2
+ 	$(MAKE) -C drumsynth/LV2
+ 	$(MAKE) -C easySSP/LV2
+-	$(MAKE) -C eqinox/LV2
++#	$(MAKE) -C eqinox/LV2
+ # 	$(MAKE) -C juce-demo-host/LV2
+ 	$(MAKE) -C juce-demo-plugin/LV2
+ 	$(MAKE) -C klangfalter/LV2
+-- 
+2.9.4
+

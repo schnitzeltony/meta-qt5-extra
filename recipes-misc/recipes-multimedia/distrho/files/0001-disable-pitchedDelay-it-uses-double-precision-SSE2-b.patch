@@ -1,0 +1,61 @@
+From b1b48a24ed4eda34e4dc4d649a1ef030c37694ec Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 26 Jun 2017 23:12:22 +0200
+Subject: [PATCH] disable pitchedDelay - it uses double precision SSE2 by
+ default
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Our build system should setz proper flags.
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ ports/Makefile | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/ports/Makefile b/ports/Makefile
+index 5794d18..f81013c 100644
+--- a/ports/Makefile
++++ b/ports/Makefile
+@@ -37,7 +37,7 @@ lv2: libs
+ 	$(MAKE) -C LUFSMeter/LV2-Multi
+ 	$(MAKE) -C luftikus/LV2
+ 	$(MAKE) -C obxd/LV2
+-	$(MAKE) -C pitchedDelay/LV2
++#	$(MAKE) -C pitchedDelay/LV2
+ 	$(MAKE) -C stereosourceseparation/LV2
+ 	$(MAKE) -C tal-dub-3/LV2
+ 	$(MAKE) -C tal-filter/LV2
+@@ -73,7 +73,7 @@ vst: libs
+ 	$(MAKE) -C LUFSMeter/VST-Multi
+ 	$(MAKE) -C luftikus/VST
+ 	$(MAKE) -C obxd/VST
+-	$(MAKE) -C pitchedDelay/VST
++#	$(MAKE) -C pitchedDelay/VST
+ 	$(MAKE) -C stereosourceseparation/VST
+ 	$(MAKE) -C tal-dub-3/VST
+ 	$(MAKE) -C tal-filter/VST
+@@ -109,7 +109,7 @@ clean:
+ 	$(MAKE) clean -C LUFSMeter/LV2-Multi
+ 	$(MAKE) clean -C luftikus/LV2
+ 	$(MAKE) clean -C obxd/LV2
+-	$(MAKE) clean -C pitchedDelay/LV2
++#	$(MAKE) clean -C pitchedDelay/LV2
+ 	$(MAKE) clean -C stereosourceseparation/LV2
+ 	$(MAKE) clean -C tal-dub-3/LV2
+ 	$(MAKE) clean -C tal-filter/LV2
+@@ -141,7 +141,7 @@ clean:
+ 	$(MAKE) clean -C LUFSMeter/VST-Multi
+ 	$(MAKE) clean -C luftikus/VST
+ 	$(MAKE) clean -C obxd/VST
+-	$(MAKE) clean -C pitchedDelay/VST
++#	$(MAKE) clean -C pitchedDelay/VST
+ 	$(MAKE) clean -C stereosourceseparation/VST
+ 	$(MAKE) clean -C tal-dub-3/VST
+ 	$(MAKE) clean -C tal-filter/VST
+-- 
+2.9.4
+
