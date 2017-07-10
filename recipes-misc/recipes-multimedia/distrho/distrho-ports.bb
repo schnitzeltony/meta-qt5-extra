@@ -20,10 +20,9 @@ PV = "0.0.0+git${SRCPV}"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit qemu distro_features_check
+inherit qemu-ext distro_features_check
 
-DEPENDS = "\
-    qemu-native \
+DEPENDS += "\
     premake3-native \
     alsa-lib \
     libx11 \
@@ -44,21 +43,6 @@ do_configure_prepend() {
 do_configure() {
     NOOPTIMIZATIONS=1 ${S}/scripts/premake-update.sh linux
 }
-
-# slightly reworked qemu_run_binary: qemu.bbclass expects binary in sysroot but
-# our binary is not (yet) installed
-# ${@qemu_run_binary_local(d, '$D', '/usr/bin/test_app')} [test_app arguments]
-#
-def qemu_run_binary_local(data, rootfs_path, binary):
-    qemu_binary = qemu_target_binary(data)
-
-    libdir = rootfs_path + data.getVar("libdir", False)
-    base_libdir = rootfs_path + data.getVar("base_libdir", False)
-    qemu_options = data.getVar("QEMU_OPTIONS", True)
-
-    return "PSEUDO_UNLOAD=1 " + qemu_binary + " " + qemu_options + " -L " + rootfs_path\
-            + " -E LD_LIBRARY_PATH=" + libdir + ":" + base_libdir + " "\
-            + binary
 
 do_compile_append() {
     # build ttl-files must be done in quemu
