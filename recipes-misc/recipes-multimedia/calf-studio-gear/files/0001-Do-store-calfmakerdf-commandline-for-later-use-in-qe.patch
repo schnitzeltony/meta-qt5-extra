@@ -1,0 +1,55 @@
+From 8aa3fc79ca124de4933025ad8fededb7db80c60a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 11 Jul 2017 00:08:47 +0200
+Subject: [PATCH] Do store calfmakerdf-commandline for later use in qemu /
+ install calfmakerdf
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ gui/Makefile.am | 2 +-
+ src/Makefile.am | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/gui/Makefile.am b/gui/Makefile.am
+index 10dc5ff..24220e7 100644
+--- a/gui/Makefile.am
++++ b/gui/Makefile.am
+@@ -4,7 +4,7 @@ STYLES = $(wildcard $(srcdir)/styles/*)
+ EXTRA_DIST = $(wildcard $(srcdir)/styles) $(wildcard $(srcdir)/strips) $(wildcard $(srcdir)/gui)
+ 
+ install-data-hook:
+-	$(top_builddir)/src/calfmakerdf -m gui -p $(DESTDIR)$(pkgdatadir)
++	echo "-m gui -p $(DESTDIR)$(pkgdatadir)" >> %QEMUCOMMAND%
+ 	for f in ${STYLES}; do \
+ 		sn=`basename $${f}` ; \
+ 		sed 's#@guidatadir@#$(pkgdatadir)/styles/'$${sn}'#g' "$${f}"/gtk.rc.in >"$${f}"/gtk.rc ; \
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 794e668..298aece 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -30,7 +30,7 @@ endif
+ endif
+ 
+ AM_CXXFLAGS += $(GLIB_DEPS_CFLAGS)
+-noinst_PROGRAMS += calfmakerdf
++bin_PROGRAMS += calfmakerdf
+ calfmakerdf_SOURCES = makerdf.cpp
+ calfmakerdf_LDADD = calf.la
+ 
+@@ -82,7 +82,7 @@ if USE_LV2_GUI
+ 	install -c -m 755 $(top_builddir)/src/.libs/calflv2gui.so $(DESTDIR)$(lv2dir)/calflv2gui.so
+ endif
+ 	rm -f $(DESTDIR)$(lv2dir)/*.ttl
+-	$(top_builddir)/src/calfmakerdf -m ttl -p $(DESTDIR)$(lv2dir)/ -d $(DESTDIR)$(pkgdatadir)/
++	echo "-m ttl -p $(DESTDIR)$(lv2dir)/ -d $(DESTDIR)$(pkgdatadir)/" >> %QEMUCOMMAND%
+ if USE_SORDI
+ 	for f in $(DESTDIR)$(lv2dir)/*.ttl; do sout=`sordi -o turtle "$$f"`; if test $$? != 0; then echo "RDF file $$f is corrupted:"; echo $$sout"<<<"; fi; done
+ endif
+-- 
+2.9.4
+
