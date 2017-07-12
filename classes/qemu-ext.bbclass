@@ -13,10 +13,15 @@ def qemu_run_binary_local(data, rootfs_path, binary):
 
     libdir = rootfs_path + data.getVar("libdir", False)
     base_libdir = rootfs_path + data.getVar("base_libdir", False)
+    extra_libdir = data.getVar("QEMU_EXTRA_LIBDIR", False)
+    if extra_libdir:
+        extra_libdir = ":" + extra_libdir
+    else:
+        extra_libdir = ""
     qemu_options = data.getVar("QEMU_OPTIONS", True)
 
     return "PSEUDO_UNLOAD=1 " + qemu_binary + " " + qemu_options + " -L " + rootfs_path\
-            + " -E LD_LIBRARY_PATH=" + libdir + ":" + base_libdir + " "\
+            + " -E LD_LIBRARY_PATH=" + libdir + ":" + base_libdir + extra_libdir + " "\
             + binary
 
 
