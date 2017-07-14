@@ -1,0 +1,33 @@
+From d9b759014b89095601b9173269b391cc646f0c0c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 14 Jul 2017 23:41:39 +0200
+Subject: [PATCH] Use fluid instead of ntk-fluid
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+ntk(-fluid) cannot be build easily: ntk requires on x11 cairo
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ source/native-plugins/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/source/native-plugins/Makefile b/source/native-plugins/Makefile
+index 6392835..f28acd1 100644
+--- a/source/native-plugins/Makefile
++++ b/source/native-plugins/Makefile
+@@ -44,7 +44,7 @@ ZYN_LD_FLAGS  += $(shell pkg-config --libs x11)
+ endif
+ ifeq ($(HAVE_ZYN_UI_DEPS),true)
+ ifeq ($(HAVE_NTK),true)
+-FLUID          = ntk-fluid
++FLUID          = fluid
+ ZYN_CXX_FLAGS += -DNTK_GUI
+ ZYN_CXX_FLAGS += $(shell pkg-config --cflags ntk_images ntk)
+ ZYN_LD_FLAGS  += $(shell pkg-config --libs ntk_images ntk)
+-- 
+2.9.4
+

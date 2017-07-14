@@ -1,0 +1,31 @@
+From 88c61efce068b4cfe6d4c175bd9d1b85def23708 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sat, 15 Jul 2017 00:03:36 +0200
+Subject: [PATCH] do not try to cross-run carla-lv2-export
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ source/plugin/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/source/plugin/Makefile b/source/plugin/Makefile
+index 59b5c5d..3bcb368 100644
+--- a/source/plugin/Makefile
++++ b/source/plugin/Makefile
+@@ -206,7 +206,7 @@ $(BINDIR)/carla.lv2/manifest.ttl: $(OBJDIR)/carla-lv2-export.cpp.o $(LIBS)
+ ifeq ($(BUILDING_FOR_WINDOWS),true)
+ 	@cd $(BINDIR) && wine ./carla-lv2-export$(APP_EXT)
+ else
+-	@cd $(BINDIR) && ./carla-lv2-export$(APP_EXT)
++	@cd $(BINDIR)
+ endif
+ 	@cd $(BINDIR)/carla.lv2 && ln -sf ../*bridge-* ../carla-discovery-* .
+ 
+-- 
+2.9.4
+
