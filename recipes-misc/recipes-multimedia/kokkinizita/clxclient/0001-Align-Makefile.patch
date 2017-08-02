@@ -1,0 +1,52 @@
+From 99021226c538d2742f92c45fc7eeb2520791cd09 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 2 Aug 2017 21:08:36 +0200
+Subject: [PATCH] Align Makefile
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+* don't hardcode g++
+* make ldconfig work on installed directory only
+* use pkgconfig to find freetype2
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ Makefile | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 2b29cbf..6c721b6 100644
+--- a/Makefile
++++ b/Makefile
+@@ -31,8 +31,8 @@ MINVERS = 9.0
+ VERSION = $(MAJVERS).$(MINVERS)
+ 
+ 
+-CPPFLAGS += -Wall -I. -I/usr/X11R6/include `freetype-config --cflags` -fpic -DVERSION=\"$(VERSION)\" -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS -O2 
+-LDFLAGS += -L/usr/X11R6/$(LIBDIR) `freetype-config --libs`
++CPPFLAGS += -Wall -I. -I/usr/X11R6/include `pkg-config --cflags freetype2` -fpic -DVERSION=\"$(VERSION)\" -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS -O2 
++LDFLAGS += -L/usr/X11R6/$(LIBDIR) `pkg-config --libs freetype2`
+ LDLIBS +=
+ 
+ 
+@@ -46,14 +46,14 @@ CLXCLIENT_H = clxclient.h
+ 
+ 
+ $(CLXCLIENT_MIN): $(CLXCLIENT_O)
+-	g++ -shared $(LDFLAGS) -Wl,-soname,$(CLXCLIENT_MAJ) -o $(CLXCLIENT_MIN) $(CLXCLIENT_O) $(CLXCLIENT_DEP)
++	$(CXX) -shared $(LDFLAGS) -Wl,-soname,$(CLXCLIENT_MAJ) -o $(CLXCLIENT_MIN) $(CLXCLIENT_O) $(CLXCLIENT_DEP)
+ 
+ 
+ install:	$(CLXCLIENT_MIN)
+ 	install -d $(PREFIX)/$(LIBDIR)
+ 	install -m 644 $(CLXCLIENT_H) $(PREFIX)/include
+ 	install -m 755 $(CLXCLIENT_MIN) $(PREFIX)/$(LIBDIR)
+-	ldconfig
++	ldconfig -n $(DESTDIR)$(PREFIX)/$(LIBDIR)
+ 	ln -sf $(CLXCLIENT_MIN) $(PREFIX)/$(LIBDIR)/$(CLXCLIENT_SO)
+ 
+ 
+-- 
+2.9.4
+
