@@ -7,19 +7,18 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = " \
-    https://github.com/falkTX/Carla/archive/${PV}.tar.gz \
+    git://github.com/falkTX/Carla.git \
     file://0001-Use-fluid-instead-of-ntk-fluid.patch \
     file://0002-do-not-try-to-cross-run-carla-lv2-export.patch \
-    file://0003-native-plugins-don-t-kill-LDFLAGS-set-by-build-syste.patch \
+    file://0003-Don-t-disable-EXPERIMENTAL_PLUGINS.patch \
 "
-SRC_URI[md5sum] = "d84613ea9fbc42f46cd9831b2d263e87"
-SRC_URI[sha256sum] = "05160ba26a4cc8420b776da2c046aa04b1aa01b0c769059251e0e9ba41e0e325"
-
-S = "${WORKDIR}/Carla-${PV}"
+SRCREV = "4a1e17888fc9abb0a4ea4a83d8f7020a5eabda1c"
+S = "${WORKDIR}/git"
+PV = "1.9.7b+git${SRCPV}"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit qmake5_base autotools-brokensep qemu-ext distro_features_check
+inherit qmake5_base autotools-brokensep pkgconfig qemu-ext distro_features_check
 
 # Notes on fltk-native / ntk
 # Ntk is a fork of fltk using cairo. Ntk cannot be build native easily without
@@ -37,13 +36,20 @@ DEPENDS += " \
     fluidsynth \
     projectm \
     mxml \
+    clthreads \
+    clxclient \
+    zita-resampler \
+    zita-convolver \
 "
 
 EXTRA_OEMAKE += " \
     DEFAULT_QT=5 \
     PREFIX=${prefix} \
     NOOPT=true \
+    EXPERIMENTAL_PLUGINS=true \
 "
+
+LDFLAGS += "-lpng"
 
 do_compile_append() {
     cd ${S}/bin
