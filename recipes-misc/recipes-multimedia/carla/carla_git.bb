@@ -11,6 +11,7 @@ SRC_URI = " \
     file://0001-Use-fluid-instead-of-ntk-fluid.patch \
     file://0002-do-not-try-to-cross-run-carla-lv2-export.patch \
     file://0003-Don-t-disable-EXPERIMENTAL_PLUGINS.patch \
+    file://0004-do-not-autodetect-pyqt-it-won-t-work-in-oe.patch \
 "
 SRCREV = "4a1e17888fc9abb0a4ea4a83d8f7020a5eabda1c"
 S = "${WORKDIR}/git"
@@ -18,7 +19,7 @@ PV = "1.9.7b+git${SRCPV}"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit qmake5_base autotools-brokensep pkgconfig qemu-ext distro_features_check
+inherit qmake5_base autotools-brokensep pkgconfig qemu-ext distro_features_check mime gtk-icon-cache
 
 # Notes on fltk-native / ntk
 # Ntk is a fork of fltk using cairo. Ntk cannot be build native easily without
@@ -26,6 +27,7 @@ inherit qmake5_base autotools-brokensep pkgconfig qemu-ext distro_features_check
 
 DEPENDS += " \
     fltk-native \
+    python3-pyqt5-native \
     ntk \
     gtk+ \
     gtk+3 \
@@ -47,6 +49,9 @@ EXTRA_OEMAKE += " \
     PREFIX=${prefix} \
     NOOPT=true \
     EXPERIMENTAL_PLUGINS=true \
+    HAVE_PYQT=true \
+    HAVE_PYQT4=false \
+    HAVE_PYQT5=true \
 "
 
 LDFLAGS += "-lpng"
@@ -57,9 +62,13 @@ do_compile_append() {
 }
 
 FILES_${PN} += " \
+    ${datadir}/icons \
+    ${datadir}/mime \
     ${libdir}/python3 \
     ${libdir}/lv2 \
     ${libdir}/vst \
 "
 
 INSANE_SKIP_${PN} = "dev-so already-stripped"
+
+RDEPENDS_${PN} += "python3-pyqt5 bash"
