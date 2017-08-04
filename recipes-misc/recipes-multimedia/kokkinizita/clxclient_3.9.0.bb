@@ -8,6 +8,7 @@ inherit pkgconfig distro_features_check
 REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS = " \
+    ldconfig-native \
     clthreads \
     freetype \
     libxft \
