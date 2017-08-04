@@ -1,0 +1,209 @@
+From 5e2f557a9c20cf8a7bd4f777db2e4883741fc085 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 4 Aug 2017 13:13:24 +0200
+Subject: [PATCH 2/2] use single precision floats - it performs much better
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ mopo/src/arpeggiator.cpp           |  2 +-
+ mopo/src/common.h                  |  2 +-
+ mopo/src/state_variable_filter.cpp | 14 +++++++-------
+ mopo/src/utils.h                   | 24 ++++++++++++------------
+ src/common/synth_base.cpp          |  4 ++--
+ 5 files changed, 23 insertions(+), 23 deletions(-)
+
+diff --git a/mopo/src/arpeggiator.cpp b/mopo/src/arpeggiator.cpp
+index 1aa7786..7c7bddd 100644
+--- a/mopo/src/arpeggiator.cpp
++++ b/mopo/src/arpeggiator.cpp
+@@ -42,7 +42,7 @@ namespace mopo {
+     
+     mopo_float frequency = input(kFrequency)->at(0);
+     mopo_float min_gate = (MIN_VOICE_TIME + VOICE_KILL_TIME) * frequency;
+-    mopo_float gate = utils::interpolate(min_gate, 1.0, input(kGate)->at(0));
++    mopo_float gate = utils::interpolate(min_gate, (mopo_float)1.0, input(kGate)->at(0));
+ 
+     mopo_float delta_phase = frequency / sample_rate_;
+     mopo_float new_phase = phase_ + buffer_size_ * delta_phase;
+diff --git a/mopo/src/common.h b/mopo/src/common.h
+index 1ef4ce8..790b6c0 100644
+--- a/mopo/src/common.h
++++ b/mopo/src/common.h
+@@ -41,7 +41,7 @@
+ 
+ namespace mopo {
+ 
+-  typedef double mopo_float;
++  typedef float mopo_float;
+ 
+   const mopo_float PI = 3.1415926535897932384626433832795;
+   const int MAX_BUFFER_SIZE = 256;
+diff --git a/mopo/src/state_variable_filter.cpp b/mopo/src/state_variable_filter.cpp
+index 105deac..8c207b8 100644
+--- a/mopo/src/state_variable_filter.cpp
++++ b/mopo/src/state_variable_filter.cpp
+@@ -161,14 +161,14 @@ namespace mopo {
+     MOPO_ASSERT(cutoff > 0.0);
+ 
+     if (db24)
+-      resonance = sqrt(resonance);
++      resonance = sqrtf(resonance);
+ 
+     mopo_float g = tan(PI * utils::min(cutoff / sample_rate_, 0.5));
+     mopo_float k = 1.0 / resonance;
+ 
+-    mopo_float low_pass_amount = sqrt(utils::clamp(1.0 - blend, 0.0, 1.0));
+-    mopo_float band_pass_amount = sqrt(utils::clamp(1.0 - fabs(blend - 1.0), 0.0, 1.0));
+-    mopo_float high_pass_amount = sqrt(utils::clamp(blend - 1.0, 0.0, 1.0));
++    mopo_float low_pass_amount = sqrtf(utils::clamp(1.0 - blend, 0.0, 1.0));
++    mopo_float band_pass_amount = sqrtf(utils::clamp(1.0 - fabs(blend - 1.0), 0.0, 1.0));
++    mopo_float high_pass_amount = sqrtf(utils::clamp(blend - 1.0, 0.0, 1.0));
+ 
+     target_m0_ = 0.0;
+     target_m1_ = band_pass_amount;
+@@ -189,14 +189,14 @@ namespace mopo {
+     MOPO_ASSERT(gain >= 0.0);
+     MOPO_ASSERT(cutoff > 0.0);
+ 
+-    gain = sqrt(gain);
++    gain = sqrtf(gain);
+ 
+     mopo_float g = tan(PI * utils::min(cutoff / sample_rate_, 0.5));
+     mopo_float k = 1.0;
+ 
+     switch(choice) {
+       case kLowShelf: {
+-        g /= sqrt(gain);
++        g /= sqrtf(gain);
+         target_m0_ = 1.0;
+         target_m1_ = k * (gain - 1.0);
+         target_m2_ = gain * gain - 1.0;
+@@ -210,7 +210,7 @@ namespace mopo {
+         break;
+       }
+       case kHighShelf: {
+-        g *= sqrt(gain);
++        g *= sqrtf(gain);
+         target_m0_ = gain * gain;
+         target_m1_ = k * gain * (1.0 - gain);
+         target_m2_ = 1.0 - gain * gain;
+diff --git a/mopo/src/utils.h b/mopo/src/utils.h
+index 762d5a2..aba450f 100644
+--- a/mopo/src/utils.h
++++ b/mopo/src/utils.h
+@@ -92,15 +92,15 @@ namespace mopo {
+ 
+ #else
+     inline mopo_float min(mopo_float one, mopo_float two) {
+-      return fmin(one, two);
++      return fminf(one, two);
+     }
+ 
+     inline mopo_float max(mopo_float one, mopo_float two) {
+-      return fmax(one, two);
++      return fmaxf(one, two);
+     }
+ 
+     inline mopo_float clamp(mopo_float value, mopo_float min, mopo_float max) {
+-      return fmin(max, fmax(value, min));
++      return fminf(max, fmaxf(value, min));
+     }
+ #endif
+ 
+@@ -120,7 +120,7 @@ namespace mopo {
+       return fmaf(t, to - from, from);
+     }
+ 
+-    inline mopo_float mod(double value, double* integral) {
++    inline double mod(double value, double* integral) {
+       return modf(value, integral);
+     }
+ 
+@@ -182,35 +182,35 @@ namespace mopo {
+     }
+ 
+     inline mopo_float quickTanh(mopo_float value) {
+-      mopo_float abs_value = fabs(value);
++      mopo_float abs_value = fabsf(value);
+       mopo_float square = value * value;
+ 
+       mopo_float num = value * (2.45550750702956 + 2.45550750702956 * abs_value +
+                                 square * (0.893229853513558 + 0.821226666969744 * abs_value));
+       mopo_float den = 2.44506634652299 + (2.44506634652299 + square) *
+-                       fabs(value + 0.814642734961073 * value * abs_value);
++                       fabsf(value + 0.814642734961073 * value * abs_value);
+       return num / den;
+     }
+ 
+     // Version of quick sin where phase is is [-0.5, 0.5]
+     inline mopo_float quickerSin(mopo_float phase) {
+-      return phase * (8.0 - 16.0 * fabs(phase));
++      return phase * (8.0 - 16.0 * fabsf(phase));
+     }
+ 
+     inline mopo_float quickSin(mopo_float phase) {
+       mopo_float approx = quickerSin(phase);
+-      return approx * (0.776 + 0.224 * fabs(approx));
++      return approx * (0.776 + 0.224 * fabsf(approx));
+     }
+ 
+     // Version of quick sin where phase is is [0, 1]
+     inline mopo_float quickerSin1(mopo_float phase) {
+       phase = 0.5 - phase;
+-      return phase * (8.0 - 16.0 * fabs(phase));
++      return phase * (8.0 - 16.0 * fabsf(phase));
+     }
+ 
+     inline mopo_float quickSin1(mopo_float phase) {
+       mopo_float approx = quickerSin1(phase);
+-      return approx * (0.776 + 0.224 * fabs(approx));
++      return approx * (0.776 + 0.224 * fabsf(approx));
+     }
+ 
+     inline bool isSilent(const mopo_float* buffer, int length) {
+@@ -227,13 +227,13 @@ namespace mopo {
+       for (int i = 0; i < num; ++i)
+         square_total += buffer[i] * buffer[i];
+ 
+-      return sqrt(square_total / num);
++      return sqrtf(square_total / num);
+     }
+ 
+     inline mopo_float peak(const mopo_float* buffer, int num, int skip) {
+       mopo_float peak = 0.0;
+       for (int i = 0; i < num; i += skip)
+-        peak = fmax(peak, fabs(buffer[i]));
++        peak = fmaxf(peak, fabsf(buffer[i]));
+ 
+       return peak;
+     }
+diff --git a/src/common/synth_base.cpp b/src/common/synth_base.cpp
+index f24eb01..95b476a 100644
+--- a/src/common/synth_base.cpp
++++ b/src/common/synth_base.cpp
+@@ -21,7 +21,7 @@
+ #include "synth_gui_interface.h"
+ #include "utils.h"
+ 
+-#define OUTPUT_WINDOW_MIN_NOTE 16.0
++#define OUTPUT_WINDOW_MIN_NOTE ((mopo::mopo_float)16.0)
+ 
+ SynthBase::SynthBase() {
+   controls_ = engine_.getControls();
+@@ -298,7 +298,7 @@ void SynthBase::updateMemoryOutput(int samples, const mopo::mopo_float* left,
+     while (memory_reset_period_ < window_length)
+       memory_reset_period_ += memory_reset_period_;
+ 
+-    memory_reset_period_ = std::min(memory_reset_period_, 2.0 * window_length);
++    memory_reset_period_ = std::min(memory_reset_period_, ((mopo::mopo_float)2.0) * window_length);
+     memory_index_ = 0;
+     mopo::utils::copyBufferf(output_memory_, output_memory_write_, 2 * mopo::MEMORY_RESOLUTION);
+   }
+-- 
+2.9.4
+

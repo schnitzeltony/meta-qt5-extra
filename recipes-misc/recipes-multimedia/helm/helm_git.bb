@@ -25,6 +25,8 @@ SRC_URI += " \
     file://0001-Makefile-remove-machine-detection-it-won-t-work-for-.patch \
     file://0002-do-not-create-ttl-files-it-won-t-work-fo-cross.patch \
     file://0003-use-standard-vst-path.patch \
+    file://0004-set-VECTORIZE_LOOP-for-gcc.patch \
+    file://0005-use-single-precision-floats-it-performs-much-better.patch \
 "
 SRCREV = "927d2ed27f71a735c3ff2a1226ce3129d1544e7e"
 PV = "0.9.0"

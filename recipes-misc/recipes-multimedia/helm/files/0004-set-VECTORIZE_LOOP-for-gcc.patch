@@ -1,0 +1,29 @@
+From fd718ad28ae3bbf85a5159cef5c0cec1824bbc97 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 4 Aug 2017 16:05:29 +0200
+Subject: [PATCH 1/2] set VECTORIZE_LOOP for gcc
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ mopo/src/common.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/mopo/src/common.h b/mopo/src/common.h
+index 9af1f5b..1ef4ce8 100644
+--- a/mopo/src/common.h
++++ b/mopo/src/common.h
+@@ -33,6 +33,8 @@
+ #define VECTORIZE_LOOP _Pragma("clang loop vectorize(enable) interleave(enable)")
+ #elif _MSC_VER
+ #define VECTORIZE_LOOP __pragma(loop(hint_parallel(8)))
++#elif __GNUC__
++#define VECTORIZE_LOOP _Pragma("GCC ivdep")
+ #else
+ #define VECTORIZE_LOOP
+ #endif
+-- 
+2.9.4
+
