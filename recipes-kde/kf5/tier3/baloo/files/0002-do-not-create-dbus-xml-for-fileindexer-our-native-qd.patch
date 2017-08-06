@@ -1,0 +1,35 @@
+From 58e317df45cfabe199d492ee8fd648ac21c3dd37 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 6 Aug 2017 13:26:55 +0200
+Subject: [PATCH] do not create dbus xml for fileindexer - our native
+ qdbuscpp2xml is broken
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/dbus/CMakeLists.txt | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/src/dbus/CMakeLists.txt b/src/dbus/CMakeLists.txt
+index 9381bfc..1863efb 100644
+--- a/src/dbus/CMakeLists.txt
++++ b/src/dbus/CMakeLists.txt
+@@ -25,11 +25,6 @@ qt5_generate_dbus_interface(
+ #
+ set(contentindexer_xml org.kde.baloo.fileindexer.xml)
+ 
+-qt5_generate_dbus_interface(
+-    ${CMAKE_SOURCE_DIR}/src/file/filecontentindexer.h
+-    ${contentindexer_xml}
+-    OPTIONS -a
+-)
+ 
+ set(
+     dbus_interface_xmls
+-- 
+2.9.4
+

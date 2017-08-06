@@ -31,8 +31,21 @@ SRC_URI[sha256sum] = "f121d9537ce785e3fa13888c09fac4f22b493a6ec6521ef880156df27e
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
-    file://0002-Workaround-build-error-for-Qt5.8-properly-working-qd.patch \
+    file://0002-do-not-create-dbus-xml-for-fileindexer-our-native-qd.patch \
+    file://org.kde.baloo.fileindexer.xml \
 "
+
+do_configure_append() {
+    # workaround broken native qdbuscpp2xml [1]. As long as this is necessary,
+    # org.kde.baloo.fileindexer.xml must be created for each new version of baloo by:
+    # 1. remove 0002-do-not-create-dbus-xml-for-fileindexer-our-native-qd.patch and do_configure_append
+    # 2. Build baloo - if it crashes continue with 3.
+    # 3. search log.do.compile for org.kde.baloo.fileindexer.xml and align command so that
+    #    the file is created by host qdbuscpp2xml(-qt5)
+    # 4. copy the file created to files
+    mkdir -p ${B}/src/dbus
+    cp -f ${WORKDIR}/org.kde.baloo.fileindexer.xml ${B}/src/dbus
+}
 
 CMAKE_ALIGN_SYSROOT[1] = "KF5Baloo, -S${libdir}, -s${OE_QMAKE_PATH_HOST_LIBS}"
 
