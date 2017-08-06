@@ -12,6 +12,7 @@ SRC_URI = " \
     file://0002-do-not-try-to-cross-run-carla-lv2-export.patch \
     file://0003-Don-t-disable-EXPERIMENTAL_PLUGINS.patch \
     file://0004-do-not-autodetect-pyqt-it-won-t-work-in-oe.patch \
+    file://0005-don-t-pin-version-when-finding-libpng.patch \
 "
 SRCREV = "4a1e17888fc9abb0a4ea4a83d8f7020a5eabda1c"
 S = "${WORKDIR}/git"

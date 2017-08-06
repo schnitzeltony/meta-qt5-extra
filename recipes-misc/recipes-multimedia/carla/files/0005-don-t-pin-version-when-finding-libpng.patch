@@ -1,0 +1,34 @@
+From 10d05c874dd22faa5f979ede6e597195b33b4f1d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 6 Aug 2017 19:53:27 +0200
+Subject: [PATCH] don't pin version when finding libpng
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ source/native-plugins/Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/source/native-plugins/Makefile b/source/native-plugins/Makefile
+index c31b865..206735f 100644
+--- a/source/native-plugins/Makefile
++++ b/source/native-plugins/Makefile
+@@ -20,9 +20,9 @@ ifeq ($(EXPERIMENTAL_PLUGINS),true)
+ ZITA_DSP_CXX_FLAGS  = $(BUILD_CXX_FLAGS) -Wno-unused-parameter
+ ZITA_DSP_CXX_FLAGS += $(shell pkg-config --cflags fftw3f)
+ ZITA_UI_CXX_FLAGS   = $(BUILD_CXX_FLAGS) -Wno-ignored-qualifiers -Wno-unused-parameter -Wno-unused-result
+-ZITA_UI_CXX_FLAGS  += $(shell pkg-config --cflags cairo libpng12 freetype2 x11 xft zlib)
++ZITA_UI_CXX_FLAGS  += $(shell pkg-config --cflags cairo libpng freetype2 x11 xft zlib)
+ ZITA_UI_LINK_FLAGS  = $(LINK_FLAGS) -lclxclient -lclthreads
+-ZITA_UI_LINK_FLAGS += $(shell pkg-config --libs cairo libpng12 freetype2 x11 xft zlib)
++ZITA_UI_LINK_FLAGS += $(shell pkg-config --libs cairo libpng freetype2 x11 xft zlib)
+ ZITA_UI_LINK_FLAGS += -ldl -lpthread -lrt
+ endif # EXPERIMENTAL_PLUGINS
+ 
+-- 
+2.9.4
+
