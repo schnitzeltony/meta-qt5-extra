@@ -28,6 +28,8 @@ inherit qmake5_base autotools-brokensep pkgconfig qemu-ext distro_features_check
 DEPENDS += " \
     fltk-native \
     python3-pyqt5-native \
+    freetype \
+    libpng \
     ntk \
     gtk+ \
     gtk+3 \
