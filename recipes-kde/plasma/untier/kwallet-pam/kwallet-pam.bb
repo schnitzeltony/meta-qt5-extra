@@ -14,8 +14,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "42e73612aed54725d7de7219403db215"
-SRC_URI[sha256sum] = "361b2b53c8e1cf00b57ef17f9b15e6db9b3161e935f43abedec7775ff8ba9059"
+SRC_URI[md5sum] = "11a6c8e3bb9484328fac8f052cd87045"
+SRC_URI[sha256sum] = "0227751c8f68970e184c2e723796bf11966ae045b904e7a6b07d1e4b9e7729ea"
 SRC_URI += " \
     file://0001-use-pkgconfig-to-find-libgcrypt.patch \
 "

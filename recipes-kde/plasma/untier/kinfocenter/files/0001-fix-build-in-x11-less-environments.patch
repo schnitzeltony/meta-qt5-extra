@@ -14,16 +14,16 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  3 files changed, 16 insertions(+), 5 deletions(-)
 
 diff --git a/Modules/info/CMakeLists.txt b/Modules/info/CMakeLists.txt
-index b252022..141ecb7 100644
+index 4dae851..a528dbd 100644
 --- a/Modules/info/CMakeLists.txt
 +++ b/Modules/info/CMakeLists.txt
 @@ -22,8 +22,10 @@ target_link_libraries(kcm_info
+     KF5::CoreAddons
      KF5::KCMUtils
      KF5::I18n
-     KF5::IconThemes
--    KF5::KDELibs4Support
+-    KF5::IconThemes
 -    ${X11_X11_LIB})
-+    KF5::KDELibs4Support)
++    KF5::IconThemes)
 +if(HAVE_X11)
 +target_link_libraries(kcm_info ${X11_X11_LIB})
 +endif()

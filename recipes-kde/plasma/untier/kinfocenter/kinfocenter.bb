@@ -23,8 +23,6 @@ DEPENDS += " \
     ki18n \
     kiconthemes \
     kcmutils \
-    kdelibs4support \
-    kdelibs4support-native \
     kdesignerplugin-native \
     kpackage-native \
     sonnet-native \
@@ -41,8 +39,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "0f10760bdefc660f6048907e6852fe69"
-SRC_URI[sha256sum] = "4f6f37b29e9f29850389fec2708dd7733051095e0ff9b842327d73bc151e7149"
+SRC_URI[md5sum] = "a5f4e407252cf8dcee2e42394e39bade"
+SRC_URI[sha256sum] = "f9a327cc68fb24289cef0ec860f18047cde55ee8a477733c186bfecfcd270ae4"
 SRC_URI += "file://0001-fix-build-in-x11-less-environments.patch"
 
 FILES_${PN} += " \
