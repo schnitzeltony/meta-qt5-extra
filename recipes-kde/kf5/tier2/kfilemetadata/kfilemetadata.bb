@@ -14,6 +14,7 @@ SRC_URI[sha256sum] = "750c1f408bad265ee10bfcd60eab88988d8bb6b3b38fd59ebad1899c68
 
 # TODO: optionals PACKAGECONFIG (poppler-qt5 / exiv2 / ffmpeg / epub)
 DEPENDS += " \
+    qtmultimedia \
     lmdb \
     ki18n \
     karchive \
