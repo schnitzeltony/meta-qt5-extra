@@ -19,8 +19,8 @@ DEPENDS += "qtdeclarative \
             threadweaver"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "7c6f7f251f56b74619cf7cb2cfea857d"
-SRC_URI[sha256sum] = "259acfcf3b6140720bc00550ca0a72e2bcda81b875ed5ddf4fe14c04ce3da258"
+SRC_URI[md5sum] = "06dc735cc1fd86a050307b14f68a2143"
+SRC_URI[sha256sum] = "1856e17a2fd8d6ad94f463fe2cb44d7377439650dd47f88444e924d650e32165"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

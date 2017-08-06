@@ -14,19 +14,19 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e7c284c..aaa0c76 100644
+index 0a1efe2..385fdc8 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -47,9 +47,6 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII)
- remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
+@@ -59,9 +59,6 @@ endif()
+ option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
+ add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
  
- add_definitions(-DTRANSLATION_DOMAIN=\"ki18n5\")
 -if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
 -    ki18n_install(po)
 -endif()
  add_subdirectory(src)
- add_subdirectory(autotests)
- 
+ if (BUILD_TESTING)
+     add_subdirectory(autotests)
 -- 
-1.9.3
+2.9.4
 

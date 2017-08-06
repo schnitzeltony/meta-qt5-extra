@@ -10,8 +10,8 @@ DEPENDS += "${BPN}-native kconfig kcoreaddons kcrash kdbusaddons kdoctools kinit
             kconfig-native kcoreaddons-native kdoctools-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "e2ac1c22569e8f09e7716c92119a6f96"
-SRC_URI[sha256sum] = "f8fb127da4cbe1c72f7ddf118e54298d5aa8199e2130e38df30f98c7d6e1c463"
+SRC_URI[md5sum] = "7e7bf7ec6077d89157a8af6cfaf129d2"
+SRC_URI[sha256sum] = "44336777a02273a62c14b4c47dcdf71f3ab2627b46f72b2991eb10d8f3cb8478"
 SRC_URI += "file://0001-hardcode-path-to-kconf_update.patch"
 
 # kded's kded5 is not required for build -> point to native dummy to make cmake happy

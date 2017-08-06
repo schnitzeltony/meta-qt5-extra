@@ -10,5 +10,6 @@ DEPENDS += "qtsvg ki18n kconfig kconfigwidgets kwidgetsaddons kitemviews gettext
             kcoreaddons-native kauth-native kconfig-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "6fc0cd71f1c331aae78b0c03114958dd"
-SRC_URI[sha256sum] = "312a3d76ba42d2b8f4e959f42e7dc1f33363529fb2279b76820d316cb2407441"
+SRC_URI[md5sum] = "2ed7f444fee9475a9c10f55df000828b"
+SRC_URI[sha256sum] = "54c833a09f1b9d117ede26b9ec5d069b84b7304ace6a173c7fd5470d849d2d29"
+

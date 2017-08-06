@@ -17,8 +17,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "b7da8abba8b5e9c9e359d40e73ba3c6f"
-SRC_URI[sha256sum] = "73d57549e1f97672053fad9ee80db3909100e4f9f1b33ba40b7ae20bce88889f"
+SRC_URI[md5sum] = "79e3d7c3b4674d1979b4d508d6909bc1"
+SRC_URI[sha256sum] = "49bf01a91f227d7daa1b41f1e792054a814de4f1783c4a44a316123fbb938580"
 
 # kjsembed's kjscmd5 is not required for build -> point to native dummy to make cmake happy
 CMAKE_ALIGN_SYSROOT[1] = "KF5JsEmbed, -s${_IMPORT_PREFIX}/bin/kjscmd5, -s${KDE_PATH_EXTERNAL_HOST_BINS}/kjscmd5"

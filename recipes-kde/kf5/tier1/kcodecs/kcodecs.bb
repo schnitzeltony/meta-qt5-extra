@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5
 
+DEPENDS += "gperf-native"
+
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "35a5fa5606b22eda5a885dc479e48e53"
-SRC_URI[sha256sum] = "50ab884a0ec9ee535ea5354323645858fe9969f93af3e1503478024731d1a14c"
+SRC_URI[md5sum] = "71e596b9d9a23fe23db586394e029ad9"
+SRC_URI[sha256sum] = "6cff3e88f9cd623509caad8cc4e20993189fdc5071f9b5c05fbcf58850dabe6c"

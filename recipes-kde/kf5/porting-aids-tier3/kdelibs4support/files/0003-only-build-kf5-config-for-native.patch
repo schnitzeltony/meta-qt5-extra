@@ -18,12 +18,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  5 files changed, 4 insertions(+), 243 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 7e6b3b9..3e60563 100644
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e13c0b2..eba84f7 100644
+index 8dd22f3..5b659ab 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -20,29 +20,11 @@ include(GenerateExportHeader)
+@@ -20,30 +20,11 @@ include(GenerateExportHeader)
  include(CMakeFindFrameworks)
  
  set(REQUIRED_QT_VERSION 5.6.0)
@@ -32,11 +30,13 @@ index e13c0b2..eba84f7 100644
  
 -find_package(KF5Completion ${KF5_DEP_VERSION} REQUIRED)
  find_package(KF5Config ${KF5_DEP_VERSION} REQUIRED)
++ find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5ConfigWidgets ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5Crash ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5DesignerPlugin ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5GlobalAccel ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
+-find_package(KF5Emoticons ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5GuiAddons ${KF5_DEP_VERSION} REQUIRED)
  find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5IconThemes ${KF5_DEP_VERSION} REQUIRED)
@@ -51,11 +51,10 @@ index e13c0b2..eba84f7 100644
 -find_package(KF5XmlGui ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5DBusAddons ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KDED ${KF5_DEP_VERSION} REQUIRED)
-+find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
  
  if(WIN32)
      find_package(KDEWin REQUIRED)
-@@ -54,7 +36,6 @@ endif()
+@@ -55,7 +35,6 @@ endif()
  set(HAVE_X11 ${X11_FOUND})
  if (HAVE_X11)
    add_feature_info("X11 Session Management (libSM)" X11_SM_FOUND "Support for session management in KApplication")
@@ -63,7 +62,7 @@ index e13c0b2..eba84f7 100644
  endif ()
  if (APPLE)
      cmake_find_frameworks(CoreFoundation)
-@@ -150,13 +131,8 @@ install(
+@@ -151,13 +130,8 @@ install(
  
  
  
