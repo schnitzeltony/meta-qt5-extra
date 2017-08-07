@@ -57,7 +57,7 @@ do_install() {
     install -d ${D}${libdir}
 	cp -r ${S}/bin/* ${D}${libdir}
     # don't install crash data
-    rm `find -name *.core`
+    rm `find ${D}${libdir} -name *.core` || true
 }
 
 FILES_${PN} += " \
