@@ -16,7 +16,6 @@ DEPENDS += " \
     stk \
     libvorbis \
     libogg \
-    unzip-native \
 "
 
 SRC_URI = " \
@@ -29,6 +28,9 @@ SRC_URI[md5sum] = "75ec14ab98bcf80f360debd80c553733"
 SRC_URI[sha256sum] = "2b0ba2887646208ae9953a336adfebe460133cd403e76f7fe795d3071827dfdd"
 
 S = "${WORKDIR}/trunk"
+
+# Have no idea why this is necessary
+do_unpack[depends] += "unzip-native:do_populate_sysroot"
 
 do_configure_prepend() {
     sed -i 's:= /usr/include:= ${STAGING_INCDIR}:g' ${S}/polyphone.pro
