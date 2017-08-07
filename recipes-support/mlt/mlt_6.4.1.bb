@@ -7,7 +7,16 @@ LIC_FILES_CHKSUM = " \
     file://GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
 "
 
-DEPENDS = " \
+SRC_URI = " \
+    https://github.com/mltframework/${BPN}/archive/v${PV}.tar.gz \
+    file://0001-mlt_property.h-Do-not-include-unneeded-xlocale.h.patch \
+"
+SRC_URI[md5sum] = "e9f0584739369c40b8f91f8cf50ea3ea"
+SRC_URI[sha256sum] = "87583af552695b2235f4ee3fc1e645d69e31702b109331d7e8785fb180cfa382"
+
+inherit autotools-brokensep pkgconfig
+
+DEPENDS += " \
     gtk+ \
     qtbase \
     qtsvg \
@@ -22,12 +31,6 @@ DEPENDS = " \
     jack \
     ladspa-sdk \
 "
-
-SRC_URI = "https://github.com/mltframework/${BPN}/archive/v${PV}.tar.gz"
-SRC_URI[md5sum] = "e9f0584739369c40b8f91f8cf50ea3ea"
-SRC_URI[sha256sum] = "87583af552695b2235f4ee3fc1e645d69e31702b109331d7e8785fb180cfa382"
-
-inherit autotools-brokensep pkgconfig
 
 CLEANBROKEN = "1"
 
