@@ -14,6 +14,7 @@ DEPENDS += " \
 
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/dssi/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \
+    file://0001-gui_widgy_editor-fix-sefaulf-on-ARM.patch \
     file://hexter.desktop \
     file://hexter.png \
 "
