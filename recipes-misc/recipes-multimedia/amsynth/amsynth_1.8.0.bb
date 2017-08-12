@@ -6,18 +6,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=67b604758dd265c185ce36fcf76a889d"
 inherit autotools pkgconfig gtk-icon-cache gettext
 
 DEPENDS += " \
-    gtk+ gtkmm \
+    gtk+ \
     intltool-native \
 "
 
 SRC_URI = " \
     https://github.com/${BPN}/${BPN}/releases/download/release-${PV}/${BPN}-${PV}.tar.bz2 \
-    file://0001-Preset-return-reference-to-mName.patch \
-    file://0002-dssi-report-presets-correctly.patch \
-    file://0003-dssi-fix-preset-selection.patch \
+    file://0001-Fix-installing-of-appdata.patch \
 "
-SRC_URI[md5sum] = "4856f582caed59fca79dfe3ca4597938"
-SRC_URI[sha256sum] = "08ec3fdc56b5eec89abed67d356458652ac5ebac2971aff4a147b9f8bcaa6169"
+SRC_URI[md5sum] = "54eaabc55d90ece5675b3cb3c2dc732d"
+SRC_URI[sha256sum] = "d05363b654752494c4b6a404d80d70d27857db5ec9ca398eebcf6c5b466d6668"
 
 PACKAGECONFIG ??= "alsa dssi jack sndfile lv2"
 
@@ -29,6 +27,7 @@ PACKAGECONFIG[sndfile] = "--with-sndfile,--without-sndfile,libsndfile1"
 PACKAGECONFIG[lv2] = "--with-lv2,--without-lv2,lv2"
 
 FILES_${PN} += " \
+    ${datadir}/appdata \
     ${libdir}/dssi \
     ${libdir}/lv2 \
     ${libdir}/vst \
