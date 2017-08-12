@@ -41,7 +41,7 @@ SRC_URI = " \
     file://0003-align-path-of-qt-build-tools-to-our-needs.patch \
     file://0004-add-vamp-float-math-build-option-to-force-vamp-calcu.patch \
 "
-SRCREV = "60b30896ac570bea52de7a0050433acd477d556d"
+SRCREV = "b6d29e53d3ae74cd040a5d5ecbe742f9c385575a"
 S = "${WORKDIR}/git"
 PV = "2.0.0+git${SRCPV}"
 

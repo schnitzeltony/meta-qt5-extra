@@ -10,14 +10,14 @@ Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- build/mixxx.py | 12 ------------
- 1 file changed, 12 deletions(-)
+ build/mixxx.py | 14 --------------
+ 1 file changed, 14 deletions(-)
 
 diff --git a/build/mixxx.py b/build/mixxx.py
-index 70c21a5..c79a09b 100644
+index aeed9e8..631bbfa 100644
 --- a/build/mixxx.py
 +++ b/build/mixxx.py
-@@ -45,18 +45,6 @@ class MixxxBuild(object):
+@@ -45,20 +45,6 @@ class MixxxBuild(object):
          if target not in ['windows', 'osx', 'linux', 'bsd']:
              raise Exception("invalid target platform")
  
@@ -31,11 +31,13 @@ index 70c21a5..c79a09b 100644
 -                                   'i486', 'i386', 'ppc', 'ppc64', 'powerpc',
 -                                   'powerpc64', 'powerpcspe', 's390x',
 -                                   'amd64', 'em64t', 'intel64', 'arm64',
--                                   'ppc64el', 'm68k', 'mips64', 'mips64el', 'mipsn32', 'mipsn32el']:
+-                                   'ppc64el', 'ppc64le', 'm68k', 'mips64',
+-                                   'mips64el', 'mipsn32', 'mipsn32el',
+-                                   'aarch64']:
 -            raise Exception("invalid machine type")
  
          if toolchain not in ['gnu', 'msvs']:
              raise Exception('invalid toolchain type')
 -- 
-2.5.5
+2.9.4
 
