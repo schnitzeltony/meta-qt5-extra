@@ -36,8 +36,8 @@ SRC_URI = " \
     file://0002-Use-ARM-NEON-intrinsics-if-available-for-mixing-func.patch \
     file://ardour5.desktop \
 "
-SRCREV = "9c629c0c76808cc3e8f05e43bc760f849566dce6"
-PV = "5.10"
+SRCREV = "bd40b9132cbac2d2b79ba0ef480bd41d837f8f71"
+PV = "5.11"
 S = "${WORKDIR}/git"
 
 
@@ -77,15 +77,17 @@ FILES_${PN} += " \
 "
 
 FILES_${PN}-dev += " \
+    ${libdir}/${BPN}/libardour.so \
+    ${libdir}/${BPN}/libardouralsautil.so \
+    ${libdir}/${BPN}/libaudiographer.so \
     ${libdir}/${BPN}/libcanvas.so \
     ${libdir}/${BPN}/libevoral.so \
     ${libdir}/${BPN}/libgtkmm2ext.so \
-    ${libdir}/${BPN}/libardour.so \
-    ${libdir}/${BPN}/libptformat.so \
-    ${libdir}/${BPN}/libardouralsautil.so \
     ${libdir}/${BPN}/libmidipp.so \
-    ${libdir}/${BPN}/libaudiographer.so \
     ${libdir}/${BPN}/libpbd.so \
+    ${libdir}/${BPN}/libptformat.so \
+    ${libdir}/${BPN}/libwaveview.so \
+    ${libdir}/${BPN}/libwidgets.so \
     ${libdir}/${BPN}/vamp/*.so \
 "
 
