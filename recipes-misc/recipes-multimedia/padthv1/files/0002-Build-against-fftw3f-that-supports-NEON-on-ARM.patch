@@ -1,0 +1,81 @@
+From 1392b3db4d56e9c26d8e3cf4137c9cc1dd33a3cc Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 22 Aug 2017 23:25:24 +0200
+Subject: [PATCH] Build against fftw3f - that supports NEON on ARM
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ configure.ac           | 2 +-
+ src/padthv1_sample.cpp | 8 ++++----
+ src/padthv1_sample.h   | 4 ++--
+ 3 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index e0204d8..e799555 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -361,7 +361,7 @@ AC_CHECK_LIB(Xext, main)
+ ac_cflags="-ffast-math $ac_cflags"
+ 
+ # Check for core FFTW3 library.
+-PKG_CHECK_MODULES([FFTW3], [fftw3], [ac_fftw3="yes"], [ac_fftw3="no"])
++PKG_CHECK_MODULES([FFTW3], [fftw3f], [ac_fftw3="yes"], [ac_fftw3="no"])
+ if test "x$ac_fftw3" = "xyes"; then
+    AC_DEFINE(CONFIG_FFTW3, 1, [Define if FFTW3 library is available.])
+    ac_cflags="$ac_cflags $FFTW3_CFLAGS"
+diff --git a/src/padthv1_sample.cpp b/src/padthv1_sample.cpp
+index 67597a5..9630840 100644
+--- a/src/padthv1_sample.cpp
++++ b/src/padthv1_sample.cpp
+@@ -111,8 +111,8 @@ padthv1_sample::padthv1_sample ( padthv1 *pSynth, int sid, uint32_t nsize )
+ 	m_freq_cos = new float [nsize2];
+ 
+ 	// data plan
+-	m_fftw_data = new double [m_nsize];
+-	m_fftw_plan = ::fftw_plan_r2r_1d(
++	m_fftw_data = new float [m_nsize];
++	m_fftw_plan = ::fftwf_plan_r2r_1d(
+ 		m_nsize, m_fftw_data, m_fftw_data, FFTW_HC2R, FFTW_ESTIMATE);
+ 
+ 	m_sample_sched = new padthv1_sample_sched(pSynth, this);
+@@ -128,7 +128,7 @@ padthv1_sample::~padthv1_sample (void)
+ 
+ 	delete m_sample_sched;
+ 
+-	::fftw_destroy_plan(m_fftw_plan);
++	::fftwf_destroy_plan(m_fftw_plan);
+ 
+ 	delete [] m_fftw_data;
+ 
+@@ -384,7 +384,7 @@ void padthv1_sample::reset_table (void)
+ 			m_fftw_data[m_nsize - i] = m_freq_sin[i];
+ 	}
+ 
+-	::fftw_execute(m_fftw_plan);
++	::fftwf_execute(m_fftw_plan);
+ 
+ 	for (i = 0; i < m_nsize; ++i)
+ 		m_table[i] = m_fftw_data[i];
+diff --git a/src/padthv1_sample.h b/src/padthv1_sample.h
+index cb5d8f3..1d3cabf 100644
+--- a/src/padthv1_sample.h
++++ b/src/padthv1_sample.h
+@@ -194,8 +194,8 @@ private:
+ 	float    *m_freq_amp;
+ 	float    *m_freq_sin;
+ 	float    *m_freq_cos;
+-	double   *m_fftw_data;
+-	fftw_plan m_fftw_plan;
++	float    *m_fftw_data;
++	fftwf_plan m_fftw_plan;
+ 
+ 	uint32_t  m_srand;
+ 
+-- 
+2.9.4
+
