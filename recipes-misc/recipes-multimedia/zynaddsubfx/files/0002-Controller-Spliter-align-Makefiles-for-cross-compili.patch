@@ -15,16 +15,18 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  2 files changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/ExternalPrograms/Controller/Makefile b/ExternalPrograms/Controller/Makefile
-index 549607f..8d35e9d 100644
+index ff747fa..d55921b 100644
 --- a/ExternalPrograms/Controller/Makefile
 +++ b/ExternalPrograms/Controller/Makefile
-@@ -1,17 +1,17 @@
+@@ -1,5 +1,5 @@
  controller: main.o Controller.o ControllerUI.o
 -	gcc -o controller *.o `fltk-config --ldflags` -lasound -lpthread -lm -lstdc++
 +	$(CC) -o controller *.o -lfltk -lm -lX11 -lXext -lpthread -lXft -lXrender -lfontconfig -ldl -lasound -lpthread -lm -lstdc++ $(LDFLAGS)
  
- ControllerUI.cxx ControllerUI.h: ControllerUI.fl
+ ControllerUI.h: ControllerUI.fl
  	fluid -c ControllerUI.fl
+@@ -8,13 +8,13 @@ ControllerUI.cxx: ControllerUI.h
+ 	echo ControllerUI.cxx
  
  ControllerUI.o: ControllerUI.cxx ControllerUI.h
 -	gcc `fltk-config --cflags` -c ControllerUI.cxx -o ControllerUI.o
@@ -41,21 +43,21 @@ index 549607f..8d35e9d 100644
  clean:
  	rm -f *.o controller ControllerUI.cxx ControllerUI.h 
 diff --git a/ExternalPrograms/Spliter/Makefile b/ExternalPrograms/Spliter/Makefile
-index fe610d4..e60ce91 100644
+index c98fc41..ba6cf99 100644
 --- a/ExternalPrograms/Spliter/Makefile
 +++ b/ExternalPrograms/Spliter/Makefile
-@@ -1,17 +1,17 @@
+@@ -1,5 +1,5 @@
  spliter: main.o Spliter.o SpliterUI.o
 -	gcc -o spliter *.o `fltk-config --ldflags` -lasound -lstdc++
 +	$(CC) -o spliter *.o -lfltk -lm -lX11 -lXext -lpthread -lXft -lXrender -lfontconfig -ldl -lasound -lstdc++ $(LDFLAGS)
  
--SplitterUI.cxx SpliterUI.h: SpliterUI.fl
-+SpliterUI.cxx SpliterUI.h: SpliterUI.fl
+ SpliterUI.h: SpliterUI.fl
  	fluid -c SpliterUI.fl
+@@ -8,13 +8,13 @@ SpliterUI.cxx: SpliterUI.h
+ 	echo SpliterUI.cxx
  
--SpliterUI.o: SplitterUI.cxx SpliterUI.h
+ SpliterUI.o: SpliterUI.cxx SpliterUI.h
 -	gcc -g `fltk-config --cflags` -c SpliterUI.cxx -o SpliterUI.o
-+SpliterUI.o: SpliterUI.cxx SpliterUI.h
 +	$(CC) $(CFLAGS) -c $< -o $@
  
  Spliter.o: Spliter.C Spliter.h
@@ -69,5 +71,5 @@ index fe610d4..e60ce91 100644
  clean:
  	rm -f *.o spliter SpliterUI.cxx SpliterUI.h 
 -- 
-2.9.3
+2.9.4
 

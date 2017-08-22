@@ -32,8 +32,8 @@ SRC_URI = " \
     file://0004-Keep-our-build-flags.patch \
     file://0005-Set-UI-optimization-to-O1-explicitly.patch \
 "
-SRC_URI[md5sum] = "bca8fc104bf31103d603a3d2bcc10027"
-SRC_URI[sha256sum] = "a8017f382be5af9e46e6e8771fb7d7c1fd2e480cf099bbb0c29606b217dd32e2"
+SRC_URI[md5sum] = "2884773e3ef8ed46b7517a7321d3e250"
+SRC_URI[sha256sum] = "95defd8250b79fbe7fb69be860df6df05d82263cabf83cf53b391486e910b926"
 
 do_configure_prepend() {
     # We cannot run lv2-ttl-generator in cross environment so keep commands in 
