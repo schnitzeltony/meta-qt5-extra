@@ -7,8 +7,8 @@ SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}2-${PV}.tar.xz \
     file://0001-do-not-perform-link-test-durin-cross-build.patch \
 "
-SRC_URI[md5sum] = "945ce769b2338c0fc7422f485282e91e"
-SRC_URI[sha256sum] = "0456adb0197562e00fa4fa7961c6acaeb9acd1b23a1e8a1536cac9a1b059ee02"
+SRC_URI[md5sum] = "d9856cd84d2e1de62adbbda9fada9570"
+SRC_URI[sha256sum] = "81589b6c1a59d0560472ff1054a7fe44fb64344428deacff387f1b09b775db39"
 
 inherit waf fontcache gettext
 
