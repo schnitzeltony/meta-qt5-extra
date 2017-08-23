@@ -7,8 +7,8 @@ SRC_URI = " \
     https://github.com/LMDB/lmdb/archive/LMDB_${PV}.tar.gz \
     file://0001-Patch-the-main-Makefile.patch \
 "
-SRC_URI[md5sum] = "0de89730b8f3f5711c2b3a4ba517b648"
-SRC_URI[sha256sum] = "49d7b40949f2ced9bc8b23ea6a89e75471a1c9126537a8b268c318a00b84322b"
+SRC_URI[md5sum] = "41a4f7b63212a00e53fabd8159008201"
+SRC_URI[sha256sum] = "1187b635a4cc415bb6972bba346121f81edd996e99b8f0816151d4090f90b559"
 
 inherit autotools-brokensep
 
@@ -25,4 +25,6 @@ do_install() {
     install -d ${D}${mandir}
     sed -i 's:\$(prefix)/man:${mandir}:' Makefile
     oe_runmake DESTDIR=${D} prefix=${prefix} libprefix=${libdir} manprefix=${mandir} install
+    chown -R root:root ${D}${bindir}
+    chown -R root:root ${D}${libdir}
 }
