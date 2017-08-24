@@ -16,8 +16,8 @@ SRC_URI = " \
     http://smbolton.com/${PN}/${PN}-${PV}.tar.bz2 \
     file://whysynth.desktop \
 "
-SRC_URI[md5sum] = "b521b63ade13b09062a64c46d2eabee2"
-SRC_URI[sha256sum] = "acc0a4c8df1c8f36619861dfa32e3d2850783d462e2afec50c2210b2e3dd8686"
+SRC_URI[md5sum] = "217bfeea23545c12cd0a1bc93de6ed0f"
+SRC_URI[sha256sum] = "a602d685a6bf48b01a82e1c077a50fe3d115805865ecfe49f531d8bd20b00b0b"
 
 CFLAGS += "-ftree-vectorize"
 
