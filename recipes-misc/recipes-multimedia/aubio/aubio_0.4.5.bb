@@ -14,8 +14,8 @@ DEPENDS += " \
 "
 
 SRC_URI = "https://aubio.org/pub/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "36870d6682716edc7977ca1d13c03bb4"
-SRC_URI[sha256sum] = "2acdb92623b9d4ba641c387760ffe3ec1e4c6ab498e64e5e2286c99e36ffbff8"
+SRC_URI[md5sum] = "6d9e361b2f4bb7ed97d1b649dca5e9d4"
+SRC_URI[sha256sum] = "70c2804e6f4fbf0ebc0fb9ac8cc9d465ef4a4d438311c074c9a7364e98827af6"
 
 EXTRA_OECONF = " \
     --notests \
