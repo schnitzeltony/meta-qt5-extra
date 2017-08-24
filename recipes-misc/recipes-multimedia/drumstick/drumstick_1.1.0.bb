@@ -12,10 +12,9 @@ DEPENDS += " \
 "
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \
-    file://0001-fix-build-with-gcc6.patch \
 "
-SRC_URI[md5sum] = "f8e6d9de7943853146c39e52242cb705"
-SRC_URI[sha256sum] = "34aab5812c35ba16f8e606632a56c38879f470e3e395d580412c73ef937f8750"
+SRC_URI[md5sum] = "8b72ff32bbd3887c53b282a7111e683f"
+SRC_URI[sha256sum] = "ae1d2c0d21b45d144e181b873ffbc2979a294fab31b8d71a5b0b8cad3276f38e"
 
 FILES_${PN} += " \
     ${datadir}/mime \
