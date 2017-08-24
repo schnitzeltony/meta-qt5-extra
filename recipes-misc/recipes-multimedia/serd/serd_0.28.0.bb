@@ -1,7 +1,7 @@
 SUMMARY = "C library for RDF syntax which supports accessing Turtle and NTriples"
 HOMEPAGE = "http://drobilla.net/software/serd"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6b8d060e6d32fbd53684f9dc0443b6a3"
+LIC_FILES_CHKSUM = "file://COPYING;md5=7aceb3a3edc99517b08f5cdd557e11fb"
 
 inherit waf
 
