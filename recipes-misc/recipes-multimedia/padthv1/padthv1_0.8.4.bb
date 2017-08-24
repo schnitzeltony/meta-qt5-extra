@@ -1,4 +1,4 @@
-SUMMARY = "Aan old-school polyphonic additive synthesizer"
+SUMMARY = "An old-school polyphonic additive synthesizer"
 HOMEPAGE = "http://padthv1.sourceforge.net/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
