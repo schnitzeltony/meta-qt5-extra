@@ -11,7 +11,7 @@ DEPENDS += " \
     liblo \
 "
 
-inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache
+inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache mime
 
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
