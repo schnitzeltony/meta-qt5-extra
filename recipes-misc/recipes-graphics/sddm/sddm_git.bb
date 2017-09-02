@@ -19,13 +19,12 @@ SRC_URI = " \
     git://github.com/sddm/${BPN}.git;protocol=git;branch=master \
     file://0001-fix-qml-install-dir.patch \
     file://0002-do-not-create-example-configutation-we-cannot-run-sd.patch \
-    file://0003-autologin-try-last-successful-session-if-no-autologi.patch \
     file://sddm.pam \
     file://sddm-autologin.pam \
     file://sddm.conf \
 "
-SRCREV = "43c900569081cdbf889c88c08c631888b56c4a8e"
-PV = "0.14.0"
+SRCREV = "e26c1e619d154376b01fda640e17b8ef7cd16f3a"
+PV = "0.15.0"
 
 S = "${WORKDIR}/git"
 
