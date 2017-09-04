@@ -1,0 +1,30 @@
+From a22285143063b99f9a6890e3b6c59366bc71f071 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 4 Sep 2017 19:50:44 +0200
+Subject: [PATCH] remove assertion which breaks build
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/libprojectM/MilkdropPresetFactory/Parser.cpp | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/libprojectM/MilkdropPresetFactory/Parser.cpp b/src/libprojectM/MilkdropPresetFactory/Parser.cpp
+index bf7c0f9..06943e1 100755
+--- a/src/libprojectM/MilkdropPresetFactory/Parser.cpp
++++ b/src/libprojectM/MilkdropPresetFactory/Parser.cpp
+@@ -1776,7 +1776,6 @@ int Parser::parse_wavecode(char * token, std::istream &  fs, MilkdropPreset * pr
+   Param * param;
+ 
+   assert(preset);
+-  assert(fs);
+   assert(token);
+ 
+   /* token should be in the form wavecode_N_var, such as wavecode_1_samples */
+-- 
+2.9.4
+

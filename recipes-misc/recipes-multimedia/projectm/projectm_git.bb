@@ -19,8 +19,9 @@ SRC_URI = " \
 	http://spiegelmc.com.s3.amazonaws.com/pub/projectm_presets.zip;name=presets \
     file://0001-Fix-sdl2-build.patch \
     file://0002-workaround-link-failures.patch \
+    file://0003-remove-assertion-which-breaks-build.patch \
 "
-SRCREV_projectm = "eafa3251c3af3a801950d588c3b531fbc7cba317"
+SRCREV_projectm = "04001c2b12de848962b74a3938d0ca877ca611be"
 SRC_URI[presets.md5sum] = "8976d72c05e3f4ddee996c6f2e98fc63"
 SRC_URI[presets.sha256sum] = "e323515f0ee5920ec45e4f9efdb55890f028dabb5ae9468fdc97c43d55040614"
 
