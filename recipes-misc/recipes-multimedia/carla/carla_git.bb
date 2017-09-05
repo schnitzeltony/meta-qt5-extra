@@ -13,6 +13,7 @@ SRC_URI = " \
     file://0003-Don-t-disable-EXPERIMENTAL_PLUGINS.patch \
     file://0004-do-not-autodetect-pyqt-it-won-t-work-in-oe.patch \
     file://0005-don-t-pin-version-when-finding-libpng.patch \
+    file://0006-do-not-build-zynaddsubfx-we-have-a-better-version.patch \
 "
 SRCREV = "4a1e17888fc9abb0a4ea4a83d8f7020a5eabda1c"
 S = "${WORKDIR}/git"
@@ -31,16 +32,13 @@ DEPENDS += " \
     python3-pyqt5-native \
     freetype \
     libpng \
-    ntk \
     gtk+ \
     gtk+3 \
     liblo \
-    fftw \
     pulseaudio \
     file \
     fluidsynth \
     projectm \
-    mxml \
     clthreads \
     clxclient \
     zita-resampler \
