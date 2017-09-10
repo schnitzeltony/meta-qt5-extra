@@ -1,0 +1,32 @@
+From d614f7dbd575f13cdc512580ea9a9ad904b69752 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 10 Sep 2017 22:11:32 +0200
+Subject: [PATCH] Do not overwrite build flags - it causes trouble for many
+ buld systems
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a1fa4d5..6d7808f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -24,9 +24,7 @@ pkg_check_modules(SND sndfile REQUIRED)
+ include_directories( ${SND_INCLUDE_DIRS}  )
+ #target_link_libraries( avtkDemo ${CAIRO_LIBRARIES}  )
+ 
+-SET(CMAKE_SHARED_LINKER_FLAGS "-fPIC -shared -L./src/avtk -Wl,--no-undefined")
+-SET(CMAKE_C_FLAGS "-g -Wall -O1 -Wno-unused-variable")
+-SET(CMAKE_CXX_FLAGS "-g -Wall -O1 -Wno-unused-variable -ftree-vectorize")
++SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fPIC -L./src/avtk")
+ 
+ 
+ # DSP sources
+-- 
+2.9.5
+

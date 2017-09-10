@@ -1,0 +1,33 @@
+From 4d284e26112bacfdcffbf06c4e509b42af2450f2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 10 Sep 2017 21:59:45 +0200
+Subject: [PATCH] avtk remove sse flags - they work on intel hardware only
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/avtk/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/avtk/CMakeLists.txt b/src/avtk/CMakeLists.txt
+index 710533d..5c17071 100644
+--- a/src/avtk/CMakeLists.txt
++++ b/src/avtk/CMakeLists.txt
+@@ -55,8 +55,8 @@ include_directories( ${X11_INCLUDE_DIRS} )
+ link_directories   ( ${X11_LIBRARY_DIRS} )
+ 
+ 
+-SET(CMAKE_C_FLAGS   "-fPIC -msse -msse2 -mfpmath=sse -g") # -fsanitize=address
+-SET(CMAKE_CXX_FLAGS "-fPIC -msse -msse2 -mfpmath=sse -g") # -fsanitize=address
++SET(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} -fPIC") # -fsanitize=address
++SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC") # -fsanitize=address
+ 
+ FILE(GLOB src libs/pffft.cxx avtk/*.cxx )
+ 
+-- 
+2.9.5
+
