@@ -24,7 +24,7 @@ index 64a90dd..6ff9c88 100644
 +#ifndef QT_NO_SESSIONMANAGER
          if (!isOpen && qApp->isSessionRestored()) {
              delete _tray;
-             _tray = 0;
+             _tray = nullptr;
              QTimer::singleShot(0, qApp, SLOT(quit()));
              return;
          }

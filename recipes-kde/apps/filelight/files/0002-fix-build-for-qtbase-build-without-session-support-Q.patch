@@ -9,13 +9,13 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- src/app/main.cpp | 5 ++++-
+ src/main.cpp | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/src/app/main.cpp b/src/app/main.cpp
+diff --git a/src/main.cpp b/src/main.cpp
 index 2463a29..1709717 100644
---- a/src/app/main.cpp
-+++ b/src/app/main.cpp
+--- a/src/main.cpp
++++ b/src/main.cpp
 @@ -78,6 +78,7 @@ int main(int argc, char *argv[])
      options.process(app);
      about.processCommandLine(&options);

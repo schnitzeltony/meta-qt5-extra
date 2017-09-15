@@ -42,8 +42,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "5adbcc3ca8e56c492e5dfbc2c3731178"
-SRC_URI[sha256sum] = "9348f5d1599d0fab0ad6a793133c552d313cb8b9a726a5fe86e61d7e0e107a1f"
+SRC_URI[md5sum] = "ec256fe6b645b947a998bdbeff0fb336"
+SRC_URI[sha256sum] = "ea7e571cbb1085c7a25dbeb1dcd9d2fa483da2f5c840d297580f6a7c438a888b"
 SRC_URI += "file://0001-CMakeLists.txt-add-an-option-BUILD_KGDECLARATIVE-dis.patch"
 
 PACKAGECONFIG[kgdeclarative] = "-DBUILD_KGDECLARATIVE=Yes,-DBUILD_KGDECLARATIVE=No, kdeclarative"
