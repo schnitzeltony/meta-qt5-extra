@@ -32,13 +32,12 @@ DEPENDS += " \
     kcrash \
 "
 
-PV = "3.1.3"
 SRC_URI = " \
-    ${KDE_MIRROR}/stable/krita/3.1.3/${BPN}-${PV}.tar.gz \
+    ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
     file://0001-fix-build-with-GLES2.patch \
 "
-SRC_URI[md5sum] = "e595cfeeb2f3c3b090a573e929db5607"
-SRC_URI[sha256sum] = "816b9fa9717b78d8dc3a9c4efd49f7a5e3b7f2a0965f2434c48b708598d1b288"
+SRC_URI[md5sum] = "00896775772991182e927248eb3ef198"
+SRC_URI[sha256sum] = "ef06cee677d75861edca0e1f825bca42ff59b7200aeb827e16f8d1fb5ef14e39"
 
 # krita has lots of include_directories(SYSTEM ${FOO_DIR})
 # have no better way to make gcc6 happy

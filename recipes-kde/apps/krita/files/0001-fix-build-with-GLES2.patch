@@ -9,7 +9,7 @@ Content-Transfer-Encoding: 8bit
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
  libs/ui/canvas/kis_mirror_axis.cpp           | 15 -------
- libs/ui/opengl/kis_opengl_canvas2.cpp        |  6 +--
+ libs/ui/opengl/kis_opengl_canvas2.cpp        | 16 ----------------
  libs/ui/opengl/kis_opengl_image_textures.cpp | 60 +++-------------------------
  3 files changed, 8 insertions(+), 73 deletions(-)
 
@@ -47,35 +47,58 @@ index 468dbf4..4823f39 100644
  }
  
 diff --git a/libs/ui/opengl/kis_opengl_canvas2.cpp b/libs/ui/opengl/kis_opengl_canvas2.cpp
-index 91149c3..0f6d0f0 100644
+index 75ca046..8d3164b 100644
 --- a/libs/ui/opengl/kis_opengl_canvas2.cpp
 +++ b/libs/ui/opengl/kis_opengl_canvas2.cpp
-@@ -303,7 +303,7 @@ void KisOpenGLCanvas2::paintToolOutline(const QPainterPath &path)
+@@ -102,9 +102,6 @@ public:
+     QVector3D vertices[6];
+     QVector2D texCoords[6];
+ 
+-#ifndef Q_OS_OSX
+-    QOpenGLFunctions_2_1 *glFn201;
+-#endif
+ 
+     int xToColWithWrapCompensation(int x, const QRect &imageRect) {
+         int firstImageColumn = openGLImageTextures->xToCol(imageRect.left());
+@@ -230,12 +227,6 @@ void KisOpenGLCanvas2::initializeGL()
+ {
+     KisOpenGL::initializeContext(context());
+     initializeOpenGLFunctions();
+-#ifndef Q_OS_OSX
+-    d->glFn201 = context()->versionFunctions<QOpenGLFunctions_2_1>();
+-    if (!d->glFn201) {
+-        warnUI << "Cannot obtain QOpenGLFunctions_2_1, glLogicOp cannot be used";
+-    }
+-#endif
+ 
+     KisConfig cfg;
+     d->openGLImageTextures->setProofingConfig(canvas()->proofingConfiguration());
+@@ -395,17 +386,6 @@ void KisOpenGLCanvas2::paintToolOutline(const QPainterPath &path)
      modelMatrix = projectionMatrix * modelMatrix;
-     cursorShader->setUniformValue(d->cursorShaderModelViewProjectionUniform, modelMatrix);
+     d->cursorShader->setUniformValue(d->cursorShader->location(Uniform::ModelViewProjection), modelMatrix);
  
 -    glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-+    /*glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
- 
-     // XXX: glLogicOp not in ES 2.0 -- it would be better to use another method.
-     // It is defined in 3.1 core profile onward.
-@@ -312,7 +312,7 @@ void KisOpenGLCanvas2::paintToolOutline(const QPainterPath &path)
-     glEnable(GL_COLOR_LOGIC_OP);
-     if (ptr_glLogicOp) {
-         ptr_glLogicOp(GL_XOR);
+-
+-    glEnable(GL_COLOR_LOGIC_OP);
+-#ifndef Q_OS_OSX
+-    if (d->glFn201) {
+-        d->glFn201->glLogicOp(GL_XOR);
 -    }
-+    }*/
- 
-     // setup the array of vertices
-     QVector<QVector3D> vertices;
-@@ -331,7 +331,7 @@ void KisOpenGLCanvas2::paintToolOutline(const QPainterPath &path)
-         vertices.clear();
+-#else
+-    glLogicOp(GL_XOR);
+-#endif
+-
+     // Paint the tool outline
+     if (KisOpenGL::hasOpenGL3()) {
+         d->outlineVAO.bind();
+@@ -440,8 +420,6 @@ void KisOpenGLCanvas2::paintToolOutline(const QPainterPath &path)
+         d->outlineVAO.release();
      }
  
 -    glDisable(GL_COLOR_LOGIC_OP);
-+    //glDisable(GL_COLOR_LOGIC_OP);
- 
-     cursorShader->release();
+-
+     d->cursorShader->release();
+ }
  
 diff --git a/libs/ui/opengl/kis_opengl_image_textures.cpp b/libs/ui/opengl/kis_opengl_image_textures.cpp
 index 835d41e..c16d0e7 100644
