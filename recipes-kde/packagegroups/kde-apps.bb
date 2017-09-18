@@ -19,6 +19,7 @@ RDEPENDS_${PN} = " \
     kdf \
     khelpcenter \
     kio-extras \
+    kmag \
     kmix \
     kolourpaint \
     konsole \
