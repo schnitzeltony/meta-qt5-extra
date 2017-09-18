@@ -25,6 +25,10 @@ DEPENDS += " \
     ktexteditor \
     kwidgetsaddons \
     kxmlgui \
+    kdelibs4support \
+    kdelibs4support-native \
+    kdesignerplugin \
+    kdesignerplugin-native \
 "
 
 PV = "${KDE_APP_VERSION}"
