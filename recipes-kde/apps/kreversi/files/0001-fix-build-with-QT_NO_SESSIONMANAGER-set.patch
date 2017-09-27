@@ -1,0 +1,36 @@
+From 14dad713bde33b66476e80dc8a13edd010925800 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 27 Sep 2017 20:39:15 +0200
+Subject: [PATCH] fix build with QT_NO_SESSIONMANAGER set
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ main.cpp | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/main.cpp b/main.cpp
+index 5cff693..f72afc9 100644
+--- a/main.cpp
++++ b/main.cpp
+@@ -73,9 +73,12 @@ int main(int argc, char **argv)
+     aboutData.processCommandLine(&parser);
+ 
+     KDBusService service;
++#ifndef QT_NO_SESSIONMANAGER
+     if (application.isSessionRestored()) {
+         RESTORE(KReversiMainWindow)
+-    } else {
++    } else
++#endif
++    {
+         KReversiMainWindow *mainWin = new KReversiMainWindow(0, parser.isSet(QStringLiteral("demo")));
+         mainWin->show();
+     }
+-- 
+2.9.5
+
