@@ -37,6 +37,7 @@ DEPENDS += "\
     sonnet-native \
     kxmlgui \
     kdoctools \
+    kdeclarative \
     \
     openal-soft \
 "
@@ -44,10 +45,6 @@ DEPENDS += "\
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "ec256fe6b645b947a998bdbeff0fb336"
 SRC_URI[sha256sum] = "ea7e571cbb1085c7a25dbeb1dcd9d2fa483da2f5c840d297580f6a7c438a888b"
-SRC_URI += "file://0001-CMakeLists.txt-add-an-option-BUILD_KGDECLARATIVE-dis.patch"
-
-PACKAGECONFIG[kgdeclarative] = "-DBUILD_KGDECLARATIVE=Yes,-DBUILD_KGDECLARATIVE=No, kdeclarative"
-PACKAGECONFIG ??= ""
 
 FILES_${PN} += " \
     ${datadir}/carddecks \
