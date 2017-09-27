@@ -10,5 +10,6 @@ RDEPENDS_${PN} = " \
     katomic \
     kbounce \
     kdiamond \
+    kreversi \
     libkdegames \
 "
