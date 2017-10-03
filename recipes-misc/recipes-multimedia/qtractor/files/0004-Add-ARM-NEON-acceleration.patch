@@ -1,25 +1,33 @@
-From 1af04054ebaac13e11559948f212080ad19ba903 Mon Sep 17 00:00:00 2001
+From 2dfcb12439328353cac5846e81872b8484c2403e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 15 Feb 2017 22:10:28 +0100
-Subject: [PATCH] Add ARM NEON intrinsics
+Date: Tue, 3 Oct 2017 21:39:19 +0200
+Subject: [PATCH 1/2] Add ARM NEON acceleration
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* More or less a 1/1 copy of SSE implementation
+* More or less a 1/1 copy of SSE implementation. Where possible make use of
+  multiply/accumulate (vmla)
 * Runtime NEON detection is not easy to implement. The only implementations I
-  found did not work properly [1]. So let's trust the compiler.
+  found did not work properly e.g [1]. So let's trust the compiler.
+* On RaspberryPi3 test arrangement with 8 Midi-Tracks / 4 LV2-Plugins the idle
+  load is reduced from 30% -> 29%.
 
 [1] http://git.openembedded.org/meta-openembedded/commit/meta-oe?id=cae9cafb9c536fd5ea40d1457c0ee1fcd6a6aa43
 
+Upstream-Status: Submitted [2]
+
+[2] https://github.com/rncbc/qtractor/pull/81
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- src/qtractorAudioEngine.cpp  | 40 +++++++++++++++++++
- src/qtractorAudioMonitor.cpp | 95 ++++++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 131 insertions(+), 4 deletions(-)
+ src/qtractorAudioEngine.cpp  |  40 ++++++++++++++++
+ src/qtractorAudioMonitor.cpp |  95 ++++++++++++++++++++++++++++++++++--
+ src/qtractorInsertPlugin.cpp | 111 +++++++++++++++++++++++++++++++++++++++----
+ 3 files changed, 234 insertions(+), 12 deletions(-)
 
 diff --git a/src/qtractorAudioEngine.cpp b/src/qtractorAudioEngine.cpp
-index e34da4b..6bbd65e 100644
+index 55dd2c7..e79e272 100644
 --- a/src/qtractorAudioEngine.cpp
 +++ b/src/qtractorAudioEngine.cpp
 @@ -118,6 +118,38 @@ static inline void sse_buffer_add (
@@ -72,7 +80,7 @@ index e34da4b..6bbd65e 100644
  		m_pfnBufferAdd = std_buffer_add;
  	}
  
-@@ -2135,6 +2171,10 @@ qtractorAudioBus::qtractorAudioBus (
+@@ -2133,6 +2169,10 @@ qtractorAudioBus::qtractorAudioBus (
  		m_pfnBufferAdd = sse_buffer_add;
  	else
  #endif
@@ -84,7 +92,7 @@ index e34da4b..6bbd65e 100644
  }
  
 diff --git a/src/qtractorAudioMonitor.cpp b/src/qtractorAudioMonitor.cpp
-index ec791f4..82cd5ef 100644
+index e9a0fd1..19f212b 100644
 --- a/src/qtractorAudioMonitor.cpp
 +++ b/src/qtractorAudioMonitor.cpp
 @@ -53,7 +53,6 @@ static inline bool sse_enabled (void)
@@ -208,6 +216,147 @@ index ec791f4..82cd5ef 100644
  
  	setChannels(iChannels);
  }
+diff --git a/src/qtractorInsertPlugin.cpp b/src/qtractorInsertPlugin.cpp
+index 40e21e3..a5f909c 100644
+--- a/src/qtractorInsertPlugin.cpp
++++ b/src/qtractorInsertPlugin.cpp
+@@ -155,6 +155,94 @@ static inline void sse_process_add (
+ 
+ #endif
+ 
++#if defined(__ARM_NEON__)
++#include "arm_neon.h"
++
++// NEON enabled processor versions.
++static inline void neon_process_gain (
++	float **ppFrames, unsigned int iFrames,
++	unsigned short iChannels, float fGain )
++{
++	float32x4_t vGain = vdupq_n_f32(fGain);
++
++	for (unsigned short i = 0; i < iChannels; ++i) {
++		float *pFrames = ppFrames[i];
++		unsigned int nframes = iFrames;
++		for (; (long(pFrames) & 15) && (nframes > 0); --nframes)
++			*pFrames++ *= fGain;
++		for (; nframes >= 4; nframes -= 4) {
++			vst1q_f32(pFrames,
++				vmulq_f32(
++					vld1q_f32(pFrames), vGain
++				)
++			);
++			pFrames += 4;
++		}
++		for (; nframes > 0; --nframes)
++			*pFrames++ *= fGain;
++	}
++}
++
++static inline void neon_process_dry_wet (
++	float **ppBuffer, float **ppFrames, unsigned int iFrames,
++	unsigned short iChannels, float fDry, float fWet )
++{
++	float32x4_t vDry = vdupq_n_f32(fDry);
++	float32x4_t vWet = vdupq_n_f32(fWet);
++
++	for (unsigned short i = 0; i < iChannels; ++i) {
++		float *pBuffer = ppBuffer[i];
++		float *pFrames = ppFrames[i];
++		unsigned int nframes = iFrames;
++		for (; (long(pBuffer) & 15) && (nframes > 0); --nframes) {
++			*pBuffer   *= fWet;
++			*pBuffer++ += fDry * *pFrames++;
++		}
++		for (; nframes >= 4; nframes -= 4) {
++			float32x4_t vBuffer = vld1q_f32(pBuffer);
++			vBuffer = vmulq_f32(vBuffer, vWet);
++			float32x4_t vFrames = vld1q_f32(pFrames);
++			// Vr[i] := Va[i] + Vb[i] * Vc[i]
++			vBuffer = vmlaq_f32(vBuffer, vDry, vFrames);
++			vst1q_f32(pBuffer, vBuffer);
++			pFrames += 4;
++			pBuffer += 4;
++		}
++		for (; nframes > 0; --nframes) {
++			*pBuffer   *= fWet;
++			*pBuffer++ += fDry * *pFrames++;
++		}
++	}
++}
++
++static inline void neon_process_add (
++	float **ppBuffer, float **ppFrames, unsigned int iFrames,
++	unsigned short iChannels, float fGain )
++{
++	float32x4_t vGain = vdupq_n_f32(fGain);
++
++	for (unsigned short i = 0; i < iChannels; ++i) {
++		float *pBuffer = ppBuffer[i];
++		float *pFrames = ppFrames[i];
++		unsigned int nframes = iFrames;
++		for (; (long(pBuffer) & 15) && (nframes > 0); --nframes)
++			*pBuffer++ += fGain * *pFrames++;
++		for (; nframes >= 4; nframes -= 4) {
++			float32x4_t vBuffer = vld1q_f32(pBuffer);
++			float32x4_t vFrames = vld1q_f32(pFrames);
++			//Vr[i] := Va[i] + Vb[i] * Vc[i]
++			vBuffer = vmlaq_f32(vBuffer, vGain, vFrames);
++			vst1q_f32(pBuffer, vBuffer);
++			pFrames += 4;
++			pBuffer += 4;
++		}
++		for (; nframes > 0; --nframes)
++			*pBuffer++ += fGain * *pFrames++;
++	}
++}
++
++#endif
++
+ 
+ // Standard processor versions.
+ static inline void std_process_gain (
+@@ -367,13 +455,17 @@ qtractorAudioInsertPlugin::qtractorAudioInsertPlugin (
+ 	if (sse_enabled()) {
+ 		m_pfnProcessGain = sse_process_gain;
+ 		m_pfnProcessDryWet = sse_process_dry_wet;
+-	} else {
++	} else
+ #endif
+-	m_pfnProcessGain = std_process_gain;
+-	m_pfnProcessDryWet = std_process_dry_wet;
+-#if defined(__SSE__)
+-	}
++#if defined(__ARM_NEON__)
++	m_pfnProcessGain = neon_process_gain;
++	m_pfnProcessDryWet = neon_process_dry_wet;
++	if(false)
+ #endif
++	{
++		m_pfnProcessGain = std_process_gain;
++		m_pfnProcessDryWet = std_process_dry_wet;
++	}
+ 
+ 	// Create and attach the custom parameters...
+ 	m_pSendGainParam = new qtractorInsertPluginParam(this, 0);
+@@ -1120,12 +1212,15 @@ qtractorAudioAuxSendPlugin::qtractorAudioAuxSendPlugin (
+ #if defined(__SSE__)
+ 	if (sse_enabled()) {
+ 		m_pfnProcessAdd = sse_process_add;
+-	} else {
++	} else
++#endif
++#if defined(__ARM_NEON__)
++	m_pfnProcessAdd = neon_process_add;
++	if(false)
+ #endif
++    {
+ 		m_pfnProcessAdd = std_process_add;
+-#if defined(__SSE__)
+ 	}
+-#endif
+ 
+ 	// Create and attach the custom parameters...
+ 	m_pSendGainParam = new qtractorInsertPluginParam(this, 0);
 -- 
-2.9.3
+2.9.5
 

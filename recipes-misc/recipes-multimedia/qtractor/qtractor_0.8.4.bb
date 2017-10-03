@@ -22,7 +22,8 @@ SRC_URI = " \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     file://0002-do-nor-try-run-for-float-sse-detection.patch \
     file://0003-do-nor-try-run-for-suil-libs-detection.patch \
-    file://0004-Add-ARM-NEON-intrinsics.patch \
+    file://0004-Add-ARM-NEON-acceleration.patch \
+    file://0005-Add-ARM-NEON-acceleration-for-time-stretch-not-yet-t.patch \
 "
 SRC_URI[md5sum] = "7a2ea586eed8b8d8c7ebfdc876b33841"
 SRC_URI[sha256sum] = "3ace8b4fdf623e5e6ccecd7047de73f72bcfdd10b01f187079832092ac936b9d"
