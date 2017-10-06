@@ -28,14 +28,15 @@ DEPENDS += " \
     kwidgetsaddons \
     kwindowsystem \
     kiconthemes \
+    kpackage \
+    kpackage-native \
     libdebconf-kde \
     gstreamer1.0 \
     glib-2.0 \
 "
 
-SRC_URI[md5sum] = "638a3d8244efe0e8fa99375a5660fd3c"
-SRC_URI[sha256sum] = "e0fa67518601fcde2c45aa613261022f2cfada54d3e1ea3cf0540805ba6663f3"
-SRC_URI += "file://0001-include-random-for-std-default_random_engine.patch"
+SRC_URI[md5sum] = "58c51c9f3b7e4b36c39ed4b5127fa599"
+SRC_URI[sha256sum] = "efd4ed1cfa92ed3f33d2993d4e4c508629187ada37ce1faf9368d4dc703def0a"
 
 do_configure_append() {
     # apt sets absolute paths - we should fix that at apt...
