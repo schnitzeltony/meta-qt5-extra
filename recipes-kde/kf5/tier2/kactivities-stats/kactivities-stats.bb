@@ -15,6 +15,10 @@ DEPENDS += " \
     kactivities \
 "
 
+# Workaround
+# default_constructible_unary_fn.hpp:38:9: error: no match for 'operator==' (operand types are 'const boost::optional<std::_Bind<ActivityInfo (Activities::*(const Activities*, std::_Placeholder<1>))(const QString&) const> >' and 'int')
+CXXFLAGS += "-DBOOST_DISABLE_ASSERTS"
+
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "529ba85f3ff2c78e9b0cbc619ab9a564"
 SRC_URI[sha256sum] = "a23955ce584ea0a1be8fe17b0b9cad819279b7518d3a9cf175a40e4bc08fa768"
