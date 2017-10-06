@@ -1,0 +1,41 @@
+From 967a2dc9a0df33091991b1e9405fdeb4d2c078d9 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 6 Oct 2017 21:52:04 +0200
+Subject: [PATCH] native: do not build data and install katehighlightingindexer
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt             | 1 -
+ src/indexer/CMakeLists.txt | 2 ++
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d503995..17637d1 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -65,7 +65,6 @@ endif()
+ # Actually build the stuff
+ #
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+-add_subdirectory(data)
+ add_subdirectory(src)
+ if(TARGET Qt5::Gui)
+     add_subdirectory(examples)
+diff --git a/src/indexer/CMakeLists.txt b/src/indexer/CMakeLists.txt
+index acb1647..a083c5d 100644
+--- a/src/indexer/CMakeLists.txt
++++ b/src/indexer/CMakeLists.txt
+@@ -11,3 +11,5 @@ else()
+         target_link_libraries(katehighlightingindexer Qt5::Core)
+     endif()
+ endif()
++
++install(TARGETS katehighlightingindexer DESTINATION "${CMAKE_INSTALL_BINDIR}")
+-- 
+2.9.5
+
