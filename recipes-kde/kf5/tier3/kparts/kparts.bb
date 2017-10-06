@@ -30,6 +30,7 @@ SRC_URI[sha256sum] = "f7a701a02d89c5555d92047760314c64fd51beb13ed393ebee67597e13
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
+    ${datadir}/kdevappwizard \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/.debug"
