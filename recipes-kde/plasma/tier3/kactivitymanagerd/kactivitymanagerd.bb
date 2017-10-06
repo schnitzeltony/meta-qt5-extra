@@ -28,6 +28,10 @@ SRC_URI[md5sum] = "0597bbbde5c78d7b543092f041c6bdd5"
 SRC_URI[sha256sum] = "228b5efc3d5c19bf457cebdcc2ee300aefcb7d36a445eecc51c934ed23ca637c"
 SRC_URI += "file://0001-replace-try_run-by-try_compile-in-compiler-feature-c.patch"
 
+# Workaround
+# default_constructible_unary_fn.hpp:38:9: error: no match for 'operator==' (operand types are 'const boost::optional<std::_Bind<ActivityInfo (Activities::*(const Activities*, std::_Placeholder<1>))(const QString&) const> >' and 'int')
+CXXFLAGS += "-DBOOST_DISABLE_ASSERTS"
+
 FILES_SOLIBSDEV = ""
 
 FILES_${PN} += " \
