@@ -9,6 +9,7 @@ inherit kde-apps gettext
 
 DEPENDS += "\
     kcoreaddons-native \
+    kpackage-native \
     kauth-native \
     kconfig-native \
     kwidgetsaddons \
