@@ -19,12 +19,13 @@ DEPENDS += "qtdeclarative \
             threadweaver"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "06dc735cc1fd86a050307b14f68a2143"
-SRC_URI[sha256sum] = "1856e17a2fd8d6ad94f463fe2cb44d7377439650dd47f88444e924d650e32165"
+SRC_URI[md5sum] = "80a77eadbf97af8eac975624346f25b8"
+SRC_URI[sha256sum] = "95bd2ed35f25d369bc2c613cbad87f78083bffde6ade3ad0ec9e69547fa1d099"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/kdevappwizard \
+    ${datadir}/dbus-1 \
     ${OE_QMAKE_PATH_QML}/org/kde \
 "
 FILES_${PN}-dbg += "${OE_QMAKE_PATH_QML}/org/kde/*/.debug"

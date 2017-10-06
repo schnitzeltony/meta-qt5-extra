@@ -17,6 +17,7 @@ TIER_1 = " \
     kguiaddons \
     ki18n \
     kidletime \
+    kirigami \
     kitemmodels \
     kitemviews \
     kplotting \

@@ -2,6 +2,11 @@ require ${BPN}.inc
 
 inherit cmake_lib
 
+SRC_URI += " \
+    file://0001-Make-our-cross-build-find-parsetrigrams.patch \
+    file://0002-make-build-of-hunspell-optional.patch \
+"
+
 DEPENDS += "${BPN}-native"
 
 do_configure_append() {

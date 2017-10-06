@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5
 
-SRC_URI[md5sum] = "7610acf496bb0dc43089e1f71388f450"
-SRC_URI[sha256sum] = "c39d5bb13f1a3e81ac5cc10f44f842228c7441a98c3c370aa55ca93ffc9566a5"
+SRC_URI[md5sum] = "6f313cbfe1ca5b009ca715cb311f40a8"
+SRC_URI[sha256sum] = "89291dd396bd0f42e9b90eb92f46895fa461ebc2b420a58c663e0c4898894e25"
 
 DEPENDS += "libxml2-native"
 

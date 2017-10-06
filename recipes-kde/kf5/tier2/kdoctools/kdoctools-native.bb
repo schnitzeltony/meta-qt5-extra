@@ -14,5 +14,5 @@ DEPENDS += " \
 RDEPENDS_${PN} += "gettext-native"
 
 SRC_URI += " \
-	file://0003-don-t-build-documentation.patch \
+	file://0001-don-t-build-documentation.patch \
 "

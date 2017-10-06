@@ -2,21 +2,19 @@ SUMMARY = "QtQuick plugins to build user interfaces based on the KDE UX guidelin
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE.LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
-# not yet in plasma
-inherit kde-base
+inherit kde-kf5
 
 # Is that true: We are depending on plasma-framework and are a tier2??
 DEPENDS += " \
-    plasma-framework \
     kpackage-native \
     qtquickcontrols2 \
+    qtsvg \
 "
 
-PV = "2.1.1"
+PV = "${KF5_VERSION}"
 
-SRC_URI = "${KDE_MIRROR}/stable/kirigami/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "f25e9dc6df1466f69b72ef8d70b034a6"
-SRC_URI[sha256sum] = "ea3796058f302dabf21b7c58a05e543da5d7407414a9001d26d4318962a872ad"
+SRC_URI[md5sum] = "1bf738daca4cfdb41eebf2a3c6cf62b2"
+SRC_URI[sha256sum] = "6c84eca0fdb7cd852aae36c45f40195dd16e17608aec2ce8fbf555198b0c64a2"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \

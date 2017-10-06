@@ -24,7 +24,7 @@ index 8dd22f3..5b659ab 100644
 @@ -20,30 +20,11 @@ include(GenerateExportHeader)
  include(CMakeFindFrameworks)
  
- set(REQUIRED_QT_VERSION 5.6.0)
+ set(REQUIRED_QT_VERSION 5.7.0)
 -find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network Widgets DBus Test Svg PrintSupport Designer)
 +find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network DBus Test)
  

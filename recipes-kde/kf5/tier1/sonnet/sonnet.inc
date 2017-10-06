@@ -5,6 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1"
 inherit kde-kf5
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "06e49a720e9d8f7e79142638a978580a"
-SRC_URI[sha256sum] = "accf0724615abf684258fa087e4166e803385ec4190f92c792fd16e8189366ed"
-SRC_URI += "file://0002-make-build-of-hunspell-optional.patch"
+SRC_URI[md5sum] = "6ac11f0762e2100b4b32555bc65f6514"
+SRC_URI[sha256sum] = "aa73bb8a599f7b2ed14c043726ffe2d6399f1fd9a3daa51f12685aae11baa58c"

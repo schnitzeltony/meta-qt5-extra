@@ -5,16 +5,21 @@ DEPENDS += "${BPN}-native gettext-native karchive ki18n libxslt libxml2"
 inherit cmake_lib
 
 SRC_URI += " \
-	file://0004-set-meinproc5-executable-so-that-it-can-be-found-for.patch \
+    file://0002-Make-our-cross-build-find-docbookl10nhelper.patch \
+	file://0003-set-meinproc5-executable-so-that-it-can-be-found-for.patch \
+    file://0004-Add-cmdline-param-to-help-find-xsl.patch \
 "
 
 do_configure_append() {
-    # use native docbookl10nhelper
-    sed -i 's:\./docbookl10nhelper:${STAGING_BINDIR_NATIVE}/docbookl10nhelper:' ${B}/src/CMakeFiles/docbookl10nhelper.dir/build.make
-
     # remove build host paths
     sed -i 's:${STAGING_DIR_NATIVE}::g' ${B}/config-kdoctools.h
     sed -i 's:${STAGING_DIR_TARGET}::g' ${B}/config-kdoctools.h
+}
+
+CMAKE_ADD_ALIGN_FILES = "config-kdoctools.h"
+do_install_prepend() {
+    # HACK: copy all-l10n.xml from native-sysroot to our builddir
+    cp -f ${STAGING_DIR_NATIVE}${datadir}/kf5/kdoctools/customization/xsl/all-l10n.xml ${B}/src/customization/xsl/
 }
 
 do_install_append() {

@@ -13,7 +13,6 @@ TIER_1 = " \
 "
 
 TIER_2 = " \
-    kirigami \
 "
 
 TIER_3 = " \
