@@ -31,6 +31,7 @@ FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \
+    ${datadir}/kdevappwizard \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 FILES_${PN}-dbg += " \
