@@ -1,0 +1,777 @@
+From da208c05b0feef747a640afd87f56f2416bed338 Mon Sep 17 00:00:00 2001
+From: rncbc <rncbc@rncbc.org>
+Date: Wed, 11 Oct 2017 09:51:18 +0100
+Subject: [PATCH 2/2] =?UTF-8?q?-=20[neonx]=20workaround=20native=20file=20?=
+ =?UTF-8?q?dialogs=20hang=20up=20by=20setting=20parent=20to=20NULL=20=20?=
+ =?UTF-8?q?=20(by=20Andreas=20M=C3=BCller,=20thanks).?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Backport
+
+---
+ src/qtractorAudioListView.cpp   |  9 +++++---
+ src/qtractorClipForm.cpp        |  9 +++++---
+ src/qtractorExportForm.cpp      |  9 +++++---
+ src/qtractorInstrumentForm.cpp  | 14 +++++++----
+ src/qtractorMainForm.cpp        | 18 ++++++++++-----
+ src/qtractorMidiControlForm.cpp | 18 ++++++++++-----
+ src/qtractorMidiEditorForm.cpp  | 10 ++++----
+ src/qtractorMidiListView.cpp    |  7 ++++--
+ src/qtractorMidiSysexForm.cpp   | 36 +++++++++++++++++++----------
+ src/qtractorOptionsForm.cpp     | 51 ++++++++++++++++++++++++++++-------------
+ src/qtractorPluginForm.cpp      | 27 ++++++++++++++--------
+ src/qtractorSessionForm.cpp     |  9 +++++---
+ src/qtractorTrackForm.cpp       | 25 ++++++++++++++------
+ src/qtractorTracks.cpp          | 18 ++++++++++-----
+ src/qtractorVstPlugin.cpp       |  6 ++---
+ 15 files changed, 179 insertions(+), 87 deletions(-)
+
+diff --git a/src/qtractorAudioListView.cpp b/src/qtractorAudioListView.cpp
+index f46b659..ed970a2 100644
+--- a/src/qtractorAudioListView.cpp
++++ b/src/qtractorAudioListView.cpp
+@@ -140,17 +140,20 @@ QStringList qtractorAudioListView::getOpenFileNames (void)
+ 	const QString& sTitle
+ 		= tr("Open Audio Files") + " - " QTRACTOR_TITLE;
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+ 	qtractorOptions *pOptions = qtractorOptions::getInstance();
+-	if (pOptions && pOptions->bDontUseNativeDialogs)
++	if (pOptions && pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filename to open...
+-	files = QFileDialog::getOpenFileNames(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	files = QFileDialog::getOpenFileNames(pParentWidget,
+ 		sTitle, recentDir(), qtractorAudioFileFactory::filters(), NULL, options);
+ #else
+ 	// Construct open-files dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, recentDir(), qtractorAudioFileFactory::filters());
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+diff --git a/src/qtractorClipForm.cpp b/src/qtractorClipForm.cpp
+index 4ead492..9825607 100644
+--- a/src/qtractorClipForm.cpp
++++ b/src/qtractorClipForm.cpp
+@@ -698,15 +698,18 @@ void qtractorClipForm::browseFilename (void)
+ 	const QString& sTitle
+ 		= tr("%1 Clip File").arg(sType) + " - " QTRACTOR_TITLE;
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+ 	qtractorOptions *pOptions = qtractorOptions::getInstance();
+-	if (pOptions && pOptions->bDontUseNativeDialogs)
++	if (pOptions && pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+-	sFilename = QFileDialog::getOpenFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	sFilename = QFileDialog::getOpenFileName(pParentWidget,
+ 		sTitle, m_ui.FilenameComboBox->currentText(), sFilter, NULL, options);
+ #else
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, m_ui.FilenameComboBox->currentText(), sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+diff --git a/src/qtractorExportForm.cpp b/src/qtractorExportForm.cpp
+index fe9ea15..832fae4 100644
+--- a/src/qtractorExportForm.cpp
++++ b/src/qtractorExportForm.cpp
+@@ -402,15 +402,18 @@ void qtractorExportForm::browseExportPath (void)
+ 	const QString& sFilter
+ 		= tr("%1 files (*.%1)").arg(m_sExportExt);
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+ 	qtractorOptions *pOptions = qtractorOptions::getInstance();
+-	if (pOptions && pOptions->bDontUseNativeDialogs)
++	if (pOptions && pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+-	sExportPath = QFileDialog::getSaveFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	sExportPath = QFileDialog::getSaveFileName(pParentWidget,
+ 		sTitle, sExportPath, sFilter, NULL, options);
+ #else
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, sExportPath, sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+diff --git a/src/qtractorInstrumentForm.cpp b/src/qtractorInstrumentForm.cpp
+index c69c800..018b538 100644
+--- a/src/qtractorInstrumentForm.cpp
++++ b/src/qtractorInstrumentForm.cpp
+@@ -223,16 +223,19 @@ void qtractorInstrumentForm::importSlot (void)
+ 	const QString& sFilter
+ 		= tr("Instrument files (*.%1 *.sf2 *.midnam)").arg(sExt);
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+-	if (pOptions->bDontUseNativeDialogs)
++	if (pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filename to open...
+-	files = QFileDialog::getOpenFileNames(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	files = QFileDialog::getOpenFileNames(pParentWidget,
+ 		sTitle, pOptions->sInstrumentDir, sFilter, NULL, options);
+ #else
+ 	// Construct open-files dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, pOptions->sInstrumentDir, sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+@@ -383,9 +386,12 @@ void qtractorInstrumentForm::exportSlot (void)
+ 	const QString& sFilter
+ 		= tr("Instrument files (*.%1)").arg(sExt);
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+-	if (pOptions->bDontUseNativeDialogs)
++	if (pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filename to open...
+ 	sPath = QFileDialog::getSaveFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
+diff --git a/src/qtractorMainForm.cpp b/src/qtractorMainForm.cpp
+index 9c9147c..5de9990 100644
+--- a/src/qtractorMainForm.cpp
++++ b/src/qtractorMainForm.cpp
+@@ -1946,15 +1946,18 @@ bool qtractorMainForm::openSession (void)
+ 	const QString& sFilter
+ 		= filters.join(";;");
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+-	if (m_pOptions->bDontUseNativeDialogs)
++	if (m_pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+-	sFilename = QFileDialog::getOpenFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	sFilename = QFileDialog::getOpenFileName(pParentWidget,
+ 		sTitle, m_pOptions->sSessionDir, sFilter, NULL, options);
+ #else
+ 	// Construct open-file session/template dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, m_pOptions->sSessionDir, sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+@@ -2037,17 +2040,20 @@ bool qtractorMainForm::saveSession ( bool bPrompt )
+ 			= tr("Save Session") + " - " QTRACTOR_TITLE;
+ 		const QString& sFilter
+ 			= filters.join(";;");
++		QWidget *pParentWidget = NULL;
+ 		QFileDialog::Options options = 0;
+-		if (m_pOptions->bDontUseNativeDialogs)
++		if (m_pOptions->bDontUseNativeDialogs) {
+ 			options |= QFileDialog::DontUseNativeDialog;
++			pParentWidget = this;
++		}
+ 		// Try to rename as if a backup is about...
+ 		sFilename = sessionBackupPath(sFilename);
+ 	#if 1//QT_VERSION < 0x040400
+-		sFilename = QFileDialog::getSaveFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++		sFilename = QFileDialog::getSaveFileName(pParentWidget,
+ 			sTitle, sFilename, sFilter, NULL, options);
+ 	#else
+ 		// Construct save-file session/template dialog...
+-		QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++		QFileDialog fileDialog(pParentWidget,
+ 			sTitle, sFilename, sFilter);
+ 		// Set proper save-file modes...
+ 		fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+diff --git a/src/qtractorMidiControlForm.cpp b/src/qtractorMidiControlForm.cpp
+index b848eba..cd80e7a 100644
+--- a/src/qtractorMidiControlForm.cpp
++++ b/src/qtractorMidiControlForm.cpp
+@@ -232,16 +232,19 @@ void qtractorMidiControlForm::importSlot (void)
+ 	const QString& sFilter
+ 		= tr("Controller files (*.%1)").arg(sExt);
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+-	if (pOptions->bDontUseNativeDialogs)
++	if (pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filename to open...
+-	files = QFileDialog::getOpenFileNames(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	files = QFileDialog::getOpenFileNames(pParentWidget,
+ 		sTitle, pOptions->sMidiControlDir, sFilter, NULL, options);
+ #else
+ 	// Construct open-files dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, pOptions->sMidiControlDir, sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+@@ -445,16 +448,19 @@ void qtractorMidiControlForm::exportSlot (void)
+ 	}
+ 	else sPath = pOptions->midiControlFiles.last();
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+-	if (pOptions->bDontUseNativeDialogs)
++	if (pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filename to open...
+-	sPath = QFileDialog::getSaveFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	sPath = QFileDialog::getSaveFileName(pParentWidget,
+ 		sTitle, sPath, sFilter, NULL, options);
+ #else
+ 	// Construct open-files dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL, sTitle, sPath, sFilter);
++	QFileDialog fileDialog(pParentWidget, sTitle, sPath, sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+ 	fileDialog.setFileMode(QFileDialog::AnyFile);
+diff --git a/src/qtractorMidiEditorForm.cpp b/src/qtractorMidiEditorForm.cpp
+index d30837b..f802c87 100644
+--- a/src/qtractorMidiEditorForm.cpp
++++ b/src/qtractorMidiEditorForm.cpp
+@@ -1037,18 +1037,20 @@ bool qtractorMidiEditorForm::saveClipFile ( bool bPrompt )
+ 			= tr("Save MIDI Clip") + " - " QTRACTOR_TITLE;
+ 		const QString& sFilter
+ 			= tr("MIDI files (*.%1 *.smf *.midi)").arg(sExt);
++		QWidget *pParentWidget = NULL;
+ 		QFileDialog::Options options = 0;
+ 		qtractorOptions *pOptions = qtractorOptions::getInstance();
+-		if (pOptions && pOptions->bDontUseNativeDialogs)
++		if (pOptions && pOptions->bDontUseNativeDialogs) {
+ 			options |= QFileDialog::DontUseNativeDialog;
++			pParentWidget = this;
++		}
+ 	#if 1//QT_VERSION < 0x040400
+ 		// Ask for the filenames to open...
+-		sFilename = QFileDialog::getSaveFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++		sFilename = QFileDialog::getSaveFileName(pParentWidget,
+ 			sTitle, sFilename, sFilter, NULL, options);
+ 	#else
+ 		// Construct open-files dialog...
+-		QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
+-			sTitle, sFilename, sFilter);
++		QFileDialog fileDialog(pParentWidget, sTitle, sFilename, sFilter);
+ 		// Set proper open-file modes...
+ 		fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+ 		fileDialog.setFileMode(QFileDialog::AnyFile);
+diff --git a/src/qtractorMidiListView.cpp b/src/qtractorMidiListView.cpp
+index 10727cd..7a269d2 100644
+--- a/src/qtractorMidiListView.cpp
++++ b/src/qtractorMidiListView.cpp
+@@ -182,13 +182,16 @@ QStringList qtractorMidiListView::getOpenFileNames (void)
+ 	const QString& sFilter
+ 		= tr("MIDI files (*.%1 *.smf *.midi)").arg(sExt);
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+ 	qtractorOptions *pOptions = qtractorOptions::getInstance();
+-	if (pOptions && pOptions->bDontUseNativeDialogs)
++	if (pOptions && pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filenames to open...
+-	files = QFileDialog::getOpenFileNames(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	files = QFileDialog::getOpenFileNames(pParentWidget,
+ 		sTitle, recentDir(), sFilter, NULL, options);
+ #else
+ 	// Construct open-files dialog...
+diff --git a/src/qtractorMidiSysexForm.cpp b/src/qtractorMidiSysexForm.cpp
+index 92bc2b1..e966772 100644
+--- a/src/qtractorMidiSysexForm.cpp
++++ b/src/qtractorMidiSysexForm.cpp
+@@ -219,16 +219,19 @@ void qtractorMidiSysexForm::importSlot (void)
+ 	const QString& sFilter
+ 		= filters.join(";;");
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+-	if (pOptions->bDontUseNativeDialogs)
++	if (pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filename to open...
+-	files = QFileDialog::getOpenFileNames(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	files = QFileDialog::getOpenFileNames(pParentWidget,
+ 		sTitle, pOptions->sMidiSysexDir, sFilter, NULL, options);
+ #else
+ 	// Construct open-files dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, pOptions->sMidiSysexDir, sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+@@ -297,16 +300,19 @@ void qtractorMidiSysexForm::exportSlot (void)
+ 	const QString& sFilter
+ 		= tr("SysEx files (*.%1)").arg(sExt);
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+-	if (pOptions->bDontUseNativeDialogs)
++	if (pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1// QT_VERSION < 0x040400
+ 	// Ask for the filename to open...
+-	sPath = QFileDialog::getSaveFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	sPath = QFileDialog::getSaveFileName(pParentWidget,
+ 		sTitle, pOptions->sMidiSysexDir, sFilter, NULL, options);
+ #else
+ 	// Construct open-files dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, pOptions->sMidiSysexDir, sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+@@ -438,16 +444,19 @@ void qtractorMidiSysexForm::openSlot (void)
+ 	const QString& sFilter
+ 		= tr("SysEx files (*.%1)").arg(sExt);
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+-	if (pOptions->bDontUseNativeDialogs)
++	if (pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filename to save...
+-	sFilename = QFileDialog::getOpenFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	sFilename = QFileDialog::getOpenFileName(pParentWidget,
+ 		sTitle, pOptions->sMidiSysexDir, sFilter, NULL, options);
+ #else
+ 	// Construct save-file dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, pOptions->sMidiSysexDir, sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+@@ -510,16 +519,19 @@ void qtractorMidiSysexForm::saveSlot (void)
+ 		const QString& sFilter
+ 			= tr("Sysex files (*.%1)").arg(sExt);
+ 		qtractorOptions *pOptions = qtractorOptions::getInstance();
++		QWidget *pParentWidget = NULL;
+ 		QFileDialog::Options options = 0;
+-		if (pOptions->bDontUseNativeDialogs)
++		if (pOptions->bDontUseNativeDialogs) {
+ 			options |= QFileDialog::DontUseNativeDialog;
++			pParentWidget = this;
++		}
+ 	#if 1//QT_VERSION < 0x040400
+ 		// Ask for the filename to save...
+-		sFilename = QFileDialog::getSaveFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++		sFilename = QFileDialog::getSaveFileName(pParentWidget,
+ 			sTitle, sFilename, sFilter, NULL, options);
+ 	#else
+ 		// Construct save-file dialog...
+-		QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL, sTitle, sFilename, sFilter);
++		QFileDialog fileDialog(pParentWidget, sTitle, sFilename, sFilter);
+ 		// Set proper open-file modes...
+ 		fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+ 		fileDialog.setFileMode(QFileDialog::AnyFile);
+diff --git a/src/qtractorOptionsForm.cpp b/src/qtractorOptionsForm.cpp
+index 237b5a8..99072a1 100644
+--- a/src/qtractorOptionsForm.cpp
++++ b/src/qtractorOptionsForm.cpp
+@@ -1055,12 +1055,16 @@ void qtractorOptionsForm::chooseAudioMeterColor (void)
+ 	const QString& sTitle
+ 		= tr("Audio Meter Color") + " - " QTRACTOR_TITLE;
+ 
++	QWidget *pParentWidget = NULL;
+ 	QColorDialog::ColorDialogOptions options = 0;
+-	if (m_pOptions && m_pOptions->bDontUseNativeDialogs)
++	if (m_pOptions && m_pOptions->bDontUseNativeDialogs) {
+ 		options |= QColorDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ 
+ 	const QColor& color = QColorDialog::getColor(
+-		QColor(m_ui.AudioMeterColorLineEdit->text()), this, sTitle, options);
++		QColor(m_ui.AudioMeterColorLineEdit->text()),
++		pParentWidget, sTitle, options);
+ 
+ 	if (color.isValid())
+ 		m_ui.AudioMeterColorLineEdit->setText(color.name());
+@@ -1073,12 +1077,16 @@ void qtractorOptionsForm::chooseMidiMeterColor (void)
+ 	const QString& sTitle
+ 		= tr("MIDI Meter Color") + " - " QTRACTOR_TITLE;
+ 
++	QWidget *pParentWidget = NULL;
+ 	QColorDialog::ColorDialogOptions options = 0;
+-	if (m_pOptions && m_pOptions->bDontUseNativeDialogs)
++	if (m_pOptions && m_pOptions->bDontUseNativeDialogs) {
+ 		options |= QColorDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ 
+ 	const QColor& color = QColorDialog::getColor(
+-		QColor(m_ui.MidiMeterColorLineEdit->text()), this, sTitle, options);
++		QColor(m_ui.MidiMeterColorLineEdit->text()),
++		pParentWidget, sTitle, options);
+ 
+ 	if (color.isValid())
+ 		m_ui.MidiMeterColorLineEdit->setText(color.name());
+@@ -1165,16 +1173,19 @@ void qtractorOptionsForm::choosePluginPath (void)
+ 	const QString& sTitle
+ 		= tr("Plug-in Directory") + " - " QTRACTOR_TITLE;
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = QFileDialog::ShowDirsOnly;
+-	if (m_pOptions->bDontUseNativeDialogs)
++	if (m_pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the directory...
+-	sPluginPath = QFileDialog::getExistingDirectory(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	sPluginPath = QFileDialog::getExistingDirectory(pParentWidget,
+ 		sTitle, m_ui.PluginPathComboBox->currentText(), options);
+ #else
+ 	// Construct open-directory dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, m_ui.PluginPathComboBox->currentText());
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+@@ -1402,17 +1413,19 @@ void qtractorOptionsForm::chooseLv2PresetDir (void)
+ 	const QString& sTitle
+ 		= tr("LV2 Presets Directory") + " - " QTRACTOR_TITLE;
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = QFileDialog::ShowDirsOnly;
+-	if (m_pOptions->bDontUseNativeDialogs)
++	if (m_pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1// QT_VERSION < 0x040400
+ 	// Ask for the directory...
+-	sLv2PresetDir = QFileDialog::getExistingDirectory(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	sLv2PresetDir = QFileDialog::getExistingDirectory(pParentWidget,
+ 		sTitle, sLv2PresetDir, options);
+ #else
+ 	// Construct open-directory dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
+-		sTitle, sLv2PresetDir);
++	QFileDialog fileDialog(pParentWidget, sTitle, sLv2PresetDir);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+ 	fileDialog.setFileMode(QFileDialog::DirectoryOnly);
+@@ -1441,13 +1454,16 @@ void qtractorOptionsForm::chooseMessagesFont (void)
+ 	const QString& sTitle
+ 		= tr("Messages Font") + " - " QTRACTOR_TITLE;
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFontDialog::FontDialogOptions options = 0;
+-	if (m_pOptions->bDontUseNativeDialogs)
++	if (m_pOptions->bDontUseNativeDialogs) {
+ 		options |= QFontDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ 
+ 	bool bOk = false;
+ 	const QFont font = QFontDialog::getFont(&bOk,
+-		m_ui.MessagesFontTextLabel->font(), this, sTitle, options);
++		m_ui.MessagesFontTextLabel->font(), pParentWidget, sTitle, options);
+ 	if (bOk) {
+ 		m_ui.MessagesFontTextLabel->setFont(font);
+ 		m_ui.MessagesFontTextLabel->setText(
+@@ -1468,16 +1484,19 @@ void qtractorOptionsForm::chooseMessagesLogPath (void)
+ 	const QString& sFilter
+ 		= tr("Log files (*.%1)").arg(sExt); 
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+-	if (m_pOptions->bDontUseNativeDialogs)
++	if (m_pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filename to open...
+-	sFilename = QFileDialog::getSaveFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	sFilename = QFileDialog::getSaveFileName(pParentWidget,
+ 		sTitle, m_ui.MessagesLogPathComboBox->currentText(), sFilter, NULL, options);
+ #else
+ 	// Construct open-file dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, m_ui.MessagesLogPathComboBox->currentText(), sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+diff --git a/src/qtractorPluginForm.cpp b/src/qtractorPluginForm.cpp
+index a465f68..71b74a9 100644
+--- a/src/qtractorPluginForm.cpp
++++ b/src/qtractorPluginForm.cpp
+@@ -557,16 +557,19 @@ void qtractorPluginForm::openPresetSlot (void)
+ 	const QString& sFilter
+ 		= tr("Preset files (*.%1)").arg(filters.join(" *."));
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+-	if (pOptions->bDontUseNativeDialogs)
++	if (pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filename to save...
+-	sFilename = QFileDialog::getOpenFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	sFilename = QFileDialog::getOpenFileName(pParentWidget,
+ 		sTitle, pOptions->sPresetDir, sFilter, NULL, options);
+ #else
+ 	// Construct save-file dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, pOptions->sPresetDir, sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+@@ -649,16 +652,19 @@ void qtractorPluginForm::savePresetSlot (void)
+ 				= tr("Save Preset") + " - " QTRACTOR_TITLE;
+ 			const QString& sFilter
+ 				= tr("Preset files (*.%1)").arg(filters.join(" *."));
++			QWidget *pParentWidget = NULL;
+ 			QFileDialog::Options options = 0;
+-			if (pOptions->bDontUseNativeDialogs)
++			if (pOptions->bDontUseNativeDialogs) {
+ 				options |= QFileDialog::DontUseNativeDialog;
++				pParentWidget = this;
++			}
+ 		#if 1//QT_VERSION < 0x040400
+ 			// Ask for the filename to save...
+-			sFilename = QFileDialog::getSaveFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++			sFilename = QFileDialog::getSaveFileName(pParentWidget,
+ 				sTitle, sFilename, sFilter, NULL, options);
+ 		#else
+ 			// Construct save-file dialog...
+-			QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++			QFileDialog fileDialog(pParentWidget,
+ 				sTitle, sFilename, sFilter);
+ 			// Set proper open-file modes...
+ 			fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+@@ -1511,15 +1517,18 @@ void qtractorPluginPropertyWidget::buttonClicked (void)
+ 	const QString& sTitle
+ 		= tr("Open File") + " - " QTRACTOR_TITLE;
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+-	if (pOptions->bDontUseNativeDialogs)
++	if (pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+-	sFilename = QFileDialog::getOpenFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	sFilename = QFileDialog::getOpenFileName(pParentWidget,
+ 		sTitle, sFilename, QString(), NULL, options);
+ #else
+ 	// Construct open-file dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL, sTitle, sFilename);
++	QFileDialog fileDialog(pParentWidget, sTitle, sFilename);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+ 	fileDialog.setFileMode(QFileDialog::ExistingFile);
+diff --git a/src/qtractorSessionForm.cpp b/src/qtractorSessionForm.cpp
+index a5672b9..0ba0fe7 100644
+--- a/src/qtractorSessionForm.cpp
++++ b/src/qtractorSessionForm.cpp
+@@ -288,15 +288,18 @@ void qtractorSessionForm::browseSessionDir (void)
+ 	const QString& sTitle
+ 		= tr("Session Directory") + " - " QTRACTOR_TITLE;
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = QFileDialog::ShowDirsOnly;
+-	if (pOptions->bDontUseNativeDialogs)
++	if (pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+-	QString sSessionDir = QFileDialog::getExistingDirectory(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QString sSessionDir = QFileDialog::getExistingDirectory(pParentWidget,
+ 		sTitle, m_ui.SessionDirComboBox->currentText(), options);
+ #else
+ 	// Construct open-directory dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	QFileDialog fileDialog(pParentWidget,
+ 		sTitle, m_ui.SessionDirComboBox->currentText());
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+diff --git a/src/qtractorTrackForm.cpp b/src/qtractorTrackForm.cpp
+index 0574ca9..6a98566 100644
+--- a/src/qtractorTrackForm.cpp
++++ b/src/qtractorTrackForm.cpp
+@@ -1162,17 +1162,20 @@ void qtractorTrackForm::trackIconClicked (void)
+ 	const QString& sFilter
+ 		= filters.join(";;");
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+ 	qtractorOptions *pOptions = qtractorOptions::getInstance();
+-	if (pOptions && pOptions->bDontUseNativeDialogs)
++	if (pOptions && pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filename to open...
+-	sFilename = QFileDialog::getOpenFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL,
++	sFilename = QFileDialog::getOpenFileName(pParentWidget,
+ 		sTitle, sFilename, sFilter, NULL, options);
+ #else
+ 	// Construct open-file dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL, sTitle, sFilename, sFilter);
++	QFileDialog fileDialog(pParentWidget, sTitle, sFilename, sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+ 	fileDialog.setFileMode(QFileDialog::AnyFile);
+@@ -1435,13 +1438,17 @@ void qtractorTrackForm::selectForegroundColor (void)
+ 	const QString& sTitle
+ 		= tr("Foreground Color") + " - " QTRACTOR_TITLE;
+ 
++	QWidget *pParentWidget = NULL;
+ 	QColorDialog::ColorDialogOptions options = 0;
+ 	qtractorOptions *pOptions = qtractorOptions::getInstance();
+-	if (pOptions && pOptions->bDontUseNativeDialogs)
++	if (pOptions && pOptions->bDontUseNativeDialogs) {
+ 		options |= QColorDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ 
+ 	const QColor& color = QColorDialog::getColor(
+-		colorItem(m_ui.ForegroundColorComboBox), this, sTitle, options);
++		colorItem(m_ui.ForegroundColorComboBox),
++		pParentWidget, sTitle, options);
+ 
+ 	if (color.isValid()) {
+ 		m_props.foreground = color;
+@@ -1457,13 +1464,17 @@ void qtractorTrackForm::selectBackgroundColor (void)
+ 	const QString& sTitle
+ 		= tr("Background Color") + " - " QTRACTOR_TITLE;
+ 
++	QWidget *pParentWidget = NULL;
+ 	QColorDialog::ColorDialogOptions options = 0;
+ 	qtractorOptions *pOptions = qtractorOptions::getInstance();
+-	if (pOptions && pOptions->bDontUseNativeDialogs)
++	if (pOptions && pOptions->bDontUseNativeDialogs) {
+ 		options |= QColorDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ 
+ 	const QColor& color = QColorDialog::getColor(
+-		colorItem(m_ui.BackgroundColorComboBox), this, sTitle, options);
++		colorItem(m_ui.BackgroundColorComboBox),
++		pParentWidget, sTitle, options);
+ 
+ 	if (color.isValid()) {
+ 		m_props.background = color;
+diff --git a/src/qtractorTracks.cpp b/src/qtractorTracks.cpp
+index ef6014d..9b9c4c4 100644
+--- a/src/qtractorTracks.cpp
++++ b/src/qtractorTracks.cpp
+@@ -1184,17 +1184,20 @@ bool qtractorTracks::mergeExportAudioClips ( qtractorClipCommand *pClipCommand )
+ 	const QString& sFilter
+ 		= tr("Audio files (*.%1)").arg(sExt); 
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+ 	qtractorOptions *pOptions = qtractorOptions::getInstance();
+-	if (pOptions && pOptions->bDontUseNativeDialogs)
++	if (pOptions && pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filename to save...
+-	QString sFilename = QFileDialog::getSaveFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL, sTitle,
++	QString sFilename = QFileDialog::getSaveFileName(pParentWidget, sTitle,
+ 		pSession->createFilePath(pTrack->trackName(), sExt), sFilter, NULL, options);
+ #else
+ 	// Construct save-file dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL, sTitle,
++	QFileDialog fileDialog(pParentWidget, sTitle,
+ 		pSession->createFilePath(pTrack->trackName(), sExt), sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+@@ -1451,17 +1454,20 @@ bool qtractorTracks::mergeExportMidiClips ( qtractorClipCommand *pClipCommand )
+ 	const QString& sFilter
+ 		= tr("MIDI files (*.%1 *.smf *.midi)").arg(sExt); 
+ 
++	QWidget *pParentWidget = NULL;
+ 	QFileDialog::Options options = 0;
+ 	qtractorOptions *pOptions = qtractorOptions::getInstance();
+-	if (pOptions && pOptions->bDontUseNativeDialogs)
++	if (pOptions && pOptions->bDontUseNativeDialogs) {
+ 		options |= QFileDialog::DontUseNativeDialog;
++		pParentWidget = this;
++	}
+ #if 1//QT_VERSION < 0x040400
+ 	// Ask for the filename to save...
+-	QString sFilename = QFileDialog::getSaveFileName(options & QFileDialog::DontUseNativeDialog ? this : NULL, sTitle,
++	QString sFilename = QFileDialog::getSaveFileName(pParentWidget, sTitle,
+ 		pSession->createFilePath(pTrack->trackName(), sExt), sFilter, NULL, options);
+ #else
+ 	// Construct save-file dialog...
+-	QFileDialog fileDialog(options & QFileDialog::DontUseNativeDialog ? this : NULL, sTitle,
++	QFileDialog fileDialog(pParentWidget, sTitle,
+ 		pSession->createFilePath(pTrack->trackName(), sExt), sFilter);
+ 	// Set proper open-file modes...
+ 	fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+diff --git a/src/qtractorVstPlugin.cpp b/src/qtractorVstPlugin.cpp
+index 6df04ae..eef9e80 100644
+--- a/src/qtractorVstPlugin.cpp
++++ b/src/qtractorVstPlugin.cpp
+@@ -1507,10 +1507,10 @@ static VstIntPtr qtractorVstPlugin_openFileSelector (
+ 		const QFileDialog::Options options = QFileDialog::DontUseNativeDialog;
+ 		if (pvfs->command == kVstFileLoad) {
+ 			sFilename = QFileDialog::getOpenFileName(
+-				NULL, sTitle, sDirectory, sFilter, NULL, options);
++				pParentWidget, sTitle, sDirectory, sFilter, NULL, options);
+ 		} else {
+ 			sFilename = QFileDialog::getSaveFileName(
+-				options & QFileDialog::DontUseNativeDialog ? pParentWidget, sTitle, sDirectory, sFilter, NULL, options);
++				pParentWidget, sTitle, sDirectory, sFilter, NULL, options);
+ 		}
+ 		if (!sFilename.isEmpty()) {
+ 			if (pvfs->returnPath == NULL) {
+@@ -1530,7 +1530,7 @@ static VstIntPtr qtractorVstPlugin_openFileSelector (
+ 			= QFileDialog::ShowDirsOnly | QFileDialog::DontUseNativeDialog;
+ 		const QString& sDirectory
+ 			= QFileDialog::getExistingDirectory(
+-				options & QFileDialog::DontUseNativeDialog ? pParentWidget, sTitle, pvfs->initialPath, options);
++				pParentWidget, sTitle, pvfs->initialPath, options);
+ 		if (!sDirectory.isEmpty()) {
+ 			if (pvfs->returnPath == NULL) {
+ 				pvfs->returnPath = new char [sDirectory.length() + 1];
+-- 
+2.9.5
+
