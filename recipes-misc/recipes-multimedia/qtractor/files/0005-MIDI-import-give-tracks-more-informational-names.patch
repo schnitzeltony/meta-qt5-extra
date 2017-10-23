@@ -1,0 +1,330 @@
+From fff172e17a9b718403948fac449c877cdeb046b8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 18 Oct 2017 23:39:57 +0200
+Subject: [PATCH] MIDI import: give tracks more informational names
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Name is created by the following sequence - if name is not empty stop:
+
+* If supplied, set track name found in MIDI file
+* Try General MIDI names
+* Set name of clip imported (usually shortened MIDI file name)
+
+Upstream-Status: Submitted [1]
+
+https://github.com/rncbc/qtractor/pull/86
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/qtractorMainForm.cpp |   2 +-
+ src/qtractorMidiClip.cpp |  11 +++
+ src/qtractorMidiClip.h   |   6 ++
+ src/qtractorTracks.cpp   | 181 +++++++++++++++++++++++++++++++++++++++++++++--
+ src/qtractorTracks.h     |   6 +-
+ 5 files changed, 200 insertions(+), 6 deletions(-)
+
+diff --git a/src/qtractorMainForm.cpp b/src/qtractorMainForm.cpp
+index 0fbb649..b3c0f76 100644
+--- a/src/qtractorMainForm.cpp
++++ b/src/qtractorMainForm.cpp
+@@ -3787,7 +3787,7 @@ void qtractorMainForm::trackImportMidi (void)
+ 		const unsigned long iClipStart = m_pSession->editHead();
+ 		qtractorTrack *pTrack = m_pTracks->currentTrack();
+ 		m_pTracks->addMidiTracks(
+-			m_pFiles->midiListView()->openFileNames(), iClipStart, pTrack);
++			m_pFiles->midiListView()->openFileNames(), iClipStart, pTrack, true);
+ 		m_pTracks->trackView()->ensureVisibleFrame(iClipStart);
+ 	}
+ }
+diff --git a/src/qtractorMidiClip.cpp b/src/qtractorMidiClip.cpp
+index 5928846..8af1d73 100644
+--- a/src/qtractorMidiClip.cpp
++++ b/src/qtractorMidiClip.cpp
+@@ -346,6 +346,7 @@ bool qtractorMidiClip::openMidiFile (
+ 	// Set local properties...
+ 	setFilename(sFilename);
+ 	setDirty(false);
++	m_sTrackNameRead.clear();
+ 
+ 	// Register file path...
+ 	pSession->files()->addClipItem(qtractorFileList::Midi, this, bWrite);
+@@ -476,6 +477,10 @@ bool qtractorMidiClip::openMidiFile (
+ 		// We should have events, otherwise this clip is of no use...
+ 		//if (m_pSeq->events().count() < 1)
+ 		//	return false;
++
++		// If MIDI file sets track name: keep it
++		m_sTrackNameRead = pSeq->name();
++
+ 		// And initial clip name...
+ 		pSeq->setName(shortClipName(QFileInfo(m_pFile->filename()).baseName()));
+ 	}
+@@ -514,6 +519,12 @@ bool qtractorMidiClip::openMidiFile (
+ }
+ 
+ 
++QString qtractorMidiClip::getTrackName (void)
++{
++	return m_sTrackNameRead;
++}
++
++
+ // Private cleanup.
+ void qtractorMidiClip::closeMidiFile (void)
+ {
+diff --git a/src/qtractorMidiClip.h b/src/qtractorMidiClip.h
+index f47528f..f45d1cc 100644
+--- a/src/qtractorMidiClip.h
++++ b/src/qtractorMidiClip.h
+@@ -60,6 +60,9 @@ public:
+ 	bool openMidiFile(const QString& sFilename, int iTrackChannel = 0,
+ 		int iMode = qtractorMidiFile::Read);
+ 
++	// Track name a read MIDI file has set
++	QString getTrackName();
++
+ 	// MIDI file properties accessors.
+ 	void setTrackChannel(unsigned short iTrackChannel)
+ 		{ m_iTrackChannel = iTrackChannel; }
+@@ -306,6 +309,9 @@ private:
+ 	QPoint m_posEditor;
+ 	QSize m_sizeEditor;
+ 
++	// Track name read from MIDI
++	QString m_sTrackNameRead;
++
+ 	// Default MIDI file format (for capture/record)
+ 	static unsigned short g_iDefaultFormat;
+ };
+diff --git a/src/qtractorTracks.cpp b/src/qtractorTracks.cpp
+index 9b9c4c4..7cac92e 100644
+--- a/src/qtractorTracks.cpp
++++ b/src/qtractorTracks.cpp
+@@ -2803,7 +2803,7 @@ bool qtractorTracks::addAudioTracks ( const QStringList& files,
+ 
+ // Import MIDI files into new tracks...
+ bool qtractorTracks::addMidiTracks ( const QStringList& files,
+-	unsigned long iClipStart, qtractorTrack *pAfterTrack )
++	unsigned long iClipStart, qtractorTrack *pAfterTrack, bool bEnhancedTrackNames )
+ {
+ 	// Have we some?
+ 	if (files.isEmpty())
+@@ -2877,10 +2877,27 @@ bool qtractorTracks::addMidiTracks ( const QStringList& files,
+ 			}
+ 			// Time to check whether there is actual data on track...
+ 			if (pMidiClip->clipLength() > 0) {
++				int iChannel = pMidiClip->channel();
++				// create track name
++				QString sTrackName;
++				if (bEnhancedTrackNames) {
++					// try track name from MIDI import
++					sTrackName = pMidiClip->getTrackName();
++					// no track name set try GM names
++					if (sTrackName.isEmpty()) {
++						QString sGMName = getGMName(iChannel, pMidiClip->prog());
++						if (!sGMName.isEmpty())
++							sTrackName = sGMName;
++					}
++				}
++				// default: shortened clip name
++				if (sTrackName.isEmpty())
++					sTrackName = pSession->uniqueTrackName(pMidiClip->clipName());
++
+ 				// Add the new track to composite command...
+-				pTrack->setTrackName(
+-					pSession->uniqueTrackName(pMidiClip->clipName()));
+-				pTrack->setMidiChannel(pMidiClip->channel());
++				pTrack->setTrackName(sTrackName);
++				pTrack->setMidiChannel(iChannel);
++
+ 				pImportTrackCommand->addTrack(pTrack);
+ 				++iUpdate;
+ 				// Don't forget to add this one to local repository.
+@@ -2984,6 +3001,162 @@ bool qtractorTracks::addMidiTrackChannel ( const QString& sPath,
+ }
+ 
+ 
++// MIDI specific: Get a GM name for channel/prog
++QString qtractorTracks::getGMName( int iChannel, int iProg )
++{
++	QString sName;
++	// static GM prog names
++	// no need to use numbers for multiple insstuments with same name
++	static const QStringList instrumentNamesGM = (
++				QStringList()
++				// 0-31
++				<< QObject::tr("Acoustic Grand Piano")
++				<< QObject::tr("Bright Acoustic Piano")
++				<< QObject::tr("Electric Grand Piano")
++				<< QObject::tr("Honky-tonk Piano")
++				<< QObject::tr("Electric Piano")
++				<< QObject::tr("Electric Piano")
++				<< QObject::tr("Harpsichord")
++				<< QObject::tr("Clavi")
++				<< QObject::tr("Celesta")
++				<< QObject::tr("Glockenspiel")
++				<< QObject::tr("Music Box")
++				<< QObject::tr("Vibraphone")
++				<< QObject::tr("Marimba")
++				<< QObject::tr("Xylophone")
++				<< QObject::tr("Tubular Bells")
++				<< QObject::tr("Dulcimer")
++				<< QObject::tr("Organ")
++				<< QObject::tr("Organ")
++				<< QObject::tr("Rock Organ")
++				<< QObject::tr("Church Organ")
++				<< QObject::tr("Reed Organ")
++				<< QObject::tr("Accordion")
++				<< QObject::tr("Harmonica")
++				<< QObject::tr("Tango Accordion")
++				<< QObject::tr("Nylon Guitar")
++				<< QObject::tr("Steel Guitar")
++				<< QObject::tr("Jazz E-Guitar")
++				<< QObject::tr("Clean E-Guitar")
++				<< QObject::tr("Muted E-Guitar")
++				<< QObject::tr("Overdrive Guitar")
++				<< QObject::tr("Distorted Guitar")
++				<< QObject::tr("Harmonic Guitar")
++				// 32-63
++				<< QObject::tr("Acoustic Bass")
++				<< QObject::tr("Fingered E-Bass")
++				<< QObject::tr("Picked E-Bass")
++				<< QObject::tr("Fretless Bass")
++				<< QObject::tr("Slap Bass")
++				<< QObject::tr("Slap Bass")
++				<< QObject::tr("Synth Bass")
++				<< QObject::tr("Synth Bass")
++				<< QObject::tr("Violin")
++				<< QObject::tr("Viola")
++				<< QObject::tr("Cello")
++				<< QObject::tr("Contrabass")
++				<< QObject::tr("Tremolo")
++				<< QObject::tr("Pizicato")
++				<< QObject::tr("Harp")
++				<< QObject::tr("Timpani")
++				<< QObject::tr("Strings")
++				<< QObject::tr("Strings")
++				<< QObject::tr("Synth Strings")
++				<< QObject::tr("Synth Strings")
++				<< QObject::tr("Choir Aah")
++				<< QObject::tr("Voice Ooh")
++				<< QObject::tr("Synth Voice")
++				<< QObject::tr("Hit Orchestra")
++				<< QObject::tr("Trumpet")
++				<< QObject::tr("Trombone")
++				<< QObject::tr("Tuba")
++				<< QObject::tr("Trumpet Muted")
++				<< QObject::tr("French Horn")
++				<< QObject::tr("Brass")
++				<< QObject::tr("Synth Brass")
++				<< QObject::tr("SynthBrass")
++				// 64-95
++				<< QObject::tr("Soprano Sax")
++				<< QObject::tr("Alto Sax")
++				<< QObject::tr("Tenor Sax")
++				<< QObject::tr("Baritone Sax")
++				<< QObject::tr("Oboe")
++				<< QObject::tr("Horn")
++				<< QObject::tr("Bassoon")
++				<< QObject::tr("Clarinet")
++				<< QObject::tr("Piccolo")
++				<< QObject::tr("Flute")
++				<< QObject::tr("Recorder")
++				<< QObject::tr("Pan Flute")
++				<< QObject::tr("Smashing Bottle")
++				<< QObject::tr("Shakuhachi")
++				<< QObject::tr("Whistle")
++				<< QObject::tr("Ocarina")
++				<< QObject::tr("Square Lead")
++				<< QObject::tr("Saw Lead")
++				<< QObject::tr("Callilope Lead")
++				<< QObject::tr("Chiffer Lead")
++				<< QObject::tr("Charang Lead")
++				<< QObject::tr("Voice Lead")
++				<< QObject::tr("5th Lead")
++				<< QObject::tr("Lead And Bass")
++				<< QObject::tr("New Age Pad")
++				<< QObject::tr("Warm Pad")
++				<< QObject::tr("Polysynth Pad")
++				<< QObject::tr("Choir Pad")
++				<< QObject::tr("Bowed Pad")
++				<< QObject::tr("Metallic Pad")
++				<< QObject::tr("Halo Pad")
++				<< QObject::tr("Sweep Pad")
++				// 96-127
++				<< QObject::tr("Rain")
++				<< QObject::tr("Soundtrack")
++				<< QObject::tr("Crystal")
++				<< QObject::tr("Atmosphere")
++				<< QObject::tr("Brightness")
++				<< QObject::tr("Goblins")
++				<< QObject::tr("Echoes")
++				<< QObject::tr("Sci-Fi")
++				<< QObject::tr("Sitar")
++				<< QObject::tr("Banjo")
++				<< QObject::tr("Shamisen")
++				<< QObject::tr("Koto")
++				<< QObject::tr("Kalimba")
++				<< QObject::tr("Bagpipe")
++				<< QObject::tr("Fiddle")
++				<< QObject::tr("Shanai")
++				<< QObject::tr("Tinkle Bell")
++				<< QObject::tr("Agogo")
++				<< QObject::tr("Steel Drums")
++				<< QObject::tr("Wood Block")
++				<< QObject::tr("Taiko Drum")
++				<< QObject::tr("Melodic Drum")
++				<< QObject::tr("Synth Drum")
++				<< QObject::tr("Reverse Cymbal")
++				<< QObject::tr("Fretless Noise")
++				<< QObject::tr("Breath Noise")
++				<< QObject::tr("Seashore")
++				<< QObject::tr("Birds")
++				<< QObject::tr("Oldschool Telephone")
++				<< QObject::tr("Helicopter")
++				<< QObject::tr("Applause")
++				<< QObject::tr("Gun Shot")
++	);
++
++	int iNameCount = instrumentNamesGM.size();
++	Q_ASSERT(iNameCount == 128);
++
++	// Drums (channel 10 - we keep data zero based)
++	if (iChannel == 9)
++		sName = QObject::tr("Drums");
++	// Instruments program name
++	else if (iProg >= 0 && iProg < iNameCount)
++		sName = instrumentNamesGM[iProg];
++
++	return sName;
++}
++
++
+ // Track-list active maintenance update.
+ void qtractorTracks::updateTrack ( qtractorTrack *pTrack )
+ {
+diff --git a/src/qtractorTracks.h b/src/qtractorTracks.h
+index 2d9fa48..c45b12a 100644
+--- a/src/qtractorTracks.h
++++ b/src/qtractorTracks.h
+@@ -71,10 +71,14 @@ public:
+ 	bool addAudioTracks(const QStringList& files,
+ 		unsigned long iClipStart, qtractorTrack *pAfterTrack = NULL);
+ 	bool addMidiTracks(const QStringList& files,
+-		unsigned long iClipStart, qtractorTrack *pAfterTrack = NULL);
++		unsigned long iClipStart, qtractorTrack *pAfterTrack = NULL,
++		bool bEnhancedTrackNames = false);
+ 	bool addMidiTrackChannel(const QString& sPath, int iTrackChannel,
+ 		unsigned long iClipStart, qtractorTrack *pAfterTrack = NULL);
+ 
++	// MIDI specific: GM instrument names
++	static QString getGMName(int iChannel, int iProg);
++
+ 	// Track-list active maintenance update.
+ 	void updateTrack(qtractorTrack *pTrack = NULL);
+ 
+-- 
+2.9.5
+

@@ -18,17 +18,16 @@ DEPENDS += " \
 inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache
 
 SRC_URI = " \
-    ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+    git://github.com/rncbc/qtractor.git;branch=neonx \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     file://0002-do-nor-try-run-for-float-sse-detection.patch \
     file://0003-do-nor-try-run-for-suil-libs-detection.patch \
-    file://0004-Add-ARM-NEON-acceleration.patch \
-    file://0005-Add-ARM-NEON-acceleration-for-time-stretch-not-yet-t.patch \
-    file://0006-workaround-native-file-dialogs-hang-up-by-setting-pa.patch \
-    file://0007-neonx-workaround-native-file-dialogs-hang-up-by-sett.patch \
+    file://0004-Add-ARM-NEON-acceleration-for-time-stretch-not-yet-t.patch \
+    file://0005-MIDI-import-give-tracks-more-informational-names.patch \
 "
-SRC_URI[md5sum] = "7a2ea586eed8b8d8c7ebfdc876b33841"
-SRC_URI[sha256sum] = "3ace8b4fdf623e5e6ccecd7047de73f72bcfdd10b01f187079832092ac936b9d"
+SRCREV = "4af19b298679e4d80ee2496ecf0175526f894919"
+PV = "0.8.4+git${SRCPV}"
+S = "${WORKDIR}/git"
 
 EXTRA_OECONF = " \
     --with-qmake=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/qmake \
