@@ -36,8 +36,8 @@ SRC_URI = " \
     file://0002-Use-ARM-NEON-intrinsics-if-available-for-mixing-func.patch \
     file://ardour5.desktop \
 "
-SRCREV = "bd40b9132cbac2d2b79ba0ef480bd41d837f8f71"
-PV = "5.11"
+SRCREV = "ae0dcdc0c5d13483271065c360e378202d20170a"
+PV = "5.12"
 S = "${WORKDIR}/git"
 
 
