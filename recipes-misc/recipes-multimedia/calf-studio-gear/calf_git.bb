@@ -10,7 +10,7 @@ SRC_URI = " \
     git://github.com/calf-studio-gear/calf.git \
     file://0001-Do-store-calfmakerdf-commandline-for-later-use-in-qe.patch \
 "
-SRCREV = "82d61aef1207dc74aafde73b6baaa64c23a3aeb3"
+SRCREV = "8694a391b27b4951ca569d3d199934db7ed54d74"
 S = "${WORKDIR}/git"
 PV = "0.0.60+git${SRCPV}"
 
