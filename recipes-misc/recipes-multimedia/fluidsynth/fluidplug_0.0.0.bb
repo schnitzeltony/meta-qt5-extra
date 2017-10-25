@@ -2,6 +2,8 @@ SUMMARY = "FluidPlug - SoundFonts as LV2 plugins via FluidSynth"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://source/FluidPlug.c;beginline=5;endline=15;md5=4932c97445ed4b8b2ce1203706e06a49"
 
+# TODO: sf2 are downloaded from linuxaudio.org. There was no license information found so far
+
 inherit pkgconfig
 
 DEPENDS += " \
@@ -30,6 +32,14 @@ do_install() {
         file=`basename $file`
         sf2name=`echo $file | sed -e 's#lv2#sf2##'`
         ln -sf  ${libdir}/lv2/$file/FluidPlug.sf2 ${D}${datadir}/sf2/$sf2name
+    done
+
+    # rename some files back
+    cd ${D}${datadir}/sf2
+    for file in `find -name 'Fluid*.sf2'`; do
+        # All the fluid sf2s are based on Fluidr3
+        newname=`echo $file | sed -e 's#Fluid#Fluidr3##'`
+	    mv $file $newname
     done
 }
 
