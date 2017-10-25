@@ -24,6 +24,16 @@ do_compile_prepend() {
 
 do_install() {
     oe_runmake DESTDIR=${D} PREFIX=${prefix} install
+    install -d ${D}${datadir}/sf2
+    cd ${S}
+    for file in `find -name '*.lv2'`; do
+        file=`basename $file`
+        sf2name=`echo $file | sed -e 's#lv2#sf2##'`
+        ln -sf  ${libdir}/lv2/$file/FluidPlug.sf2 ${D}${datadir}/sf2/$sf2name
+    done
 }
 
-FILES_${PN} += "${libdir}/lv2"
+FILES_${PN} += " \
+    ${datadir}/sf2 \
+    ${libdir}/lv2 \
+"
