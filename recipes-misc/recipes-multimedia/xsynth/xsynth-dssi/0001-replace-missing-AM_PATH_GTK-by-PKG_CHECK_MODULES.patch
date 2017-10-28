@@ -1,0 +1,38 @@
+From bb2378e872d315b85d8c13473d9072b0aeeb0cbb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sat, 28 Oct 2017 20:50:10 +0200
+Subject: [PATCH] replace missing AM_PATH_GTK by PKG_CHECK_MODULES
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ configure.in | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
+
+diff --git a/configure.in b/configure.in
+index bc1ed5f..9939851 100644
+--- a/configure.in
++++ b/configure.in
+@@ -21,14 +21,7 @@ AC_ARG_WITH(gtk2, AC_HELP_STRING([--with-gtk2], [use GTK+ 2.0 default=yes]),
+             [ if test $withval = "yes"; then try_gtk2=yes ;
+               else try_gtk2=no ; fi ], try_gtk2=yes)
+ with_gtk=no
+-dnl First look for GTK+ 2.x, unless '--without-gtk2' was specified.
+-if test "x${try_gtk2}" = 'xyes'; then
+-    AM_PATH_GTK_2_0(2.0.0, with_gtk='yes (version 2.0)', with_gtk=no)
+-fi
+-dnl  No GTK+ 2.x found, look for GTK+ 1.2 instead
+-if test "x${with_gtk}" = 'xno'; then
+-    AM_PATH_GTK(1.2.0, with_gtk='yes (version 1.2)', AC_MSG_WARN([GUI will not be built because no version of GTK+ was found]))
+-fi
++PKG_CHECK_MODULES(GTK, gtk+-2.0, with_gtk=yes, with_gtk=no)
+ AM_CONDITIONAL(BUILD_GUI, test "x${with_gtk}" != 'xno')
+ echo "GTK support: $with_gtk"
+ 
+-- 
+2.9.5
+
