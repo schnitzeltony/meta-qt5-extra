@@ -7,10 +7,10 @@ inherit waf distro_features_check pkgconfig
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS = "gtk+ qtbase lv2"
+DEPENDS = "gtk+ gtk+3 qtbase lv2"
 
-SRC_URI = "http://www.rncbc.org/archive/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "50598cc44f419f60805862272abe881c"
-SRC_URI[sha256sum] = "6ef2247eaeaf3b5d7fc7a2728bcbca797d40586111c954bbc9d80805211d51ce"
+SRC_URI = "http://download.drobilla.net/${BPN}-${PV}.tar.bz2"
+SRC_URI[md5sum] = "ba2f6bf631d8f3686772c2b5c9467628"
+SRC_URI[sha256sum] = "9895c531f80c7e89a2b4b47de589d73b70bf48db0b0cfe56e5d54237ea4b8848"
 
 FILES_${PN} += "${libdir}/suil-0"
