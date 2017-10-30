@@ -19,8 +19,8 @@ SRC_URI = " \
     http://linuxsynths.com/Synthv1PatchesDemos/Synthv1Patches06.tar.gz;name=linuxsynths-synthv1-presets;subdir=linuxsynths-synthv1-presets \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
 "
-SRC_URI[md5sum] = "a8a8ba00a2d10006ef8df8e08cb9b710"
-SRC_URI[sha256sum] = "48177a3ab90ea473ab183087572004a56b5ec504ff130195a1dba80efa17932b"
+SRC_URI[md5sum] = "0c71c38a3eff36fa85cc395fdc790b83"
+SRC_URI[sha256sum] = "31995feea77d4ff2b3a482190388ce25f4c313a9bc4741c8e3021e2fcdc47957"
 
 SRC_URI[autostatic-synthv1-presets1.md5sum] = "02210e5576310554cfe316fb72e88b74"
 SRC_URI[autostatic-synthv1-presets1.sha256sum] = "587ac8cb4cb645fc71603d1b4b351b24f3e4d9f15a53aca59c0f30cc9f66e253"
@@ -46,6 +46,7 @@ FILES_${PN} += " \
     ${datadir}/appdata \
     ${datadir}/mime \
     ${datadir}/icons \
+    ${datadir}/metainfo \
     ${datadir}/${BPN} \
     ${libdir}/lv2 \
 "
