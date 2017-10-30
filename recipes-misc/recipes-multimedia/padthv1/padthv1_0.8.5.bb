@@ -22,8 +22,8 @@ SRC_URI = " \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     ${FFTWSINGLEPATCH} \
 "
-SRC_URI[md5sum] = "62716da063ec23ccd4cc625349f6b62c"
-SRC_URI[sha256sum] = "198839e774466a2ad42e48f9d56755fd00f9c78c7c53386490ef4090e073dcdc"
+SRC_URI[md5sum] = "cb27d4e1133d6912b4fb0c18c05a4bdf"
+SRC_URI[sha256sum] = "229c0529f585ba7fb4c6e1236d88d8e0f047eab1e633d9a39d969cf63aa5d937"
 
 EXTRA_OECONF = " \
     --with-qmake=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/qmake \
@@ -36,6 +36,7 @@ EXTRA_OECONF = " \
 FILES_${PN} += " \
     ${datadir}/appdata \
     ${datadir}/mime \
+    ${datadir}/metainfo \
     ${datadir}/icons \
     ${libdir}/lv2 \
 "
