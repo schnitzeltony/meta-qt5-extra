@@ -30,3 +30,5 @@ FILES_${PN} += " \
     ${datadir}/mime \
     ${datadir}/menu \
 "
+
+RDEPENDS_${PN} += "carla"
