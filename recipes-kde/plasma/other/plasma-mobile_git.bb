@@ -11,8 +11,6 @@ DEPENDS += "\
     plasma-framework \
     kdeclarative \
     kio \
-    kdelibs4support \
-    kdelibs4support-native \
     kactivities \
     baloo \
     kcoreaddons-native \
@@ -24,7 +22,7 @@ DEPENDS += "\
 "
 
 SRC_URI = "git://anongit.kde.org/${BPN}.git"
-SRCREV = "8005327e22c54b1e7e4be20c844819a43aa7d108"
+SRCREV = "05676493808bbfafbc867392c541f799c8e25779"
 S = "${WORKDIR}/git"
 # Did not find version anywhere
 PV = "0.0.0+git${SRCPV}"
