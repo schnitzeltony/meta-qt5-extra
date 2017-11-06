@@ -1,0 +1,248 @@
+From dad78145c4c427d44ad63caaa15966e8fe5693bf Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sat, 4 Nov 2017 11:59:47 +0100
+Subject: [PATCH 1/4] Make plugin-lists and MIDI-manager-list thread-safe
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+During debugging (PC) and testing (RaspberryPi) the MIDI import dialog, qtractor
+crashed several times with segfaults due to inconsistent list state (the MIDI-
+manager case was mentioned in [1]). Since adding plugins to MIDI import the
+probabilty of these crashes increases because of performing 'dangerous'
+operations multiple times.
+
+To avoid this, lock/unlock guards were added under the following consideration:
+Keep the locking time as short as possible to reduce the probability of
+blocking audio-engine. For the implemetation qtractorSession::lock got a
+parameter 'bStabilize' set true by default. If set to false, no events are
+performed to avoid plugin-list-view updates with inconsistent data.
+
+Worth to mention: With this modification no more crashes happend.
+
+[1] https://github.com/rncbc/qtractor/issues/91
+
+Upstream-Status: Submitted [2]
+
+[2] https://github.com/rncbc/qtractor/pull/94
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/qtractorPlugin.cpp        | 40 +++++++++++++++++++++++++++++++++-------
+ src/qtractorPluginCommand.cpp | 16 ----------------
+ src/qtractorSession.cpp       | 14 +++++++++++---
+ src/qtractorSession.h         |  2 +-
+ 4 files changed, 45 insertions(+), 27 deletions(-)
+
+diff --git a/src/qtractorPlugin.cpp b/src/qtractorPlugin.cpp
+index e547381..651f603 100644
+--- a/src/qtractorPlugin.cpp
++++ b/src/qtractorPlugin.cpp
+@@ -1620,10 +1620,17 @@ void qtractorPluginList::insertPlugin (
+ 	// We'll get prepared before plugging it in...
+ 	pPlugin->setChannels(m_iChannels);
+ 
++	qtractorSession *pSession = qtractorSession::getInstance();
++	if (pSession == NULL)
++		return;
++
++	// Do not perform events while locking - list views are not yet updated.
++	pSession->lock(false);
+ 	if (pNextPlugin)
+ 		insertBefore(pPlugin, pNextPlugin);
+ 	else
+ 		append(pPlugin);
++	pSession->unlock();
+ 
+ 	// Now update each observer list-view...
+ 	QListIterator<qtractorPluginListView *> iter(m_views);
+@@ -1654,13 +1661,15 @@ void qtractorPluginList::movePlugin (
+ 	if (pPluginList == NULL)
+ 		return;
+ 
+-	// Remove and insert back again...
++	qtractorSession *pSession = qtractorSession::getInstance();
++	if (pSession == NULL)
++		return;
++
++	// Do not perform events while locking - list views are not yet updated.
++	pSession->lock(false);
++	// Remove it -> it is no more processed by worker thread.
+ 	pPluginList->unlink(pPlugin);
+-	if (pNextPlugin) {
+-		insertBefore(pPlugin, pNextPlugin);
+-	} else {
+-		append(pPlugin);
+-	}
++	pSession->unlock();
+ 
+ 	// DANGER: Gasp, we might be not the same...
+ 	if (pPluginList != this) {
+@@ -1713,6 +1722,16 @@ void qtractorPluginList::movePlugin (
+ 		pListView->setCurrentItem(pNextItem);
+ 	}
+ 
++	// Views are updated so perform events during lock.
++	pSession->lock();
++	// Insert back again -> processing continues.
++	if (pNextPlugin) {
++		insertBefore(pPlugin, pNextPlugin);
++	} else {
++		append(pPlugin);
++	}
++	pSession->unlock();
++
+ 	// update (both) lists for Auto-plugin-deactivation
+ 	autoDeactivatePlugins(m_bAutoDeactivated, true);
+ 	if (pPluginList != this)
+@@ -1723,8 +1742,15 @@ void qtractorPluginList::movePlugin (
+ // Remove-guarded plugin method.
+ void qtractorPluginList::removePlugin ( qtractorPlugin *pPlugin )
+ {
+-	// Just unlink the plugin from the list...
++	qtractorSession *pSession = qtractorSession::getInstance();
++	if (pSession == NULL)
++		return;
++
++	// Views are not touched here so perform events.
++	pSession->lock();
++	// Remove it -> it is no more processed by worker thread.
+ 	unlink(pPlugin);
++	pSession->unlock();
+ 
+ 	if (pPlugin->isActivated())
+ 		updateActivated(false);
+diff --git a/src/qtractorPluginCommand.cpp b/src/qtractorPluginCommand.cpp
+index 10bd717..c4321ca 100644
+--- a/src/qtractorPluginCommand.cpp
++++ b/src/qtractorPluginCommand.cpp
+@@ -65,8 +65,6 @@ bool qtractorPluginCommand::addPlugins (void)
+ 	if (pSession == NULL)
+ 		return false;
+ 
+-//	pSession->lock();
+-
+ 	// Add all listed plugins, in order...
+ 	QListIterator<qtractorPlugin *> iter(m_plugins);
+ 	while (iter.hasNext()) {
+@@ -78,8 +76,6 @@ bool qtractorPluginCommand::addPlugins (void)
+ 	// Avoid the disposal of the plugin reference(s).
+ 	setAutoDelete(false);
+ 
+-//	pSession->unlock();
+-
+ 	return true;
+ }
+ 
+@@ -91,8 +87,6 @@ bool qtractorPluginCommand::removePlugins (void)
+ 	if (pSession == NULL)
+ 		return false;
+ 
+-//	pSession->lock();
+-
+ 	// Unlink all listed plugins, in order...
+ 	QListIterator<qtractorPlugin *> iter(m_plugins);
+ 	iter.toBack();
+@@ -105,8 +99,6 @@ bool qtractorPluginCommand::removePlugins (void)
+ 	// Allow the disposal of the plugin reference(s).
+ 	setAutoDelete(true);
+ 
+-//	pSession->unlock();
+-
+ 	return true;
+ }
+ 
+@@ -284,8 +276,6 @@ bool qtractorInsertPluginCommand::redo (void)
+ 	if (pPluginList == NULL)
+ 		return false;
+ 
+-//	pSession->lock();
+-
+ 	qtractorPlugin *pNextPlugin = pPlugin->next();
+ 
+ 	// Insert it...
+@@ -297,8 +287,6 @@ bool qtractorInsertPluginCommand::redo (void)
+ 	// Whether to allow the disposal of the plugin reference.
+ 	setAutoDelete(false);
+ 
+-//	pSession->unlock();
+-
+ 	return true;
+ }
+ 
+@@ -317,8 +305,6 @@ bool qtractorInsertPluginCommand::undo (void)
+ 	if (pPluginList == NULL)
+ 		return false;
+ 
+-//	pSession->lock();
+-
+ 	qtractorPlugin *pNextPlugin = pPlugin->next();
+ 
+ 	// Insert it...
+@@ -330,8 +316,6 @@ bool qtractorInsertPluginCommand::undo (void)
+ 	// Whether to allow the disposal of the plugin reference.
+ 	setAutoDelete(true);
+ 
+-//	pSession->unlock();
+-
+ 	return true;
+ }
+ 
+diff --git a/src/qtractorSession.cpp b/src/qtractorSession.cpp
+index bc901d6..19e72b3 100644
+--- a/src/qtractorSession.cpp
++++ b/src/qtractorSession.cpp
+@@ -1250,13 +1250,17 @@ void qtractorSession::release (void)
+ }
+ 
+ 
+-void qtractorSession::lock (void)
++void qtractorSession::lock (bool bStabilize)
+ {
+ 	// Wind up as pending lock...
+ 	if (ATOMIC_INC(&m_locks) == 1) {
+ 		// Get lost for a while...
+-		while (!acquire())
+-			stabilize();
++		while (!acquire()) {
++			if (bStabilize)
++				stabilize();
++			else
++				QThread::yieldCurrentThread();
++		}
+ 	}
+ }
+ 
+@@ -1901,12 +1905,16 @@ void qtractorSession::resetAllMidiControllers ( bool bForceImmediate )
+ // MIDI manager list accessors.
+ void qtractorSession::addMidiManager ( qtractorMidiManager *pMidiManager )
+ {
++	lock();
+ 	m_midiManagers.append(pMidiManager);
++	unlock();
+ }
+ 
+ void qtractorSession::removeMidiManager ( qtractorMidiManager *pMidiManager )
+ {
++	lock();
+ 	m_midiManagers.remove(pMidiManager);
++	unlock();
+ }
+ 
+ 
+diff --git a/src/qtractorSession.h b/src/qtractorSession.h
+index 151096e..821fa5b 100644
+--- a/src/qtractorSession.h
++++ b/src/qtractorSession.h
+@@ -229,7 +229,7 @@ public:
+ 	// Session RT-safe pseudo-locking primitives.
+ 	bool acquire();
+ 	void release();
+-	void lock();
++	void lock(bool bStabilize = false);
+ 	void unlock();
+ 
+ 	// Re-entrancy check.
+-- 
+2.9.5
+
