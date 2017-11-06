@@ -14,9 +14,11 @@ DEPENDS += " \
     jack \
     fftw \
     stk \
+    lame \
     fluidsynth \
     portaudio-v19 \
     libsdl \
+    carla \
     fltk fltk-native \
 "
 
