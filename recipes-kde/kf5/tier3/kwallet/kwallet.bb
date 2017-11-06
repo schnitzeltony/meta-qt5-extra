@@ -29,7 +29,7 @@ DEPENDS += " \
 # TBD: add KF5Gpgmepp with PACKAGECONFIG??
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "c7a7e47f5e7853f864d1ea295dd2dfdd"
-SRC_URI[sha256sum] = "dc06fe8917cf5ea61251e42e9c7e9e5662eb223aace1bf8ee4becf6a896cdae3"
+SRC_URI[md5sum] = "6f7fe0204d75eb6ecb6c32f2ec02fbca"
+SRC_URI[sha256sum] = "5f83a5ca245773abfe5b31c536996ca1aee312d512181d133edcd890874f9fee"
 
 FILES_${PN} += "${datadir}"

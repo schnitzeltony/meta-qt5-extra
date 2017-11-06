@@ -6,8 +6,8 @@ inherit kde-kf5
 
 DEPENDS = "qttools-native"
 
-SRC_URI[md5sum] = "cf6779e72493dd229902007720eb0d96"
-SRC_URI[sha256sum] = "6188a8ac8d799439204f69a1eb229431fc9f196790b88d6fb72bb3d57edb2332"
+SRC_URI[md5sum] = "777b57222f5c23d1599b8e8774e96b73"
+SRC_URI[sha256sum] = "b80536d7bed8c12fc492857d3d433b3859462402fe231e463efcd3bf44ffbcd1"
 SRC_URI += "file://0001-FindQtWaylandScanner.cmake-align-path-to-our-needs.patch"
 
 PV = "${KF5_VERSION}"

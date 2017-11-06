@@ -76,6 +76,7 @@ TIER_3 = " \
     kxmlgui \
     kxmlrpcclient \
     plasma-framework \
+    qqc2-desktop-style \
 "
 
 TIER_4 = " \
