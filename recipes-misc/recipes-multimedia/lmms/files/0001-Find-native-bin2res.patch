@@ -1,6 +1,6 @@
 From d224e6ccbd8c221172099e9c0162e03eeb1b6e18 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 12 Jan 2017 23:30:23 +0100
+Date: Mon, 6 Nov 2017 21:44:58 +0100
 Subject: [PATCH] Find native bin2res
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -15,11 +15,11 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/cmake/modules/BuildPlugin.cmake b/cmake/modules/BuildPlugin.cmake
-index 7fa7c4c..fb0758f 100644
+index a107ef5..1e182a4 100644
 --- a/cmake/modules/BuildPlugin.cmake
 +++ b/cmake/modules/BuildPlugin.cmake
-@@ -15,7 +15,7 @@ MACRO(BUILD_PLUGIN PLUGIN_NAME)
- 	IF(ER_LEN)
+@@ -27,7 +27,7 @@ MACRO(BUILD_PLUGIN PLUGIN_NAME)
+ 
  		SET(ER_H ${CMAKE_CURRENT_BINARY_DIR}/embedded_resources.h)
  		ADD_CUSTOM_COMMAND(OUTPUT ${ER_H}
 -			COMMAND ${BIN2RES}
@@ -28,18 +28,18 @@ index 7fa7c4c..fb0758f 100644
  			DEPENDS bin2res)
  	ENDIF(ER_LEN)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 24cedbf..73901ef 100644
+index 154ff4f..4ceddf6 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -43,7 +43,7 @@ ENDIF()
- 
- SET(lmms_EMBEDDED_RESOURCES "${CMAKE_SOURCE_DIR}/doc/AUTHORS" "${CMAKE_SOURCE_DIR}/LICENSE.txt" "${CONTRIBUTORS}")
+@@ -46,7 +46,7 @@ SET(lmms_EMBEDDED_RESOURCES
+ 	"${CMAKE_SOURCE_DIR}/LICENSE.txt"
+ 	"${CMAKE_SOURCE_DIR}/doc/CONTRIBUTORS")
  SET(LMMS_ER_H "${CMAKE_CURRENT_BINARY_DIR}/embedded_resources.h")
--ADD_CUSTOM_COMMAND(OUTPUT "${LMMS_ER_H}" COMMAND "${BIN2RES}" ARGS ${lmms_EMBEDDED_RESOURCES} > "\"${LMMS_ER_H}\"" DEPENDS bin2res)
-+ADD_CUSTOM_COMMAND(OUTPUT "${LMMS_ER_H}" COMMAND "bin2res" ARGS ${lmms_EMBEDDED_RESOURCES} > "\"${LMMS_ER_H}\"" DEPENDS bin2res)
+-ADD_CUSTOM_COMMAND(OUTPUT "${LMMS_ER_H}" COMMAND "${BIN2RES}" ARGS ${lmms_EMBEDDED_RESOURCES} > "${LMMS_ER_H}" DEPENDS bin2res)
++ADD_CUSTOM_COMMAND(OUTPUT "${LMMS_ER_H}" COMMAND "bin2res" ARGS ${lmms_EMBEDDED_RESOURCES} > "${LMMS_ER_H}" DEPENDS bin2res)
  
  # Paths relative to lmms executable
  FILE(RELATIVE_PATH LIB_DIR_RELATIVE "/${BIN_DIR}" "/${LIB_DIR}")
 -- 
-2.5.5
+2.9.5
 
