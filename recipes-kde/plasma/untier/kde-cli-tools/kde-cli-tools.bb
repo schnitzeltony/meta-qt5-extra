@@ -16,6 +16,7 @@ DEPENDS += " \
     kconfig-native \
     kdoctools-native \
     kcoreaddons-native \
+    kactivities \
     kiconthemes \
     ki18n \
     kcmutils \
@@ -25,8 +26,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "b4f2c715081a638778f412e21891ab67"
-SRC_URI[sha256sum] = "069a4032b7f98c2b04358f5af0d2974ec2d963853e144f2625af4412bdb82bb5"
+SRC_URI[md5sum] = "d74bb26154bf559a72d1bccf5daa1d18"
+SRC_URI[sha256sum] = "7133220cf68aea67ddca787103d1bd469386ee86a8ca177da51df4edb5830f7a"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

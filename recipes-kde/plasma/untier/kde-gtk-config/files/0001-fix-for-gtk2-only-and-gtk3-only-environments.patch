@@ -17,10 +17,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  create mode 100644 config-gtk.h.cmake
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 0da858d..f0bb39a 100644
+index 0605c02..48d4958 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -26,11 +26,12 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
+@@ -29,11 +29,12 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY
  # Set KI18n translation domain
  add_definitions(-DTRANSLATION_DOMAIN=\"kde-gtk-config\")
  
@@ -35,7 +35,7 @@ index 0da858d..f0bb39a 100644
       src/appearencegtk.cpp
       src/abstractappearance.cpp
       src/thread.cpp
-@@ -41,6 +42,16 @@ set(kcm_SRCS
+@@ -44,6 +45,16 @@ set(kcm_SRCS
       src/fontshelpers.cpp
  )
  
@@ -49,11 +49,11 @@ index 0da858d..f0bb39a 100644
 +
 +configure_file(config-gtk.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-gtk.h)
 +
- set(GHNS_FILES 
-      cgcicon.knsrc
-      cgctheme.knsrc
-@@ -62,8 +73,12 @@ install(TARGETS kcm_kdegtkconfig DESTINATION ${PLUGIN_INSTALL_DIR})
- install(FILES ${GHNS_FILES} DESTINATION ${CONFIG_INSTALL_DIR})
+ ki18n_wrap_ui(kcm_SRCS 
+      src/ui/gui.ui 
+      src/ui/dialog_installer.ui 
+@@ -59,8 +70,12 @@ install(TARGETS kcm_kdegtkconfig DESTINATION ${PLUGIN_INSTALL_DIR})
+ install(FILES cgctheme.knsrc cgcgtk3.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
  install(FILES kde-gtk-config.desktop DESTINATION ${SERVICES_INSTALL_DIR})
  
 +if(GTK2_FOUND)

@@ -9,6 +9,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 inherit kde-plasma distro_features_check gettext pkgconfig
 
 DEPENDS += " \
+    qtquickcontrols2 \
     breeze \
     kauth-native \
     kconfig \
@@ -25,8 +26,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "0911bf6174ee3ed98c5022744b8201f0"
-SRC_URI[sha256sum] = "068b4ed0b1160a78a336085f8b0bb192cd3c136f8a6a091f8ac7c593b207c565"
+SRC_URI[md5sum] = "a96320eca7c6f29631ee33353fc56d76"
+SRC_URI[sha256sum] = "a1bf8e27a4b9d7a2e6323a35edd92654ce4a9a7eb4aed13e8eacfb706e2f1c2f"
 
 FILES_${PN} += " \
     ${datadir}/kconf_update \

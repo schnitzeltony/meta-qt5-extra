@@ -50,6 +50,7 @@ UNTIER = " \
     plasma-integration \
     plasma-nm \
     plasma-pa \
+    plasma-vault \
     plasma-workspace-wallpapers \
     polkit-kde-agent-1 \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "powerdevil", "",d)} \

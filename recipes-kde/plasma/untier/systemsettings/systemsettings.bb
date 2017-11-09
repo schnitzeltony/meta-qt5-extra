@@ -8,9 +8,15 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gettext
 
 DEPENDS += " \
+    kdoctools-native \
+    sonnet-native \
+    kpackage-native \
     kcoreaddons-native \
     kauth-native \
     kconfig-native \
+    kactivities \
+    kactivities-stats \
+    kirigami2 \
     kitemviews \
     kcmutils \
     ki18n \
@@ -23,16 +29,15 @@ DEPENDS += " \
     kconfig \
     khtml \
     kdoctools \
-    kdoctools-native \
-    sonnet-native \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "bb0ecd75155f9536af7522c987a8b34c"
-SRC_URI[sha256sum] = "5e5a9d1b3b483cafd2aa61f1c245658449cdc1245f208c7fc4a3df534c842c17"
+SRC_URI[md5sum] = "f8f0a44bbc883aea202272a8b56f06d4"
+SRC_URI[sha256sum] = "c7512fdc714765d8e94dce7bb0dd0d310b92ab278c8e3245a6cdc15631507fa9"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
+    ${datadir}/kpackage \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
