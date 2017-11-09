@@ -31,8 +31,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "bb5cea86979114509ef11d02953c3588"
-SRC_URI[sha256sum] = "a8285ec2b1fb055f47bb7ddb86114077760887353d1a4f98b2500235ea199fca"
+SRC_URI[md5sum] = "c8627e79b26a80a7e151455a29611405"
+SRC_URI[sha256sum] = "c27f8b33ad0f1cc36c5af4f23352f02ab8de4a18e8a448f8ef80b41756f2bf62"
 SRC_URI += "file://0001-align-path-of-designer-plugins.patch"
 
 EXTRA_OECMAKE += "-DMARBLE_PRI_INSTALL_DIR=${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/modules"
