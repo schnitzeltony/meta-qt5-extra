@@ -23,12 +23,11 @@ SRC_URI = " \
     file://0002-do-nor-try-run-for-float-sse-detection.patch \
     file://0003-do-nor-try-run-for-suil-libs-detection.patch \
     file://0004-Add-ARM-NEON-acceleration-for-time-stretch-not-yet-t.patch \
-    file://0005-Make-plugin-lists-and-MIDI-manager-list-thread-safe.patch \
-    file://0006-Add-qtractorPluginListDocument-to-save-load-plugin-l.patch \
-    file://0007-qtractorImportTrackCommand-extend-to-accept-qtractor.patch \
-    file://0008-Optionally-enhance-MIDI-import.patch \
+    file://0005-Add-qtractorPluginListDocument-to-save-load-plugin-l.patch \
+    file://0006-qtractorImportTrackCommand-extend-to-accept-qtractor.patch \
+    file://0007-Add-MIDI-import-options-to-create-ready-to-play-sess.patch \
 "
-SRCREV = "1152ce6c8e64c76e5fadff59ca9e84aa6a647a9a"
+SRCREV = "3de003e171a605e7fb4dab761f3943727d8cad05"
 PV = "0.8.4+git${SRCPV}"
 S = "${WORKDIR}/git"
 

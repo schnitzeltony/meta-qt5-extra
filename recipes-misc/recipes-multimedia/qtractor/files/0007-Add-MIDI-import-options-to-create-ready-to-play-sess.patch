@@ -1,18 +1,16 @@
-From b48b25af8979c40e58c263338446cd419db4016a Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Sun, 5 Nov 2017 01:14:49 +0100
-Subject: [PATCH 4/4] Optionally enhance MIDI import
+From 19a97a228e1af0adcb2cc565920a14646215d638 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 9 Nov 2017 22:08:14 +0100
+Subject: [PATCH 3/3] Add MIDI import options to create ready-to-play sessions
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-In the 'MIDI' section of settings, the following can be set to get a ready to
-play MIDI import:
+In the 'MIDI' section of settings, a dialog can be opened to set up the
+following:
 
-* Plugins can be set. Each track imported gets the plugins with settings set in
-  dialog.
-* Bank used for instruments and drums can be set. When using plugins using
-  soundfonts it is useful to set instrument bank to 0 and drum bank to 128.
+* Plugins: Each track imported gets the plugins with settings made in dialog.
+* MIDI-bank used can be set seperately selected for instruments and drums.
 * Names of created tracks can be aligned:
   * MIDI filename: This is the same naming scheme as it was before this patch
   * Track n: Tracks ar named 'Track n' where 'n' is an incrementing number.
@@ -21,28 +19,25 @@ play MIDI import:
     especially on small monitors where large areas of patch section in track
     header are usually hidden.
 
-Upstream-Status: Submitted [1]
-
-[1] https://github.com/rncbc/qtractor/pull/94
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  src/qtractorMainForm.cpp           |  14 +-
- src/qtractorMidiImportExtender.cpp | 372 ++++++++++++++++++++++++
- src/qtractorMidiImportExtender.h   | 102 +++++++
- src/qtractorMidiImportForm.cpp     | 568 +++++++++++++++++++++++++++++++++++++
- src/qtractorMidiImportForm.h       | 119 ++++++++
- src/qtractorMidiImportForm.ui      | 396 ++++++++++++++++++++++++++
+ src/qtractorMidiImportExtender.cpp | 398 ++++++++++++++++++++++++++++
+ src/qtractorMidiImportExtender.h   | 100 +++++++
+ src/qtractorMidiImportForm.cpp     | 519 +++++++++++++++++++++++++++++++++++++
+ src/qtractorMidiImportForm.h       | 110 ++++++++
+ src/qtractorMidiImportForm.ui      | 396 ++++++++++++++++++++++++++++
  src/qtractorOptions.cpp            |  16 +-
  src/qtractorOptions.h              |   9 +
  src/qtractorOptionsForm.cpp        |  35 +++
  src/qtractorOptionsForm.h          |   5 +
  src/qtractorOptionsForm.ui         |  21 +-
  src/qtractorSession.cpp            |   2 +
- src/qtractorTracks.cpp             |  47 ++-
+ src/qtractorTrackList.cpp          |   8 +-
+ src/qtractorTracks.cpp             |  47 +++-
  src/qtractorTracks.h               |   4 +-
  src/src.pro                        |   5 +
- 15 files changed, 1702 insertions(+), 13 deletions(-)
+ 16 files changed, 1674 insertions(+), 15 deletions(-)
  create mode 100644 src/qtractorMidiImportExtender.cpp
  create mode 100644 src/qtractorMidiImportExtender.h
  create mode 100644 src/qtractorMidiImportForm.cpp
@@ -50,10 +45,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  create mode 100644 src/qtractorMidiImportForm.ui
 
 diff --git a/src/qtractorMainForm.cpp b/src/qtractorMainForm.cpp
-index 0fbb649..d2d5aa6 100644
+index d7d16ba..30ed26f 100644
 --- a/src/qtractorMainForm.cpp
 +++ b/src/qtractorMainForm.cpp
-@@ -75,6 +75,8 @@
+@@ -76,6 +76,8 @@
  #include "qtractorMidiEditorForm.h"
  #include "qtractorMidiEditor.h"
  
@@ -62,7 +57,7 @@ index 0fbb649..d2d5aa6 100644
  #include "qtractorTrackCommand.h"
  #include "qtractorCurveCommand.h"
  
-@@ -3786,9 +3788,15 @@ void qtractorMainForm::trackImportMidi (void)
+@@ -3833,9 +3835,15 @@ void qtractorMainForm::trackImportMidi (void)
  	if (m_pTracks) {
  		const unsigned long iClipStart = m_pSession->editHead();
  		qtractorTrack *pTrack = m_pTracks->currentTrack();
@@ -83,10 +78,10 @@ index 0fbb649..d2d5aa6 100644
  
 diff --git a/src/qtractorMidiImportExtender.cpp b/src/qtractorMidiImportExtender.cpp
 new file mode 100644
-index 0000000..875f94c
+index 0000000..431e9d7
 --- /dev/null
 +++ b/src/qtractorMidiImportExtender.cpp
-@@ -0,0 +1,372 @@
+@@ -0,0 +1,398 @@
 +// qtractorMidiImportExtender.cpp
 +//
 +/****************************************************************************
@@ -119,19 +114,28 @@ index 0000000..875f94c
 +#include "qtractorTrackCommand.h"
 +#include "QDomDocument"
 +
-+// It is not a good idea to delete plugins within a session. To avoid
-+// deletion, the plugins are kept in static m_pPluginList. As soon
-+// as an object of qtractorMidiImportExtender is created, a plugin-list
-+// is created to. It is either deleted by:
-+// * closing session which calls qtractorMidiImportExtender::clearPluginList
-+// * on import / first track: After moving plugins to target track, plugin
-+//   list is empty and can be deleted
++//----------------------------------------------------------------------
++// class qtractorMidiImportExtender -- MIDI import extender class.
++//
++
++//
++// It is not a good idea to delete plugins: At least DSSI plugins supporting
++// run_multiple_synths interface get confused and cause crashes when deleting.
++//
++// To avoid deletion of plugins the plugins are kept in static m_pPluginList
++// which is created as soon as pluginList() is called (typically by settings
++// dialog).
++// At MIDI import process the plugins in plugin list are reused by moving to
++// first track generated to avoid wasting resources.
++//
++
++
++// Pointer to singleton plugin list for display.
 +qtractorPluginList *qtractorMidiImportExtender::m_pPluginList = NULL;
 +
++
 +// Constructor.
-+qtractorMidiImportExtender::qtractorMidiImportExtender() :
-+	m_pPluginDomDocument(NULL), m_pPluginListDocument(NULL),
-+	m_iTrackNumber(0)
++qtractorMidiImportExtender::qtractorMidiImportExtender()
 +{
 +	// Get global session object
 +	qtractorSession *pSession = qtractorSession::getInstance();
@@ -142,57 +146,36 @@ index 0000000..875f94c
 +	if (!pOptions)
 +		return;
 +
-+	// Create and fill plugin-lists if when called first time in session
-+	if (!m_pPluginList) {
-+		m_pPluginList = new qtractorPluginList(0, 0);
-+
-+		// Restore plugin-list from persistant options.
-+		if (!pOptions->sMidiImportPlugins.isEmpty()) {
-+			QDomDocument domDocument("qtractorMidiImport");
-+			if (domDocument.setContent(pOptions->sMidiImportPlugins)) {
-+				qtractorPluginListDocument pluginListDocument(&domDocument, m_pPluginList);
-+				// Get root element and check for proper taq name.
-+				QDomElement elem = domDocument.documentElement();
-+				if (elem.tagName() == "PluginList")
-+					m_pPluginList->loadElement(&pluginListDocument, &elem);
-+			}
-+		}
-+		// Output bus gets to be the first available output bus (master).
-+		qtractorAudioBus *pAudioBus = NULL;
-+		qtractorAudioEngine *pAudioEngine = pSession->audioEngine();
-+		for (qtractorBus *pBus = (pAudioEngine->buses()).first();
-+				pBus; pBus = pBus->next()) {
-+			if (pBus->busMode() & qtractorBus::Output) {
-+				pAudioBus = static_cast<qtractorAudioBus *> (pBus);
-+				break;
-+			}
-+		}
-+
-+		// Plugin-List needs one or more channels - just to allow adding plugins.
-+		if (pAudioBus)
-+			m_pPluginList->setChannels(pAudioBus->channels(),
-+				qtractorPluginList::Midi);
-+		else
-+			m_pPluginList->setChannels(1, qtractorPluginList::Midi);
-+	}
-+
 +	// Keep a shadow copy of settings.
-+	m_tExtendedSettings.sMidiImportInstInst = pOptions->sMidiImportInstInst;
-+	m_tExtendedSettings.sMidiImportDrumInst = pOptions->sMidiImportDrumInst;
-+	m_tExtendedSettings.iMidiImportInstBank = pOptions->iMidiImportInstBank;
-+	m_tExtendedSettings.iMidiImportDrumBank = pOptions->iMidiImportDrumBank;
-+	m_tExtendedSettings.eMidiImportTrackNameType = (TrackNameType) pOptions->iMidiImportTrackName;
++	if (!pOptions->sMidiImportPlugins.isEmpty()) {
++		m_extendedSettings.pPluginDomDocument = new QDomDocument("qtractorMidiImport");
++		m_extendedSettings.pPluginDomDocument->setContent(pOptions->sMidiImportPlugins);
++	} else
++		m_extendedSettings.pPluginDomDocument = NULL;
++	m_extendedSettings.sMidiImportInstInst = pOptions->sMidiImportInstInst;
++	m_extendedSettings.sMidiImportDrumInst = pOptions->sMidiImportDrumInst;
++	m_extendedSettings.iMidiImportInstBank = pOptions->iMidiImportInstBank;
++	m_extendedSettings.iMidiImportDrumBank = pOptions->iMidiImportDrumBank;
++	m_extendedSettings.eMidiImportTrackNameType = (TrackNameType) pOptions->iMidiImportTrackName;
 +
 +	// Get reference of the last command before dialog.
-+	m_pLastCommand = NULL;
++	m_pLastUndoCommand = NULL;
 +	qtractorCommandList *pCommands = pSession->commands();
-+	m_pLastCommand = pCommands->lastCommand();
++	if (pCommands)
++		m_pLastUndoCommand = pCommands->lastCommand();
++
++	// Setup track number here. When setting track name, imported tracks are
++	// already created.
++	m_iTrackNumber = pSession->tracks().count();
 +}
 +
 +
 +// Destructor.
 +qtractorMidiImportExtender::~qtractorMidiImportExtender()
 +{
++	// cleanup document
++	if (m_extendedSettings.pPluginDomDocument)
++		delete m_extendedSettings.pPluginDomDocument;
 +}
 +
 +
@@ -204,60 +187,100 @@ index 0000000..875f94c
 +	if (!pOptions)
 +		return;
 +
-+	// Xmlize plugin list and staore in options
++	// Xmlize plugin list and store in options
 +	pluginListToDocument();
 +	QString strPluginListXML;
-+	if (m_pPluginDomDocument)
++	if (m_extendedSettings.pPluginDomDocument)
 +		// Store as XML string without whitespaces.
-+		strPluginListXML = m_pPluginDomDocument->toString(-1);
++		strPluginListXML = m_extendedSettings.pPluginDomDocument->toString(-1);
 +	pOptions->sMidiImportPlugins = strPluginListXML;
 +
 +	// Store other options
-+	pOptions->sMidiImportInstInst = m_tExtendedSettings.sMidiImportInstInst;
-+	pOptions->sMidiImportDrumInst = m_tExtendedSettings.sMidiImportDrumInst;
-+	pOptions->iMidiImportInstBank = m_tExtendedSettings.iMidiImportInstBank;
-+	pOptions->iMidiImportDrumBank = m_tExtendedSettings.iMidiImportDrumBank;
-+	pOptions->iMidiImportTrackName = (int)m_tExtendedSettings.eMidiImportTrackNameType;
++	pOptions->sMidiImportInstInst = m_extendedSettings.sMidiImportInstInst;
++	pOptions->sMidiImportDrumInst = m_extendedSettings.sMidiImportDrumInst;
++	pOptions->iMidiImportInstBank = m_extendedSettings.iMidiImportInstBank;
++	pOptions->iMidiImportDrumBank = m_extendedSettings.iMidiImportDrumBank;
++	pOptions->iMidiImportTrackName = (int)m_extendedSettings.eMidiImportTrackNameType;
 +}
 +
 +
-+// Undo commands done since creation.
++// Undo commands done since creation (for CANCEL on dialog).
 +void qtractorMidiImportExtender::backoutCommandList()
 +{
 +	// Backout all commands made in this dialog-session.
 +	qtractorSession *pSession = qtractorSession::getInstance();
 +	if (pSession)
-+		pSession->commands()->backout(m_pLastCommand);
++		pSession->commands()->backout(m_pLastUndoCommand);
 +}
 +
 +
-+// Restore command list to the point of creation.
++// Restore undo command list to the point of creation without performing
++// plugin list actions. Do this to avoid commands added to undo menu (for OK
++// on dialogs).
 +void qtractorMidiImportExtender::restoreCommandList()
 +{
-+	// Avoid inconsistent execution of undo menu entries for actions done
-+	// within dialog.
 +	qtractorSession *pSession = qtractorSession::getInstance();
 +	if (pSession) {
 +		qtractorCommandList *pCommands = pSession->commands();
-+		// Remove all commands without execution - tested: command-list keeps
++		// Remove all commands without execution - tested: command list keeps
 +		// them with proper auto-delete so they are cleaned up properly on
 +		// session close.
 +		for (qtractorCommand *pCurrLastCommand = pCommands->lastCommand();
-+			pCurrLastCommand != m_pLastCommand;
++			pCurrLastCommand != m_pLastUndoCommand;
 +			pCurrLastCommand = pCommands->lastCommand())
 +			pCommands->removeLastCommand();
 +	}
 +}
 +
 +
-+// Accessor to plugin list.
++// Accessor/creator for plugin list.
 +qtractorPluginList *qtractorMidiImportExtender::pluginList()
 +{
++	qtractorSession *pSession = qtractorSession::getInstance();
++	if (!pSession)
++		return NULL;
++
++	// Create plugin list.
++	if (!m_pPluginList) {
++		// Create plugin list.
++		m_pPluginList = new qtractorPluginList(0, qtractorPluginList::Midi);
++		// Create plugins from document.
++		if (m_extendedSettings.pPluginDomDocument) {
++			qtractorPluginListDocument pluginListDocument(
++						m_extendedSettings.pPluginDomDocument,
++						m_pPluginList);
++			// Get root element and check for proper taq name.
++			QDomElement elem = m_extendedSettings.pPluginDomDocument->documentElement();
++			if (elem.tagName() == "PluginList") {
++				pluginListDocument.loadElement(&elem);
++			}
++		}
++		// Plugin list needs channels set > 0. Otherwise all entries in
++		// plugin selection dialog are disabled. Try same channel count as
++		// master output audio bus. That is default connection for imported
++		// tracks.
++		qtractorAudioBus *pAudioBus = NULL;
++		qtractorAudioEngine *pAudioEngine = pSession->audioEngine();
++		for (qtractorBus *pBus = (pAudioEngine->buses()).first();
++				pBus; pBus = pBus->next()) {
++			if (pBus->busMode() & qtractorBus::Output) {
++				pAudioBus = static_cast<qtractorAudioBus *> (pBus);
++				break;
++			}
++		}
++		if (pAudioBus)
++			m_pPluginList->setChannels(pAudioBus->channels(),
++					qtractorPluginList::Midi);
++		else
++			// Use reasonable fallback channel count.
++			m_pPluginList->setChannels(2, qtractorPluginList::Midi);
++	}
++
 +	return m_pPluginList;
 +}
 +
 +
-+// Clear singleton plugin-list and delete plugins
++// Clear singleton plugin list and delete plugins
 +void qtractorMidiImportExtender::clearPluginList()
 +{
 +	if (m_pPluginList) {
@@ -266,53 +289,51 @@ index 0000000..875f94c
 +	}
 +}
 +
-+// Add plugins to track and return a track-edit-command for setting bank
++
++// Add plugins to track and return a track-edit-command for setting midi-bank.
 +qtractorEditTrackCommand *qtractorMidiImportExtender::modifyBareTrackAndGetEditCommand(
 +		qtractorTrack *pTrack)
 +{
-+	// Bail out if something is seriously wrong.
++	// Bail out if something is wrong.
 +	if (!pTrack)
 +		return NULL;
 +	qtractorPluginList *pTargetList = pTrack->pluginList();
 +	if (!pTargetList)
 +		return NULL;
 +
-+	// Add plugins
++	// Add plugins.
 +
-+	// Take plugins for first track from plugin-list.
++	// Take plugins for first track from plugin list.
 +	if (m_pPluginList) {
-+		// First ensure we have a valid document for further tracks
-+		pluginListToDocument();
-+
 +		// Move plugins to target.
 +		while (m_pPluginList->count())
 +			pTargetList->movePlugin(m_pPluginList->first(), NULL);
-+
-+		// Remove list: It is empty and no more required
++		// Plugin list is empty now so it can be removed.
 +		clearPluginList();
 +	}
-+
-+	// all further are cloned by our document - if there is one.
-+	else if (m_pPluginListDocument) {
++	// All further are cloned by our document - if there is one.
++	else if (m_extendedSettings.pPluginDomDocument) {
 +		// Get root element and check for proper taq name.
-+		QDomElement elem = m_pPluginDomDocument->documentElement();
-+		if (elem.tagName() == "PluginList")
-+			pTargetList->loadElement(m_pPluginListDocument, &elem);
++		QDomElement elem =
++				m_extendedSettings.pPluginDomDocument->documentElement();
++		if (elem.tagName() == "PluginList") {
++			qtractorPluginListDocument pluginListDocument(
++						m_extendedSettings.pPluginDomDocument, pTargetList);
++			pluginListDocument.loadElement(&elem);
++		}
 +	}
 +
-+
-+	// Set bank.
++	// Set MIDI bank.
++	bool bTrackChanged = false;
 +	bool bIsDrumTrack = pTrack->midiChannel() == 9;
 +	int iBankNew = bIsDrumTrack ?
-+		m_tExtendedSettings.iMidiImportDrumBank :
-+				m_tExtendedSettings.iMidiImportInstBank;
-+
-+	bool bTrackChanged = false;
++			m_extendedSettings.iMidiImportDrumBank :
++			m_extendedSettings.iMidiImportInstBank;
 +	qtractorTrack::Properties &properties = pTrack->properties();
 +	if (iBankNew >= 0) {
 +		properties.midiBank = iBankNew;
-+		// By default midiBankSelMethod is -1. If we don't set it here bank
-+		// change is not sent to instrument.
++		// By default midiBankSelMethod is -1. If not set it here, bank change
++		// is not send to instrument.
 +		properties.midiBankSelMethod = 0;
 +		bTrackChanged = true;
 +		// Special case for drum-tracks: Some MIDI files out in the wild do not
@@ -329,15 +350,17 @@ index 0000000..875f94c
 +}
 +
 +
++// Set instrument and track-name. Track must be 'complete' (have an output bus).
 +bool qtractorMidiImportExtender::modifyFinishedTrack(qtractorTrack *pTrack)
 +{
-+	// Bail out if something seriously is wrong.
++	// Bail out if something is wrong.
 +	if (!pTrack)
 +		return false;
 +	qtractorSession *pSession = qtractorSession::getInstance();
 +	if (!pSession)
 +		return false;
 +
++	// Some helpers...
 +	bool bTrackChanged = false;
 +	int iMidiChannel = pTrack->midiChannel();
 +	bool bIsDrumTrack = pTrack->midiChannel() == 9;
@@ -352,8 +375,8 @@ index 0000000..875f94c
 +		if (patch.prog >= 0) {
 +			// Set instrument.
 +			QString strInstrumentNew = bIsDrumTrack ?
-+				m_tExtendedSettings.sMidiImportDrumInst :
-+						m_tExtendedSettings.sMidiImportInstInst;
++				m_extendedSettings.sMidiImportDrumInst :
++						m_extendedSettings.sMidiImportInstInst;
 +
 +			// Update patch if necessary.
 +			if (!strInstrumentNew.isEmpty()) {
@@ -370,50 +393,54 @@ index 0000000..875f94c
 +
 +	// Set track name.
 +	QString sTrackName;
-+	switch (m_tExtendedSettings.eMidiImportTrackNameType) {
-+	case Midifile:
-+		// Default: no modification
-+		break;
-+	case Track: {
-+		// Set names only for tracks making music after import
-+		if (pTrack->midiBank() < 0 || pTrack->midiProg() < 0)
++	// Set names only for tracks making noise after import. This indicates
++	// immediately that such track is special or broken or...
++	if (pTrack->midiBank() >= 0 && pTrack->midiProg() >= 0) {
++		// Set track name based upon type set up.
++		switch (m_extendedSettings.eMidiImportTrackNameType) {
++		case Midifile:
++			// MIDI filename is default: no modification.
 +			break;
-+		sTrackName = pSession->uniqueTrackName(
-+						QString("Track %1").arg(++m_iTrackNumber));
-+		break;
-+	}
-+	case PatchName:
-+		// Instrument track.
-+		if (!bIsDrumTrack) {
-+			// Other bail out checks...
-+			if (pTrack->midiBank() < 0 || pTrack->midiProg() < 0)
-+				break;
-+			qtractorPluginList *pPluginList = pTrack->pluginList();
-+			if (!pPluginList)
-+				break;
-+			qtractorMidiManager *pMidiManager = pPluginList->midiManager();
-+			if (!pMidiManager)
-+				break;
++		case Track: {
++			sTrackName = pSession->uniqueTrackName(
++							QString("Track %1").arg(++m_iTrackNumber));
++			break;
++		}
++		case PatchName:
++			// Instrument track.
++			if (!bIsDrumTrack) {
++				// Collect what's necessary to get patch name.
++				qtractorPluginList *pPluginList = pTrack->pluginList();
++				if (!pPluginList)
++					break;
 +
-+			const qtractorMidiManager::Instruments& list
-+				= pMidiManager->instruments();
-+			QString sInstrumentName = m_tExtendedSettings.sMidiImportInstInst;
-+			if (!list.contains(sInstrumentName))
-+				break;
++				qtractorMidiManager *pMidiManager = pPluginList->midiManager();
++				if (!pMidiManager)
++					break;
 +
-+			// Banks reference...
-+			const qtractorMidiManager::Banks& banks
-+				= list[sInstrumentName];
-+			if (banks.contains(pTrack->midiBank())) {
++				const qtractorMidiManager::Instruments& list
++					= pMidiManager->instruments();
++				QString sInstrumentName = m_extendedSettings.sMidiImportInstInst;
++				if (!list.contains(sInstrumentName))
++					break;
++
++				const qtractorMidiManager::Banks& banks
++					= list[sInstrumentName];
++				if (!banks.contains(pTrack->midiBank()))
++					break;
++
++				// A patch name was found!
 +				const qtractorMidiManager::Progs& progs = banks[pTrack->midiBank()].progs;
 +				sTrackName = progs[pTrack->midiProg()];
 +			}
++
++			// Drum track's name is fixed - patch names are not really useful at drums.
++			else
++				sTrackName = QObject::tr("Drums");
++			break;
 +		}
-+		// Drum track.
-+		else
-+			sTrackName = QObject::tr("Drums");
-+		break;
 +	}
++	// Let name overrides cause effect.
 +	if (!sTrackName.isEmpty()) {
 +		pSession->releaseTrackName(pTrack);
 +		pTrack->setTrackName(sTrackName);
@@ -428,43 +455,37 @@ index 0000000..875f94c
 +// Accessor to exteneded settings.
 +qtractorMidiImportExtender::exportExtensionsData *qtractorMidiImportExtender::exportExtensions()
 +{
-+	return &m_tExtendedSettings;
++	return &m_extendedSettings;
 +}
 +
-+// Xmlize plugin List
++
++// Xmlize plugin list.
 +void qtractorMidiImportExtender::pluginListToDocument()
 +{
-+	// remove old plugin-list settings
-+	if (m_pPluginDomDocument) {
-+		delete m_pPluginDomDocument;
-+		m_pPluginDomDocument = NULL;
-+	}
-+	if (m_pPluginListDocument) {
-+		delete m_pPluginListDocument;
-+		m_pPluginListDocument = NULL;
++	// Remove old plugin list document.
++	if (m_extendedSettings.pPluginDomDocument) {
++		delete m_extendedSettings.pPluginDomDocument;
++		m_extendedSettings.pPluginDomDocument = NULL;
 +	}
 +
-+	// Xmlize plugin-list for options and cloning.
-+	if (m_pPluginList->count()) {
-+		m_pPluginDomDocument = new QDomDocument("qtractorMidiImport");
-+		m_pPluginListDocument = new qtractorPluginListDocument(m_pPluginDomDocument, m_pPluginList);
-+
-+		// Save plugin settings to document.
-+		QDomElement elem = m_pPluginDomDocument->createElement("PluginList");
-+		m_pPluginList->saveElement(m_pPluginListDocument, &elem);
-+		m_pPluginDomDocument->appendChild(elem);
++	if (m_pPluginList && m_pPluginList->count()) {
++		// Save plugin settings to new document.
++		m_extendedSettings.pPluginDomDocument = new QDomDocument("qtractorMidiImport");
++		qtractorPluginListDocument pluginListDocument(m_extendedSettings.pPluginDomDocument, m_pPluginList);
++		QDomElement elem = m_extendedSettings.pPluginDomDocument->createElement("PluginList");
++		m_pPluginList->saveElement(&pluginListDocument, &elem);
++		m_extendedSettings.pPluginDomDocument->appendChild(elem);
 +	}
 +}
-+
 +
 +
 +// end of qtractorMidiImportExtender.cpp
 diff --git a/src/qtractorMidiImportExtender.h b/src/qtractorMidiImportExtender.h
 new file mode 100644
-index 0000000..e5a1c87
+index 0000000..b507602
 --- /dev/null
 +++ b/src/qtractorMidiImportExtender.h
-@@ -0,0 +1,102 @@
+@@ -0,0 +1,100 @@
 +// qtractorMidiImportExtender.h
 +//
 +/****************************************************************************
@@ -510,14 +531,14 @@ index 0000000..e5a1c87
 +
 +	// Save all settings to global options.
 +	void saveSettings();
-+	// Undo commands done since creation.
++	// Undo plugin list commands done since creation.
 +	void backoutCommandList();
-+	// Restore command list to the point of creation.
++	// Restore plugin list command list to the point of creation.
 +	void restoreCommandList();
 +
-+	// Accessor to plugin list.
++	// Accessor/creator for plugin list.
 +	qtractorPluginList *pluginList();
-+	// Clear singleton plugin-list.
++	// Clear singleton plugin list - do only call on session close!!!
 +	static void	clearPluginList();
 +
 +	// Methods used during import.
@@ -527,8 +548,10 @@ index 0000000..e5a1c87
 +	// Track name set types.
 +	typedef enum { Midifile, Track, PatchName } TrackNameType;
 +
-+	// All extended settings except plugin list
++	// Declare all extended settings for MIDI import.
 +	typedef struct{
++		// Plugin list.
++		QDomDocument *pPluginDomDocument;
 +		// Instruments to set.
 +		QString sMidiImportInstInst;
 +		QString sMidiImportDrumInst;
@@ -547,21 +570,17 @@ index 0000000..e5a1c87
 +	// XMLize plugin List
 +	void pluginListToDocument();
 +
-+	// pointer to singleton plugin-list
++	// Pointer to singleton plugin list for display.
 +	static qtractorPluginList *m_pPluginList;
 +
-+	// Plugin list settings keeper.
-+	QDomDocument *m_pPluginDomDocument;
-+	qtractorPluginListDocument *m_pPluginListDocument;
-+
-+	// Counter for 'Track n' name-type
-+	int m_iTrackNumber;
-+
-+	// All settings except plugin list.
-+	exportExtensionsData m_tExtendedSettings;
++	// Settings member.
++	exportExtensionsData m_extendedSettings;
 +
 +	// Keep last command for backout / restore.
-+	qtractorCommand *m_pLastCommand;
++	qtractorCommand *m_pLastUndoCommand;
++
++	// Track number for 'Track n' naming type.
++	int m_iTrackNumber;
 +};
 +
 +#endif // __qtractorMidiImportExtender_h
@@ -569,10 +588,10 @@ index 0000000..e5a1c87
 +// end of qtractorMidiImportExtender.h
 diff --git a/src/qtractorMidiImportForm.cpp b/src/qtractorMidiImportForm.cpp
 new file mode 100644
-index 0000000..39ab05c
+index 0000000..30a6e86
 --- /dev/null
 +++ b/src/qtractorMidiImportForm.cpp
-@@ -0,0 +1,568 @@
+@@ -0,0 +1,519 @@
 +// qtractorMidiListView.cpp
 +//
 +/****************************************************************************
@@ -605,35 +624,6 @@ index 0000000..39ab05c
 +#include "qtractorInstrument.h"
 +#include "QPushButton"
 +
-+//----------------------------------------------------------------------------
-+// qtractorMidiImportForm::MidiProgramObserver -- Local dedicated observer.
-+
-+class qtractorMidiImportForm::MidiProgramObserver : public qtractorObserver
-+{
-+public:
-+
-+	// Constructor.
-+	MidiProgramObserver(qtractorMidiImportForm *pMidiImportForm, qtractorSubject *pSubject)
-+		: qtractorObserver(pSubject), m_pMidiImportForm(pMidiImportForm) {}
-+
-+protected:
-+
-+	// Update feedback.
-+	void update(bool bUpdate)
-+	{
-+		if (bUpdate) {
-+			const int iValue = int(value());
-+			const int iBank = (iValue >> 7) & 0x3fff;
-+			m_pMidiImportForm->setMidiProgram(iBank);
-+		}
-+	}
-+
-+private:
-+
-+	// Members.
-+	qtractorMidiImportForm *m_pMidiImportForm;
-+};
-+
 +
 +//----------------------------------------------------------------------
 +// class qtractorMidiImportForm -- UI wrapper form.
@@ -644,8 +634,7 @@ index 0000000..39ab05c
 +qtractorMidiImportForm::qtractorMidiImportForm(qtractorMidiImportExtender *pMidiImportExtender,
 +		QWidget *pParent, Qt::WindowFlags wflags )
 +		: QDialog(pParent, wflags),
-+		m_pMidiImportExtender(pMidiImportExtender),
-+		m_pMidiProgramObserver(NULL), m_iDirtySetup(0)
++		m_pMidiImportExtender(pMidiImportExtender), m_iDirtySetup(0)
 +{
 +
 +	// Get global session object.
@@ -653,7 +642,7 @@ index 0000000..39ab05c
 +	if (!pSession)
 +		return;
 +
-+	// Get plugin-list to work with.
++	// Get plugin list to display.
 +	qtractorPluginList *pPluginList = m_pMidiImportExtender->pluginList();
 +	if (!pPluginList)
 +		return;
@@ -672,12 +661,6 @@ index 0000000..39ab05c
 +	// Set plugin list...
 +	m_ui.PluginListView->setPluginList(pPluginList);
 +	m_ui.PluginListView->refresh();
-+
-+	// Setup Observer for the instrument bank combobox.
-+	if ( pPluginList->midiProgramSubject()) {
-+		m_pMidiProgramObserver = new MidiProgramObserver(this,
-+			pPluginList->midiProgramSubject());
-+	}
 +
 +	// Fill Instrument / bank comboboxes.
 +	updateInstruments();
@@ -762,9 +745,6 @@ index 0000000..39ab05c
 +// Destructor.
 +qtractorMidiImportForm::~qtractorMidiImportForm()
 +{
-+	// Do final cleanup
-+	delete m_pMidiProgramObserver;
-+
 +}
 +
 +
@@ -857,7 +837,7 @@ index 0000000..39ab05c
 +}
 +
 +
-+// Plugin-list add plugin.
++// Plugin list: add plugin.
 +void qtractorMidiImportForm::addPlugin()
 +{
 +	m_ui.PluginListView->addPlugin();
@@ -865,7 +845,7 @@ index 0000000..39ab05c
 +}
 +
 +
-+// Plugin-list remove plugin.
++// Plugin list: remove plugin.
 +void qtractorMidiImportForm::removePlugin()
 +{
 +	m_ui.PluginListView->removePlugin();
@@ -873,7 +853,7 @@ index 0000000..39ab05c
 +}
 +
 +
-+// Plugin-list move plugin up.
++// Plugin list: move plugin up.
 +void qtractorMidiImportForm::moveUpPlugin()
 +{
 +	m_ui.PluginListView->moveUpPlugin();
@@ -881,7 +861,7 @@ index 0000000..39ab05c
 +}
 +
 +
-+// Plugin-list move plugin down.
++// Plugin list: move plugin down.
 +void qtractorMidiImportForm::moveDownPlugin()
 +{
 +	m_ui.PluginListView->moveDownPlugin();
@@ -1125,28 +1105,18 @@ index 0000000..39ab05c
 +		pPlugin->closeForm();
 +	}
 +
-+	// Unlink plugin-list from view.
++	// Unlink plugin list from view.
 +	m_ui.PluginListView->setPluginList(NULL);
-+}
-+
-+
-+// MIDI bank/program settlers.
-+void qtractorMidiImportForm::setMidiProgram ( int iBank )
-+{
-+	QString sInstrumentName;
-+	if (m_ui.InstInstComboBox->currentIndex() > 0)
-+		sInstrumentName = m_ui.InstInstComboBox->currentText();
-+	updateBanks(sInstrumentName, iBank, Instruments);
 +}
 +
 +
 +// end of qtractorMidiImportForm.cpp
 diff --git a/src/qtractorMidiImportForm.h b/src/qtractorMidiImportForm.h
 new file mode 100644
-index 0000000..e36ac79
+index 0000000..fde1d32
 --- /dev/null
 +++ b/src/qtractorMidiImportForm.h
-@@ -0,0 +1,119 @@
+@@ -0,0 +1,110 @@
 +// qtractorMidiImportForm.h
 +//
 +/****************************************************************************
@@ -1192,9 +1162,6 @@ index 0000000..e36ac79
 +		QWidget *pParent = 0, Qt::WindowFlags wflags = 0);
 +	// Destructor.
 +	virtual ~qtractorMidiImportForm();
-+
-+	// MIDI observer callback
-+	void setMidiProgram(int iBank);
 +
 +protected slots:
 +
@@ -1244,12 +1211,6 @@ index 0000000..e36ac79
 +
 +	// Keep last command for backout / restore.
 +	qtractorCommand *m_pLastCommand;
-+
-+	// MIDI bank/program observer.
-+	class MidiProgramObserver;
-+
-+	// Observer to catch instument bank change
-+	MidiProgramObserver *m_pMidiProgramObserver;
 +
 +	// Button group around name-type radios
 +	QButtonGroup* m_groupNameRadios;
@@ -1730,7 +1691,7 @@ index ca8aad0..1822b63 100644
  	int iMetroChannel;
  	int iMetroBarNote;
 diff --git a/src/qtractorOptionsForm.cpp b/src/qtractorOptionsForm.cpp
-index 99072a1..f33dcb6 100644
+index f15a3a7..39b5f7e 100644
 --- a/src/qtractorOptionsForm.cpp
 +++ b/src/qtractorOptionsForm.cpp
 @@ -36,6 +36,8 @@
@@ -1784,7 +1745,7 @@ index 99072a1..f33dcb6 100644
  	// Save/commit to disk.
  	m_pOptions->saveOptions();
  
-+	// Remove plugin-list commands from undo-menu.
++	// Remove plugin list commands from undo menu.
 +	if (m_pMidiImportExtender)
 +		m_pMidiImportExtender->restoreCommandList();
 +
@@ -1796,7 +1757,7 @@ index 99072a1..f33dcb6 100644
  			return;
  		case QMessageBox::Discard:
 +			// In case Midi-Import dialog was closed with OK but changes
-+			// shall be discarded, the plugin-list changes must be discarded
++			// shall be discarded, the plugin list's changes must be discarded
 +			// too.
 +			if (m_pMidiImportExtender)
 +				m_pMidiImportExtender->backoutCommandList();
@@ -1894,7 +1855,7 @@ index ab60726..ff62036 100644
             <widget class="QLabel" name="MidiCaptureQuantizeTextLabel">
              <property name="font">
 diff --git a/src/qtractorSession.cpp b/src/qtractorSession.cpp
-index 19e72b3..f4415b2 100644
+index c080215..9d71fc5 100644
 --- a/src/qtractorSession.cpp
 +++ b/src/qtractorSession.cpp
 @@ -33,6 +33,7 @@
@@ -1913,8 +1874,34 @@ index 19e72b3..f4415b2 100644
  
  	m_iSessionStart  = 0;
  	m_iSessionEnd    = 0;
+diff --git a/src/qtractorTrackList.cpp b/src/qtractorTrackList.cpp
+index 0b710eb..7a99060 100644
+--- a/src/qtractorTrackList.cpp
++++ b/src/qtractorTrackList.cpp
+@@ -46,6 +46,7 @@
+ #include "qtractorMidiMonitor.h"
+ #include "qtractorAudioMeter.h"
+ #include "qtractorMidiMeter.h"
++#include "qtractorMidiImportExtender.h"
+ 
+ #include "qtractorOptions.h"
+ 
+@@ -1596,8 +1597,11 @@ void qtractorTrackList::dropEvent ( QDropEvent *pDropEvent )
+ 	const unsigned long iClipStart = (pSession ? pSession->editHead() : 0);
+ 	qtractorTrack *pAfterTrack = currentTrack();
+ 
+-	if (!midi_files.isEmpty())
+-		m_pTracks->addMidiTracks(midi_files, iClipStart, pAfterTrack);
++	if (!midi_files.isEmpty()) {
++		qtractorMidiImportExtender midiImportExtenter;
++		m_pTracks->addMidiTracks(
++					midi_files, iClipStart, pAfterTrack, &midiImportExtenter);
++	}
+ 	if (!audio_files.isEmpty())
+ 		m_pTracks->addAudioTracks(audio_files, iClipStart, pAfterTrack);
+ 
 diff --git a/src/qtractorTracks.cpp b/src/qtractorTracks.cpp
-index 2d2ff6a..86fec14 100644
+index 9b9c4c4..06405ea 100644
 --- a/src/qtractorTracks.cpp
 +++ b/src/qtractorTracks.cpp
 @@ -61,9 +61,12 @@
@@ -1971,7 +1958,7 @@ index 2d2ff6a..86fec14 100644
 -				++iUpdate;
 +				// Enhanced dialog: do modifications on bare track
 +				if (pMidiImportExtender)
-+				        pImportTrackCommand->addTrackEditCommand(
++					pImportTrackCommand->addTrackEditCommand(
 +						pMidiImportExtender->modifyBareTrackAndGetEditCommand(pTrack));
  				// Don't forget to add this one to local repository.
  				if (pMainForm)
@@ -1996,7 +1983,7 @@ index 2d2ff6a..86fec14 100644
  		// Put it in the form of an undoable command...
  		bResult = pSession->execute(pImportTrackCommand);
 +		// Tracks are complete now: instrument and track-name (based on
-+		// program-name are depending on instrument) can be set.
++		// patch name are depending on instrument) can be set.
 +		if (bResult && pMidiImportExtender) {
 +			bool bModified = false;
 +			QListIterator<qtractorTrack *> iter(addedTracks);
@@ -2049,19 +2036,19 @@ index 2d9fa48..dbe60de 100644
  		unsigned long iClipStart, qtractorTrack *pAfterTrack = NULL);
  
 diff --git a/src/src.pro b/src/src.pro
-index 92c0bd8..e87382f 100644
+index 949bded..3f9a394 100644
 --- a/src/src.pro
 +++ b/src/src.pro
-@@ -45,6 +45,8 @@ HEADERS += config.h \
- 	qtractorFileList.h \
+@@ -46,6 +46,8 @@ HEADERS += config.h \
  	qtractorFileListView.h \
  	qtractorFiles.h \
+ 	qtractorFileSystem.h \
 +	qtractorMidiImportExtender.h \
 +	qtractorMidiImportForm.h \
  	qtractorInsertPlugin.h \
  	qtractorInstrument.h \
  	qtractorInstrumentMenu.h \
-@@ -202,6 +204,8 @@ SOURCES += \
+@@ -204,6 +206,8 @@ SOURCES += \
  	qtractorMidiEventList.cpp \
  	qtractorMidiFile.cpp \
  	qtractorMidiFileTempo.cpp \
@@ -2070,7 +2057,7 @@ index 92c0bd8..e87382f 100644
  	qtractorMidiListView.cpp \
  	qtractorMidiManager.cpp \
  	qtractorMidiMeter.cpp \
-@@ -276,6 +280,7 @@ FORMS += \
+@@ -278,6 +282,7 @@ FORMS += \
  	qtractorMidiControlForm.ui \
  	qtractorMidiControlObserverForm.ui \
  	qtractorMidiEditorForm.ui \

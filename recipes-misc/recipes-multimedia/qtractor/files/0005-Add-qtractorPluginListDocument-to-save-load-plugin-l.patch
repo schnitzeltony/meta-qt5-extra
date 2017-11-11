@@ -1,7 +1,7 @@
-From b8ef1130bee18e5a28340c21941d67bd14949b2d Mon Sep 17 00:00:00 2001
+From a5275b9facecc8a77cb6c47c1c186b8135fa34f3 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Sat, 4 Nov 2017 20:41:50 +0100
-Subject: [PATCH 2/4] Add qtractorPluginListDocument to save/load plugin-lists
+Subject: [PATCH 1/3] Add qtractorPluginListDocument to save/load plugin-lists
  to XML
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -10,10 +10,6 @@ Content-Transfer-Encoding: 8bit
 For MIDI Import dialog it is necessary to save/load plugin-lists. The easiest
 way to do is to reuse the code used when saving/loading sessions. To perform
 save/load only on plugin-lists an own document class has to be created.
-
-Upstream-Status: Submitted [1]
-
-[1] https://github.com/rncbc/qtractor/pull/94
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
@@ -140,10 +136,10 @@ index 0000000..57464d7
 +
 +// end of qtractorPluginListDocument.h
 diff --git a/src/src.pro b/src/src.pro
-index 5e43fa7..92c0bd8 100644
+index b4bd0e3..949bded 100644
 --- a/src/src.pro
 +++ b/src/src.pro
-@@ -94,6 +94,7 @@ HEADERS += config.h \
+@@ -95,6 +95,7 @@ HEADERS += config.h \
  	qtractorPlugin.h \
  	qtractorPluginFactory.h \
  	qtractorPluginCommand.h \
@@ -151,7 +147,7 @@ index 5e43fa7..92c0bd8 100644
  	qtractorPluginListView.h \
  	qtractorPropertyCommand.h \
  	qtractorRingBuffer.h \
-@@ -218,6 +219,7 @@ SOURCES += \
+@@ -220,6 +221,7 @@ SOURCES += \
  	qtractorPlugin.cpp \
  	qtractorPluginFactory.cpp \
  	qtractorPluginCommand.cpp \

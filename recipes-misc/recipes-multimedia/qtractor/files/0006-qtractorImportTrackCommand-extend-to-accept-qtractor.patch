@@ -1,7 +1,7 @@
-From e509eef8b5653796acb44bdd187db6574ed39da8 Mon Sep 17 00:00:00 2001
+From 093a9a2af41222116dc7525dc3050842134d47c5 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Sun, 5 Nov 2017 00:58:28 +0100
-Subject: [PATCH 3/4] qtractorImportTrackCommand: extend to accept
+Subject: [PATCH 2/3] qtractorImportTrackCommand: extend to accept
  qtractorEditTrackCommand
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -16,10 +16,6 @@ are performed.
 * declaration of qtractorEditTrackCommand is moved before
   qtractorImportTrackCommand to avoid useless forward declarations. This makes
   the diff a bit human-unreadable.
-
-Upstream-Status: Submitted [1]
-
-[1] https://github.com/rncbc/qtractor/pull/94
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
