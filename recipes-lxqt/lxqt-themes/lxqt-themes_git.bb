@@ -7,10 +7,6 @@ inherit lxqt pkgconfig gtk-icon-cache
 SRCREV = "9d86cc594b7f181036b7e3ba128fd467b2e2e8fd"
 PV = "0.12.0"
 
-RPROVIDES_${PN} += "lxqt-common"
-RREPLACES_${PN} += "lxqt-common"
-RCONFLICTS_${PN} += "lxqt-common"
-
 FILES_${PN} += " \
     ${datadir}/lxqt \
     ${datadir}/icons \

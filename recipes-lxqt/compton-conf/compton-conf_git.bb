@@ -12,7 +12,3 @@ PV = "0.3.0"
 FILES_${PN} += "${datadir}/${BPN}/compton.conf.example"
 
 RDEPENDS_${PN} += "compton"
-
-RPROVIDES_${PN} += "lxqt-common"
-RREPLACES_${PN} += "lxqt-common"
-RCONFLICTS_${PN} += "lxqt-common"

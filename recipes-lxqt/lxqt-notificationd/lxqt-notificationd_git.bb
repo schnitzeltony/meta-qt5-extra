@@ -8,7 +8,3 @@ DEPENDS += "liblxqt libqtxdg kwindowsystem"
 
 SRCREV = "6a93910037d2d59bd885fa71e2ea713778376869"
 PV = "0.12.0"
-
-RPROVIDES_${PN} += "lxqt-common"
-RREPLACES_${PN} += "lxqt-common"
-RCONFLICTS_${PN} += "lxqt-common"

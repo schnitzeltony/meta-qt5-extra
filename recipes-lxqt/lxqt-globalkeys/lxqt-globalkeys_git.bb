@@ -10,7 +10,3 @@ DEPENDS += "liblxqt"
 
 SRCREV = "84e9c3148e70bbb5338cb2edcf09d6ff6d74e082"
 PV = "0.12.0"
-
-RPROVIDES_${PN} += "lxqt-common"
-RREPLACES_${PN} += "lxqt-common"
-RCONFLICTS_${PN} += "lxqt-common"

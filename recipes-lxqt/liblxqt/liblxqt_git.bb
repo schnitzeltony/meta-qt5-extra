@@ -15,3 +15,10 @@ EXTRA_OECMAKE += " \
     -DCMAKE_INSTALL_DATAROOTDIR=share \
     -DLXQT_ETC_XDG_DIR=${sysconfdir}/xdg \
 "
+
+# This is not the full truth but at least opkg terminates do_rootfs if there
+# are multiple RCONFLICTS. To workaround we add the triple below to lxqt base
+# library.
+RPROVIDES_${PN} += "lxqt-common"
+RREPLACES_${PN} += "lxqt-common"
+RCONFLICTS_${PN} += "lxqt-common"

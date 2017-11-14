@@ -18,7 +18,3 @@ FILES_${PN} += " \
 "
 
 RDEPENDS_${PN} += "xdg-user-dirs"
-
-RPROVIDES_${PN} += "lxqt-common"
-RREPLACES_${PN} += "lxqt-common"
-RCONFLICTS_${PN} += "lxqt-common"

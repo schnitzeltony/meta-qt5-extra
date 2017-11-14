@@ -12,7 +12,3 @@ SRCREV = "8ba67fdfc8d848e1882f992ee37eb8d795e857dd"
 PV = "0.12.0"
 
 RRECOMMENDS_${PN} = "gvfs gvfsd-trash eject"
-
-RPROVIDES_${PN} += "lxqt-common"
-RREPLACES_${PN} += "lxqt-common"
-RCONFLICTS_${PN} += "lxqt-common"
