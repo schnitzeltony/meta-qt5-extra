@@ -10,5 +10,11 @@ DEPENDS += " \
     file \
 "
 
-SRCREV = "fc6b455a7ede30a4b3db73c2af06dfa44af585ea"
-PV = "2.0.0"
+EXTRA_OECMAKE += " \
+    -DQTXDGX_ICONENGINEPLUGIN_INSTALL_PATH=${OE_QMAKE_PATH_PLUGINS}/iconengines \
+"
+
+SRCREV = "7b46be496c67f65deabb84fdab2c66bcf54d288a"
+PV = "3.1.0"
+
+FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/iconengines"
