@@ -10,8 +10,8 @@ do_configure_append() {
 }
 
 SRC_URI = "git://github.com/lxde/${BPN}.git;protocol=git;branch=master"
-SRCREV = "b38c9e0d12877702f0d12b749f69579626c36054"
-PV = "0.3.2"
+SRCREV = "496ff5c72403dbe0833d9543b90d986023e72923"
+PV = "0.4.0"
 S = "${WORKDIR}/git"
 
 CMAKE_ALIGN_SYSROOT[1] = "lxqt-build-tools, -sgcc-ar, -S${TARGET_PREFIX}gcc-ar"
