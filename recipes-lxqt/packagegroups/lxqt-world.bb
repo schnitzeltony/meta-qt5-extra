@@ -13,7 +13,6 @@ RDEPENDS_${PN} = " \
     lxmenu-data \
     lxqt-about \
     lxqt-admin \
-    lxqt-common \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-config", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-globalkeys", "",d)} \
     lxqt-l10n \
@@ -33,4 +32,5 @@ RDEPENDS_${PN} = " \
     qtermwidget \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qterminal", "",d)} \
     lxqt-l10n \
+    lxqt-themes \
 "
