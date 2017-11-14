@@ -4,10 +4,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
 
 inherit lxqt
 
-DEPENDS += "liblxqt libdbusmenu-qt5"
+DEPENDS += "liblxqt libdbusmenu-qt5 libfm-qt"
 
-SRCREV = "b040c40bb72c3a128f408bf2797575ca5718d933"
-PV = "0.11.1"
+SRCREV = "7d2c98756f3088306ee0f2ae78f70eae8e47ffe1"
+PV = "0.12.0"
 SRC_URI += " \
     file://0001-set-installation-path-fixed-cmake-query-returns-sysr.patch \
 "
