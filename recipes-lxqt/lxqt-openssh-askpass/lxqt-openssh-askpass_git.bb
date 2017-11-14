@@ -6,5 +6,5 @@ inherit lxqt
 
 DEPENDS += "liblxqt"
 
-SRCREV = "a65635d2ec5fd40d488ed3c3ea9b0054a0fe1734"
-PV = "0.11.1"
+SRCREV = "c0d40adf480469e9817294c64589484b198a9585"
+PV = "0.12.0"
