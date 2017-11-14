@@ -8,7 +8,11 @@ inherit lxqt pkgconfig distro_features_check
 
 DEPENDS += "libfm-qt"
 
-SRCREV = "c048d7214920a74f1604f7832668a8c73be09ac3"
-PV = "0.11.3"
+SRCREV = "8ba67fdfc8d848e1882f992ee37eb8d795e857dd"
+PV = "0.12.0"
 
 RRECOMMENDS_${PN} = "gvfs gvfsd-trash eject"
+
+RPROVIDES_${PN} += "lxqt-common"
+RREPLACES_${PN} += "lxqt-common"
+RCONFLICTS_${PN} += "lxqt-common"
