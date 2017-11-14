@@ -6,9 +6,13 @@ inherit lxqt pkgconfig
 
 DEPENDS += "libconfig"
 
-SRCREV = "841c35ad043f4ee5b6eab317068aa5d449eeb9f8"
-PV = "0.2.1"
+SRCREV = "166a42fcbb802a122ca8614871cae98604be061f"
+PV = "0.3.0"
 
 FILES_${PN} += "${datadir}/${BPN}/compton.conf.example"
 
 RDEPENDS_${PN} += "compton"
+
+RPROVIDES_${PN} += "lxqt-common"
+RREPLACES_${PN} += "lxqt-common"
+RCONFLICTS_${PN} += "lxqt-common"
