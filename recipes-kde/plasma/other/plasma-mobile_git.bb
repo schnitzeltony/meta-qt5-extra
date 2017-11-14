@@ -9,11 +9,13 @@ inherit kde-base gtk-icon-cache
 
 DEPENDS += "\
     plasma-framework \
+    plasma-desktop \
     kdeclarative \
     kio \
     kactivities \
     baloo \
     kcoreaddons-native \
+    kcoreaddons \
     kconfig-native \
     kauth-native \
     sonnet-native \
