@@ -1,6 +1,6 @@
 From 22ce88122c616771e715873cc715b1ded65f0b52 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 27 Sep 2016 18:02:39 +0200
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 14 Nov 2017 14:11:19 +0100
 Subject: [PATCH] do not check for xdg-udser-dirs at build time - it is a
  runtime dependency
 MIME-Version: 1.0
@@ -9,31 +9,25 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Inappropriate [embedded specific]
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- CMakeLists.txt | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ CMakeLists.txt | 3 ---
+ 1 file changed, 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d62552f..0f8a569 100644
+index 3cd4112..a400535 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -1,4 +1,5 @@
- cmake_minimum_required(VERSION 3.0.2 FATAL_ERROR)
-+cmake_minimum_required(VERSION 3.0.2 FATAL_ERROR)
- 
- project(lxqt-session)
- 
-@@ -26,9 +27,6 @@ find_package(KF5WindowSystem REQUIRED)
+@@ -26,9 +26,6 @@ find_package(KF5WindowSystem REQUIRED)
  
  find_package(lxqt REQUIRED)
  
 -# Please don't move, must be after lxqt
 -find_package(XdgUserDirs REQUIRED)
 -
- include(LXQtCompilerSettings NO_POLICY_SCOPE)
- 
- # Translations **********************************
+ if(NOT CMAKE_BUILD_TYPE)
+     set(CMAKE_BUILD_TYPE Release)
+ endif()
 -- 
-2.7.4
+2.9.5
 
