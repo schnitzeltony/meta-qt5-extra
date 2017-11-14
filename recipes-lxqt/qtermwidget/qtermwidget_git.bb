@@ -2,15 +2,13 @@ SUMMARY = "The qterminal widget"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4641e94ec96f98fabc56ff9cc48be14b"
 
-inherit lxqt cmake_lib
+inherit lxqt
 
-SRCREV = "2d5717931128ea28af9daaea4c3464d3ea4d8315"
-PV = "0.7.1"
+SRCREV = "1e00757da69ef4dd926b31beb5bb7c73ab255782"
+PV = "0.8.0"
 
 #EXTRA_OECMAKE += "-DUSE_QT5=ON -DBUILD_DESIGNER_PLUGIN=OFF"
 
 FILES_${PN} += " \
     ${datadir}/qtermwidget5 \
 "
-
-CMAKE_ALIGN_SYSROOT[1] = "qtermwidget5, -S${includedir}, -s${CMAKE_QT5_EX_PATH_HOST_HEADERS}"
