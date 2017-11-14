@@ -8,5 +8,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "liblxqt"
 
-SRCREV = "796079e653258e9446ec8858f0968df138e616be"
-PV = "0.11.1"
+SRCREV = "84e9c3148e70bbb5338cb2edcf09d6ff6d74e082"
+PV = "0.12.0"
+
+RPROVIDES_${PN} += "lxqt-common"
+RREPLACES_${PN} += "lxqt-common"
+RCONFLICTS_${PN} += "lxqt-common"
