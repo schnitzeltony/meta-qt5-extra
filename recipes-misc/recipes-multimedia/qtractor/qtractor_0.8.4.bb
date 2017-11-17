@@ -24,10 +24,10 @@ SRC_URI = " \
     file://0003-do-nor-try-run-for-suil-libs-detection.patch \
     file://0004-Add-ARM-NEON-acceleration-for-time-stretch-not-yet-t.patch \
     file://0005-Add-qtractorPluginListDocument-to-save-load-plugin-l.patch \
-    file://0006-qtractorImportTrackCommand-extend-to-accept-qtractor.patch \
-    file://0007-Add-MIDI-import-options-to-create-ready-to-play-sess.patch \
+    file://0006-Add-MIDI-import-options-to-create-ready-to-play-sess.patch \
+    file://0007-Hold-defer-JACK-timebase-reset-on-main-time-scale-up.patch \
 "
-SRCREV = "3de003e171a605e7fb4dab761f3943727d8cad05"
+SRCREV = "9e4fe9fecbd8d8161c40b77924e834f139597a83"
 PV = "0.8.4+git${SRCPV}"
 S = "${WORKDIR}/git"
 
@@ -40,6 +40,6 @@ EXTRA_OECONF = " \
 "
 
 FILES_${PN} += " \
-  ${datadir}/mime \
-  ${datadir}/metainfo \
+    ${datadir}/mime \
+    ${datadir}/metainfo \
 "
