@@ -25,9 +25,8 @@ SRC_URI = " \
     file://0004-Add-ARM-NEON-acceleration-for-time-stretch-not-yet-t.patch \
     file://0005-Add-qtractorPluginListDocument-to-save-load-plugin-l.patch \
     file://0006-Add-MIDI-import-options-to-create-ready-to-play-sess.patch \
-    file://0007-Hold-defer-JACK-timebase-reset-on-main-time-scale-up.patch \
 "
-SRCREV = "9e4fe9fecbd8d8161c40b77924e834f139597a83"
+SRCREV = "10c0efe357b51120b7c14ce4494487bc70742226"
 PV = "0.8.4+git${SRCPV}"
 S = "${WORKDIR}/git"
 

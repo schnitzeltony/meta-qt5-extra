@@ -1,7 +1,7 @@
-From bd053e36f5dbd62e4ebce2d96f724980a9c7a1ad Mon Sep 17 00:00:00 2001
+From caabb400184290a251eb094c69f178da923ee147 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Thu, 9 Nov 2017 22:08:14 +0100
-Subject: [PATCH] Add MIDI import options to create ready-to-play sessions
+Subject: [PATCH 2/2] Add MIDI import options to create ready-to-play sessions
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -22,8 +22,8 @@ following:
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  src/qtractorMainForm.cpp           |  14 +-
- src/qtractorMidiImportExtender.cpp | 433 +++++++++++++++++++++++++++++++
- src/qtractorMidiImportExtender.h   | 107 ++++++++
+ src/qtractorMidiImportExtender.cpp | 457 ++++++++++++++++++++++++++++++++
+ src/qtractorMidiImportExtender.h   | 109 ++++++++
  src/qtractorMidiImportForm.cpp     | 519 +++++++++++++++++++++++++++++++++++++
  src/qtractorMidiImportForm.h       | 110 ++++++++
  src/qtractorMidiImportForm.ui      | 396 ++++++++++++++++++++++++++++
@@ -36,10 +36,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  src/qtractorPlugin.h               |   6 +
  src/qtractorSession.cpp            |   2 +
  src/qtractorTrackList.cpp          |   8 +-
- src/qtractorTracks.cpp             |  42 ++-
+ src/qtractorTracks.cpp             |  35 ++-
  src/qtractorTracks.h               |   4 +-
  src/src.pro                        |   5 +
- 18 files changed, 1731 insertions(+), 16 deletions(-)
+ 18 files changed, 1750 insertions(+), 16 deletions(-)
  create mode 100644 src/qtractorMidiImportExtender.cpp
  create mode 100644 src/qtractorMidiImportExtender.h
  create mode 100644 src/qtractorMidiImportForm.cpp
@@ -47,7 +47,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  create mode 100644 src/qtractorMidiImportForm.ui
 
 diff --git a/src/qtractorMainForm.cpp b/src/qtractorMainForm.cpp
-index 04072d1..78905ad 100644
+index 029ea74..4041ddf 100644
 --- a/src/qtractorMainForm.cpp
 +++ b/src/qtractorMainForm.cpp
 @@ -76,6 +76,8 @@
@@ -80,10 +80,10 @@ index 04072d1..78905ad 100644
  
 diff --git a/src/qtractorMidiImportExtender.cpp b/src/qtractorMidiImportExtender.cpp
 new file mode 100644
-index 0000000..e84b779
+index 0000000..b6f3962
 --- /dev/null
 +++ b/src/qtractorMidiImportExtender.cpp
-@@ -0,0 +1,433 @@
+@@ -0,0 +1,457 @@
 +// qtractorMidiImportExtender.cpp
 +//
 +/****************************************************************************
@@ -172,6 +172,8 @@ index 0000000..e84b779
 +	// Setup track number here. When setting track name, imported tracks are
 +	// already created.
 +	m_iTrackNumber = pSession->tracks().count();
++
++	m_bAutoDeactivateWasDisabled = false;
 +}
 +
 +
@@ -316,6 +318,13 @@ index 0000000..e84b779
 +	if (!pPluginList)
 +		return;
 +
++	// Auto deactivation must be disabled to make plugins process program/bank
++	// changes.
++	if (!m_bAutoDeactivateWasDisabled && pSession->isAutoDeactivatePlugins()) {
++		pSession->setAutoDeactivatePlugins(false);
++		m_bAutoDeactivateWasDisabled = true;
++	}
++
 +	// Add plugins early. Several options were tested to add plugins later
 +	// (when tracks are complete / added to session): it was not possible to
 +	// set patch reproducable.
@@ -350,142 +359,157 @@ index 0000000..e84b779
 +}
 +
 +
-+// Set instrument and track-name. Track must be 'complete' (have an output bus).
-+bool qtractorMidiImportExtender::finishTrackForExtension(qtractorTrack *pTrack)
++// Set instrument and track-name. Tracks must be 'complete' (have an output bus).
++bool qtractorMidiImportExtender::finishTracksForExtension(QList<qtractorTrack *> *pImportedTracks)
 +{
 +	// Bail out if something is wrong.
-+	if (!pTrack)
++	if (!pImportedTracks || pImportedTracks->count() == 0)
 +		return false;
 +	qtractorSession *pSession = qtractorSession::getInstance();
 +	if (!pSession)
 +		return false;
-+	qtractorPluginList *pPluginList = pTrack->pluginList();
-+	if (!pPluginList)
-+		return false;
 +
-+	// Reactivate plugin processing first.
-+	if (pPluginList->count() > 0)
-+		pPluginList->forceNoProcessing(false);
++	// Loop all tracks to wake plugins.
++	qtractorTrack *pTrack;
++	for (pTrack = pImportedTracks->first(); pTrack; pTrack = pTrack->next()) {
 +
-+	// Track change must be reported as return value.
-+	bool bTrackChanged = pPluginList->count() > 0;
++		qtractorPluginList *pPluginList = pTrack->pluginList();
++		if (!pPluginList)
++			continue;
++		if (pPluginList->count() > 0)
++			pPluginList->forceNoProcessing(false);
 +
-+	// Get current track properties.
-+	qtractorTrack::Properties &properties = pTrack->properties();
-+	bool bIsDrumTrack = properties.midiChannel == 9;
-+
-+	// Midi bank.
-+	int iBankNew = properties.midiBank;
-+	if (!bIsDrumTrack) {
-+		// Instruments: apply bank settings only if clip does not suggest.
-+		if (iBankNew < 0)
-+			iBankNew = m_extendedSettings.iMidiImportInstBank;
-+	} else
-+		// Follow settings for drums whatever clip suggests.
-+		iBankNew = m_extendedSettings.iMidiImportDrumBank;
-+	// And bank action...
-+	if (iBankNew >= 0) {
-+		// By default midiBankSelMethod is -1. If not set it here, bank change
-+		// is not send to instrument.
-+		properties.midiBankSelMethod = 0;
-+		properties.midiBank = iBankNew;
-+		bTrackChanged = true;
-+	}
-+
-+	// Special case for drum-tracks program: Some MIDI files out in the wild do
-+	// not set program for drum tracks. Give those a reasonable default.
-+	if (bIsDrumTrack && properties.midiProg < 0) {
-+		// Set standard drums.
-+		properties.midiProg = 0;
-+		bTrackChanged = true;
 +	}
 +
 +	// Make sure plugins are able to process program/bank changes send below.
-+	if (pPluginList->count() > 0)
-+		pSession->stabilize(100);
++	pSession->stabilize(100);
 +
-+	// Set patch (instrument / midiprog / midibank).
-+	QString strInstrumentNew = bIsDrumTrack ?
-+			m_extendedSettings.sMidiImportDrumInst :
-+			m_extendedSettings.sMidiImportInstInst;
++	// Return value notifying import process of changes done here.
++	bool bOneOrMoreTracksChanged = false;
 +
-+	qtractorMidiBus *pMidiBus =
-+		static_cast<qtractorMidiBus *> (pTrack->outputBus());
-+	if (pMidiBus) {
-+		// Set instrument / bank for tracks with program set only. At least
-+		// plugins have missed program change during adding tracks to session -
-+		// they were not processing.
-+		if (properties.midiProg >= 0) {
-+			bTrackChanged = true;
-+			pMidiBus->setPatch(properties.midiChannel,
-+				strInstrumentNew,
-+				properties.midiBankSelMethod,
-+				properties.midiBank,
-+				properties.midiProg,
-+				pTrack);
++	// Loop all tracks to set patches.
++	for (pTrack = pImportedTracks->first(); pTrack; pTrack = pTrack->next()) {
 +
-+			bTrackChanged = true;
++		qtractorPluginList *pPluginList = pTrack->pluginList();
++		if (!pPluginList)
++			continue;
++
++		// Get current track properties.
++		qtractorTrack::Properties &properties = pTrack->properties();
++		bool bIsDrumTrack = properties.midiChannel == 9;
++
++		// Midi bank.
++		int iBankNew = properties.midiBank;
++		if (!bIsDrumTrack) {
++			// Instruments: apply bank settings only if clip does not suggest.
++			if (iBankNew < 0)
++				iBankNew = m_extendedSettings.iMidiImportInstBank;
++		} else
++			// Follow settings for drums whatever clip suggests.
++			iBankNew = m_extendedSettings.iMidiImportDrumBank;
++		// And bank action...
++		if (iBankNew >= 0) {
++			// By default midiBankSelMethod is -1. If not set it here, bank change
++			// is not send to instrument.
++			properties.midiBankSelMethod = 0;
++			properties.midiBank = iBankNew;
++			bOneOrMoreTracksChanged = true;
 +		}
-+	}
 +
-+	// Set track name.  Set names only for tracks making noise after import.
-+	// This indicates from first glance that track is special or broken or...
-+	QString sTrackName;
-+	if (pTrack->midiBank() >= 0 && pTrack->midiProg() >= 0) {
-+		// Set track name based upon type set up.
-+		switch (m_extendedSettings.eMidiImportTrackNameType) {
-+		case Midifile:
-+			// MIDI filename is default: no modification.
-+			break;
-+		case Track:
-+			sTrackName = pSession->uniqueTrackName(
-+					QString("Track %1").arg(++m_iTrackNumber));
-+			bTrackChanged = true;
-+			break;
-+		case PatchName:
-+			// Instrument track.
-+			if (!bIsDrumTrack) {
-+				// Collect what's necessary to get patch name.
-+				qtractorMidiManager *pMidiManager = pPluginList->midiManager();
-+				if (!pMidiManager)
-+					break;
++		// Midi prog.
++		// Special case for drum-tracks program: Some MIDI files out in the wild do
++		// not set program for drum tracks. Give those a reasonable default.
++		if (bIsDrumTrack && properties.midiProg < 0) {
++			// Set standard drums.
++			properties.midiProg = 0;
++			bOneOrMoreTracksChanged = true;
++		}
 +
-+				const qtractorMidiManager::Instruments& list
-+					= pMidiManager->instruments();
-+				QString sInstrumentName = m_extendedSettings.sMidiImportInstInst;
-+				if (!list.contains(sInstrumentName))
-+					break;
++		// Instrument.
++		QString strInstrumentNew = bIsDrumTrack ?
++				m_extendedSettings.sMidiImportDrumInst :
++				m_extendedSettings.sMidiImportInstInst;
++		if (!strInstrumentNew.isEmpty())
++			bOneOrMoreTracksChanged = true;
 +
-+				const qtractorMidiManager::Banks& banks
-+					= list[sInstrumentName];
-+				if (!banks.contains(pTrack->midiBank()))
-+					break;
-+
-+				// A patch name was found!
-+				const qtractorMidiManager::Progs& progs = banks[pTrack->midiBank()].progs;
-+				sTrackName = progs[pTrack->midiProg()];
++		// Do set patch (instrument / midiprog / midibank).
++		qtractorMidiBus *pMidiBus =
++			static_cast<qtractorMidiBus *> (pTrack->outputBus());
++		if (pMidiBus) {
++			if (properties.midiProg >= 0) {
++				pMidiBus->setPatch(properties.midiChannel,
++					strInstrumentNew,
++					properties.midiBankSelMethod,
++					properties.midiBank,
++					properties.midiProg,
++					pTrack);
 +			}
-+
-+			// Drum track's name is fixed - patch names are not really useful at drums.
-+			else
-+				sTrackName = QObject::tr("Drums");
-+			break;
 +		}
-+	}
-+	// Let name overrides cause effect.
-+	if (!sTrackName.isEmpty()) {
-+		properties.trackName = sTrackName;
-+		pSession->releaseTrackName(pTrack);
-+		pTrack->setTrackName(sTrackName);
-+		pSession->acquireTrackName(pTrack);
-+		bTrackChanged = true;
-+	}
 +
-+	if (bTrackChanged)
-+		// Apply track changes changes.
++		// Create track name.  Set names only for tracks making noise after
++		// import. This indicates from first glance that track is special or
++		// broken or...
++		QString sTrackName;
++		if (pTrack->midiBank() >= 0 && pTrack->midiProg() >= 0) {
++			// Set track name based upon type set up.
++			switch (m_extendedSettings.eMidiImportTrackNameType) {
++			case Midifile:
++				// MIDI filename is default: no modification.
++				break;
++			case Track:
++				sTrackName = pSession->uniqueTrackName(
++						QString("Track %1").arg(++m_iTrackNumber));
++				break;
++			case PatchName:
++				// Instrument track.
++				if (!bIsDrumTrack) {
++					// Collect what's necessary to get patch name.
++					qtractorMidiManager *pMidiManager = pPluginList->midiManager();
++					if (!pMidiManager)
++						break;
++
++					const qtractorMidiManager::Instruments& list
++						= pMidiManager->instruments();
++					QString sInstrumentName = m_extendedSettings.sMidiImportInstInst;
++					if (!list.contains(sInstrumentName))
++						break;
++
++					const qtractorMidiManager::Banks& banks
++						= list[sInstrumentName];
++					if (!banks.contains(pTrack->midiBank()))
++						break;
++
++					// A patch name was found!
++					const qtractorMidiManager::Progs& progs = banks[pTrack->midiBank()].progs;
++					sTrackName = progs[pTrack->midiProg()];
++				}
++
++				// Drum track's name is fixed - patch names are not really useful at drums.
++				else
++					sTrackName = QObject::tr("Drums");
++				break;
++			}
++		}
++
++		// Do set track name.
++		if (!sTrackName.isEmpty()) {
++			properties.trackName = sTrackName;
++			pSession->releaseTrackName(pTrack);
++			pTrack->setTrackName(sTrackName);
++			pSession->acquireTrackName(pTrack);
++			bOneOrMoreTracksChanged = true;
++		}
++
++		// Apply all to track also.
 +		pTrack->setProperties(properties);
++	}
 +
-+	return bTrackChanged;
++	// Restore plugin auto deactivation.
++	if (m_bAutoDeactivateWasDisabled) {
++		pSession->setAutoDeactivatePlugins(true);
++		m_bAutoDeactivateWasDisabled = false;
++	}
++	return bOneOrMoreTracksChanged;
 +}
 +
 +
@@ -519,10 +543,10 @@ index 0000000..e84b779
 +// end of qtractorMidiImportExtender.cpp
 diff --git a/src/qtractorMidiImportExtender.h b/src/qtractorMidiImportExtender.h
 new file mode 100644
-index 0000000..e202e89
+index 0000000..3e022c9
 --- /dev/null
 +++ b/src/qtractorMidiImportExtender.h
-@@ -0,0 +1,107 @@
+@@ -0,0 +1,109 @@
 +// qtractorMidiImportExtender.h
 +//
 +/****************************************************************************
@@ -584,7 +608,7 @@ index 0000000..e202e89
 +
 +	// Methods used during import.
 +	void prepareTrackForExtension(qtractorTrack *pTrack);
-+	bool finishTrackForExtension(qtractorTrack *pTrack);
++	bool finishTracksForExtension(QList<qtractorTrack *> *pImportedTracks);
 +
 +	// Track name set types.
 +	typedef enum { Midifile, Track, PatchName } TrackNameType;
@@ -605,6 +629,8 @@ index 0000000..e202e89
 +
 +	// Accessor to exteneded settings.
 +	exportExtensionsData *exportExtensions();
++	// Keep auto-deactivation change
++	bool m_bAutoDeactivateWasDisabled;
 +
 +private:
 +
@@ -1899,10 +1925,10 @@ index 42ca936..b7e33e6 100644
             <widget class="QLabel" name="MidiCaptureQuantizeTextLabel">
              <property name="font">
 diff --git a/src/qtractorPlugin.cpp b/src/qtractorPlugin.cpp
-index e547381..4d5b1ce 100644
+index ca6d50e..722d658 100644
 --- a/src/qtractorPlugin.cpp
 +++ b/src/qtractorPlugin.cpp
-@@ -1410,7 +1410,8 @@ qtractorPluginList::qtractorPluginList (
+@@ -1405,7 +1405,8 @@ qtractorPluginList::qtractorPluginList (
  	: m_iChannels(iChannels), m_iFlags(iFlags),
  		m_iActivated(0), m_pMidiManager(NULL),
  		m_iMidiBank(-1), m_iMidiProg(-1),
@@ -1912,7 +1938,7 @@ index e547381..4d5b1ce 100644
  {
  	setAutoDelete(true);
  
-@@ -1801,6 +1802,10 @@ void qtractorPluginList::removeView ( qtractorPluginListView *pView )
+@@ -1796,6 +1797,10 @@ void qtractorPluginList::removeView ( qtractorPluginListView *pView )
  // The meta-main audio-processing plugin-chain procedure.
  void qtractorPluginList::process ( float **ppBuffer, unsigned int nframes )
  {
@@ -1923,7 +1949,7 @@ index e547381..4d5b1ce 100644
  	// Sanity checks...
  	if (!isActivated())
  		return;
-@@ -2220,6 +2225,14 @@ bool qtractorPluginList::isAutoDeactivated (void) const
+@@ -2215,6 +2220,14 @@ bool qtractorPluginList::isAutoDeactivated (void) const
  	return m_bAutoDeactivated;
  }
  
@@ -1939,7 +1965,7 @@ index e547381..4d5b1ce 100644
  // Check/sanitize plugin file-path;
  bool qtractorPluginList::checkPluginFile (
 diff --git a/src/qtractorPlugin.h b/src/qtractorPlugin.h
-index f56720b..b34e04d 100644
+index a43a85e..7d91115 100644
 --- a/src/qtractorPlugin.h
 +++ b/src/qtractorPlugin.h
 @@ -928,6 +928,9 @@ public:
@@ -1963,7 +1989,7 @@ index f56720b..b34e04d 100644
  
  
 diff --git a/src/qtractorSession.cpp b/src/qtractorSession.cpp
-index 9fac440..80be9c8 100644
+index eebba09..ccaec74 100644
 --- a/src/qtractorSession.cpp
 +++ b/src/qtractorSession.cpp
 @@ -33,6 +33,7 @@
@@ -2009,7 +2035,7 @@ index 0b710eb..7a99060 100644
  		m_pTracks->addAudioTracks(audio_files, iClipStart, pAfterTrack);
  
 diff --git a/src/qtractorTracks.cpp b/src/qtractorTracks.cpp
-index 9b9c4c4..4cd0b54 100644
+index 9b9c4c4..3229627 100644
 --- a/src/qtractorTracks.cpp
 +++ b/src/qtractorTracks.cpp
 @@ -61,9 +61,12 @@
@@ -2078,7 +2104,7 @@ index 9b9c4c4..4cd0b54 100644
  			sDescription += tr("MIDI file import \"%1\" on %2 %3.\n")
  				.arg(QFileInfo(sPath).fileName())
  				.arg(QDate::currentDate().toString("MMM dd yyyy"))
-@@ -2906,17 +2915,36 @@ bool qtractorTracks::addMidiTracks ( const QStringList& files,
+@@ -2906,17 +2915,29 @@ bool qtractorTracks::addMidiTracks ( const QStringList& files,
  
  	// Have we changed anything?
  	bool bResult = false;
@@ -2090,20 +2116,13 @@ index 9b9c4c4..4cd0b54 100644
  		bResult = pSession->execute(pImportTrackCommand);
 +		// Tracks are complete now: instrument and track-name (based on
 +		// patch name are depending on instrument) can be set.
-+		if (bResult && pMidiImportExtender) {
-+			bool bModified = false;
-+			QListIterator<qtractorTrack *> iter(addedTracks);
-+			while (iter.hasNext()) {
-+				qtractorTrack *pTrack = iter.next();
-+				if (pMidiImportExtender->finishTrackForExtension(pTrack))
-+					bModified = true;
-+			}
-+			if (bModified) {
-+				// Mixer needs extra invitation...
-+				qtractorMixer *pMixer = pMainForm->mixer();
-+				if (pMixer)
-+					pMixer->updateTracks(true);
-+			}
++		if (bResult &&
++				pMidiImportExtender &&
++				pMidiImportExtender->finishTracksForExtension(&addedTracks)) {
++			// Mixer needs extra invitation...
++			qtractorMixer *pMixer = pMainForm->mixer();
++			if (pMixer)
++				pMixer->updateTracks(true);
 +		}
  	} else {
  		delete pImportTrackCommand;
