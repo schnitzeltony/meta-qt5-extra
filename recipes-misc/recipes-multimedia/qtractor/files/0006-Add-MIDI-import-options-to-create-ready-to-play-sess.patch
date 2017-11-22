@@ -1,7 +1,7 @@
-From caabb400184290a251eb094c69f178da923ee147 Mon Sep 17 00:00:00 2001
+From 4648440a7b4020705d4c8448e367d46b037f380d Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Thu, 9 Nov 2017 22:08:14 +0100
-Subject: [PATCH 2/2] Add MIDI import options to create ready-to-play sessions
+Subject: [PATCH] Add MIDI import options to create ready-to-play sessions
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -22,11 +22,11 @@ following:
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  src/qtractorMainForm.cpp           |  14 +-
- src/qtractorMidiImportExtender.cpp | 457 ++++++++++++++++++++++++++++++++
+ src/qtractorMidiImportExtender.cpp | 462 +++++++++++++++++++++++++++++++++
  src/qtractorMidiImportExtender.h   | 109 ++++++++
  src/qtractorMidiImportForm.cpp     | 519 +++++++++++++++++++++++++++++++++++++
  src/qtractorMidiImportForm.h       | 110 ++++++++
- src/qtractorMidiImportForm.ui      | 396 ++++++++++++++++++++++++++++
+ src/qtractorMidiImportForm.ui      | 399 ++++++++++++++++++++++++++++
  src/qtractorOptions.cpp            |  16 +-
  src/qtractorOptions.h              |   9 +
  src/qtractorOptionsForm.cpp        |  35 +++
@@ -39,7 +39,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  src/qtractorTracks.cpp             |  35 ++-
  src/qtractorTracks.h               |   4 +-
  src/src.pro                        |   5 +
- 18 files changed, 1750 insertions(+), 16 deletions(-)
+ 18 files changed, 1758 insertions(+), 16 deletions(-)
  create mode 100644 src/qtractorMidiImportExtender.cpp
  create mode 100644 src/qtractorMidiImportExtender.h
  create mode 100644 src/qtractorMidiImportForm.cpp
@@ -80,10 +80,10 @@ index 029ea74..4041ddf 100644
  
 diff --git a/src/qtractorMidiImportExtender.cpp b/src/qtractorMidiImportExtender.cpp
 new file mode 100644
-index 0000000..b6f3962
+index 0000000..ea72b8a
 --- /dev/null
 +++ b/src/qtractorMidiImportExtender.cpp
-@@ -0,0 +1,457 @@
+@@ -0,0 +1,462 @@
 +// qtractorMidiImportExtender.cpp
 +//
 +/****************************************************************************
@@ -308,59 +308,62 @@ index 0000000..b6f3962
 +// There was no way found to wait for plugins e.g. loading soundfonts.
 +void qtractorMidiImportExtender::prepareTrackForExtension(qtractorTrack *pTrack)
 +{
-+	// Bail out if something is wrong.
-+	if (!pTrack)
-+		return;
-+	qtractorSession *pSession = qtractorSession::getInstance();
-+	if (!pSession)
-+		return;
-+	qtractorPluginList *pPluginList = pTrack->pluginList();
-+	if (!pPluginList)
-+		return;
++	// Are there plugins to add ?
++	if (m_extendedSettings.pPluginDomDocument) {
 +
-+	// Auto deactivation must be disabled to make plugins process program/bank
-+	// changes.
-+	if (!m_bAutoDeactivateWasDisabled && pSession->isAutoDeactivatePlugins()) {
-+		pSession->setAutoDeactivatePlugins(false);
-+		m_bAutoDeactivateWasDisabled = true;
-+	}
++		// Bail out if something is wrong.
++		if (!pTrack)
++			return;
++		qtractorSession *pSession = qtractorSession::getInstance();
++		if (!pSession)
++			return;
++		qtractorPluginList *pPluginList = pTrack->pluginList();
++		if (!pPluginList)
++			return;
 +
-+	// Add plugins early. Several options were tested to add plugins later
-+	// (when tracks are complete / added to session): it was not possible to
-+	// set patch reproducable.
-+
-+	// Take plugins for first track from plugin list.
-+	if (m_pPluginList && !m_bPluginListIsEmpty)
-+	{
-+		// Move plugins to target.
-+		while (m_pPluginList->count())
-+			pPluginList->movePlugin(m_pPluginList->first(), NULL);
-+		m_bPluginListIsEmpty = true;
-+	}
-+	// All further are cloned by our document - if there is one.
-+	else if (m_extendedSettings.pPluginDomDocument) {
-+		// Get root element and check for proper taq name.
-+		QDomElement elem =
-+				m_extendedSettings.pPluginDomDocument->documentElement();
-+		if (elem.tagName() == "PluginList") {
-+			qtractorPluginListDocument pluginListDocument(
-+						m_extendedSettings.pPluginDomDocument, pPluginList);
-+			pluginListDocument.loadElement(&elem);
++		// Auto deactivation must be disabled to make plugins process program/bank
++		// changes.
++		if (!m_bAutoDeactivateWasDisabled && pSession->isAutoDeactivatePlugins()) {
++			pSession->setAutoDeactivatePlugins(false);
++			m_bAutoDeactivateWasDisabled = true;
 +		}
-+	}
 +
-+	if (pPluginList->count() > 0) {
 +		// Deactivate processing for plugin list - we have to choose the hard way
 +		// because during adding tracks to session activation state of plugins
 +		// flip. It seems activated plugins must report proper activation state
 +		// for next actions - otherwise output is scrambled.
 +		pPluginList->forceNoProcessing(true);
++
++		// Add plugins early. Several options were tested to add plugins later
++		// (when tracks are complete / added to session): it was not possible to
++		// set patch reproducable.
++
++		// Take plugins for first track from plugin list.
++		if (m_pPluginList && !m_bPluginListIsEmpty)
++		{
++			// Move plugins to target.
++			while (m_pPluginList->count())
++				pPluginList->movePlugin(m_pPluginList->first(), NULL);
++			m_bPluginListIsEmpty = true;
++		}
++		// All further are cloned by our document - if there is one.
++		else {
++			// Get root element and check for proper taq name.
++			QDomElement elem =
++					m_extendedSettings.pPluginDomDocument->documentElement();
++			if (elem.tagName() == "PluginList") {
++				qtractorPluginListDocument pluginListDocument(
++							m_extendedSettings.pPluginDomDocument, pPluginList);
++				pluginListDocument.loadElement(&elem);
++			}
++		}
 +	}
 +}
 +
 +
 +// Set instrument and track-name. Tracks must be 'complete' (have an output bus).
-+bool qtractorMidiImportExtender::finishTracksForExtension(QList<qtractorTrack *> *pImportedTracks)
++bool qtractorMidiImportExtender::finishTracksForExtension(
++		QList<qtractorTrack *> *pImportedTracks)
 +{
 +	// Bail out if something is wrong.
 +	if (!pImportedTracks || pImportedTracks->count() == 0)
@@ -369,20 +372,22 @@ index 0000000..b6f3962
 +	if (!pSession)
 +		return false;
 +
-+	// Loop all tracks to wake plugins.
 +	qtractorTrack *pTrack;
-+	for (pTrack = pImportedTracks->first(); pTrack; pTrack = pTrack->next()) {
 +
-+		qtractorPluginList *pPluginList = pTrack->pluginList();
-+		if (!pPluginList)
-+			continue;
-+		if (pPluginList->count() > 0)
-+			pPluginList->forceNoProcessing(false);
++	// Were plugins added?
++	if (m_extendedSettings.pPluginDomDocument) {
++		// Loop all tracks to wake plugins.
++		for (pTrack = pImportedTracks->first(); pTrack; pTrack = pTrack->next()) {
++			qtractorPluginList *pPluginList = pTrack->pluginList();
++			if (!pPluginList)
++				continue;
++			if (pPluginList->count() > 0)
++				pPluginList->forceNoProcessing(false);
++		}
 +
++		// Make sure plugins are able to process program/bank changes send below.
++		pSession->stabilize(100);
 +	}
-+
-+	// Make sure plugins are able to process program/bank changes send below.
-+	pSession->stabilize(100);
 +
 +	// Return value notifying import process of changes done here.
 +	bool bOneOrMoreTracksChanged = false;
@@ -1299,10 +1304,10 @@ index 0000000..fde1d32
 +// end of qtractorMidiImportForm.h
 diff --git a/src/qtractorMidiImportForm.ui b/src/qtractorMidiImportForm.ui
 new file mode 100644
-index 0000000..f6e5e2d
+index 0000000..82e5b00
 --- /dev/null
 +++ b/src/qtractorMidiImportForm.ui
-@@ -0,0 +1,396 @@
+@@ -0,0 +1,399 @@
 +<?xml version="1.0" encoding="UTF-8"?>
 +<ui version="4.0">
 + <author>rncbc aka Rui Nuno Capela</author>
@@ -1353,6 +1358,9 @@ index 0000000..f6e5e2d
 +      <layout class="QHBoxLayout" >
 +       <item>
 +        <widget class="qtractorPluginListView" name="PluginListView" >
++         <property name="focusPolicy" >
++          <enum>Qt::WheelFocus</enum>
++         </property>
 +         <property name="toolTip" >
 +          <string>Track plugins</string>
 +         </property>
@@ -1761,7 +1769,7 @@ index 7233304..1bb68c4 100644
  	int iMetroChannel;
  	int iMetroBarNote;
 diff --git a/src/qtractorOptionsForm.cpp b/src/qtractorOptionsForm.cpp
-index db2d0ef..f397354 100644
+index ea6b984..9a7ab8f 100644
 --- a/src/qtractorOptionsForm.cpp
 +++ b/src/qtractorOptionsForm.cpp
 @@ -36,6 +36,8 @@
@@ -1783,7 +1791,7 @@ index db2d0ef..f397354 100644
  	qtractorSession *pSession = qtractorSession::getInstance();
  	if (pSession) {
  		m_pTimeScale = new qtractorTimeScale(*pSession->timeScale());
-@@ -269,6 +274,9 @@ qtractorOptionsForm::qtractorOptionsForm (
+@@ -262,6 +267,9 @@ qtractorOptionsForm::qtractorOptionsForm (
  	QObject::connect(m_ui.MidiCaptureFormatComboBox,
  		SIGNAL(activated(int)),
  		SLOT(changed()));
@@ -1793,7 +1801,7 @@ index db2d0ef..f397354 100644
  	QObject::connect(m_ui.MidiCaptureQuantizeComboBox,
  		SIGNAL(activated(int)),
  		SLOT(changed()));
-@@ -506,6 +514,7 @@ qtractorOptionsForm::qtractorOptionsForm (
+@@ -499,6 +507,7 @@ qtractorOptionsForm::qtractorOptionsForm (
  qtractorOptionsForm::~qtractorOptionsForm (void)
  {
  	if (m_pTimeScale) delete m_pTimeScale;
@@ -1801,7 +1809,7 @@ index db2d0ef..f397354 100644
  }
  
  
-@@ -805,6 +814,9 @@ void qtractorOptionsForm::accept (void)
+@@ -798,6 +807,9 @@ void qtractorOptionsForm::accept (void)
  		m_pOptions->iMetroBeatDuration   = m_ui.MetroBeatDurationSpinBox->value();
  		m_pOptions->bMidiMetroBus        = m_ui.MidiMetroBusCheckBox->isChecked();
  		m_pOptions->iMidiMetroOffset     = m_ui.MidiMetroOffsetSpinBox->value();
@@ -1811,7 +1819,7 @@ index db2d0ef..f397354 100644
  		// Display options...
  		m_pOptions->bConfirmRemove       = m_ui.ConfirmRemoveCheckBox->isChecked();
  		m_pOptions->bConfirmArchive      = m_ui.ConfirmArchiveCheckBox->isChecked();
-@@ -896,6 +908,10 @@ void qtractorOptionsForm::accept (void)
+@@ -889,6 +901,10 @@ void qtractorOptionsForm::accept (void)
  	// Save/commit to disk.
  	m_pOptions->saveOptions();
  
@@ -1822,7 +1830,7 @@ index db2d0ef..f397354 100644
  	// Just go with dialog acceptance
  	QDialog::accept();
  }
-@@ -921,6 +937,11 @@ void qtractorOptionsForm::reject (void)
+@@ -914,6 +930,11 @@ void qtractorOptionsForm::reject (void)
  			accept();
  			return;
  		case QMessageBox::Discard:
@@ -1834,7 +1842,7 @@ index db2d0ef..f397354 100644
  			break;
  		default:    // Cancel.
  			bReject = false;
-@@ -1565,6 +1586,20 @@ void qtractorOptionsForm::chooseSessionTemplatePath (void)
+@@ -1558,6 +1579,20 @@ void qtractorOptionsForm::chooseSessionTemplatePath (void)
  }
  
  
@@ -1989,7 +1997,7 @@ index a43a85e..7d91115 100644
  
  
 diff --git a/src/qtractorSession.cpp b/src/qtractorSession.cpp
-index eebba09..ccaec74 100644
+index cf974f3..c7f4b74 100644
 --- a/src/qtractorSession.cpp
 +++ b/src/qtractorSession.cpp
 @@ -33,6 +33,7 @@

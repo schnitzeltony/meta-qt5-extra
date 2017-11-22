@@ -26,7 +26,7 @@ SRC_URI = " \
     file://0005-Add-qtractorPluginListDocument-to-save-load-plugin-l.patch \
     file://0006-Add-MIDI-import-options-to-create-ready-to-play-sess.patch \
 "
-SRCREV = "10c0efe357b51120b7c14ce4494487bc70742226"
+SRCREV = "9bf540b60a273b4257a3616acb108d9ef075c539"
 PV = "0.8.4+git${SRCPV}"
 S = "${WORKDIR}/git"
 
