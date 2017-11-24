@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Fluxbox
+Comment=Very small and fast window manger
+Exec=startfluxbox
+Type=Application
+Name[en_US]=fluxbox
