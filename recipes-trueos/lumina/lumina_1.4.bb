@@ -69,4 +69,5 @@ FILES_${PN} += " \
 
 FILES_${PN}-icon-themes = "${datadir}/icons"
 
+RDEPENDS_${PN} += "fluxbox"
 RRECOMMENDS_${PN} += "${PN}-icon-themes"
