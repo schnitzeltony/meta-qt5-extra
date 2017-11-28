@@ -8,11 +8,11 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = " \
-    https://github.com/mltframework/${BPN}/archive/v${PV}.tar.gz \
+    git://github.com/mltframework/mlt.git \
     file://0001-mlt_property.h-Do-not-include-unneeded-xlocale.h.patch \
 "
-SRC_URI[md5sum] = "e9f0584739369c40b8f91f8cf50ea3ea"
-SRC_URI[sha256sum] = "87583af552695b2235f4ee3fc1e645d69e31702b109331d7e8785fb180cfa382"
+SRCREV = "e8325f5e9acce9c41b3e91d7b587a41c91b8d0d7"
+S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
 
