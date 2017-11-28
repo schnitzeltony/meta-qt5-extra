@@ -13,14 +13,12 @@ DEPENDS = " \
 "
 
 SRC_URI = " \
-    https://github.com/openAVproductions/openAV-ArtyFX/archive/release-${PV}.zip \
+    git://github.com/openAVproductions/openAV-ArtyFX.git \
     file://0001-Do-not-overwrite-build-flags-it-causes-trouble-for-m.patch \
     file://0002-avtk-remove-sse-flags-they-work-on-intel-hardware-on.patch \
 "
-SRC_URI[md5sum] = "b96dca48391188442609867f60edb702"
-SRC_URI[sha256sum] = "5010cb190f5d507fd384325ee1f7f83b8441429e3b7f19b5287f1b6ea6b8f82c"
-
-S = "${WORKDIR}/openAV-ArtyFX-release-${PV}"
+SRCREV = "5ed821b77a5892f6d79bd29a52ec8685f89cefd0"
+S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += " \
     -DBUILD_SSE=OFF \
