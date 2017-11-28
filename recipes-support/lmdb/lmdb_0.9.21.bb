@@ -4,15 +4,14 @@ LICENSE = "OLDAP-2.8"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972"
 
 SRC_URI = " \
-    https://github.com/LMDB/lmdb/archive/LMDB_${PV}.tar.gz \
+    git://github.com/LMDB/lmdb.git;branch=mdb.RE/0.9 \
     file://0001-Patch-the-main-Makefile.patch \
 "
-SRC_URI[md5sum] = "41a4f7b63212a00e53fabd8159008201"
-SRC_URI[sha256sum] = "1187b635a4cc415bb6972bba346121f81edd996e99b8f0816151d4090f90b559"
+SRCREV = "60d500206a108b2c64ca7e36b0113b2cd3711b98"
+S = "${WORKDIR}/git/libraries/liblmdb"
 
 inherit autotools-brokensep
 
-S = "${WORKDIR}/lmdb-LMDB_${PV}/libraries/liblmdb"
 
 do_compile() {
     oe_runmake "CC=${CC}"
