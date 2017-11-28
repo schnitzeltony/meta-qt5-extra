@@ -18,15 +18,12 @@ DEPENDS += " \
 inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache
 
 SRC_URI = " \
-    git://github.com/rncbc/qtractor.git;branch=neonx \
+    git://github.com/schnitzeltony/qtractor.git \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     file://0002-do-nor-try-run-for-float-sse-detection.patch \
     file://0003-do-nor-try-run-for-suil-libs-detection.patch \
-    file://0004-Add-ARM-NEON-acceleration-for-time-stretch-not-yet-t.patch \
-    file://0005-Add-qtractorPluginListDocument-to-save-load-plugin-l.patch \
-    file://0006-Add-MIDI-import-options-to-create-ready-to-play-sess.patch \
 "
-SRCREV = "9bf540b60a273b4257a3616acb108d9ef075c539"
+SRCREV = "85968e9481f457d9345ab64676f46a18a3c26047"
 PV = "0.8.4+git${SRCPV}"
 S = "${WORKDIR}/git"
 

@@ -1,0 +1,36 @@
+From d63c75a654c797360b4f98cba736084a987ab828 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 27 Nov 2017 19:41:04 +0100
+Subject: [PATCH 2/2] MidiImportExtender: return track change for midi program
+ change only
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/qtractorMidiImportExtender.cpp | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/src/qtractorMidiImportExtender.cpp b/src/qtractorMidiImportExtender.cpp
+index 0129d0f..0e11a7f 100644
+--- a/src/qtractorMidiImportExtender.cpp
++++ b/src/qtractorMidiImportExtender.cpp
+@@ -338,11 +338,12 @@ bool qtractorMidiImportExtender::finishTracksForExtension(
+ 		// Midi prog.
+ 		// Special case for drum-tracks program: Some MIDI files out in the wild do
+ 		// not set program for drum tracks. Give those a reasonable default.
+-		if (bIsDrumTrack && properties.midiProg < 0) {
++		if (bIsDrumTrack && properties.midiProg < 0)
+ 			// Set standard drums.
+ 			properties.midiProg = 0;
++		// Initial program change was missed likely (plugins did not process).
++		if (properties.midiProg >= 0)
+ 			bOneOrMoreTracksChanged = true;
+-		}
+ 
+ 		// Instrument.
+ 		QString strInstrumentNew = bIsDrumTrack ?
+-- 
+2.9.5
+
