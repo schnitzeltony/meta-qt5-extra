@@ -12,7 +12,7 @@ DEPENDS += " \
     fftw \
 "
 
-inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache
+inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache mime
 
 # fftwf is neon accelerated -> force SINGLE precision
 FFTWSINGLEPATCH = "${@bb.utils.contains('TUNE_FEATURES', 'neon', 'file://0002-Build-against-fftw3f-that-supports-NEON-on-ARM.patch', '', d)}"
