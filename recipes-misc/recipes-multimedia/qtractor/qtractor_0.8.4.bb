@@ -15,7 +15,7 @@ DEPENDS += " \
     suil \
 "
 
-inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache mime
+inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache mime qt5-translation
 
 SRC_URI = " \
     git://github.com/schnitzeltony/qtractor.git \
