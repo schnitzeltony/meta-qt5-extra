@@ -1,0 +1,66 @@
+From 6bf6f86f9948bdc0e409f4c16c3ee41338494e6b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 30 Nov 2017 22:25:34 +0100
+Subject: [PATCH] find native qt build tools by configure options - auto
+ detection does not work
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ configure.ac | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index ceada50..d982045 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -148,11 +148,14 @@ if test "x$ac_buildapp" = "xyes" -o ["x$ac_lv2pluginuis" = "xyes"  -a "x$ac_lv2w
+     dnl endo of qt version test
+     
+     dnl check for moc
+-    AC_PATH_PROGS(MOC, moc-$ac_qtversion moc, no, [$PATH:$QTDIR/bin])
++    AC_ARG_WITH(moc,
++      AC_HELP_STRING([--with-moc=PATH], [use alternate moc path]),
++      [MOC="$withval"], [MOC="no"])
+     if test "x$MOC" = "xno" ; then
+       AC_MSG_ERROR(
+         [cannot find 'moc', please install the Qt development tools package.])
+     fi
++    AC_SUBST(MOC)
+     
+     # Enable translations.
+     AC_ARG_ENABLE(translations,
+@@ -164,18 +167,24 @@ if test "x$ac_buildapp" = "xyes" -o ["x$ac_lv2pluginuis" = "xyes"  -a "x$ac_lv2w
+     
+     AM_COND_IF([ENABLE_TRANSLATIONS],[
+     dnl check for lupdate
+-    AC_PATH_PROGS(LUPDATE, lupdate-$ac_qtversion lupdate, no, [$PATH:$QTDIR/bin])
++    AC_ARG_WITH(lupdate,
++      AC_HELP_STRING([--with-lupdate=PATH], [use alternate lupdate path]),
++      [LUPDATE="$withval"], [LUPDATE="no"])
+     if test "x$LUPDATE" = "xno" ; then
+       AC_MSG_ERROR(
+         [cannot find 'lupdate', please install the Qt development tools package.])
+     fi
++    AC_SUBST(LUPDATE)
+     
+     dnl check for lrelease
+-    AC_PATH_PROGS(LRELEASE, lrelease-$ac_qtversion lrelease, no, [$PATH:$QTDIR/bin])
++    AC_ARG_WITH(lrelease,
++      AC_HELP_STRING([--with-lrelease=PATH], [use alternate lrelease path]),
++      [LRELEASE="$withval"], [LRELEASE="no"])
+     if test "x$LRELEASE" = "xno" ; then
+       AC_MSG_ERROR(
+         [cannot find 'lrelease', please install the Qt development tools package.])
+     fi
++    AC_SUBST(LRELEASE)
+     ], [AC_MSG_NOTICE([translations are disabled])])
+     
+     # Modify the entries in the LV2 ttl files according to Qt version
+-- 
+2.9.5
+

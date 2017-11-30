@@ -1,0 +1,35 @@
+From 2c7b219c4c50db0753a1ac6734e691bdba6a0e79 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 30 Nov 2017 21:44:15 +0100
+Subject: [PATCH] remove code to find qtwidget headers - it finds host's files
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ configure.ac | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index ceada50..ca5f5c8 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -127,12 +127,6 @@ if test "x$ac_buildapp" = "xyes" -o ["x$ac_lv2pluginuis" = "xyes"  -a "x$ac_lv2w
+           QT_INCLUDE_DIR=`$PKG_CONFIG --variable=includedir Qt5Gui`
+           QT_CXXFLAGS=`$PKG_CONFIG --cflags Qt5Core Qt5Gui Qt5Widgets`
+           QT_CXXFLAGS="$QT_CXXFLAGS -fPIC"
+-          EXTRA_QT_INCLUDE_DIR="$QT_INCLUDE_DIR/Qt"
+-          AC_CHECK_FILE([$QT_INCLUDE_DIR/QtWidgets/QWidget],
+-            AC_MSG_NOTICE([No extra QT_INCLUDE_DIR needed]),
+-              AC_CHECK_FILE([$EXTRA_QT_INCLUDE_DIR/QtWidgets/QWidget],
+-                QT_CPPFLAGS="$QT_CPPFLAGS -I$EXTRA_QT_INCLUDE_DIR",
+-                  AC_MSG_WARN([QWidget not found])))
+         
+           AC_SUBST(QT_CXXFLAGS)
+           AC_SUBST(Qt5_LIBS)
+-- 
+2.9.5
+
