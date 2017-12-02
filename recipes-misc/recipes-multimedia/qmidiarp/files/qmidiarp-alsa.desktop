@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Categories=AudioVideo;X-Sound;Midi;Audio;AudioVideoEditing;X-Jack;X-Midi;
+Name=QMidiArp ALSA
+GenericName=Arpeggiator-Sequencer-LFO
+Comment=Arpeggiator-Sequencer-LFO
+Keywords=audio;sound;jackd;midi;arpeggiator;
+Icon=qmidiarp
+MimeType=application/qma;application/qmax;
+Exec=qmidiarp -a %F
+TryExec=qmidiarp
+Terminal=false
+StartupNotify=true
+Name[en_US]=qmidiarp-alsa

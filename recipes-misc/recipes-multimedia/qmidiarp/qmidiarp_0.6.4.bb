@@ -17,6 +17,8 @@ SRC_URI = " \
     git://github.com/emuse/qmidiarp.git \
     file://0001-remove-code-to-find-qtwidget-headers-it-finds-host-s.patch \
     file://0002-find-native-qt-build-tools-by-configure-options-auto.patch \
+    file://qmidiarp-alsa.desktop \
+    file://qmidiarp-jack.desktop \
 "
 
 SRCREV = "05a1462569c1fb771852ca51bb8e5c8192b13e9d"
@@ -29,6 +31,13 @@ EXTRA_OECONF = " \
     --with-lupdate=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/lupdate \
     --with-lrelease=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/lrelease \
 "
+
+do_install_append() {
+    # replace default and split alsa
+    rm -f ${D}/${datadir}/applications/qmidiarp.desktop
+    install -m 644 ${WORKDIR}/qmidiarp-alsa.desktop ${D}/${datadir}/applications/
+    install -m 644 ${WORKDIR}/qmidiarp-jack.desktop ${D}/${datadir}/applications/
+}
 
 FILES_${PN} += " \
     ${datadir}/appdata \
