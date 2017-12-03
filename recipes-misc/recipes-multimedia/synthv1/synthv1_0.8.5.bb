@@ -37,16 +37,19 @@ EXTRA_OECONF = " \
 "
 
 do_install_append() {
-    install -d ${D}/${datadir}/${BPN}
-    cp ${WORKDIR}/autostatic-synthv1-presets1/*.synthv1 ${D}/${datadir}/${BPN}
-    cp ${WORKDIR}/linuxsynths-synthv1-presets/*.synthv1 ${D}/${datadir}/${BPN}
+    install -d ${D}/${datadir}/${BPN}/presets
+    cp ${WORKDIR}/autostatic-synthv1-presets1/*.synthv1 ${D}/${datadir}/${BPN}/presets
+    cp ${WORKDIR}/linuxsynths-synthv1-presets/*.synthv1 ${D}/${datadir}/${BPN}/presets
 }
+
+PACKAGES =+ "${PN}-presets"
 
 FILES_${PN} += " \
     ${datadir}/appdata \
     ${datadir}/mime \
     ${datadir}/icons \
     ${datadir}/metainfo \
-    ${datadir}/${BPN} \
     ${libdir}/lv2 \
 "
+
+FILES_${PN}-presets += "${datadir}/${BPN}/presets/"
