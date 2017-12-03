@@ -63,9 +63,6 @@ do_install_append() {
     install -m 0755 ${S}/ExternalPrograms/Spliter/spliter ${D}${bindir}/zynaddsubfx-spliter
 }
 
-# we are not linking against dssi - so
-RDEPENDS_${PN} += "dssi"
-
 FILES_${PN} += " \
     ${libdir}/dssi \
     ${libdir}/lv2 \
