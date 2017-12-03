@@ -37,7 +37,7 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/audiophob/*.drumkv1 ${D}${datadir}/${BPN}/presets/
 }
 
-PACKAGES += "${PN}-presets"
+PACKAGES =+ "${PN}-presets"
 
 FILES_${PN} += " \
     ${datadir}/appdata \
