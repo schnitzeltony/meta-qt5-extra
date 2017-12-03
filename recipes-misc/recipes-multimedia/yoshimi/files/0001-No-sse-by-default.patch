@@ -1,0 +1,31 @@
+From b7ba301c1a62dc41a4fbe7463bfd51f24445d396 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 3 Dec 2017 20:25:53 +0100
+Subject: [PATCH] No sse by default
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 4de8148..fcb94fb 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -104,7 +104,7 @@ set (BuildOptionsThisCPU
+ )
+ 
+ set (BuildOptionsBasic
+-    "-O3 -msse -msse2 -mfpmath=sse -ffast-math -fomit-frame-pointer"
++    "-O3 -ffast-math -fomit-frame-pointer"
+     CACHE STRING "basic X86 complier options"
+ )
+ 
+-- 
+2.9.5
+
