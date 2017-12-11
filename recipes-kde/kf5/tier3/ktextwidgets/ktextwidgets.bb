@@ -11,7 +11,7 @@ DEPENDS += "kcompletion kconfig kconfigwidgets ki18n kiconthemes kservice kwidge
             gettext-native sonnet-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "795f2892fa9c630a6c22720a8f60a10c"
-SRC_URI[sha256sum] = "5849d104e99be94d554bff229646df8fde84e3396c82e21a3e390ee08b09d05c"
+SRC_URI[md5sum] = "b0f13d0727924a002fb3da6ba51b9b5e"
+SRC_URI[sha256sum] = "7608a9f6b44acf2c9fbd483605dfd65004cce321ea0177909f8a6d69c126d654"
 
 FILES_${PN} += "${datadir}/kservicetypes5"

@@ -12,5 +12,5 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "ecdcbe50d14f279240a590331ec2e6e4"
-SRC_URI[sha256sum] = "6ee0f5a2b1d66d5266cd2045ff06329efeb394441261a9ce9ea7f5f35689e9ab"
+SRC_URI[md5sum] = "68ff5c6e23100fbcb8e5df810c8446dd"
+SRC_URI[sha256sum] = "e1a2bf196a4134293a4efd461b4aa6c2cdb3653d09569bbcc2591b923c066a33"
