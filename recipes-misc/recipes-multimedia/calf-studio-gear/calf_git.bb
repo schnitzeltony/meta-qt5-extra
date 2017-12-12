@@ -22,6 +22,7 @@ DEPENDS += " \
     fluidsynth \
     liblo \
     ladspa-sdk \
+    lv2 \
 "
 
 EXTRA_OECONF += "--enable-experimental"
