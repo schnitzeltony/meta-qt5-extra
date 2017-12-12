@@ -23,8 +23,8 @@ SRC_URI = " \
     file://0002-do-nor-try-run-for-float-sse-detection.patch \
     file://0003-do-nor-try-run-for-suil-libs-detection.patch \
 "
-SRCREV = "85968e9481f457d9345ab64676f46a18a3c26047"
-PV = "0.8.4+git${SRCPV}"
+SRCREV = "a024638db6e97c9147384b1a1ee69adf8cf743fe"
+PV = "0.8.5+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF = " \
