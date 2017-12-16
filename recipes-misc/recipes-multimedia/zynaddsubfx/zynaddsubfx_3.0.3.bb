@@ -22,6 +22,8 @@ DEPENDS += " \
     ntk \
 "
 
+CLEANBROKEN = "1"
+
 CXXFLAGS += "-ffast-math -DNDEBUG"
 
 SRC_URI = " \
