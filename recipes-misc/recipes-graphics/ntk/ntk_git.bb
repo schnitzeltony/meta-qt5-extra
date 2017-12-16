@@ -7,10 +7,10 @@ SRC_URI = " \
     git://github.com/original-male/${BPN}.git \
     file://0001-wscript-check-compile-instead-of-tun-check-datatype-.patch \
 "
-SRCREV = "92365eca0f9a6f054abc70489c009aba0fcde0ff"
+SRCREV = "1e3f5106d404562902bed2983403301db24a3f78"
 S = "${WORKDIR}/git"
-PV_LAST_RELEASE = "1.3.0"
-PV = "${PV_LAST_RELEASE}+git${SRCPV}"
+PV_LAST_RELEASE = "1.3.1000"
+PV = "${PV_LAST_RELEASE}"
 
 inherit waf pkgconfig
 
