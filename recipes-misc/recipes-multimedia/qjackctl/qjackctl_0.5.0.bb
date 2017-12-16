@@ -19,8 +19,8 @@ SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
 "
-SRC_URI[md5sum] = "2f8697891942403d7782e173704110c9"
-SRC_URI[sha256sum] = "c50da569ec8466ac6cc72c65e2d8212eb9c40149daed0a10fb7795ff9ddc4ab7"
+SRC_URI[md5sum] = "5e7e2a03f700b62578d1a712f3c9bf28"
+SRC_URI[sha256sum] = "9a74f33f6643bea8bf742ea54f9b40f08ed339887f076ff3068159c55d0ba853"
 
 EXTRA_OECONF = " \
     --with-qmake=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/qmake \
@@ -31,7 +31,7 @@ EXTRA_OECONF = " \
 "
 
 FILES_${PN} += " \
-    ${datadir}/appdata \
+    ${datadir}/metainfo \
 "
 
 RDEPENDS_${PN} += "jack-server"
