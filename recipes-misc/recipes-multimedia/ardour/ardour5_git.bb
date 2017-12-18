@@ -45,7 +45,7 @@ S = "${WORKDIR}/git"
 
 # arch specific override - default (tested) is ARM -> no fpu-optimizations
 # can be something like i686 / x86_64 see file 'wscript' in sourcepath for more details
-BUILD_DIST_TARGET = "none"
+BUILD_DIST_TARGET ??= "none"
 
 EXTRA_OECONF = " \
     --configdir=${sysconfdir} \
