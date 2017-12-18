@@ -19,11 +19,15 @@ FFTWSINGLEPATCH = "${@bb.utils.contains('TUNE_FEATURES', 'neon', 'file://0002-Bu
 
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+    http://linuxsynths.com/Padthv1PatchesDemos/Padthv1Patches.tar.gz;name=linuxsynths-padthv1-presets;subdir=linuxsynths-padthv1-presets \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     ${FFTWSINGLEPATCH} \
 "
 SRC_URI[md5sum] = "cb27d4e1133d6912b4fb0c18c05a4bdf"
 SRC_URI[sha256sum] = "229c0529f585ba7fb4c6e1236d88d8e0f047eab1e633d9a39d969cf63aa5d937"
+
+SRC_URI[linuxsynths-padthv1-presets.md5sum] = "951484ad2fe404d233a704d444147827"
+SRC_URI[linuxsynths-padthv1-presets.sha256sum] = "ad9eadc707784b6931955b1fc63308b9e5dc59d24903e6405e9d34d30794fd0b"
 
 EXTRA_OECONF = " \
     --with-qmake=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/qmake \
@@ -33,6 +37,14 @@ EXTRA_OECONF = " \
     --with-lrelease=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/lrelease \
 "
 
+do_install_append() {
+    install -d ${D}/${datadir}/${BPN}
+    install -d ${D}/${datadir}/${BPN}/presets
+    cp ${WORKDIR}/linuxsynths-padthv1-presets/*.padthv1 ${D}/${datadir}/${BPN}/presets
+}
+
+PACKAGES =+ "${PN}-presets"
+
 FILES_${PN} += " \
     ${datadir}/appdata \
     ${datadir}/mime \
@@ -40,3 +52,5 @@ FILES_${PN} += " \
     ${datadir}/icons \
     ${libdir}/lv2 \
 "
+
+FILES_${PN}-presets += "${datadir}/${BPN}/presets/"
