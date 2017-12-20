@@ -24,7 +24,6 @@ DEPENDS += " \
     ki18n \
     kiconthemes \
     kinit \
-    kdelibs4support \
     kio \
     knotifications \
     knotifyconfig \
@@ -41,8 +40,8 @@ DEPENDS += " \
 
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "3e6f5f3d8f9d6fb514aa80dfa38b0015"
-SRC_URI[sha256sum] = "82ece65d298f82955c19e77cab0465001abb26d5075cfadebb56dd3fe3b2691f"
+SRC_URI[md5sum] = "449ab05418804614ad8f6672c5b94ed6"
+SRC_URI[sha256sum] = "adc6e2d36d84f0460db1ee04fa93f5ac5148f5d64acf96de262e712dfdc05f41"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

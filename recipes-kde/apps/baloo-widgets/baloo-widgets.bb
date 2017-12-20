@@ -16,9 +16,8 @@ DEPENDS += "\
     kservice \
     kfilemetadata \
     baloo \
-    kdelibs4support \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "96fbeebe281f81a962ef809a9250bcc1"
-SRC_URI[sha256sum] = "8f90340c3640623781772f76e33357856c0781b15153afea30f9e31dd1863e0c"
+SRC_URI[md5sum] = "dc1a73d546cd246309c5985ccbd298bc"
+SRC_URI[sha256sum] = "ada72db458d5a4c222251628ced9521f16bfea8c682a89d72c0af571dd0617c9"

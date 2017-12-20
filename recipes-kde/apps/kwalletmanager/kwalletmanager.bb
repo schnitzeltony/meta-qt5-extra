@@ -16,7 +16,6 @@ DEPENDS += " \
     kwallet \
     kservice \
     kcmutils \
-    kdelibs4support \
     ki18n \
     kxmlgui \
     kconfig-native \
@@ -25,8 +24,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "cafbbbe3fcb934c1ae6991c12f9cbbdb"
-SRC_URI[sha256sum] = "d98c399899502cb168a351b6d699b0bfd26c4614c34b6c64a7e346a33dd7f9bd"
+SRC_URI[md5sum] = "8dc8e625ef37906ba49cc3a3c8f75a68"
+SRC_URI[sha256sum] = "b8d7d5c2ea4ce7b0f4d0610c51d6675fbdde01584f74feb5f8ef7c88b1f76b4b"
 SRC_URI += "file://0001-fix-build-with-QT_NO_SESSIONMANAGER-set.patch"
 
 FILES_${PN} += " \

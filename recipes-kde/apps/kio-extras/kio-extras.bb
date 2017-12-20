@@ -32,8 +32,6 @@ DEPENDS += " \
     ki18n \
     kio \
     khtml \
-    kdelibs4support \
-    kdelibs4support-native \
     kpty \
     solid \
     kbookmarks \
@@ -51,8 +49,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "091c51c84bcb3fc120e8cc68a6221570"
-SRC_URI[sha256sum] = "4c268b22a50d7ed08dbb7211a34e562aa10c2cbb2c62fb4311a0f932c841013f"
+SRC_URI[md5sum] = "a0e84bb9966025424e9b9cfdf9713e5a"
+SRC_URI[sha256sum] = "9a166d517ae950e2a2f5f19c2c3121363aa220156c139c16f20451bfa143521e"
 
 # gperf creates hard #line links
 do_install_prepend() {

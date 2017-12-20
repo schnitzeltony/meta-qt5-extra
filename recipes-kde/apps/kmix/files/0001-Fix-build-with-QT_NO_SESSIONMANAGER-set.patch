@@ -1,0 +1,44 @@
+From 9757ed6c44884eb7890f31e015f5788de88891ac Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 21 Dec 2017 00:22:43 +0100
+Subject: [PATCH] Fix build with QT_NO_SESSIONMANAGER set
+
+---
+ apps/KMixApp.cpp | 4 ++++
+ apps/kmix.cpp    | 2 ++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/apps/KMixApp.cpp b/apps/KMixApp.cpp
+index d00309b..b00f27a 100644
+--- a/apps/KMixApp.cpp
++++ b/apps/KMixApp.cpp
+@@ -87,7 +87,11 @@ bool KMixApp::restoreSessionIfApplicable(bool hasArgKeepvisibility, bool reset)
+ 	 */
+ 	creationLock.lock();
+ 
++#ifndef QT_NO_SESSIONMANAGER
+ 	bool restore = qApp->isSessionRestored(); // && KMainWindow::canBeRestored(0);
++#else
++	bool restore = false;
++#endif
+ 	qCDebug(KMIX_LOG) << "Starting KMix using keepvisibility=" << hasArgKeepvisibility << ", failsafe=" << reset << ", sessionRestore=" << restore;
+ 	int createCount = 0;
+ 	if (restore)
+diff --git a/apps/kmix.cpp b/apps/kmix.cpp
+index b97852c..cd74d03 100644
+--- a/apps/kmix.cpp
++++ b/apps/kmix.cpp
+@@ -99,8 +99,10 @@ KMixWindow::KMixWindow(bool invisible, bool reset) :
+ 		recreateGUI(false, QString(), true, reset);
+ 	}
+ 
++#ifndef QT_NO_SESSIONMANAGER
+ 	if (!qApp->isSessionRestored() ) // done by the session manager otherwise
+ 		setInitialSize();
++#endif
+ 
+ 	fixConfigAfterRead();
+ 	theKMixDeviceManager->initHotplug();
+-- 
+2.9.5
+
