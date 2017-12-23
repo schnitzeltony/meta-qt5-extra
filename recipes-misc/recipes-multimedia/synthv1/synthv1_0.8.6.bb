@@ -19,8 +19,8 @@ SRC_URI = " \
     http://linuxsynths.com/Synthv1PatchesDemos/Synthv1Patches06.tar.gz;name=linuxsynths-synthv1-presets;subdir=linuxsynths-synthv1-presets \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
 "
-SRC_URI[md5sum] = "0c71c38a3eff36fa85cc395fdc790b83"
-SRC_URI[sha256sum] = "31995feea77d4ff2b3a482190388ce25f4c313a9bc4741c8e3021e2fcdc47957"
+SRC_URI[md5sum] = "d21ba0b79cb0de144070940d30786f8f"
+SRC_URI[sha256sum] = "22bd413e101077ba4d518008726e0010249c70095e956d089a22976d5f802a90"
 
 SRC_URI[autostatic-synthv1-presets1.md5sum] = "02210e5576310554cfe316fb72e88b74"
 SRC_URI[autostatic-synthv1-presets1.sha256sum] = "587ac8cb4cb645fc71603d1b4b351b24f3e4d9f15a53aca59c0f30cc9f66e253"
