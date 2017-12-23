@@ -18,8 +18,8 @@ SRC_URI = " \
     git://github.com/marado/drumkv1-audiophob.git;name=audiophob;destsuffix=audiophob \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
 "
-SRC_URI[md5sum] = "496a92a5648aeab656c16b168a8a6383"
-SRC_URI[sha256sum] = "cfc9373b8ac38235c8086e27b8699fa0b057c4d8aa9fd98f16f756ea43c5b81b"
+SRC_URI[md5sum] = "1c3efd8bbb222f8771fe6c0793178113"
+SRC_URI[sha256sum] = "9821570e17770cedd99e99426e8891b9c16a86e495fc5fcfa9449570bdcb9d3b"
 
 SRCREV_audiophob = "903639b36bd7ffcb7c96893d558c6653d8e249cc"
 
