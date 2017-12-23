@@ -21,9 +21,8 @@ SRC_URI = " \
     file://qmidiarp-jack.desktop \
 "
 
-SRCREV = "05a1462569c1fb771852ca51bb8e5c8192b13e9d"
+SRCREV = "bf9300363578eee44ce2e1e42e938ce338425937"
 S = "${WORKDIR}/git"
-PV = "0.6.4+git${SRCPV}"
 
 EXTRA_OECONF = " \
     --enable-translations \
