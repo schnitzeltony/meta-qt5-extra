@@ -23,8 +23,8 @@ SRC_URI = " \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     ${FFTWSINGLEPATCH} \
 "
-SRC_URI[md5sum] = "cb27d4e1133d6912b4fb0c18c05a4bdf"
-SRC_URI[sha256sum] = "229c0529f585ba7fb4c6e1236d88d8e0f047eab1e633d9a39d969cf63aa5d937"
+SRC_URI[md5sum] = "a601c57ee03a7d12cfb128da6040fc43"
+SRC_URI[sha256sum] = "b87348a050efbfa2007c9a1604c83c650f97435d7a5cfb9c0eb8d8e4c45233d6"
 
 SRC_URI[linuxsynths-padthv1-presets.md5sum] = "951484ad2fe404d233a704d444147827"
 SRC_URI[linuxsynths-padthv1-presets.sha256sum] = "ad9eadc707784b6931955b1fc63308b9e5dc59d24903e6405e9d34d30794fd0b"
