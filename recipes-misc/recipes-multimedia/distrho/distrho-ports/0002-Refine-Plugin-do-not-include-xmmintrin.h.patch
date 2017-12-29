@@ -1,0 +1,27 @@
+From 8681831fa6fc5e58a7eebfc46bb0a467c8f19dcc Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 29 Dec 2017 23:36:46 +0100
+Subject: [PATCH] Refine-Plugin: do not include "xmmintrin.h"
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ ports/refine/source/PluginProcessor.cpp | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/ports/refine/source/PluginProcessor.cpp b/ports/refine/source/PluginProcessor.cpp
+index 6c9e6182..ab50a6ad 100644
+--- a/ports/refine/source/PluginProcessor.cpp
++++ b/ports/refine/source/PluginProcessor.cpp
+@@ -1,6 +1,5 @@
+ #include "PluginProcessor.h"
+ #include "PluginEditor.h"
+-#include "xmmintrin.h"
+ 
+ ReFinedAudioProcessor::ReFinedAudioProcessor()    
+ {
+-- 
+2.14.3
+

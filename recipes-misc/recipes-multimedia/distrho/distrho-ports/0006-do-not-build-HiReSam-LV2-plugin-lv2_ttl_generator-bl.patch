@@ -1,0 +1,32 @@
+From da09f0307d08242d5dfdb738e6ea51876ac1da58 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 30 Dec 2017 00:08:07 +0100
+Subject: [PATCH] do not build HiReSam LV2-plugin - lv2_ttl_generator blocks
+ forever
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ ports/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ports/Makefile b/ports/Makefile
+index 751158c3..59966e48 100644
+--- a/ports/Makefile
++++ b/ports/Makefile
+@@ -51,7 +51,7 @@ else
+ #	$(MAKE) -C drumsynth/LV2
+ 	$(MAKE) -C easySSP/LV2
+ #	$(MAKE) -C eqinox/LV2
+-	$(MAKE) -C HiReSam/LV2
++#	$(MAKE) -C HiReSam/LV2
+ # 	$(MAKE) -C juce-demo-host/LV2
+ 	$(MAKE) -C juce-demo-plugin/LV2
+ 	$(MAKE) -C klangfalter/LV2
+-- 
+2.14.3
+

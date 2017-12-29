@@ -9,14 +9,12 @@ LIC_FILES_CHKSUM = " \
 SRC_URI = " \
     git://github.com/DISTRHO/DISTRHO-Ports.git \
     file://0001-disable-pitchedDelay-it-uses-double-precision-SSE2-b.patch \
-    file://0002-Refine-Plugin-do-not-include-xmmintrin.h.patch \
-    file://0003-do-not-build-equinox-LV2-plugin-lv2_ttl_generator-bl.patch \
-    file://0004-do-not-build-drowaudio-tremolo-LV2-plugin-lv2_ttl_ge.patch \
-    file://0005-do-not-build-drumsynth-LV2-plugin-lv2_ttl_generator-.patch \
-    file://0006-do-not-build-HiReSam-LV2-plugin-lv2_ttl_generator-bl.patch \
+    file://0002-do-not-build-equinox-LV2-plugin-lv2_ttl_generator-bl.patch \
+    file://0003-do-not-build-drowaudio-tremolo-LV2-plugin-lv2_ttl_ge.patch \
+    file://0004-do-not-build-drumsynth-LV2-plugin-lv2_ttl_generator-.patch \
 "
 
-SRCREV = "e11e2b204c14b8e370a0bf5beafa5f162fedb8e9"
+SRCREV = "bef9436de38794dd2de24d404785089f33e6df8a"
 S = "${WORKDIR}/git"
 PV = "0.0.0+git${SRCPV}"
 

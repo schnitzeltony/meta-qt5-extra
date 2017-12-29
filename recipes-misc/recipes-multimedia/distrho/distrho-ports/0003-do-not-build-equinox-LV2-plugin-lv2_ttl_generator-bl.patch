@@ -15,18 +15,18 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/ports/Makefile b/ports/Makefile
-index f81013c..750f323 100644
+index d87da4af..4cdc7674 100644
 --- a/ports/Makefile
 +++ b/ports/Makefile
-@@ -29,7 +29,7 @@ lv2: libs
+@@ -50,7 +50,7 @@ else
  	$(MAKE) -C drowaudio-tremolo/LV2
  	$(MAKE) -C drumsynth/LV2
  	$(MAKE) -C easySSP/LV2
 -	$(MAKE) -C eqinox/LV2
 +#	$(MAKE) -C eqinox/LV2
+ 	$(MAKE) -C HiReSam/LV2
  # 	$(MAKE) -C juce-demo-host/LV2
  	$(MAKE) -C juce-demo-plugin/LV2
- 	$(MAKE) -C klangfalter/LV2
 -- 
-2.9.4
+2.14.3
 
