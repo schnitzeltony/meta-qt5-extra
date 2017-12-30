@@ -14,11 +14,19 @@ SRC_URI = " \
     file://0004-do-not-build-drowaudio-tremolo-LV2-plugin-lv2_ttl_ge.patch \
     file://0005-do-not-build-drumsynth-LV2-plugin-lv2_ttl_generator-.patch \
     file://0006-do-not-build-HiReSam-LV2-plugin-lv2_ttl_generator-bl.patch \
+    \
+    http://linuxsynths.com/VexPatchesDemos/VexPatches01.tar.gz;name=linuxsynths-vex-patches1;subdir=linuxsynths-vex-patches \
+    http://linuxsynths.com/VexPatchesDemos/VexPatches02.tar.gz;name=linuxsynths-vex-patches2;subdir=linuxsynths-vex-patches \
 "
 
 SRCREV = "e11e2b204c14b8e370a0bf5beafa5f162fedb8e9"
 S = "${WORKDIR}/git"
 PV = "0.0.0+git${SRCPV}"
+
+SRC_URI[linuxsynths-vex-patches1.md5sum] = "c03f8ac9eaf3fabb3c98af5cb27a5edb"
+SRC_URI[linuxsynths-vex-patches1.sha256sum] = "1a32ba4ba52d0efcd2214e52ecf9ea71885d110261c2b26e23ccdbd0960b6f60"
+SRC_URI[linuxsynths-vex-patches2.md5sum] = "a3d00bf9eb7e2381ffc56f3e79e067ec"
+SRC_URI[linuxsynths-vex-patches2.sha256sum] = "378cff261dab333c5f29246b6f3f557e0461e8bc230519da3a1a9049cbd437d5"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
@@ -60,6 +68,13 @@ do_install() {
 	cp -r ${S}/bin/* ${D}${libdir}
     # don't install crash data
     rm `find ${D}${libdir} -name *.core` || true
+
+    # presets
+    install -d ${D}${libdir}/lv2
+    # vex
+    for file in `find ${WORKDIR}/linuxsynths-vex-patches -maxdepth 1` ; do
+        cp -rf $file ${D}${libdir}/lv2/
+    done
 }
 
 FILES_${PN} += " \
