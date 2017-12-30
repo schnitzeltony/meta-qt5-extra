@@ -15,6 +15,8 @@ SRC_URI = " \
     file://0005-do-not-build-drumsynth-LV2-plugin-lv2_ttl_generator-.patch \
     file://0006-do-not-build-HiReSam-LV2-plugin-lv2_ttl_generator-bl.patch \
     \
+    http://linuxsynths.com/ObxdPatchesDemos/ObxdPatchesBrian-01.tar.gz;name=linuxsynths-obxd-patches1;subdir=linuxsynths-obxd-patches \
+    \
     http://linuxsynths.com/VexPatchesDemos/VexPatches01.tar.gz;name=linuxsynths-vex-patches1;subdir=linuxsynths-vex-patches \
     http://linuxsynths.com/VexPatchesDemos/VexPatches02.tar.gz;name=linuxsynths-vex-patches2;subdir=linuxsynths-vex-patches \
 "
@@ -22,6 +24,9 @@ SRC_URI = " \
 SRCREV = "e11e2b204c14b8e370a0bf5beafa5f162fedb8e9"
 S = "${WORKDIR}/git"
 PV = "0.0.0+git${SRCPV}"
+
+SRC_URI[linuxsynths-obxd-patches1.md5sum] = "32244f847a54a71ee3c25079df5c8b84"
+SRC_URI[linuxsynths-obxd-patches1.sha256sum] = "246fccadd71bb9f0606a95bf7b0aee7807fd3a14f754367425423a51c31e160e"
 
 SRC_URI[linuxsynths-vex-patches1.md5sum] = "c03f8ac9eaf3fabb3c98af5cb27a5edb"
 SRC_URI[linuxsynths-vex-patches1.sha256sum] = "1a32ba4ba52d0efcd2214e52ecf9ea71885d110261c2b26e23ccdbd0960b6f60"
@@ -71,6 +76,10 @@ do_install() {
 
     # presets
     install -d ${D}${libdir}/lv2
+    # obxd
+    for file in `find ${WORKDIR}/linuxsynths-obxd-patches -maxdepth 1` ; do
+        cp -rf $file ${D}${libdir}/lv2/
+    done
     # vex
     for file in `find ${WORKDIR}/linuxsynths-vex-patches -maxdepth 1` ; do
         cp -rf $file ${D}${libdir}/lv2/
