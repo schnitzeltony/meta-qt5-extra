@@ -1,0 +1,33 @@
+From 3891b9d78e8debf0a725aaef14dcf15a2531621d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 31 Dec 2017 09:39:53 +0100
+Subject: [PATCH] Remove x86 specific build flags
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 5aaad52..2fc727b 100644
+--- a/Makefile
++++ b/Makefile
+@@ -11,8 +11,8 @@ CXX ?= g++
+ # Set build and link flags
+ 
+ BASE_FLAGS = -Wall -Wextra -pipe -DREAL_BUILD -MD -MP
+-BASE_OPTS  = -O2 -mtune=generic -msse -msse2 -fdata-sections -ffunction-sections -fPIC -DPIC
+-LINK_OPTS  = -fdata-sections -ffunction-sections -Wl,--gc-sections -Wl,-O1 -Wl,--as-needed -Wl,--strip-all
++BASE_OPTS  = -O2 -fdata-sections -ffunction-sections -fPIC -DPIC
++LINK_OPTS  = -fdata-sections -ffunction-sections -Wl,--gc-sections -Wl,-O1 -Wl,--as-needed
+ 
+ ifeq ($(DEBUG),true)
+ BASE_FLAGS += -DDEBUG -O0 -g
+-- 
+2.14.3
+
