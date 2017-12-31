@@ -37,7 +37,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 inherit qemu-ext distro_features_check
 
-DEPENDS += "\
+DEPENDS += " \
     premake3-native \
     alsa-lib \
     libx11 \
