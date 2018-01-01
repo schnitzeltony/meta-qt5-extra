@@ -21,12 +21,9 @@ DEPENDS += " \
     libxft \
 "
 
-SRC_URI = " \
-    ${SOURCEFORGE_MIRROR}/project/${BPN}/1.5/${BPN}-${PV}.tar.bz2 \
-    file://0001-No-sse-by-default.patch \
-"
-SRC_URI[md5sum] = "e8f580a2d3628a8cf0831dd2d5ec7e1f"
-SRC_URI[sha256sum] = "466e51ee9eb229ee96bc680e29fc0ea31832b9e7ceb23d9a1d7529dfa97cb5e4"
+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/1.5/${BPN}-${PV}.tar.bz2"
+SRC_URI[md5sum] = "30fe0b2f3f8e27f53587c3a8b8e958ce"
+SRC_URI[sha256sum] = "ee962fe137fe33bdfd3ad779d07a690e11f35d50751d4ab98b5c2f414eeae140"
 
 OECMAKE_SOURCEPATH = "${S}/src"
 
