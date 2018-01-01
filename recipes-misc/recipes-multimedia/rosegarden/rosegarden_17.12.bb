@@ -21,11 +21,10 @@ REQUIRED_DISTRO_FEATURE = "x11"
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \
 "
-SRC_URI[md5sum] = "d3d80cc8e6eb3c7764a2905059acacce"
-SRC_URI[sha256sum] = "988a6141c5b0a8e85c029f650de78bf57100c4d778c22d0194b0692584640ece"
-
+SRC_URI[md5sum] = "089c37a35115bfa6b890d206529b628f"
+SRC_URI[sha256sum] = "26592aca205063d62e847840f0a82cfd5093e0ccc10df63853b794c7bdeb2390"
 
 FILES_${PN} += " \
     ${datadir}/mime \
-    ${datadir}/appdata \
+    ${datadir}/metainfo \
 "
