@@ -12,7 +12,7 @@ SRC_URI = " \
 "
 SRCREV = "f71e2742e1463906c3d44a4b33c1d90e3ad61acb"
 S = "${WORKDIR}/git"
-PV = "0.0.90"
+PV = "0.90.0"
 
 inherit autotools-brokensep pkgconfig gtk-icon-cache bash-completion qemu-ext
 
