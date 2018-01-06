@@ -36,7 +36,7 @@ python qt_do_split_locales() {
         translocation = '%s%s' % (dvar, transvar)
         transfiles = glob.glob(translocation)
         for l in sorted(transfiles):
-            lib, locale = l.replace('.qm', '').split("_",1)
+            lib, locale = os.path.basename(l.replace('.qm', '')).split("_",1)
             if not locale in locales:
                 locales.append(locale)
 
