@@ -24,8 +24,8 @@ inherit cmake_qt5 pkgconfig gtk-icon-cache distro_features_check mime qt5-transl
 SRC_URI = " \
     git://github.com/muse-sequencer/muse.git \
 "
-SRCREV = "454ebcc7233bf6be29666125a15a9cc72e33c262"
-PV = "3.0.0pre2"
+SRCREV = "1ad1f785556366002c877910d629b53e679d47ce"
+PV = "3.0.0+git${SRCPV}"
 S = "${WORKDIR}/git/muse3"
 
 EXTRA_OECMAKE += " \
@@ -36,7 +36,6 @@ EXTRA_OECMAKE += " \
     -DENABLE_FLUID=1 \
 "
 #    -DENABLE_EXPERIMENTAL=1 won't work
-#    -DENABLE_LV2_SUPPLIED=1 won't work
 #    -DENABLE_VST_NATIVE=1 
 
 # Have no idea where flags are lost. Anyway driver would fail
