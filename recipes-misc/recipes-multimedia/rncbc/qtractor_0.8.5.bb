@@ -18,12 +18,12 @@ DEPENDS += " \
 inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache mime qt5-translation
 
 SRC_URI = " \
-    git://github.com/schnitzeltony/qtractor.git;branch=work-2017-12 \
+    git://github.com/rncbc/qtractor.git;branch=midiimportx \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     file://0002-do-nor-try-run-for-float-sse-detection.patch \
     file://0003-do-nor-try-run-for-suil-libs-detection.patch \
 "
-SRCREV = "c57cd061cb8edc04761ca1400fff071c81939602"
+SRCREV = "e3b12b6238755e4e78092bd89e074b42314da6a2"
 PV = "0.8.5+git${SRCPV}"
 S = "${WORKDIR}/git"
 
