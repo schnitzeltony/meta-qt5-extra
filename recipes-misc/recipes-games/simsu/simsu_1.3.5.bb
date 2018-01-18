@@ -8,8 +8,8 @@ inherit qmake5 qt5-translation gtk-icon-cache
 DEPENDS = "qttools-native qtbase hicolor-icon-theme"
 
 SRC_URI = "http://gottcode.org/${BPN}/${BPN}-${PV}-src.tar.bz2"
-SRC_URI[md5sum] = "7b54fe7b78e880157951f79fd372cdf5"
-SRC_URI[sha256sum] = "1dd01274796583e49520217c93b6ebeab1bd58703c158a92209ed0bdd87b26b0"
+SRC_URI[md5sum] = "289321393c7881ab5f96a025633b5a95"
+SRC_URI[sha256sum] = "00c6afc5d5909fabbffc6f37f78834e2e7f54e5d26a9994414940d8917941a2b"
 
 EXTRA_QMAKEVARS_PRE += "PREFIX=${prefix}"
 
