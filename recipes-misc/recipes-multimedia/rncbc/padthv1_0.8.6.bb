@@ -22,6 +22,7 @@ SRC_URI = " \
     http://linuxsynths.com/Padthv1PatchesDemos/Padthv1Patches.tar.gz;name=linuxsynths-padthv1-presets;subdir=linuxsynths-padthv1-presets \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     ${FFTWSINGLEPATCH} \
+    file://padthv1.conf \
 "
 SRC_URI[md5sum] = "a601c57ee03a7d12cfb128da6040fc43"
 SRC_URI[sha256sum] = "b87348a050efbfa2007c9a1604c83c650f97435d7a5cfb9c0eb8d8e4c45233d6"
@@ -41,6 +42,9 @@ do_install_append() {
     install -d ${D}/${datadir}/${BPN}
     install -d ${D}/${datadir}/${BPN}/presets
     cp ${WORKDIR}/linuxsynths-padthv1-presets/*.padthv1 ${D}/${datadir}/${BPN}/presets
+
+    install -d ${D}/${sysconfdir}/skel/.config/rncbc.org
+    install -m 0644 ${WORKDIR}/${BPN}.conf ${D}/${sysconfdir}/skel/.config/rncbc.org/
 }
 
 PACKAGES =+ "${PN}-presets"
@@ -53,4 +57,7 @@ FILES_${PN} += " \
     ${libdir}/lv2 \
 "
 
-FILES_${PN}-presets += "${datadir}/${BPN}/presets/"
+FILES_${PN}-presets += " \
+    ${sysconfdir}/skel/.config/rncbc.org \
+    ${datadir}/${BPN}/presets/ \
+"
