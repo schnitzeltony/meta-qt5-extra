@@ -1,0 +1,61 @@
+From ec1ed40b49a8056cd3d646c652e5cdfcee3c1c6e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 19 Jan 2018 18:46:04 +0100
+Subject: [PATCH] remove UINQHACK - it is used for OSX builds only and caused
+ trouble for us
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ common.mak     | 2 +-
+ robtk/robtk.mk | 3 ---
+ 2 files changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/common.mak b/common.mak
+index e17b007..569b0b6 100644
+--- a/common.mak
++++ b/common.mak
+@@ -170,7 +170,7 @@ ifeq ($(LV2AVAIL)$(HAVE_UI)$(HAVE_IDLE), yesyesyes)
+       UICFLAGS+=-DFONTFILE=\"$(FONTFILE)\"
+     endif
+   endif
+-  UICFLAGS+=`pkg-config --cflags freetype2` `pkg-config --cflags ftgl` -DHAVE_FTGL -DUINQHACK=Sbf
++  UICFLAGS+=`pkg-config --cflags freetype2` `pkg-config --cflags ftgl` -DHAVE_FTGL
+ endif
+ 
+ #NOTE: midi.c and cfgParser.c needs to be re-compiled w/o HAVE_ASEQ
+diff --git a/robtk/robtk.mk b/robtk/robtk.mk
+index d6d84dd..c787364 100644
+--- a/robtk/robtk.mk
++++ b/robtk/robtk.mk
+@@ -65,7 +65,6 @@ ROBGTK = $(RW)robtk.mk $(UITOOLKIT) $(RW)ui_gtk.c \
+ %UI_gl.o:: $(ROBGL)
+ 	@mkdir -p $(@D)
+ 	$(CXX) -c $(CPPFLAGS) $(CFLAGS) $(GLUICFLAGS) \
+-	  -DUINQHACK="$(shell date +%s$$$$)" \
+ 	  -DPLUGIN_SOURCE="\"gui/$(*F).c\"" \
+ 	  -DRTK_DESCRIPTOR="$(value gl_$(subst -,_,$(*F))_LV2DESC)" \
+ 	  -o $@ $(RW)ui_gl.c
+@@ -73,7 +72,6 @@ ROBGTK = $(RW)robtk.mk $(UITOOLKIT) $(RW)ui_gtk.c \
+ %pugl.o:: $(ROBGL)
+ 	@mkdir -p $(@D)
+ 	$(CXX) -c $(CPPFLAGS) $(CFLAGS) $(GLUICFLAGS) \
+-	  -DUINQHACK="$(shell date +%s$$$$)" \
+ 	  -o $@ $(PUGL_SRC)
+ 
+ %_glui.so %_glui.dylib %_glui.dll::
+@@ -89,7 +87,6 @@ ROBGTK = $(RW)robtk.mk $(UITOOLKIT) $(RW)ui_gtk.c \
+ %UI_gl.so %UI_gl.dylib %UI_gl.dll:: $(ROBGL)
+ 	@mkdir -p $(@D)
+ 	$(CXX) $(CPPFLAGS) $(CFLAGS) $(GLUICFLAGS) \
+-	  -DUINQHACK="$(shell date +%s$$$$)" \
+ 	  -DPLUGIN_SOURCE="\"gui/$(*F).c\"" \
+ 	  -o $@ $(RW)ui_gl.c \
+ 	  $(PUGL_SRC) \
+-- 
+2.14.3
+
