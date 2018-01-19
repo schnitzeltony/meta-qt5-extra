@@ -18,6 +18,7 @@ SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/autostatic/autostatic-synthv1-presets/autostatic-synthv1-presets1.tar.gz;name=autostatic-synthv1-presets1 \
     http://linuxsynths.com/Synthv1PatchesDemos/Synthv1Patches06.tar.gz;name=linuxsynths-synthv1-presets;subdir=linuxsynths-synthv1-presets \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
+    file://synthv1.conf \
 "
 SRC_URI[md5sum] = "d21ba0b79cb0de144070940d30786f8f"
 SRC_URI[sha256sum] = "22bd413e101077ba4d518008726e0010249c70095e956d089a22976d5f802a90"
@@ -40,6 +41,9 @@ do_install_append() {
     install -d ${D}/${datadir}/${BPN}/presets
     cp ${WORKDIR}/autostatic-synthv1-presets1/*.synthv1 ${D}/${datadir}/${BPN}/presets
     cp ${WORKDIR}/linuxsynths-synthv1-presets/*.synthv1 ${D}/${datadir}/${BPN}/presets
+
+    install -d ${D}/${sysconfdir}/skel/.config/rncbc.org
+    install -m 0644 ${WORKDIR}/${BPN}.conf ${D}/${sysconfdir}/skel/.config/rncbc.org/
 }
 
 PACKAGES =+ "${PN}-presets"
@@ -52,4 +56,7 @@ FILES_${PN} += " \
     ${libdir}/lv2 \
 "
 
-FILES_${PN}-presets += "${datadir}/${BPN}/presets/"
+FILES_${PN}-presets += " \
+    ${sysconfdir}/skel/.config/rncbc.org \
+    ${datadir}/${BPN}/presets/ \
+"
