@@ -39,10 +39,14 @@ SRC_URI = " \
 SRC_URI[md5sum] = "00896775772991182e927248eb3ef198"
 SRC_URI[sha256sum] = "ef06cee677d75861edca0e1f825bca42ff59b7200aeb827e16f8d1fb5ef14e39"
 
+OECMAKE_GENERATOR="Unix Makefiles"
+
 # krita has lots of include_directories(SYSTEM ${FOO_DIR})
 # have no better way to make gcc6 happy
 do_configure_append() {
-     sed -i 's:-isystem:-I:g' `find ${B} -name *.make`
+     for makefile in `find ${B} -name *.make` ; do
+         sed -i 's:-isystem:-I:g' $makefile
+     done
 }
 
 # HACK - but overidable by BSP
