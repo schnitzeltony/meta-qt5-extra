@@ -31,3 +31,5 @@ do_install_append() {
     rm ${D}${libdir}/libntk_images.a.1
     mv ${D}${libdir}/libntk_images.a.${PV_LAST_RELEASE} ${D}${libdir}/libntk_images.a
 }
+
+BBCLASSEXTEND = "native"
