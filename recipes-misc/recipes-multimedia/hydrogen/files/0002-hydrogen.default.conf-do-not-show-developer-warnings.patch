@@ -1,0 +1,31 @@
+From ad239818271230d7cae0b602ac2165db1b178445 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 5 Feb 2018 23:59:05 +0100
+Subject: [PATCH] hydrogen.default.conf: do not show developer warnings
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ data/hydrogen.default.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/data/hydrogen.default.conf b/data/hydrogen.default.conf
+index a5c201ef..d6d2b6c3 100644
+--- a/data/hydrogen.default.conf
++++ b/data/hydrogen.default.conf
+@@ -15,7 +15,7 @@
+ 	<useTimeLine>false</useTimeLine>
+ 	<maxBars>400</maxBars>
+ 	<useTheRubberbandBpmChangeEvent>false</useTheRubberbandBpmChangeEvent>
+-	<showDevelWarning>true</showDevelWarning>
++	<showDevelWarning>false</showDevelWarning>
+ 	<hearNewNotes>true</hearNewNotes>
+ 	<recordEvents>false</recordEvents>
+ 	<quantizeEvents>true</quantizeEvents>
+-- 
+2.14.3
+
