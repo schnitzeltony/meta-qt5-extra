@@ -40,7 +40,6 @@ DEPENDS += " \
     kwin \
     kpackage-native \
     kdoctools-native \
-    kjsembed-native \
     sonnet-native \
     kdesignerplugin-native \
     kdelibs4support-native \
@@ -49,8 +48,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "ae474cb87f328e9c1e7646e5a393c17a"
-SRC_URI[sha256sum] = "28556c8e1627ccf9f2d0c87159951b73ee2102c12f03e475498056b10da3f3c6"
+SRC_URI[md5sum] = "83b59db9049abe5122f074fa47f2deda"
+SRC_URI[sha256sum] = "d5e58c98a43eec206396cd7d3b1d3008c6edba07e9e92c593c24d321f13548b3"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
@@ -104,6 +103,7 @@ FILES_${PN}-dev = " \
     ${libdir}/libplasma-geolocation-interface.so \
     ${libdir}/libtaskmanager.so \
     ${libdir}/liblegacytaskmanager.so \
+    ${libdir}/libcolorcorrect.so \
 "
 
 # startkde/startplasmacompositor require:

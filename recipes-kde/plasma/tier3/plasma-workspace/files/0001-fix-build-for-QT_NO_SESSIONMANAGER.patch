@@ -107,7 +107,7 @@ index ec117f3..93791b2 100644
      ShellManager::s_fixedShell = cliOptions.value(shellPluginOption);
  
 diff --git a/xembed-sni-proxy/main.cpp b/xembed-sni-proxy/main.cpp
-index aa1d7f3..26ff777 100644
+index 1ae9b91..8a3bc39 100644
 --- a/xembed-sni-proxy/main.cpp
 +++ b/xembed-sni-proxy/main.cpp
 @@ -19,7 +19,9 @@
@@ -120,7 +120,7 @@ index aa1d7f3..26ff777 100644
  
  #include "fdoselectionmanager.h"
  
-@@ -47,12 +49,13 @@ int main(int argc, char ** argv)
+@@ -49,11 +51,13 @@ int main(int argc, char ** argv)
          qFatal("xembed-sni-proxy is only useful XCB. Aborting");
      }
  
@@ -130,11 +130,10 @@ index aa1d7f3..26ff777 100644
      };
      QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
      QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
--
 +#endif
  
-     app.setDesktopSettingsAware(false);
      app.setQuitOnLastWindowClosed(false);
+ 
 -- 
 2.9.3
 

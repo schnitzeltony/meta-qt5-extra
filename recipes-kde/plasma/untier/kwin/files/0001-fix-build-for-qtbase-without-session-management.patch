@@ -65,10 +65,10 @@ index 6852390..efa2e82 100644
  
  void Workspace::addSessionInfo(KConfigGroup &cg)
 diff --git a/workspace.cpp b/workspace.cpp
-index 078f79f..24b3219 100644
+index 02ccf5a..3c83ec1 100644
 --- a/workspace.cpp
 +++ b/workspace.cpp
-@@ -159,10 +159,12 @@ Workspace::Workspace(const QString &sessionKey)
+@@ -152,10 +152,12 @@ Workspace::Workspace(const QString &sessionKey)
  
      delayFocusTimer = 0;
  
@@ -81,8 +81,8 @@ index 078f79f..24b3219 100644
  
      RuleBook::create(this)->load();
  
-@@ -266,7 +268,9 @@ void Workspace::init()
- 
+@@ -397,7 +399,9 @@ void Workspace::initWithX11()
+     // TODO: only in X11 mode
      // Extra NETRootInfo instance in Client mode is needed to get the values of the properties
      NETRootInfo client_info(connection(), NET::ActiveWindow | NET::CurrentDesktop);
 +#ifndef QT_NO_SESSIONMANAGER
@@ -91,21 +91,19 @@ index 078f79f..24b3219 100644
          m_initialDesktop = client_info.currentDesktop();
      if (!VirtualDesktopManager::self()->setCurrent(m_initialDesktop))
          VirtualDesktopManager::self()->setCurrent(1);
-@@ -288,9 +292,10 @@ void Workspace::init()
-     active_client = NULL;
+@@ -406,7 +410,9 @@ void Workspace::initWithX11()
      rootInfo->setActiveWindow(None);
      focusToNull();
+ 
 +#ifndef QT_NO_SESSIONMANAGER
      if (!qApp->isSessionRestored())
-         ++block_focus; // Because it will be set below
--
 +#endif
-     {
-         // Begin updates blocker block
-         StackingUpdatesBlocker blocker(this);
-@@ -353,7 +358,10 @@ void Workspace::init()
-     } // End updates blocker block
+         ++block_focus; // Because it will be set below
  
+     {
+@@ -472,7 +478,10 @@ void Workspace::initWithX11()
+ 
+     // TODO: only on X11?
      AbstractClient* new_active_client = nullptr;
 -    if (!qApp->isSessionRestored()) {
 +#ifndef QT_NO_SESSIONMANAGER

@@ -21,8 +21,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "18b4b6c055de39628be87863e62dd893"
-SRC_URI[sha256sum] = "c6bfdcbd0f751a00a44df371d43e3986156c41e02a05fb7a1e30c5cf8e299b2f"
+SRC_URI[md5sum] = "1379f306d81dd226b753f2f61ebe8a20"
+SRC_URI[sha256sum] = "ee4486b6678b24ba5f9eb6ac8b36b07b34cb87f84e0a3183761a75414b3c0be8"
 
 SRC_URI += "file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch"
 

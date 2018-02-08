@@ -30,11 +30,12 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "dc080435284f8fc11418dc462d9482e6"
-SRC_URI[sha256sum] = "1296a39ccff2b2174d8652b56872585e0ac6236f6bef4e6f911bd9a856410e4b"
+SRC_URI[md5sum] = "05ddba26835f8f6894bcab7945fd28f6"
+SRC_URI[sha256sum] = "f8f28d24c87319e2e700f62f32db873c28eb94b71288c71c706441e98a4dce71"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
+    ${datadir}/kconf_update \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \
     ${OE_QMAKE_PATH_PLUGINS} \

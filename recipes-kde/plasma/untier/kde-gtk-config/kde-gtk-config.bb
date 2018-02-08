@@ -12,6 +12,7 @@ inherit kde-plasma distro_features_check gettext
 DEPENDS += " \
     gtk+ \
     gtk+3 \
+    gsettings-desktop-schemas \
     ki18n \
     kauth-native \
     kconfig-native \
@@ -23,10 +24,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "196dc596b29d8e483ef774cda8175728"
-SRC_URI[sha256sum] = "860690cd19868af76ccc887f656c416f6985e4178302de01f8e26e8a058a32f9"
-
-SRC_URI += "file://0001-fix-for-gtk2-only-and-gtk3-only-environments.patch"
+SRC_URI[md5sum] = "bb779d08536e9cfe2b7d5ba546d1a8f6"
+SRC_URI[sha256sum] = "eaac67c464d52342c17cd36eb88ed1441f0acb17399174ea9299b7564ffdb594"
 
 FILES_${PN} += " \
     ${datadir}/kservices5 \

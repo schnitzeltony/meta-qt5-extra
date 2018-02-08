@@ -10,43 +10,23 @@ Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- startkde/startplasmacompositor.cmake | 16 ++++------------
- 1 file changed, 4 insertions(+), 12 deletions(-)
+ startkde/startplasmacompositor.cmake | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/startkde/startplasmacompositor.cmake b/startkde/startplasmacompositor.cmake
-index 5bcf26a..6252d79 100644
+index 8ac47aa..d29ce16 100644
 --- a/startkde/startplasmacompositor.cmake
 +++ b/startkde/startplasmacompositor.cmake
-@@ -4,17 +4,9 @@
+@@ -3,6 +3,9 @@
+ #  DEFAULT Plasma STARTUP SCRIPT ( @PROJECT_VERSION@ )
  #
  
- # in case we have been started with full pathname spec without being in PATH
--bindir=`echo "$0" | sed -n 's,^\(/.*\)/[^/][^/]*$,\1,p'`
--if [ -n "$bindir" ]; then
--  qbindir=`qtpaths --binaries-dir`
--  qdbus=$qbindir/qdbus
--  case $PATH in
--    $bindir|$bindir:*|*:$bindir|*:$bindir:*) ;;
--    *) PATH=$bindir:$PATH; export PATH;;
--  esac
--else
--  qdbus=qdbus
--fi
-+
 +# meta-qt5 specific
 +qdbus=@OE_QMAKE_PATH_QT_BINS@/qdbus
- 
++
  # We need to create config folder so we can write startupconfigkeys
  if [  ${XDG_CONFIG_HOME} ]; then
-@@ -148,7 +140,7 @@ fi
- # better use the Autostart folder.
- 
- # TODO: Use GenericConfigLocation once we depend on Qt 5.4
--scriptpath=`qtpaths --paths ConfigLocation | tr ':' '\n' | sed 's,$,/plasma-workspace,g'`
-+scriptpath=`@OE_QMAKE_PATH_QT_BINS@/qtpaths --paths ConfigLocation | tr ':' '\n' | sed 's,$,/plasma-workspace,g'`
- 
- # Add /env/ to the directory to locate the scripts to be sourced
- for prefix in `echo $scriptpath`; do
+   configDir=$XDG_CONFIG_HOME;
 -- 
-2.7.4
+2.14.3
 

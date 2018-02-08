@@ -11,6 +11,7 @@ inherit kde-plasma distro_features_check gettext
 
 DEPENDS += " \
     libinput \
+    qtsensors \
     \
     kauth-native \
     kconfig \
@@ -55,8 +56,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "260bd4365a58a14abcb860b34c05ef5d"
-SRC_URI[sha256sum] = "9fb0db84fd13568a0dcae7d1fdd3e72e5bbb80120d374941043d4474ea167f19"
+SRC_URI[md5sum] = "1f0f4de8a67d01e2002020acd625e5a8"
+SRC_URI[sha256sum] = "73f6cec78dd3cd76caf26ba57f3d3deed94ad37458ed4aea70752eaffa5664c0"
 
 SRC_URI += " \
     file://0001-fix-build-for-qtbase-without-session-management.patch \

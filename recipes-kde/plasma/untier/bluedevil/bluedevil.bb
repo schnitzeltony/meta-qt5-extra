@@ -8,7 +8,6 @@ inherit kde-plasma gettext
 
 DEPENDS += " \
     kauth-native \
-    kded-native \
     kcoreaddons \
     kcoreaddons-native \
     kwidgetsaddons \
@@ -26,8 +25,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "58820e51e6671540c1d07858ca441391"
-SRC_URI[sha256sum] = "059a2372839c8687ebfbf6268dc28847000ec5993f6528ecbed40a977170ed77"
+SRC_URI[md5sum] = "558e7d9ca66ca00774978fc72fb0305e"
+SRC_URI[sha256sum] = "de009f6c440cc89cdb6ca0c16e60d49bf419b1a195a5bb49b0316275619254ee"
 
 FILES_${PN} += " \
     ${datadir}/bluedevilwizard \

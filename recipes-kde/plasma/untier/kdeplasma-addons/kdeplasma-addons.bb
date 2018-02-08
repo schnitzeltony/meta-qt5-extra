@@ -36,14 +36,19 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "a7043d6fe18e82de60aa338ed4cc033d"
-SRC_URI[sha256sum] = "242d78f853ed0128e062ed402bc79f4aa0dbb04d08fb9b75e131f3a2e2c9e9ee"
+SRC_URI[md5sum] = "13a375d9be77841c7124855113b8ee31"
+SRC_URI[sha256sum] = "1717f67907faee002006d4c11b95ec0100afbc6c0794aae065f1e226999fc49d"
+
+FILES_SOLIBSDEV = " \
+    ${libdir}/libplasma*core${SOLIBSDEV} \
+"
 
 FILES_${PN} += " \
     ${datadir}/kwin \
     ${datadir}/k*5 \
     ${datadir}/plasma \
     ${datadir}/icons \
+    ${libdir}/libplasma*private.so \
     \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
