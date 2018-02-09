@@ -22,6 +22,7 @@ SRC_URI = " \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     file://0002-do-nor-try-run-for-float-sse-detection.patch \
     file://0003-do-nor-try-run-for-suil-libs-detection.patch \
+    file://Qtractor.conf \
 "
 SRCREV = "e3b12b6238755e4e78092bd89e074b42314da6a2"
 PV = "0.8.5+git${SRCPV}"
@@ -35,7 +36,20 @@ EXTRA_OECONF = " \
     --with-lrelease=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/lrelease \
 "
 
+do_install_append() {
+    install -d ${D}/${sysconfdir}/skel/.config/rncbc.org
+    install -m 0644 ${WORKDIR}/Qtractor.conf ${D}/${sysconfdir}/skel/.config/rncbc.org/
+}
+
+PACKAGES =+ "${PN}-defconfig"
+
 FILES_${PN} += " \
     ${datadir}/mime \
     ${datadir}/metainfo \
 "
+
+FILES_${PN}-defconfig = " \
+    ${sysconfdir}/skel/.config/rncbc.org \
+"
+
+RDEPENDS_${PN}-defconfig = "${PN} fluidsynth-dssi"
