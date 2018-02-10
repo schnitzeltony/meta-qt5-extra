@@ -25,8 +25,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "303a4f3d2d297b69856e81c1c9357c12"
-SRC_URI[sha256sum] = "3f41bda6ef857269bb0b8658ebd4f27844d3a11ac118c31eb124c571ec643bd5"
+SRC_URI[md5sum] = "60a521560b34533bfa51ef2e70210eb1"
+SRC_URI[sha256sum] = "f9f5bb6d45f72d734ba4ac2d9ae04f7e0930fb4ca4921620db40d4b9283ffb32"
 
 SRC_URI += " \
     file://0001-Set-Kipi-package-properties.patch  \

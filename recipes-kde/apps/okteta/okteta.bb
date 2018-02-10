@@ -33,8 +33,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "be00b1e651f6c183e04983fe5b166db1"
-SRC_URI[sha256sum] = "f3cc09032294df15ecad8b01cfd29c468e8f1e98a3b8a1598cc480b826aad07f"
+SRC_URI[md5sum] = "34ce42a1de0693df09f8f0d16f6159d9"
+SRC_URI[sha256sum] = "8dac910adfb4c3a142d9e123a5f5b41e40a8009d955f5377ff61e77d4b158bcc"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
