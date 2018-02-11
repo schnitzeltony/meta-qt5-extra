@@ -84,6 +84,9 @@ do_install() {
     for file in `find ${WORKDIR}/linuxsynths-vex-patches -maxdepth 1` ; do
         cp -rf $file ${D}${libdir}/lv2/
     done
+
+    # remove broken (during qemu build) LV2 (use VST for those)
+    rm -rf ${D}${libdir}/lv2/Dexed.lv2
 }
 
 FILES_${PN} += " \
