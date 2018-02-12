@@ -31,7 +31,6 @@ DEPENDS += " \
     kwindowsystem \
     kxmlgui \
     kded \
-    kded-native \
     kauth-native \
     sonnet-native \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \

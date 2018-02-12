@@ -26,8 +26,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "4249f48518556c174f9475e3f33ca3e1"
-SRC_URI[sha256sum] = "90c4c27959efec70849fd03e6cf9708d09c0101a15f3c14ab731ec0997bb649e"
+SRC_URI[md5sum] = "b8888829cf7064c756331c2e8347fd09"
+SRC_URI[sha256sum] = "e6ecd2290d19e0680f4bc35dc157cf8f4df85ab3a967521dd510163843a372d5"
 
 SRC_URI += "file://0001-Extend-upstream-workaround-for-bug-371721-to-also-co.patch"
 
@@ -48,6 +48,7 @@ do_configure_append() {
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/k*5 \
+    ${datadir}/polkit-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 FILES_${PN}-dbg += " \

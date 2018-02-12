@@ -13,8 +13,8 @@ DEPENDS += "boost kconfig kcoreaddons ki18n kservice kwindowsystem kglobalaccel 
             kauth-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "94b470c2ab31754cec8b976dbcf914fb"
-SRC_URI[sha256sum] = "8cf600304dbccea07a251f458b97e40745fcf57fa00c9fda357322827facbcff"
+SRC_URI[md5sum] = "a443aaa90ddd41b11e4fa43b35a3f5dd"
+SRC_URI[sha256sum] = "7e496d94d544071511b596be0d79bdfdc7fe80d5cde2755fdbcba3ff9cf4b566"
 
 do_compile_prepend() {
     # Error: Could not locate service type file kservicetypes5/ "kfileitemactionplugin.desktop" , tried ...

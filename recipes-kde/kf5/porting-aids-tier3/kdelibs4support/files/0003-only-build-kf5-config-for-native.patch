@@ -143,11 +143,10 @@ index 64a53d8..9f2e8ac 100644
      kdecore/kcalendarera.cpp
      kdecore/kcalendarsystem.cpp
      kdecore/kcalendarsystemcoptic.cpp
-@@ -108,95 +108,6 @@ set(libkdelibs4support_SRCS
-     kdecore/ktzfiletimezone.cpp
+@@ -115,95 +115,6 @@ set(libkdelibs4support_SRCS
      kdecore/klocale.cpp
      kdecore/klocale_kde.cpp
--
+ 
 -    kdeui/k3icon.cpp
 -    kdeui/k4style.cpp
 -    kdeui/kaction.cpp
@@ -236,6 +235,7 @@ index 64a53d8..9f2e8ac 100644
 -
 -    kparts/factory.cpp
 -    solid/powermanagement.cpp
+-    solid/networking.cpp
  )
  
  set_source_files_properties( solid/org.freedesktop.PowerManagement.xml

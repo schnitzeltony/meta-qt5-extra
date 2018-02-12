@@ -11,6 +11,8 @@ DEPENDS += " \
     qtdeclarative \
     qtsvg \
     qtscript \
+    qtquickcontrols2 \
+    kirigami2 \
     kactivities \
     karchive \
     kconfig \
@@ -37,8 +39,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "a824f972b674747dcf4c37b72ac5aafe"
-SRC_URI[sha256sum] = "84de6496f1f6797cba95ca51607ab59a5f24cbd238f600ec75ccfa0b02b23ae6"
+SRC_URI[md5sum] = "62454f341fbcadc0c25d1a18ef8e7014"
+SRC_URI[sha256sum] = "c6108fd4d2cf516cbb97c77c2c58f136b670afc01a7f49face60812f4156eeec"
 
 FILES_${PN} += " \
     ${datadir}/kdevappwizard \

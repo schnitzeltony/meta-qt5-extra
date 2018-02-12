@@ -15,6 +15,7 @@ TIER_1 = " \
     kdbusaddons \
     kdnssd \
     kguiaddons \
+    kholidays \
     ki18n \
     kidletime \
     kirigami \
@@ -76,6 +77,7 @@ TIER_3 = " \
     kxmlgui \
     kxmlrpcclient \
     plasma-framework \
+    purpose \
     qqc2-desktop-style \
 "
 
