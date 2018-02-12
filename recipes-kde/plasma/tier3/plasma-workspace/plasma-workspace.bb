@@ -43,7 +43,7 @@ DEPENDS += " \
     sonnet-native \
     kdesignerplugin-native \
     kdelibs4support-native \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver libsm libxcb", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 libsm libxcb", "", d)} \
     zlib \
 "
 

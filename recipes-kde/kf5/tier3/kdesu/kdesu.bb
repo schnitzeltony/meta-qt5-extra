@@ -12,7 +12,7 @@ DEPENDS += " \
     kcoreaddons-native \
     kservice \
     kpty \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11", "", d)} \
 "
 
 PV = "${KF5_VERSION}"

@@ -39,7 +39,7 @@ DEPENDS += " \
     kdesignerplugin-native \
     sonnet-native \
     \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver libxcb qtx11extras", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 libxcb libxkbfile qtx11extras", "", d)} \
 "
 
 # REVISIT optionals: find_package(PackageKitQt5 0.9)

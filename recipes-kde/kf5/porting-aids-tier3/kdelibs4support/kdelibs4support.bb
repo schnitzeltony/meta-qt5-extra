@@ -33,7 +33,7 @@ DEPENDS += " \
     kded \
     kauth-native \
     sonnet-native \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras", "", d)} \
 "
 
 # uncomment for broken gelib getaddr / AI_PASSIVE

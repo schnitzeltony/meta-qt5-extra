@@ -19,7 +19,7 @@ DEPENDS += " \
     kconfigwidgets \
     kio \
     knewstuff \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcursor libxcb virtual/xserver", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcursor libxcb virtual/libx11", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"

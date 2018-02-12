@@ -35,7 +35,7 @@ DEPENDS += " \
     kwindowsystem \
     kxmlgui \
     sonnet-native \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11", "", d)} \
 "
 
 

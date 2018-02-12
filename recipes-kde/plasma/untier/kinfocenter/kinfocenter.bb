@@ -35,7 +35,7 @@ DEPENDS += " \
 
 # REVISIT optionals
 DEPENDS += " \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"

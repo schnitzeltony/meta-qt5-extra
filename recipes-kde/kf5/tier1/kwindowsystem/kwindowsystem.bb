@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 cmake_auto_align_paths cmake_lib
 
-DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras libxrender", "", d)}"
+DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libxrender", "", d)}"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "ca000f985de0be2bb3c602697d1bb923"

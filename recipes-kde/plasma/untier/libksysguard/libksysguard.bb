@@ -24,7 +24,7 @@ DEPENDS += " \
     kservice \
     plasma-framework \
     kpackage-native \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras libxres", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libxres", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"

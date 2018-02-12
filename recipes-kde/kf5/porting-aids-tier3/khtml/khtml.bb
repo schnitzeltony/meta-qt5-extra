@@ -33,7 +33,7 @@ DEPENDS += " \
     giflib \
     libpng \
     \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras", "", d)} \
 "
 
 PV = "${KF5_VERSION}"

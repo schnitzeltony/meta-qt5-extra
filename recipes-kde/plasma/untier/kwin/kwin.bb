@@ -45,7 +45,7 @@ DEPENDS += " \
 
 # this condition matches always currently - it is kept in this way as a marker
 DEPENDS += " \
-	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/xserver qtx11extras libepoxy xcb-util-cursor", "",d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)} \
 "
 
 # REVISIT: PACKAGECONFIG for optionals
