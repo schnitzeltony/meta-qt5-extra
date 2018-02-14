@@ -1,6 +1,6 @@
 From eaa5ced7a2a2b67160c2408d9a5f90086779b0dc Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 25 Mar 2016 16:14:43 +0100
+Date: Wed, 14 Feb 2018 23:51:38 +0100
 Subject: [PATCH] fix configuration/build on x-less systems
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -12,30 +12,28 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
  CMakeLists.txt                        | 9 ++++++---
  backends/qscreen/CMakeLists.txt       | 5 ++++-
- src/CMakeLists.txt                    | 5 ++++-
+ CMakeLists.txt                        | 7 +++++--
  src/backendlauncher/CMakeLists.txt    | 7 +++++--
  src/backendlauncher/backendloader.cpp | 1 -
  5 files changed, 19 insertions(+), 8 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 891a4b8..8592aa9 100644
+index e1214da..cf9ed80 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -16,9 +16,6 @@ include(ECMQtDeclareLoggingCategory)
+@@ -19,8 +19,6 @@ include(ECMQtDeclareLoggingCategory)
  include(FeatureSummary)
  include(CheckCXXCompilerFlag)
  
--set(REQUIRED_QT_VERSION 5.4.0)
 -find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core DBus Gui Test X11Extras)
 -
  # Wayland backend
- find_package(KF5Wayland CONFIG QUIET)
+ find_package(KF5Wayland ${KF5_MIN_VERSION} CONFIG REQUIRED)
  add_feature_info("KF5Wayland" KF5Wayland_FOUND "Required for building libkscreen's KWayland backend")
-@@ -31,6 +28,12 @@ set_package_properties(XCB PROPERTIES
+@@ -33,6 +31,11 @@ set_package_properties(XCB PROPERTIES
                         PURPOSE "Required for building XRandR backends"
  )
  
-+set(REQUIRED_QT_VERSION 5.2.0)
 +find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core DBus Gui Test)
 +if (XCB_FOUND)
 +    find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED X11Extras)
