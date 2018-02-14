@@ -22,10 +22,9 @@ SRC_URI = " \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     file://0002-do-nor-try-run-for-float-sse-detection.patch \
     file://0003-do-nor-try-run-for-suil-libs-detection.patch \
-    file://0004-Auto-deactivate-Add-initial-call-after-loading-sessi.patch \
     file://Qtractor.conf \
 "
-SRCREV = "cdfb6632934ca2aa36ce6967e31ad542203ca0e2"
+SRCREV = "f75b1833935238a3ff4d1818d59561e8f1d29edf"
 PV = "0.8.6+git${SRCPV}"
 S = "${WORKDIR}/git"
 
