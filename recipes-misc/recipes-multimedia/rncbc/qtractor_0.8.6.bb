@@ -24,7 +24,7 @@ SRC_URI = " \
     file://0003-do-nor-try-run-for-suil-libs-detection.patch \
     file://Qtractor.conf \
 "
-SRCREV = "4c7124b06566a5ce6d3c20bff06366d6b858c159"
+SRCREV = "cdfb6632934ca2aa36ce6967e31ad542203ca0e2"
 PV = "0.8.6+git${SRCPV}"
 S = "${WORKDIR}/git"
 
