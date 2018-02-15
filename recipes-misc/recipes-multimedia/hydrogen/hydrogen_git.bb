@@ -28,6 +28,7 @@ DEPENDS += " \
 "
 
 # drumkits taken from http://www.hydrogen-music.org/feeds/drumkit_list.php (sf: http -> https)
+# NOTE: download of drumkits might fail -> repeat builds of this recipe usually helps
 
 SRC_URI = " \
     git://github.com/hydrogen-music/hydrogen.git \
