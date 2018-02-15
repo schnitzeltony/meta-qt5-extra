@@ -77,11 +77,11 @@ do_install() {
     # presets
     install -d ${D}${libdir}/lv2
     # obxd
-    for file in `find ${WORKDIR}/linuxsynths-obxd-patches -maxdepth 1` ; do
+    for file in `find ${WORKDIR}/linuxsynths-obxd-patches -mindepth 1 -maxdepth 1` ; do
         cp -rf $file ${D}${libdir}/lv2/
     done
     # vex
-    for file in `find ${WORKDIR}/linuxsynths-vex-patches -maxdepth 1` ; do
+    for file in `find ${WORKDIR}/linuxsynths-vex-patches -mindepth 1 -maxdepth 1` ; do
         cp -rf $file ${D}${libdir}/lv2/
     done
 
