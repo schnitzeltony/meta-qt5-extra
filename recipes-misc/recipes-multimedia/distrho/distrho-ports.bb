@@ -89,11 +89,15 @@ do_install() {
     rm -rf ${D}${libdir}/lv2/Dexed.lv2
 }
 
+PACKAGES =+ "${PN}-presets"
+RDEPENDS_${PN}-presets = "${PN}"
+
 FILES_${PN} += " \
     ${libdir}/lv2 \
     ${libdir}/vst \
 "
 
+FILES_${PN}-presets = "${libdir}/lv2/*.preset.lv2"
+
 # Have not found what causes stripping - debugging of plugins is unlikely
 INSANE_SKIP_${PN} = "already-stripped"
-
