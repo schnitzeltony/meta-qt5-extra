@@ -41,7 +41,7 @@ do_install_append() {
         drumkit_name=`dirname $drumkit`
         drumkit_name=`basename $drumkit_name`
         echo $drumkit_name
-        python3 ${WORKDIR}/hydrogen2drumkv1/hydrogen2drumkv1.py --prefix ${datadir}/hydrogen/data/drumkits $drumkit ${D}${datadir}/${BPN}/presets/$drumkit_name.drumkv1
+        python3 ${WORKDIR}/hydrogen2drumkv1/hydrogen2drumkv1.py --prefix ${datadir}/hydrogen/data/drumkits/$drumkit_name/ $drumkit ${D}${datadir}/${BPN}/presets/$drumkit_name.drumkv1
     done
 }
 
