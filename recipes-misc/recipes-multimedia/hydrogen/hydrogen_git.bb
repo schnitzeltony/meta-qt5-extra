@@ -34,7 +34,6 @@ SRC_URI = " \
     git://github.com/hydrogen-music/hydrogen.git \
     file://0001-Fix-man-installation-path.patch \
     file://0002-hydrogen.default.conf-do-not-show-developer-warnings.patch \
-    file://0003-Fix-default-song-after-deletion-of-GMkit-in-favour-o.patch \
     \
     http://hydrogen-music.org/drumkits/Audiophob.h2drumkit;downloadfilename=Audiophob.tar.gz;name=Audiophob;subdir=drumkits \
     http://hydrogen-music.org/drumkits/belofilms_GuitarStrums.h2drumkit;downloadfilename=belofilms_GuitarStrums.tar.gz;name=belofilms_GuitarStrums;subdir=drumkits \
@@ -77,7 +76,7 @@ SRC_URI = " \
     https://downloads.sourceforge.net/hydrogen/TR808909.h2drumkit;downloadfilename=TR808909.tar.gz;name=TR808909;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/VariBreaks.h2drumkit;downloadfilename=VariBreaks.tar.gz;name=VariBreaks;subdir=drumkits \
 "
-SRCREV = "f0d0e8cf2498ae94dd78842078c70c11787f3c08"
+SRCREV = "21a833317a2e6ac23873e6ed056a691ff0988660"
 PV ="0.9.7+git${SRCPV}"
 
 S = "${WORKDIR}/git"
