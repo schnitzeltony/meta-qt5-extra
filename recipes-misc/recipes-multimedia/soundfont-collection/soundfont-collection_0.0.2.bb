@@ -34,6 +34,7 @@ SRC_URI = " \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_organ.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-organ \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_percussive.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-percussive \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_pipe.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-pipe \
+    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_piano.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-piano \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_reed.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-reed \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_soundeffects.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-soundeffects \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_strings.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-strings \
@@ -91,6 +92,9 @@ SRC_URI[fluidr3gm-organ.sha256sum] = "d991c71083138f4f48995863bd4d77d1a3ca7e8b30
 
 SRC_URI[fluidr3gm-percussive.md5sum] = "c8a4afdc45cfefd5409ad39d9d0ebdd0"
 SRC_URI[fluidr3gm-percussive.sha256sum] = "c316f3fca1e955f9453414c7f22a940610d6e03c64ab0a52363681f9c30314bf"
+
+SRC_URI[fluidr3gm-piano.md5sum] = "fcedef3aea615926ff8d2e5e8cdf0004"
+SRC_URI[fluidr3gm-piano.sha256sum] = "593c0966d12624e76037f7023f7f5deca4dc965517ee90e945129fbefb094819"
 
 SRC_URI[fluidr3gm-pipe.md5sum] = "abe06dfb215b0cf6ec1fab953c1ee416"
 SRC_URI[fluidr3gm-pipe.sha256sum] = "c259df70894ef7a310e4bf897af9fd08fc5f4e252f9c779039c245b694de9f27"
@@ -165,6 +169,9 @@ RRECOMMENDS_${PN}-meta = " \
     ${PN}-philscomputerlab-com \
     ${PN}-christiancollins \
 "
+
+do_configure() {
+}
 
 do_install() {
     install -d ${D}${datadir}/sf2
