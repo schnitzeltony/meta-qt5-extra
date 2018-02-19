@@ -9,7 +9,6 @@ inherit kde-kf5
 DEPENDS += " \
     libgcrypt \
     gpgme \
-    gpgme-native \
     kconfig \
     kconfig-native \
     kcoreaddons \
@@ -25,8 +24,6 @@ DEPENDS += " \
     kdoctools-native \
     kauth-native \
 "
-
-# TBD: add KF5Gpgmepp with PACKAGECONFIG??
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "43173ebb19608ca56e3b1a1c737b3716"
