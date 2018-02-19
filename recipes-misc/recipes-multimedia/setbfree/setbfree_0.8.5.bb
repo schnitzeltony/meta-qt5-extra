@@ -21,14 +21,15 @@ DEPENDS += " \
 SRC_URI = " \
     git://github.com/pantherb/setBfree.git \
     file://0001-remove-UINQHACK-it-is-used-for-OSX-builds-only-and-c.patch \
+    file://0002-Do-not-check-for-fontfile.patch \
 "
 SRCREV = "30f1ec6267afb0ee17b472db0c4826d5bd96fad8"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE += " \
     PREFIX=${prefix} \
-    STRIP= \
-    FONTFILE=${S}/b_synth/VeraBd.ttf \
+    STRIP=echo \
+    FONTFILE=${prefix}/share/fonts/ttf/VeraBd.ttf \
 "
 
 do_install_append() {

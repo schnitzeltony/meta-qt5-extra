@@ -1,0 +1,69 @@
+From 055b916edbeae17fc63b144318ea76959adad7bf Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 19 Feb 2018 22:12:02 +0100
+Subject: [PATCH] Do not check for fontfile
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Path for target is of interest and won't be found here.
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ b_synth/Makefile |  2 +-
+ common.mak       | 10 +---------
+ ui/Makefile      |  2 +-
+ 3 files changed, 3 insertions(+), 11 deletions(-)
+
+diff --git a/b_synth/Makefile b/b_synth/Makefile
+index ae47d88..4501f93 100644
+--- a/b_synth/Makefile
++++ b/b_synth/Makefile
+@@ -53,7 +53,7 @@ $(LV2NAME)$(LIB_EXT): lv2.c $(LV2OBJ) uris.h ../src/cfgParser.h ../src/midi.h
+ 		lv2.c $(LV2OBJ) \
+ 	  -shared $(LV2LDFLAGS) $(LDFLAGS) $(LOADLIBES) $(LIC_LOADLIBES)
+ 
+-$(LV2GUI)$(LIB_EXT): ui.c uris.h $(UIDEPS) $(FONTFILE) $(LV2OBJ)
++$(LV2GUI)$(LIB_EXT): ui.c uris.h $(UIDEPS) $(LV2OBJ)
+ 	$(CC) $(CPPFLAGS) $(CFLAGS) $(UICFLAGS) \
+ 		-o $(LV2GUI)$(LIB_EXT) ui.c -DCONFIGDOCONLY -D XKEYFOCUSGRAB \
+ 		../src/midi.c \
+diff --git a/common.mak b/common.mak
+index 569b0b6..7731490 100644
+--- a/common.mak
++++ b/common.mak
+@@ -116,15 +116,7 @@ endif
+ 
+ #LV2 / GL-GUI
+ 
+-ifeq ($(FONTFILE),verabd.h)
+-  FONT_FOUND=yes
+-else
+-  ifeq ($(shell test -f $(FONTFILE) || echo no ), no)
+-    FONT_FOUND=no
+-  else
+-    FONT_FOUND=yes
+-  endif
+-endif
++FONT_FOUND=yes
+ 
+ ifeq ($(MOD),)
+   HAVE_UI=$(shell pkg-config --exists $(PKG_GL_LIBS) ftgl && echo $(FONT_FOUND))
+diff --git a/ui/Makefile b/ui/Makefile
+index 739e92a..3fba31b 100644
+--- a/ui/Makefile
++++ b/ui/Makefile
+@@ -56,7 +56,7 @@ setBfreeUI$(EXE_EXT): $(RW)jackwrap.c $(LV2OBJ) $(OSXJACKWRAP) $(RW)weakjack/wea
+ 	../b_synth/lv2.c ../b_synth/uris.h \
+ 	../b_synth/ui.c $(UIDEPS) \
+ 	../src/cfgParser.h ../src/midi.h
+-	$(MAKE) -C ../b_synth $(FONTFILE)
++	$(MAKE) -C ../b_synth
+ 	$(CC) $(CPPFLAGS) $(CFLAGS) $(UICFLAGS) $(LIC_CFLAGS) \
+ 		-pthread \
+ 		-DXTERNAL_UI -DJACK_AUTOCONNECT=15 \
+-- 
+2.14.3
+
