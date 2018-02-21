@@ -35,6 +35,3 @@ do_install_append() {
 FILES_${PN} += " \
     ${libdir}/dssi \
 "
-
-# we are not linking against dssi - so
-RDEPENDS_${PN} += "dssi"
