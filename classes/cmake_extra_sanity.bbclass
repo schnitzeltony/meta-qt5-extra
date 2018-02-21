@@ -24,29 +24,16 @@ do_install_append() {
         error=
         # check for genarated sources
         for f in `find ${B} -name '*.h' -o -name '*.cpp'` ; do
-            if grep -q '${STAGING_DIR_HOST}' $f ; then
-                bbwarn "$f contains links to build host sysroot!"
-                error=true
-            fi
-        done
-        for f in `find ${B} -name '*.h' -o -name '*.cpp'` ; do
-            if grep -q '${STAGING_DIR_NATIVE}' $f ; then
-                bbwarn "$f contains links to build native sysroot!"
+            if grep -q 'recipe-sysroot' $f ; then
+                bbwarn "$f contains links to build sysroot!"
                 error=true
             fi
         done
 
         # check installed cmake files
         for f in `find ${D} -name '*.cmake'` ; do
-            if grep -q '${STAGING_DIR_HOST}' "$f" ; then
+            if grep -q 'recipe-sysroot' "$f" ; then
                 bbwarn "$f contains links to build host sysroot!"
-                error=true
-            fi
-
-        done
-        for f in `find ${D} -name '*.cmake'` ; do
-            if grep -q '${STAGING_DIR_NATIVE}' "$f" ; then
-                bbwarn "$f contains links to build native sysroot!"
                 error=true
             fi
 
