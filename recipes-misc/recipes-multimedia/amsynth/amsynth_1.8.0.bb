@@ -21,7 +21,7 @@ PACKAGECONFIG ??= "alsa jack sndfile lv2"
 
 PACKAGECONFIG[oss] = "--with-oss,--without-oss"
 PACKAGECONFIG[alsa] = "--with-alsa,--without-alsa,alsa-lib"
-PACKAGECONFIG[dssi] = "--with-dssi,--without-dssi,dssi liblo,dssi"
+PACKAGECONFIG[dssi] = "--with-dssi,--without-dssi,dssi liblo"
 PACKAGECONFIG[jack] = "--with-jack,--without-jack,jack"
 PACKAGECONFIG[sndfile] = "--with-sndfile,--without-sndfile,libsndfile1"
 PACKAGECONFIG[lv2] = "--with-lv2,--without-lv2,lv2"
