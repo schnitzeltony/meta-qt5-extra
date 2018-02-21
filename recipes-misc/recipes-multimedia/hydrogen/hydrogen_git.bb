@@ -210,9 +210,14 @@ CMAKE_FLAGS = " \
 
 do_install_append() {
     install -d ${D}/${datadir}/${BPN}/data/drumkits
-    cp -rf ${WORKDIR}/drumkits ${D}/${datadir}/${BPN}/data/
-    # have no idea what this is for
-    rm ${D}/${datadir}/${BPN}/data/drumkits/._BJA_Pacific
+    cp -rf ${WORKDIR}/drumkits/* ${D}/${datadir}/${BPN}/data/drumkits/
+
+    # grant access
+    chmod -R 644 ${D}/${datadir}/${BPN}/data/drumkits
+    export IFS=$'\n'
+    for drumkitdir in `find ${D}/${datadir}/${BPN}/data/drumkits -type d` ; do
+        chmod 755 $drumkitdir
+    done
 }
 
 PACKAGES =+ "${PN}-drumkits"
