@@ -17,7 +17,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "54eaabc55d90ece5675b3cb3c2dc732d"
 SRC_URI[sha256sum] = "d05363b654752494c4b6a404d80d70d27857db5ec9ca398eebcf6c5b466d6668"
 
-PACKAGECONFIG ??= "alsa dssi jack sndfile lv2"
+PACKAGECONFIG ??= "alsa jack sndfile lv2"
 
 PACKAGECONFIG[oss] = "--with-oss,--without-oss"
 PACKAGECONFIG[alsa] = "--with-alsa,--without-alsa,alsa-lib"
