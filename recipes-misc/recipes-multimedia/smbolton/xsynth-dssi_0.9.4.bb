@@ -22,6 +22,3 @@ SRC_URI[sha256sum] = "d3d24941a509c6193eac2b2ee3c9a6057c832565a0b66e58c3bd2e89af
 FILES_${PN} += " \
     ${libdir}/dssi \
 "
-
-# we are not linking against dssi - so
-RDEPENDS_${PN} += "dssi"
