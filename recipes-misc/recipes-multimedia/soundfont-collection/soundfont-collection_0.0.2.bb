@@ -6,8 +6,9 @@ LIC_FILES_CHKSUM = " \
     \
     file://GeneralUser%20GS%201.471/LICENSE.txt;md5=51c5827b75fa15c5e7f6f13290bc5445 \
     \
+    file://avl-drumkits/AVL-Drumkits-1.1-fix-SF2/AVL-Drumkits%20CC-BY-SA%20License.pdf;md5=db54d5d5fcba6e9ca3f61185eec10a43 \
+    \
     file://linuxaudio.org/airfont_a340u/readme;md5=94c7ebefcd275e72d018acec80b714cf \
-    file://linuxaudio.org/AVL-Drumkits-1.1-fix-SF2/AVL-Drumkits%20CC-BY-SA%20License.pdf;md5=db54d5d5fcba6e9ca3f61185eec10a43 \
     file://linuxaudio.org/fluidr3/readme;md5=4223817a5c95fe5efbe35d0e6b487063 \
     \
     file://freepats.zenvoid.org/acoustic_grand_piano_ydp_20080910.txt;md5=6aca163c2105ed4ac00e4f3ce83c9e3a \
@@ -22,7 +23,6 @@ inherit allarch
 
 SRC_URI = " \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/airfont_a340u.tar.7z;subdir=linuxaudio.org;name=airfont \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/AVL-Drumkits-1.1-fix-SF2.zip;subdir=linuxaudio.org;name=avl-drumkits \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3.tar.7z;subdir=linuxaudio.org;name=fluidr3 \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_bass.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-bass \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_brass.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-brass \
@@ -44,6 +44,8 @@ SRC_URI = " \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/jRhodes3.tar.7z;subdir=linuxaudio.org;name=jRhodes3 \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/melloflute.tar.7z;subdir=linuxaudio.org;name=melloflute \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/melloreed.tar.7z;subdir=linuxaudio.org;name=melloreed \
+    \
+    http://bandshed.net/sounds/sf2/AVL-Drumkits-1.1-fix-SF2.zip;subdir=avl-drumkits;name=avl-drumkits \
     \
     http://freepats.zenvoid.org/sf2/acoustic_grand_piano_ydp_20080910.txt;subdir=freepats.zenvoid.org;name=acoustic_grand_piano_ydp_license \
     http://freepats.zenvoid.org/sf2/acoustic_grand_piano_ydp_20080910.sf2;subdir=freepats.zenvoid.org;name=acoustic_grand_piano_ydp_sf2 \
@@ -156,6 +158,7 @@ S = "${WORKDIR}"
 
 PACKAGES = " \
     ${PN}-meta \
+    ${PN}-avl-drumkits \
     ${PN}-linuxaudio-org \
     ${PN}-freepats-zenvoid-org \
     ${PN}-philscomputerlab-com \
@@ -164,6 +167,7 @@ PACKAGES = " \
 
 ALLOW_EMPTY_${PN}-meta = "1"
 RRECOMMENDS_${PN}-meta = " \
+    ${PN}-avl-drumkits \
     ${PN}-linuxaudio-org \
     ${PN}-freepats-zenvoid-org \
     ${PN}-philscomputerlab-com \
@@ -178,18 +182,24 @@ do_install() {
     install ${WORKDIR}/freepats.zenvoid.org/*.sf2 ${D}${datadir}/sf2
     install ${WORKDIR}/www.philscomputerlab.com/*.sf2 ${D}${datadir}/sf2
     install "${WORKDIR}/GeneralUser GS 1.471/GeneralUser GS v1.471.sf2" ${D}${datadir}/sf2/general-user-gs-v1.471.sf2
+    for soundfont in `find ${WORKDIR}/avl-drumkits -name *.sf2`; do
+        install $soundfont ${D}${datadir}/sf2
+    done
     for soundfont in `find ${WORKDIR}/linuxaudio.org -name *.sf2`; do
         install $soundfont ${D}${datadir}/sf2
     done
 }
 
-FILES_${PN}-linuxaudio-org = " \
-    ${datadir}/sf2/fluidr3*.sf2 \
+FILES_${PN}-avl-drumkits = " \
+    ${datadir}/sf2/AVL_Drumkits_Perc_1.1.sf2 \
     ${datadir}/sf2/Black_Pearl*.sf2 \
     ${datadir}/sf2/Red_Zeppelin*.sf2 \
+"
+
+FILES_${PN}-linuxaudio-org = " \
+    ${datadir}/sf2/fluidr3*.sf2 \
     ${datadir}/sf2/airfont_a320u.sf2 \
     ${datadir}/sf2/mello*.sf2 \
-    ${datadir}/sf2/AVL_Drumkits_Perc_1.1.sf2 \
     ${datadir}/sf2/jRhodes3.sf2 \
 P"
 
