@@ -1,0 +1,31 @@
+From c9eec598b2f8b1435a2229dd5c49a9e15c6bc2ac Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 22 Feb 2018 00:13:04 +0100
+Subject: [PATCH] automake: enable subdir-objects
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 0562059..13a7ffc 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -3,7 +3,7 @@
+ AC_INIT([drumgizmo], m4_esyscmd([cat version.h | cut -d'"' -f2 | xargs echo -n]))dnl"
+ 
+ AC_CONFIG_SRCDIR([src/drumgizmo.cc])
+-AM_INIT_AUTOMAKE
++AM_INIT_AUTOMAKE(subdir-objects)
+
+ AC_PROG_CXX
+ AC_PROG_OBJC
+-- 
+2.14.3
+

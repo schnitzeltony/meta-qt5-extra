@@ -1,0 +1,31 @@
+From 766c8c4aa6f6e8743234b93a760a89480bddd7fd Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 28 May 2018 23:08:07 +0200
+Subject: [PATCH] Use native rcgen
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ plugingui/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/plugingui/Makefile.am b/plugingui/Makefile.am
+index dd36783..ca30e84 100644
+--- a/plugingui/Makefile.am
++++ b/plugingui/Makefile.am
+@@ -28,7 +28,7 @@ RES = \
+ 	../COPYING
+ 
+ resource_data.cc : rcgen $(RES)
+-	./rcgen $(RES) > resource_data.cc
++	drumgizmo-rcgen $(RES) > resource_data.cc
+ 
+ libdggui_la_CPPFLAGS = \
+ 	$(GUI_CPPFLAGS) \
+-- 
+2.14.3
+
