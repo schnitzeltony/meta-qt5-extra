@@ -25,7 +25,7 @@ EXTRA_OECONF = " \
 "
 
 do_compile()  {
-	${S}/waf build ${@get_waf_parallel_make(d)} --notests
+	${S}/waf build ${@oe.utils.parallel_make_argument(d, '-j%d', limit=64)} --notests
 }
 
 do_install() {
