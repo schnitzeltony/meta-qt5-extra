@@ -1,4 +1,4 @@
-From badaca1b793199578f36160101c1d3288193cdb0 Mon Sep 17 00:00:00 2001
+From 2f0e2efee933c8be2e69bfa1dbbaa8eeed22ee6c Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Mon, 26 Feb 2018 14:39:52 +0100
 Subject: [PATCH] Fix release build with Qt 5.10
@@ -25,7 +25,7 @@ Date:   Tue Mar 14 22:45:05 2017 +0100
 Fix mixxx by copying/aliging the new definition of Q_ASSERT from qglobal.h
 shipped with 5.10.1.
 
-Tested for Qt 5.9.4 and 5.10.1
+Tested on Linux with Qt 5.9.4 and 5.10.1
 
 Upstream-Status: Submitted [1]
 
@@ -33,19 +33,23 @@ Upstream-Status: Submitted [1]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- build/depends.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ build/depends.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/build/depends.py b/build/depends.py
-index 4b88034f2..399a2c237 100644
+index 4b88034f2..a53ba166b 100644
 --- a/build/depends.py
 +++ b/build/depends.py
-@@ -1260,7 +1260,7 @@ class MixxxCore(Feature):
+@@ -1258,9 +1258,9 @@ class MixxxCore(Feature):
+ 
+             # In a release build we want to disable all Q_ASSERTs in Qt headers
              # that we include. We can't define QT_NO_DEBUG because that would
-             # mean turning off QDebug output. qt_noop() is what Qt defines
-             # Q_ASSERT to be when QT_NO_DEBUG is defined.
+-            # mean turning off QDebug output. qt_noop() is what Qt defines
+-            # Q_ASSERT to be when QT_NO_DEBUG is defined.
 -            build.env.Append(CPPDEFINES="'Q_ASSERT(x)=qt_noop()'")
-+            build.env.Append(CPPDEFINES="'Q_ASSERT(cond)=static_cast<void>(false&&(cond))'")
++            # mean turning off QDebug output. So we pass the same code as qtbase
++            # uses in qglobal.h for QT_NO_DEBUG set from qtbase 5.10 on.
++            build.env.Append(CPPDEFINES="'Q_ASSERT(x)=static_cast<void>(false&&(x))'")
  
          if int(SCons.ARGUMENTS.get('debug_assertions_fatal', 0)):
              build.env.Append(CPPDEFINES='MIXXX_DEBUG_ASSERTIONS_FATAL')
