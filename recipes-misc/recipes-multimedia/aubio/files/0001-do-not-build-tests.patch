@@ -1,0 +1,30 @@
+From e597c5c8636a269dbe5e664c706e66887479f161 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 26 Feb 2018 10:59:52 +0100
+Subject: [PATCH] do not build tests
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ wscript | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/wscript b/wscript
+index c40a864..0bc8238 100644
+--- a/wscript
++++ b/wscript
+@@ -474,7 +474,6 @@ def build(bld):
+         if bld.env['DEST_OS']=='emscripten' and not bld.options.testcmd:
+             bld.options.testcmd = 'node %s'
+         bld.recurse('examples')
+-        bld.recurse('tests')
+ 
+     # pkg-config template
+     bld( source = 'aubio.pc.in' )
+-- 
+2.14.3
+
