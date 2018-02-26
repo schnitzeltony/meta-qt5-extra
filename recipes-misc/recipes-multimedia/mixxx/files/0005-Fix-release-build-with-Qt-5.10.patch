@@ -1,0 +1,54 @@
+From badaca1b793199578f36160101c1d3288193cdb0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 26 Feb 2018 14:39:52 +0100
+Subject: [PATCH] Fix release build with Qt 5.10
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Moving Qt from 5.9.4 -> 5.10.1 causes build failures for mixxx:
+
+| <command-line>:0:20: error: call to non-constexpr function 'void qt_noop()'
+| /usr/include/qt5/QtCore/qstringview.h:291:14: note: in expansion of macro 'Q_ASSERT'
+|     { return Q_ASSERT(int(size()) == size()), int(size()); }
+| .. many-more errors of same kind
+
+This is caused by a different usage of Q_ASSERT in qtbase. For further details
+see qtbase
+
+commit 8ea27bb1c669e21100a6a042b0378b3346bdf671
+Author: Marc Mutz <marc.mutz@kdab.com>
+Date:   Tue Mar 14 22:45:05 2017 +0100
+
+    Make Q_ASSERT() usable in constexpr functions
+
+Fix mixxx by copying/aliging the new definition of Q_ASSERT from qglobal.h
+shipped with 5.10.1.
+
+Tested for Qt 5.9.4 and 5.10.1
+
+Upstream-Status: Submitted [1]
+
+[1] https://github.com/mixxxdj/mixxx/pull/1526
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ build/depends.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/build/depends.py b/build/depends.py
+index 4b88034f2..399a2c237 100644
+--- a/build/depends.py
++++ b/build/depends.py
+@@ -1260,7 +1260,7 @@ class MixxxCore(Feature):
+             # that we include. We can't define QT_NO_DEBUG because that would
+             # mean turning off QDebug output. qt_noop() is what Qt defines
+             # Q_ASSERT to be when QT_NO_DEBUG is defined.
+-            build.env.Append(CPPDEFINES="'Q_ASSERT(x)=qt_noop()'")
++            build.env.Append(CPPDEFINES="'Q_ASSERT(cond)=static_cast<void>(false&&(cond))'")
+ 
+         if int(SCons.ARGUMENTS.get('debug_assertions_fatal', 0)):
+             build.env.Append(CPPDEFINES='MIXXX_DEBUG_ASSERTIONS_FATAL')
+-- 
+2.14.3
+

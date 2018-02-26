@@ -40,6 +40,7 @@ SRC_URI = " \
     file://0002-force-using-system-soundtouch.patch \
     file://0003-align-path-of-qt-build-tools-to-our-needs.patch \
     file://0004-add-vamp-float-math-build-option-to-force-vamp-calcu.patch \
+    file://0005-Fix-release-build-with-Qt-5.10.patch \
 "
 SRCREV = "24028f2e8a28210fe45d8b67f2bb44d580587261"
 S = "${WORKDIR}/git"
