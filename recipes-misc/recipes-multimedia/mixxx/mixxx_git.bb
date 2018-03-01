@@ -42,7 +42,7 @@ SRC_URI = " \
     file://0004-add-vamp-float-math-build-option-to-force-vamp-calcu.patch \
     file://0005-Fix-release-build-with-Qt-5.10.patch \
 "
-SRCREV = "24028f2e8a28210fe45d8b67f2bb44d580587261"
+SRCREV = "b6d29e53d3ae74cd040a5d5ecbe742f9c385575a"
 S = "${WORKDIR}/git"
 PV = "2.0.0+git${SRCPV}"
 

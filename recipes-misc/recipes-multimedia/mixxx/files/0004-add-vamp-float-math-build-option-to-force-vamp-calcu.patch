@@ -74,12 +74,14 @@ diff --git a/SConstruct b/SConstruct
 index 301fd3d..7fc552a 100644
 --- a/SConstruct
 +++ b/SConstruct
-@@ -65,7 +65,8 @@ available_features = [features.Mad,
+@@ -63,8 +63,9 @@ available_features = [features.Mad,
+                       features.IPod,
+                       features.FFMPEG,
  
-                       # Experimental features
-                       features.OpenGLES,
--                      features.QtKeychain
-+                      features.QtKeychain,
+-		     # Experimental features
+-		     features.OpenGLES
++                      # Experimental features
++                      features.OpenGLES,
 +                      features.VampFloat
                        ]
  
