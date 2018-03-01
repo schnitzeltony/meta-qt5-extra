@@ -42,3 +42,6 @@ do_install_append() {
 FILES_${PN} += " \
     ${libdir}/dssi \
 "
+
+# standalone needs jack-dssi-host
+RDEPENDS_${PN} += "dssi"
