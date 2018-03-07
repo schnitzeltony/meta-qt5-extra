@@ -18,10 +18,11 @@ SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/autostatic/autostatic-synthv1-presets/autostatic-synthv1-presets1.tar.gz;name=autostatic-synthv1-presets1 \
     http://linuxsynths.com/Synthv1PatchesDemos/Synthv1Patches06.tar.gz;name=linuxsynths-synthv1-presets;subdir=linuxsynths-synthv1-presets \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
+    \
     file://synthv1.conf \
 "
-SRC_URI[md5sum] = "d21ba0b79cb0de144070940d30786f8f"
-SRC_URI[sha256sum] = "22bd413e101077ba4d518008726e0010249c70095e956d089a22976d5f802a90"
+SRC_URI[md5sum] = "4af8ebd4249424eb94f51c2a09fdf13e"
+SRC_URI[sha256sum] = "97b386cbd7409eab8f4380c297107eaa73d60d946ef989f17218dc689eb47eea"
 
 SRC_URI[autostatic-synthv1-presets1.md5sum] = "02210e5576310554cfe316fb72e88b74"
 SRC_URI[autostatic-synthv1-presets1.sha256sum] = "587ac8cb4cb645fc71603d1b4b351b24f3e4d9f15a53aca59c0f30cc9f66e253"
