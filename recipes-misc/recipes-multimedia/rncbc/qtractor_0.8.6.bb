@@ -23,6 +23,7 @@ SRC_URI = " \
     \
     file://0001-do-nor-try-run-for-float-sse-detection.patch \
     file://0002-do-nor-try-run-for-suil-libs-detection.patch \
+    file://0003-Add-ARM-NEON-acceleration-for-time-stretch-not-yet-t.patch \
     file://Qtractor.conf \
 "
 SRCREV = "010bd49a69df14f457770bc29824a4af15a2ee50"
