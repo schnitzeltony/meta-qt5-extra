@@ -15,17 +15,18 @@ DEPENDS += " \
 inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache mime
 
 # fftwf is neon accelerated -> force SINGLE precision
-FFTWSINGLEPATCH = "${@bb.utils.contains('TUNE_FEATURES', 'neon', 'file://0002-Build-against-fftw3f-that-supports-NEON-on-ARM.patch', '', d)}"
+FFTWSINGLEPATCH = "${@bb.utils.contains('TUNE_FEATURES', 'neon', 'file://0001-Build-against-fftw3f-that-supports-NEON-on-ARM.patch', '', d)}"
 
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
     http://linuxsynths.com/Padthv1PatchesDemos/Padthv1Patches.tar.gz;name=linuxsynths-padthv1-presets;subdir=linuxsynths-padthv1-presets \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
+    \
     ${FFTWSINGLEPATCH} \
     file://padthv1.conf \
 "
-SRC_URI[md5sum] = "a601c57ee03a7d12cfb128da6040fc43"
-SRC_URI[sha256sum] = "b87348a050efbfa2007c9a1604c83c650f97435d7a5cfb9c0eb8d8e4c45233d6"
+SRC_URI[md5sum] = "ca7d8c0444f20d1170f838baef7a924f"
+SRC_URI[sha256sum] = "706b6f91dbd65e1da870ab77ab69118b64dbce7598fbe4f043b38127264ea130"
 
 SRC_URI[linuxsynths-padthv1-presets.md5sum] = "951484ad2fe404d233a704d444147827"
 SRC_URI[linuxsynths-padthv1-presets.sha256sum] = "ad9eadc707784b6931955b1fc63308b9e5dc59d24903e6405e9d34d30794fd0b"
