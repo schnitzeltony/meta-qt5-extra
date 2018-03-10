@@ -19,21 +19,19 @@ DEPENDS += " \
 "
 
 SRC_URI = " \
-    http://polyphone-soundfonts.com/en/download/file/76-polyphone-1-8-src-zip/latest/download;downloadfilename=polyphone-1-8-src.zip \
+    git://github.com/davy7125/polyphone.git \
     file://polyphone.desktop \
     file://polyphone.mime \
     file://0001-align-compiler-switches-constants-for-cross-compilin.patch \
 "
-SRC_URI[md5sum] = "75ec14ab98bcf80f360debd80c553733"
-SRC_URI[sha256sum] = "2b0ba2887646208ae9953a336adfebe460133cd403e76f7fe795d3071827dfdd"
-
-S = "${WORKDIR}/trunk"
-
-# Have no idea why this is necessary
-do_unpack[depends] += "unzip-native:do_populate_sysroot"
+SRCREV = "13beb7119bc573af3f5e595ae2989034c226e355"
+S = "${WORKDIR}/git/trunk"
 
 do_configure_prepend() {
-    sed -i 's:= /usr/include:= ${STAGING_INCDIR}:g' ${S}/polyphone.pro
+    sed -i \
+        -e 's:= /usr/include:= ${STAGING_INCDIR}:g' \
+        -e 's:^DEFINES += USE_LOCAL_:#DEFINES += USE_LOCAL_:g' \
+        ${S}/polyphone.pro
 }
 
 do_install() {

@@ -96,10 +96,10 @@ index 0a6739f..d9b44fb 100644
  #else
      #define FIX_ENDIAN16(w)	(w)	
 diff --git a/polyphone.pro b/polyphone.pro
-index ffa65d9..9139209 100644
+index 9aef72c..d10ccfa 100644
 --- a/polyphone.pro
 +++ b/polyphone.pro
-@@ -366,7 +366,6 @@ RESOURCES += ressources.qrc \
+@@ -385,7 +385,6 @@ RESOURCES += ressources.qrc \
  
  
  # SfArk extraction (what a mess!)
@@ -107,15 +107,22 @@ index ffa65d9..9139209 100644
  INCLUDEPATH += lib/sfarklib
  HEADERS += lib/sfarklib/sfArkLib.h \
      lib/sfarklib/wcc.h \
-@@ -399,7 +398,7 @@ win32 {
-     ExtraCompiler.commands = $${QMAKE_CXX} -D__LITTLE_ENDIAN__ -MD -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
- }
- unix:!macx {
+@@ -414,13 +413,6 @@ macx {
+ ExtraCompiler.input = SPECIAL_SOURCE
+ ExtraCompiler.variable_out = OBJECTS
+ ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
+-win32 {
+-    ExtraCompiler.commands = $${QMAKE_CXX} -D__LITTLE_ENDIAN__ -MD -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
+-}
+-equals(QMAKE_CXX, g++) {
 -    ExtraCompiler.commands = $${QMAKE_CXX} -fPIC -D__LITTLE_ENDIAN__ -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
-+    ExtraCompiler.commands = $${QMAKE_CXX} -fPIC $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
- }
- macx {
-     ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+-}
+-equals(QMAKE_CXX, clang++) {
+-    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+-}
++ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -fPIC $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
++
+ QMAKE_EXTRA_COMPILERS += ExtraCompiler
 -- 
-2.5.5
+2.14.3
 
