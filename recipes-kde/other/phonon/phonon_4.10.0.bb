@@ -11,10 +11,9 @@ DEPENDS += "alsa-lib"
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}.tar.xz"
 SRC_URI += " \
     file://0001-fix-PHONON_LIBRARY_PATH-was-usr-usr-lib-qt5-plugins.patch \
-    file://fix-qt-5.8-build.patch \
 "
-SRC_URI[md5sum] = "8abeb7b1eaf4935668c7fb441fc2491a"
-SRC_URI[sha256sum] = "bb74b40f18ade1d9ab89ffcd7aeb7555be797ca395f1224c488b394da6deb0e0"
+SRC_URI[md5sum] = "4c7f311a44babbf3270aec992daaa4b1"
+SRC_URI[sha256sum] = "e2c10ecc7d2f3d3a0f80a63def789a875420b3d90062c26718dcfdaab8a5d03f"
 
 EXTRA_OECMAKE += "-DPHONON_BUILD_DEMOS=ON -DPHONON_BUILD_PHONON4QT5=ON -D__KDE_HAVE_GCC_VISIBILITY=NO"
 
