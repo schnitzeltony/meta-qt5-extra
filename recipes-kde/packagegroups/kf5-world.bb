@@ -76,6 +76,7 @@ TIER_3 = " \
     kwallet \
     kxmlgui \
     kxmlrpcclient \
+    oxygen-icons5 \
     plasma-framework \
     purpose \
     qqc2-desktop-style \

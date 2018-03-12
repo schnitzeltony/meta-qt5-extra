@@ -34,7 +34,6 @@ RDEPENDS_${PN} = " \
     minuet \
     okteta \
     okular \
-    oxygen-icons \
     spectacle \
     umbrello \
 "

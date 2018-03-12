@@ -9,7 +9,7 @@ RDEPENDS_${PN} = " \
     qtimageformats-plugins \
     \
     lxqt-world \
-    oxygen-icons \
+    oxygen-icons5 \
     \
     openbox \
     openbox-theme-artwiz-boxed \
