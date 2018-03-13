@@ -25,8 +25,8 @@ DEPENDS += " \
 
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "b532e804db95ab4afd011b24b09c7a50"
-SRC_URI[sha256sum] = "be7e36e05577c514033c379b4f8d5f081e4dfd76903c50737e2d1a5b26bfe00d"
+SRC_URI[md5sum] = "1ae76c6b0ce8f087e884a897ab7a708f"
+SRC_URI[sha256sum] = "a6a07988a9a201be774e632bc2fa7d108000aeec36e9fdbf9818ada3b81e97b9"
 SRC_URI += "file://0001-kstyle-add-an-option-BUILD_OXYGEN_SETTINGS-disabled-.patch"
 
 PACKAGECONFIG ??= ""
