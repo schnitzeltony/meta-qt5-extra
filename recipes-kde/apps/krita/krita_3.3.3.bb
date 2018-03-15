@@ -34,10 +34,10 @@ DEPENDS += " \
 
 SRC_URI = " \
     ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
-    file://0001-fix-build-with-GLES2.patch \
+    file://0001-fix-build-with-GLES2-only.patch \
 "
-SRC_URI[md5sum] = "00896775772991182e927248eb3ef198"
-SRC_URI[sha256sum] = "ef06cee677d75861edca0e1f825bca42ff59b7200aeb827e16f8d1fb5ef14e39"
+SRC_URI[md5sum] = "eb3224bbf09b7b88364c6308cd5a5d18"
+SRC_URI[sha256sum] = "bec04e3392e9b311477c5c6a50e2201b43a3afda91d9b24a0fc8e3399585865d"
 
 OECMAKE_GENERATOR="Unix Makefiles"
 
