@@ -13,13 +13,12 @@ DEPENDS += " \
 "
 
 SRC_URI = " \
-    ${SOURCEFORGE_MIRROR}/project/dssi/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \
-    file://0001-gui_widgy_editor-fix-sefaulf-on-ARM.patch \
+    git://github.com/smbolton/hexter.git \
     file://hexter.desktop \
     file://hexter.png \
 "
-SRC_URI[md5sum] = "4c3ffd27eecb7eabf1ffc3fe334937bb"
-SRC_URI[sha256sum] = "4d4091a73e04cdc9b39a6ad8aecaa9f122686a400b9e25f2617b6c0174547b3d"
+SRCREV = "737dbb04c407184fae0e203c1d73be8ad3fd55ba"
+S = "${WORKDIR}/git"
 
 do_compile_append() {
     cd ${S}/extra
