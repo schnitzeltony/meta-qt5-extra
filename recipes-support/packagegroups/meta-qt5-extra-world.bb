@@ -29,7 +29,6 @@ RDEPENDS_${PN} = " \
     dssi \
     dssi-vst \
     fluidsynth-dssi \
-    fluidplug \
     ftgl \
     ganv \
     helm \
