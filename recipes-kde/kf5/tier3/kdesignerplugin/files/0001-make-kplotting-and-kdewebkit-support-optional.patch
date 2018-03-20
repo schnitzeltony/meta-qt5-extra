@@ -9,6 +9,7 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  CMakeLists.txt | 20 ++++++++++++++------
  1 file changed, 14 insertions(+), 6 deletions(-)
@@ -17,9 +18,9 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index ed22059..5720f1f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -27,6 +27,10 @@ find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
+@@ -31,6 +31,10 @@ find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
  find_package(KF5Config ${KF5_DEP_VERSION} REQUIRED)
- find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
+ find_package(KF5DocTools ${KF5_DEP_VERSION})
  
 +
 +option(WITH_KPLOTTING "enable KPlotting support" Off)
@@ -28,7 +29,7 @@ index ed22059..5720f1f 100644
  find_package(KF5Completion ${KF5_DEP_VERSION})
  set_package_properties(KF5Completion PROPERTIES TYPE OPTIONAL
     PURPOSE "Required to build the Qt Designer plugin for KDE Frameworks widgets")
-@@ -47,9 +51,11 @@ find_package(KF5ItemViews ${KF5_DEP_VERSION})
+@@ -51,9 +55,11 @@ find_package(KF5ItemViews ${KF5_DEP_VERSION})
  set_package_properties(KF5ItemViews PROPERTIES TYPE OPTIONAL
     PURPOSE "Required to build the Qt Designer plugin for KDE Frameworks widgets")
  
@@ -43,7 +44,7 @@ index ed22059..5720f1f 100644
  
  find_package(KF5TextWidgets ${KF5_DEP_VERSION})
  set_package_properties(KF5TextWidgets PROPERTIES TYPE OPTIONAL
-@@ -67,9 +73,11 @@ find_package(KF5Sonnet ${KF5_DEP_VERSION})
+@@ -71,9 +77,11 @@ find_package(KF5Sonnet ${KF5_DEP_VERSION})
  set_package_properties(KF5Sonnet PROPERTIES TYPE OPTIONAL
     PURPOSE "Required to build the Qt Designer plugin for KDE Frameworks widgets")
  
