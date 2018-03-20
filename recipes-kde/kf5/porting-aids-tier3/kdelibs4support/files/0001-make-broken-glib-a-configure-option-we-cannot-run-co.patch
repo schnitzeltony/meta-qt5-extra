@@ -10,15 +10,16 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Inappropriate [cross]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  src/ConfigureChecks.cmake | 23 ++---------------------
  1 file changed, 2 insertions(+), 21 deletions(-)
 
 diff --git a/src/ConfigureChecks.cmake b/src/ConfigureChecks.cmake
-index 73a2df3..dc8d8b8 100644
+index 9edbff7..d44aca6 100644
 --- a/src/ConfigureChecks.cmake
 +++ b/src/ConfigureChecks.cmake
-@@ -83,27 +83,8 @@ check_struct_has_member("struct sockaddr" sa_len "sys/types.h;sys/socket.h" HAVE
+@@ -85,27 +85,8 @@ check_struct_has_member("struct sockaddr" sa_len "sys/types.h;sys/socket.h" HAVE
  check_struct_has_member(dirent d_type dirent.h HAVE_DIRENT_D_TYPE LANGUAGE CXX)
  check_prototype_exists(res_init "sys/types.h;netinet/in.h;arpa/nameser.h;resolv.h" HAVE_RES_INIT_PROTO)
  
