@@ -17,7 +17,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index c7f2236..f8af062 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -107,6 +107,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kpackage_version.h
+@@ -88,6 +88,7 @@ include(KF5PackageMacros.cmake)
  # make package_version.h available
  include_directories(${CMAKE_CURRENT_BINARY_DIR})
  
@@ -25,7 +25,7 @@ index c7f2236..f8af062 100644
  ################# list the subdirectories #################
  if (KF5DocTools_FOUND)
      add_subdirectory(docs)
-@@ -119,7 +120,10 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+@@ -100,8 +101,11 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
      endif()
  endif()
  
@@ -35,7 +35,8 @@ index c7f2236..f8af062 100644
  add_subdirectory(autotests)
 +endif()
  
- feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+ ################ create PackageConfig.cmake and install it ####################
+ 
 -- 
-2.7.4
+2.14.3
 
