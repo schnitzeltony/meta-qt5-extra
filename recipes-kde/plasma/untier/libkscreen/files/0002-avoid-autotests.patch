@@ -6,15 +6,16 @@ Subject: [PATCH] avoid tests
 Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Luis Gustavo S. Barreto <gustavo@ossystems.com.br>
+
 ---
  CMakeLists.txt | 2 --
  1 file changed, 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 8592aa9..c7f3541 100644
+index bf05910..f81a81d 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -54,8 +54,6 @@ endif (_HAVE_VISIBILITY AND NOT WIN32)
+@@ -56,8 +56,6 @@ endif (_HAVE_VISIBILITY AND NOT WIN32)
  
  add_subdirectory(src)
  add_subdirectory(backends)
