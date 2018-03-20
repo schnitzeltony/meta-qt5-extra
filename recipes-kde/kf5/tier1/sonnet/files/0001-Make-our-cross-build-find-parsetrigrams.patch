@@ -6,19 +6,25 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
 Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  data/CMakeLists.txt | 8 +-------
  1 file changed, 1 insertion(+), 7 deletions(-)
 
 diff --git a/data/CMakeLists.txt b/data/CMakeLists.txt
-index 100b05f..17a5c98 100644
+index d86cde1..6c2c3be 100644
 --- a/data/CMakeLists.txt
 +++ b/data/CMakeLists.txt
-@@ -15,18 +15,12 @@ INSTALL(TARGETS parsetrigrams EXPORT KF5SonnetTargets ${KF5_INSTALL_TARGETS_DEFA
- INSTALL(TARGETS gentrigrams EXPORT KF5SonnetTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+@@ -15,18 +15,12 @@ INSTALL(TARGETS parsetrigrams ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+ INSTALL(TARGETS gentrigrams ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
  
  cmake_policy(SET CMP0026 OLD) # FIXME: make this work with CMP0026 set to NEW
 -if(CMAKE_CROSSCOMPILING AND PARSETRIGRAMS_EXECUTABLE)
