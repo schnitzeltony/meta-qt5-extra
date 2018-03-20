@@ -9,6 +9,7 @@ Content-Transfer-Encoding: 8bit
 we can start kde from shell by this which is sometimes helpful for debugging
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  startkde/startkde.cmake | 6 ++++--
  1 file changed, 4 insertions(+), 2 deletions(-)
@@ -17,8 +18,8 @@ diff --git a/startkde/startkde.cmake b/startkde/startkde.cmake
 index 24e5c1b..0c5f569 100644
 --- a/startkde/startkde.cmake
 +++ b/startkde/startkde.cmake
-@@ -37,8 +37,10 @@ if test $kcheckrunning_result -eq 0 ; then
- 	xmessage -geometry 500x100 "KDE seems to be already running on this display." > /dev/null 2>/dev/null
+@@ -18,8 +18,10 @@ if test $kcheckrunning_result -eq 0 ; then
+ 	xmessage -geometry 500x100 "Plasma seems to be already running on this display." > /dev/null 2>/dev/null
  	exit 1
  elif test $kcheckrunning_result -eq 2 ; then
 -	echo "\$DISPLAY is not set or cannot connect to the X server."

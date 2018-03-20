@@ -9,12 +9,13 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  klipper/main.cpp          | 4 ++++
  krunner/main.cpp          | 4 ++++
  shell/main.cpp            | 4 ++++
- xembed-sni-proxy/main.cpp | 5 ++++-
- 4 files changed, 16 insertions(+), 1 deletion(-)
+ xembed-sni-proxy/main.cpp | 4 ++++
+ 4 files changed, 16 insertions(+)
 
 diff --git a/klipper/main.cpp b/klipper/main.cpp
 index 58a0778..a1d1312 100644
@@ -90,7 +91,7 @@ index ec117f3..93791b2 100644
  #include <QDebug>
  #include <QMessageBox>
  
-@@ -110,6 +112,7 @@ int main(int argc, char *argv[])
+@@ -108,6 +110,7 @@ int main(int argc, char *argv[])
      cliOptions.process(app);
      aboutData.processCommandLine(&cliOptions);
  
@@ -98,7 +99,7 @@ index ec117f3..93791b2 100644
      QGuiApplication::setFallbackSessionManagementEnabled(false);
  
      auto disableSessionManagement = [](QSessionManager &sm) {
-@@ -117,6 +120,7 @@ int main(int argc, char *argv[])
+@@ -115,6 +118,7 @@ int main(int argc, char *argv[])
      };
      QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
      QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);

@@ -9,6 +9,7 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  startkde/startplasma.cmake | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
@@ -17,7 +18,7 @@ diff --git a/startkde/startplasma.cmake b/startkde/startplasma.cmake
 index 59dc7b7..edd400b 100644
 --- a/startkde/startplasma.cmake
 +++ b/startkde/startplasma.cmake
-@@ -127,7 +127,7 @@ if test $? -ne 0; then
+@@ -140,7 +140,7 @@ if test $? -ne 0; then
    exit 1
  fi
  
@@ -26,7 +27,7 @@ index 59dc7b7..edd400b 100644
  
  # finally, give the session control to the session manager
  # see kdebase/ksmserver for the description of the rest of the startup sequence
-@@ -156,13 +156,13 @@ if test x"$wait_drkonqi"x = x"true"x ; then
+@@ -169,13 +169,13 @@ if test x"$wait_drkonqi"x = x"true"x ; then
      # wait for remaining drkonqi instances with timeout (in seconds)
      wait_drkonqi_timeout=`kreadconfig5 --file startkderc --group WaitForDrKonqi --key Timeout --default 900`
      wait_drkonqi_counter=0

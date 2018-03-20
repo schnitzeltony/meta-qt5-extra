@@ -11,6 +11,7 @@ fixes:
 | static QPlatformTheme* QKdeTheme::createKdeTheme(): Unable to determine KDE dirs
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  startkde/startkde.cmake | 5 +++++
  1 file changed, 5 insertions(+)
@@ -19,8 +20,8 @@ diff --git a/startkde/startkde.cmake b/startkde/startkde.cmake
 index 891c21e..cbb7063 100644
 --- a/startkde/startkde.cmake
 +++ b/startkde/startkde.cmake
-@@ -66,6 +66,11 @@ fi
- 
+@@ -46,6 +46,11 @@ sysConfigDirs=${XDG_CONFIG_DIRS:-/etc/xdg}
+ # We need to create config folder so we can write startupconfigkeys
  mkdir -p $configDir
  
 +# Make qtbase/src/platformsupport/themes/genericunix/qgenericunixthemes.cpp

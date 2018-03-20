@@ -9,6 +9,7 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  startkde/startkde.cmake | 3 +++
  1 file changed, 3 insertions(+)
@@ -18,7 +19,7 @@ index 046543e..2663348 100644
 --- a/startkde/startkde.cmake
 +++ b/startkde/startkde.cmake
 @@ -3,6 +3,9 @@
- #  DEFAULT KDE STARTUP SCRIPT ( @PROJECT_VERSION@ )
+ #  DEFAULT Plasma STARTUP SCRIPT ( @PROJECT_VERSION@ )
  #
  
 +# meta-qt5 specific
