@@ -6,23 +6,29 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
 kconfig does not export location to kconfig in our environment so set it
 manually.
 
 Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  src/CMakeLists.txt | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 5e95df8..8334c80 100644
+index 90050ff..5bd922d 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -18,10 +18,10 @@ target_link_libraries(kdeinit_kded5
-     KF5::Crash # Sets it as autostart
- )
+@@ -16,10 +16,10 @@ if(APPLE)
+     target_link_libraries(kdeinit_kded5 "-framework CoreFoundation")
+ endif()
  target_compile_definitions(kdeinit_kded5 PRIVATE
 -    KCONF_UPDATE_EXE="$<TARGET_FILE:KF5::kconf_update>"
 +    KCONF_UPDATE_EXE="${CMAKE_INSTALL_FULL_LIBEXECDIR}/kf5/kconf_update"
