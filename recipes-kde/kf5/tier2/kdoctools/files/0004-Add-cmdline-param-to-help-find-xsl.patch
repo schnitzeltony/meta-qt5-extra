@@ -1,7 +1,12 @@
-From d344f2342a76dcf0c6808428c5050fe09972ce85 Mon Sep 17 00:00:00 2001
+From 6cfe8c2c0c1a40e00c51a6e4c6f6314670889630 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Fri, 28 Nov 2014 10:04:17 +0100
-Subject: [PATCH 1/4] Add cmdline param to help find xsl
+Subject: [PATCH] Add cmdline param to help find xsl
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -9,29 +14,30 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  CMakeLists.txt             | 2 ++
  cmake/FindDocBookXSL.cmake | 2 +-
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 063ded0..425c688 100644
+index 500c252..00d9e54 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -18,6 +18,8 @@ ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KDOCTOOLS
-                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5DocToolsConfigVersion.cmake"
-                         SOVERSION 5)
+@@ -27,6 +27,8 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KDOCTOOLS
+ option(MEINPROC_NO_KARCHIVE "Compile meinproc without KArchive dependency. Only for internal usage on KDE infrastructure." OFF)
+ option(INSTALL_INTERNAL_TOOLS "Install internal tools too." OFF)
  
 +# OE specific
 +set(OE_ROOT_PATH_PREFIX "" CACHE STRING "OE sysroot")
  # Dependencies
- set(REQUIRED_QT_VERSION 5.2.0)
+ set(REQUIRED_QT_VERSION 5.7.0)
  find_package(Qt5Core ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE)
 diff --git a/cmake/FindDocBookXSL.cmake b/cmake/FindDocBookXSL.cmake
-index 6429e90..0a72c22 100644
+index 3d9e40c..779cb2c 100644
 --- a/cmake/FindDocBookXSL.cmake
 +++ b/cmake/FindDocBookXSL.cmake
-@@ -33,7 +33,7 @@ find_path (DocBookXSL_DIR lib/lib.xsl
+@@ -56,7 +56,7 @@ find_path (DocBookXSL_DIR lib/lib.xsl
  if (NOT DocBookXSL_DIR)
      # hacks for systems that put the version in the stylesheet dirs
      set (STYLESHEET_PATH_LIST)
@@ -40,6 +46,3 @@ index 6429e90..0a72c22 100644
          file(GLOB STYLESHEET_SUFFIX_ITER RELATIVE ${STYLESHEET_PREFIX_ITER}
              ${STYLESHEET_PREFIX_ITER}/share/xml/docbook/xsl-stylesheets-*
          )
--- 
-1.8.3.1
-
