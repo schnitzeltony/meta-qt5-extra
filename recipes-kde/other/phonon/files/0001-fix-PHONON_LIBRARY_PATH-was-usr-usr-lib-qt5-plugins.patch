@@ -25,7 +25,6 @@ index d93124b..80d6a6c 100644
 +add_definitions(-DPHONON_LIBRARY_PATH="${PLUGIN_INSTALL_DIR}/plugins")
  add_definitions(-DPHONON_BACKEND_DIR_SUFFIX="/${PHONON_LIB_SONAME}_backend/")
  
- automoc4_add_library(${PHONON_LIB_SONAME} SHARED ${phonon_LIB_SRCS})
+ add_library(${PHONON_LIB_SONAME} SHARED ${phonon_LIB_SRCS})
 -- 
-1.9.3
-
+2.14.3
