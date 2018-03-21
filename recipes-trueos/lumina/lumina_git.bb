@@ -18,14 +18,10 @@ DEPENDS += " \
     poppler \
 "
 
-SRC_URI = " \
-    git://github.com/trueos/lumina.git \
-    file://0001-lumina-desktop.pro-fix-out-of-tree-installation.patch \
-    file://0002-manpages-fix-out-of-tree-install.patch \
-    file://0003-i18n-fix-out-of-tree-build.patch \
-"
-SRCREV = "a881c51e7b20f086b6b8b546c116d38478f87840"
+SRC_URI = "git://github.com/trueos/lumina.git"
+SRCREV = "afcece7d649bf7fecb39c815d5b5603d31df00c9"
 S = "${WORKDIR}/git"
+PV = "1.4.0+git${SRCPV}"
 
 do_configure_prepend() {
     # change paths by sed instead of endles escapes in 'DEFINES+=..' below
