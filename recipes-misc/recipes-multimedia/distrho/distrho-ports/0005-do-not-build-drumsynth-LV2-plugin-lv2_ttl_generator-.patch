@@ -25,7 +25,4 @@ index 441a66e..114ee5f 100644
 +#	$(MAKE) -C drumsynth/LV2
  	$(MAKE) -C easySSP/LV2
  #	$(MAKE) -C eqinox/LV2
- # 	$(MAKE) -C juce-demo-host/LV2
--- 
-2.9.4
-
+ 	$(MAKE) -C HiReSam/LV2
