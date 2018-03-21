@@ -3,8 +3,8 @@ LICENSE = "LGPLv2.1 | CDDL-1.0"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=da556b13ec78a2eca584c86147e50e61"
 
 SRC_URI = "http://www.libraw.org/data/LibRaw-${PV}.tar.gz"
-SRC_URI[md5sum] = "7bd923ea7c9cc71897b005be46c01b2b"
-SRC_URI[sha256sum] = "ce366bb38c1144130737eb16e919038937b4dc1ab165179a225d5e847af2abc6"
+SRC_URI[md5sum] = "ef5b9bc4c2749b83f63c6c38a5f5d744"
+SRC_URI[sha256sum] = "56aca4fd97038923d57d2d17d90aa11d827f1f3d3f1d97e9f5a0d52ff87420e2"
 S = "${WORKDIR}/LibRaw-${PV}"
 
 inherit autotools pkgconfig
