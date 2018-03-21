@@ -27,7 +27,4 @@ index 4a9995f..8ec7d44 100644
 -	mv *.ttl helm.lv2
  
  clean:
- 	$(MAKE) clean -f Makefile.binary
--- 
-2.5.5
-
+ 	$(MAKE) clean CONFIG=$(CONFIG) -f Makefile.binary
