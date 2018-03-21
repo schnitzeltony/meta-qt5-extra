@@ -1,0 +1,29 @@
+From 4aaf0c498a8d7b132bb4e5216b28955dcbd515a7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 21 Mar 2018 14:26:26 +0100
+Subject: [PATCH] do not build dexed LV2-plugin - lv2_ttl_generator blocks
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ ports/Makefile | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/ports/Makefile b/ports/Makefile
+index 59966e48..6ad528fa 100644
+--- a/ports/Makefile
++++ b/ports/Makefile
+@@ -42,7 +42,7 @@ ifeq ($(LINUX_EMBED),true)
+ else
+ 	$(MAKE) -C arctican-function/LV2
+ 	$(MAKE) -C arctican-pilgrim/LV2
+-	$(MAKE) -C dexed/LV2
++#	$(MAKE) -C dexed/LV2
+ 	$(MAKE) -C drowaudio-distortion/LV2
+ 	$(MAKE) -C drowaudio-distortionshaper/LV2
+ 	$(MAKE) -C drowaudio-flanger/LV2
+-- 
+2.14.3
+

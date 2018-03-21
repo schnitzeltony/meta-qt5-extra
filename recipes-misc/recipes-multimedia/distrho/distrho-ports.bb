@@ -14,6 +14,7 @@ SRC_URI = " \
     file://0004-do-not-build-drowaudio-tremolo-LV2-plugin-lv2_ttl_ge.patch \
     file://0005-do-not-build-drumsynth-LV2-plugin-lv2_ttl_generator-.patch \
     file://0006-do-not-build-HiReSam-LV2-plugin-lv2_ttl_generator-bl.patch \
+    file://0007-do-not-build-dexed-LV2-plugin-lv2_ttl_generator-bloc.patch \
     \
     http://linuxsynths.com/ObxdPatchesDemos/ObxdPatchesBrian-01.tar.gz;name=linuxsynths-obxd-patches1;subdir=linuxsynths-obxd-patches \
     \
@@ -84,9 +85,6 @@ do_install() {
     for file in `find ${WORKDIR}/linuxsynths-vex-patches -mindepth 1 -maxdepth 1` ; do
         cp -rf $file ${D}${libdir}/lv2/
     done
-
-    # remove broken (during qemu build) LV2 (use VST for those)
-    rm -rf ${D}${libdir}/lv2/Dexed.lv2
 }
 
 PACKAGES =+ "${PN}-presets"
