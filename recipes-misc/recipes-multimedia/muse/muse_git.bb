@@ -51,6 +51,7 @@ FILES_${PN}-locale = "${datadir}/muse-3.0/locale"
 
 FILES_${PN} += " \
     ${datadir}/mime \
+    ${datadir}/metainfo \
     \
     ${datadir}/muse-3.0/didyouknow.txt \
     ${datadir}/muse-3.0/splash.png \
