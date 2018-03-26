@@ -14,18 +14,18 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b5a646d..7018636 100644
+index d33b65e..2c1c376 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -82,7 +82,7 @@ set_package_properties(MLT PROPERTIES
+@@ -108,7 +108,7 @@ set_package_properties(MLT PROPERTIES
                  TYPE RUNTIME
                  PURPOSE "Required to do video processing")
  
 -set(MLT_PREFIX ${MLT_ROOT_DIR})
-+SET(MLT_PREFIX "/usr" CACHE STRING "mlt prefix")
++set(MLT_PREFIX ${MLT_ROOT_DIR} CACHE STRING "mlt prefix")
  
  add_subdirectory(data)
- add_subdirectory(doc)
+ if(KF5DocTools_FOUND)
 -- 
-2.1.0
+2.14.3
 
