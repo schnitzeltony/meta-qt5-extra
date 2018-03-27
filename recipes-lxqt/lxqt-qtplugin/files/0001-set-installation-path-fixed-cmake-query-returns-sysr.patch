@@ -18,9 +18,9 @@ diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 index d65d813..61038fb 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -14,25 +14,4 @@ target_link_libraries(qtlxqt
-     Qt5::Widgets
+@@ -37,25 +37,4 @@ target_link_libraries(qtlxqt
  )
+ 
  
 -# there is no standard way to get the plugin dir of Qt5 with cmake
 -# The best way is get_target_property(QT_PLUGINS_DIR Qt5::QGtk2ThemePlugin LOCATION).
