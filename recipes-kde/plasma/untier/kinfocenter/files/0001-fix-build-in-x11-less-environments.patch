@@ -8,10 +8,10 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- Modules/info/CMakeLists.txt   |  3 +--
+ Modules/info/CMakeLists.txt   |  6 ++++--
  Modules/opengl/CMakeLists.txt |  5 ++++-
  Modules/opengl/opengl.cpp     | 13 +++++++++++--
- 3 files changed, 16 insertions(+), 5 deletions(-)
+ 3 files changed, 19 insertions(+), 5 deletions(-)
 
 diff --git a/Modules/info/CMakeLists.txt b/Modules/info/CMakeLists.txt
 index 4dae851..a528dbd 100644
@@ -63,7 +63,7 @@ index c87cde8..5df02e3 100644
  
  #include <openglconfig.h>
  
-@@ -735,7 +738,8 @@ static QTreeWidgetItem *get_gl_info_glx(Display *dpy, int scrnum, Bool allowDire
+@@ -737,7 +740,8 @@ static QTreeWidgetItem *get_gl_info_glx(Display *dpy, int scrnum, Bool allowDire
  }
  #endif
  
@@ -73,7 +73,7 @@ index c87cde8..5df02e3 100644
  static QTreeWidgetItem *get_gl_info_egl(Display *dpy, int scrnum, QTreeWidgetItem *l1, QTreeWidgetItem *after)
  {
     Window win;
-@@ -847,6 +851,7 @@ static QTreeWidgetItem *get_gl_info_egl(Display *dpy, int scrnum, QTreeWidgetIte
+@@ -852,6 +856,7 @@ static QTreeWidgetItem *get_gl_info_egl(Display *dpy, int scrnum, QTreeWidgetIte
     return result;
  
  }
@@ -81,9 +81,9 @@ index c87cde8..5df02e3 100644
  
  static QTreeWidgetItem *get_gl_info_egl_qt(QTreeWidgetItem *l1, QTreeWidgetItem *after, QSurfaceFormat::OpenGLContextProfile profile, const QString &title)
  {
-@@ -894,7 +899,9 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
+@@ -899,7 +904,9 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
  {
-     QTreeWidgetItem *l1, *l2 = NULL;
+     QTreeWidgetItem *l1, *l2 = nullptr;
  
 +#if HAVE_X11
      static bool isX11 = QGuiApplication::platformName() == QStringLiteral("xcb");
@@ -91,24 +91,24 @@ index c87cde8..5df02e3 100644
      static bool isWayland = QGuiApplication::platformName().contains(QStringLiteral("wayland"));
  
      QTreeWidgetItem *header = new QTreeWidgetItem();
-@@ -906,6 +913,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
+@@ -911,6 +918,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
  
      l1 = new QTreeWidgetItem(treeWidget);
  
 +#if HAVE_X11
      if (isX11) {
-         char *displayName = NULL;
+         char *displayName = nullptr;
          Display *dpy;
-@@ -936,7 +944,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
- 
-             if (IsDirect) l2 = get_gl_info_glx(dpy, scrnum, false, l1, l2);
+@@ -939,7 +947,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
+             l2 = get_gl_info_glx(dpy, scrnum, true, l1, l2);
+             if (l2) l2->setExpanded(true);
  #endif
 -#if KCM_HAVE_EGL
 +#if KCM_HAVE_EGL && HAVE_X11
              l2 = get_gl_info_egl(dpy, scrnum, l1, l2);
              if (l2)
                  l2->setExpanded(true);
-@@ -953,6 +961,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
+@@ -956,6 +964,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
  #endif
          XCloseDisplay(dpy);
      }
