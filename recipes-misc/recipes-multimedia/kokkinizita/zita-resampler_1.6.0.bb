@@ -26,7 +26,7 @@ do_compile() {
     base_do_compile
 
     # create lib link for building apps
-    ln -s lib${BPN}.so.${PV} lib${BPN}.so
+    ln -sf lib${BPN}.so.${PV} lib${BPN}.so
 
     cd ${S}/apps
     base_do_compile
