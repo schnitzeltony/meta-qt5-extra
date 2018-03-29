@@ -36,8 +36,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "90322b861f904d7cb4786f84491cedf1"
-SRC_URI[sha256sum] = "1705c57af39ba3030b727e83fd72f7ad39dfa6f496e69e6ed1537dfda80be619"
+SRC_URI[md5sum] = "b0bb48df3452b3ebfffe60700e51a023"
+SRC_URI[sha256sum] = "e5b1d5280dda7bb652f59251cdb1846d62719589e78cab94d445642275edfb3d"
 
 FILES_SOLIBSDEV = " \
     ${libdir}/libplasma*core${SOLIBSDEV} \
