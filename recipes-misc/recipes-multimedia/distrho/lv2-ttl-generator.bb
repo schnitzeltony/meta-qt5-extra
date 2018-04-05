@@ -18,5 +18,5 @@ do_compile() {
 
 do_install() {
     install -d ${D}${bindir}
-    install -m 0755 ${S}/utils/lv2_ttl_generator ${D}${bindir}
+    install -m 0755 ${S}/utils/lv2_ttl_generator ${D}${bindir}/lv2-ttl-generator
 }
