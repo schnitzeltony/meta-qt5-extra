@@ -37,32 +37,59 @@ SRC_URI = " \
 SRC_URI[md5sum] = "66acae0913108f129aa979f3c4b65473"
 SRC_URI[sha256sum] = "11de448f9664076e9e8f2bcb8f7f45bf54a13516b7d6693da1ef8c511b8ed7c1"
 
+LV2-TURTLE-BUILD-DATA = "${WORKDIR}/lv2-ttl-generator-data"
+LV2-DUMMY-TURTLE-STR = "lv2-dummy-turtle-str"
+LV2-POSTINST-MANIFEST = "${datadir}/${BPN}/lv2-postinst-manifest"
+
 do_configure_prepend() {
-    # We cannot run lv2-ttl-generator in cross environment so keep commands in 
-    # shell script. Builddir is deleted so keep our script in ${WORKDIR}
-
-	# manipulate CMakeLists.txt to keep commands in script
-    sed -i 's|../../lv2-ttl-generator|lv2-ttl-generator|g' `find ${S} -name CMakeLists.txt`
-    sed -i 's|lv2-ttl-generator $<TARGET_FILE.*|echo \"&\" >> ${WORKDIR}/lv2-ttl-generator-data|g' `find ${S} -name CMakeLists.txt`
+    # reconfigure?
+    if [ ! -f ${LV2-TURTLE-BUILD-DATA} ] ; then
+        # We cannot run lv2-ttl-generator in cross environment so
+        # manipulate CMakeLists.txt to keep commands in file
+        sed -i 's|../../lv2-ttl-generator|lv2-ttl-generator|g' `find ${S} -name CMakeLists.txt`
+        sed -i 's|lv2-ttl-generator $<TARGET_FILE.*|echo \"&\" >> ${LV2-TURTLE-BUILD-DATA}|g' `find ${S} -name CMakeLists.txt`
+    else
+        rm -f ${LV2-TURTLE-BUILD-DATA}
+    fi
 }
-
 
 do_compile_append() {
     # Build Controller/Spliter
     oe_runmake -C ${S}/ExternalPrograms/Controller
     oe_runmake -C ${S}/ExternalPrograms/Spliter
 
-    # build ttl-files must be done in quemu (lv2-ttl-generator-data loads 
-    # so-files and calls functions to create ttl-files)
-    for sofile in `cat ${WORKDIR}/lv2-ttl-generator-data | awk '{ print $2 }'`; do
-        cd `dirname ${sofile}`
-        ${@qemu_run_binary_local(d, '${STAGING_DIR_TARGET}', '${B}/src/Plugin/lv2-ttl-generator')} ${sofile}
+    # Create dummy lv2-turtles to make install happy
+    cd ${B}/src/Plugin/
+    for dir in `find -type d -mindepth 1 -maxdepth 1`; do
+        if [ -d $dir/lv2 ] ; then
+            echo ${LV2-DUMMY-TURTLE-STR} > $dir/lv2/manifest.ttl
+            echo ${LV2-DUMMY-TURTLE-STR} > $dir/lv2/presets.ttl
+            for so in `find $dir -name '*.so' -mindepth 2 -maxdepth 2`; do
+                pluginname=`basename $so | sed 's|.so||g'`
+                echo ${LV2-DUMMY-TURTLE-STR} > $dir/lv2/$pluginname.ttl
+            done
+        fi
     done
 }
 
 do_install_append() {
     install -m 0755 ${S}/ExternalPrograms/Controller/controller ${D}${bindir}/zynaddsubfx-controller
     install -m 0755 ${S}/ExternalPrograms/Spliter/spliter ${D}${bindir}/zynaddsubfx-spliter
+
+    # remove dummy lv2-turtles again
+    cd ${D}/${libdir}/lv2
+    for tfile in `grep -rl ${LV2-DUMMY-TURTLE-STR}`; do
+        rm $tfile
+    done
+
+    # create postinst manifest
+    install -d ${D}`dirname ${LV2-POSTINST-MANIFEST}`
+    for sofile in `cat ${LV2-TURTLE-BUILD-DATA} | awk '{ print $2 }'`; do
+        sofile=`basename $sofile`
+        installed=`find ${D}${libdir}/lv2 -name $sofile | sed 's|${D}||g'`
+        echo $installed >> ${D}${LV2-POSTINST-MANIFEST}
+    done
+
 }
 
 FILES_${PN} += " \
@@ -70,3 +97,24 @@ FILES_${PN} += " \
     ${libdir}/lv2 \
     ${libdir}/vst \
 "
+
+pkg_postinst_ontarget_${PN}() {
+    oldpath=`pwd`
+    for sofile in `cat ${LV2-POSTINST-MANIFEST}`; do
+        cd `dirname "$sofile"`
+        lv2-ttl-generator "$sofile"
+    done
+    cd $oldpath
+}
+
+pkg_prerm_${PN}() {
+    for sofile in `cat ${LV2-POSTINST-MANIFEST}`; do
+        path=`dirname "$sofile"`
+        for turtle in `find $path -name '*.ttl'`; do
+            rm $turtle
+        done
+    done
+}
+
+RDEPENDS_${PN} += "lv2-ttl-generator"
+
