@@ -1,51 +1,63 @@
 SUMMARY = "projectM is a MilkDrop compatible opensource music visualizer"
-HOMEPAGE = "http://projectm-visualizer.github.io/projectm/"
+HOMEPAGE = "http://projectm-visualizer.github.io/projectm"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26f590fe167311fe2a5a7ce0b3e71900"
 
-inherit cmake_qt5
+inherit autotools-brokensep pkgconfig distro_features_check
+inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt', 'qmake5_paths', '', d)}
+
+REQUIRED_DISTRO_FEATURES = "opengl ${@bb.utils.contains('PACKAGECONFIG', 'qt', 'pulseaudio', '', d)}"
 
 DEPENDS += " \
-    virtual/libgl \
+    libglu \
     glew \
-    ftgl \
-    libvisual \
-    libsdl \
-    libsdl2 \
 "
 
 SRC_URI = " \
     git://github.com/projectM-visualizer/projectm.git;name=projectm \
 	http://spiegelmc.com.s3.amazonaws.com/pub/projectm_presets.zip;name=presets \
-    file://0001-Fix-sdl2-build.patch \
-    file://0002-workaround-link-failures.patch \
-    file://0003-remove-assertion-which-breaks-build.patch \
+    file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
+    file://0002-Re-add-pkg-config-support.patch \
+    file://0003-Install-headers-to-usr-include-libprojectM.patch \
 "
-SRCREV_projectm = "04001c2b12de848962b74a3938d0ca877ca611be"
+SRCREV_projectm = "2a3a5315f5c45c89c9c8641381c65da55545694f"
 SRC_URI[presets.md5sum] = "8976d72c05e3f4ddee996c6f2e98fc63"
 SRC_URI[presets.sha256sum] = "e323515f0ee5920ec45e4f9efdb55890f028dabb5ae9468fdc97c43d55040614"
 
 S = "${WORKDIR}/git"
-PV = "2.2.0+git${SRCPV}"
+PV = "2.2.1+git${SRCPV}"
 
-# why is static default?
-EXTRA_OECMAKE += "-DBUILD_PROJECTM_STATIC=OFF"
+# Many options are Qt related but can be set unconditionally
+EXTRA_OECONF += " \
+    --with-moc=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/moc \
+    --with-uic=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/uic \
+    --with-rcc=${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}/rcc \
+"
 
-# projectm supports qt4 only - disable componenrs asking for qt4
-EXTRA_OECMAKE += "-DINCLUDE-PROJECTM-QT=OFF -DINCLUDE-PROJECTM-PULSEAUDIO=OFF"
+PACKAGECONFIG ??= "ftgl sdl2"
+PACKAGECONFIG[ftgl] = "--enable-ftgl,--disable-ftgl,ftgl"
+PACKAGECONFIG[sdl2] = "--enable-sdl,--disable-sdl,libsdl2"
 
-# force gles1
-#EXTRA_OECMAKE += "USE_GLES1=ON"
+# Note: qtbase must be configured with desktop gl / gles won't work
+PACKAGECONFIG[qt] = "--enable-qt,--disable-qt,qtbase-native qtbase pulseaudio"
 
 do_install_append() {
-	install -d ${D}/${datadir}/projectM/presets
-    install -m 0644 ${WORKDIR}/presets/presets_projectM/* ${D}/${datadir}/projectM/presets/
+    #install -m 0644 ${WORKDIR}/presets/presets_projectM/* ${D}/${datadir}/projectM/presets/
     # original name confuses sanity check for file already in sysroot -> avoild by renaming
-    mv '${D}/${datadir}/projectM/presets/Eo.S. - skylight a3 [trip colors flux2]_phat_Multi_shaped2_zoe_colours5.milk' \
-       '${D}/${datadir}/projectM/presets/Eo.S. - skylight a3 (trip colors flux2)_phat_Multi_shaped2_zoe_colours5.milk' || true
+    #mv '${D}/${datadir}/projectM/presets/Eo.S. - skylight a3 [trip colors flux2]_phat_Multi_shaped2_zoe_colours5.milk' \
+    #   '${D}/${datadir}/projectM/presets/Eo.S. - skylight a3 (trip colors flux2)_phat_Multi_shaped2_zoe_colours5.milk' || true
+
+    # Install presets manually for now
+    install -m 0644 ${S}/presets/presets_projectM/* ${D}/${datadir}/projectM/presets/
+
+    # Remove native presets for now - they are at the wrong location
+    rm -f ${D}/${datadir}/projectM/presets/*.a
+    rm -f ${D}/${datadir}/projectM/presets/*.so*
 }
 
 FILES_${PN} += " \
     ${datadir}/projectM \
     ${libdir}/libvisual-0.4/actor/*.so \
 "
+
+FILE_${PN}-dbg += "${datadir}/projectM/presets/.debug"

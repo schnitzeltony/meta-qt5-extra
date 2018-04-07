@@ -1,0 +1,74 @@
+From 4305ce94f40526de8cd92200c1abf5f369bc03b2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 14 Apr 2018 21:45:07 +0200
+Subject: [PATCH 2/3] Re-add pkg-config support
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Give others - e.g qmmp the chance to find projectM
+
+Upstream-Status: Submitted [1]
+
+[1] https://github.com/projectM-visualizer/projectm/pull/54#pullrequestreview-112244678
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ configure.ac                      |  1 +
+ src/libprojectM/Makefile.am       |  6 +++---
+ src/libprojectM/libprojectM.pc.in | 14 +++++++-------
+ 3 files changed, 11 insertions(+), 10 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 96ce9dd7..eb582aa1 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -19,6 +19,7 @@ AC_CONFIG_FILES([
+   src/libprojectM/Renderer/Makefile
+   src/libprojectM/NativePresetFactory/Makefile
+   src/libprojectM/MilkdropPresetFactory/Makefile
++  src/libprojectM/libprojectM.pc
+   src/NativePresets/Makefile
+   src/projectM-sdl/Makefile
+   src/projectM-qt/Makefile
+diff --git a/src/libprojectM/Makefile.am b/src/libprojectM/Makefile.am
+index 73d8353f..f102b9fb 100644
+--- a/src/libprojectM/Makefile.am
++++ b/src/libprojectM/Makefile.am
+@@ -48,6 +48,6 @@ libprojectM_la_SOURCES = ConfigFile.cpp Preset.cpp PresetLoader.cpp timer.cpp \
+ 	omptl/omptl_algorithm
+ 
+ pkgconfigdir = $(libdir)/pkgconfig
+-# pkgconfig_DATA = src/libprojectM.pc
+-# EXTRA_DIST += src/libprojectM.pc.in
+-# CLEANFILES += src/libprojectM.pc
++pkgconfig_DATA = libprojectM.pc
++EXTRA_DIST += libprojectM.pc.in
++CLEANFILES += libprojectM.pc
+diff --git a/src/libprojectM/libprojectM.pc.in b/src/libprojectM/libprojectM.pc.in
+index 90de7523..84f6694e 100644
+--- a/src/libprojectM/libprojectM.pc.in
++++ b/src/libprojectM/libprojectM.pc.in
+@@ -1,12 +1,12 @@
+-prefix=@CMAKE_INSTALL_PREFIX@
+-exec_prefix=@CMAKE_INSTALL_PREFIX@
+-libdir=@LIB_INSTALL_DIR@
+-includedir=@CMAKE_INSTALL_PREFIX@/include
+-pkgdatadir=@CMAKE_INSTALL_PREFIX@/@RESOURCE_PREFIX@
+-sysconfdir=@CMAKE_INSTALL_PREFIX@/@RESOURCE_PREFIX@
++prefix=@prefix@
++exec_prefix=@exec_prefix@
++libdir=@libdir@
++includedir=@includedir@
++pkgdatadir=@datadir@/@PACKAGE_NAME@
++sysconfdir=@datadir@/@PACKAGE_NAME@
+ 
+ Name: libprojectM
+-Version: @PROJECTM_VERSION@
++Version: @PACKAGE_VERSION@
+ Description: projectM - OpenGL Milkdrop
+ Requires:
+ Libs: -L${libdir} -lprojectM
+-- 
+2.14.3
+
