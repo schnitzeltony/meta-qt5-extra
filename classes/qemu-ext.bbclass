@@ -2,26 +2,21 @@ inherit qemu
 
 DEPENDS += "qemu-native"
 
-# slightly reworked qemu_run_binary: qemu.bbclass expects binary in sysroot but
-# our binary is not (yet) installed
-# ${@qemu_run_binary_local(d, '$D', '/usr/bin/test_app')} [test_app arguments]
+# This is an extended/modified qemu.bbclass tailored four our needs:
 #
-def qemu_run_binary_local(data, rootfs_path, binary):
-    qemu_binary = qemu_target_binary(data)
-    if qemu_binary == "qemu-allarch":
-        qemu_binary = "qemuwrapper"
+# * add qemu-native to DEPENDS: we can do that because there is no
+#   introspection/interception delayed qemu usage here
+# * The executable binary is set by absolute path: oe-core's qemu.bbclass
+#   expects it in sysroot. Here we usually run binaries in builddir which are
+#   not yet installed.
+# * A recipe can set an extra library path in 'QEMU_EXTRA_LIBDIR'. This path is
+#   an absolute path.
 
+def qemu_run_binary_local(data, rootfs_path, binary):
     libdir = rootfs_path + data.getVar("libdir", False)
     base_libdir = rootfs_path + data.getVar("base_libdir", False)
     extra_libdir = data.getVar("QEMU_EXTRA_LIBDIR", False)
     if extra_libdir:
-        extra_libdir = ":" + extra_libdir
+        return qemu_wrapper_cmdline(data, rootfs_path, [libdir, base_libdir, extra_libdir]) + binary
     else:
-        extra_libdir = ""
-    qemu_options = data.getVar("QEMU_OPTIONS", True)
-
-    return "PSEUDO_UNLOAD=1 " + qemu_binary + " " + qemu_options + " -L " + rootfs_path\
-            + " -E LD_LIBRARY_PATH=" + libdir + ":" + base_libdir + extra_libdir + " "\
-            + binary
-
-
+        return qemu_wrapper_cmdline(data, rootfs_path, [libdir, base_libdir]) + binary
