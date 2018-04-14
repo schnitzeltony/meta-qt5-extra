@@ -1,0 +1,34 @@
+From d0591ebca09921ed7bfd67f224015ced4bc7a9f8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 14 Apr 2018 19:12:49 +0200
+Subject: [PATCH] Hardcode projectM configuration file location
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+A bit of a hack but other attempts failed
+
+Upstream-Status: Inappropriate [workaround]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/plugins/Visual/projectm/projectmwidget.cpp | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/src/plugins/Visual/projectm/projectmwidget.cpp b/src/plugins/Visual/projectm/projectmwidget.cpp
+index 7f7fcc4..12d2595 100644
+--- a/src/plugins/Visual/projectm/projectmwidget.cpp
++++ b/src/plugins/Visual/projectm/projectmwidget.cpp
+@@ -33,9 +33,7 @@
+ #include "projectmwrapper.h"
+ #include "projectmwidget.h"
+ 
+-#ifndef PROJECTM_CONFIG
+ #define PROJECTM_CONFIG "/usr/share/projectM/config.inp"
+-#endif
+ 
+ ProjectMWidget::ProjectMWidget(QListWidget *listWidget, QWidget *parent)
+         : QOpenGLWidget(parent)
+-- 
+2.14.3
+
