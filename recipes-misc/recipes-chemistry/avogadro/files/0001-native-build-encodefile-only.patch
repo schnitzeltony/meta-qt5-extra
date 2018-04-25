@@ -1,0 +1,44 @@
+From 1effb804467e23e617f4e1330422e7b4fae769da Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 18 Dec 2016 23:02:14 +0100
+Subject: [PATCH] native: build encodefile only
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt           | 3 +++
+ utilities/CMakeLists.txt | 1 -
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8a50914..60a94fc 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -42,6 +42,7 @@ option(USE_MOLEQUEUE "Enable the MoleQueue dependent functionality" ON)
+ option(USE_BOOST_PYTHON "Use Boost Python to wrap some of our API" OFF)
+ 
+ add_subdirectory(utilities)
++if(false)
+ add_subdirectory(thirdparty)
+ add_subdirectory(avogadro)
+ 
+@@ -89,3 +90,5 @@ install(FILES
+   DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/avogadrolibs")
+ install(EXPORT "AvogadroLibsTargets"
+   DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/avogadrolibs")
++
++endif()
+diff --git a/utilities/CMakeLists.txt b/utilities/CMakeLists.txt
+index e459934..6a76c75 100644
+--- a/utilities/CMakeLists.txt
++++ b/utilities/CMakeLists.txt
+@@ -1,2 +1 @@
+-add_subdirectory(bodr)
+ add_subdirectory(encodefile)
+-- 
+2.5.5
+

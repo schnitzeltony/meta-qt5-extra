@@ -31,7 +31,7 @@ index 500c252..00d9e54 100644
 +# OE specific
 +set(OE_ROOT_PATH_PREFIX "" CACHE STRING "OE sysroot")
  # Dependencies
- set(REQUIRED_QT_VERSION 5.7.0)
+ set(REQUIRED_QT_VERSION 5.8.0)
  find_package(Qt5Core ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE)
 diff --git a/cmake/FindDocBookXSL.cmake b/cmake/FindDocBookXSL.cmake
 index 3d9e40c..779cb2c 100644

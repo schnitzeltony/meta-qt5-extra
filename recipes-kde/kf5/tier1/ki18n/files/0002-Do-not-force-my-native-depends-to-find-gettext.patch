@@ -1,0 +1,31 @@
+From ddf59b7c75744cb4bd3d305fcf0c70dff2bfe46c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 25 Apr 2018 22:55:13 +0200
+Subject: [PATCH] Do not force my native depends to find gettext
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ cmake/KF5I18NMacros.cmake.in | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/cmake/KF5I18NMacros.cmake.in b/cmake/KF5I18NMacros.cmake.in
+index e8401a9..35bccc0 100644
+--- a/cmake/KF5I18NMacros.cmake.in
++++ b/cmake/KF5I18NMacros.cmake.in
+@@ -25,8 +25,6 @@
+ # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ # SUCH DAMAGE.
+ 
+-find_package(Gettext REQUIRED)
+-
+ set(KI18N_PYTHON_EXECUTABLE "@PYTHON_EXECUTABLE@")
+ 
+ set(_ki18n_pmap_compile_script ${CMAKE_CURRENT_LIST_DIR}/ts-pmap-compile.py)
+-- 
+2.14.3
+

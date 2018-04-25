@@ -1,0 +1,37 @@
+From 5f5efc614a3724cf2a52ce55718cda79e488337f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 25 Apr 2018 01:12:00 +0200
+Subject: [PATCH] Do not do the cross dance for katehighlightingindexer
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/indexer/CMakeLists.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/indexer/CMakeLists.txt b/src/indexer/CMakeLists.txt
+index 9fa26b2..d2f7255 100644
+--- a/src/indexer/CMakeLists.txt
++++ b/src/indexer/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ # when cross compiling, use either the executable offered or try to cross-compile it in place
+-
++if(false)
+ if(CMAKE_CROSSCOMPILING AND KATEHIGHLIGHTINGINDEXER_EXECUTABLE)
+     add_executable(katehighlightingindexer IMPORTED GLOBAL)
+     set_target_properties(katehighlightingindexer PROPERTIES IMPORTED_LOCATION ${KATEHIGHLIGHTINGINDEXER_EXECUTABLE})
+@@ -25,6 +25,7 @@ elseif(CMAKE_CROSSCOMPILING)
+     add_dependencies(katehighlightingindexer native_katehighlightingindexer)
+     set_target_properties(katehighlightingindexer PROPERTIES IMPORTED_LOCATION
+         ${CMAKE_CURRENT_BINARY_DIR}/native_katehighlightingindexer-prefix/src/native_katehighlightingindexer-build/bin/katehighlightingindexer)
++endif()
+ else()
+     # host build
+     add_executable(katehighlightingindexer katehighlightingindexer.cpp)
+-- 
+2.14.3
+

@@ -1,0 +1,32 @@
+From 1133bce9e352a88e4e3321d04d9d28f38d2d8fc9 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 24 Nov 2016 21:15:38 +0100
+Subject: [PATCH] use pkg-config to find taglib
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ad5d918..c56e405 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -326,7 +326,8 @@ if( NOT TOMAHAWK_QT5 )
+     macro_log_feature(QJSON_FOUND "QJson" "Qt library that maps JSON data to QVariant objects" "http://qjson.sf.net" TRUE "" "libqjson is used for encoding communication between Tomahawk instances")
+ ENDIF()
+ 
+-macro_optional_find_package(Taglib 1.8.0)
++find_package(PkgConfig)
++pkg_check_modules(TAGLIB taglib)
+ macro_log_feature(TAGLIB_FOUND "TagLib" "Audio Meta-Data Library" "http://developer.kde.org/~wheeler/taglib.html" TRUE "" "taglib is needed for reading meta data from audio files")
+ include( CheckTagLibFileName )
+ check_taglib_filename( COMPLEX_TAGLIB_FILENAME )
+-- 
+2.5.5
+

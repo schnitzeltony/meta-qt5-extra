@@ -16,26 +16,25 @@ Upstream-Status: Inappropriate [configuration]
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 
 ---
- data/CMakeLists.txt | 8 +-------
- 1 file changed, 1 insertion(+), 7 deletions(-)
+ data/CMakeLists.txt | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
 diff --git a/data/CMakeLists.txt b/data/CMakeLists.txt
-index d86cde1..6c2c3be 100644
+index 90077fa..b8876cc 100644
 --- a/data/CMakeLists.txt
 +++ b/data/CMakeLists.txt
-@@ -15,18 +15,12 @@ INSTALL(TARGETS parsetrigrams ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+@@ -14,17 +14,10 @@ TARGET_LINK_LIBRARIES(gentrigrams PUBLIC Qt5::Core KF5::SonnetCore)
+ INSTALL(TARGETS parsetrigrams ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
  INSTALL(TARGETS gentrigrams ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
  
- cmake_policy(SET CMP0026 OLD) # FIXME: make this work with CMP0026 set to NEW
 -if(CMAKE_CROSSCOMPILING AND PARSETRIGRAMS_EXECUTABLE)
 -    add_executable(KF5::parsetrigrams IMPORTED GLOBAL)
 -    set_target_properties(KF5::parsetrigrams PROPERTIES IMPORTED_LOCATION ${PARSETRIGRAMS_EXECUTABLE})
 -else()
 -    add_executable(KF5::parsetrigrams ALIAS parsetrigrams)
 -endif()
- 
- macro(create_trigrams_map _target_name _in_DIR _out_FILE)
-     get_target_property(PARSETRIGRAMS_EXECUTABLE parsetrigrams LOCATION)
+-
+ function(create_trigrams_map _target_name _in_DIR _out_FILE)
      add_custom_target(trigrams_${_target_name} ALL)
      add_custom_command(TARGET trigrams_${_target_name}
 -                       COMMAND $<TARGET_FILE:KF5::parsetrigrams> "${_in_DIR}" > "${_out_FILE}"
@@ -44,5 +43,5 @@ index d86cde1..6c2c3be 100644
  
      add_dependencies(trigrams_${_target_name} parsetrigrams)
 -- 
-2.9.4
+2.14.3
 

@@ -11,8 +11,8 @@ inherit kde-kf5 gettext
 DEPENDS += "kconfig kconfig-native kcoreaddons-native kcrash kdbusaddons ki18n kdoctools-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "4b058080142481f130c32a4f0ef9c193"
-SRC_URI[sha256sum] = "d3477286a3be9cf125155438deaf8c7cd293be1b357d183cb46756e09646f73f"
+SRC_URI[md5sum] = "e0cd29f83540d7c0272c355797f6420b"
+SRC_URI[sha256sum] = "875a0496d2f0d28163e5a9fa6832676162695b9dd8a2232632d8f80d8de42a63"
 
 FILES_${PN} += "${datadir}/kservicetypes5"
 

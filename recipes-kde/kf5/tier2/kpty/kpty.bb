@@ -10,5 +10,5 @@ inherit kde-kf5 gettext
 DEPENDS += "kcoreaddons kcoreaddons-native ki18n"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "d4ed27252edc65da197d54a7db6c1415"
-SRC_URI[sha256sum] = "803bbe7f1c409b0cc67091a96da33341f52f5c01df9a640ac99dcf3a92c15d22"
+SRC_URI[md5sum] = "266d4702bc624387363864214aebdb79"
+SRC_URI[sha256sum] = "ee3c9d1513a1a0f32708083fc9c06bdf616448014b973440572ac7e577570d3d"

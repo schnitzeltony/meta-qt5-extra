@@ -9,6 +9,7 @@ DEPENDS += " \
     kcoreaddons-native \
     ki18n-native \
     liburi-perl-native \
+    gettext-native \
 "
 
 SRC_URI += " \
