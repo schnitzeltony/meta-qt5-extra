@@ -9,9 +9,8 @@ LIC_FILES_CHKSUM = " \
 
 SRC_URI = " \
     git://github.com/mltframework/mlt.git \
-    file://0001-mlt_property.h-Do-not-include-unneeded-xlocale.h.patch \
 "
-SRCREV = "e8325f5e9acce9c41b3e91d7b587a41c91b8d0d7"
+SRCREV = "aea7f984b85ac61a4052d6ae17ce981d0530548e"
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
@@ -36,7 +35,7 @@ CLEANBROKEN = "1"
 
 CXXFLAGS += "--std=c++11"
 
-CONF_ACCEL = " \
+CONF_ACCEL ?= " \
     --disable-mmx \
     --disable-sse \
     --disable-sse2 \
