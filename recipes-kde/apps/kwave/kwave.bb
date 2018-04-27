@@ -1,7 +1,7 @@
 SUMMARY = "Kwave is a sound editor for KDE"
 LICENSE = "GPLv2 & LGPLv2 & CC-BY-SA-3.0 & CC-BY-SA-4.0 & GFDL-1.2 & BSD"
 LIC_FILES_CHKSUM = " \
-    file://LICENSES;md5=90ff5adc50ce32f0425aaa40f1e606bf \
+    file://LICENSES;md5=a5262554ba5698535ed8c962a5248dff \
     file://GNU-LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 "
 
@@ -33,8 +33,8 @@ DEPENDS += "\
 
 PV = "${KDE_APP_VERSION}"
 SRC_URI += "file://0001-FIND_REQUIRED_PROGRAM-is-broken-use-the-tools-direct.patch"
-SRC_URI[md5sum] = "f96b60911d674dedb44771fbaef8560d"
-SRC_URI[sha256sum] = "cf665ba77c9e8372e09d34ec19eb69b4d3be80e1b1f6fb96fcc1b1c0649310f3"
+SRC_URI[md5sum] = "35883c19bd948f523d6b83e2b7f4ae53"
+SRC_URI[sha256sum] = "a354bd9e158f6554a2caca7a169b850e021c55cb338c2feedf0cab9228a386af"
 
 # Aagh: To select a soundcard we need to select another type - so keep oss in as dummy
 #EXTRA_OECMAKE += "-DWITH_OSS=OFF"

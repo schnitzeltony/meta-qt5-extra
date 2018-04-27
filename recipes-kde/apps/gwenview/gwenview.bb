@@ -25,8 +25,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "c0e224d49d0e80e5f1e24f43de81920d"
-SRC_URI[sha256sum] = "3987dcfbfaea60130d98d7708f7c0f468eec3efff6f45241aeb08751882aff0d"
+SRC_URI[md5sum] = "2cf12970b1cf52982548f82ac05d7522"
+SRC_URI[sha256sum] = "e5938ce2ae05a338daada1a8b6ecfb6706920def8201937f3683a717dc980745"
 
 SRC_URI += " \
     file://0001-Set-Kipi-package-properties.patch  \
@@ -39,6 +39,7 @@ FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/icons \
     ${datadir}/solid \
+    ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 

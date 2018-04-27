@@ -32,7 +32,7 @@ DEPENDS += " \
     shared-mime-info-native \
 "
 
-PV = "${KDE_APP_VERSION}"
+PV = "17.12.3"
 SRC_URI[md5sum] = "780530d53715ef8d579d7262b7eb823c"
 SRC_URI[sha256sum] = "64b2d5264ac3b2e8010cbcf58fe03c567d4e44684a4fcd6e135eb14007da9a0f"
 

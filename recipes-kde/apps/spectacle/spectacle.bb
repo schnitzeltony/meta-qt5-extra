@@ -21,6 +21,7 @@ DEPENDS += " \
     kio \
     kxmlgui \
     kwindowsystem \
+    knewstuff \
 "
 
 # REVISIT optionals
@@ -30,8 +31,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "563558fe7fea33fdea9f8ee29c9ff4ca"
-SRC_URI[sha256sum] = "d93346f99dbbd7d36b7b140bdf37e0bd2e24a29af817a28045483da1bd39e989"
+SRC_URI[md5sum] = "4f52cf24f4d8a72b4b56b9946886625f"
+SRC_URI[sha256sum] = "8281ed781737a8cb89141d6326976b04303feeedf51b38a3259cfd97c37d98ea"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \

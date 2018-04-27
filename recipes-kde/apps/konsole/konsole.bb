@@ -35,13 +35,14 @@ DEPENDS += " \
     kwindowsystem \
     kxmlgui \
     sonnet-native \
+    knewstuff \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11", "", d)} \
 "
 
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "6aea3f99260440c4d1321b25a7478572"
-SRC_URI[sha256sum] = "fa0997c14a96252177e4808636ec43509eadb1482d54bb8a86b85810283f6cbc"
+SRC_URI[md5sum] = "89717feae52541a311607555c543f357"
+SRC_URI[sha256sum] = "53f829a574929c8973383257b7638ba4dc596fd2f16778b0f7f3baa0e4a04a64"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

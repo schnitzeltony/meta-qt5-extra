@@ -26,8 +26,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "d3547836e884387da322086ebccacac8"
-SRC_URI[sha256sum] = "ac5f73ead36f30609d2ef1b8888b940e47e3bbbee54fda8c27765ddea5a295cc"
+SRC_URI[md5sum] = "5ebdc3e8c67ecaa96e45c4ef8697e293"
+SRC_URI[sha256sum] = "497671d84cf7723223fa8affb3a1869cb04a36d41a2f1e072f043e4ac7bcfd3f"
 SRC_URI+="file://0001-fix-build-with-QT_NO_SESSIONMANAGER-set.patch"
 
 FILES_${PN} += " \

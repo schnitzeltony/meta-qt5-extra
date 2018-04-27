@@ -19,5 +19,10 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "959165128d97a132b2b18d886af6c4f1"
-SRC_URI[sha256sum] = "10956500e389cce6b043fbda7bdc16916cda75548f285268025d72dc5546c1be"
+SRC_URI[md5sum] = "248738e0c40ade9e9842bf310a624396"
+SRC_URI[sha256sum] = "b27bfcd00eda236bd7b7a071ce3658d10928e9c33ad723b5e15935e9f9eb3cf8"
+
+FILES_${PN} += " \
+    ${datadir}/kservices5 \
+    ${OE_QMAKE_PATH_PLUGINS} \
+"

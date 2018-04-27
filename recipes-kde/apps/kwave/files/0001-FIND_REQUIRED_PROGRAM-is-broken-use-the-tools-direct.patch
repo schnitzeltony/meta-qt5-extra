@@ -20,14 +20,14 @@ index b509ab1..ffb7baa 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -91,7 +91,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+ ### Kwave version number                                                  ###
  
  INCLUDE(FindRequiredProgram)
- 
 -FIND_REQUIRED_PROGRAM(CAT_EXECUTABLE cat)
 +SET(CAT_EXECUTABLE cat)
- INCLUDE(FindKwaveVersion)
- 
- #############################################################################
+ SET(KWAVE_VERSION_MAJOR ${KDE_APPLICATIONS_VERSION_MAJOR})
+ SET(KWAVE_VERSION_MINOR ${KDE_APPLICATIONS_VERSION_MINOR})
+ SET(KWAVE_VERSION_MICRO ${KDE_APPLICATIONS_VERSION_MICRO})
 @@ -406,7 +406,7 @@ ADD_CUSTOM_TARGET(distfiles
  #############################################################################
  ### uninstall support                                                     ###
@@ -38,10 +38,10 @@ index b509ab1..ffb7baa 100644
  CONFIGURE_FILE(
      ${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake.in
 diff --git a/cmake/KwaveL10N.cmake b/cmake/KwaveL10N.cmake
-index 64ef8e2..cb615f2 100644
+index cd036cd..9b63f0a 100644
 --- a/cmake/KwaveL10N.cmake
 +++ b/cmake/KwaveL10N.cmake
-@@ -22,12 +22,12 @@
+@@ -22,11 +22,11 @@
  #                                                                           #
  #############################################################################
  
@@ -50,13 +50,11 @@ index 64ef8e2..cb615f2 100644
 -FIND_REQUIRED_PROGRAM(XGETTEXT_EXECUTABLE xgettext)
 -FIND_REQUIRED_PROGRAM(MSGMERGE_EXECUTABLE msgmerge)
 -FIND_REQUIRED_PROGRAM(MSGFMT_EXECUTABLE msgfmt)
--FIND_REQUIRED_PROGRAM(RM_EXECUTABLE rm)
 +SET(FIND_EXECUTABLE find)
 +SET(MSGCAT_EXECUTABLE msgcat)
 +SET(XGETTEXT_EXECUTABLE xgettext)
 +SET(MSGMERGE_EXECUTABLE msgmerge)
 +SET(MSGFMT_EXECUTABLE msgfmt)
-+SET(RM_EXECUTABLE rm)
  
  SET(PO_SRC_DIR "${CMAKE_SOURCE_DIR}/po")
  SET(PO_BIN_DIR "${CMAKE_BINARY_DIR}/po")

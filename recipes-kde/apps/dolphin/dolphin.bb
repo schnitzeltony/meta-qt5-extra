@@ -36,12 +36,9 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "c79b7db37e9c5cd84eab7673eeb563d3"
-SRC_URI[sha256sum] = "40dc96fa05cf6a09c49329cd69c9f1079b4ddb57592c9ff0e957eec6e761a439"
-SRC_URI += " \
-    file://0001-align-paths-to-phonon.patch \
-    file://0002-fix-build-for-qtbase-without-session-management.patch \
-"
+SRC_URI[md5sum] = "4bb711a430a7312ada387eb246065d1c"
+SRC_URI[sha256sum] = "b5068a26b34e2edac25f3528799ce48c7d211ee70113751275b01a5c87ba6d53"
+SRC_URI += "file://0001-fix-build-for-qtbase-without-session-management.patch"
 
 FILES_SOLIBSDEV = "${libdir}/libdolphin*${SOLIBSDEV}"
 
@@ -51,8 +48,4 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${libdir}/libkdeinit5_dolphin.so \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "
