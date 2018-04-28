@@ -12,8 +12,8 @@ SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}.tar.xz"
 SRC_URI += " \
     file://0001-fix-PHONON_LIBRARY_PATH-was-usr-usr-lib-qt5-plugins.patch \
 "
-SRC_URI[md5sum] = "4c7f311a44babbf3270aec992daaa4b1"
-SRC_URI[sha256sum] = "e2c10ecc7d2f3d3a0f80a63def789a875420b3d90062c26718dcfdaab8a5d03f"
+SRC_URI[md5sum] = "edb9ab608c7b74b4f0f10ebcf53e050d"
+SRC_URI[sha256sum] = "e5a98df31aeffc22493afc8d6adbca5d6f0c27cc2eed73b3be05195321e08db7"
 
 EXTRA_OECMAKE += "-DPHONON_BUILD_DEMOS=ON -DPHONON_BUILD_PHONON4QT5=ON -D__KDE_HAVE_GCC_VISIBILITY=NO"
 
