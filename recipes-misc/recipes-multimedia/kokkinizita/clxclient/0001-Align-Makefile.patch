@@ -1,4 +1,4 @@
-From 99021226c538d2742f92c45fc7eeb2520791cd09 Mon Sep 17 00:00:00 2001
+From 5b95fca0be36e0e57f65975cf5b295e1937bbbf4 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Wed, 2 Aug 2017 21:08:36 +0200
 Subject: [PATCH] Align Makefile
@@ -9,6 +9,7 @@ Content-Transfer-Encoding: 8bit
 * don't hardcode g++
 * make ldconfig work on installed directory only
 * use pkgconfig to find freetype2
+* do not add host path to compiler/linker
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
@@ -16,7 +17,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 2b29cbf..6c721b6 100644
+index 2b29cbf..0811df9 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -31,8 +31,8 @@ MINVERS = 9.0
@@ -25,8 +26,8 @@ index 2b29cbf..6c721b6 100644
  
 -CPPFLAGS += -Wall -I. -I/usr/X11R6/include `freetype-config --cflags` -fpic -DVERSION=\"$(VERSION)\" -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS -O2 
 -LDFLAGS += -L/usr/X11R6/$(LIBDIR) `freetype-config --libs`
-+CPPFLAGS += -Wall -I. -I/usr/X11R6/include `pkg-config --cflags freetype2` -fpic -DVERSION=\"$(VERSION)\" -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS -O2 
-+LDFLAGS += -L/usr/X11R6/$(LIBDIR) `pkg-config --libs freetype2`
++CPPFLAGS += -Wall -I. `pkg-config --cflags freetype2` -fpic -DVERSION=\"$(VERSION)\" -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS -O2 
++LDFLAGS += `pkg-config --libs freetype2`
  LDLIBS +=
  
  
@@ -48,5 +49,5 @@ index 2b29cbf..6c721b6 100644
  
  
 -- 
-2.9.4
+2.14.3
 
