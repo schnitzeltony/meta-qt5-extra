@@ -1,0 +1,44 @@
+From 9c6a9dff17a8d660f8014ad7cc53d7d57e475787 Mon Sep 17 00:00:00 2001
+From: Max Krummenacher <max.krummenacher@toradex.com>
+Date: Sun, 6 May 2018 08:56:45 +0000
+Subject: [PATCH] xxxwidget.h: include QAction explicitely
+
+5.11 Qt headers do not indirectly include QAction resulting in compile
+time errors like:
+| devicewidget.cc:40:52: error: invalid use of incomplete type 'class QAction'
+
+Upstream-Status: Submitted [https://github.com/lxqt/pavucontrol-qt/pull/49]
+
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
+ src/devicewidget.h | 1 +
+ src/streamwidget.h | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/src/devicewidget.h b/src/devicewidget.h
+index dc6585c..be8524d 100644
+--- a/src/devicewidget.h
++++ b/src/devicewidget.h
+@@ -25,6 +25,7 @@
+ 
+ #include "minimalstreamwidget.h"
+ #include "ui_devicewidget.h"
++#include <QAction>
+ #include <QTimer>
+ #include <vector>
+ 
+diff --git a/src/streamwidget.h b/src/streamwidget.h
+index ed7c9a5..8778e21 100644
+--- a/src/streamwidget.h
++++ b/src/streamwidget.h
+@@ -25,6 +25,7 @@
+ 
+ #include "minimalstreamwidget.h"
+ #include "ui_streamwidget.h"
++#include <QAction>
+ #include <QTimer>
+ 
+ class MainWindow;
+-- 
+2.13.6
+
