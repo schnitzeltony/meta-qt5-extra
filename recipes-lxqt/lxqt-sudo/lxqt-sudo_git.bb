@@ -6,5 +6,6 @@ inherit lxqt pkgconfig
 
 DEPENDS += "liblxqt"
 
+SRC_URI += "file://0001-passworddialog.cpp-include-QIcon-explicitely.patch"
 SRCREV = "1d8947c6124f40bf2a753c18de3f4fe124c5396a"
 PV = "0.12.0"
