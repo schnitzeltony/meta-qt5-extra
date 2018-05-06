@@ -15,6 +15,8 @@ LIC_FILES_CHKSUM = " \
     file://freepats.zenvoid.org/acoustic_piano_imis_1.txt;md5=a9a3c1e67619043ca82d64dfca849288 \
 "
 
+DEPENDS = "sf-tools-native"
+
 inherit allarch
 
 # TODO
@@ -160,8 +162,10 @@ PACKAGES = " \
     ${PN}-meta \
     ${PN}-avl-drumkits \
     ${PN}-linuxaudio-org \
+    ${PN}-linuxaudio-org-single \
     ${PN}-freepats-zenvoid-org \
     ${PN}-philscomputerlab-com \
+    ${PN}-philscomputerlab-com-single \
     ${PN}-christiancollins \
 "
 
@@ -169,8 +173,10 @@ ALLOW_EMPTY_${PN}-meta = "1"
 RRECOMMENDS_${PN}-meta = " \
     ${PN}-avl-drumkits \
     ${PN}-linuxaudio-org \
+    ${PN}-linuxaudio-org-single \
     ${PN}-freepats-zenvoid-org \
     ${PN}-philscomputerlab-com \
+    ${PN}-philscomputerlab-com-single \
     ${PN}-christiancollins \
 "
 
@@ -188,6 +194,19 @@ do_install() {
     for soundfont in `find ${WORKDIR}/linuxaudio.org -name *.sf2`; do
         install $soundfont ${D}${datadir}/sf2
     done
+
+    # split some GM soundfonts into single files
+    install -d ${D}${datadir}/sf2/fluidr3gm-single
+    cd ${D}${datadir}/sf2/fluidr3gm-single
+    sf2-split ${D}${datadir}/sf2/fluidr3gm.sf2
+    
+    install -d ${D}${datadir}/sf2/airfont_a320u-single
+    cd ${D}${datadir}/sf2/airfont_a320u-single
+    sf2-split ${D}${datadir}/sf2/airfont_a320u.sf2
+
+    install -d ${D}${datadir}/sf2/weedsgm3
+    cd ${D}${datadir}/sf2/weedsgm3
+    sf2-split ${D}${datadir}/sf2/weedsgm3.sf2
 }
 
 FILES_${PN}-avl-drumkits = " \
@@ -201,7 +220,12 @@ FILES_${PN}-linuxaudio-org = " \
     ${datadir}/sf2/airfont_a320u.sf2 \
     ${datadir}/sf2/mello*.sf2 \
     ${datadir}/sf2/jRhodes3.sf2 \
-P"
+"
+
+FILES_${PN}-linuxaudio-org-single = " \
+    ${datadir}/sf2/fluidr3gm-single \
+    ${datadir}/sf2/airfont_a320u-single \
+"
 
 FILES_${PN}-freepats-zenvoid-org = " \
     ${datadir}/sf2/acoustic_grand_piano_ydp_20080910.sf2 \
@@ -211,6 +235,10 @@ FILES_${PN}-freepats-zenvoid-org = " \
 FILES_${PN}-philscomputerlab-com = " \
     ${datadir}/sf2/weedsgm3.sf2 \
     ${datadir}/sf2/choriumreva.sf2 \
+"
+
+FILES_${PN}-philscomputerlab-com-single = " \
+    ${datadir}/sf2/weedsgm3 \
 "
 
 FILES_${PN}-christiancollins = "${datadir}/sf2/general-user-gs-v1.471.sf2"
