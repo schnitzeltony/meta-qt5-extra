@@ -10,6 +10,7 @@ DEPENDS += " \
     qtsvg \
 "
 
+SRC_URI += "file://0001-CMakeLists.txt-Fix-build-with-Qt-5.11_beta3-dropping.patch"
 SRCREV = "940493ce509bb2784738d547cc27df677b4835a2"
 PV = "0"
 
