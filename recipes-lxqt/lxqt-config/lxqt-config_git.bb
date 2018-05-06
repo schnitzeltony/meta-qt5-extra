@@ -8,6 +8,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qtsvg liblxqt libkscreen libxcursor"
 
+SRC_URI += "file://0001-timeoutdialog.cpp-include-QIcon-QStyle-explicitely.patch"
 SRCREV = "0ff80827f32f43cd1c1bfc832f69e285874dad5e"
 PV = "0.12.0"
 
