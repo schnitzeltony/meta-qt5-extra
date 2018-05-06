@@ -19,6 +19,7 @@ SRC_URI = " \
     git://github.com/sddm/${BPN}.git;protocol=git;branch=master \
     file://0001-fix-qml-install-dir.patch \
     file://0002-do-not-create-example-configutation-we-cannot-run-sd.patch \
+    file://0001-Fix-build-with-Qt-5.11-1024.patch \
     file://sddm.pam \
     file://sddm-autologin.pam \
     file://sddm.conf \
