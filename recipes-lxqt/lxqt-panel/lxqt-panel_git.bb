@@ -17,6 +17,7 @@ DEPENDS += " \
 
 SRC_URI += " \
     file://0001-add-Qt5-X11Extras-to-QTX_LIBRARIES.patch \
+    file://0001-lxqtmainmenuconfiguration.cpp-include-QAction-explic.patch \
 "
 SRCREV = "4b20a41f3442b121485664333f457ee9abc228b8"
 PV = "0.12.0"
