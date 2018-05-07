@@ -18,7 +18,7 @@ DEPENDS += " \
 inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache mime qt5-translation
 
 SRC_URI = " \
-    git://github.com/rncbc/qtractor.git;branch=midiimportx \
+    git://github.com/schnitzeltony/qtractor.git;branch=midiimportx \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     \
     file://0001-do-nor-try-run-for-float-sse-detection.patch \
@@ -26,8 +26,8 @@ SRC_URI = " \
     file://0003-Add-ARM-NEON-acceleration-for-time-stretch-not-yet-t.patch \
     file://Qtractor.conf \
 "
-SRCREV = "7e53c6c296f395f83854deb249084561d95ef507"
-PV = "0.8.6+git${SRCPV}"
+SRCREV = "cc98b53f2996bba4277575c65ee061fb7b6d8903"
+PV = "0.9.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF = " \
