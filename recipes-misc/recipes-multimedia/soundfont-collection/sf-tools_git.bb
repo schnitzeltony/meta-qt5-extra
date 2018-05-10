@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
     file://README;beginline=119;endline=121;md5=6c1c96772982f45a0c0deca5af1b988d \
 "
 SRC_URI = "git://github.com/schnitzeltony/iffdigest.git"
-SRCREV = "90d073dd35206f2cb9804f8e65600d7661cc5dcb"
+SRCREV = "342262a9184d89dda0d87cec099d13c494060ec4"
 S = "${WORKDIR}/git"
 PV = "0.0.0+git${SRCPV}"
 
