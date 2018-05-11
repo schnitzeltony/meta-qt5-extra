@@ -1,0 +1,31 @@
+From cb2d1d8d5bab855f15e96dec6410ae1477e658ba Mon Sep 17 00:00:00 2001
+From: Max Krummenacher <max.krummenacher@toradex.com>
+Date: Sun, 6 May 2018 09:39:03 +0000
+Subject: [PATCH] lxqtmainmenuconfiguration.cpp: include QAction explicitely
+
+5.11 Qt headers do not indirectly include QAction resulting in compile
+time errors like:
+| lxqtmainmenuconfiguration.cpp:71:105: error: no matching function for call to 'LXQtMainMenuConfiguration::connect(QAction*, const char [13], LXQtMainMenuConfiguration*, const char [17])'
+
+Upstream-Status: Submitted [https://github.com/lxqt/lxqt-panel/pull/467]
+
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
+ plugin-mainmenu/lxqtmainmenuconfiguration.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/plugin-mainmenu/lxqtmainmenuconfiguration.cpp b/plugin-mainmenu/lxqtmainmenuconfiguration.cpp
+index b5c5f003..63a4c2ad 100644
+--- a/plugin-mainmenu/lxqtmainmenuconfiguration.cpp
++++ b/plugin-mainmenu/lxqtmainmenuconfiguration.cpp
+@@ -33,6 +33,7 @@
+ #include <lxqt-globalkeys.h>
+ #include <LXQt/Settings>
+ 
++#include <QAction>
+ #include <QFileDialog>
+ 
+ LXQtMainMenuConfiguration::LXQtMainMenuConfiguration(PluginSettings *settings, GlobalKeyShortcut::Action * shortcut, const QString &defaultShortcut, QWidget *parent) :
+-- 
+2.13.6
+

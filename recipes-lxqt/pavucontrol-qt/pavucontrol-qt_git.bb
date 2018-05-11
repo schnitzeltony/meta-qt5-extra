@@ -6,6 +6,7 @@ inherit lxqt
 
 DEPENDS += "glib-2.0 liblxqt pulseaudio"
 
+SRC_URI += "file://0001-xxxwidget.h-include-QAction-explicitely.patch"
 SRCREV = "d74f6f990905c43f01bbd609ae297f045b533045"
 PV = "0.3.0"
 
