@@ -22,8 +22,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "9a933c2f13328fd7ae01bcada43f0646"
-SRC_URI[sha256sum] = "bbc9740dc6a638eab65dd36b9408252822d09d4aed9fce8692722755044eb5b7"
+SRC_URI[md5sum] = "c0da027e693d32b9463deaead983573c"
+SRC_URI[sha256sum] = "0db96b0167a5689c17ba01793a37b5e78d7d16e8783c330a4e7a47fab648b8c2"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

@@ -36,8 +36,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "4bb711a430a7312ada387eb246065d1c"
-SRC_URI[sha256sum] = "b5068a26b34e2edac25f3528799ce48c7d211ee70113751275b01a5c87ba6d53"
+SRC_URI[md5sum] = "db011d0c3dd748f1bb1d6600798c62fe"
+SRC_URI[sha256sum] = "50db0e6c59383c3141ba96f733d36ac63b8f4d3e1f3d233b4a27da5931179587"
 SRC_URI += "file://0001-fix-build-for-qtbase-without-session-management.patch"
 
 FILES_SOLIBSDEV = "${libdir}/libdolphin*${SOLIBSDEV}"
