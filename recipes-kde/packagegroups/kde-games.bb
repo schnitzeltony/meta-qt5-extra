@@ -9,8 +9,14 @@ RDEPENDS_${PN} = " \
     granatier \
     kapman \
     katomic \
+    kblocks \
     kbounce \
     kdiamond \
+    kmahjongg \
+    kmines \
+    kpat \
     kreversi \
+    ksudoku \
     libkdegames \
+    libkmahjongg \
 "
