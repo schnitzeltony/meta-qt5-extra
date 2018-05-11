@@ -18,6 +18,7 @@ inherit qmake5_base autotools-brokensep gtk-icon-cache qt5-translation
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
+    file://QjackCtl.conf \
 "
 SRC_URI[md5sum] = "5e7e2a03f700b62578d1a712f3c9bf28"
 SRC_URI[sha256sum] = "9a74f33f6643bea8bf742ea54f9b40f08ed339887f076ff3068159c55d0ba853"
@@ -34,4 +35,22 @@ FILES_${PN} += " \
     ${datadir}/metainfo \
 "
 
-RDEPENDS_${PN} += "jack-server"
+do_install_append() {
+    install -d ${D}/${sysconfdir}/skel/.config/rncbc.org
+    install -m 0644 ${WORKDIR}/QjackCtl.conf ${D}/${sysconfdir}/skel/.config/rncbc.org/
+}
+
+PACKAGES =+ "${PN}-defconfig"
+
+FILES_${PN}-defconfig = " \
+    ${sysconfdir}/skel/.config/rncbc.org \
+"
+
+RDEPENDS_${PN} += " \
+    jack-server \
+"
+
+RDEPENDS_${PN}}-defconfig += " \
+    a2jmidi \
+    audio-tweaks \
+"
