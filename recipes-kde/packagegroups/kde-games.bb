@@ -6,6 +6,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     bovo \
+    granatier \
     kapman \
     katomic \
     kbounce \
