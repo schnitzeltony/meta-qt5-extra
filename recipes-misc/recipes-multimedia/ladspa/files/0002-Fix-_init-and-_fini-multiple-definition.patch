@@ -1,0 +1,135 @@
+From 2fdcfa6361ac0d897552c39e362424da9f0e2423 Mon Sep 17 00:00:00 2001
+From: wata2ki <wata2ki@gmail.com>
+Date: Sat, 12 May 2018 20:49:12 +0900
+Subject: [PATCH 2/2] Fix _init and _fini multiple definition
+
+When linking using CC, the following error occurs.
+
+/tmp/ccpy2KWL.o: In function `_init':
+ladspa_sdk/src/plugins/noise.c:146: multiple definition of `_init'
+sysdeps/arm/crti.S:83: first defined here
+/tmp/ccpy2KWL.o: In function `_fini':
+ladspa_sdk/src/plugins/noise.c:223: multiple definition of `_fini'
+sysdeps/arm/crti.S:95: first defined here
+collect2: error: ld returned 1 exit status
+makefile:33: recipe for target '../plugins/noise.so' failed
+make: *** [../plugins/noise.so] Error 1
+
+Because these plugins are using deprecated _init and _fini instead of __attribute__ ((constructor)) and __attribute__ ((destructor)).
+This patch is modified to use __attribute__ ((constructor)) and __attribute__ ((destructor)).
+
+Signed-off-by: wata2ki <wata2ki@gmail.com>
+---
+ src/plugins/amp.c    | 8 ++++----
+ src/plugins/delay.c  | 8 ++++----
+ src/plugins/filter.c | 8 ++++----
+ src/plugins/noise.c  | 8 ++++----
+ 4 files changed, 16 insertions(+), 16 deletions(-)
+
+diff --git a/src/plugins/amp.c b/src/plugins/amp.c
+index b6d2345..f80b3e3 100644
+--- a/src/plugins/amp.c
++++ b/src/plugins/amp.c
+@@ -152,8 +152,8 @@ LADSPA_Descriptor * g_psStereoDescriptor = NULL;
+ 
+ /* _init() is called automatically when the plugin library is first
+    loaded. */
+-void 
+-_init() {
++void __attribute__ ((constructor)) 
++local_init() {
+ 
+   char ** pcPortNames;
+   LADSPA_PortDescriptor * piPortDescriptors;
+@@ -335,8 +335,8 @@ deleteDescriptor(LADSPA_Descriptor * psDescriptor) {
+ /*****************************************************************************/
+ 
+ /* _fini() is called automatically when the library is unloaded. */
+-void
+-_fini() {
++void __attribute__ ((destructor)) 
++local_fini() {
+   deleteDescriptor(g_psMonoDescriptor);
+   deleteDescriptor(g_psStereoDescriptor);
+ }
+diff --git a/src/plugins/delay.c b/src/plugins/delay.c
+index 8b03979..7b15966 100644
+--- a/src/plugins/delay.c
++++ b/src/plugins/delay.c
+@@ -228,8 +228,8 @@ LADSPA_Descriptor * g_psDescriptor = NULL;
+ 
+ /* _init() is called automatically when the plugin library is first
+    loaded. */
+-void 
+-_init() {
++void __attribute__ ((constructor)) 
++local_init() {
+ 
+   char ** pcPortNames;
+   LADSPA_PortDescriptor * piPortDescriptors;
+@@ -322,8 +322,8 @@ _init() {
+ /*****************************************************************************/
+ 
+ /* _fini() is called automatically when the library is unloaded. */
+-void 
+-_fini() {
++void __attribute__ ((destructor)) 
++local_fini() {
+   long lIndex;
+   if (g_psDescriptor) {
+     free((char *)g_psDescriptor->Label);
+diff --git a/src/plugins/filter.c b/src/plugins/filter.c
+index 3f50457..aa53a4f 100644
+--- a/src/plugins/filter.c
++++ b/src/plugins/filter.c
+@@ -252,8 +252,8 @@ LADSPA_Descriptor * g_psHPFDescriptor = NULL;
+ 
+ /* _init() is called automatically when the plugin library is first
+    loaded. */
+-void 
+-_init() {
++void __attribute__ ((constructor)) 
++local_init() {
+ 
+   char ** pcPortNames;
+   LADSPA_PortDescriptor * piPortDescriptors;
+@@ -431,8 +431,8 @@ deleteDescriptor(LADSPA_Descriptor * psDescriptor) {
+ /*****************************************************************************/
+ 
+ /* _fini() is called automatically when the library is unloaded. */
+-void
+-_fini() {
++void __attribute__ ((destructor)) 
++local_fini() {
+   deleteDescriptor(g_psLPFDescriptor);
+   deleteDescriptor(g_psHPFDescriptor);
+ }
+diff --git a/src/plugins/noise.c b/src/plugins/noise.c
+index 0fdd938..f602055 100644
+--- a/src/plugins/noise.c
++++ b/src/plugins/noise.c
+@@ -142,8 +142,8 @@ LADSPA_Descriptor * g_psDescriptor;
+ 
+ /* _init() is called automatically when the plugin library is first
+    loaded. */
+-void 
+-_init() {
++void __attribute__ ((constructor)) 
++local_init() {
+ 
+   char ** pcPortNames;
+   LADSPA_PortDescriptor * piPortDescriptors;
+@@ -219,8 +219,8 @@ _init() {
+ /*****************************************************************************/
+ 
+ /* _fini() is called automatically when the library is unloaded. */
+-void 
+-_fini() {
++void __attribute__ ((destructor)) 
++local_fini() {
+   long lIndex;
+   if (g_psDescriptor) {
+     free((char *)g_psDescriptor->Label);
+-- 
+2.7.4
+
