@@ -17,9 +17,9 @@ SRC_URI = " \
     http://linuxsynths.com/VexPatchesDemos/VexPatches02.tar.gz;name=linuxsynths-vex-patches2;subdir=linuxsynths-vex-patches \
 "
 
-SRCREV = "e11e2b204c14b8e370a0bf5beafa5f162fedb8e9"
+SRCREV = "a82fff059baafc03f7c0e8b9a99f383af7bfbd79"
 S = "${WORKDIR}/git"
-PV = "0.0.0+git${SRCPV}"
+PV = "2018-04-16"
 
 SRC_URI[linuxsynths-obxd-patches1.md5sum] = "32244f847a54a71ee3c25079df5c8b84"
 SRC_URI[linuxsynths-obxd-patches1.sha256sum] = "246fccadd71bb9f0606a95bf7b0aee7807fd3a14f754367425423a51c31e160e"
@@ -46,7 +46,7 @@ DEPENDS += " \
 do_configure_prepend() {
     # reconfigure?
     if [ ! -f ${LV2-TURTLE-BUILD-DATA} ] ; then
-	    # manipulate scripts to keep lv2_ttl_generator-calls in script for qemu
+	    # manipulate scripts to keep lv2_ttl_generator-calls in script for lv2-postinst-helper
         sed -i 's|$GEN ./$FILE|echo "lv2-ttl-generator `pwd`/$FILE" >> ${LV2-TURTLE-BUILD-DATA}|g' `find ${S} -name *.sh`
     else
         rm -f ${LV2-TURTLE-BUILD-DATA}
