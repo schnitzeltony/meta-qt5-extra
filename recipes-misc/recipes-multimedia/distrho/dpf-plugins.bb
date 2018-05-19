@@ -12,7 +12,7 @@ SRCREV = "6454c590a2b5402195e655b1386358210e067dfd"
 S = "${WORKDIR}/git"
 PV = "v1.1"
 
-REQUIRED_DISTRO_FEATURES = "x11"
+REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
 inherit lv2-postinst-helper distro_features_check pkgconfig
 
