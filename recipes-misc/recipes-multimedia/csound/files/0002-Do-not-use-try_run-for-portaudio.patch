@@ -1,0 +1,51 @@
+From 70b48196f3f2eb7a8cd2b21a3c39986bdb24bff2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 20 May 2018 20:59:59 +0200
+Subject: [PATCH] Do not use try_run for portaudio
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [OE specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ InOut/CMakeLists.txt | 13 -------------
+ 1 file changed, 13 deletions(-)
+
+diff --git a/InOut/CMakeLists.txt b/InOut/CMakeLists.txt
+index 9422575e3..7590a8c01 100644
+--- a/InOut/CMakeLists.txt
++++ b/InOut/CMakeLists.txt
+@@ -27,19 +27,6 @@ endif()
+ if(USE_PORTAUDIO)
+     find_path(PORTAUDIO_INCLUDE_PATH portaudio.h)
+     find_library(PORTAUDIO_LIBRARY NAMES portaudio portaudio_x64)
+-
+-    if(PORTAUDIO_INCLUDE_PATH AND PORTAUDIO_LIBRARY)
+-        try_run(PORTAUDIO_V19 PORTAUDIO_TEST_COMPILED
+-            ${CMAKE_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/portaudio_test.c
+-            CMAKE_FLAGS -DLINK_LIBRARIES:STRING=${PORTAUDIO_LIBRARY}
+-            COMPILE_DEFINITIONS "-I${PORTAUDIO_INCLUDE_PATH}"
+-            COMPILE_OUTPUT_VARIABLE OUTPUT)
+-        if(NOT PORTAUDIO_TEST_COMPILED AND NOT WIN32)
+-            set(PORTAUDIO_V19 false)
+-        endif()
+-    else()
+-        set(PORTAUDIO_V19 false)
+-    endif()
+ endif()
+ if(USE_PORTMIDI)
+     find_path(PORTMIDI_INCLUDE_PATH portmidi.h)
+@@ -117,7 +117,7 @@ endif()
+ if(WIN32)
+     check_deps(USE_PORTAUDIO PORTAUDIO_INCLUDE_PATH PORTAUDIO_LIBRARY)
+ else()
+-    check_deps(USE_PORTAUDIO PORTAUDIO_INCLUDE_PATH PORTAUDIO_LIBRARY PORTAUDIO_TEST_COMPILED)
++    check_deps(USE_PORTAUDIO PORTAUDIO_INCLUDE_PATH PORTAUDIO_LIBRARY)
+ endif()
+ if(USE_PORTAUDIO AND PORTAUDIO_V19 MATCHES 1)
+     message(STATUS "Building rtpa module.")
+-- 
+2.14.3
+

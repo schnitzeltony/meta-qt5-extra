@@ -1,0 +1,31 @@
+From 1ae6204460552d524398765ca3931f73c7647472 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 20 May 2018 20:22:21 +0200
+Subject: [PATCH] Do not set include path to /usr/local/include
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ InOut/CMakeLists.txt | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/InOut/CMakeLists.txt b/InOut/CMakeLists.txt
+index 9422575e3..535528c83 100644
+--- a/InOut/CMakeLists.txt
++++ b/InOut/CMakeLists.txt
+@@ -16,8 +16,6 @@ option(USE_FLTK "Use FLTK for graphs and widget opcodes" ON)
+ option(BUILD_VIRTUAL_KEYBOARD "Build Virtual MIDI keyboard" ON)
+ option(NEED_PORTTIME "porttime library separate from portmidi" ON)
+ 
+-set(CMAKE_REQUIRED_INCLUDES /usr/local/include)
+-
+ # FIND LIBRARIES AND HEADERS
+ 
+ if(USE_ALSA)
+-- 
+2.14.3
+
