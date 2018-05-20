@@ -19,53 +19,6 @@ RDEPENDS_${PN} = " \
     \
     qtiohelper \
     \
-    amsynth \
-    ardour5 \
-    aubio \
-    calf \
-    chromaprint \
-    drumkv1 \
-    drumstick\
-    dssi \
-    dssi-vst \
-    fluidsynth-dssi \
-    ftgl \
-    ganv \
-    helm \
-    hexter \
-    ladspa-sdk \
-    liblo \
-    libmp4v2 \
-    libvisual \
-    libxmp \
-    lilv \
-    lmms \
-    lrdf \
-    lv2 \
-    mixxx \
-    muse \
-    patchage \
-    polyphone \
-    portmidi \
-    projectm \
-    qjackctl \
-    qmmp \
-    qsynth \
-    qt-gstreamer \
-    qtractor \
-    rosegarden \
-    rubberband \
-    samplv1 \
-    serd \
-    sord \
-    soundtouch \
-    sratom \
-    synthv1 \
-    timidity++ \
-    vamp-plugin-sdk \
-    whysynth \
-    zynaddsubfx \
-    \
     exiv2 \
     grantlee \
     libcddb \
@@ -82,4 +35,5 @@ RDEPENDS_${PN} = " \
     liri-world \
     kde-world \
     lxqt-world \
+    meta-qt5-extra-music-world \
 "
