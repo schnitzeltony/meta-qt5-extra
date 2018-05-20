@@ -57,6 +57,7 @@ RDEPENDS_${PN} = " \
     calf \
     carla \
     chromaprint \
+    csound \
     drumstick \
     dssi \
     dssi-vst \
