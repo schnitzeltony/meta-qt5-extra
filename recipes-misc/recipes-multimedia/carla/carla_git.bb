@@ -23,12 +23,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 inherit qmake5_base autotools-brokensep pkgconfig qemu-ext distro_features_check mime gtk-icon-cache
 
-# Notes on fltk-native / ntk
-# Ntk is a fork of fltk using cairo. Ntk cannot be build native easily without
-# X11-cairo. So use fluid (fltk-native) instead of ntk-fluid
-
 DEPENDS += " \
-    fltk-native \
+    ntk-native \
     python3-pyqt5-native \
     freetype \
     libpng \
