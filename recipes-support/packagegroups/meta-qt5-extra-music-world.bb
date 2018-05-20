@@ -81,7 +81,6 @@ RDEPENDS_${PN} = " \
     polyphone \
     portmidi \
     projectm \
-    qm-dsp \
     qmidiarp \
     qmmp \
     qt-gstreamer \
@@ -99,3 +98,6 @@ RDEPENDS_${PN} = " \
 
 # non working
 # tomahawk
+
+# empty
+# qm-dsp
