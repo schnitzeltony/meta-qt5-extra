@@ -44,18 +44,18 @@ DEPENDS += " \
     ladspa-sdk \
 "
 
-do_configure_prepend() {
+do_configure() {
     # reconfigure?
     if [ ! -f ${LV2-TURTLE-BUILD-DATA} ] ; then
-	    # manipulate scripts to keep lv2_ttl_generator-calls in script for lv2-postinst-helper
-        sed -i 's|$GEN ./$FILE|echo "lv2-ttl-generator `pwd`/$FILE" >> ${LV2-TURTLE-BUILD-DATA}|g' `find ${S} -name *.sh`
+        # keep unmodified scripts
+        cp -r ${S}/scripts ${WORKDIR}
+        # manipulate scripts to keep lv2_ttl_generator-calls in script for lv2-postinst-helper
+        sed -i 's|$GEN ./$FILE|echo "lv2-ttl-generator `pwd`/$FILE" >> ${LV2-TURTLE-BUILD-DATA}|g' `find ${S}/scripts -name *.sh`
     else
         rm -f ${LV2-TURTLE-BUILD-DATA}
     fi
-}
 
-# platforms supporting sse2 can override this
-do_configure() {
+    # platforms supporting sse2 can override this (NOOPTIMIZATIONS)
     NOOPTIMIZATIONS=1 ${S}/scripts/premake-update.sh linux
 }
 
@@ -73,6 +73,12 @@ do_install() {
     for file in `find ${WORKDIR}/linuxsynths-vex-patches -mindepth 1 -maxdepth 1` ; do
         cp -rf $file ${D}${libdir}/lv2/
     done
+
+    # install scripts for distro-ports-extra (and abuse libdir to ensure is is found in sysroot)
+    install -d ${D}/${libdir}/distrho-ports-build
+    cp -rf ${WORKDIR}/scripts ${D}${libdir}/distrho-ports-build/
+    cp -rf ${S}/libs ${D}${libdir}/distrho-ports-build/
+    rm -f ${D}${libdir}/distrho-ports-build/libs/lv2_ttl_generator
 }
 
 PACKAGES =+ "${PN}-presets"
@@ -84,6 +90,12 @@ FILES_${PN} += " \
 "
 
 FILES_${PN}-presets = "${libdir}/lv2/*.preset.lv2"
+
+# dummy pack scripts for distrho-ports-extra
+FILES_${PN}-staticdev += " \
+    ${libdir}/distrho-ports-build \
+"
+RDEPENDS_${PN}-staticdev = "bash perl"
 
 # Have not found what causes stripping - debugging of plugins is unlikely
 INSANE_SKIP_${PN} = "already-stripped"
