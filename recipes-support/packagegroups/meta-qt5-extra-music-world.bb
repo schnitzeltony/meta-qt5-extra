@@ -6,6 +6,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     distrho-ports distrho-ports-presets \
+    distrho-ports-extra \
     dpf-plugins \
     lv2-ttl-generator \
     \
