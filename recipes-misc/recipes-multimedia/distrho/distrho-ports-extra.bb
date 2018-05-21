@@ -9,6 +9,10 @@ LIC_FILES_CHKSUM = " \
 SRC_URI = " \
     git://github.com/DISTRHO/DISTRHO-Ports-Extra.git \
 "
+# TODO:
+# argolunar: no sound (presets?)
+# pdpulp: segfault
+# protoplug asks for files
 
 SRCREV = "b6f25f1feb4de49136844f20d88bec6439cdfbc5"
 S = "${WORKDIR}/git"
