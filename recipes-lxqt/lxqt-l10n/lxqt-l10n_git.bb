@@ -6,7 +6,7 @@ inherit lxqt qt5-translation
 
 DEPENDS += "liblxqt"
 
-SRCREV = "338b1ff6308ca271902f72715f61a40c2f93de93"
-PV = "0.12.0"
+SRCREV = "91a536e5dec55d0b90ddaa8425d392fe9d7d7d8f"
+PV = "0.13.0"
 
 ALLOW_EMPTY_${PN} = "1"
