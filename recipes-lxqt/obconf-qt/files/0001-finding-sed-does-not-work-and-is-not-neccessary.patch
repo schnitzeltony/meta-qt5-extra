@@ -1,7 +1,7 @@
-From 76ba8b96c2a5281b1b549e6512b4d998e05b4304 Mon Sep 17 00:00:00 2001
+From 19c7b3eaa79eb7d6ed9037d6c9efac422356889d Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Thu, 23 Jul 2015 16:34:45 +0200
-Subject: [PATCH 2/2] finding sed does not work and is not neccessary
+Subject: [PATCH] finding sed does not work and is not neccessary
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -13,23 +13,23 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  2 files changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 912e8f7..ebde50e 100644
+index 9ed9cf4..5a611d2 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -2,8 +2,6 @@ project(obconf-qt)
  # newer cmake is required for CMAKE_AUTOMOC Qt support
- cmake_minimum_required(VERSION 2.8.12)
+ cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
  
 -find_program(SED_PROGRAM sed)
 -
  include(GNUInstallDirs)
  
- set(LXQTBT_MINIMUM_VERSION "0.1.0")
+ set(LXQTBT_MINIMUM_VERSION "0.5.0")
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 20ca9f3..a744b17 100644
+index 88196b4..fb2d6bb 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -46,7 +46,7 @@ endif()
+@@ -48,7 +48,7 @@ set_property(SOURCE ${obconf-qt_UI_H} PROPERTY SKIP_AUTOMOC ON)
  # but we don't want that. Fix it with sed.
  add_custom_command(
    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/ui_obconf_fixed.h
@@ -39,5 +39,5 @@ index 20ca9f3..a744b17 100644
    # DEPENDS
    MAIN_DEPENDENCY ${obconf-qt_UI_H}
 -- 
-2.7.4
+2.13.6
 
