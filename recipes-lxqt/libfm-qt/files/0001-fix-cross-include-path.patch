@@ -1,0 +1,38 @@
+From d77352eb287f457d0fb43689cbbbcd864097a9f2 Mon Sep 17 00:00:00 2001
+From: Max Krummenacher <max.krummenacher@toradex.com>
+Date: Mon, 21 May 2018 11:16:35 +0000
+Subject: [PATCH] fix cross include path
+
+src/CMakeLists.txt uses the FM_INCLUDE_DIR variable to specify an additonal
+includedir. FM_INCLUDE_DIR is read from the pkg config variable includedir
+which does not get modified by the pkg config sysroot, so we add an "-I"
+statement pointing to the build host's /usr/include which throws a compiler
+warning and a OE QA WARNING.
+
+| cc1plus: warning: include location "/usr/include/libfm" is unsafe for cross-compilation [-Wpoison-system-directories]
+
+| WARNING: libfm-qt-0.12.0-r0 do_package_qa: QA Issue: libfm-qt: The compile log indicates that host include and/or library paths were used.
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
+ src/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 0695854..bd6a715 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -142,7 +142,7 @@ target_include_directories(${LIBFM_QT_LIBRARY_NAME}
+     PRIVATE "${Qt5Gui_PRIVATE_INCLUDE_DIRS}"
+     PUBLIC
+         "${FM_INCLUDE_DIRS}"
+-        "${FM_INCLUDE_DIR}/libfm" # to workaround incorrect #include in fm-actions.
++        "$ENV{PKG_CONFIG_SYSROOT_DIR}${FM_INCLUDE_DIR}/libfm" # to workaround incorrect #include in fm-actions.
+         "${MENUCACHE_INCLUDE_DIRS}"
+         "${XCB_INCLUDE_DIRS}"
+         "${EXIF_INCLUDE_DIRS}"
+-- 
+2.13.6
+
