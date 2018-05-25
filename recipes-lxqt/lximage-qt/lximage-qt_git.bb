@@ -1,4 +1,4 @@
-SUMMARY = "LXQt system settings center"
+SUMMARY = "The image viewer and screenshot tool for LXQt"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4641e94ec96f98fabc56ff9cc48be14b"
 
@@ -8,7 +8,7 @@ inherit lxqt pkgconfig distro_features_check gtk-icon-cache mime
 
 DEPENDS += "qtx11extras qtsvg libfm-qt libexif libxfixes"
 
-SRCREV = "84dc86611f3e3356dd6fbef6c72b29948278015a"
-PV = "0.6.0"
+SRCREV = "a577151ae6935dfa890b961f2dff833d21e3a4a9"
+PV = "0.7.0"
 
 FILES_${PN} += "${datadir}/icons"
