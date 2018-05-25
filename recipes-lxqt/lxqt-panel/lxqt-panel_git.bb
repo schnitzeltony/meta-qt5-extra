@@ -17,10 +17,9 @@ DEPENDS += " \
 
 SRC_URI += " \
     file://0001-add-Qt5-X11Extras-to-QTX_LIBRARIES.patch \
-    file://0001-lxqtmainmenuconfiguration.cpp-include-QAction-explic.patch \
 "
-SRCREV = "4b20a41f3442b121485664333f457ee9abc228b8"
-PV = "0.12.0"
+SRCREV = "7d97a5e331a05b4fd06a729a58d47cef0f584c5f"
+PV = "0.13.0"
 
 PACKAGECONFIG[cpu_plugin] = "-DCPULOAD_PLUGIN=Yes,-DCPULOAD_PLUGIN=No, libstatgrab"
 PACKAGECONFIG[mount_plugin] = "-DMOUNT_PLUGIN=Yes,-DMOUNT_PLUGIN=No, solid"
@@ -33,6 +32,7 @@ PACKAGECONFIG[volume_pulse_plugin] = "-DVOLUME_USE_PULSEAUDIO=Yes,-DVOLUME_USE_P
 PACKAGECONFIG ??= "cpu_plugin mount_plugin networkmonitor_plugin sensor_plugin sysstat_plugin volume_alsa_plugin volume_pulse_plugin"
 
 FILES_${PN} += " \
+    ${datadir}/lxqt/panel.conf \
     ${datadir}/lxqt/lxqt-panel/*.desktop \
     ${datadir}/desktop-directories \
 "
