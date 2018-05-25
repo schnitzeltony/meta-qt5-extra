@@ -6,10 +6,10 @@ inherit lxqt distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "qttools libqtxdg kwindowsystem libxscrnsaver"
+DEPENDS += "qttools libqtxdg kwindowsystem libxscrnsaver polkit-qt-1"
 
-SRCREV = "9efc2eeb70c2275b985277a9a2238556aaf43f5d"
-PV = "0.12.0"
+SRCREV = "d9f9f62e48de432ce2fe3e9c4c91f21dc089d777"
+PV = "0.13.0"
 
 EXTRA_OECMAKE += " \
     -DCMAKE_INSTALL_DATAROOTDIR=share \
@@ -22,3 +22,8 @@ EXTRA_OECMAKE += " \
 RPROVIDES_${PN} += "lxqt-common"
 RREPLACES_${PN} += "lxqt-common"
 RCONFLICTS_${PN} += "lxqt-common"
+
+FILES_${PN} += " \
+    /usr/share/polkit-1/ \
+    /usr/share/lxqt/ \
+"
