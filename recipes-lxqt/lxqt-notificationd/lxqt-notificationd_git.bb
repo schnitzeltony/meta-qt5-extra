@@ -6,6 +6,5 @@ inherit lxqt
 
 DEPENDS += "liblxqt libqtxdg kwindowsystem"
 
-SRC_URI += "file://0001-notification.cpp-include-QStyleOption-explicitely.patch"
-SRCREV = "6a93910037d2d59bd885fa71e2ea713778376869"
-PV = "0.12.0"
+SRCREV = "488b7f82e4b12d94e5f988648c69e1f27aa99046"
+PV = "0.13.0"
