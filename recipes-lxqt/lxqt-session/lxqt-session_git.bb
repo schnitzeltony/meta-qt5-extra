@@ -9,12 +9,13 @@ REQUIRED_DISTRO_FEATURES = "x11"
 DEPENDS += "liblxqt kwindowsystem"
 
 SRC_URI += "file://0001-do-not-check-for-xdg-udser-dirs-at-build-time-it-is-.patch"
-SRCREV = "206b709cd1cd4a14f454dfa90a908844c11fefee"
-PV = "0.12.0"
+SRCREV = "74e18f354587add8c05e51a4be6366fc9aadb59e"
+PV = "0.13.0"
 
 FILES_${PN} += " \
-	${datadir}/xsessions \
-	${datadir}/kdm \
+    ${datadir}/lxqt/*.conf \
+    ${datadir}/xsessions \
+    ${datadir}/kdm \
 "
 
 RDEPENDS_${PN} += "xdg-user-dirs"
