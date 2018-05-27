@@ -10,9 +10,6 @@ RDEPENDS_${PN} = " \
     kde-apps-world \
     \
     kpmcore \
-    libdebconf-kde \
-    libqapt \
-    muon \
     partitionmanager \
     phonon \
     polkit-qt-1 \
