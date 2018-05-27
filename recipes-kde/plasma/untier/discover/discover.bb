@@ -1,4 +1,4 @@
-SUMMARY = "A collection of package management tools for Debian-based systems"
+SUMMARY = "KDE and Plasma resources management GUI"
 LICENSE = "GPLv3 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
