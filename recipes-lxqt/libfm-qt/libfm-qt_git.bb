@@ -10,8 +10,9 @@ DEPENDS += "qtx11extras glib-2.0 libfm menu-cache libxcb liblxqt"
 
 CMAKE_ALIGN_FILES_FIND = "*targets.cmake"
 
-SRCREV = "6f8c1e9c3c61aa7fb07f64300a78933dfe183460"
-PV = "0.12.0"
+SRC_URI += "file://0001-fix-cross-include-path.patch"
+SRCREV = "42c538bd1d4a30a53509ab8b2e8a9437482acbec"
+PV = "0.13.0"
 
 FILES_${PN} += "${datadir}/mime"
 

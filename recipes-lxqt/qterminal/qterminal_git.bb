@@ -8,8 +8,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qtermwidget qtx11extras"
 
-SRCREV = "e4a56827d31aee8e0b285a155dbda7516f371864"
-PV = "0.8.0"
+SRCREV = "aeb2f1f570d7a1773a5eb586e4b56c3218a78cea"
+PV = "0.9.0"
 
 S = "${WORKDIR}/git"
 
