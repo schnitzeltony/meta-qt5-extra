@@ -12,18 +12,18 @@ SRC_URI[md5sum] = "9101bdf4a6664dddc0e15b8fda4681e9"
 SRC_URI[sha256sum] = "f5889b89a69ad2ed7db488631d59d13e7511235d759cc05e19b4086402d0d209"
 
 DEPENDS += " \
-    attica \
+    qtdeclarative \
+    qtsvg \
+    kauth-native \
     kconfig-native \
     kcoreaddons-native \
     kpackage-native \
-    kauth-native \
+    attica \
     kitemmodels \
     knewstuff \
-    libdebconf-kde \
-    libqapt \
-    qca \
-    qtdeclarative \
-    qtsvg \
+    knotifications \
+    kirigami2 \
+    plasma-framework \
 "
 
 FILES_${PN} += " \
