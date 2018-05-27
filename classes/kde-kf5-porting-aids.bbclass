@@ -1,3 +1,3 @@
 inherit kde-kf5
 
-SRC_URI = "${KDE_MIRROR}/stable/frameworks/5.45/portingAids/${BPN}-${PV}.tar.xz"
+SRC_URI = "${KDE_MIRROR}/stable/frameworks/5.46/portingAids/${BPN}-${PV}.tar.xz"

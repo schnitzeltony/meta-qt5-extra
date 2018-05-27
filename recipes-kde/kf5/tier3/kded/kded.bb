@@ -17,8 +17,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "944c9bdb34c2c967313a01c59d1558c4"
-SRC_URI[sha256sum] = "9ca9b14b961c00c3d7ee6ab7f801f4ceac20d5615051fa6f9ae5898f31f32463"
+SRC_URI[md5sum] = "7f34228533707b5c85f8ab2bae7b97a4"
+SRC_URI[sha256sum] = "590060c3c903e755e9bb13ab96ad35d636e9f8589efa3b501555dd2632ea4847"
 SRC_URI += "file://0001-hardcode-path-to-kconf_update.patch"
 
 FILES_${PN} += "${datadir}/dbus-1 ${datadir}/k*5 ${libdir}/libkdeinit5_kded5.so"

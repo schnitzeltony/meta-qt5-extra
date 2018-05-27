@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 perlnative
 
-SRC_URI[md5sum] = "80bdb9eea28f17c456a87eaadf984a42"
-SRC_URI[sha256sum] = "63903b51971dc98f9509e9d02d057f95ed53d9dcfd1583f904df4c6dd597e3ec"
+SRC_URI[md5sum] = "ab7de9568bec23ad56f11183570dee07"
+SRC_URI[sha256sum] = "bdf7041e05eda6fcffda6e2fcc60e283fa84e8f7dbdd5ecb85134f36a8d967a1"
 
 PV = "${KF5_VERSION}"

@@ -1,0 +1,121 @@
+From 0db1a4aa854b5c82230bfcc7f5c939fcc5ed18f5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 27 May 2018 22:57:40 +0200
+Subject: [PATCH] Revert "extractors: Hide warnings from system headers"
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This reverts commit b680861aa2ed973eb6694a9dda1c327107323062.
+
+It causes in OE-builds:
+
+| In file included from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/c++/7.3.0/bits/stl_algo.h:59:0,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/c++/7.3.0/algorithm:62,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/qt5/QtCore/qglobal.h:109,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/qt5/QtCore/qalgorithms.h:43,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/qt5/QtCore/qlist.h:43,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/qt5/QtCore/qstringlist.h:41,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/qt5/QtCore/QStringList:1,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/kfilemetadata-5.46.0/src/extractorplugin.h:24,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/kfilemetadata-5.46.0/src/extractors/exiv2extractor.h:24,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/kfilemetadata-5.46.0/src/extractors/exiv2extractor.cpp:21:
+| /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/c++/7.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+|  #include_next <stdlib.h>
+               ^~~~~~~~~~
+
+and
+
+| In file included from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/c++/7.3.0/bits/stl_algo.h:59:0,
+|                 from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/c++/7.3.0/algorithm:62,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/qt5/QtCore/qglobal.h:109,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/qt5/QtCore/qalgorithms.h:43,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/qt5/QtCore/qlist.h:43,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/qt5/QtCore/qstringlist.h:41,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/qt5/QtCore/QStringList:1,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/kfilemetadata-5.46.0/src/extractorplugin.h:24,
+|                  from src/extractors/kfilemetadata_exiv2extractor_autogen/EWIEGA46WW/../../../../../kfilemetadata-5.46.0/src/extractors/exiv2extractor.h:24,
+|                  from src/extractors/kfilemetadata_exiv2extractor_autogen/EWIEGA46WW/moc_exiv2extractor.cpp:9,
+|                  from src/extractors/kfilemetadata_exiv2extractor_autogen/mocs_compilation.cpp:2:
+| /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/kfilemetadata/5.46.0-r0/recipe-sysroot/usr/include/c++/7.3.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+|  #include_next <stdlib.h>
+               ^~~~~~~~~~
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/extractors/CMakeLists.txt | 22 ++++++++++++++++------
+ 1 file changed, 16 insertions(+), 6 deletions(-)
+
+diff --git a/src/extractors/CMakeLists.txt b/src/extractors/CMakeLists.txt
+index 3888d1d..0401429 100644
+--- a/src/extractors/CMakeLists.txt
++++ b/src/extractors/CMakeLists.txt
+@@ -16,8 +16,10 @@ if(Poppler_Qt5_FOUND)
+ endif()
+ 
+ if(TAGLIB_FOUND)
++    include_directories( ${TAGLIB_INCLUDES} )
++
+     add_library(kfilemetadata_taglibextractor MODULE taglibextractor.cpp )
+-    target_include_directories(kfilemetadata_taglibextractor SYSTEM PRIVATE ${TAGLIB_INCLUDES})
++
+     target_link_libraries( kfilemetadata_taglibextractor
+         KF5::FileMetaData
+         ${TAGLIB_LIBRARIES}
+@@ -27,12 +29,15 @@ if(TAGLIB_FOUND)
+     install(
+     TARGETS kfilemetadata_taglibextractor
+     DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/kfilemetadata)
++
+ endif()
+ 
+ if(EXIV2_FOUND)
++    include_directories( ${EXIV2_INCLUDE_DIR} )
++
++    kde_enable_exceptions()
+     add_library(kfilemetadata_exiv2extractor MODULE exiv2extractor.cpp)
+-    target_include_directories(kfilemetadata_exiv2extractor SYSTEM PRIVATE ${EXIV2_INCLUDE_DIR})
+-    kde_target_enable_exceptions(kfilemetadata_exiv2extractor PRIVATE)
++
+     target_link_libraries(kfilemetadata_exiv2extractor
+         KF5::FileMetaData
+         ${EXIV2_LIBRARIES}
+@@ -46,8 +51,10 @@ if(EXIV2_FOUND)
+ endif()
+ 
+ if(FFMPEG_FOUND)
++    include_directories( ${FFMPEG_INCLUDE_DIRS} )
++
+     add_library(kfilemetadata_ffmpegextractor MODULE ffmpegextractor.cpp)
+-    target_include_directories(kfilemetadata_ffmpegextractor SYSTEM PRIVATE ${FFMPEG_INCLUDE_DIRS})
++
+     target_link_libraries(kfilemetadata_ffmpegextractor
+         KF5::FileMetaData
+         ${FFMPEG_LIBRARIES}
+@@ -62,8 +69,10 @@ endif()
+ 
+ 
+ if(EPUB_FOUND)
++    include_directories( ${EPUB_INCLUDE_DIR} )
++
+     add_library(kfilemetadata_epubextractor MODULE epubextractor.cpp)
+-    target_include_directories(kfilemetadata_epubextractor SYSTEM PRIVATE ${EPUB_INCLUDE_DIR})
++
+     target_link_libraries(kfilemetadata_epubextractor
+         KF5::FileMetaData
+         ${EPUB_LIBRARIES}
+@@ -163,7 +172,8 @@ DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/kfilemetadata)
+ #
+ if (QMOBIPOCKET_FOUND)
+     add_library(kfilemetadata_mobiextractor MODULE mobiextractor.cpp)
+-    target_include_directories(kfilemetadata_mobiextractor SYSTEM PRIVATE ${QMOBIPOCKET_INCLUDE_DIR})
++
++    include_directories(${QMOBIPOCKET_INCLUDE_DIR})
+     target_link_libraries(kfilemetadata_mobiextractor
+         KF5::FileMetaData
+         ${QMOBIPOCKET_LIBRARIES}
+-- 
+2.14.3
+

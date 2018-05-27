@@ -16,7 +16,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "d3c96b58853644036e5ca859ae9b9883"
-SRC_URI[sha256sum] = "9e2a304e074fff4fdf2cf60fc99dde64d681d3c0c602e61c669fd54d8e65d67e"
+SRC_URI[md5sum] = "84fbce9781af3acaa7e0e94abfaa3405"
+SRC_URI[sha256sum] = "b121d8c70954239e8aba99efa9cd8900f954b67bfbf7ae7032d8a982bc67a44a"
 
 FILES_${PN}-dbg += "${libdir}/kdesu/kf5/.debug"

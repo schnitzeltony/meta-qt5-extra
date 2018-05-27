@@ -11,7 +11,7 @@ DEPENDS += " \
     libdmtx \
 "
 
-SRC_URI[md5sum] = "dc84cdb5abedd1c3f63a4481c2220d90"
-SRC_URI[sha256sum] = "20f645e263df3f32be04485bd21fcdb02d46c1f5c91f411c43e26b82bab7d9bc"
+SRC_URI[md5sum] = "9e76c7991e42b1f2edbd6e942c5519f0"
+SRC_URI[sha256sum] = "ef6a3f29e3f030e254343600f051317f6f8a99185d8ad93d78d849bf31bb0894"
 
 PV = "${KF5_VERSION}"
