@@ -1,10 +1,10 @@
 SUMMARY = "Commandline tools for soundfont analysis and split"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = " \
-    file://README;beginline=119;endline=121;md5=6c1c96772982f45a0c0deca5af1b988d \
+    file://LICENSE;md5=75859989545e37968a99b631ef42722e \
 "
-SRC_URI = "git://github.com/schnitzeltony/iffdigest.git"
-SRCREV = "342262a9184d89dda0d87cec099d13c494060ec4"
+SRC_URI = "git://github.com/schnitzeltony/soundfont-cmdline-tools.git"
+SRCREV = "c4b11144dc714d9e4d959f0631c35a6b9764c057"
 S = "${WORKDIR}/git"
 PV = "0.0.0+git${SRCPV}"
 
