@@ -59,6 +59,7 @@ RDEPENDS_${PN} = " \
     carla \
     chromaprint \
     csound \
+    drumgizmo \
     drumstick \
     dssi \
     dssi-vst \
