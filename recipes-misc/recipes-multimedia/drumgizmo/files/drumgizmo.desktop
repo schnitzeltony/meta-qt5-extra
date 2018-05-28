@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=DrumGizmo
+Comment=DrumGizmo standalone application
+Exec=drumgizmo
+Icon=drumgizmo-logo.png
+Terminal=false
+Type=Application
+Categories=Application;Audio;Midi;Music
