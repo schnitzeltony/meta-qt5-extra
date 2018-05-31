@@ -27,7 +27,7 @@ do_compile_append() {
 
 do_install_append() {
     install -d ${D}/${datadir}/applications
-    install -m 755 ${WORKDIR}/hexter.desktop ${D}/${datadir}/applications/
+    install -m 644 ${WORKDIR}/hexter.desktop ${D}/${datadir}/applications/
 
     install -d ${D}/${datadir}//icons/hicolor/36x36/apps
     install -m 644 ${WORKDIR}/hexter.png ${D}/${datadir}/icons/hicolor/36x36/apps/
