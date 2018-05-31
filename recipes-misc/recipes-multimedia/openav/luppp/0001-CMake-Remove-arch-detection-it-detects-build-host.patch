@@ -1,0 +1,45 @@
+From ffaf0641a2222a48637367ca59f936d303bbdfad Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 31 May 2018 23:12:51 +0200
+Subject: [PATCH] CMake: Remove arch detection - it detects build host
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/CMakeLists.txt | 11 -----------
+ 1 file changed, 11 deletions(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 8c2dcfe..b47dbb0 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1,8 +1,4 @@
+ 
+-# Detect platform
+-EXECUTE_PROCESS( COMMAND uname -m COMMAND tr -d '\n' OUTPUT_VARIABLE ARCHITECTURE)
+-message( STATUS "Architecture:  ${ARCHITECTURE}" )
+-
+ # Find depend libraries
+ find_package(PkgConfig)
+ 
+@@ -57,13 +53,6 @@ IF(WITH_ASAN)
+   SET(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -O0 -g -fsanitize=address -fno-omit-frame-pointer")
+ ENDIF()
+ 
+-if( ${ARCHITECTURE} STREQUAL "x86_64" AND NOT WITH_ASAN)
+-  set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -O3 -msse2")
+-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -msse2")
+-else()
+-  # Can set i686 / ARM stuff here
+-endif()
+-
+ # Add all files
+ FILE(GLOB sources *.cxx  avtk/*.cxx cjson/*.c controller/*.cxx dsp/*.cxx observer/*.cxx state/*.cxx tests/*.cxx)
+ 
+-- 
+2.14.3
+
