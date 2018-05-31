@@ -19,9 +19,6 @@ PV = "0.0.10"
 S = "${WORKDIR}/git"
 
 do_install_append() {
-    install -d ${D}/${datadir}/applications
-    install -m 644 ${WORKDIR}/lpd8-editor.desktop ${D}/${datadir}/applications/
-
-    install -d ${D}/${datadir}/icons/hicolor/scalable/apps
-    install -m 644 ${S}/icon.svg ${D}/${datadir}/icons/hicolor/scalable/apps/lpd8-editor.svg
+    install -Dm 644 ${WORKDIR}/lpd8-editor.desktop ${D}/${datadir}/applications/lpd8-editor.desktop
+    install -Dm 644 ${S}/icon.svg ${D}/${datadir}/icons/hicolor/scalable/apps/lpd8-editor.svg
 }
