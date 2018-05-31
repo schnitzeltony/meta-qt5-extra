@@ -72,6 +72,7 @@ RDEPENDS_${PN} = " \
     \
     \
     arty-fx \
+    fabla \
     \
     \
     polyphone \
