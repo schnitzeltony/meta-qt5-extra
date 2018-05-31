@@ -76,6 +76,7 @@ RDEPENDS_${PN} = " \
     libvisual \
     libxmp \
     lmms \
+    lpd8editor \
     lrdf \
     lv2 \
     mixxx \
