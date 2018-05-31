@@ -23,7 +23,7 @@ CFLAGS += "-ftree-vectorize"
 
 do_install_append() {
     install -d ${D}/${datadir}/applications
-    install -m 755 ${WORKDIR}/whysynth.desktop ${D}/${datadir}/applications/
+    install -m 644 ${WORKDIR}/whysynth.desktop ${D}/${datadir}/applications/
 
     install -d ${D}/${datadir}//icons/hicolor/36x36/apps
     install -m 644 ${S}/extra/whysynth-icon-32x32.png ${D}/${datadir}/icons/hicolor/36x36/apps/whysynth.png
