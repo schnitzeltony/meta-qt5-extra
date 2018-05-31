@@ -1,0 +1,36 @@
+From 4c8bb82c0a1963890b683b0bf5ebc3ef5ce9435d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 1 Jun 2018 00:25:24 +0200
+Subject: [PATCH] Do not overwrite build flags - it causes trouble for many
+ build systems
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 7c0d989..0b23603 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -26,11 +26,11 @@ pkg_check_modules(CAIRO cairo REQUIRED)
+ include_directories( ${CAIRO_INCLUDE_DIRS}  )
+ link_directories   ( ${CAIRO_LIBRARY_DIRS}  )
+ 
+-SET(CMAKE_SHARED_LINKER_FLAGS "-fPIC -shared -Wl,-z,nodelete -Wl,--no-undefined")
++SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fPIC -shared -Wl,-z,nodelete -Wl,--no-undefined")
+ 
+ IF(RELEASE_BUILD)
+-  SET(CMAKE_CXX_FLAGS "-g -Wall -Wno-unused-variable -msse2 -mfpmath=sse -ffast-math")
+-  SET(CMAKE_C_FLAGS "-g -Wall -W -Wno-unused-variable -msse2 -mfpmath=sse -ffast-math")
++  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wno-unused-variable -ffast-math")
++  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -W -Wno-unused-variable -ffast-math")
+ ENDIF()
+ 
+ ## The following commands will re-generate the .cpp files from the FAUST .dsp,
+-- 
+2.14.3
+
