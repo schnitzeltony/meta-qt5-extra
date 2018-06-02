@@ -26,8 +26,8 @@ SRC_URI = " \
     file://0003-Add-ARM-NEON-acceleration-for-time-stretch-not-yet-t.patch \
     file://Qtractor.conf \
 "
-SRCREV = "5b8a3d1cc3dd6ff8782168d0710f6ed161558619"
-PV = "0.9.0+git${SRCPV}"
+SRCREV = "e190588b89862d4de5953544035e91f58417225e"
+PV = "0.9.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF = " \
