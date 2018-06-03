@@ -14,13 +14,13 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/data/hydrogen.default.conf b/data/hydrogen.default.conf
-index a5c201ef..d6d2b6c3 100644
+index d57ea8d4..136cbdf0 100644
 --- a/data/hydrogen.default.conf
 +++ b/data/hydrogen.default.conf
-@@ -15,7 +15,7 @@
- 	<useTimeLine>false</useTimeLine>
- 	<maxBars>400</maxBars>
+@@ -23,7 +23,7 @@
  	<useTheRubberbandBpmChangeEvent>false</useTheRubberbandBpmChangeEvent>
+ 	<preDelete>0</preDelete>
+ 	<postDelete>0</postDelete>
 -	<showDevelWarning>true</showDevelWarning>
 +	<showDevelWarning>false</showDevelWarning>
  	<hearNewNotes>true</hearNewNotes>

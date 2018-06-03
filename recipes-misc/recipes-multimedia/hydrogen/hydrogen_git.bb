@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 # 'listplugins' tool.
 
 DEPENDS += " \
+    qttools-native \
     qtbase \
     qtxmlpatterns \
     libtar \
@@ -32,8 +33,9 @@ DEPENDS += " \
 
 SRC_URI = " \
     git://github.com/hydrogen-music/hydrogen.git \
-    file://0001-Fix-man-installation-path.patch \
+    file://0001-remove-qt5_use_modules.patch \
     file://0002-hydrogen.default.conf-do-not-show-developer-warnings.patch \
+    file://0003-Fix-man-installation-path.patch \
     \
     http://hydrogen-music.org/drumkits/Audiophob.h2drumkit;downloadfilename=Audiophob.tar.gz;name=Audiophob;subdir=drumkits \
     http://hydrogen-music.org/drumkits/belofilms_GuitarStrums.h2drumkit;downloadfilename=belofilms_GuitarStrums.tar.gz;name=belofilms_GuitarStrums;subdir=drumkits \
@@ -76,7 +78,7 @@ SRC_URI = " \
     https://downloads.sourceforge.net/hydrogen/TR808909.h2drumkit;downloadfilename=TR808909.tar.gz;name=TR808909;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/VariBreaks.h2drumkit;downloadfilename=VariBreaks.tar.gz;name=VariBreaks;subdir=drumkits \
 "
-SRCREV = "21a833317a2e6ac23873e6ed056a691ff0988660"
+SRCREV = "2cbb04f85d84bddb5a8a1caf614837cbe5323292"
 PV ="0.9.7+git${SRCPV}"
 
 S = "${WORKDIR}/git"
