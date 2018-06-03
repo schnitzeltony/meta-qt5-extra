@@ -23,8 +23,9 @@ SRC_URI = " \
     file://0001-remove-UINQHACK-it-is-used-for-OSX-builds-only-and-c.patch \
     file://0002-Do-not-check-for-fontfile.patch \
 "
-SRCREV = "30f1ec6267afb0ee17b472db0c4826d5bd96fad8"
+SRCREV = "ff2ea498f74671ce1051cec1738d9f3c71da8bec"
 S = "${WORKDIR}/git"
+PV = "0.8.5+git${SRCPV}"
 
 EXTRA_OEMAKE += " \
     PREFIX=${prefix} \
