@@ -1,0 +1,42 @@
+From 7d3e26b46cb5ce191cd1c91347c9ddfa15199f63 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 3 Jun 2018 21:09:24 +0200
+Subject: [PATCH] config.ccp: include QAction explicitly to fix build with Qt
+ 5.11
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Fixes many errors like:
+| ../git/trunk/configuration/config.cpp:363:55: error: invalid use of incomplete type 'class QAction'
+|              ui->listActions->addItem(_actionList.at(i)->text().replace("&", ""));
+|                                                        ^~
+| In file included from ../recipe-sysroot/usr/include/qt5/QtWidgets/qdialog.h:44:0,
+|                  from ../recipe-sysroot/usr/include/qt5/QtWidgets/qcolordialog.h:45,
+|                  from ../recipe-sysroot/usr/include/qt5/QtWidgets/QColorDialog:1,
+|                  from ../git/trunk/configuration/config.cpp:27:
+
+Upstream-Status: Submitted [1]
+
+[1] https://github.com/davy7125/polyphone/pull/32
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ configuration/config.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configuration/config.cpp b/configuration/config.cpp
+index 93b30cb..90b304f 100644
+--- a/configuration/config.cpp
++++ b/configuration/config.cpp
+@@ -26,6 +26,7 @@
+ #include <QDir>
+ #include <QColorDialog>
+ #include <QDesktopServices>
++#include <QAction>
+ #include "config.h"
+ #include "ui_config.h"
+ #include "mainwindow.h"
+-- 
+2.14.3
+

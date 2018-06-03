@@ -23,6 +23,7 @@ SRC_URI = " \
     file://polyphone.desktop \
     file://polyphone.mime \
     file://0001-align-compiler-switches-constants-for-cross-compilin.patch \
+    file://0002-config.ccp-include-QAction-explicitly-to-fix-build-w.patch \
 "
 SRCREV = "13beb7119bc573af3f5e595ae2989034c226e355"
 S = "${WORKDIR}/git/trunk"
