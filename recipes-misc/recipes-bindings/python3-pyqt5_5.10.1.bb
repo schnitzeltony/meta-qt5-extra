@@ -7,17 +7,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "\
     https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-${PV}/PyQt5_gpl-${PV}.tar.gz \
-    file://0001-qtabbar.sip-fix-build-with-accessibility-disabled.patch \
 "
-SRC_URI[md5sum] = "c3048e9d242f3e72fd393630da1d971a"
-SRC_URI[sha256sum] = "ebd70515b30bbd6098fee29e6271a6696b1183c5530ee30e6ba9aaab195536e8"
-
-#PARALLEL_MAKE = ""
+SRC_URI[md5sum] = "be36c2abaffc9daa8b993f1ca982968f"
+SRC_URI[sha256sum] = "9932e971e825ece4ea08f84ad95017837fa8f3f29c6b0496985fa1093661e9ef"
 
 inherit qmake5 python3native
 
 DEPENDS += "sip sip-native sip3-native qtbase python3"
-DEPENDS_append_class-target = "qtsvg qtwebkit"
+DEPENDS_append_class-target = "qtsvg"
 
 S = "${WORKDIR}/PyQt5_gpl-${PV}"
 B = "${S}"
@@ -26,7 +23,7 @@ DISABLED_FEATURES = "PyQt_Desktop_OpenGL"
 
 DISABLED_FEATURES_append_arm = " PyQt_qreal_double"
 
-PYQT_MODULES = "QtCore QtGui QtNetwork QtWidgets QtSvg QtWebKit"
+PYQT_MODULES = "QtCore QtGui QtNetwork QtWidgets QtSvg"
 PYQT_MODULES_class-native = "QtCore"
 PYQT_MODULES_aarch64 = "QtCore QtGui QtNetwork QtWidgets QtSvg"
 
