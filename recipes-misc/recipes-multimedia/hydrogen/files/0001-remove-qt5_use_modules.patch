@@ -9,6 +9,10 @@ Content-Transfer-Encoding: 8bit
 * it is not necessary - all libs are linked
 * was removed in Qt 5.11
 
+Upstream-Status: Submitted [1]
+
+[1] https://github.com/hydrogen-music/hydrogen/pull/618
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  src/gui/CMakeLists.txt | 1 -
