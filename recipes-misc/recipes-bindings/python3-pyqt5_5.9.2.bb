@@ -8,8 +8,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 SRC_URI = "\
     https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-${PV}/PyQt5_gpl-${PV}.tar.gz \
 "
-SRC_URI[md5sum] = "be36c2abaffc9daa8b993f1ca982968f"
-SRC_URI[sha256sum] = "9932e971e825ece4ea08f84ad95017837fa8f3f29c6b0496985fa1093661e9ef"
+SRC_URI[md5sum] = "33d6d2ab8183da17ac18b8132a4b278e"
+SRC_URI[sha256sum] = "c190dac598c97b0113ca5e7a37c71c623f02d1d713088addfacac4acfa4b8394"
+
+PE = "1"
 
 inherit qmake5 python3native
 
