@@ -17,6 +17,7 @@ SRC_URI = " \
     git://github.com/projectM-visualizer/projectm.git;name=projectm \
 	http://spiegelmc.com.s3.amazonaws.com/pub/projectm_presets.zip;name=presets \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
+    file://0002-Makefile.am-Fix-installation-with-DESTDIR-set.patch \
 "
 SRCREV_projectm = "9650468607537a028e4d71523c5e88a81f506578"
 SRC_URI[presets.md5sum] = "8976d72c05e3f4ddee996c6f2e98fc63"
