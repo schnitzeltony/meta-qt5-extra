@@ -1,7 +1,7 @@
-From 99e6edad2d7d06bdd796b2c613fa6d9a243e92f1 Mon Sep 17 00:00:00 2001
+From a6cf64a6e5ca10f67c85a475345810ee10653830 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Sun, 3 Jun 2018 21:46:26 +0200
-Subject: [PATCH] Add includes to fix build with Qt 5.11
+Subject: [PATCH] Add include to fix build with Qt 5.11
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -9,19 +9,6 @@ Content-Transfer-Encoding: 8bit
 While at it use preferred <> instread of "".
 
 Fixes:
-
-| In file included from ../../recipe-sysroot/usr/include/qt5/QtWidgets/qradiobutton.h:44:0,
-|                  from ../../recipe-sysroot/usr/include/qt5/QtWidgets/QRadioButton:1,
-|                  from .ui/ui_qtractorMidiImportForm.h:44,
-|                  from qtractorMidiImportForm.h:25,
-|                  from qtractorMidiImportForm.cpp:22:
-| ../../recipe-sysroot/usr/include/qt5/QtWidgets/qabstractbutton.h:53:7: note: forward declaration of 'class QButtonGroup'
-|  class QButtonGroup;
-|        ^~~~~~~~~~~~
-| qtractorMidiImportForm.cpp:195:88: error: invalid use of incomplete type 'class QButtonGroup'
-| ...
-
-and
 
 | In file included from ../../recipe-sysroot/usr/include/qt5/QtGui/qwindowdefs.h:44:0,
 |                  from ../../recipe-sysroot/usr/include/qt5/QtWidgets/qwidget.h:44,
@@ -37,30 +24,15 @@ and
 |                                      ^~~~~~~
 | ...
 
-A similar patch was submitted in [1] - our special midiimportx branch needs a
-further pull request.
+Upstream-Status: Submitted [1]
 
-[1] https://github.com/rncbc/qtractor/pull/156 
+[1] https://github.com/rncbc/qtractor/pull/157
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- src/qtractorMeter.cpp          | 1 +
  src/qtractorMidiImportForm.cpp | 3 ++-
- src/qtractorTrackButton.h      | 1 +
- 3 files changed, 4 insertions(+), 1 deletion(-)
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/src/qtractorMeter.cpp b/src/qtractorMeter.cpp
-index d1b826c5..999e0ae3 100644
---- a/src/qtractorMeter.cpp
-+++ b/src/qtractorMeter.cpp
-@@ -33,6 +33,7 @@
- #include <QVBoxLayout>
- #include <QPainter>
- #include <QLabel>
-+#include <QAction>
- 
- #include <QPaintEvent>
- #include <QResizeEvent>
 diff --git a/src/qtractorMidiImportForm.cpp b/src/qtractorMidiImportForm.cpp
 index e04efb51..b22557f8 100644
 --- a/src/qtractorMidiImportForm.cpp
@@ -75,18 +47,6 @@ index e04efb51..b22557f8 100644
  
  
  //----------------------------------------------------------------------
-diff --git a/src/qtractorTrackButton.h b/src/qtractorTrackButton.h
-index dedd2933..8ec801f0 100644
---- a/src/qtractorTrackButton.h
-+++ b/src/qtractorTrackButton.h
-@@ -25,6 +25,7 @@
- #include "qtractorTrack.h"
- 
- #include <QPushButton>
-+#include <QAction>
- 
- #include "qtractorObserverWidget.h"
- 
 -- 
 2.14.3
 
