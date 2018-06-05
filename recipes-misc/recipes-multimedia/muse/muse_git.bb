@@ -24,8 +24,8 @@ inherit cmake_qt5 pkgconfig gtk-icon-cache distro_features_check mime qt5-transl
 SRC_URI = " \
     git://github.com/muse-sequencer/muse.git \
 "
-SRCREV = "538467edd047fcdb355f9bc911f0c7cee1386ad3"
-PV = "3.0.2"
+SRCREV = "02d9dc6abd757c3c1783fdd46dacd3c4ef2c0a6d"
+PV = "3.0.2+git${SRCPV}"
 S = "${WORKDIR}/git/muse3"
 
 EXTRA_OECMAKE += " \
