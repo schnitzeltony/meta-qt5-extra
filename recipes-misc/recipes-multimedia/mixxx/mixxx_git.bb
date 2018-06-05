@@ -1,7 +1,7 @@
 SUMMARY = "Qt based DJ software"
 HOMEPAGE = "http://mixxx.org/"
 LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=16afb79bc15f82862549f246a6d0062f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=e029b0dfdd8cfff5e40a3741234b1ca7"
 
 inherit scons qmake5_paths
 
@@ -35,25 +35,23 @@ DEPENDS += " \
 #    gperftools
 
 SRC_URI = " \
-    git://github.com/mixxxdj/${BPN}.git \
+    git://github.com/mixxxdj/${BPN}.git;branch=2.1 \
     file://0001-do-not-check-for-known-machine-types.patch \
     file://0002-force-using-system-soundtouch.patch \
     file://0003-align-path-of-qt-build-tools-to-our-needs.patch \
     file://0004-add-vamp-float-math-build-option-to-force-vamp-calcu.patch \
-    file://0005-Fix-release-build-with-Qt-5.10.patch \
 "
-SRCREV = "b6d29e53d3ae74cd040a5d5ecbe742f9c385575a"
+SRCREV = "55b4f3e0a67d27f94d55c0c5152e53fc138dea7c"
 S = "${WORKDIR}/git"
-PV = "2.0.0+git${SRCPV}"
-
-EXTRA_OESCONS_GL ??= " \
-    opengles=1 \
-"
+PV = "2.1.0+git${SRCPV}"
 
 EXTRA_OESCONS_MATH ??= " \
     vampfloatmath=1 \
 "
 
+# qtbase is expected to be build for desktop GL. If there is qtbase with gles
+# add opengles=1 to EXTRA_OESCONS but that currently disables code paths and
+# wave displays remain empty
 EXTRA_OESCONS += " \
     build=release \
     target=linux \
@@ -63,7 +61,6 @@ EXTRA_OESCONS += " \
     shoutcast=0 \
     localecompare=0 \
     faad=1 \
-    ${EXTRA_OESCONS_GL} \
     ${EXTRA_OESCONS_MATH} \
 "
 #    perftools=1

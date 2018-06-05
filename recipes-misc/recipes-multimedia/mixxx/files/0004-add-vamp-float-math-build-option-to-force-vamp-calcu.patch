@@ -71,30 +71,27 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  48 files changed, 728 insertions(+), 664 deletions(-)
 
 diff --git a/SConstruct b/SConstruct
-index 301fd3d..7fc552a 100644
+index c2680fb364..05e33196c1 100644
 --- a/SConstruct
 +++ b/SConstruct
-@@ -63,8 +63,9 @@ available_features = [features.Mad,
-                       features.IPod,
-                       features.FFMPEG,
+@@ -65,7 +65,8 @@ available_features = [features.Mad,
  
--		     # Experimental features
--		     features.OpenGLES
-+                      # Experimental features
-+                      features.OpenGLES,
+                       # Experimental features
+                       features.OpenGLES,
+-                      features.QtKeychain
++                      features.QtKeychain,
 +                      features.VampFloat
                        ]
  
  build = mixxx.MixxxBuild(target, machine, build_type,
 diff --git a/build/features.py b/build/features.py
-index e6ee0f9..5a7c0ad 100644
+index 263c01583b..029318d211 100644
 --- a/build/features.py
 +++ b/build/features.py
-@@ -26,6 +26,29 @@ class OpenGLES(Feature):
+@@ -26,6 +26,28 @@ class OpenGLES(Feature):
      def sources(self, build):
          return []
  
-+
 +class VampFloat(Feature):
 +    def description(self):
 +        return "Vamp single precision [Experimental]"
@@ -120,14 +117,14 @@ index e6ee0f9..5a7c0ad 100644
  class HSS1394(Feature):
      def description(self):
          return "HSS1394 MIDI device support"
-@@ -390,7 +413,6 @@ class Vamp(Feature):
+@@ -391,7 +413,6 @@ class Vamp(Feature):
              return
  
          build.env.Append(CPPDEFINES='__VAMP__')
 -        build.env.Append(CPPDEFINES='kiss_fft_scalar=double')
  
-         # If there is no system vamp-hostdk installed, then we'll directly link
-         # the vamp-hostsdk.
+         # If there is no system vamp-hostsdk is installed or if the version
+         # of the installed vamp-hostsdk is less than the bundled version,
 diff --git a/vamp-plugins/dsp/chromagram/CQprecalc.cpp b/vamp-plugins/dsp/chromagram/CQprecalc.cpp
 index 96d41b5..43d031c 100644
 --- a/vamp-plugins/dsp/chromagram/CQprecalc.cpp
