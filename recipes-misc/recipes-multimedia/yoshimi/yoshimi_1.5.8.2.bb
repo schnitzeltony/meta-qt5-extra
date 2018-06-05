@@ -22,8 +22,8 @@ DEPENDS += " \
 "
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/1.5/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "f1747d75a4d5a94c4140a4015faf6377"
-SRC_URI[sha256sum] = "46361765ab042fd45d5f83f33591cabe6acff5452c7f07318748f89f75c99a3f"
+SRC_URI[md5sum] = "e9a0b110a7833833556191cc883a544d"
+SRC_URI[sha256sum] = "acdb8c431a3b7231be9a1d6d5aea5dd7bd0f83cbf51e9721d69fb76fab69e7cd"
 
 OECMAKE_SOURCEPATH = "${S}/src"
 
