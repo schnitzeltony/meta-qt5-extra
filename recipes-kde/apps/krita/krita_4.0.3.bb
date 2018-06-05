@@ -34,10 +34,9 @@ DEPENDS += " \
 
 SRC_URI = " \
     ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
-    file://0001-fix-build-with-GLES2-only.patch \
 "
-SRC_URI[md5sum] = "eb3224bbf09b7b88364c6308cd5a5d18"
-SRC_URI[sha256sum] = "bec04e3392e9b311477c5c6a50e2201b43a3afda91d9b24a0fc8e3399585865d"
+SRC_URI[md5sum] = "38f5955277e6e544922ebc7272f503c7"
+SRC_URI[sha256sum] = "f9ead78ff4b184af49aea59385b0cfa1238ebf7fd527bf2f408c59fc5b12b67e"
 
 OECMAKE_GENERATOR="Unix Makefiles"
 
@@ -59,4 +58,5 @@ FILES_${PN} += " \
     ${datadir}/icons \
     ${datadir}/kritaplugins \
     ${libdir}/kritaplugins \
+    ${OE_QMAKE_PATH_QML}/org/krita \
 "
