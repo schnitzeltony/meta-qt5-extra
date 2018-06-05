@@ -9,7 +9,7 @@ DEPENDS += " \
     glib-2.0-native \
     boost \
     qtbase \
-    qtquick1 \
+    qtquickcontrols2 \
     qtdeclarative \
     gstreamer1.0 \
     gstreamer1.0-plugins-base \
