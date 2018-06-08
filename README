@@ -14,4 +14,4 @@ URI: git://git.openembedded.org/meta-openembedded
 branch: master
 revision: HEAD
 
-Layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
+Layer maintainer: Andreas Müller <schnitzeltony@gmail.com>
