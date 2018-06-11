@@ -74,6 +74,7 @@ RDEPENDS_${PN} = " \
     arty-fx \
     fabla \
     luppp \
+    openav-presets \
     sorcer \
     \
     \
