@@ -1,6 +1,6 @@
 inherit kde-base
 
-KDE_APP_VERSION = "18.04.1"
+KDE_APP_VERSION = "18.04.2"
 
 SRC_URI = "${KDE_MIRROR}/stable/applications/${PV}/src/${BPN}-${PV}.tar.xz"
 

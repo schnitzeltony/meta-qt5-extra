@@ -19,8 +19,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "507e5b2ba4e9448661b02dd63389c46e"
-SRC_URI[sha256sum] = "a02eeb3ebe5964078a340d072cffa011c69082d2a6c7c24d1f13a2e67b885827"
+SRC_URI[md5sum] = "35990bb0c7d2508cb25a4aadcac306fa"
+SRC_URI[sha256sum] = "c4b10ac354829fa8ae236fd099d241c0d3e651923f21260eec059e8198ce7f3d"
 
 FILES_${PN} += " \
     ${datadir}/kmahjongglib \
