@@ -49,11 +49,6 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/k*5 \
     ${datadir}/polkit-1 \
+    ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-FILES_${PN}-dbg += " \
-    ${libdir}/${BPN}/kf5/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
 "
