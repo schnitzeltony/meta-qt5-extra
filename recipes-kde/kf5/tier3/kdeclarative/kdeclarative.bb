@@ -13,8 +13,8 @@ DEPENDS += "qtdeclarative kconfig kconfig-native ki18n kiconthemes kio kwidgetsa
 SRC_URI += "file://0001-kpackagelauncherqml-Add-include-of-QDebug.patch"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "16214091286562cdd2dbcf3a00be599b"
-SRC_URI[sha256sum] = "0c6d9cea0b977d5d2fb65cc9ac620724602ee4c9fccd7152fe9360333a072283"
+SRC_URI[md5sum] = "d9103b9b38ba20a042098f169d6bc9ca"
+SRC_URI[sha256sum] = "3a55236b3aed4ca1b5c754b2b97652a4c91c1c15107396c111bc41ef8d4874a0"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}/org/kde"
 FILES_${PN}-dbg += " \
