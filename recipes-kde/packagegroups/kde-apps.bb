@@ -17,6 +17,7 @@ RDEPENDS_${PN} = " \
     kcolorchooser \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
     kdf \
+    kexi \
     khelpcenter \
     kio-extras \
     kmag \

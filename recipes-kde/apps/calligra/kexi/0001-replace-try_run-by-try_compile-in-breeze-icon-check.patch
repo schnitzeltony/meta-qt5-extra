@@ -1,0 +1,48 @@
+From 11f1c4adc5141a66552f6862d943c7af3c8972b3 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 18 Jun 2018 23:31:15 +0200
+Subject: [PATCH] replace try_run by try_compile in breeze-icon-check
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+try_run does not work in cross environments
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ cmake/modules/CheckGlobalBreezeIcons.cmake | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
+
+diff --git a/cmake/modules/CheckGlobalBreezeIcons.cmake b/cmake/modules/CheckGlobalBreezeIcons.cmake
+index 9763213..46a218a 100644
+--- a/cmake/modules/CheckGlobalBreezeIcons.cmake
++++ b/cmake/modules/CheckGlobalBreezeIcons.cmake
+@@ -24,21 +24,14 @@ else()
+     set(CheckGlobalBreezeIcons_libs Qt5::Xml)
+ endif()
+ 
+-try_run(RUN_RESULT COMPILE_OK
++try_compile(COMPILE_OK
+     ${CMAKE_CURRENT_BINARY_DIR}/CMakeTmp
+     ${CMAKE_SOURCE_DIR}/cmake/modules/CheckGlobalBreezeIcons.cpp
+     COMPILE_DEFINITIONS ${CheckGlobalBreezeIcons_defs}
+     LINK_LIBRARIES ${CheckGlobalBreezeIcons_libs}
+     CMAKE_FLAGS ${CheckGlobalBreezeIcons_flags}
+-    COMPILE_OUTPUT_VARIABLE COMPILE_OUTPUT
+-    RUN_OUTPUT_VARIABLE RUN_OUTPUT)
++    OUTPUT_VARIABLE COMPILE_OUTPUT)
+ 
+ if(NOT COMPILE_OK)
+     message(FATAL_ERROR "${COMPILE_OUTPUT}")
+ endif()
+-
+-if(NOT ${RUN_RESULT} EQUAL 0)
+-    message(FATAL_ERROR "No valid breeze-icons.rcc resource file found. \
+-The CheckGlobalBreezeIcons.cmake script returned ${RUN_RESULT}.\n \
+-Result: ${RUN_OUTPUT}")
+-endif()
+-- 
+2.14.3
+
