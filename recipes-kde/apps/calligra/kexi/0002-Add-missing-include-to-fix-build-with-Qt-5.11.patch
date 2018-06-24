@@ -1,0 +1,30 @@
+From e915c66f94921aaf07232a454404e157b65bbb5f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 22 Jun 2018 22:49:17 +0200
+Subject: [PATCH] Add missing include to fix build with Qt 5.11
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/main/startup/KexiNewProjectAssistant.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/main/startup/KexiNewProjectAssistant.cpp b/src/main/startup/KexiNewProjectAssistant.cpp
+index 59e819a..afacc17 100644
+--- a/src/main/startup/KexiNewProjectAssistant.cpp
++++ b/src/main/startup/KexiNewProjectAssistant.cpp
+@@ -54,6 +54,7 @@
+ #include <QProgressBar>
+ #include <QFileInfo>
+ #include <QFileDialog>
++#include <QAction>
+ 
+ class KexiServerDBNamePage : public QWidget, public Ui::KexiServerDBNamePage
+ {
+-- 
+2.14.3
+
