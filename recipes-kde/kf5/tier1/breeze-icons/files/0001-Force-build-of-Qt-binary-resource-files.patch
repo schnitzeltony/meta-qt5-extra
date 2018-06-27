@@ -1,0 +1,31 @@
+From f2a47f18e8f15fcf78e9d3bab29a5f553cd461e0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 28 Jun 2018 00:06:30 +0200
+Subject: [PATCH] Force build of Qt binary resource files
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ffc718b..f76650a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -26,7 +26,7 @@ else()
+     set(BINARY_ICONS_RESOURCE_OPTION_DEFAULT ON)
+ endif()
+ 
+-option(BINARY_ICONS_RESOURCE "Install Qt binary resource files containing breeze icons (breeze-icons.rcc, breeze-icons-dark.rcc)" ${BINARY_ICONS_RESOURCE_OPTION_DEFAULT})
++option(BINARY_ICONS_RESOURCE "Install Qt binary resource files containing breeze icons (breeze-icons.rcc, breeze-icons-dark.rcc)" ON)
+ option(SKIP_INSTALL_ICONS "Skip installing the icons files" OFF)
+ 
+ if(BINARY_ICONS_RESOURCE)
+-- 
+2.14.3
+

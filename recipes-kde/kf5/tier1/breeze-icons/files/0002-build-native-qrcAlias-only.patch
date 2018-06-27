@@ -1,0 +1,31 @@
+From 2edcfaf8e189ac569192f48ed00aa0e13fc79962 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 28 Jun 2018 00:41:48 +0200
+Subject: [PATCH] build native qrcAlias only
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f76650a..3c67d5b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -84,8 +84,4 @@ if(NOT WIN32)
+     endif()
+ endif()
+ 
+-add_subdirectory(autotests)
+-add_subdirectory(icons)
+-add_subdirectory(icons-dark)
+-
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES INCLUDE_QUIET_PACKAGES)
+-- 
+2.14.3
+
