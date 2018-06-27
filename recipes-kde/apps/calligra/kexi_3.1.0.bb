@@ -20,7 +20,6 @@ DEPENDS += " \
     kconfig-native \
     kcoreaddons-native \
     kdoctools-native \
-    breeze-icons \
     karchive \
     kcodecs \
     kconfigwidgets \
@@ -48,6 +47,8 @@ SRC_URI[sha256sum] = "6d55cd4af177bcb060673a0977d52bc91cc2dd1b1420d008a78f978331
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
+
+RDEPENDS_${PN} += "breeze-icons-binres"
 
 # REVISIT
 #-- The following RECOMMENDED packages have not been found:
