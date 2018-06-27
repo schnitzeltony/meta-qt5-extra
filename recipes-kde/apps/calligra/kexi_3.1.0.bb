@@ -44,6 +44,11 @@ SRC_URI = " \
 SRC_URI[md5sum] = "22d6c4739109441f5274da584f67f1c8"
 SRC_URI[sha256sum] = "6d55cd4af177bcb060673a0977d52bc91cc2dd1b1420d008a78f9783312152fb"
 
+do_install_append() {
+    install -d "${D}/${datadir}/pixmaps"
+    install ${S}/src/pics/icons/breeze/apps/48/kexi.svg ${D}/${datadir}/pixmaps/
+}
+
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
