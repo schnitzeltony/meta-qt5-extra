@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/schnitzeltony/${BPN}.git;branch=master"
 
 DEPENDS += "qtbase qtserialport"
 
-PV = "0.3.992+git${SRCPV}"
-SRCREV = "9b9e413d0047495a2b956621a5774c4d51cd94a3"
+PV = "0.3.993+git${SRCPV}"
+SRCREV = "f14298778f36171d6d3923c95cd891d4473937fe"
 
 S="${WORKDIR}/git"
