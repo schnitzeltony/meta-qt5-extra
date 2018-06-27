@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING-CMAKE-SCRIPTS;md5=3775480a712fc46a69647678acb234cb \
 "
 
-inherit kde-apps gtk-icon-cache
+inherit kde-apps python3native gtk-icon-cache
 
 DEPENDS += " \
     qtmultimedia \
@@ -35,8 +35,8 @@ DEPENDS += " \
 SRC_URI = " \
     ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
 "
-SRC_URI[md5sum] = "38f5955277e6e544922ebc7272f503c7"
-SRC_URI[sha256sum] = "f9ead78ff4b184af49aea59385b0cfa1238ebf7fd527bf2f408c59fc5b12b67e"
+SRC_URI[md5sum] = "ec8933f055944598fd05a331929d8776"
+SRC_URI[sha256sum] = "78792df8165b986b806dcf9960a2679f683f2263e06f3ad5a24b0f78d8f27ed5"
 
 OECMAKE_GENERATOR="Unix Makefiles"
 
