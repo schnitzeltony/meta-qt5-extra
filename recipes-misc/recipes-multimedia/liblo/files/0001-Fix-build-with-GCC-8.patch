@@ -1,0 +1,36 @@
+From 74621a7d961b792fb5a9399b6f40ef633ebc5339 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 1 Jul 2018 18:10:10 +0200
+Subject: [PATCH] Fix build with GCC >= 8
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+| ../../liblo-0.29/src/server.c:324:13: error: 'strncpy' specified bound 1024 equals destination size [-Werror=stringop-truncation]
+|             strncpy(hostname, he->h_name, sizeof(hostname));
+|             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| cc1: all warnings being treated as errors
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/server.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/server.c b/src/server.c
+index 01fa08f..e94a453 100644
+--- a/src/server.c
++++ b/src/server.c
+@@ -321,7 +321,7 @@ void lo_server_resolve_hostname(lo_server s)
+         gethostname(hostname, sizeof(hostname));
+         he = gethostbyname(hostname);
+         if (he) {
+-            strncpy(hostname, he->h_name, sizeof(hostname));
++            strncpy(hostname, he->h_name, sizeof(hostname)-1);
+         }
+     }
+ 
+-- 
+2.14.4
+
