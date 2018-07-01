@@ -17,8 +17,8 @@ DEPENDS += " \
 "
 
 SRC_URI = "gitsm://github.com/x42/tuna.lv2.git"
-SRCREV = "a27336f2869a52759f009a866632fd2a98c9c480"
-PV = "0.4.3+git${SRCPV}"
+SRCREV = "d0c5044df527042d4d2b5365b5706ad151ca033d"
+PV = "0.4.4+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE += " \
