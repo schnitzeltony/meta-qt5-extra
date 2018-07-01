@@ -1,0 +1,84 @@
+From 9d4fef967e622faec90bbed00fb00383e85e328c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 2 Jul 2018 00:22:14 +0200
+Subject: [PATCH] Engine/csound_orc_semantics.c: Fix build with gcc8
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/csound/6.11.0-r0/git/Engine/csound_orc_semantics.c:73:7: error: 'strncpy' output truncated before terminating nul copying as many bytes from a string as its length [-Werror=stringop-truncation]
+       strncpy(retVal, str, len);
+       ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/csound/6.11.0-r0/git/Engine/csound_orc_semantics.c:69:11: note: length computed here
+     len = strlen(str);
+           ^~~~~~~~~~~
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/csound/6.11.0-r0/git/Engine/csound_orc_semantics.c: In function 'get_arg_type2':
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/csound/6.11.0-r0/git/Engine/csound_orc_semantics.c:450:7: error: 'strncpy' output truncated before terminating nul copying as many bytes from a string as its length [-Werror=stringop-truncation]
+       strncpy(inArgTypes, argTypeLeft, len1);
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/csound/6.11.0-r0/git/Engine/csound_orc_semantics.c:446:14: note: length computed here
+       len1 = strlen(argTypeLeft);
+              ^~~~~~~~~~~~~~~~~~~
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/csound/6.11.0-r0/git/Engine/csound_orc_semantics.c:451:7: error: 'strncpy' output truncated before terminating nul copying as many bytes from a string as its length [-Werror=stringop-truncation]
+       strncpy(inArgTypes + len1, argTypeRight, len2);
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/csound/6.11.0-r0/git/Engine/csound_orc_semantics.c:447:14: note: length computed here
+       len2 = strlen(argTypeRight);
+              ^~~~~~~~~~~~~~~~~~~~
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/csound/6.11.0-r0/git/Engine/csound_orc_semantics.c:392:9: error: 'strncpy' output truncated before terminating nul copying as many bytes from a string as its length [-Werror=stringop-truncation]
+         strncpy(inArgTypes, argTypeLeft, len1);
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/csound/6.11.0-r0/git/Engine/csound_orc_semantics.c:388:16: note: length computed here
+         len1 = strlen(argTypeLeft);
+                ^~~~~~~~~~~~~~~~~~~
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/csound/6.11.0-r0/git/Engine/csound_orc_semantics.c:393:9: error: 'strncpy' output truncated before terminating nul copying as many bytes from a string as its length [-Werror=stringop-truncation]
+         strncpy(inArgTypes + len1, argTypeRight, len2);
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/csound/6.11.0-r0/git/Engine/csound_orc_semantics.c:389:16: note: length computed here
+         len2 = strlen(argTypeRight);
+         
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ Engine/csound_orc_semantics.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/Engine/csound_orc_semantics.c b/Engine/csound_orc_semantics.c
+index 6b6255d9c..5985b2435 100644
+--- a/Engine/csound_orc_semantics.c
++++ b/Engine/csound_orc_semantics.c
+@@ -70,7 +70,7 @@ char* cs_strdup(CSOUND* csound, char* str) {
+     retVal = csound->Malloc(csound, len + 1);
+ 
+     if (len > 0) {
+-      strncpy(retVal, str, len);
++      strncpy(retVal, str, len+1);
+     }
+     retVal[len] = '\0';
+ 
+@@ -389,8 +389,8 @@ char* get_arg_type2(CSOUND* csound, TREE* tree, TYPE_TABLE* typeTable)
+         len2 = strlen(argTypeRight);
+         inArgTypes = csound->Malloc(csound, len1 + len2 + 1);
+ 
+-        strncpy(inArgTypes, argTypeLeft, len1);
+-        strncpy(inArgTypes + len1, argTypeRight, len2);
++        strncpy(inArgTypes, argTypeLeft, len1+1);
++        strncpy(inArgTypes + len1, argTypeRight, len2+1);
+ 
+         inArgTypes[len1 + len2] = '\0';
+ 
+@@ -447,8 +447,8 @@ char* get_arg_type2(CSOUND* csound, TREE* tree, TYPE_TABLE* typeTable)
+       len2 = strlen(argTypeRight);
+       inArgTypes = csound->Malloc(csound, len1 + len2 + 1);
+ 
+-      strncpy(inArgTypes, argTypeLeft, len1);
+-      strncpy(inArgTypes + len1, argTypeRight, len2);
++      strncpy(inArgTypes, argTypeLeft, len1+1);
++      strncpy(inArgTypes + len1, argTypeRight, len2+1);
+ 
+       inArgTypes[len1 + len2] = '\0';
+ 
+-- 
+2.14.4
+

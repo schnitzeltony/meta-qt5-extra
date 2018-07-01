@@ -1,0 +1,117 @@
+From 7e2f3f49670166804529c6b9ff1398f38999d921 Mon Sep 17 00:00:00 2001
+From: veplaini <victor.lazzarini@nuim.ie>
+Date: Fri, 11 May 2018 14:05:49 +0100
+Subject: [PATCH] strict aliasing errors
+
+---
+ Engine/musmon.c |  2 +-
+ Engine/rdscor.c |  8 +++++---
+ OOps/schedule.c | 19 ++++++++++++++-----
+ 3 files changed, 20 insertions(+), 9 deletions(-)
+ 
+Upstream-Status: Backport
+
+diff --git a/Engine/musmon.c b/Engine/musmon.c
+index 440642489..8f4cc22cf 100644
+--- a/Engine/musmon.c
++++ b/Engine/musmon.c
+@@ -1033,7 +1033,7 @@ int sensevents(CSOUND *csound)
+         if (!(rdscor(csound, e))){
+           /* or rd nxt evt from scstr */
+           e->opcod = 'e';
+-        }
++        } 
+       csound->currevent = e;
+ 
+       switch (e->opcod) {
+diff --git a/Engine/rdscor.c b/Engine/rdscor.c
+index f39393725..fe6488cb2 100644
+--- a/Engine/rdscor.c
++++ b/Engine/rdscor.c
+@@ -142,7 +142,7 @@ int rdscor(CSOUND *csound, EVTBLK *e) /* read next score-line from scorefile */
+ {                                     /*      presumes good format if warped */
+     MYFLT   *pp, *plim;
+     int     c;
+-
++    
+     e->pinstance = NULL;
+     if (csound->scstr == NULL ||
+         csound->scstr->body[0] == '\0') {   /* if no concurrent scorefile  */
+@@ -151,12 +151,14 @@ int rdscor(CSOUND *csound, EVTBLK *e) /* read next score-line from scorefile */
+       e->p[2] = FL(INF);
+       e->p2orig = FL(INF);
+       e->pcnt = 2;
++       
+       return(1);
+     }
++   
+   /* else read the real score */
+     while ((c = corfile_getc(csound->scstr)) != '\0') {
+       csound->scnt = 0;
+-      switch (c) {
++      switch (c) {       
+       case ' ':
+       case '\t':
+       case '\n':
+@@ -193,7 +195,7 @@ int rdscor(CSOUND *csound, EVTBLK *e) /* read next score-line from scorefile */
+         goto setp;
+       case 'e':
+         e->opcod = c;
+-        e->pcnt = 0;
++        e->pcnt = 0; 
+         return(1);
+       case EOF:                          /* necessary for cscoreGetEvent */
+         return(0);
+diff --git a/OOps/schedule.c b/OOps/schedule.c
+index b87897ec9..6dd60e94f 100644
+--- a/OOps/schedule.c
++++ b/OOps/schedule.c
+@@ -79,7 +79,7 @@ int32_t schedule_N(CSOUND *csound, SCHED *p)
+ {
+     int32_t i;
+     int32_t argno = p->INOCOUNT+1;
+-    char s[16384];
++    char s[16384], sf[64];
+     sprintf(s, "i %f %f %f", *p->which, *p->when, *p->dur);
+     for (i=4; i < argno ; i++) {
+        MYFLT *arg = p->argums[i-4];
+@@ -87,8 +87,12 @@ int32_t schedule_N(CSOUND *csound, SCHED *p)
+            add_string_arg(s, ((STRINGDAT *)arg)->data);
+            //sprintf(s, "%s \"%s\" ", s, ((STRINGDAT *)arg)->data);
+        }
+-       else sprintf(s, "%s %f", s,  *arg);
+-
++       else {
++         sprintf(sf, " %f", *arg);
++         if(strlen(s) < 16384)
++          strncat(s, sf, 16384-strlen(s));
++         //sprintf(s, "%s %f", s,  *arg);
++       }
+     }
+ 
+     csoundInputMessageInternal(csound, s);
+@@ -99,14 +103,19 @@ int32_t schedule_SN(CSOUND *csound, SCHED *p)
+ {
+     int32_t i;
+     int32_t argno = p->INOCOUNT+1;
+-    char s[16384];
++    char s[16384], sf[64];
+     sprintf(s, "i \"%s\" %f %f", ((STRINGDAT *)p->which)->data, *p->when, *p->dur);
+     for (i=4; i < argno ; i++) {
+        MYFLT *arg = p->argums[i-4];
+          if (csoundGetTypeForArg(arg) == &CS_VAR_TYPE_S)
+            //sprintf(s, "%s \"%s\" ", s, ((STRINGDAT *)arg)->data);
+            add_string_arg(s, ((STRINGDAT *)arg)->data);
+-         else sprintf(s, "%s %f", s,  *arg);
++        else {
++         sprintf(sf, " %f", *arg);
++         if(strlen(s) < 16384)
++          strncat(s, sf, 16384-strlen(s));
++         //sprintf(s, "%s %f", s,  *arg);
++       }
+     }
+     //printf("%s\n", s);
+     csoundInputMessageInternal(csound, s);
+-- 
+2.14.4
+
