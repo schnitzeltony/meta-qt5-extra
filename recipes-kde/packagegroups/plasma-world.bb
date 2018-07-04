@@ -46,7 +46,7 @@ UNTIER = " \
     milou \
     oxygen \
     oxygen-fonts \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "plasma-desktop", "",d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', bb.utils.contains('BBFILE_COLLECTIONS', 'browser-layer', 'plasma-browser-integration', '', d), '', d)} \
     plasma-integration \
     plasma-nm \
     plasma-pa \
