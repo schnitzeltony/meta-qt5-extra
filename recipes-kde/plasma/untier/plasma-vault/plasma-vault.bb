@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gtk-icon-cache
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "550e6df7522a10e5262136a54b88a254"
-SRC_URI[sha256sum] = "2d4027ee1e21a2c0698a56e17aacdf871a2ea6f0e4bd2e3c7459eb7919d63c7f"
+SRC_URI[md5sum] = "205472598c7d246fdc6f9c3dfb46374d"
+SRC_URI[sha256sum] = "cbf59234eb2a114bf5095b202d855930491e5d470ad8b205184b45b2a4c78297"
 
 DEPENDS += " \
     kauth-native \
@@ -25,13 +25,11 @@ DEPENDS += " \
     plasma-framework \
     kwidgetsaddons \
     ksysguard \
+    networkmanager-qt \
 "
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/plasma \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
 "

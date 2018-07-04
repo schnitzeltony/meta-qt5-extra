@@ -23,11 +23,12 @@ DEPENDS += " \
     kdesu \
     kdelibs4support \
     kwindowsystem \
+    plasma-workspace \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "15e8b3abd34c7bed89247dcd89677da9"
-SRC_URI[sha256sum] = "905e5ad02a68743674f89bf705ffc32e0772704fee5023e5be068f2e6e6a403f"
+SRC_URI[md5sum] = "ba79b133e21e40968eb95f3c7710d721"
+SRC_URI[sha256sum] = "fa869ce5582553f2ce5a7027984ce5a65474675f19c17235cff12124f2821e12"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

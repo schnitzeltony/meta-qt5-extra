@@ -1,15 +1,14 @@
-From 81fbb6d0d806f7934e24145fcd329a6a67b04952 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 11 Dec 2014 17:07:06 +0100
-Subject: [PATCH 08/12] fix build for QT_NO_SESSIONMANAGER
+From 5b89ba2442a8829a8a5f5af5247d838d1a2750e8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 4 Jul 2018 23:32:58 +0200
+Subject: [PATCH] fix build for QT_NO_SESSIONMANAGER
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Upstream-Status: pending
+Upstream-Status: Pending
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  klipper/main.cpp          | 4 ++++
  krunner/main.cpp          | 4 ++++
@@ -18,7 +17,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  4 files changed, 16 insertions(+)
 
 diff --git a/klipper/main.cpp b/klipper/main.cpp
-index 58a0778..a1d1312 100644
+index 36539b63..522608a4 100644
 --- a/klipper/main.cpp
 +++ b/klipper/main.cpp
 @@ -27,7 +27,9 @@
@@ -39,16 +38,16 @@ index 58a0778..a1d1312 100644
    QGuiApplication::setFallbackSessionManagementEnabled(false);
  
    auto disableSessionManagement = [](QSessionManager &sm) {
-@@ -80,6 +83,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
-   };
+@@ -81,6 +84,7 @@ extern "C" int Q_DECL_EXPORT kdemain(int argc, char *argv[])
    QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
    QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
-+#endif
    app.setQuitOnLastWindowClosed( false );
++#endif
  
    QCommandLineParser parser;
+   parser.addHelpOption();
 diff --git a/krunner/main.cpp b/krunner/main.cpp
-index b63156d..4edc1a8 100644
+index cf228f86..6785a928 100644
 --- a/krunner/main.cpp
 +++ b/krunner/main.cpp
 @@ -24,7 +24,9 @@
@@ -61,15 +60,15 @@ index b63156d..4edc1a8 100644
  
  #include <KAuthorized>
  #include <KAboutData>
-@@ -76,6 +78,7 @@ int main(int argc, char **argv)
+@@ -81,6 +83,7 @@ int main(int argc, char **argv)
  
-     KAboutData::setApplicationData(aboutData);
+     KDBusService service(KDBusService::Unique);
  
 +#ifndef QT_NO_SESSIONMANAGER
      QGuiApplication::setFallbackSessionManagementEnabled(false);
  
      auto disableSessionManagement = [](QSessionManager &sm) {
-@@ -83,6 +86,7 @@ int main(int argc, char **argv)
+@@ -88,6 +91,7 @@ int main(int argc, char **argv)
      };
      QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
      QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
@@ -78,7 +77,7 @@ index b63156d..4edc1a8 100644
      View view;
      view.setVisible(false);
 diff --git a/shell/main.cpp b/shell/main.cpp
-index ec117f3..93791b2 100644
+index 6e241360..97908501 100644
 --- a/shell/main.cpp
 +++ b/shell/main.cpp
 @@ -21,7 +21,9 @@
@@ -89,9 +88,9 @@ index ec117f3..93791b2 100644
  #include <QSessionManager>
 +#endif
  #include <QDebug>
+ #include <QProcess>
  #include <QMessageBox>
- 
-@@ -108,6 +110,7 @@ int main(int argc, char *argv[])
+@@ -123,6 +125,7 @@ int main(int argc, char *argv[])
      cliOptions.process(app);
      aboutData.processCommandLine(&cliOptions);
  
@@ -99,7 +98,7 @@ index ec117f3..93791b2 100644
      QGuiApplication::setFallbackSessionManagementEnabled(false);
  
      auto disableSessionManagement = [](QSessionManager &sm) {
-@@ -115,6 +118,7 @@ int main(int argc, char *argv[])
+@@ -130,6 +133,7 @@ int main(int argc, char *argv[])
      };
      QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
      QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
@@ -108,7 +107,7 @@ index ec117f3..93791b2 100644
      ShellManager::s_fixedShell = cliOptions.value(shellPluginOption);
  
 diff --git a/xembed-sni-proxy/main.cpp b/xembed-sni-proxy/main.cpp
-index 1ae9b91..8a3bc39 100644
+index 8b007823..a41b795e 100644
 --- a/xembed-sni-proxy/main.cpp
 +++ b/xembed-sni-proxy/main.cpp
 @@ -19,7 +19,9 @@
@@ -136,5 +135,5 @@ index 1ae9b91..8a3bc39 100644
      app.setQuitOnLastWindowClosed(false);
  
 -- 
-2.9.3
+2.14.3
 

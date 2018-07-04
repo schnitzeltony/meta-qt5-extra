@@ -29,11 +29,12 @@ DEPENDS += " \
     kconfig \
     khtml \
     kdoctools \
+    plasma-workspace \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "08b5ebd84ee25d2306d30e1afe33f924"
-SRC_URI[sha256sum] = "08128bfe1d946b8857ecb106fcc730132eb32d6256e596203558ebea7cfb9329"
+SRC_URI[md5sum] = "625d73b83cb2fc483f962c09daef681f"
+SRC_URI[sha256sum] = "a408cf2a35b95e547b3acaf1cbefcc01055a14e1d75c93584a79d5fd1881ed3f"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

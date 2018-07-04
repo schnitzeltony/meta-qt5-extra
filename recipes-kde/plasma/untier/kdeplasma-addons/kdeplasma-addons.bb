@@ -11,51 +11,39 @@ DEPENDS += " \
     qtdeclarative \
     \
     kauth-native \
-    kconfig \
     kconfig-native \
-    kconfigwidgets \
-    kcoreaddons \
     kcoreaddons-native \
+    kpackage-native \
+    karchive \
+    kdeclarative \
+    kholidays \
     ki18n \
+    kiconthemes \
+    kio \
     kcmutils \
+    kross \
+    knotifications \
     plasma-framework \
     krunner \
     kservice \
-    kpackage-native \
     sonnet \
     kunitconversion \
-    kdelibs4support \
-    kdelibs4support-native \
-    kdesignerplugin-native \
-    kross \
+    kwindowsystem \
     knewstuff \
-    sonnet-native \
-    plasma-workspace \
-    \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras", "", d)} \
+    purpose \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "d16a91ea15fc12e7c18d420370ad0bd6"
-SRC_URI[sha256sum] = "5af0b5e5e47a18abbb8c8e563598d3e9b99db57617faa6d7bf668188afd2698c"
-
-FILES_SOLIBSDEV = " \
-    ${libdir}/libplasma*core${SOLIBSDEV} \
-"
+SRC_URI[md5sum] = "c20bdbf3c6d814bcea7970be4e1a825e"
+SRC_URI[sha256sum] = "fdd800ffd137ffa69febe8c945973bb85d5a8627916308bf1853c51adfe0400d"
 
 FILES_${PN} += " \
-    ${datadir}/kwin \
-    ${datadir}/k*5 \
-    ${datadir}/plasma \
     ${datadir}/icons \
-    ${libdir}/libplasma*private.so \
+    ${datadir}/kdevappwizard \
+    ${datadir}/k*5 \
+    ${datadir}/kwin \
+    ${datadir}/plasma \
     \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/plasma/private/*/.debug \
 "

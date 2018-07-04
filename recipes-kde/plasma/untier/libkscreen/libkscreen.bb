@@ -7,19 +7,15 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-plasma
 
-DEPENDS += " \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras", "", d)} \
-"
+DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras", "", d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "1e3b3aa0026bf51121fa36f4380db6e5"
-SRC_URI[sha256sum] = "64490d5cc666251b78d2aa42db9f4160d8494807f2777afa1fb46cda2764ed43"
+SRC_URI[md5sum] = "5cef0c575c51acafa81d8fc954a07d4e"
+SRC_URI[sha256sum] = "a5629c371a79b7872f72cc212e42d408823fba0f1eb2bd46fb036f657d372517"
 
 SRC_URI += " \
     file://0001-fix-configuration-build-on-x-less-systems.patch \
-    file://0002-avoid-autotests.patch \
 "
-
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \

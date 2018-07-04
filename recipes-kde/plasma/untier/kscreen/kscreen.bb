@@ -13,22 +13,26 @@ DEPENDS += "\
     kauth-native \
     kconfig-native \
     kcoreaddons-native \
-    libkscreen \
+    kpackage-native \
     kdbusaddons \
+    kconfig \
     kconfigwidgets \
     ki18n \
     kxmlgui \
     kglobalaccel \
-    \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)} \
+    kwidgetsaddons \
+    kdeclarative \
+	kiconthemes \
+    plasma-framework \
+    libkscreen \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "bdd7f9036220e39f23b1c57cb373174d"
-SRC_URI[sha256sum] = "1468c4bf0e781122eb0087c3b6fcee9c75da310fa1838c93f0dcfe1af7f14cb3"
+SRC_URI[md5sum] = "b03a2382f80aea7018bcc6d48373d21c"
+SRC_URI[sha256sum] = "20dcd03adf8a1cd5971e718ef56a55b3c72331207f3fb14216ad7710e30c1520"
 
 FILES_${PN} += " \
-    ${datadir}/kcm_kscreen \
+    ${datadir}/k*_kscreen \
     ${datadir}/kservices5 \
     ${datadir}/icons \
     ${OE_QMAKE_PATH_PLUGINS} \

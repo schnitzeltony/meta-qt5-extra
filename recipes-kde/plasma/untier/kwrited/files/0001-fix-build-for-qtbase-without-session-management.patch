@@ -1,25 +1,28 @@
-From 0803702f8cae2734df58e82a19905de4cbd22484 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 25 Feb 2015 11:47:44 +0100
+From a5d00be3accdbc1cecd4174c74c9876293b83e3c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 4 Jul 2018 22:01:37 +0200
 Subject: [PATCH] fix build for qtbase without session management
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- kwrited.cpp | 3 +++
- 1 file changed, 3 insertions(+)
+ kwrited.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/kwrited.cpp b/kwrited.cpp
-index 2b73e36..de0a49a 100644
+index 1df1f2c..b77cd25 100644
 --- a/kwrited.cpp
 +++ b/kwrited.cpp
-@@ -76,11 +76,13 @@ int main(int argc, char **argv)
- #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-     QGuiApplication::setFallbackSessionManagementEnabled(false);
- #endif
+@@ -73,12 +73,14 @@ int main(int argc, char **argv)
+     QApplication::setDesktopSettingsAware(false);
+     QApplication a(argc, argv);
+     KAboutData::setApplicationData(aboutData());
 +#ifndef QT_NO_SESSIONMANAGER
+     QGuiApplication::setFallbackSessionManagementEnabled(false);
      auto disableSessionManagement = [](QSessionManager &sm) {
              sm.setRestartHint(QSessionManager::RestartNever);
      };
@@ -30,5 +33,5 @@ index 2b73e36..de0a49a 100644
      KWrited w;
      return a.exec();
 -- 
-1.9.3
+2.14.3
 

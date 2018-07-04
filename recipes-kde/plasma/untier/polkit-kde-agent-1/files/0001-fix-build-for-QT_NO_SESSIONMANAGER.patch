@@ -1,45 +1,48 @@
-From 099c0a4f82aaea70d751ad33fc35dfaea0c80a1b Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Mon, 9 Feb 2015 20:00:24 +0100
+From ec4d92577256080e668869fc0ee343bf1a0dc62d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 4 Jul 2018 23:21:01 +0200
 Subject: [PATCH] fix build for QT_NO_SESSIONMANAGER
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  main.cpp | 4 ++++
  1 file changed, 4 insertions(+)
 
 diff --git a/main.cpp b/main.cpp
-index c770e25..8b93157 100644
+index a30eeca..c53bb4e 100644
 --- a/main.cpp
 +++ b/main.cpp
-@@ -25,7 +25,9 @@
- #include <KCrash>
- #include <KDBusService>
- 
+@@ -29,7 +29,9 @@
+ #include <PolkitQt1/Subject>
+ // Qt
+ #include <QApplication>
 +#ifndef QT_NO_SESSIONMANAGER
  #include <QSessionManager>
 +#endif
- 
- #include "policykitkde.h"
- 
-@@ -48,12 +50,14 @@ int main(int argc, char *argv[])
-     PolicyKitKDE agent(argc, argv);
+ #include <QDebug>
+ // std
+ #if HAVE_SYS_PRCTL_H
+@@ -73,6 +75,7 @@ int main(int argc, char *argv[])
+     // ensure singleton run
      KDBusService service(KDBusService::Unique);
  
 +#ifndef QT_NO_SESSIONMANAGER
+     // disable session management
      auto disableSessionManagement = [](QSessionManager &sm) {
          sm.setRestartHint(QSessionManager::RestartNever);
-     };
+@@ -80,6 +83,7 @@ int main(int argc, char *argv[])
  
-     QObject::connect(&agent, &QGuiApplication::commitDataRequest, disableSessionManagement);
-     QObject::connect(&agent, &QGuiApplication::saveStateRequest, disableSessionManagement);
+     QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
+     QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
 +#endif
  
-     agent.exec();
- }
+     // register agent
+     PolicyKitListener *listener = new PolicyKitListener(&app);
 -- 
-1.9.3
+2.14.3
 
