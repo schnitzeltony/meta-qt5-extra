@@ -1,8 +1,7 @@
 SUMMARY = "Artwork, styles and assets for the Breeze visual style for the Plasma Desktop"
-LICENSE = "GPLv2 & LGPLv3"
+LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-    file://COPYING-ICONS;md5=3e7f6a3da5801872be1084a978cfc0eb \
 "
 
 inherit kde-plasma gettext
