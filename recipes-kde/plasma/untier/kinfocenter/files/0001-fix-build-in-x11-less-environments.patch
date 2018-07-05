@@ -63,7 +63,7 @@ index c87cde8..5df02e3 100644
  
  #include <openglconfig.h>
  
-@@ -737,7 +740,8 @@ static QTreeWidgetItem *get_gl_info_glx(Display *dpy, int scrnum, Bool allowDire
+@@ -782,7 +785,8 @@ static QTreeWidgetItem *get_gl_info_glx(Display *dpy, int scrnum, Bool allowDire
  }
  #endif
  
@@ -73,7 +73,7 @@ index c87cde8..5df02e3 100644
  static QTreeWidgetItem *get_gl_info_egl(Display *dpy, int scrnum, QTreeWidgetItem *l1, QTreeWidgetItem *after)
  {
     Window win;
-@@ -852,6 +856,7 @@ static QTreeWidgetItem *get_gl_info_egl(Display *dpy, int scrnum, QTreeWidgetIte
+@@ -898,6 +902,7 @@ static QTreeWidgetItem *get_gl_info_egl(Display *dpy, int scrnum, QTreeWidgetIte
     return result;
  
  }
@@ -81,7 +81,7 @@ index c87cde8..5df02e3 100644
  
  static QTreeWidgetItem *get_gl_info_egl_qt(QTreeWidgetItem *l1, QTreeWidgetItem *after, QSurfaceFormat::OpenGLContextProfile profile, const QString &title)
  {
-@@ -899,7 +904,9 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
+@@ -943,7 +948,9 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
  {
      QTreeWidgetItem *l1, *l2 = nullptr;
  
@@ -91,7 +91,7 @@ index c87cde8..5df02e3 100644
      static bool isWayland = QGuiApplication::platformName().contains(QStringLiteral("wayland"));
  
      QTreeWidgetItem *header = new QTreeWidgetItem();
-@@ -911,6 +918,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
+@@ -955,6 +962,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
  
      l1 = new QTreeWidgetItem(treeWidget);
  
@@ -99,7 +99,7 @@ index c87cde8..5df02e3 100644
      if (isX11) {
          char *displayName = nullptr;
          Display *dpy;
-@@ -939,7 +947,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
+@@ -983,7 +991,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
              l2 = get_gl_info_glx(dpy, scrnum, true, l1, l2);
              if (l2) l2->setExpanded(true);
  #endif
@@ -108,14 +108,11 @@ index c87cde8..5df02e3 100644
              l2 = get_gl_info_egl(dpy, scrnum, l1, l2);
              if (l2)
                  l2->setExpanded(true);
-@@ -956,6 +964,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
+@@ -1000,6 +1008,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
  #endif
          XCloseDisplay(dpy);
      }
 +#endif
  
      if (isWayland) {
-         l1->setText(0, i18n("Name of the Display"));
--- 
-1.9.3
-
+         IsDirect = true;
