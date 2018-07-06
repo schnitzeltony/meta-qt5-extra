@@ -36,3 +36,5 @@ FILES_${PN} += " \
     ${datadir}/solid \
     ${OE_QMAKE_PATH_QML} \
 "
+
+RDEPENDS_${PN} += "qtquickcontrols-qmlplugins"
