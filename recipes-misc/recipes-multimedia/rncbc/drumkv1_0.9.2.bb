@@ -19,8 +19,8 @@ SRC_URI = " \
     git://github.com/TuriSc/hydrogen2drumkv1.py.git;name=hydrogen2drumkv1;destsuffix=hydrogen2drumkv1 \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
 "
-SRC_URI[md5sum] = "fed5cf375dcd7e97291ed38d632fa773"
-SRC_URI[sha256sum] = "7f45e960c6c1bf7bf736e9b6de8ca96214eec5feb9c4ba7ee8652d252f2870e2"
+SRC_URI[md5sum] = "f1ca5b84755d481a02f79ad031d18ba5"
+SRC_URI[sha256sum] = "36735bc10d4a45a2eb406b4b578c2fdabc5a71924c54f5735a01b490fe2034fd"
 
 SRCREV_hydrogen2drumkv1 = "4ca8af8f1433dce33f675ae68e95429c9eed084e"
 
