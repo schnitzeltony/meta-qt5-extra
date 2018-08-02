@@ -32,13 +32,9 @@ SRC_URI = " \
     file://0001-Remove-freebsd-compilation-support.patch \
     file://0002-Hardcode-projectM-configuration-file-location.patch \
 "
-SRC_URI[md5sum] = "42e6a4cfc315ed893554c2df99ba1b4b"
-SRC_URI[sha256sum] = "e9dc5723f7f2a04d36167585ce1b4223c09f36c6dad1215de877dc51d1f3d606"
+SRC_URI[md5sum] = "9656b1d37bc4f258467e67e32fa8f753"
+SRC_URI[sha256sum] = "32a162b273a61b5d7a568f266d0cc3c3dab63c310d89046280ace42d84ac9816"
 
 inherit cmake_qt5
 
 FILES_${PN} += "${datadir}"
-
-FILES_${PN}-dbg += " \
-    ${libdir}/qmmp/*/.debug \
-"
