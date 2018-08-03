@@ -12,6 +12,7 @@ inherit kde-plasma distro_features_check gettext
 DEPENDS += " \
     libinput \
     qtsensors \
+    fontconfig \
     \
     kauth-native \
     kconfig \
