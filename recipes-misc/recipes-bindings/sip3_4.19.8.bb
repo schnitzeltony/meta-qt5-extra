@@ -37,9 +37,8 @@ do_configure_prepend_class-native() {
 }
 do_install() {
     oe_runmake install
-    # we are inrterested in python3 modules only - for other stuff build sip
-    rm -rf ${D}/${includedir}
-    rm -rf ${D}/${bindir}
+    # avoid conflicts with sip for python2
+    mv ${D}/${bindir}/sip ${D}/${bindir}/sip3
 }
 
 FILES_python3-sip = "${libdir}/${PYTHON_DIR}/site-packages/"
