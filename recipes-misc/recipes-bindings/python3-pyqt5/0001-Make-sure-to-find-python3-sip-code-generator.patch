@@ -1,0 +1,31 @@
+From f583921012ed1f4e853f41d4fd3d95d1a819ac03 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 4 Aug 2018 02:48:14 +0200
+Subject: [PATCH] Make sure to find python3 sip code generator
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ configure.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.py b/configure.py
+index a263efb..daefc0e 100644
+--- a/configure.py
++++ b/configure.py
+@@ -522,7 +522,7 @@ class TargetConfiguration:
+         self.qtconf_prefix = ''
+         self.qt_shared = False
+         self.qt_version = 0
+-        self.sip = self._find_exe('sip5', 'sip')
++        self.sip = self._find_exe('sip3')
+         self.sip_h_version = None
+         self.sip_inc_dir = self.py_venv_inc_dir
+         self.static = False
+-- 
+2.14.4
+

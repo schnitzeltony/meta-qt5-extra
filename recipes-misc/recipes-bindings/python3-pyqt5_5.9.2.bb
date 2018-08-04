@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "\
     https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-${PV}/PyQt5_gpl-${PV}.tar.gz \
+    file://0001-Make-sure-to-find-python3-sip-code-generator.patch \
 "
 SRC_URI[md5sum] = "33d6d2ab8183da17ac18b8132a4b278e"
 SRC_URI[sha256sum] = "c190dac598c97b0113ca5e7a37c71c623f02d1d713088addfacac4acfa4b8394"
@@ -15,7 +16,7 @@ PE = "1"
 
 inherit qmake5 python3native
 
-DEPENDS += "sip sip-native sip3-native qtbase python3"
+DEPENDS += "sip3-native sip3 qtbase python3"
 DEPENDS_append_class-target = "qtsvg"
 
 S = "${WORKDIR}/PyQt5_gpl-${PV}"
