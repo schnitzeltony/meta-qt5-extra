@@ -1,0 +1,30 @@
+From f006426aac72fba8529bc85068d98e664e860584 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 5 Jul 2018 23:33:36 +0200
+Subject: [PATCH 1/2] Do not force sse
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ bristol/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/bristol/Makefile.am b/bristol/Makefile.am
+index bbc90c9..5d12413 100755
+--- a/bristol/Makefile.am
++++ b/bristol/Makefile.am
+@@ -1,6 +1,6 @@
+ AUTOMAKE_OPTIONS = foreign
+ 
+-AM_CFLAGS = -pthread -Wall -g -I$(srcdir)/../include/slab -I$(srcdir)/../include/bristol -I. -DBRISTOL_VOICECOUNT=@_BRISTOL_VOICES@ @BRISTOL_JACK_DEFAULT_MIDI@ @BRISTOL_JACK_DEFAULT@ @BRISTOL_JACK_MULTI_CLOSE@ @BRISTOL_SEMAPHORE@ @BRISTOL_SEM_OPEN@ @BRISTOL_BARRIER@ @BRISTOL_HAS_PA@ -DBRISTOL_RAMP_RATE=@BRR@ @BRISTOL_LIN_ATTACK@ @BRISTOL_HAS_DRAIN@ @BRISTOL_HAS_JACK@ @BRISTOL_HAS_JACK_MIDI@ @BRISTOL_HAS_JACK_SESSION@ -DBRISTOL_HAS_ALSA=@BRISTOL_HAS_ALSA@ @JACK_CFLAGS@ @ALSA_CFLAGS@ -msse -mfpmath=sse -ffast-math -fomit-frame-pointer -O2
++AM_CFLAGS = -pthread -Wall -g -I$(srcdir)/../include/slab -I$(srcdir)/../include/bristol -I. -DBRISTOL_VOICECOUNT=@_BRISTOL_VOICES@ @BRISTOL_JACK_DEFAULT_MIDI@ @BRISTOL_JACK_DEFAULT@ @BRISTOL_JACK_MULTI_CLOSE@ @BRISTOL_SEMAPHORE@ @BRISTOL_SEM_OPEN@ @BRISTOL_BARRIER@ @BRISTOL_HAS_PA@ -DBRISTOL_RAMP_RATE=@BRR@ @BRISTOL_LIN_ATTACK@ @BRISTOL_HAS_DRAIN@ @BRISTOL_HAS_JACK@ @BRISTOL_HAS_JACK_MIDI@ @BRISTOL_HAS_JACK_SESSION@ -DBRISTOL_HAS_ALSA=@BRISTOL_HAS_ALSA@ @JACK_CFLAGS@ @ALSA_CFLAGS@ -ffast-math -fomit-frame-pointer -O2
+ 
+ bin_PROGRAMS = bristol
+ #bristol_LDFLAGS = -Bdynamic -L../libbristolmidi/.libs -L../libbristolaudio/.libs -L../libbristol -L../libbristolic
+-- 
+2.14.3
+

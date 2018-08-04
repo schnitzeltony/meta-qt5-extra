@@ -1,0 +1,32 @@
+From d7b57162ff8c279fb9ac309fce0cdd98696c327a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 5 Jul 2018 23:34:17 +0200
+Subject: [PATCH 2/2] Do not include alsa/iatomic.h
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ libbristolaudio/audioEngineJack.c | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/libbristolaudio/audioEngineJack.c b/libbristolaudio/audioEngineJack.c
+index 2b8900b..94c083e 100644
+--- a/libbristolaudio/audioEngineJack.c
++++ b/libbristolaudio/audioEngineJack.c
+@@ -38,9 +38,6 @@
+ #include <string.h>
+ 
+ #ifdef _BRISTOL_JACK
+-#if (BRISTOL_HAS_ALSA == 1)
+-#include <alsa/iatomic.h>
+-#endif
+ 
+ /*
+  * Drop this atomic stuff, it comes from the ALSA library and it not present on
+-- 
+2.14.3
+

@@ -1,0 +1,29 @@
+From 4269cada0a225e89c3edd3e85c21debd3f5ab958 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 4 Aug 2018 22:33:08 +0200
+Subject: [PATCH] bristoljackstats: do not overwrite LDFLAGS
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstrem-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ bin/Makefile.am | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/bin/Makefile.am b/bin/Makefile.am
+index fed0c6b..d9957b1 100755
+--- a/bin/Makefile.am
++++ b/bin/Makefile.am
+@@ -1,6 +1,5 @@
+ AUTOMAKE_OPTIONS = foreign
+ 
+-LDFLAGS = -Bdynamic -lm -lpthread `pkg-config --silence-errors --libs jack`
+ AM_CFLAGS = -pthread -Wall -g -I. -I$(srcdir)/../include/bristol @BRISTOL_HAS_JACK@ @BRISTOL_HAS_JACK_MIDI@ @JACK_CFLAGS@
+ 
+ #bin_PROGRAMS = bristoljackstats bristolnotegen bristolNRPgen
+-- 
+2.14.4
+
