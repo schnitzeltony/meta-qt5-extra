@@ -14,6 +14,7 @@ RDEPENDS_${PN} = " \
     ardour5 \
     aubio \
     audio-tweaks \
+    bristol \
     calf \
     carla \
     chromaprint \
