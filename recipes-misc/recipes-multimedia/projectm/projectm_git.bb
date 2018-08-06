@@ -41,11 +41,6 @@ PACKAGECONFIG[sdl2] = "--enable-sdl,--disable-sdl,libsdl2"
 PACKAGECONFIG[qt] = "--enable-qt,--disable-qt,qtbase-native qtbase pulseaudio"
 
 do_install_append() {
-    #install -m 0644 ${WORKDIR}/presets/presets_projectM/* ${D}/${datadir}/projectM/presets/
-    # original name confuses sanity check for file already in sysroot -> avoild by renaming
-    #mv '${D}/${datadir}/projectM/presets/Eo.S. - skylight a3 [trip colors flux2]_phat_Multi_shaped2_zoe_colours5.milk' \
-    #   '${D}/${datadir}/projectM/presets/Eo.S. - skylight a3 (trip colors flux2)_phat_Multi_shaped2_zoe_colours5.milk' || true
-
     # Install presets manually for now
     install -m 0644 ${S}/presets/presets_projectM/* ${D}/${datadir}/projectM/presets/
 
@@ -58,5 +53,3 @@ FILES_${PN} += " \
     ${datadir}/projectM \
     ${libdir}/libvisual-0.4/actor/*.so \
 "
-
-FILE_${PN}-dbg += "${datadir}/projectM/presets/.debug"
