@@ -18,7 +18,6 @@ DEPENDS += " \
     curl \
     fltk \
     liblo \
-    luajit \
     stk \
     libvorbis \
     libeigen \
@@ -45,19 +44,18 @@ LUA_VERSION = "5.3"
 EXTRA_OECMAKE += " \
     -DUSE_DOUBLE=OFF \
     -DPYTHON_MODULE_INSTALL_DIR=${PYTHON_SITEPACKAGES_DIR} \
-    -DLUA_MODULE_INSTALL_DIR=${libdir}/lua/${LUA_VERSION} \
 "
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)}"
 PACKAGECONFIG[pulseaudio] = "-DUSE_PULSEAUDIO=ON,-DUSE_PULSEAUDIO=OFF,pulseaudio,pulseaudio-server"
+PACKAGECONFIG[luajit] = "-DLUA_MODULE_INSTALL_DIR=${libdir}/lua/${LUA_VERSION},,luajit"
 
 PACKAGES =+ " \
     ${PN}-python2 \
-    ${PN}-lua \
+    ${PN}-luajit \
 "
 
 FILES_${PN}-python2 = "${PYTHON_SITEPACKAGES_DIR}"
 RDEPENDS_${PN}-python2 += "python"
 
-FILES_${PN}-lua = "${libdir}/lua"
-RDEPENDS_${PN}-lua += "lua"
+FILES_${PN}-luajit = "${libdir}/lua"
