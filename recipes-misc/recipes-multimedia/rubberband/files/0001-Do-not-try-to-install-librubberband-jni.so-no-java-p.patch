@@ -1,0 +1,30 @@
+From 9a7c07d3db3cccb9fc6128c66f1c2e61bd07b3df Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 11 Aug 2018 01:16:35 +0200
+Subject: [PATCH] Do not try to install librubberband-jni.so - no java please
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ Makefile.in | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index 3a70a71..76f8552 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -183,7 +183,6 @@ install:	all
+ 	cp $(DYNAMIC_TARGET) $(DESTDIR)$(INSTALL_LIBDIR)/$(LIBNAME)$(DYNAMIC_EXTENSION).$(DYNAMIC_FULL_VERSION)
+ 	ln -s $(LIBNAME)$(DYNAMIC_EXTENSION).$(DYNAMIC_FULL_VERSION) $(DESTDIR)$(INSTALL_LIBDIR)/$(LIBNAME)$(DYNAMIC_EXTENSION).$(DYNAMIC_ABI_VERSION)
+ 	ln -s $(LIBNAME)$(DYNAMIC_EXTENSION).$(DYNAMIC_FULL_VERSION) $(DESTDIR)$(INSTALL_LIBDIR)/$(LIBNAME)$(DYNAMIC_EXTENSION)
+-	cp -f $(JNI_TARGET) $(DESTDIR)$(INSTALL_LIBDIR)/$(JNINAME)$(DYNAMIC_EXTENSION)
+ 	cp $(VAMP_TARGET) $(DESTDIR)$(INSTALL_VAMPDIR)
+ 	cp vamp/vamp-rubberband.cat $(DESTDIR)$(INSTALL_VAMPDIR)
+ 	cp $(LADSPA_TARGET) $(DESTDIR)$(INSTALL_LADSPADIR)
+-- 
+2.14.4
+

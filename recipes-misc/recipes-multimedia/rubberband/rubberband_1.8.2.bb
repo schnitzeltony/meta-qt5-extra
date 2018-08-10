@@ -13,15 +13,16 @@ DEPENDS += " \
 "
 
 # fftwf is neon accelerated -> force SINGLE precision
-SINGLEPATCH = "${@bb.utils.contains('TUNE_FEATURES', 'neon', 'file://0002-Optional-replace-FFTW_DOUBLE_ONLY-by-FFTW_SINGLE_ONL.patch', '', d)}"
+SINGLEPATCH = "${@bb.utils.contains('TUNE_FEATURES', 'neon', 'file://0003-Optional-replace-FFTW_DOUBLE_ONLY-by-FFTW_SINGLE_ONL.patch', '', d)}"
 
 SRC_URI = " \
     http://code.breakfastquay.com/attachments/download/34/${BPN}-${PV}.tar.bz2 \
-    file://0001-replace-double-process_t.patch \
+    file://0001-Do-not-try-to-install-librubberband-jni.so-no-java-p.patch \
+    file://0002-Fix-build-for-FFTW_SINGLE_ONLY.patch \
     ${SINGLEPATCH} \
 "
-SRC_URI[md5sum] = "6c2b4e18a714bcc297d0db81a10f9348"
-SRC_URI[sha256sum] = "ff0c63b0b5ce41f937a8a3bc560f27918c5fe0b90c6bc1cb70829b86ada82b75"
+SRC_URI[md5sum] = "db0ecb4f1a647bdaf7e43ef2ca2f7883"
+SRC_URI[sha256sum] = "86bed06b7115b64441d32ae53634fcc0539a50b9b648ef87443f936782f6c3ca"
 
 CPPFLAGS += "-ftree-vectorize -DPROCESS_SAMPLE_TYPE=float"
 
