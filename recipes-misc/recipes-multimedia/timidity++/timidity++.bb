@@ -5,7 +5,6 @@ DEPENDS += " \
    gtk+ \
    alsa-lib \
    jack \
-   portmidi \
 "
 
 inherit autotools pkgconfig
@@ -22,12 +21,10 @@ EXTRA_OECONF += " \
     --enable-audio=alsa,jack \
     --with-module-dir=${libdir}/${BPN} \
     --enable-dynamic=gtk \
-    --enable-portmidisyn \
     --enable-alsaseq \
 "
 
 CFLAGS  += '-DCONFIG_FILE=\\"${sysconfdir}/timidity++.cfg\\"'
-LDFLAGS += "-lportmidi"
 
 do_install_append() {
 	install -d ${D}/${datadir}/applications
