@@ -10,9 +10,9 @@ SRC_URI = " \
     git://github.com/calf-studio-gear/calf.git \
     file://0001-Do-store-calfmakerdf-commandline-for-later-use-in-qe.patch \
 "
-SRCREV = "f71e2742e1463906c3d44a4b33c1d90e3ad61acb"
+SRCREV = "cd53de64cca49e04dc1773c39cda58dd0ba49452"
 S = "${WORKDIR}/git"
-PV = "0.90.0"
+PV = "0.90.1"
 
 inherit autotools-brokensep pkgconfig gtk-icon-cache bash-completion qemu-ext
 
