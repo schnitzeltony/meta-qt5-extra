@@ -1,0 +1,35 @@
+From 30166fe55c9a7c65f5db04e75e92407da4f0e88a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 10 Aug 2018 14:00:52 +0200
+Subject: [PATCH] Do not set lib-suffix - oe will take care
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 274b6fa..6782e43 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -21,11 +21,7 @@ endif()
+ 
+ project(DRUMSTICK)
+ 
+-if(CMAKE_SIZEOF_VOID_P MATCHES "8")
+-    set(_INIT_LIB_SUFFIX "64")
+-else()
+-    set(_INIT_LIB_SUFFIX "")
+-endif()
++set(_INIT_LIB_SUFFIX "")
+ set(LIB_SUFFIX ${_INIT_LIB_SUFFIX} CACHE STRING "optional library install directory suffix: 32, 64, none")
+ 
+ set(CMAKE_COLOR_MAKEFILE ON)
+-- 
+2.14.4
+
