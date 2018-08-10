@@ -34,7 +34,7 @@ SRC_URI = " \
     file://0006-fixed-unsafe-use-of-strncpy.patch \
     file://0007-util1-csd_util-cs.c-Fix-build-with-gcc8.patch \
 "
-SRCREV = "c6e19a041507c057a27927761ddb80deb4213eb6"
+SRCREV = "2905724262b516983e779ed8c589602da4bf3f7d"
 S = "${WORKDIR}/git"
 PV = "6.11.0"
 
