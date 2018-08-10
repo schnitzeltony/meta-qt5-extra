@@ -13,8 +13,8 @@ DEPENDS += " \
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \
 "
-SRC_URI[md5sum] = "8b72ff32bbd3887c53b282a7111e683f"
-SRC_URI[sha256sum] = "ae1d2c0d21b45d144e181b873ffbc2979a294fab31b8d71a5b0b8cad3276f38e"
+SRC_URI[md5sum] = "a1fd83216f65619fea766dfc0a6f5266"
+SRC_URI[sha256sum] = "367743764c8f5c6e40bb19b9581f083da2881b9c9516d6b3b247e5644dee7c2b"
 
 FILES_${PN} += " \
     ${datadir}/mime \
