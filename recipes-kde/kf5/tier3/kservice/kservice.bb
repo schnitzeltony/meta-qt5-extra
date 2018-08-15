@@ -8,7 +8,16 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 gettext
 
-DEPENDS += "kconfig kconfig-native kcoreaddons-native kcrash kdbusaddons ki18n kdoctools-native"
+DEPENDS += " \
+    kconfig-native \
+    kdoctools-native \
+    kcoreaddons-native \
+    kconfig \
+    kcrash \
+    kdbusaddons \
+    ki18n \
+    kdoctools \
+"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "622e73f22de26a8fde0d915bd6e0f27d"
