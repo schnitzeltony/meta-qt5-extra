@@ -7,6 +7,6 @@ SRC_URI = "git://github.com/beltoforion/muparser.git"
 SRCREV = "33dcf471d40f15cb86d9307328dc8f9e875a5202"
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig
+inherit cmake pkgconfig
 
-EXTRA_OECONF = "--enable-samples=no"
+EXTRA_OECMAKE = "-DENABLE_SAMPLES=OFF"
