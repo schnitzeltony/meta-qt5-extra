@@ -82,18 +82,16 @@ index 3888d1d..0401429 100644
      target_link_libraries(kfilemetadata_exiv2extractor
          KF5::FileMetaData
          ${EXIV2_LIBRARIES}
-@@ -46,8 +51,10 @@ if(EXIV2_FOUND)
+@@ -46,8 +46,8 @@ if(EXIV2_FOUND)
  endif()
  
  if(FFMPEG_FOUND)
 +    include_directories( ${FFMPEG_INCLUDE_DIRS} )
-+
      add_library(kfilemetadata_ffmpegextractor MODULE ffmpegextractor.cpp)
--    target_include_directories(kfilemetadata_ffmpegextractor SYSTEM PRIVATE ${FFMPEG_INCLUDE_DIRS})
-+
+-    target_include_directories(kfilemetadata_ffmpegextractor SYSTEM PRIVATE ${AVCODEC_INCLUDE_DIRS} ${AVFORMAT_INCLUDE_DIRS} ${AVUTIL_INCLUDE_DIRS})
      target_link_libraries(kfilemetadata_ffmpegextractor
          KF5::FileMetaData
-         ${FFMPEG_LIBRARIES}
+ 	${AVCODEC_LIBRARIES}
 @@ -62,8 +69,10 @@ endif()
  
  

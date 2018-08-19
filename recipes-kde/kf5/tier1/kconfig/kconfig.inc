@@ -7,13 +7,12 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 cmake_lib
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "eddee66fc96928a82314bb89e44e7fe6"
-SRC_URI[sha256sum] = "d882255769ab95d49d4df4b40e659b25754935206b1fc07310e2cbc34d3cdb45"
+SRC_URI[md5sum] = "57f6c446d29483fb2cfb285eb956a91b"
+SRC_URI[sha256sum] = "4e3f2b98fd15fa9c90763fe6fca79f75324f1aee6efa81af2d19a24c6d666331"
 
 # REVISIT remove ugly hack for wayland-only environments
 SRC_URI += " \
     file://0001-kconfiggui-do-only-compile-in-case-sessions-are-aval.patch \
-    file://0002-make-autotests-optional-by-BUILD_TESTING.patch \
 "
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"

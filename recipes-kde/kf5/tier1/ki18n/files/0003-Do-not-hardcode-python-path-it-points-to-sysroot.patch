@@ -10,37 +10,39 @@ Upstream-Status: Inappropriate [embedded-specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- cmake/KF5I18NMacros.cmake.in | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ cmake/KF5I18nMacros.cmake.in | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/cmake/KF5I18NMacros.cmake.in b/cmake/KF5I18NMacros.cmake.in
-index e8401a9..0bfc2a1 100644
---- a/cmake/KF5I18NMacros.cmake.in
-+++ b/cmake/KF5I18NMacros.cmake.in
-@@ -27,8 +27,6 @@
+diff --git a/cmake/KF5I18nMacros.cmake.in b/cmake/KF5I18nMacros.cmake.in
+index 7e99468..5099fb2 100644
+--- a/cmake/KF5I18nMacros.cmake.in
++++ b/cmake/KF5I18nMacros.cmake.in
+@@ -27,10 +27,6 @@
  
  find_package(Gettext REQUIRED)
  
--set(KI18N_PYTHON_EXECUTABLE "@PYTHON_EXECUTABLE@")
+-# The Python executable used for building ki18n will be used as a fallback
+-# solution if it cannot be found in $PATH when building applications.
+-set(_KI18N_PYTHON_EXECUTABLE "@PYTHON_EXECUTABLE@")
 -
- set(_ki18n_pmap_compile_script ${CMAKE_CURRENT_LIST_DIR}/ts-pmap-compile.py)
- set(_ki18n_uic_script ${CMAKE_CURRENT_LIST_DIR}/kf5i18nuic.cmake)
- 
-@@ -116,7 +114,7 @@ function(KI18N_INSTALL podir)
-     add_custom_target(tsfiles-${pathmd5} ALL
-         COMMENT "Generating ts..."
-         COMMAND ${CMAKE_COMMAND}
--                -DPYTHON_EXECUTABLE=${KI18N_PYTHON_EXECUTABLE}
-+                -DPYTHON_EXECUTABLE=python
-                 -D_ki18n_pmap_compile_script=${_ki18n_pmap_compile_script}
-                 -DCOPY_TO=${CMAKE_CURRENT_BINARY_DIR}/${dirname}
-                 -DPO_DIR=${absolute_podir}
-@@ -158,7 +156,7 @@ function(KI18N_INSTALL_TS_FILES lang scripts_dir)
+ find_program(KI18N_PYTHON_EXECUTABLE NAMES python3 python2 python)
+ if(NOT KI18N_PYTHON_EXECUTABLE)
+     set(KI18N_PYTHON_EXECUTABLE "${_KI18N_PYTHON_EXECUTABLE}")
+@@ -128,7 +124,7 @@ function(KI18N_INSTALL podir)
+         add_custom_target(tsfiles-${pathmd5} ALL
+             COMMENT "Generating ts..."
+             COMMAND ${CMAKE_COMMAND}
+-                    -DPYTHON_EXECUTABLE=${KI18N_PYTHON_EXECUTABLE}
++                    -DPYTHON_EXECUTABLE=python3
+                     -D_ki18n_pmap_compile_script=${_ki18n_pmap_compile_script}
+                     -DCOPY_TO=${CMAKE_CURRENT_BINARY_DIR}/${dirname}
+                     -DPO_DIR=${absolute_podir}
+@@ -171,7 +167,7 @@ function(KI18N_INSTALL_TS_FILES lang scripts_dir)
              set(pmapc_basename "${pmap_basename}c")
              set(pmapc_file "${lang}-${subpath}-${pmapc_basename}")
              add_custom_command(OUTPUT ${pmapc_file}
 -               COMMAND ${KI18N_PYTHON_EXECUTABLE}
-+               COMMAND python
++               COMMAND python3
                 ARGS
                 -B
                 ${_ki18n_pmap_compile_script}

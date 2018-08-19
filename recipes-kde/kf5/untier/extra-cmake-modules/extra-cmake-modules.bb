@@ -6,8 +6,8 @@ inherit kde-kf5
 
 DEPENDS = "qttools-native"
 
-SRC_URI[md5sum] = "a617f0eb7abc85d09866c3fa61a31aa4"
-SRC_URI[sha256sum] = "976d8bd15a0b929376bfaef34602a0fb9614229851c46fac3c4b28938f682195"
+SRC_URI[md5sum] = "44d277d5df5aa806f8caf4b12541b15c"
+SRC_URI[sha256sum] = "c09fb851751f2e1c1231130dbce62d5dab396444fce7ed18662ada9ebd7ced1e"
 
 PV = "${KF5_VERSION}"
 

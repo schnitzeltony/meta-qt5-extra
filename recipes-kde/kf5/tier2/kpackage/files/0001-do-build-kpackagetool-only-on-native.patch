@@ -10,14 +10,14 @@ Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- CMakeLists.txt     | 4 ++++
- 1 file changed, 4 insertions(+)
+ CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index c7f2236..f8af062 100644
+index 7da9a1d..b701045 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -88,6 +88,7 @@ include(KF5PackageMacros.cmake)
+@@ -74,6 +74,7 @@ include(KF5PackageMacros.cmake)
  # make package_version.h available
  include_directories(${CMAKE_CURRENT_BINARY_DIR})
  
@@ -25,18 +25,14 @@ index c7f2236..f8af062 100644
  ################# list the subdirectories #################
  if (KF5DocTools_FOUND)
      add_subdirectory(docs)
-@@ -100,8 +101,11 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+@@ -85,6 +86,7 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+         kdoctools_install(po)
      endif()
  endif()
- 
 +endif()
+ 
  add_subdirectory(src)
-+if (false)
- add_subdirectory(autotests)
-+endif()
- 
- ################ create PackageConfig.cmake and install it ####################
- 
+ if (BUILD_TESTING)
 -- 
-2.14.3
+2.14.4
 

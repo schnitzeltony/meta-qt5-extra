@@ -10,14 +10,14 @@ Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- CMakeLists.txt | 4 ----
- 1 file changed, 4 deletions(-)
+ CMakeLists.txt | 5 -----
+ 1 file changed, 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 62328bf..7adc6f8 100644
+index 5927437..2e49d39 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -74,12 +74,7 @@ set(KDOCTOOLS_LANGUAGES_LIST af bg ca cs da de el en-GB en eo es et fi fo fr gl
+@@ -91,12 +91,7 @@ set(KDOCTOOLS_LANGUAGES_LIST af bg ca cs da de el en-GB en eo es et fi fo fr gl
  
  set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5DocTools")
  add_definitions(-DTRANSLATION_DOMAIN=\"kdoctools5\")
@@ -28,8 +28,8 @@ index 62328bf..7adc6f8 100644
  add_subdirectory(common)
 -add_subdirectory(docs)
  add_subdirectory(src)
- add_subdirectory(autotests)
- 
+ if (BUILD_TESTING)
+     add_subdirectory(autotests)
 -- 
-1.8.3.1
+2.14.4
 

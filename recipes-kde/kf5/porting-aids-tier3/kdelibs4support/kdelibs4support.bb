@@ -1,6 +1,6 @@
 require ${BPN}.inc
 
-inherit cmake_lib gettext
+inherit gettext
 
 DEPENDS += " \
     ${BPN}-native \
@@ -48,10 +48,6 @@ do_configure_append() {
     # fix KCONFIG_COMPILER_LOCATION
     sed -i 's:${STAGING_LIBDIR_NATIVE}:${libdir}:g' ${B}/src/config-kstandarddirs.h
 }
-
-# native executables
-CMAKE_ALIGN_SYSROOT[1] = "KF5KDELibs4Support, -s${_IMPORT_PREFIX}/bin, -s${KDE_PATH_EXTERNAL_HOST_BINS}"
-CMAKE_ALIGN_SYSROOT[2] = "KDELibs4, -s${_IMPORT_PREFIX}/bin, -S${STAGING_BINDIR_NATIVE}"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
