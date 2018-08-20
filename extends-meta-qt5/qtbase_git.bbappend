@@ -7,8 +7,6 @@ PACKAGECONFIG_DISTRO += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sm", "", d)} \
     accessibility \
     sql-sqlite \
-    kms \
-    gbm \
     cups \
     libinput \
 "
