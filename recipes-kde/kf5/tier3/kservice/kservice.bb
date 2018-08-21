@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 gettext
 
 DEPENDS += " \
+    bison-native \
     kconfig-native \
     kdoctools-native \
     kcoreaddons-native \
