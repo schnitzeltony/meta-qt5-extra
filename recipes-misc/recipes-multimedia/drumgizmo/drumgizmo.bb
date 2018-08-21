@@ -12,7 +12,6 @@ DEPENDS += " \
     libsmf \
     alsa-lib \
     libsndfile1 \
-    libsamplerate0 \
     zita-resampler \
     jack \
 "
