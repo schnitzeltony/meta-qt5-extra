@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5
 
-DEPENDS += "qtdeclarative"
+DEPENDS += "bison-native qtdeclarative"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "391b3473e9e5d31d6e301f27e657ae4f"
