@@ -31,12 +31,13 @@ DEPENDS += "\
     kiconthemes \
     kdoctools-native \
     xapian-core \
+    purpose \
     shared-mime-info-native \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "636d7dc647afdbe3ea7e08e3f5f15e51"
-SRC_URI[sha256sum] = "31bb2809c43537224eef0a7d71fd8f474eef05648adb7f9379012bc0b943be21"
+SRC_URI[md5sum] = "4cda25856cd790a5e9c1face9f2be7c5"
+SRC_URI[sha256sum] = "43247d070e6898c26271235b915b45422ee8668e512f38f6df711e5571dca019"
 
 SRC_URI += " \
     file://0001-CMakeLists.txt-make-MLT_PREFIX-configurable.patch \

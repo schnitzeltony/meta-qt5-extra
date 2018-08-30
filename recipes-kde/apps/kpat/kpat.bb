@@ -23,11 +23,12 @@ DEPENDS += " \
     kwidgetsaddons  \
     kxmlgui \
     libkdegames \
+    freecell-solver \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "bfa352c54ac25bfecdc7874a8111c367"
-SRC_URI[sha256sum] = "669210fab2c7281b87e9de309649c7345df522027d2bb8c00735151249c30f5b"
+SRC_URI[md5sum] = "89d1f7917d73e21363ad05c12a22919a"
+SRC_URI[sha256sum] = "b4ba00d0d90ccb60a8b9328d22f0ce31413abe8a4ead775d712b8a5b2355a936"
 
 FILES_SOLIBSDEV = ""
 
