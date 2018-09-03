@@ -16,6 +16,9 @@ DEPENDS += " \
 "
 
 do_install() {
-  install -d ${D}/${bindir}
-  cp ${B}/build/host/bin/* ${D}/${bindir}/
+    install -d ${D}/${bindir}
+    cp ${B}/build/host/bin/* ${D}/${bindir}/
+
+    install -d ${D}/${includedir}
+    cp -r ${S}/include/* ${D}/${includedir}
 }
