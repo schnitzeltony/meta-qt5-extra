@@ -1,6 +1,6 @@
 From d5f3d3a0a02f01a78bb867929b854bb7df4861c3 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 8 Mar 2017 15:45:49 +0100
+Date: Wed, 5 Sep 2018 00:07:23 +0200
 Subject: [PATCH] startplasma.cmake: fix paths to qdbus
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -11,22 +11,13 @@ Upstream-Status: Inappropriate [configuration]
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 
 ---
- startkde/startplasma.cmake | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ startkde/startplasma.cmake | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/startkde/startplasma.cmake b/startkde/startplasma.cmake
-index 59dc7b7..edd400b 100644
+index f7330ab3..4fddd097 100644
 --- a/startkde/startplasma.cmake
 +++ b/startkde/startplasma.cmake
-@@ -140,7 +140,7 @@ if test $? -ne 0; then
-   exit 1
- fi
- 
--qdbus org.kde.KSplash /KSplash org.kde.KSplash.setStage kinit
-+@OE_QMAKE_PATH_QT_BINS@/qdbus org.kde.KSplash /KSplash org.kde.KSplash.setStage kinit
- 
- # finally, give the session control to the session manager
- # see kdebase/ksmserver for the description of the rest of the startup sequence
 @@ -169,13 +169,13 @@ if test x"$wait_drkonqi"x = x"true"x ; then
      # wait for remaining drkonqi instances with timeout (in seconds)
      wait_drkonqi_timeout=`kreadconfig5 --file startkderc --group WaitForDrKonqi --key Timeout --default 900`
@@ -45,5 +36,5 @@ index 59dc7b7..edd400b 100644
              break
          fi
 -- 
-2.9.3
+2.14.4
 
