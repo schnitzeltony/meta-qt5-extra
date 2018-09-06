@@ -16,25 +16,25 @@ DEPENDS += " \
     lv2 \
     liblo \
     zlib \
-    fltk fltk-native \
     mxml \
     libxpm \
-    ntk \
+    ntk-native ntk \
+    fltk-native fltk \
 "
 
 CXXFLAGS += "-ffast-math -DNDEBUG"
 
 SRC_URI = " \
-    ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \
+    gitsm://github.com/zynaddsubfx/zynaddsubfx.git \
     file://0001-No-target-specific-asm.patch \
     file://0002-Controller-Spliter-align-Makefiles-for-cross-compili.patch \
     file://0003-Nio.cpp-Do-not-use-ps-aux-to-find-jack-busybox-s-ps-.patch \
     file://0004-Keep-our-build-flags.patch \
     file://0005-Set-UI-optimization-to-O1-explicitly.patch \
 "
-SRC_URI[md5sum] = "66acae0913108f129aa979f3c4b65473"
-SRC_URI[sha256sum] = "11de448f9664076e9e8f2bcb8f7f45bf54a13516b7d6693da1ef8c511b8ed7c1"
-
+SRCREV = "6f8a61f6ee74316e471495f040660318a339d0c7"
+PV = "3.0.3+git${SRCPV}"
+S = "${WORKDIR}/git"
 
 do_configure_prepend() {
     # reconfigure?
