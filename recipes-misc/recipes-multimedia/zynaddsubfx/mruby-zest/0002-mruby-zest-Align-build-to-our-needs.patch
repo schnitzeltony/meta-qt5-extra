@@ -1,0 +1,48 @@
+From 368ece5a84a3972ae7e2635e4fa53a1dce0383f8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 12 Sep 2018 21:19:55 +0200
+Subject: [PATCH] mruby-zest: Align build to our needs
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+* Add build flags
+* Link against shared libuv - it is not build here
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ Makefile | 8 ++++----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index c0d8cc1..7ce309a 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,18 +5,18 @@ UV_URL    = http://dist.libuv.org/dist/v1.9.1/$(UV_FILE)
+ 
+ all:
+ 	ruby ./rebuild-fcache.rb
+-	cd deps/nanovg/src   && $(CC) nanovg.c -c -fPIC
++	cd deps/nanovg/src   && $(CC) $(CFLAGS) nanovg.c -c -fPIC
+ 	$(AR) rc deps/libnanovg.a deps/nanovg/src/*.o
+ #	cd deps/pugl         && python2 ./waf configure --no-cairo --static
+ 	cd deps/pugl         && python2 ./waf configure --no-cairo --static --debug
+ 	cd deps/pugl         && python2 ./waf
+-	cd src/osc-bridge    && CFLAGS="-I ../../deps/$(UV_DIR)/include " make lib
++	cd src/osc-bridge    && make lib
+ 	cd mruby             && MRUBY_CONFIG=../build_config.rb rake
+ 	$(CC) -shared -o libzest.so `find mruby/build/host -type f | grep -e "\.o$$" | grep -v bin` ./deps/libnanovg.a \
+ 		./deps/libnanovg.a \
+ 		src/osc-bridge/libosc-bridge.a \
+-		./deps/$(UV_DIR)/.libs/libuv.a  -lm -lX11 -lGL -lpthread
+-	$(CC) test-libversion.c deps/pugl/build/libpugl-0.a -ldl -o zest -lX11 -lGL -lpthread -I deps/pugl -std=gnu99
++		$(LDFLAGS) -lpcre -luv -lm -lX11 -lGL -lpthread
++	$(CC) $(CFLAGS) test-libversion.c deps/pugl/build/libpugl-0.a -ldl -o zest $(LDFLAGS) -lX11 -lGL -lpthread -I deps/pugl -std=gnu99
+ 
+ osx:
+ 	ruby ./rebuild-fcache.rb
+-- 
+2.14.4
+

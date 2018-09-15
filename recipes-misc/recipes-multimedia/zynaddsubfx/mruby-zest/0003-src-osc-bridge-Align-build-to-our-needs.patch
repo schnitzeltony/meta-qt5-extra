@@ -1,0 +1,33 @@
+From 7480845b43717d9eb1f8f31dafe9725f920d4f41 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 12 Sep 2018 21:27:38 +0200
+Subject: [PATCH] src/osc-bridge: Align build to our needs
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+* Add build flags
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/osc-bridge/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/osc-bridge/Makefile b/src/osc-bridge/Makefile
+index 14d1377..f11ae86 100644
+--- a/src/osc-bridge/Makefile
++++ b/src/osc-bridge/Makefile
+@@ -10,7 +10,7 @@ remote-test: $(SRC) test/basic-remote.c
+ 	$(CC) $(CFLAGS) $(CFLAGS_) -o remote-test $(SRC) test/basic-remote.c -luv -g -O0
+ 
+ lib: $(SRC)
+-	$(CC) $(CFLAGS) $(CFLAGS_) -O3 -g -fPIC -c $(SRC)
++	$(CC) $(CFLAGS) $(CFLAGS_) -g -fPIC -c $(SRC)
+ 	$(AR) rcs libosc-bridge.a bridge.o cache.o parse-schema.o schema.o rtosc.o
+ 
+ clean:
+-- 
+2.14.4
+
