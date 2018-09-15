@@ -1,4 +1,3 @@
-SUMMARY = "ZynAddSubFX is an open source software synthesizer"
 HOMEPAGE = "http://zynaddsubfx.sourceforge.net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=21fa88a5e50a1c608d22612c1fbe1971"
@@ -18,11 +17,11 @@ DEPENDS += " \
     zlib \
     mxml \
     libxpm \
-    ntk-native ntk \
-    fltk-native fltk \
 "
 
-CXXFLAGS += "-ffast-math -DNDEBUG"
+CXXFLAGS += "-ftree-vectorize -ffast-math -DNDEBUG"
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/zyn:"
 
 SRC_URI = " \
     gitsm://github.com/zynaddsubfx/zynaddsubfx.git \
@@ -49,10 +48,6 @@ do_configure_prepend() {
 }
 
 do_compile_append() {
-    # Build Controller/Spliter
-    oe_runmake -C ${S}/ExternalPrograms/Controller
-    oe_runmake -C ${S}/ExternalPrograms/Spliter
-
     # Create dummy lv2-turtles to make install happy
     cd ${B}/src/Plugin/
     for dir in `find -type d -mindepth 1 -maxdepth 1`; do
@@ -65,11 +60,6 @@ do_compile_append() {
             done
         fi
     done
-}
-
-do_install_append() {
-    install -m 0755 ${S}/ExternalPrograms/Controller/controller ${D}${bindir}/zynaddsubfx-controller
-    install -m 0755 ${S}/ExternalPrograms/Spliter/spliter ${D}${bindir}/zynaddsubfx-spliter
 }
 
 FILES_${PN} += " \
