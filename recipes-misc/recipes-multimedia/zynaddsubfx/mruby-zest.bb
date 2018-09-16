@@ -8,6 +8,7 @@ SRC_URI += " \
     file://0005-mruby-Use-native-mrbc.patch \
     file://0006-mruby-regexp-pcre-link-against-libpcre.patch \
     file://0007-Load-schema-from-usr-share-zyn-fusion-schema.patch \
+    file://0008-Do-not-require-dummy-MainWindow.qml.patch \
 "
 
 DEPENDS += " \
@@ -54,8 +55,6 @@ do_install() {
     install -d ${D}/opt/zyn-fusion
     cp -r ${B}/package/{libzest.so,font} ${D}/opt/zyn-fusion/
 
-    install -d ${D}/opt/zyn-fusion/qml
-    touch ${D}/opt/zyn-fusion/qml/MainWindow.qml
 }
 
 FILES_${PN} += " \

@@ -1,0 +1,41 @@
+From 3fb95d2ec341330e3fa02112768ca60065dd7838 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 16 Sep 2018 21:23:35 +0200
+Subject: [PATCH] Do not require dummy MainWindow.qml
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/mruby-widget-lib/src/api.c | 14 ++------------
+ 1 file changed, 2 insertions(+), 12 deletions(-)
+
+diff --git a/src/mruby-widget-lib/src/api.c b/src/mruby-widget-lib/src/api.c
+index 88d245c..f30544f 100644
+--- a/src/mruby-widget-lib/src/api.c
++++ b/src/mruby-widget-lib/src/api.c
+@@ -101,18 +101,8 @@ zest_open(char *address)
+     if(!dev_mode) {
+         if(strstr(path, "libzest"))
+             strstr(path, "libzest")[0] = 0;
+-        char path2[256];
+-        snprintf(path2, sizeof(path2), "%s%s", path, "./qml/MainWindow.qml");
+-        FILE *f = fopen(path2, "r");
+-        if(f) {
+-            printf("[INFO:Zyn] Found Assets at %s\n", path);
+-            zest_search_path = path;
+-            fclose(f);
+-        } else {
+-            printf("[ERROR:Zyn] QML Not Found At \"%s\"...\n", path2);
+-            printf("[ERROR:Zyn] Zyn Fusion Assets Missing, Please Check Install...\n");
+-            exit(1);
+-        }
++        printf("[INFO:Zyn] Found Assets at %s\n", path);
++        zest_search_path = path;
+     }
+ 
+ #if DEMO_MODE
+-- 
+2.14.4
+
