@@ -44,15 +44,14 @@ do_configure_prepend() {
 do_install() {
     oe_runmake pack
 
+    install -d ${D}${bindir}
+    install -m 755 ${B}/package/zest ${D}${bindir}/zyn-fusion
+
     install -d ${D}/opt/zyn-fusion
-    install -m 755 ${B}/package/zest ${D}/opt/zyn-fusion/zyn-fusion
     cp -a ${B}/package/{libzest.so,font,schema} ${D}/opt/zyn-fusion/
 
     install -d ${D}/opt/zyn-fusion/qml
     touch ${D}/opt/zyn-fusion/qml/MainWindow.qml
-
-    install -d ${D}${bindir}
-	ln -s /opt/zyn-fusion/zyn-fusion ${D}${bindir}
 }
 
 FILES_${PN} += "/opt/zyn-fusion/*"
