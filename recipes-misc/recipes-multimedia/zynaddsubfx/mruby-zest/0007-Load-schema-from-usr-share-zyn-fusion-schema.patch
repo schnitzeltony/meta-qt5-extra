@@ -1,0 +1,31 @@
+From 6866d2085b362adcc23edac712b7d504950d0594 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 16 Sep 2018 15:01:49 +0200
+Subject: [PATCH] Load schema from /usr/share/zyn-fusion/schema
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/osc-bridge/src/bridge.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/osc-bridge/src/bridge.c b/src/osc-bridge/src/bridge.c
+index c32ace3..c2bc1a8 100644
+--- a/src/osc-bridge/src/bridge.c
++++ b/src/osc-bridge/src/bridge.c
+@@ -430,7 +430,7 @@ schema_t br_get_schema(bridge_t *br, uri_t uri)
+     schema_t sch;
+ 
+     //printf("[debug] loading json file\n");
+-    FILE *f = fopen("schema/test.json", "r");
++    FILE *f = fopen("/usr/share/zyn-fusion/schema/test.json", "r");
+     if(!f && br->search_path) {
+         char tmp[256];
+         snprintf(tmp, sizeof(tmp), "%s%s", br->search_path, "schema/test.json");
+-- 
+2.14.4
+

@@ -7,6 +7,7 @@ inherit autotools-brokensep distro_features_check
 SRC_URI += " \
     file://0005-mruby-Use-native-mrbc.patch \
     file://0006-mruby-regexp-pcre-link-against-libpcre.patch \
+    file://0007-Load-schema-from-usr-share-zyn-fusion-schema.patch \
 "
 
 DEPENDS += " \
@@ -47,11 +48,17 @@ do_install() {
     install -d ${D}${bindir}
     install -m 755 ${B}/package/zest ${D}${bindir}/zyn-fusion
 
+    install -d ${D}/${datadir}/zyn-fusion
+    cp -r ${B}/package/schema ${D}/${datadir}/zyn-fusion/
+
     install -d ${D}/opt/zyn-fusion
-    cp -a ${B}/package/{libzest.so,font,schema} ${D}/opt/zyn-fusion/
+    cp -r ${B}/package/{libzest.so,font} ${D}/opt/zyn-fusion/
 
     install -d ${D}/opt/zyn-fusion/qml
     touch ${D}/opt/zyn-fusion/qml/MainWindow.qml
 }
 
-FILES_${PN} += "/opt/zyn-fusion/*"
+FILES_${PN} += " \
+    ${datadir}/zyn-fusion \
+    /opt/zyn-fusion/* \
+"
