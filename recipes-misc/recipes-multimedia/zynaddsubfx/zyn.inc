@@ -29,7 +29,6 @@ SRC_URI = " \
     file://0002-Controller-Spliter-align-Makefiles-for-cross-compili.patch \
     file://0003-Nio.cpp-Do-not-use-ps-aux-to-find-jack-busybox-s-ps-.patch \
     file://0004-Keep-our-build-flags.patch \
-    file://0005-Set-UI-optimization-to-O1-explicitly.patch \
 "
 SRCREV = "6f8a61f6ee74316e471495f040660318a339d0c7"
 PV = "3.0.3+git${SRCPV}"
