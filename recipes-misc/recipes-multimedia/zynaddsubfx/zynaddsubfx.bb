@@ -17,3 +17,6 @@ do_install_append() {
     install -m 0755 ${S}/ExternalPrograms/Controller/controller ${D}${bindir}/zynaddsubfx-controller
     install -m 0755 ${S}/ExternalPrograms/Spliter/spliter ${D}${bindir}/zynaddsubfx-spliter
 }
+
+RREPLACES_${PN} += "zyn-fusion"
+RCONFLICTS_${PN} += "zyn-fusion"

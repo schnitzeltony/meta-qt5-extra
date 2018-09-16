@@ -10,8 +10,5 @@ FILES_${PN} += " \
 
 RDEPENDS_${PN} += "mruby-zest"
 
-RPROVIDES_${PN} += "zynaddsubfx"
 RREPLACES_${PN} += "zynaddsubfx"
 RCONFLICTS_${PN} += "zynaddsubfx"
-
-
