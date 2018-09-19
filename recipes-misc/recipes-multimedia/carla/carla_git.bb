@@ -8,23 +8,17 @@ LIC_FILES_CHKSUM = " \
 
 SRC_URI = " \
     git://github.com/falkTX/Carla.git \
-    file://0001-Use-fluid-instead-of-ntk-fluid.patch \
-    file://0002-do-not-try-to-cross-run-carla-lv2-export.patch \
-    file://0003-Don-t-disable-EXPERIMENTAL_PLUGINS.patch \
-    file://0004-do-not-autodetect-pyqt-it-won-t-work-in-oe.patch \
-    file://0005-don-t-pin-version-when-finding-libpng.patch \
-    file://0006-do-not-build-zynaddsubfx-we-have-a-better-version.patch \
+    file://0001-do-not-try-to-cross-run-carla-lv2-export.patch \
 "
-SRCREV = "4a1e17888fc9abb0a4ea4a83d8f7020a5eabda1c"
+SRCREV = "430740a896d8f7546e02b524302e2cfda4509ff9"
 S = "${WORKDIR}/git"
-PV = "1.9.7b+git${SRCPV}"
+PV = "1.9.11+git${SRCPV}"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
 inherit qmake5_base autotools-brokensep pkgconfig qemu-ext distro_features_check mime gtk-icon-cache
 
 DEPENDS += " \
-    ntk-native \
     python3-pyqt5-native \
     freetype \
     libpng \
@@ -34,23 +28,20 @@ DEPENDS += " \
     pulseaudio \
     file \
     fluidsynth \
-    projectm \
-    clthreads \
-    clxclient \
-    zita-resampler \
-    zita-convolver \
+    libsndfile1 \
 "
 
 EXTRA_OEMAKE += " \
     DEFAULT_QT=5 \
     PREFIX=${prefix} \
     NOOPT=true \
-    EXPERIMENTAL_PLUGINS=true \
     HAVE_PYQT=true \
     HAVE_PYQT4=false \
     HAVE_PYQT5=true \
+    SKIP_STRIPPING=true \
 "
 
+# required???
 LDFLAGS += "-lpng"
 
 do_compile_append() {
@@ -66,6 +57,6 @@ FILES_${PN} += " \
     ${libdir}/vst \
 "
 
-INSANE_SKIP_${PN} = "dev-so already-stripped"
+INSANE_SKIP_${PN} = "dev-so"
 
 RDEPENDS_${PN} += "python3-pyqt5 bash"
