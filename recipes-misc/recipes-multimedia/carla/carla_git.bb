@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = " \
 SRC_URI = " \
     git://github.com/falkTX/Carla.git \
     file://0001-do-not-try-to-cross-run-carla-lv2-export.patch \
+    file://0002-Do-not-try-to-find-Qt5-host-bins-it-won-t-work.patch \
 "
 SRCREV = "430740a896d8f7546e02b524302e2cfda4509ff9"
 S = "${WORKDIR}/git"
@@ -20,13 +21,12 @@ inherit qmake5_base autotools-brokensep pkgconfig qemu-ext distro_features_check
 
 DEPENDS += " \
     python3-pyqt5-native \
-    freetype \
-    libpng \
+    qtbase-native \
+    qtbase \
     gtk+ \
     gtk+3 \
     liblo \
     pulseaudio \
-    file \
     fluidsynth \
     libsndfile1 \
 "
@@ -41,8 +41,11 @@ EXTRA_OEMAKE += " \
     SKIP_STRIPPING=true \
 "
 
-# required???
-LDFLAGS += "-lpng"
+export QT5_HOSTBINS="${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}"
+
+do_configure() {
+    oe_runmake features
+}
 
 do_compile_append() {
     cd ${S}/bin
@@ -52,7 +55,6 @@ do_compile_append() {
 FILES_${PN} += " \
     ${datadir}/icons \
     ${datadir}/mime \
-    ${libdir}/python3 \
     ${libdir}/lv2 \
     ${libdir}/vst \
 "

@@ -1,0 +1,30 @@
+From 079d1a1b34394b76d23ce7d92254cb785333d3e7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 20 Sep 2018 22:44:48 +0200
+Subject: [PATCH] Do not try to find Qt5 host bins - it won't work
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [cross specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ source/Makefile.mk | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/source/Makefile.mk b/source/Makefile.mk
+index 688dca20..07afc7a2 100644
+--- a/source/Makefile.mk
++++ b/source/Makefile.mk
+@@ -253,7 +253,6 @@ endif
+ endif
+ 
+ ifeq ($(HAVE_QT5),true)
+-QT5_HOSTBINS = $(shell pkg-config --variable=host_bins Qt5Core)
+ MOC_QT5 ?= $(QT5_HOSTBINS)/moc
+ RCC_QT5 ?= $(QT5_HOSTBINS)/rcc
+ UIC_QT5 ?= $(QT5_HOSTBINS)/uic
+-- 
+2.14.4
+
