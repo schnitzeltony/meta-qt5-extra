@@ -128,7 +128,7 @@ RDEPENDS_${PN} = " \
     \
     \
     yoshimi \
-    ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "zyn-fusion", "zynaddsubfx",d)} \
+    zyn \
 "
 
 # non working
