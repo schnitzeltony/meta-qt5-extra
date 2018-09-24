@@ -15,8 +15,8 @@ DEPENDS += " \
 "
 
 SRC_URI = "gitsm://github.com/x42/avldrums.lv2.git"
-SRCREV = "856f794c38a1769d108235e4ffb734c1f025f150"
-PV = "0.2.2+git${SRCPV}"
+SRCREV = "43b28a761ea980d176b66347a6f8a44fb4e84611"
+PV = "0.3.0"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE += " \
@@ -26,6 +26,3 @@ EXTRA_OEMAKE += " \
 "
 
 FILES_${PN} += "${libdir}/lv2"
-
-# TBD ? - https://github.com/x42/avldrums.lv2/issues/5
-#RDEPENDS_${PN} += "soundfont-collection-avl-drumkits"
