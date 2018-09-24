@@ -16,10 +16,9 @@ DEPENDS += " \
 SRC_URI = " \
     https://aubio.org/pub/${BPN}-${PV}.tar.bz2 \
     file://0001-do-not-build-tests.patch \
-    file://0002-Fix-build-with-FFmpeg-4.0.patch \
 "
-SRC_URI[md5sum] = "78d326e5e44d19b0d21a5abf834bae20"
-SRC_URI[sha256sum] = "bdc73be1f007218d3ea6d2a503b38a217815a0e2ccc4ed441f6e850ed5d47cfb"
+SRC_URI[md5sum] = "1e8deb14b0e45ffadc91dcf7cfaee0c8"
+SRC_URI[sha256sum] = "cbed4afec5ab3a1a6300c7e3af0a1369379aa94259f5e701a8ca905cdd9fa041"
 
 EXTRA_OECONF = " \
     --prefix=${prefix} \
