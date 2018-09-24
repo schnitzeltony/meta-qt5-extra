@@ -22,10 +22,12 @@ SRC_URI = " \
     git://github.com/pantherb/setBfree.git \
     file://0001-remove-UINQHACK-it-is-used-for-OSX-builds-only-and-c.patch \
     file://0002-Do-not-check-for-fontfile.patch \
+    file://setbfree.desktop \
+    file://x42-whirl.desktop \
 "
-SRCREV = "ff2ea498f74671ce1051cec1738d9f3c71da8bec"
+SRCREV = "9a4783cd91739d5ead118227bfeaaa651b0def5f"
 S = "${WORKDIR}/git"
-PV = "0.8.5+git${SRCPV}"
+PV = "0.8.8"
 
 EXTRA_OEMAKE += " \
     PREFIX=${prefix} \
@@ -39,8 +41,8 @@ do_install_append() {
     install -m 0644 ${S}/doc/x42-whirl.png ${D}${datadir}/pixmaps
 
     install -d  ${D}${datadir}/applications
-    install -m 0644 ${S}/debian/setbfree.desktop ${D}${datadir}/applications
-    install -m 0644 ${S}/debian/x42-whirl.desktop ${D}${datadir}/applications
+    install -m 0644 ${WORKDIR}/setbfree.desktop ${D}${datadir}/applications
+    install -m 0644 ${WORKDIR}/x42-whirl.desktop ${D}${datadir}/applications
 }
 
 FILES_${PN} += " \
