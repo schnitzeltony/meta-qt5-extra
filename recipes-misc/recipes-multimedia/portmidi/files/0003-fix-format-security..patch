@@ -1,5 +1,27 @@
---- portmidi/pm_test/latency.c	2014-06-09 19:58:02.503837705 +0200
-+++ portmidi/pm_test/latency.c	2014-06-09 19:59:15.645838404 +0200
+From e597c5c8636a269dbe5e664c706e66887479f161 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 26 Sep 2018 01:44:12 +0200
+Subject: [PATCH] Fix format-security
+
+Stolen from [1]
+
+[1] https://src.fedoraproject.org/cgit/rpms/portmidi.git/plain/portmidi-217-format-security.patch
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ pm_test/latency.c   | 2 +-
+ pm_test/midiclock.c | 4 ++--
+ pm_test/mm.c        | 8 ++++----
+ pm_test/sysex.c     | 2 +-
+ pm_test/test.c      | 2 +-
+ 5 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/pm_test/latency.c b/pm_test/latency.c
+index 507648c..5f4bb5c 100755
+--- a/pm_test/latency.c
++++ b/pm_test/latency.c
 @@ -280,7 +280,7 @@ int get_number(char *prompt)
  {
      char line[STRING_MAX];
@@ -9,9 +31,10 @@
      while (n != 1) {
          n = scanf("%d", &i);
          fgets(line, STRING_MAX, stdin);
-diff -Nurp portmidi/pm_test/midiclock.c portmidi/pm_test.new/midiclock.c
---- portmidi/pm_test/midiclock.c	2014-06-09 20:05:10.783841793 +0200
-+++ portmidi/pm_test.new/midiclock.c	2014-06-09 20:06:05.582842316 +0200
+diff --git a/pm_test/midiclock.c b/pm_test/midiclock.c
+index 60fcf7a..17967a5 100644
+--- a/pm_test/midiclock.c
++++ b/pm_test/midiclock.c
 @@ -167,7 +167,7 @@ int get_number(char *prompt)
  {
      char line[STRING_MAX];
@@ -30,9 +53,10 @@ diff -Nurp portmidi/pm_test/midiclock.c portmidi/pm_test.new/midiclock.c
          goto error_exit_no_device;
      }
      active = true;
-diff -Nurp portmidi/pm_test/mm.c portmidi/pm_test.new/mm.c
---- portmidi/pm_test/mm.c	2010-10-05 20:49:09.000000000 +0200
-+++ portmidi/pm_test.new/mm.c	2014-06-09 20:09:26.222844231 +0200
+diff --git a/pm_test/mm.c b/pm_test/mm.c
+index 209ff74..f3e6e7b 100755
+--- a/pm_test/mm.c
++++ b/pm_test/mm.c
 @@ -119,7 +119,7 @@ int get_number(char *prompt)
  {
      char line[STRING_MAX];
@@ -42,7 +66,7 @@ diff -Nurp portmidi/pm_test/mm.c portmidi/pm_test.new/mm.c
      while (n != 1) {
          n = scanf("%d", &i);
          fgets(line, STRING_MAX, stdin);
-@@ -136,7 +136,7 @@ void receive_poll(PtTimestamp timestamp,
+@@ -136,7 +136,7 @@ void receive_poll(PtTimestamp timestamp, void *userData)
      if (!active) return;
      while ((count = Pm_Read(midi_in, &event, 1))) {
          if (count == 1) output(event.message);
@@ -69,21 +93,10 @@ diff -Nurp portmidi/pm_test/mm.c portmidi/pm_test.new/mm.c
      return strlen(result);
  }
  
-diff -Nurp portmidi/pm_test/test.c portmidi/pm_test.new/test.c
---- portmidi/pm_test/test.c	2009-09-16 18:54:04.000000000 +0200
-+++ portmidi/pm_test.new/test.c	2014-06-09 20:10:04.310844594 +0200
-@@ -37,7 +37,7 @@ int get_number(char *prompt)
- {
-     char line[STRING_MAX];
-     int n = 0, i;
--    printf(prompt);
-+    printf("%s",prompt);
-     while (n != 1) {
-         n = scanf("%d", &i);
-         fgets(line, STRING_MAX, stdin);
-diff -Nurp portmidi/pm_test/sysex.c portmidi/pm_test.new/sysex.c
---- portmidi/pm_test/sysex.c	2010-09-20 21:57:48.000000000 +0200
-+++ portmidi/pm_test.new/sysex.c	2014-06-09 20:12:05.502845751 +0200
+diff --git a/pm_test/sysex.c b/pm_test/sysex.c
+index 627a3df..da2bb90 100755
+--- a/pm_test/sysex.c
++++ b/pm_test/sysex.c
 @@ -39,7 +39,7 @@ int get_number(char *prompt)
  {
      char line[STRING_MAX];
@@ -93,4 +106,19 @@ diff -Nurp portmidi/pm_test/sysex.c portmidi/pm_test.new/sysex.c
      while (n != 1) {
          n = scanf("%d", &i);
          fgets(line, STRING_MAX, stdin);
+diff --git a/pm_test/test.c b/pm_test/test.c
+index 03d6331..dcac1bc 100755
+--- a/pm_test/test.c
++++ b/pm_test/test.c
+@@ -37,7 +37,7 @@ int get_number(char *prompt)
+ {
+     char line[STRING_MAX];
+     int n = 0, i;
+-    printf(prompt);
++    printf("%s",prompt);
+     while (n != 1) {
+         n = scanf("%d", &i);
+         fgets(line, STRING_MAX, stdin);
+-- 
+2.14.4
 
