@@ -62,7 +62,6 @@ RDEPENDS_${PN} = " \
     liblo \
     libmp4v2 \
     libsmf \
-    libvisual \
     libxmp \
     lmms \
     lrdf \
