@@ -51,5 +51,4 @@ do_install_append() {
 
 FILES_${PN} += " \
     ${datadir}/projectM \
-    ${libdir}/libvisual-0.4/actor/*.so \
 "
