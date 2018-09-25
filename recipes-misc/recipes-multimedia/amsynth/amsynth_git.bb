@@ -10,12 +10,11 @@ DEPENDS += " \
     intltool-native \
 "
 
-SRC_URI = " \
-    https://github.com/${BPN}/${BPN}/releases/download/release-${PV}/${BPN}-${PV}.tar.bz2 \
-    file://0001-Fix-installing-of-appdata.patch \
-"
-SRC_URI[md5sum] = "54eaabc55d90ece5675b3cb3c2dc732d"
-SRC_URI[sha256sum] = "d05363b654752494c4b6a404d80d70d27857db5ec9ca398eebcf6c5b466d6668"
+SRC_URI = "git://github.com/amsynth/amsynth.git;branch=develop"
+SRCREV = "3ddbd8c44ea9ddec558c1da0d27b26f553898d4f"
+PV = "1.8.0+git${SRCPV}"
+S = "${WORKDIR}/git"
+
 
 PACKAGECONFIG ??= "alsa jack sndfile lv2"
 
