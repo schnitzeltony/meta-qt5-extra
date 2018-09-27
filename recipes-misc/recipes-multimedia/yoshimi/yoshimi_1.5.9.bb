@@ -15,7 +15,7 @@ DEPENDS += " \
     lv2 \
     cairo \
     fltk fltk-native \
-    mxml \
+    libmxml \
     libpng jpeg \
     libxrender \
     libxft \

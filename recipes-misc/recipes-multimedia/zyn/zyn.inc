@@ -15,7 +15,7 @@ DEPENDS += " \
     lv2 \
     liblo \
     zlib \
-    mxml \
+    libmxml \
     libxpm \
 "
 
