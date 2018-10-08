@@ -16,4 +16,5 @@ PACKAGECONFIG ??= "alsa jack"
 PACKAGECONFIG[alsa] = "--with-alsa,--without-alsa,alsa-lib"
 PACKAGECONFIG[jack] = "--with-jack,--without-jack,jack"
 
+DISABLE_STATIC = ""
 EXTRA_OECONF = "--enable-realtime"
