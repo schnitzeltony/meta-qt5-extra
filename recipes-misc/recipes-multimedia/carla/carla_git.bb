@@ -10,8 +10,10 @@ SRC_URI = " \
     git://github.com/falkTX/Carla.git \
     file://0001-do-not-try-to-cross-run-carla-lv2-export.patch \
     file://0002-Do-not-try-to-find-Qt5-host-bins-it-won-t-work.patch \
+    file://0003-Fluidsynths-Ensure-fluidsynth-s-defaults-are-set-onc.patch \
+    file://0004-Fixes-for-fluidsynth-2.0.0.patch \
 "
-SRCREV = "430740a896d8f7546e02b524302e2cfda4509ff9"
+SRCREV = "d73c0788ccc5fb9019d224046ef1b652aa5a9bbe"
 S = "${WORKDIR}/git"
 PV = "1.9.11+git${SRCPV}"
 
