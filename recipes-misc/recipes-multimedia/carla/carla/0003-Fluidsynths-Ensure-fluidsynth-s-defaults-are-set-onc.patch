@@ -1,4 +1,4 @@
-From 4db0ed714fdea67a5e1ca38e55eaf2cfaac05151 Mon Sep 17 00:00:00 2001
+From 5e796fe27ef27bd6e5e87c6d4ab04549c99f0f48 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Wed, 10 Oct 2018 23:48:22 +0200
 Subject: [PATCH 1/3] Fluidsynths: Ensure fluidsynth's defaults are set once
@@ -11,40 +11,40 @@ This makes transition fluidsynth 1.x -> 2.x a lot easier.
 
 Upstream-Status: Submitted [1]
 
-[1] https://github.com/falkTX/Carla/pull/765
+[1] https://github.com/falkTX/Carla/pull/766
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- source/backend/plugin/CarlaPluginFluidSynth.cpp | 67 ++++++++++++++++++-------
- 1 file changed, 48 insertions(+), 19 deletions(-)
+ source/backend/plugin/CarlaPluginFluidSynth.cpp | 69 ++++++++++++++++++-------
+ 1 file changed, 50 insertions(+), 19 deletions(-)
 
 diff --git a/source/backend/plugin/CarlaPluginFluidSynth.cpp b/source/backend/plugin/CarlaPluginFluidSynth.cpp
-index be9e720a..ed0a55ac 100644
+index be9e720a..85e3aeb2 100644
 --- a/source/backend/plugin/CarlaPluginFluidSynth.cpp
 +++ b/source/backend/plugin/CarlaPluginFluidSynth.cpp
 @@ -73,20 +73,22 @@ public:
          fSynth = new_fluid_synth(fSettings);
          CARLA_SAFE_ASSERT_RETURN(fSynth != nullptr,);
  
-+        keepFluidDefaults();
++        initializeFluidDefaultsIfNeeded();
 +
          fluid_synth_set_sample_rate(fSynth, (float)pData->engine->getSampleRate());
  
          // set default values
          fluid_synth_set_reverb_on(fSynth, 1);
 -        fluid_synth_set_reverb(fSynth, FLUID_REVERB_DEFAULT_ROOMSIZE, FLUID_REVERB_DEFAULT_DAMP, FLUID_REVERB_DEFAULT_WIDTH, FLUID_REVERB_DEFAULT_LEVEL);
-+        fluid_synth_set_reverb(fSynth, fFluidDefaults[FluidSynthReverbRoomSize], fFluidDefaults[FluidSynthReverbDamp], fFluidDefaults[FluidSynthReverbWidth], fFluidDefaults[FluidSynthReverbLevel]);
++        fluid_synth_set_reverb(fSynth, sfFluidDefaults[FluidSynthReverbRoomSize], sfFluidDefaults[FluidSynthReverbDamp], sfFluidDefaults[FluidSynthReverbWidth], sfFluidDefaults[FluidSynthReverbLevel]);
  
          fluid_synth_set_chorus_on(fSynth, 1);
 -        fluid_synth_set_chorus(fSynth, FLUID_CHORUS_DEFAULT_N, FLUID_CHORUS_DEFAULT_LEVEL, FLUID_CHORUS_DEFAULT_SPEED, FLUID_CHORUS_DEFAULT_DEPTH, FLUID_CHORUS_DEFAULT_TYPE);
-+        fluid_synth_set_chorus(fSynth, fFluidDefaults[FluidSynthChorusNr], fFluidDefaults[FluidSynthChorusLevel], fFluidDefaults[FluidSynthChorusSpeedHz], fFluidDefaults[FluidSynthChorusDepthMs], fFluidDefaults[FluidSynthChorusType]);
++        fluid_synth_set_chorus(fSynth, sfFluidDefaults[FluidSynthChorusNr], sfFluidDefaults[FluidSynthChorusLevel], sfFluidDefaults[FluidSynthChorusSpeedHz], sfFluidDefaults[FluidSynthChorusDepthMs], sfFluidDefaults[FluidSynthChorusType]);
  
          fluid_synth_set_polyphony(fSynth, FLUID_DEFAULT_POLYPHONY);
          fluid_synth_set_gain(fSynth, 1.0f);
  
          for (int i=0; i < MAX_MIDI_CHANNELS; ++i)
 -            fluid_synth_set_interp_method(fSynth, i, FLUID_INTERP_DEFAULT);
-+            fluid_synth_set_interp_method(fSynth, i, fFluidDefaults[FluidSynthInterpolation]);
++            fluid_synth_set_interp_method(fSynth, i, sfFluidDefaults[FluidSynthInterpolation]);
      }
  
      ~CarlaPluginFluidSynth() override
@@ -53,7 +53,7 @@ index be9e720a..ed0a55ac 100644
                  return FLUID_CHORUS_MOD_TRIANGLE;
              default:
 -                return FLUID_CHORUS_DEFAULT_TYPE;
-+                return fFluidDefaults[FluidSynthChorusType];
++                return sfFluidDefaults[FluidSynthChorusType];
              }
          case FluidSynthInterpolation:
              switch (scalePointId)
@@ -62,7 +62,7 @@ index be9e720a..ed0a55ac 100644
                  return FLUID_INTERP_7THORDER;
              default:
 -                return FLUID_INTERP_DEFAULT;
-+                return fFluidDefaults[FluidSynthInterpolation];
++                return sfFluidDefaults[FluidSynthInterpolation];
              }
          default:
              return 0.0f;
@@ -71,7 +71,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = 0.0f;
              pData->param.ranges[j].max = 1.0f;
 -            pData->param.ranges[j].def = 1.0f;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 1.0f;
              pData->param.ranges[j].stepSmall = 1.0f;
              pData->param.ranges[j].stepLarge = 1.0f;
@@ -80,7 +80,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = 0.0f;
              pData->param.ranges[j].max = 1.2f;
 -            pData->param.ranges[j].def = FLUID_REVERB_DEFAULT_ROOMSIZE;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 0.01f;
              pData->param.ranges[j].stepSmall = 0.0001f;
              pData->param.ranges[j].stepLarge = 0.1f;
@@ -89,7 +89,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = 0.0f;
              pData->param.ranges[j].max = 1.0f;
 -            pData->param.ranges[j].def = FLUID_REVERB_DEFAULT_DAMP;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 0.01f;
              pData->param.ranges[j].stepSmall = 0.0001f;
              pData->param.ranges[j].stepLarge = 0.1f;
@@ -98,7 +98,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = 0.0f;
              pData->param.ranges[j].max = 1.0f;
 -            pData->param.ranges[j].def = FLUID_REVERB_DEFAULT_LEVEL;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 0.01f;
              pData->param.ranges[j].stepSmall = 0.0001f;
              pData->param.ranges[j].stepLarge = 0.1f;
@@ -107,7 +107,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = 0.0f;
              pData->param.ranges[j].max = 10.0f; // should be 100, but that sounds too much
 -            pData->param.ranges[j].def = FLUID_REVERB_DEFAULT_WIDTH;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 0.01f;
              pData->param.ranges[j].stepSmall = 0.0001f;
              pData->param.ranges[j].stepLarge = 0.1f;
@@ -116,7 +116,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = 0.0f;
              pData->param.ranges[j].max = 1.0f;
 -            pData->param.ranges[j].def = 1.0f;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 1.0f;
              pData->param.ranges[j].stepSmall = 1.0f;
              pData->param.ranges[j].stepLarge = 1.0f;
@@ -125,7 +125,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = 0.0f;
              pData->param.ranges[j].max = 99.0f;
 -            pData->param.ranges[j].def = FLUID_CHORUS_DEFAULT_N;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 1.0f;
              pData->param.ranges[j].stepSmall = 1.0f;
              pData->param.ranges[j].stepLarge = 10.0f;
@@ -134,7 +134,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = 0.0f;
              pData->param.ranges[j].max = 10.0f;
 -            pData->param.ranges[j].def = FLUID_CHORUS_DEFAULT_LEVEL;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 0.01f;
              pData->param.ranges[j].stepSmall = 0.0001f;
              pData->param.ranges[j].stepLarge = 0.1f;
@@ -143,7 +143,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = 0.29f;
              pData->param.ranges[j].max = 5.0f;
 -            pData->param.ranges[j].def = FLUID_CHORUS_DEFAULT_SPEED;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 0.01f;
              pData->param.ranges[j].stepSmall = 0.0001f;
              pData->param.ranges[j].stepLarge = 0.1f;
@@ -152,7 +152,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = 0.0f;
              pData->param.ranges[j].max = float(2048.0 * 1000.0 / pData->engine->getSampleRate()); // FIXME?
 -            pData->param.ranges[j].def = FLUID_CHORUS_DEFAULT_DEPTH;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 0.01f;
              pData->param.ranges[j].stepSmall = 0.0001f;
              pData->param.ranges[j].stepLarge = 0.1f;
@@ -161,7 +161,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = FLUID_CHORUS_MOD_SINE;
              pData->param.ranges[j].max = FLUID_CHORUS_MOD_TRIANGLE;
 -            pData->param.ranges[j].def = FLUID_CHORUS_DEFAULT_TYPE;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 1.0f;
              pData->param.ranges[j].stepSmall = 1.0f;
              pData->param.ranges[j].stepLarge = 1.0f;
@@ -170,7 +170,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = 1.0f;
              pData->param.ranges[j].max = 512.0f; // max theoric is 65535
 -            pData->param.ranges[j].def = (float)fluid_synth_get_polyphony(fSynth);
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 1.0f;
              pData->param.ranges[j].stepSmall = 1.0f;
              pData->param.ranges[j].stepLarge = 10.0f;
@@ -179,7 +179,7 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = FLUID_INTERP_NONE;
              pData->param.ranges[j].max = FLUID_INTERP_HIGHEST;
 -            pData->param.ranges[j].def = FLUID_INTERP_DEFAULT;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 1.0f;
              pData->param.ranges[j].stepSmall = 1.0f;
              pData->param.ranges[j].stepLarge = 1.0f;
@@ -188,54 +188,56 @@ index be9e720a..ed0a55ac 100644
              pData->param.ranges[j].min = 0.0f;
              pData->param.ranges[j].max = 65535.0f;
 -            pData->param.ranges[j].def = 0.0f;
-+            pData->param.ranges[j].def = fFluidDefaults[j];
++            pData->param.ranges[j].def = sfFluidDefaults[j];
              pData->param.ranges[j].step = 1.0f;
              pData->param.ranges[j].stepSmall = 1.0f;
              pData->param.ranges[j].stepLarge = 1.0f;
-@@ -1656,6 +1658,27 @@ public:
+@@ -1656,6 +1658,29 @@ public:
      }
  
  private:
-+    void keepFluidDefaults()
++    void initializeFluidDefaultsIfNeeded()
 +    {
-+        if (!bFluidDefaultsKept)
++        if (!sbFluidDefaultsStored)
 +        {
-+            fFluidDefaults[FluidSynthReverbOnOff] = 1.0f;
-+            fFluidDefaults[FluidSynthReverbRoomSize] = FLUID_REVERB_DEFAULT_ROOMSIZE;
-+            fFluidDefaults[FluidSynthReverbDamp] = FLUID_REVERB_DEFAULT_DAMP;
-+            fFluidDefaults[FluidSynthReverbLevel] = FLUID_REVERB_DEFAULT_LEVEL;
-+            fFluidDefaults[FluidSynthReverbWidth] = FLUID_REVERB_DEFAULT_WIDTH;
-+            fFluidDefaults[FluidSynthChorusOnOff] = 1.0f;
-+            fFluidDefaults[FluidSynthChorusNr] = FLUID_CHORUS_DEFAULT_N;
-+            fFluidDefaults[FluidSynthChorusLevel] = FLUID_CHORUS_DEFAULT_LEVEL;
-+            fFluidDefaults[FluidSynthChorusSpeedHz] = FLUID_CHORUS_DEFAULT_SPEED;
-+            fFluidDefaults[FluidSynthChorusDepthMs] = FLUID_CHORUS_DEFAULT_DEPTH;
-+            fFluidDefaults[FluidSynthChorusType] = FLUID_CHORUS_DEFAULT_TYPE;
-+            fFluidDefaults[FluidSynthPolyphony] = (float)fluid_synth_get_polyphony(fSynth);
-+            fFluidDefaults[FluidSynthInterpolation] = FLUID_INTERP_DEFAULT;
-+            fFluidDefaults[FluidSynthVoiceCount] = 0.0f;
++            sfFluidDefaults[FluidSynthReverbOnOff] = 1.0f;
++            sfFluidDefaults[FluidSynthReverbRoomSize] = FLUID_REVERB_DEFAULT_ROOMSIZE;
++            sfFluidDefaults[FluidSynthReverbDamp] = FLUID_REVERB_DEFAULT_DAMP;
++            sfFluidDefaults[FluidSynthReverbLevel] = FLUID_REVERB_DEFAULT_LEVEL;
++            sfFluidDefaults[FluidSynthReverbWidth] = FLUID_REVERB_DEFAULT_WIDTH;
++            sfFluidDefaults[FluidSynthChorusOnOff] = 1.0f;
++            sfFluidDefaults[FluidSynthChorusNr] = FLUID_CHORUS_DEFAULT_N;
++            sfFluidDefaults[FluidSynthChorusLevel] = FLUID_CHORUS_DEFAULT_LEVEL;
++            sfFluidDefaults[FluidSynthChorusSpeedHz] = FLUID_CHORUS_DEFAULT_SPEED;
++            sfFluidDefaults[FluidSynthChorusDepthMs] = FLUID_CHORUS_DEFAULT_DEPTH;
++            sfFluidDefaults[FluidSynthChorusType] = FLUID_CHORUS_DEFAULT_TYPE;
++            sfFluidDefaults[FluidSynthPolyphony] = (float)fluid_synth_get_polyphony(fSynth);
++            sfFluidDefaults[FluidSynthInterpolation] = FLUID_INTERP_DEFAULT;
++            sfFluidDefaults[FluidSynthVoiceCount] = 0.0f;
++
++            sbFluidDefaultsStored = true;
 +        }
 +    }
 +
      enum FluidSynthParameters {
          FluidSynthReverbOnOff    = 0,
          FluidSynthReverbRoomSize = 1,
-@@ -1683,6 +1706,9 @@ private:
+@@ -1683,6 +1708,9 @@ private:
      float** fAudio16Buffers;
      float   fParamBuffers[FluidSynthParametersMax];
  
-+    static bool  bFluidDefaultsKept;
-+    static float fFluidDefaults[FluidSynthParametersMax];
++    static bool  sbFluidDefaultsStored;
++    static float sfFluidDefaults[FluidSynthParametersMax];
 +
      int32_t fCurMidiProgs[MAX_MIDI_CHANNELS];
  
      const char* fLabel;
-@@ -1690,6 +1716,9 @@ private:
+@@ -1690,6 +1718,9 @@ private:
      CARLA_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CarlaPluginFluidSynth)
  };
  
-+bool CarlaPluginFluidSynth::bFluidDefaultsKept = false;
-+float CarlaPluginFluidSynth::fFluidDefaults[FluidSynthParametersMax];
++bool CarlaPluginFluidSynth::sbFluidDefaultsStored = false;
++float CarlaPluginFluidSynth::sfFluidDefaults[FluidSynthParametersMax];
 +
  CARLA_BACKEND_END_NAMESPACE
  

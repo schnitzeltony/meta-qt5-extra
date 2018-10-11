@@ -1,6 +1,6 @@
-From 0e23f43a997a44bb4985f826cd31f180ff2bae13 Mon Sep 17 00:00:00 2001
+From 9800d8fea43f17f7c198ce2375a21715794f3352 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 11 Oct 2018 00:09:56 +0200
+Date: Thu, 11 Oct 2018 23:35:02 +0200
 Subject: [PATCH 2/3] Fixes for fluidsynth >= 2.0.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -12,7 +12,7 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Submitted [1]
 
-[1] https://github.com/falkTX/Carla/pull/765
+[1] https://github.com/falkTX/Carla/pull/766
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
@@ -21,7 +21,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  2 files changed, 67 insertions(+)
 
 diff --git a/source/backend/plugin/CarlaPluginFluidSynth.cpp b/source/backend/plugin/CarlaPluginFluidSynth.cpp
-index ed0a55ac..44621e01 100644
+index 85e3aeb2..3873507c 100644
 --- a/source/backend/plugin/CarlaPluginFluidSynth.cpp
 +++ b/source/backend/plugin/CarlaPluginFluidSynth.cpp
 @@ -943,6 +943,7 @@ public:
@@ -71,53 +71,53 @@ index ed0a55ac..44621e01 100644
                  {
 @@ -1662,17 +1693,48 @@ private:
      {
-         if (!bFluidDefaultsKept)
+         if (!sbFluidDefaultsStored)
          {
 +            // reverb defaults
-             fFluidDefaults[FluidSynthReverbOnOff] = 1.0f;
+             sfFluidDefaults[FluidSynthReverbOnOff] = 1.0f;
 +#if FLUIDSYNTH_VERSION_MAJOR < 2
-             fFluidDefaults[FluidSynthReverbRoomSize] = FLUID_REVERB_DEFAULT_ROOMSIZE;
-             fFluidDefaults[FluidSynthReverbDamp] = FLUID_REVERB_DEFAULT_DAMP;
-             fFluidDefaults[FluidSynthReverbLevel] = FLUID_REVERB_DEFAULT_LEVEL;
-             fFluidDefaults[FluidSynthReverbWidth] = FLUID_REVERB_DEFAULT_WIDTH;
+             sfFluidDefaults[FluidSynthReverbRoomSize] = FLUID_REVERB_DEFAULT_ROOMSIZE;
+             sfFluidDefaults[FluidSynthReverbDamp] = FLUID_REVERB_DEFAULT_DAMP;
+             sfFluidDefaults[FluidSynthReverbLevel] = FLUID_REVERB_DEFAULT_LEVEL;
+             sfFluidDefaults[FluidSynthReverbWidth] = FLUID_REVERB_DEFAULT_WIDTH;
 +#else
 +            double reverbVal;
 +            fluid_settings_getnum_default(fSettings, "synth.reverb.room-size", &reverbVal);
-+            fFluidDefaults[FluidSynthReverbRoomSize] = reverbVal;
++            sfFluidDefaults[FluidSynthReverbRoomSize] = reverbVal;
 +            fluid_settings_getnum_default(fSettings, "synth.reverb.damp", &reverbVal);
-+            fFluidDefaults[FluidSynthReverbDamp] = reverbVal;
++            sfFluidDefaults[FluidSynthReverbDamp] = reverbVal;
 +            fluid_settings_getnum_default(fSettings, "synth.reverb.level", &reverbVal);
-+            fFluidDefaults[FluidSynthReverbLevel] = reverbVal;
++            sfFluidDefaults[FluidSynthReverbLevel] = reverbVal;
 +            fluid_settings_getnum_default(fSettings, "synth.reverb.width", &reverbVal);
-+            fFluidDefaults[FluidSynthReverbWidth] = reverbVal;
++            sfFluidDefaults[FluidSynthReverbWidth] = reverbVal;
 +#endif
 +
 +            // chorus defaults
-             fFluidDefaults[FluidSynthChorusOnOff] = 1.0f;
+             sfFluidDefaults[FluidSynthChorusOnOff] = 1.0f;
 +#if FLUIDSYNTH_VERSION_MAJOR < 2
-             fFluidDefaults[FluidSynthChorusNr] = FLUID_CHORUS_DEFAULT_N;
-             fFluidDefaults[FluidSynthChorusLevel] = FLUID_CHORUS_DEFAULT_LEVEL;
-             fFluidDefaults[FluidSynthChorusSpeedHz] = FLUID_CHORUS_DEFAULT_SPEED;
-             fFluidDefaults[FluidSynthChorusDepthMs] = FLUID_CHORUS_DEFAULT_DEPTH;
-             fFluidDefaults[FluidSynthChorusType] = FLUID_CHORUS_DEFAULT_TYPE;
+             sfFluidDefaults[FluidSynthChorusNr] = FLUID_CHORUS_DEFAULT_N;
+             sfFluidDefaults[FluidSynthChorusLevel] = FLUID_CHORUS_DEFAULT_LEVEL;
+             sfFluidDefaults[FluidSynthChorusSpeedHz] = FLUID_CHORUS_DEFAULT_SPEED;
+             sfFluidDefaults[FluidSynthChorusDepthMs] = FLUID_CHORUS_DEFAULT_DEPTH;
+             sfFluidDefaults[FluidSynthChorusType] = FLUID_CHORUS_DEFAULT_TYPE;
 +#else
 +            double chorusVal;
 +            fluid_settings_getnum_default(fSettings, "synth.chorus.nr", &chorusVal);
-+            fFluidDefaults[FluidSynthChorusNr] = chorusVal;
++            sfFluidDefaults[FluidSynthChorusNr] = chorusVal;
 +            fluid_settings_getnum_default(fSettings, "synth.chorus.level", &chorusVal);
-+            fFluidDefaults[FluidSynthChorusLevel] = chorusVal;
++            sfFluidDefaults[FluidSynthChorusLevel] = chorusVal;
 +            fluid_settings_getnum_default(fSettings, "synth.chorus.speed", &chorusVal);
-+            fFluidDefaults[FluidSynthChorusSpeedHz] = chorusVal;
++            sfFluidDefaults[FluidSynthChorusSpeedHz] = chorusVal;
 +            fluid_settings_getnum_default(fSettings, "synth.chorus.depth", &chorusVal);
-+            fFluidDefaults[FluidSynthChorusDepthMs] = chorusVal;
++            sfFluidDefaults[FluidSynthChorusDepthMs] = chorusVal;
 +            // There is no settings for chorus default type
-+            fFluidDefaults[FluidSynthChorusType] = (float)fluid_synth_get_chorus_type(fSynth);
++            sfFluidDefaults[FluidSynthChorusType] = (float)fluid_synth_get_chorus_type(fSynth);
 +#endif
 +
 +            // misc. defaults
-             fFluidDefaults[FluidSynthPolyphony] = (float)fluid_synth_get_polyphony(fSynth);
-             fFluidDefaults[FluidSynthInterpolation] = FLUID_INTERP_DEFAULT;
-             fFluidDefaults[FluidSynthVoiceCount] = 0.0f;
+             sfFluidDefaults[FluidSynthPolyphony] = (float)fluid_synth_get_polyphony(fSynth);
+             sfFluidDefaults[FluidSynthInterpolation] = FLUID_INTERP_DEFAULT;
+             sfFluidDefaults[FluidSynthVoiceCount] = 0.0f;
 diff --git a/source/discovery/carla-discovery.cpp b/source/discovery/carla-discovery.cpp
 index a0745e23..d2cd2931 100644
 --- a/source/discovery/carla-discovery.cpp
