@@ -11,7 +11,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     amsynth \
-    ardour \
+    ardour5 \
     aubio \
     audio-tweaks \
     bristol \

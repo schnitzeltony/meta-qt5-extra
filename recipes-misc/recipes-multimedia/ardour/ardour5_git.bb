@@ -3,12 +3,8 @@ HOMEPAGE = "http://ardour.org/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4641e94ec96f98fabc56ff9cc48be14b"
 
-# It is a V6 already
-ARDOUR_VER = "6"
-
 DEPENDS += " \
     gettext-native \
-    itstool-native \
     gtk+ \
     gtkmm \
     cppunit \
@@ -40,11 +36,10 @@ SRC_URI = " \
     git://github.com/Ardour/ardour.git \
     file://0001-remove-all-build-flags-that-cause-trouble-for-cross-.patch \
     file://0002-Use-ARM-NEON-intrinsics-if-available-for-mixing-func.patch \
-    file://0003-Follow-fluidsynth-s-API-changes-introduced-with-2.0..patch \
-    file://0004-Make-itstool-work.patch \
+    file://ardour5.desktop \
 "
-SRCREV = "2a9af2d2f6aa9025adabf2f9bc6e42c65b43c08a"
-PV = "5.12+git${SRCPV}"
+SRCREV = "ae0dcdc0c5d13483271065c360e378202d20170a"
+PV = "5.12"
 S = "${WORKDIR}/git"
 
 
@@ -56,7 +51,7 @@ EXTRA_OECONF = " \
     --configdir=${sysconfdir} \
     --libdir=${libdir} \
     --optimize \
-    --freedesktop \
+    --cxx11 \
     --no-phone-home \
     --use-external-libs \
     --qm-dsp-include=${STAGING_INCDIR}/qm-dsp \
@@ -65,49 +60,39 @@ EXTRA_OECONF = " \
     --dist-target=${BUILD_DIST_TARGET} \
 "
 
-do_configure_prepend() {
-    # force full path for itstool
-    sed -i 's:%sysroot_bindir%:${STAGING_BINDIR_NATIVE}:g' ${S}/gtk2_ardour/wscript
-}
-
 do_install_append() {
     # install icons to freedesktop locations
     for s in 16 22 32 48 256 512; do
         install -d  ${D}${datadir}/icons/hicolor/${s}x${s}/apps
-        ln -s ../../../../${BPN}${ARDOUR_VER}/resources/Ardour-icon_${s}px.png \
-            ${D}${datadir}/icons/hicolor/${s}x${s}/apps/${BPN}${ARDOUR_VER}.png
+        ln -s ../../../../${BPN}/resources/Ardour-icon_${s}px.png \
+            ${D}${datadir}/icons/hicolor/${s}x${s}/apps/${BPN}.png
     done
+
     # install .desktop
     install -d  ${D}${datadir}/applications
-    install -m 0644 ${S}/build/gtk2_ardour/${BPN}${ARDOUR_VER}.desktop ${D}${datadir}/applications
+    install -m 0644 ${WORKDIR}/ardour5.desktop ${D}${datadir}/applications
 }
 
 FILES_${PN} += " \
-    ${datadir}/${BPN}${ARDOUR_VER} \
-    ${libdir}/${BPN}${ARDOUR_VER} \
+    ${datadir}/${BPN} \
+    ${libdir}/${BPN} \
 "
 
 FILES_${PN}-dev += " \
-    ${libdir}/${BPN}${ARDOUR_VER}/libardour.so \
-    ${libdir}/${BPN}${ARDOUR_VER}/libardouralsautil.so \
-    ${libdir}/${BPN}${ARDOUR_VER}/libaudiographer.so \
-    ${libdir}/${BPN}${ARDOUR_VER}/libcanvas.so \
-    ${libdir}/${BPN}${ARDOUR_VER}/libevoral.so \
-    ${libdir}/${BPN}${ARDOUR_VER}/libgtkmm2ext.so \
-    ${libdir}/${BPN}${ARDOUR_VER}/libmidipp.so \
-    ${libdir}/${BPN}${ARDOUR_VER}/libpbd.so \
-    ${libdir}/${BPN}${ARDOUR_VER}/libptformat.so \
-    ${libdir}/${BPN}${ARDOUR_VER}/libtemporal.so \
-    ${libdir}/${BPN}${ARDOUR_VER}/libwaveview.so \
-    ${libdir}/${BPN}${ARDOUR_VER}/libwidgets.so \
-    ${libdir}/${BPN}${ARDOUR_VER}/vamp/libardourvampplugins.so \
+    ${libdir}/${BPN}/libardour.so \
+    ${libdir}/${BPN}/libardouralsautil.so \
+    ${libdir}/${BPN}/libaudiographer.so \
+    ${libdir}/${BPN}/libcanvas.so \
+    ${libdir}/${BPN}/libevoral.so \
+    ${libdir}/${BPN}/libgtkmm2ext.so \
+    ${libdir}/${BPN}/libmidipp.so \
+    ${libdir}/${BPN}/libpbd.so \
+    ${libdir}/${BPN}/libptformat.so \
+    ${libdir}/${BPN}/libwaveview.so \
+    ${libdir}/${BPN}/libwidgets.so \
+    ${libdir}/${BPN}/vamp/*.so \
 "
 
 FILES_${PN}-staticdev += " \
-    ${libdir}/${BPN}${ARDOUR_VER}/*.a \
+    ${libdir}/${BPN}/*.a \
 "
-
-RPROVIDES_${PN} += "${PN}5"
-RREPLACES_${PN} += "${PN}5"
-RCONFLICTS_${PN} += "${PN}5"
-
