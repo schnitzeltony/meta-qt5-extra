@@ -62,14 +62,6 @@ index a7dd5e2..35acc51 100644
  
          if (conf.env['build_target'] == 'mingw'):
              if (re.search ("(x86_64|AMD64)", cpu) != None):
-@@ -965,7 +940,6 @@ def configure(conf):
-             else:
-                 conf.check_cc(function_name='dlopen', header_name='dlfcn.h', lib='dl', uselib_store='DL')
-         conf.check_cxx(fragment = "#include <boost/version.hpp>\nint main(void) { return (BOOST_VERSION >= 103900 ? 0 : 1); }\n",
--                  execute = "1",
-                   mandatory = True,
-                   msg = 'Checking for boost library >= 1.39',
-                   okmsg = 'ok',
 -- 
 2.9.3
 
