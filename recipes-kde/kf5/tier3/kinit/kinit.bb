@@ -23,8 +23,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "f6b5fada29fde1223aa976476f583427"
-SRC_URI[sha256sum] = "25b5e07c2dd651a96f79ea58e0a76a172aac4b818892641adf97bdf6525909e7"
+SRC_URI[md5sum] = "363769e63800c6eaf3285999c0f5945f"
+SRC_URI[sha256sum] = "1464902a9266c302ed48f7b9ebfd5a11944c4eddb4da805b4ec560163bf644b7"
 
 FILES_${PN} += "${datadir}/dbus-1 ${libdir}/libkdeinit5_klauncher.so"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"

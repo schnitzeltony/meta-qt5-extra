@@ -1,38 +1,38 @@
-From 938ed57e8985770b1e9824a1d1de3d67b3b2f2f7 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 25 Aug 2016 11:30:33 +0200
-Subject: [PATCH] do build kpackagetool only on native
+From 632015125044fad5b268329570b55246002cd792 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 15 Oct 2018 22:57:51 +0200
+Subject: [PATCH] Do not build po-files on native build
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Inappropriate [embedded specific]
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  CMakeLists.txt | 2 ++
  1 file changed, 2 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 7da9a1d..b701045 100644
+index 6712311..51df454 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -74,6 +74,7 @@ include(KF5PackageMacros.cmake)
- # make package_version.h available
+@@ -75,6 +75,7 @@ include(KF5PackageMacros.cmake)
  include_directories(${CMAKE_CURRENT_BINARY_DIR})
  
-+if (false)
  ################# list the subdirectories #################
++if(false)
  if (KF5DocTools_FOUND)
      add_subdirectory(docs)
+ endif()
 @@ -85,6 +86,7 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
          kdoctools_install(po)
      endif()
  endif()
 +endif()
- 
- add_subdirectory(src)
- if (BUILD_TESTING)
+ add_definitions(-DQT_NO_CAST_FROM_ASCII)
+ add_definitions(-DQT_NO_CAST_TO_ASCII)
+ add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
 -- 
 2.14.4
 

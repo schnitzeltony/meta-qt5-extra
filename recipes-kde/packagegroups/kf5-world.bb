@@ -46,6 +46,7 @@ TIER_2 = " \
     kpackage \
     kpty \
     kunitconversion \
+    syndication \
 "
 
 TIER_3 = " \
