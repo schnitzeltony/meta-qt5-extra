@@ -1,0 +1,136 @@
+From 19649bd6e41dad42abf25defdd9bd1bed6f9a0b6 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 22 Oct 2018 11:00:32 +0200
+Subject: [PATCH] Add installation targets
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ examples/example.pri      |  3 +++
+ playground/playground.pri |  3 +++
+ qmlexport/qmlexport.pro   |  3 +++
+ qskconfig.pri             | 11 +++++++++++
+ skins/skins.pri           |  4 ++++
+ src/src.pro               |  6 ++++++
+ support/support.pro       |  3 +++
+ 7 files changed, 33 insertions(+)
+
+diff --git a/examples/example.pri b/examples/example.pri
+index 9057d57..21176fa 100644
+--- a/examples/example.pri
++++ b/examples/example.pri
+@@ -7,6 +7,9 @@ QT += quick
+ 
+ TEMPLATE     = app
+ 
++target.path    = $${QSK_INSTALL_BINS}
++INSTALLS       = target
++
+ QSK_DIRS = \
+     $${QSK_ROOT}/src/common \
+     $${QSK_ROOT}/src/nodes \
+diff --git a/playground/playground.pri b/playground/playground.pri
+index a454e8d..9432dca 100644
+--- a/playground/playground.pri
++++ b/playground/playground.pri
+@@ -9,6 +9,9 @@ CONFIG += no_private_qt_headers_warning
+ 
+ TEMPLATE     = app
+ 
++target.path    = $${QSK_INSTALL_BINS}
++INSTALLS       = target
++
+ QSK_DIRS = \
+     $${QSK_ROOT}/src/common \
+     $${QSK_ROOT}/src/nodes \
+diff --git a/qmlexport/qmlexport.pro b/qmlexport/qmlexport.pro
+index 9c8d87f..393623c 100644
+--- a/qmlexport/qmlexport.pro
++++ b/qmlexport/qmlexport.pro
+@@ -6,6 +6,9 @@ include( $${QSK_ROOT}/qskconfig.pri )
+ TEMPLATE = lib
+ TARGET   = qskqmlexport
+ 
++target.path    = $${QSK_INSTALL_LIBS}
++INSTALLS       = target
++
+ DESTDIR  = $${QSK_OUT_ROOT}/lib
+ 
+ QT += quick quick-private
+diff --git a/qskconfig.pri b/qskconfig.pri
+index 9952b91..9a9ab2c 100644
+--- a/qskconfig.pri
++++ b/qskconfig.pri
+@@ -16,6 +16,17 @@ RCC_DIR      = rcc
+ 
+ QSK_CONFIG += QskDll
+ 
++######################################################################
++# Default install paths
++######################################################################
++
++QSK_INSTALL_PREFIX    = $$[QT_INSTALL_PREFIX]
++QSK_INSTALL_DOCS      = $$[QT_INSTALL_DOCS]
++QSK_INSTALL_HEADERS   = $$[QT_INSTALL_HEADERS]
++QSK_INSTALL_LIBS      = $$[QT_INSTALL_LIBS]
++QSK_INSTALL_BINS      = $$[QT_INSTALL_BINS]
++QSK_INSTALL_PLUGINS   = $$[QT_INSTALL_PLUGINS]
++
+ *-g++* {
+ 
+     GCC_VERSION = $$system("$$QMAKE_CXX -dumpversion")
+diff --git a/skins/skins.pri b/skins/skins.pri
+index 7043c83..bad8431 100644
+--- a/skins/skins.pri
++++ b/skins/skins.pri
+@@ -5,6 +5,10 @@ QSK_OUT_ROOT = $${OUT_PWD}/../..
+ 
+ CONFIG         += plugin
+ 
++# Currently plugins are loaded as libs - to find them they nedd to go to libdir
++target.path    = $${QSK_INSTALL_LIBS}
++INSTALLS       = target
++
+ QT += quick
+ 
+ TEMPLATE     = lib
+diff --git a/src/src.pro b/src/src.pro
+index a4f338c..c7165c2 100644
+--- a/src/src.pro
++++ b/src/src.pro
+@@ -29,6 +29,9 @@ QSK_SUBDIRS = common graphic nodes controls layouts dialogs inputpanel
+ INCLUDEPATH *= $${QSK_SUBDIRS}
+ DEPENDPATH *= $${QSK_SUBDIRS}
+ 
++target.path    = $${QSK_INSTALL_LIBS}
++INSTALLS       = target
++
+ HEADERS += \
+     common/QskAspect.h \
+     common/QskBoxBorderColors.h \
+@@ -315,3 +318,6 @@ SOURCES += \
+     inputpanel/QskInputPredictionBar.cpp \
+     inputpanel/QskVirtualKeyboard.cpp
+ 
++header_files.files = $$HEADERS
++header_files.path = $${QSK_INSTALL_HEADERS}
++INSTALLS += header_files
+diff --git a/support/support.pro b/support/support.pro
+index d7e4114..e919cb2 100644
+--- a/support/support.pro
++++ b/support/support.pro
+@@ -7,6 +7,9 @@ include( $${QSK_ROOT}/qskconfig.pri )
+ TEMPLATE = lib
+ TARGET   = qsktestsupport
+ 
++target.path    = $${QSK_INSTALL_LIBS}
++INSTALLS       = target
++
+ DESTDIR  = $${QSK_OUT_ROOT}/lib
+ 
+ QT += quick 
+-- 
+2.14.4
+
