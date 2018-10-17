@@ -36,6 +36,9 @@ SRC_URI = " \
     git://github.com/Ardour/ardour.git \
     file://0001-remove-all-build-flags-that-cause-trouble-for-cross-.patch \
     file://0002-Use-ARM-NEON-intrinsics-if-available-for-mixing-func.patch \
+    file://0003-Prevent-excessive-meter-redraws-for-inactive-meters-.patch \
+    file://0004-Prevent-excessive-meter-redraws-for-inactive-meters-.patch \
+    file://0005-Follow-fluidsynth-s-API-changes-introduced-with-2.0..patch \
     file://ardour5.desktop \
 "
 SRCREV = "ae0dcdc0c5d13483271065c360e378202d20170a"

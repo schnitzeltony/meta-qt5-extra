@@ -1,0 +1,29 @@
+From be826f363522dbca96c8263d404c57c4fe9ff0e2 Mon Sep 17 00:00:00 2001
+From: Robin Gareus <robin@gareus.org>
+Date: Wed, 3 Oct 2018 20:54:14 +0200
+Subject: [PATCH] Prevent excessive meter redraws for inactive meters at zero
+
+Upstream-Status: Backport [1]
+
+[1] https://github.com/Ardour/ardour/commit/be826f363522dbca96c8263d404c57c4fe9ff0e2
+
+---
+ libs/widgets/fastmeter.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libs/widgets/fastmeter.cc b/libs/widgets/fastmeter.cc
+index cf1d9dd07..a9ecf5dad 100644
+--- a/libs/widgets/fastmeter.cc
++++ b/libs/widgets/fastmeter.cc
+@@ -703,7 +703,7 @@ FastMeter::set (float lvl, float peak)
+ 	if (pixwidth <= 0 || pixheight <=0) return;
+ 
+ 	if (peak == -1) {
+-		if (lvl >= current_peak) {
++		if (lvl >= current_peak && lvl > 0) {
+ 			current_peak = lvl;
+ 			hold_state = hold_cnt;
+ 		}
+-- 
+2.14.4
+

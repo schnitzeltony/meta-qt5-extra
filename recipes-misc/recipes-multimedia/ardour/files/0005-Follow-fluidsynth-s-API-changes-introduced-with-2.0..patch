@@ -1,0 +1,117 @@
+From ae281f2135607e55675d7cc18a9fe1a5b88464ec Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 12 Oct 2018 00:56:59 +0200
+Subject: [PATCH] Follow fluidsynth's API changes introduced with 2.0.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Submitted [1]
+
+[1] https://github.com/Ardour/ardour/pull/431
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ libs/ardour/fluid_synth.cc                    | 14 ++++++++++++++
+ libs/plugins/a-fluidsynth.lv2/a-fluidsynth.cc | 27 ++++++++++++++++++++++++++-
+ 2 files changed, 40 insertions(+), 1 deletion(-)
+
+diff --git a/libs/ardour/fluid_synth.cc b/libs/ardour/fluid_synth.cc
+index 45653a9e7..c9b7b526e 100644
+--- a/libs/ardour/fluid_synth.cc
++++ b/libs/ardour/fluid_synth.cc
+@@ -71,6 +71,7 @@ FluidSynth::load_sf2 (const std::string& fn)
+ 	}
+ 
+ 	size_t count;
++#if FLUIDSYNTH_VERSION_MAJOR < 2
+ 	fluid_preset_t preset;
+ 
+ 	sfont->iteration_start (sfont);
+@@ -83,7 +84,20 @@ FluidSynth::load_sf2 (const std::string& fn)
+ 					preset.get_banknum (&preset),
+ 					preset.get_num (&preset)));
+ 	}
++#else
++	fluid_preset_t* preset;
+ 
++	fluid_sfont_iteration_start (sfont);
++	for (count = 0; (preset = fluid_sfont_iteration_next (sfont)) != 0; ++count) {
++		if (count < 16) {
++			fluid_synth_program_select (_synth, count, _synth_id, fluid_preset_get_banknum (preset), fluid_preset_get_num (preset));
++		}
++		_presets.push_back (BankProgram (
++					fluid_preset_get_name (preset),
++					fluid_preset_get_banknum (preset),
++					fluid_preset_get_num (preset)));
++	}
++#endif
+ 	if (count == 0) {
+ 		return false;
+ 	}
+diff --git a/libs/plugins/a-fluidsynth.lv2/a-fluidsynth.cc b/libs/plugins/a-fluidsynth.lv2/a-fluidsynth.cc
+index e6cf1e29d..6d168d5fe 100644
+--- a/libs/plugins/a-fluidsynth.lv2/a-fluidsynth.cc
++++ b/libs/plugins/a-fluidsynth.lv2/a-fluidsynth.cc
+@@ -184,6 +184,7 @@ load_sf2 (AFluidSynth* self, const char* fn)
+ 	}
+ 
+ 	int chn;
++#if FLUIDSYNTH_VERSION_MAJOR < 2
+ 	fluid_preset_t preset;
+ 	sfont->iteration_start (sfont);
+ 	pthread_mutex_lock (&self->bp_lock);
+@@ -192,15 +193,33 @@ load_sf2 (AFluidSynth* self, const char* fn)
+ 			fluid_synth_program_select (self->synth, chn, synth_id,
+ 					preset.get_banknum (&preset), preset.get_num (&preset));
+ 		}
++#else
++	fluid_preset_t *preset;
++	fluid_sfont_iteration_start (sfont);
++	pthread_mutex_lock (&self->bp_lock);
++	for (chn = 0; (preset = fluid_sfont_iteration_next (sfont)); ++chn) {
++		if (chn < 16) {
++			fluid_synth_program_select (self->synth, chn, synth_id,
++					fluid_preset_get_banknum (preset), fluid_preset_get_num (preset));
++		}
++#endif // FLUIDSYNTH_VERSION_MAJOR < 2
+ #ifndef LV2_EXTENDED
+ 		else { break ; }
+ #else
++#if FLUIDSYNTH_VERSION_MAJOR < 2
+ 		self->presets[preset.get_banknum (&preset)].push_back (
+ 				BankProgram (
+ 					preset.get_name (&preset),
+ 					preset.get_banknum (&preset),
+ 					preset.get_num (&preset)));
+-#endif
++#else
++		self->presets[fluid_preset_get_banknum (preset)].push_back (
++				BankProgram (
++					fluid_preset_get_name (preset),
++					fluid_preset_get_banknum (preset),
++					fluid_preset_get_num (preset)));
++#endif // FLUIDSYNTH_VERSION_MAJOR < 2
++#endif // LV2_EXTENDED
+ 	}
+ 	pthread_mutex_unlock (&self->bp_lock);
+ 
+@@ -681,9 +700,15 @@ work_response (LV2_Handle  instance,
+ 		}
+ 
+ 		for (int chn = 0; chn < 16; ++chn) {
++#if FLUIDSYNTH_VERSION_MAJOR < 2
+ 			unsigned int sfid = 0;
+ 			unsigned int bank = 0;
+ 			unsigned int program = -1;
++#else
++			int sfid = 0;
++			int bank = 0;
++			int program = -1;
++#endif
+ 			if (FLUID_OK == fluid_synth_get_program (self->synth, chn, &sfid, &bank, &program)) {
+ 				self->program_state[chn].bank = bank;
+ 				self->program_state[chn].program = program;
+-- 
+2.14.4
+
