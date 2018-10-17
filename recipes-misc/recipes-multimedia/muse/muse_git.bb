@@ -23,8 +23,9 @@ inherit cmake_qt5 pkgconfig gtk-icon-cache distro_features_check mime qt5-transl
 
 SRC_URI = " \
     git://github.com/muse-sequencer/muse.git \
+    file://0001-fluidsynth-Follow-API-change-introduced-in-fluidsynt.patch \
 "
-SRCREV = "02d9dc6abd757c3c1783fdd46dacd3c4ef2c0a6d"
+SRCREV = "1fde7ca69b1b7988595f4cfb58eae5c566324cac"
 PV = "3.0.2+git${SRCPV}"
 S = "${WORKDIR}/git/muse3"
 
