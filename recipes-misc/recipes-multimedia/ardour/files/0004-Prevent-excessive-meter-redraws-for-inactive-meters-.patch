@@ -9,6 +9,8 @@ Content-Transfer-Encoding: 8bit
 
 Same as be826f363522dbca96c8263d404c57c4fe9ff0e2
 
+Upstream-Status: Applied
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  libs/canvas/meter.cc | 2 +-
