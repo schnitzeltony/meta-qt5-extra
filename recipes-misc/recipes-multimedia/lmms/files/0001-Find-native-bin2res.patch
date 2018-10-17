@@ -8,30 +8,30 @@ Content-Transfer-Encoding: 8bit
 
 Inappropriate [embedded specific]
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  cmake/modules/BuildPlugin.cmake | 2 +-
  src/CMakeLists.txt              | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/cmake/modules/BuildPlugin.cmake b/cmake/modules/BuildPlugin.cmake
-index a107ef5..1e182a4 100644
+index 25cca92af..bb031990f 100644
 --- a/cmake/modules/BuildPlugin.cmake
 +++ b/cmake/modules/BuildPlugin.cmake
 @@ -27,7 +27,7 @@ MACRO(BUILD_PLUGIN PLUGIN_NAME)
  
- 		SET(ER_H ${CMAKE_CURRENT_BINARY_DIR}/embedded_resources.h)
+ 		SET(ER_H "${CMAKE_CURRENT_BINARY_DIR}/embedded_resources.h")
  		ADD_CUSTOM_COMMAND(OUTPUT ${ER_H}
 -			COMMAND ${BIN2RES}
 +			COMMAND bin2res
- 			ARGS ${PLUGIN_EMBEDDED_RESOURCES} > ${ER_H}
+ 			ARGS ${PLUGIN_EMBEDDED_RESOURCES} > "${ER_H}"
  			DEPENDS bin2res)
  	ENDIF(ER_LEN)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 154ff4f..4ceddf6 100644
+index b18fa897e..d0eea89ae 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -46,7 +46,7 @@ SET(lmms_EMBEDDED_RESOURCES
+@@ -45,7 +45,7 @@ ENDIF()
  
  SET(lmms_EMBEDDED_RESOURCES "${CMAKE_SOURCE_DIR}/doc/AUTHORS" "${CMAKE_SOURCE_DIR}/LICENSE.txt" "${CONTRIBUTORS}")
  SET(LMMS_ER_H "${CMAKE_CURRENT_BINARY_DIR}/embedded_resources.h")
@@ -41,5 +41,5 @@ index 154ff4f..4ceddf6 100644
  # Paths relative to lmms executable
  FILE(RELATIVE_PATH LIB_DIR_RELATIVE "/${BIN_DIR}" "/${LIB_DIR}")
 -- 
-2.9.5
+2.14.4
 

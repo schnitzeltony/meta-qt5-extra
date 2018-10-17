@@ -8,6 +8,7 @@ SRC_URI += " \
     file://0001-Find-native-bin2res.patch \
     file://0002-zynaddsubfx-link-agains-X11.patch \
     file://0003-CMake-rpmalloc-Do-not-overwrite-CMAKE_C_FLAGS.patch \
+    file://0004-Allow-building-SF2-player-with-FluidSynth-2.x.patch \
 "
 
 DEPENDS += " \
