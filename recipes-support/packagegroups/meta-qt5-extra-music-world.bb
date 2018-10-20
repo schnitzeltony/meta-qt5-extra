@@ -117,6 +117,7 @@ RDEPENDS_${PN} = " \
     timidity++ \
     triceratops-lv2 \
     vamp-plugin-sdk \
+    wolf-shaper \
     \
     \
     avldrums.lv2 \
