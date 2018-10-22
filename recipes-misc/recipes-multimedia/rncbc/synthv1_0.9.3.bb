@@ -21,8 +21,8 @@ SRC_URI = " \
     \
     file://synthv1.conf \
 "
-SRC_URI[md5sum] = "08fb4bc78f8d1bef55815955f0d12ca8"
-SRC_URI[sha256sum] = "749e7f2705afe79b90a653efe9f1be4293d90f1c6c599a3351c4236b90a0c0e4"
+SRC_URI[md5sum] = "12c344d41c0ae71f77d44868bff0932d"
+SRC_URI[sha256sum] = "4cf8cbc34661f96d8b121925d9a471ea393ae85fe7bda839c2c798296c99a838"
 
 SRC_URI[autostatic-synthv1-presets1.md5sum] = "02210e5576310554cfe316fb72e88b74"
 SRC_URI[autostatic-synthv1-presets1.sha256sum] = "587ac8cb4cb645fc71603d1b4b351b24f3e4d9f15a53aca59c0f30cc9f66e253"
