@@ -14,7 +14,7 @@ DEPENDS += " \
 "
 
 SRC_URI = "git://github.com/schnitzeltony/fluidsynth-dssi.git"
-SRCREV = "6ece68627f6a06b935361f4f06556fc03ef4fd1c"
+SRCREV = "f8c0165b60042d2976c0983261a3ad8c059e2926"
 S = "${WORKDIR}/git"
 PV = "1.0.0+git${SRCPV}"
 
