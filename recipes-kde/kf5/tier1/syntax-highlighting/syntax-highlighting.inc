@@ -1,7 +1,7 @@
 SUMMARY = "Syntax highlighting Engine for Structured Text and Code"
-LICENSE = "LGPLv2.1"
+LICENSE = "MIT"
 LIC_FILES_CHKSUM = " \
-    file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://COPYING;md5=61be4d272e55cc2609d58596cf084908 \
 "
 
 inherit kde-kf5 perlnative
