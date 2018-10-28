@@ -1,4 +1,4 @@
-From 1404a308cde3904e10262687c9c3a3cc9f0aafd1 Mon Sep 17 00:00:00 2001
+From 37cec8b882d9941430c2ad33298b5b9a49cbfa96 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Sun, 8 Feb 2015 20:50:43 +0100
 Subject: [PATCH] set installation path fixed - cmake query returns sysrooted
@@ -15,10 +15,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 1 insertion(+), 22 deletions(-)
 
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index d65d813..61038fb 100644
+index 18403b5..74668be 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -37,25 +37,4 @@ target_link_libraries(qtlxqt
+@@ -42,25 +42,4 @@ target_link_libraries(qtlxqt
  )
  
  
@@ -44,7 +44,7 @@ index d65d813..61038fb 100644
 -endif()
 -
 -install(TARGETS qtlxqt LIBRARY DESTINATION "${QT_PLUGINS_DIR}/platformthemes")
-+install(TARGETS qtlxqt LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/qt5/plugins/platformthemes")
++install(TARGETS qtlxqt LIBRARY DESTINATION "${OE_QMAKE_PATH_PLUGINS}/platformthemes")
 -- 
-1.9.3
+2.13.6
 
