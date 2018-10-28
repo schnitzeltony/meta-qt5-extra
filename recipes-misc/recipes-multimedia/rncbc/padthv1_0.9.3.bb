@@ -23,6 +23,7 @@ SRC_URI = " \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
     \
     ${FFTWSINGLEPATCH} \
+    file://0002-Remove-extra-rpath.patch \
     file://padthv1.conf \
 "
 SRC_URI[md5sum] = "d014db4f3b9bf54599955535c9c5bae6"
