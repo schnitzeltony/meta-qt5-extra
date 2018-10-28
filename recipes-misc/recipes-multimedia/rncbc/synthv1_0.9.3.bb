@@ -18,6 +18,7 @@ SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/autostatic/autostatic-synthv1-presets/autostatic-synthv1-presets1.tar.gz;name=autostatic-synthv1-presets1 \
     http://linuxsynths.com/Synthv1PatchesDemos/Synthv1Patches06.tar.gz;name=linuxsynths-synthv1-presets;subdir=linuxsynths-synthv1-presets \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
+    file://0002-Remove-extra-rpath.patch \
     \
     file://synthv1.conf \
 "
