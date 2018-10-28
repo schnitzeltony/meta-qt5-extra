@@ -18,6 +18,7 @@ SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
     git://github.com/TuriSc/hydrogen2drumkv1.py.git;name=hydrogen2drumkv1;destsuffix=hydrogen2drumkv1 \
     file://0001-find-native-qt-build-tools-by-configure-options-auto.patch \
+    file://0002-Remove-extra-rpath.patch \
 "
 SRC_URI[md5sum] = "1523c576c5f4be72b979de3ef68a8c49"
 SRC_URI[sha256sum] = "8ac9525e4698642053d1a79811489792746d17910fe6165de44ddeebfddd6828"
