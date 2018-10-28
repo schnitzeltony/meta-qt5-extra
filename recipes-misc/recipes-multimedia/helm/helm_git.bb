@@ -34,6 +34,21 @@ S = "${WORKDIR}/git"
 
 CXXFLAGS += "-I ${STAGING_INCDIR}/freetype2"
 
+do_configure_prepend() {
+    # not easy to patch:
+    # * the place is platered all over
+    # * we have some <CR><LF> around
+    OIFS="$IFS"
+    IFS=$'\n'
+    for f in `find ${S} -name '*Makefile*' -o -name '*.jucer'`; do
+        if [ -f "$f" ] ; then
+            sed -i 's:-L/usr/X11R6/lib/::g' "$f"
+            sed -i 's:libraryPath="/usr/X11R6/lib/"::g' "$f"
+        fi
+    done
+    IFS="$OIFS"
+}
+
 do_compile_append() {
     ${@qemu_run_binary_local(d, '${STAGING_DIR_TARGET}', '${S}/builds/linux/LV2/lv2_ttl_generator')} ${S}/builds/linux/LV2/build/helm.so
     cp *.ttl ${S}/builds/linux/LV2/helm.lv2/
