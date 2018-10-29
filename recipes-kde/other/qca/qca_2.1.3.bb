@@ -15,12 +15,13 @@ DEPENDS += " \
     pkcs11-helper \
 "
 
-SRC_URI[md5sum] = "657cc701316600199199a6b6cb2c73c9"
-SRC_URI[sha256sum] = "95de3e7910b5f9ec7084169989c9d98bfb527e6a4865fe17269c3b24308be983"
-SRC_URI += " \
+SRC_URI = " \
+    git://github.com/KDE/qca.git \
     file://0001-use-pkg-config-to-find-libgcrypt.patch \
-    file://0002-fix-base64-decoding-on-ARM.patch \
 "
+SRCREV = "32343842d359a60e3619f97aac983d587f6eca16"
+S = "${WORKDIR}/git"
+PV = "2.1.3+git${SRCPV}"
 
 EXTRA_OECMAKE += "-DQCA_FEATURE_INSTALL_DIR=${libdir}${QT_DIR_NAME}/mkspecs/features"
 
