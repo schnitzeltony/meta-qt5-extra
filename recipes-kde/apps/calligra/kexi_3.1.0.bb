@@ -38,7 +38,7 @@ DEPENDS += " \
 
 SRC_URI = " \
     ${KDE_MIRROR}/stable/${BPN}/src/${BPN}-${PV}.tar.xz \
-    file://0001-replace-try_run-by-try_compile-in-breeze-icon-check.patch \
+    file://0001-remove-try_run-by-try_compile-in-breeze-icon-check.patch \
     file://0002-Add-missing-include-to-fix-build-with-Qt-5.11.patch \
 "
 SRC_URI[md5sum] = "22d6c4739109441f5274da584f67f1c8"
