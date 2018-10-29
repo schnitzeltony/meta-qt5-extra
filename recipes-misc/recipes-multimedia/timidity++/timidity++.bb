@@ -26,6 +26,10 @@ EXTRA_OECONF += " \
 
 CFLAGS  += '-DCONFIG_FILE=\\"${sysconfdir}/timidity++.cfg\\"'
 
+do_configure_prepend() {
+    export SHLDFLAGS="${LDFLAGS}"
+}
+
 do_install_append() {
 	install -d ${D}/${datadir}/applications
 	install ${WORKDIR}/timidity.desktop ${D}/${datadir}/applications
