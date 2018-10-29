@@ -38,7 +38,10 @@ DEPENDS += " \
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "710275813a7f2b46740418d327097d22"
 SRC_URI[sha256sum] = "5d79d289735822dfc27917917ee7c92284d1f846696773ed66da2102617e9451"
-SRC_URI += "file://0001-fix-build-for-qtbase-without-session-management.patch"
+SRC_URI += " \
+    file://0001-fix-build-for-qtbase-without-session-management.patch \
+    file://0002-Revert-Make-target_link_libraries-for-kdeinit_dolphi.patch \
+"
 
 FILES_SOLIBSDEV = "${libdir}/libdolphin*${SOLIBSDEV}"
 
