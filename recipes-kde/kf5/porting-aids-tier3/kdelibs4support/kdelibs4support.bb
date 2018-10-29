@@ -36,6 +36,9 @@ DEPENDS += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras", "", d)} \
 "
 
+SRC_URI += " \
+	file://0004-Hack-away-SSL-configure-check.patch \
+"
 # uncomment for broken gelib getaddr / AI_PASSIVE
 #EXTRA_OECMAKE += "-DHAVE_GOOD_GETADDRINFO=OFF"
 

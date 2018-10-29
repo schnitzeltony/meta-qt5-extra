@@ -1,0 +1,33 @@
+From f70a18e936616d448a56015009b8a4f0004bd9b8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 29 Oct 2018 15:12:25 +0100
+Subject: [PATCH] Hack away SSL configure check
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+it fails for -isystem <sysroot>/usr/include failure on gcc8
+
+Upstream-Status: Inappropriate [cross-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/ConfigureChecks.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/ConfigureChecks.cmake b/src/ConfigureChecks.cmake
+index d44aca6..689ac0e 100644
+--- a/src/ConfigureChecks.cmake
++++ b/src/ConfigureChecks.cmake
+@@ -13,7 +13,7 @@ set( KDELIBSUFF ${LIB_SUFFIX} )
+ 
+ set(CMAKE_REQUIRED_LIBRARIES Qt5::Network)
+ check_cxx_source_compiles(
+-"#include <QtNetwork/QSslSocket>
++"class QSslSocket;
+ int main()
+ {
+     QSslSocket *socket;
+-- 
+2.14.5
+
