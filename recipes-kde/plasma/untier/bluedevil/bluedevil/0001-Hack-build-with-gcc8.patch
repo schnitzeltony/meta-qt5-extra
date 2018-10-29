@@ -1,0 +1,51 @@
+From 10df317b1f2f4eb6f3227fe04794a8acc5222b4f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 29 Oct 2018 21:47:37 +0100
+Subject: [PATCH] Hack build with gcc8
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Something sneaks -isystem <sysroot>/usr/include. This causes
+
+| /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-mortsgna-linux-gnueabi/bluedevil/5.13.5-r0/recipe-sysroot/usr/include/c++/8.2.0/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+|  #include_next <stdlib.h>
+|                ^~~~~~~~~~
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/fileitemactionplugin/CMakeLists.txt | 2 +-
+ src/kio/bluetooth/CMakeLists.txt        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/fileitemactionplugin/CMakeLists.txt b/src/fileitemactionplugin/CMakeLists.txt
+index f22bcbf..eacefd4 100644
+--- a/src/fileitemactionplugin/CMakeLists.txt
++++ b/src/fileitemactionplugin/CMakeLists.txt
+@@ -12,7 +12,7 @@ target_link_libraries(bluetoothfileitemaction
+     Qt5::Widgets
+     KF5::I18n
+     KF5::KIOFileWidgets)
+-target_include_directories(bluetoothfileitemaction SYSTEM
++target_include_directories(bluetoothfileitemaction
+     PUBLIC $<TARGET_PROPERTY:KF5::BluezQt,INTERFACE_INCLUDE_DIRECTORIES>)
+ 
+ install(TARGETS bluetoothfileitemaction DESTINATION ${KDE_INSTALL_PLUGINDIR})
+diff --git a/src/kio/bluetooth/CMakeLists.txt b/src/kio/bluetooth/CMakeLists.txt
+index 971b00a..8b8cc9a 100644
+--- a/src/kio/bluetooth/CMakeLists.txt
++++ b/src/kio/bluetooth/CMakeLists.txt
+@@ -19,7 +19,7 @@ target_link_libraries(kio_bluetooth
+     Qt5::Network
+ )
+ 
+-target_include_directories(kio_bluetooth SYSTEM
++target_include_directories(kio_bluetooth
+     PUBLIC $<TARGET_PROPERTY:KF5::BluezQt,INTERFACE_INCLUDE_DIRECTORIES>)
+ 
+ ########### install files ###############
+-- 
+2.14.4
+
