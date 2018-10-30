@@ -1,0 +1,32 @@
+From 29cb7d7d388f3b75698abcd0f627cb2708f291c6 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 30 Oct 2018 10:12:32 +0100
+Subject: [PATCH] carlabase: Do not add RPATH to carlabase
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ plugins/carlabase/CMakeLists.txt | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/plugins/carlabase/CMakeLists.txt b/plugins/carlabase/CMakeLists.txt
+index 4fa81a491..4375e95f1 100644
+--- a/plugins/carlabase/CMakeLists.txt
++++ b/plugins/carlabase/CMakeLists.txt
+@@ -12,9 +12,4 @@ if(LMMS_HAVE_CARLA)
+         LINK_DIRECTORIES(${CARLA_LIBRARY_DIRS})
+         LINK_LIBRARIES(${CARLA_LIBRARIES})
+         BUILD_PLUGIN(carlabase carla.cpp carla.h MOCFILES carla.h EMBEDDED_RESOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.png" LINK SHARED)
+-        SET_TARGET_PROPERTIES(carlabase
+-                PROPERTIES SKIP_BUILD_RPATH TRUE
+-                BUILD_WITH_INSTALL_RPATH TRUE
+-                INSTALL_RPATH_USE_LINK_PATH TRUE
+-                INSTALL_RPATH "${CARLA_RPATH}")
+ endif(LMMS_HAVE_CARLA)
+-- 
+2.14.5
+
