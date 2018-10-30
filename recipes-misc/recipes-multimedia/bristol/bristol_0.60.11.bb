@@ -18,6 +18,7 @@ SRC_URI = " \
     file://0001-Do-not-force-sse.patch \
     file://0002-Do-not-include-alsa-iatomic.h.patch \
     file://0003-bristoljackstats-do-not-overwrite-LDFLAGS.patch \
+    file://0004-Avoid-crosscompile-warnings.patch \
 "
 SRC_URI[md5sum] = "9ea4dacdac0dba3048156e2f6a5ee4d6"
 SRC_URI[sha256sum] = "7d1f0bbd0d7d303fc77c6b9549b61708d7a83b4dc007818011b1f55d1fa922ba"
