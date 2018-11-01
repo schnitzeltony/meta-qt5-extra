@@ -1,53 +1,54 @@
 From 5b95fca0be36e0e57f65975cf5b295e1937bbbf4 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 2 Aug 2017 21:08:36 +0200
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 1 Nov 2018 19:46:37 +0100
 Subject: [PATCH] Align Makefile
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* don't hardcode g++
-* make ldconfig work on installed directory only
-* use pkgconfig to find freetype2
-* do not add host path to compiler/linker
+Upstream-Status: Pending
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- Makefile | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ source/Makefile | 11 +++--------
+ 1 file changed, 3 insertions(+), 8 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index 2b29cbf..0811df9 100644
---- a/Makefile
-+++ b/Makefile
-@@ -31,8 +31,8 @@ MINVERS = 9.0
+diff --git a/source/Makefile b/source/Makefile
+index 177115f..9e12cb8 100644
+--- a/source/Makefile
++++ b/source/Makefile
+@@ -20,20 +20,15 @@
+ 
+ # Modify as required.
+ #
+-SUFFIX := $(shell uname -m | sed -e 's/^unknown/$//' -e 's/^i.86/$//' -e 's/^x86_64/$/64/')
+-PREFIX ?= /usr/local
+-INCDIR ?= $(PREFIX)/include
+-LIBDIR ?= $(PREFIX)/lib$(SUFFIX)
+ 
+ MAJVERS = 3
+ MINVERS = 9.2
  VERSION = $(MAJVERS).$(MINVERS)
  
  
--CPPFLAGS += -Wall -I. -I/usr/X11R6/include `freetype-config --cflags` -fpic -DVERSION=\"$(VERSION)\" -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS -O2 
--LDFLAGS += -L/usr/X11R6/$(LIBDIR) `freetype-config --libs`
-+CPPFLAGS += -Wall -I. `pkg-config --cflags freetype2` -fpic -DVERSION=\"$(VERSION)\" -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS -O2 
-+LDFLAGS += `pkg-config --libs freetype2`
+-CPPFLAGS += $(shell pkgconf --cflags freetype2) 
++CPPFLAGS += $(shell pkg-config --cflags freetype2)
+ CPPFLAGS += -DVERSION=\"$(VERSION)\" -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS $(PCONFCFL)
+-CXXFLAGS += -Wall -O2 -fPIC 
+-CXXFLAGS += -march=native
++CXXFLAGS += -I./ -Wall -fPIC
  LDLIBS +=
  
  
-@@ -46,14 +46,14 @@ CLXCLIENT_H = clxclient.h
- 
- 
- $(CLXCLIENT_MIN): $(CLXCLIENT_O)
--	g++ -shared $(LDFLAGS) -Wl,-soname,$(CLXCLIENT_MAJ) -o $(CLXCLIENT_MIN) $(CLXCLIENT_O) $(CLXCLIENT_DEP)
-+	$(CXX) -shared $(LDFLAGS) -Wl,-soname,$(CLXCLIENT_MAJ) -o $(CLXCLIENT_MIN) $(CLXCLIENT_O) $(CLXCLIENT_DEP)
- 
- 
- install:	$(CLXCLIENT_MIN)
- 	install -d $(PREFIX)/$(LIBDIR)
- 	install -m 644 $(CLXCLIENT_H) $(PREFIX)/include
- 	install -m 755 $(CLXCLIENT_MIN) $(PREFIX)/$(LIBDIR)
+@@ -55,7 +50,7 @@ install:	$(CLXCLIENT_MIN)
+ 	install -d $(DESTDIR)$(LIBDIR)
+ 	install -m 644 $(CLXCLIENT_H) $(DESTDIR)$(INCDIR)
+ 	install -m 755 $(CLXCLIENT_MIN) $(DESTDIR)$(LIBDIR)
 -	ldconfig
-+	ldconfig -n $(DESTDIR)$(PREFIX)/$(LIBDIR)
- 	ln -sf $(CLXCLIENT_MIN) $(PREFIX)/$(LIBDIR)/$(CLXCLIENT_SO)
++	ldconfig -n $(DESTDIR)$(LIBDIR)
+ 	ln -sf $(CLXCLIENT_MIN) $(DESTDIR)$(LIBDIR)/$(CLXCLIENT_SO)
  
- 
+ uninstall:
 -- 
-2.14.3
+2.14.4
 
