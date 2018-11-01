@@ -1,52 +1,53 @@
 From 77fd68629356acc5747d06814aa4a86ab7f8b31a Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 2 Aug 2017 18:38:51 +0200
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 1 Nov 2018 20:15:23 +0100
 Subject: [PATCH] Align Makefile
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* don't hardcode g++
-* remove -march=native from CXXFLAGS
-* make ldconfig work on installed directory only
-
 Upstream-Status: Pending
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- libs/Makefile | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ source/Makefile | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
 
-diff --git a/libs/Makefile b/libs/Makefile
-index d1bfc37..7189d0e 100644
---- a/libs/Makefile
-+++ b/libs/Makefile
-@@ -33,7 +33,6 @@ VERSION = $(MAJVERS).$(MINVERS)
- CPPFLAGS += -I. -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS -DENABLE_VECTOR_MODE 
- CXXFLAGS += -fPIC -Wall
- CXXFLAGS += -ffast-math -funroll-loops -O3
+diff --git a/source/Makefile b/source/Makefile
+index 776c067..dda063f 100644
+--- a/source/Makefile
++++ b/source/Makefile
+@@ -20,11 +20,6 @@
+ 
+ # Modify as required.
+ #
+-SUFFIX := $(shell uname -m | sed -e 's/^unknown/$//' -e 's/^i.86/$//' -e 's/^x86_64/$/64/')
+-PREFIX ?= /usr/local
+-INCDIR ?= $(PREFIX)/include
+-LIBDIR ?= $(PREFIX)/lib$(SUFFIX)
+-
+ 
+ MAJVERS = 4
+ MINVERS = 0.3
+@@ -33,8 +28,7 @@ VERSION = $(MAJVERS).$(MINVERS)
+ 
+ CPPFLAGS += -I. -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS
+ CPPFLAGS += -DENABLE_VECTOR_MODE 
+-CXXFLAGS += -fPIC -Wall -ffast-math -funroll-loops -O2
 -CXXFLAGS += -march=native
++CXXFLAGS += -fPIC -Wall -ffast-math -funroll-loops
  LDLFAGS += 
  LDLIBS +=
  
-@@ -47,7 +46,7 @@ ZITA-CONVOLVER_H = zita-convolver.h
- 
- 
- $(ZITA-CONVOLVER_MIN):	$(ZITA-CONVOLVER_O)
--	g++ -shared $(LDFLAGS) -Wl,-soname,$(ZITA-CONVOLVER_MAJ) -o $(ZITA-CONVOLVER_MIN) $(ZITA-CONVOLVER_O) $(ZITA-CONVOLVER_DEP)
-+	$(CXX) -shared $(LDFLAGS) -Wl,-soname,$(ZITA-CONVOLVER_MAJ) -o $(ZITA-CONVOLVER_MIN) $(ZITA-CONVOLVER_O) $(ZITA-CONVOLVER_DEP)
- 
- 
- install:	$(ZITA-CONVOLVER_MIN)
-@@ -56,7 +55,7 @@ install:	$(ZITA-CONVOLVER_MIN)
- 	install -m 644 $(ZITA-CONVOLVER_H) $(DESTDIR)$(PREFIX)/include
- 	install -m 755 $(ZITA-CONVOLVER_MIN) $(DESTDIR)$(PREFIX)/$(LIBDIR)
- 	ln -sf $(ZITA-CONVOLVER_MIN) $(DESTDIR)$(PREFIX)/$(LIBDIR)/$(ZITA-CONVOLVER_SO)
+@@ -56,7 +50,7 @@ install:	$(ZITA-CONVOLVER_MIN)
+ 	install -d $(DESTDIR)$(LIBDIR)
+ 	install -m 644 $(ZITA-CONVOLVER_H) $(DESTDIR)$(INCDIR)
+ 	install -m 755 $(ZITA-CONVOLVER_MIN) $(DESTDIR)$(LIBDIR)
 -	ldconfig
-+	ldconfig -n $(DESTDIR)$(PREFIX)/$(LIBDIR)
++	ldconfig -n $(DESTDIR)$(LIBDIR)
+ 	ln -sf $(ZITA-CONVOLVER_MIN) $(DESTDIR)$(LIBDIR)/$(ZITA-CONVOLVER_SO)
  
- clean:
- 	/bin/rm -f *~ *.o *.a *.d *.so.*
+ uninstall:
 -- 
-2.9.4
+2.14.4
 
