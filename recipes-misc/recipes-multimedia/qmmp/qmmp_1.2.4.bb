@@ -25,6 +25,8 @@ DEPENDS += " \
     libvorbis \
     projectm \
     enca \
+    jack \
+    soxr \
 "
 
 SRC_URI = " \
