@@ -9,11 +9,15 @@ SRC_URI = " \
     http://kokkinizita.linuxaudio.org/linuxaudio/downloads/${BPN}-${PV}.tar.bz2 \
     file://0001-Align-Makefile.patch \
 "
-SRC_URI[md5sum] = "90b650f1f5c9f39f4d77f73aca3c53be"
-SRC_URI[sha256sum] = "a69fd566af24b85a10c5ecd957a85b7f5eb1c56995d2b999219b52f353ea1de9"
+SRC_URI[md5sum] = "6c82e4edece2db2de9451b6afe702a86"
+SRC_URI[sha256sum] = "c659b14c0c4055c44432cb83060b95d30ae0c1ecc6f50d73968e239c100f7a31"
 
+do_compile() {
+    cd ${S}/source
+    base_do_compile
+}
 
 do_install() {
-    install -d "${D}${prefix}/include"
-	oe_runmake 'PREFIX=${D}${prefix}' 'LIBDIR=${baselib}' install
+    cd ${S}/source
+	oe_runmake 'DESTDIR=${D}' 'LIBDIR=${libdir}' 'INCDIR=${includedir}' install
 }
