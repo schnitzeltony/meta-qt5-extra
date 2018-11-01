@@ -1,87 +1,84 @@
 From 23dd312b270330a0df18b229b9f68bc74c72934b Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 2 Aug 2017 17:34:18 +0200
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 1 Nov 2018 20:31:34 +0100
 Subject: [PATCH] Align Makefiles
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* don't hardcode g++
-* remove -march=native from CXXFLAGS
-* make ldconfig work on installed directory only
-* do not add host path to link flags
-
 Upstream-Status: Pending
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- apps/Makefile | 6 ++----
- libs/Makefile | 5 ++---
- 2 files changed, 4 insertions(+), 7 deletions(-)
+ apps/Makefile   | 11 +++--------
+ source/Makefile |  9 ++-------
+ 2 files changed, 5 insertions(+), 15 deletions(-)
 
 diff --git a/apps/Makefile b/apps/Makefile
-index f009937..9329b25 100644
+index 053b9a6..2becb79 100644
 --- a/apps/Makefile
 +++ b/apps/Makefile
-@@ -24,10 +24,8 @@ LIBDIR = lib$(SUFFIX)
- DISTDIR = zresample-$(VERSION)
+@@ -18,14 +18,9 @@
+ # ----------------------------------------------------------------------------
+ 
+ 
+-PREFIX ?= /usr/local
+-BINDIR ?= $(PREFIX)/bin
+-MANDIR ?= /usr/share/man/man1
+-
  VERSION = 1.6.0
- MANDIR = /usr/share/man/man1
--LDFLAGS += -L$(PREFIX)/$(LIBDIR)
  CPPFLAGS += -MMD -MP -DVERSION=\"$(VERSION)\"
- CXXFLAGS += -O3  -ffast-math -Wall
+-CXXFLAGS += -O2  -ffast-math -Wall
 -CXXFLAGS += -march=native
++CXXFLAGS += -ffast-math -Wall
  
  
  all:	zresample zretune zresample.1.gz zretune.1.gz
-@@ -36,7 +34,7 @@ all:	zresample zretune zresample.1.gz zretune.1.gz
- ZRESAMPLE_O = zresample.o audiofile.o dither.o
- zresample:	LDLIBS += -lzita-resampler -lsndfile -lrt
- zresample:	$(ZRESAMPLE_O)
--	g++ $(LDFLAGS) -o $@ $(ZRESAMPLE_O) $(LDLIBS)
-+	$(CXX) $(LDFLAGS) -o $@ $(ZRESAMPLE_O) $(LDLIBS)
- $(ZRESAMPLE_O):
- -include $(ZRESAMPLE_O:%.o=%.d)
+@@ -55,8 +50,8 @@ zretune.1.gz:	zretune.1
  
-@@ -44,7 +42,7 @@ $(ZRESAMPLE_O):
- ZRETUNE_O = zretune.o audiofile.o dither.o
- zretune:	LDLIBS += -lzita-resampler -lsndfile -lrt
- zretune:	$(ZRETUNE_O)
--	g++ $(LDFLAGS) -o $@ $(ZRETUNE_O) $(LDLIBS)
-+	$(CXX) $(LDFLAGS) -o $@ $(ZRETUNE_O) $(LDLIBS)
- $(ZRETUNE_O):
- -include $(ZRETUNE_O:%.o=%.d)
  
-diff --git a/libs/Makefile b/libs/Makefile
-index 15b0471..575e670 100644
---- a/libs/Makefile
-+++ b/libs/Makefile
-@@ -32,7 +32,6 @@ DISTDIR = zita-resampler-$(VERSION)
+ install:	all
+-	install -d $(BINDIR)
+-	install -d $(MANDIR)
++	install -d $(DESTDIR)$(BINDIR)
++	install -d $(DESTDIR)$(MANDIR)
+ 	install -m 755 zresample $(DESTDIR)$(BINDIR)
+ 	install -m 755 zretune $(DESTDIR)$(BINDIR)
+ 	install -m 644 zresample.1.gz $(DESTDIR)$(MANDIR)
+diff --git a/source/Makefile b/source/Makefile
+index cd54ff5..ccb68d1 100644
+--- a/source/Makefile
++++ b/source/Makefile
+@@ -20,10 +20,6 @@
+ 
+ # Modify as required.
+ #
+-SUFFIX := $(shell uname -m | sed -e 's/^unknown/$//' -e 's/^i.86/$//' -e 's/^x86_64/$/64/')
+-PREFIX ?= /usr/local
+-INCDIR ?= $(PREFIX)/include
+-LIBDIR ?= $(PREFIX)/lib$(SUFFIX)
+ 
+ MAJVERS = 1
+ MINVERS = 6.2
+@@ -32,8 +28,7 @@ DISTDIR = zita-resampler-$(VERSION)
+ 
  
  CPPFLAGS += -I. -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS
- CXXFLAGS += -Wall -fPIC -O2 -ffast-math
+-CXXFLAGS += -Wall -fPIC -O2 -ffast-math
 -CXXFLAGS += -march=native
++CXXFLAGS += -Wall -fPIC -ffast-math
  LDFLAGS += 
  LDLIBS +=
  
-@@ -47,7 +46,7 @@ ZITA-RESAMPLER_H = zita-resampler/resampler.h zita-resampler/resampler-table.h \
- 
- 
- $(ZITA-RESAMPLER_MIN): $(ZITA-RESAMPLER_O)
--	g++ -shared $(LDFLAGS) -Wl,-soname,$(ZITA-RESAMPLER_MAJ) -o $(ZITA-RESAMPLER_MIN) $(ZITA-RESAMPLER_O) $(ZITA-RESAMPLER_DEP)
-+	$(CXX) -shared $(LDFLAGS) -Wl,-soname,$(ZITA-RESAMPLER_MAJ) -o $(ZITA-RESAMPLER_MIN) $(ZITA-RESAMPLER_O) $(ZITA-RESAMPLER_DEP)
- 
- $(ZITA-RESAMPLER_O):	$(ZITA-RESAMPLER_H)
- 
-@@ -58,7 +57,7 @@ install:	$(ZITA-RESAMPLER_MIN)
- 	install -m 644 $(ZITA-RESAMPLER_H) $(DESTDIR)$(PREFIX)/include/zita-resampler
- 	install -m 644 $(ZITA-RESAMPLER_MIN) $(DESTDIR)$(PREFIX)/$(LIBDIR)
- 	ln -sf $(ZITA-RESAMPLER_MIN) $(DESTDIR)$(PREFIX)/$(LIBDIR)/$(ZITA-RESAMPLER_SO)
+@@ -58,7 +53,7 @@ install:	$(ZITA-RESAMPLER_MIN)
+ 	install -d $(DESTDIR)$(LIBDIR)
+ 	install -m 644 $(ZITA-RESAMPLER_H)   $(DESTDIR)$(INCDIR)/zita-resampler
+ 	install -m 755 $(ZITA-RESAMPLER_MIN) $(DESTDIR)$(LIBDIR)
 -	ldconfig
-+	ldconfig -n $(DESTDIR)$(PREFIX)/$(LIBDIR)
++	ldconfig -n $(DESTDIR)$(LIBDIR)
+ 	ln -sf $(ZITA-RESAMPLER_MIN) $(DESTDIR)$(LIBDIR)/$(ZITA-RESAMPLER_SO)
  
  uninstall:
- 	/bin/rm -rf $(DESTDIR)$(PREFIX)/include/zita-resampler
 -- 
-2.14.3
+2.14.4
 
