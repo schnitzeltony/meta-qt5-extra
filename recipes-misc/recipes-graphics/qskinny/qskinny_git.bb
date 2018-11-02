@@ -7,9 +7,10 @@ inherit qmake5 qemu-ext
 
 SRC_URI = " \
     git://github.com/uwerat/qskinny.git \
-    file://0001-Add-installation-targets.patch \
+    file://0001-Fix-linking-for-all-examples.patch \
+    file://0002-Do-not-install-to-usr-local.patch \
 "
-SRCREV = "7d39d8dbf659c22b9c65cac13a3da4119ea4b293"
+SRCREV = "84e19c43f800f1d05f23dcb855807e0159b8fa04"
 S = "${WORKDIR}/git"
 PV = "0.0.1+git${SRCPV}"
 
@@ -30,6 +31,20 @@ do_configure_prepend() {
         # wrap cross svg2qvg by qemu
         sed -i 's|${SVG2QVG_CALL_IN_SOURCE}|${QEMUCALL} ${SVG2QVG_CALL_IN_SOURCE}|g' "$pro_file"
     done
+}
+
+do_install_append() {
+    # Don't not pollute /usr/include
+    install -d ${D}${includedir}/qskinny
+    for header in `find ${D}/${includedir} -name '*.h*'`; do
+        mv $header ${D}${includedir}/qskinny/
+    done
+    
+    # plugins are not yet used as such -> libdir
+    for lib in `find ${D}/usr/plugins -name '*.so*'`; do
+        mv $lib ${D}${libdir}/
+    done
+    rm -r ${D}/usr/plugins
 }
 
 PACKAGES =+ "${PN}-examples"

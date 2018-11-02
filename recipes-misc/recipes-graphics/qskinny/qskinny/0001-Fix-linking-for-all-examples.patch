@@ -1,0 +1,69 @@
+From f6f8d9fee3a776f742977545dc62a418ccf82b89 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 2 Nov 2018 12:56:57 +0100
+Subject: [PATCH] Fix linking for all examples
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ examples/automotive/automotive.pro | 4 ----
+ examples/example.pri               | 4 +++-
+ playground/playground.pri          | 4 +++-
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/examples/automotive/automotive.pro b/examples/automotive/automotive.pro
+index cb0954e..72e1159 100644
+--- a/examples/automotive/automotive.pro
++++ b/examples/automotive/automotive.pro
+@@ -8,10 +8,6 @@ QSK_SKIN_DIR=$${QSK_ROOT}/skins
+ INCLUDEPATH *= $${QSK_SKIN_DIR}
+ DEPENDPATH *= $${QSK_SKIN_DIR}
+ 
+-QSK_PLUGIN_DIR = $${QSK_OUT_ROOT}/plugins
+-QMAKE_RPATHDIR *= $${QSK_PLUGIN_DIR}/skins
+-LIBS *= -L$${QSK_PLUGIN_DIR}/skins -lsquiekskin -lmaterialskin
+-
+ HEADERS += \
+     ButtonBar.h \
+     SoundControl.h \
+diff --git a/examples/example.pri b/examples/example.pri
+index 221f995..c8d59c2 100644
+--- a/examples/example.pri
++++ b/examples/example.pri
+@@ -24,9 +24,11 @@ DEPENDPATH  *= $${QSK_DIRS}
+ 
+ DESTDIR      = $${QSK_OUT_ROOT}/examples/bin
+ 
+-QMAKE_RPATHDIR *= $${QSK_OUT_ROOT}/lib
++QMAKE_RPATHDIR *= $${QSK_OUT_ROOT}/lib $${QSK_OUT_ROOT}/plugins/skins
+ qskAddLibrary($${QSK_OUT_ROOT}/lib, qsktestsupport)
+ qskAddLibrary($${QSK_OUT_ROOT}/lib, qskinny)
++qskAddLibrary($${QSK_OUT_ROOT}/plugins/skins, squiekskin)
++qskAddLibrary($${QSK_OUT_ROOT}/plugins/skins, materialskin)
+ 
+ win32 {
+     contains(QSK_CONFIG, QskDll) {
+diff --git a/playground/playground.pri b/playground/playground.pri
+index 8e61547..11362f9 100644
+--- a/playground/playground.pri
++++ b/playground/playground.pri
+@@ -26,9 +26,11 @@ DEPENDPATH  += $${QSK_DIRS}
+ 
+ DESTDIR      = $${QSK_OUT_ROOT}/playground/bin
+ 
+-QMAKE_RPATHDIR *= $${QSK_OUT_ROOT}/lib
++QMAKE_RPATHDIR *= $${QSK_OUT_ROOT}/lib $${QSK_OUT_ROOT}/plugins/skins
+ qskAddLibrary($${QSK_OUT_ROOT}/lib, qsktestsupport)
+ qskAddLibrary($${QSK_OUT_ROOT}/lib, qskinny)
++qskAddLibrary($${QSK_OUT_ROOT}/plugins/skins, squiekskin)
++qskAddLibrary($${QSK_OUT_ROOT}/plugins/skins, materialskin)
+ 
+ win32 {
+     contains(QSK_CONFIG, QskDll) {
+-- 
+2.14.4
+
