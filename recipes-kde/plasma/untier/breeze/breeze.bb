@@ -23,11 +23,12 @@ DEPENDS += "\
     kcmutils \
     kpackage-native \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "",d)} \
+    fftw \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "9b4240b531dc002c97a7c2da91087264"
-SRC_URI[sha256sum] = "80abee69d458457837ae57195e0d62f7e7edcda6391a2f22ba6b3f5b9b9b5326"
+SRC_URI[md5sum] = "bb89a706274daeb806b4f4b8c48e9e35"
+SRC_URI[sha256sum] = "843fea3115a0d2e4058ca3b298da521f6dddbe9dd0d2d991c1052209087f8c33"
 
 FILES_${PN} += " \
     ${datadir}/color-schemes \

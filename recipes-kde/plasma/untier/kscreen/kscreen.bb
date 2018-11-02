@@ -28,13 +28,14 @@ DEPENDS += "\
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "3df4c0a05f280b2b1adc855b5e32816c"
-SRC_URI[sha256sum] = "e7acb533f60dbb0daf69915f0ecbe5c8ec020c0125a77eb424cb108b9063c14d"
+SRC_URI[md5sum] = "0d7922c55da12e25393357176e222c42"
+SRC_URI[sha256sum] = "ec3cacce45c2fcca39bc180371d1274672411662d4eefcb83d4b0f26db5c384d"
 
 FILES_${PN} += " \
     ${datadir}/k*_kscreen \
     ${datadir}/kservices5 \
     ${datadir}/icons \
+    ${datadir}/plasma \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 

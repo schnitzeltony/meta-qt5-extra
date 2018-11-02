@@ -1,6 +1,6 @@
 From f7d25d036e02d9db3806818bf358c59ab4efdf38 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 4 Jul 2018 21:09:11 +0200
+Date: Thu, 1 Nov 2018 23:56:48 +0100
 Subject: [PATCH] fix configuration/build on x-less systems
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -10,32 +10,31 @@ Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- CMakeLists.txt                        | 8 ++++++--
+ CMakeLists.txt                        | 7 ++++++-
  backends/qscreen/CMakeLists.txt       | 5 ++++-
  src/CMakeLists.txt                    | 5 ++++-
- src/backendlauncher/CMakeLists.txt    | 7 +++++--
- src/backendlauncher/backendloader.cpp | 3 +++
- src/backendmanager.cpp                | 5 ++++-
- 6 files changed, 26 insertions(+), 7 deletions(-)
+ src/backendlauncher/CMakeLists.txt    | 5 ++++-
+ src/backendlauncher/backendloader.cpp | 2 ++
+ src/backendmanager.cpp                | 7 ++++++-
+ 6 files changed, 26 insertions(+), 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 536948f..33ac124 100644
+index 601d34a..1320625 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -21,8 +21,6 @@ include(CheckCXXCompilerFlag)
+@@ -21,7 +21,7 @@ include(CheckCXXCompilerFlag)
  include(CMakePackageConfigHelpers)
  include(GenerateExportHeader)
  
--find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core DBus Gui Test X11Extras)
--
+-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Gui Test X11Extras)
++find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Gui Test)
+ 
  # Wayland backend
  find_package(KF5Wayland ${KF5_MIN_VERSION} CONFIG REQUIRED)
- add_feature_info("KF5Wayland" KF5Wayland_FOUND "Required for building libkscreen's KWayland backend")
-@@ -35,6 +33,12 @@ set_package_properties(XCB PROPERTIES
+@@ -35,6 +35,11 @@ set_package_properties(XCB PROPERTIES
                         PURPOSE "Required for building XRandR backends"
  )
  
-+find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core DBus Gui Test)
 +if (XCB_RANDR_FOUND)
 +    find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED X11Extras)
 +    add_definitions(-DWITH_XCB_RANDR=1)
@@ -45,10 +44,10 @@ index 536948f..33ac124 100644
  add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
  
 diff --git a/backends/qscreen/CMakeLists.txt b/backends/qscreen/CMakeLists.txt
-index a79f5e4..f0b6dd4 100644
+index acd52f4..a4cf0a2 100644
 --- a/backends/qscreen/CMakeLists.txt
 +++ b/backends/qscreen/CMakeLists.txt
-@@ -14,8 +14,11 @@ add_library(KSC_QScreen MODULE ${qscreen_SRCS})
+@@ -15,8 +15,11 @@ set_target_properties(KSC_QScreen PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_B
  set_target_properties(KSC_QScreen PROPERTIES PREFIX "")
  target_link_libraries(KSC_QScreen Qt5::Core
                                   Qt5::Gui
@@ -80,7 +79,7 @@ index 5718cf1..3094814 100644
      VERSION "${KSCREEN_VERSION_STRING}"
      SOVERSION "${KSCREEN_SOVERSION}"
 diff --git a/src/backendlauncher/CMakeLists.txt b/src/backendlauncher/CMakeLists.txt
-index f26ad0e..c933f10 100644
+index e031a89..c933f10 100644
 --- a/src/backendlauncher/CMakeLists.txt
 +++ b/src/backendlauncher/CMakeLists.txt
 @@ -26,10 +26,13 @@ target_link_libraries(kscreen_backend_launcher
@@ -98,22 +97,14 @@ index f26ad0e..c933f10 100644
  install(TARGETS kscreen_backend_launcher
          DESTINATION ${CMAKE_INSTALL_FULL_LIBEXECDIR_KF5}
  )
-@@ -39,4 +42,4 @@ configure_file(org.kde.kscreen.service.cmake
- )
- install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.kscreen.service
-         DESTINATION ${KDE_INSTALL_DBUSSERVICEDIR}
--)
-\ No newline at end of file
-+)
 diff --git a/src/backendlauncher/backendloader.cpp b/src/backendlauncher/backendloader.cpp
-index 40f854d..5fc1350 100644
+index 40f854d..86ccf49 100644
 --- a/src/backendlauncher/backendloader.cpp
 +++ b/src/backendlauncher/backendloader.cpp
-@@ -28,7 +28,10 @@
+@@ -28,7 +28,9 @@
  #include <QDBusConnectionInterface>
  #include <QDir>
  #include <QPluginLoader>
-+
 +#ifdef WITH_XCB_RANDR
  #include <QX11Info>
 +#endif
@@ -121,10 +112,20 @@ index 40f854d..5fc1350 100644
  #include <memory>
  
 diff --git a/src/backendmanager.cpp b/src/backendmanager.cpp
-index a895198..1cecba3 100644
+index 6785eb9..9f13cef 100644
 --- a/src/backendmanager.cpp
 +++ b/src/backendmanager.cpp
-@@ -152,9 +152,12 @@ QFileInfo BackendManager::preferredBackend(const QString &backend)
+@@ -38,7 +38,9 @@
+ #include <QGuiApplication>
+ #include <QStandardPaths>
+ #include <QThread>
++#ifdef WITH_XCB_RANDR
+ #include <QX11Info>
++#endif
+ 
+ #include <memory>
+ 
+@@ -151,9 +153,12 @@ QFileInfo BackendManager::preferredBackend(const QString &backend)
      } else if (!env_kscreen_backend.isEmpty()) {
          backendFilter = env_kscreen_backend;
      } else {
@@ -132,12 +133,12 @@ index a895198..1cecba3 100644
          if (QX11Info::isPlatformX11()) {
              backendFilter = QStringLiteral("XRandR");
 -        } else if (QGuiApplication::platformName().startsWith(QLatin1String("wayland"))) {
-+        } else
++        } else 
 +#endif
 +        if (QGuiApplication::platformName().startsWith(QLatin1String("wayland"))) {
              backendFilter = QStringLiteral("KWayland");
          } else {
              backendFilter = QStringLiteral("QScreen");
 -- 
-2.14.3
+2.14.4
 

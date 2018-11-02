@@ -1,6 +1,6 @@
 From 10df317b1f2f4eb6f3227fe04794a8acc5222b4f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 29 Oct 2018 21:47:37 +0100
+Date: Fri, 2 Nov 2018 01:22:41 +0100
 Subject: [PATCH] Hack build with gcc8
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -16,23 +16,9 @@ Upstream-Status: Pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- src/fileitemactionplugin/CMakeLists.txt | 2 +-
- src/kio/bluetooth/CMakeLists.txt        | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ src/kio/bluetooth/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/src/fileitemactionplugin/CMakeLists.txt b/src/fileitemactionplugin/CMakeLists.txt
-index f22bcbf..eacefd4 100644
---- a/src/fileitemactionplugin/CMakeLists.txt
-+++ b/src/fileitemactionplugin/CMakeLists.txt
-@@ -12,7 +12,7 @@ target_link_libraries(bluetoothfileitemaction
-     Qt5::Widgets
-     KF5::I18n
-     KF5::KIOFileWidgets)
--target_include_directories(bluetoothfileitemaction SYSTEM
-+target_include_directories(bluetoothfileitemaction
-     PUBLIC $<TARGET_PROPERTY:KF5::BluezQt,INTERFACE_INCLUDE_DIRECTORIES>)
- 
- install(TARGETS bluetoothfileitemaction DESTINATION ${KDE_INSTALL_PLUGINDIR})
 diff --git a/src/kio/bluetooth/CMakeLists.txt b/src/kio/bluetooth/CMakeLists.txt
 index 971b00a..8b8cc9a 100644
 --- a/src/kio/bluetooth/CMakeLists.txt

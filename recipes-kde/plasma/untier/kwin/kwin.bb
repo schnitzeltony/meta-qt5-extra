@@ -57,8 +57,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "fa5636af0cf11cbc497357a51219e488"
-SRC_URI[sha256sum] = "d53d380dab763827e4f3effcb4f0725aaec91ded6f702e0fcc5d856829bba151"
+SRC_URI[md5sum] = "3fadf29f8bf65dbc5b2777e03e662862"
+SRC_URI[sha256sum] = "3588a25e5c160aedffa01cec06c513fb3934a117be194d04dcd61d9777440971"
 
 SRC_URI += " \
     file://0001-fix-build-for-qtbase-without-session-management.patch \
@@ -78,6 +78,7 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/icons \
     ${datadir}/*5 \
+    ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
     ${libdir}/kconf_update_bin \

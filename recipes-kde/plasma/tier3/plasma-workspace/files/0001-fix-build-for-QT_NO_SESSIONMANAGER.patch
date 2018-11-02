@@ -45,9 +45,9 @@ index 36539b63..522608a4 100644
 +#endif
  
    QCommandLineParser parser;
-   parser.addHelpOption();
+   aboutData.setupCommandLine(&parser);
 diff --git a/krunner/main.cpp b/krunner/main.cpp
-index cf228f86..6785a928 100644
+index a90324e..b8d2a74 100644
 --- a/krunner/main.cpp
 +++ b/krunner/main.cpp
 @@ -24,7 +24,9 @@
