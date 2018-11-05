@@ -1,0 +1,47 @@
+From 23e0436fda4503b8463e031122ce8f71aaf5425f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 5 Nov 2018 23:57:01 +0100
+Subject: [PATCH] Make build of dialer optional
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+libphonenumber requires JAVA:
+
+* Don't want meta-java as mandatory dependency
+* Am not interested in phone parts by default
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 99405d4..1035709 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -8,6 +8,7 @@ set(KF5_MIN_VERSION "5.0.0")
+ set(CMAKE_AUTOMOC ON)
+ set(CMAKE_INCLUDE_CURRENT_DIR ON)
+ 
++option(BUILD_DIALER "Set this option to build dialer - requires libphonenumber (+JAVA)" OFF)
+ 
+ find_package(ECM 0.0.9 REQUIRED NO_MODULE)
+ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_SOURCE_DIR}/cmake)
+@@ -57,8 +58,10 @@ add_subdirectory(bin)
+ #add_subdirectory(services)
+ add_subdirectory(applets)
+ add_subdirectory(containments)
+- add_subdirectory(components)
++add_subdirectory(components)
++if(BUILD_DIALER)
+ add_subdirectory(dialer)
++endif(BUILD_DIALER)
+ add_subdirectory(sounds)
+ #add_subdirectory(touchscreentest)
+ 
+-- 
+2.14.4
+
