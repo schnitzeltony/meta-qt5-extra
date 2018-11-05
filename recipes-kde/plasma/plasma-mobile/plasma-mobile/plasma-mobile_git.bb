@@ -24,7 +24,7 @@ DEPENDS += "\
 "
 
 SRC_URI = "git://anongit.kde.org/${BPN}.git"
-SRCREV = "05676493808bbfafbc867392c541f799c8e25779"
+SRCREV = "5e90beb4185e010eb14d6f3564627f9710f404b6"
 S = "${WORKDIR}/git"
 # Did not find version anywhere
 PV = "0.0.0+git${SRCPV}"
