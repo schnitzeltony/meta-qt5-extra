@@ -29,7 +29,13 @@ S = "${WORKDIR}/git"
 PV = "0.0.0++git${SRCPV}"
 
 FILES_${PN} += " \
-    ${datadir} \
+    ${datadir}\kservices5 \
+    ${datadir}\kwin \
+    ${datadir}\metainfo \
+    ${datadir}\plasma \
+    ${datadir}\sounds \
+    ${datadir}\wallpapers \
+    ${datadir}\wayland-sessions \
     ${OE_QMAKE_PATH_QML} \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
