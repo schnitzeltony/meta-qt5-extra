@@ -7,4 +7,5 @@ inherit packagegroup
 RDEPENDS_${PN} = " \
     plasma-mobile \
     plasma-phone-components \
+    plasma-settings \
 "
