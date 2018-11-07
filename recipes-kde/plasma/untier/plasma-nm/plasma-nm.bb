@@ -32,8 +32,6 @@ DEPENDS += " \
     plasma-framework \
     kdeclarative \
     kinit \
-    kdelibs4support \
-    kdelibs4support-native \
     modemmanager-qt \
     networkmanager-qt \
     sonnet-native \
