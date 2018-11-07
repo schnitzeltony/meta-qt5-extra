@@ -26,7 +26,7 @@ SRC_URI = " \
 SRCREV = "306512efe93f925b5e5f35cac0eb76b6ba7afa77"
 S = "${WORKDIR}/git"
 # Did not find version anywhere
-PV = "0.0.0++git${SRCPV}"
+PV = "0.0.0+git${SRCPV}"
 
 FILES_${PN} += " \
     ${datadir}/kservices5 \
