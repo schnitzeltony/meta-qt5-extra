@@ -1,0 +1,28 @@
+From 45038115cf962f0b5923a74ae362e3a430ec5a3b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 8 Nov 2018 10:37:24 +0100
+Subject: [PATCH] fix qml install dir
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ components/CMakeLists.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/components/CMakeLists.txt b/components/CMakeLists.txt
+index 33920a6..22d75c9 100644
+--- a/components/CMakeLists.txt
++++ b/components/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ configure_file("2.0/LayoutBox.qml" "2.0/LayoutBox.qml")
+ 
+-install(DIRECTORY "2.0/" DESTINATION "${QT_IMPORTS_DIR}/SddmComponents")
+-install(DIRECTORY "common/" DESTINATION "${QT_IMPORTS_DIR}/SddmComponents")
+-install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/2.0/" DESTINATION "${QT_IMPORTS_DIR}/SddmComponents")
++install(DIRECTORY "2.0/" DESTINATION "${QML_INSTALL_DIR}/SddmComponents")
++install(DIRECTORY "common/" DESTINATION "${QML_INSTALL_DIR}/SddmComponents")
++install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/2.0/" DESTINATION "${QML_INSTALL_DIR}/SddmComponents")
+-- 
+2.14.5
+

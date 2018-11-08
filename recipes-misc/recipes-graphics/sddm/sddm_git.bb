@@ -18,18 +18,19 @@ DEPENDS += "libpam"
 SRC_URI = " \
     git://github.com/sddm/${BPN}.git;protocol=git;branch=master \
     file://0001-fix-qml-install-dir.patch \
-    file://0002-do-not-create-example-configutation-we-cannot-run-sd.patch \
-    file://0001-Fix-build-with-Qt-5.11-1024.patch \
     file://sddm.pam \
     file://sddm-autologin.pam \
     file://sddm.conf \
 "
-SRCREV = "a15888b04dee1c3194b1b81b7660b6e0f5ebdb43"
-PV = "0.17.0"
+SRCREV = "c8867e02890502151a314c529348e9a42d0a061c"
+PV = "0.18.0"
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECMAKE += "-DQML_INSTALL_DIR=${OE_QMAKE_PATH_QML}"
+EXTRA_OECMAKE += " \
+    -DLOGIN_DEFS_PATH=${STAGING_DIR_HOST}${sysconfdir}/login.defs \
+    -DQML_INSTALL_DIR=${OE_QMAKE_PATH_QML} \
+"
 
 do_configure_append() {
     # fix sysroot path
@@ -37,8 +38,8 @@ do_configure_append() {
 }
 
 do_install_append() {
-    install -d ${D}/${sysconfdir}
-    install -m 644 ${WORKDIR}/sddm.conf ${D}/${sysconfdir}
+    install -d ${D}/${sysconfdir}/sddm.conf.d
+    install -m 644 ${WORKDIR}/sddm.conf ${D}/${sysconfdir}/sddm.conf.d/00-default.conf
 
     install -d ${D}${sysconfdir}/pam.d
     install -m 644 ${WORKDIR}/sddm.pam ${D}${sysconfdir}/pam.d/sddm
@@ -68,4 +69,9 @@ RDEPENDS_${PN} += " \
     qtdeclarative-plugins \
     qtdeclarative-qmlplugins \
     pam-plugin-tally \
+"
+
+RRECOMMENDS_${PN += " \
+    qtvirtualkeyboard-plugins \
+    qtvirtualkeyboard-qmlplugins \
 "
