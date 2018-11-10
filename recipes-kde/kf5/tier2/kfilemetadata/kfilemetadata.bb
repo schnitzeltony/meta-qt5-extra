@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 pkgconfig gettext
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "a6ef8ff3a121c9942148f05d8218653e"
-SRC_URI[sha256sum] = "d6db35f1ff5df56f495f713b0cc437625099758e0e5ee6a2ccf53e156adbde13"
+SRC_URI[md5sum] = "e1b9d7f405dfe3ee5861e5b20522ff19"
+SRC_URI[sha256sum] = "bcaa271e4234016b7f12a64c9cd8f3e9827ff1eb49f9cf2aaecea1a8535d51fe"
 SRC_URI += "file://0001-Revert-extractors-Hide-warnings-from-system-headers.patch"
 
 # TODO: optionals PACKAGECONFIG (poppler-qt5 / exiv2 / ffmpeg / epub)

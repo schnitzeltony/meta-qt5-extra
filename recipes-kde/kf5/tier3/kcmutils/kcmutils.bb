@@ -10,7 +10,7 @@ DEPENDS += "kitemviews kconfigwidgets kcoreaddons ki18n kiconthemes kservice kxm
             kdeclarative kcoreaddons-native kauth-native kconfig-native kpackage-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "fd914e7559710808a2f7c1de0ad669e5"
-SRC_URI[sha256sum] = "c838d4671e87314897da62c62d3663d97e38ecb560fd5bf922a5806f7d611305"
+SRC_URI[md5sum] = "4595a7fde0edebb72bd109f377b1622e"
+SRC_URI[sha256sum] = "b11bbabdb11c205bdf7419e7a397555dd769353ffe217182d2c187f98e3142b3"
 
 FILES_${PN} += "${datadir}/kservicetypes5"

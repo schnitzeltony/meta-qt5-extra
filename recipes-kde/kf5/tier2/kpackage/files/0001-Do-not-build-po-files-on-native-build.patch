@@ -1,6 +1,6 @@
 From 632015125044fad5b268329570b55246002cd792 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 15 Oct 2018 22:57:51 +0200
+Date: Sat, 10 Nov 2018 20:39:47 +0100
 Subject: [PATCH] Do not build po-files on native build
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -14,7 +14,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6712311..51df454 100644
+index 4e6aa9c..acb8ba3 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -75,6 +75,7 @@ include(KF5PackageMacros.cmake)
@@ -30,9 +30,9 @@ index 6712311..51df454 100644
      endif()
  endif()
 +endif()
- add_definitions(-DQT_NO_CAST_FROM_ASCII)
- add_definitions(-DQT_NO_CAST_TO_ASCII)
- add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
+ add_subdirectory(src)
+ if (BUILD_TESTING)
+     add_subdirectory(autotests)
 -- 
 2.14.4
 

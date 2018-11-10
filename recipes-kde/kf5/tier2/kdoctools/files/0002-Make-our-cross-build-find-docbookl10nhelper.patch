@@ -1,5 +1,5 @@
 From 6e7cb3131acc1a066e942686d72c1d0d70ca7c4c Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Fri, 6 Oct 2017 13:08:01 +0200
 Subject: [PATCH] Make our cross build find docbookl10nhelper
 MIME-Version: 1.0

@@ -1,12 +1,7 @@
-From 6cfe8c2c0c1a40e00c51a6e4c6f6314670889630 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From c4030d7fec972b950c02668f4c32a1e412be286e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Fri, 28 Nov 2014 10:04:17 +0100
 Subject: [PATCH] Add cmdline param to help find xsl
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -21,12 +16,12 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 500c252..00d9e54 100644
+index d99537c..a06d025 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -27,6 +27,8 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KDOCTOOLS
- option(MEINPROC_NO_KARCHIVE "Compile meinproc without KArchive dependency. Only for internal usage on KDE infrastructure." OFF)
- option(INSTALL_INTERNAL_TOOLS "Install internal tools too." OFF)
+@@ -30,6 +30,8 @@ option(INSTALL_INTERNAL_TOOLS "Install internal tools too." OFF)
+ option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
+ add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
  
 +# OE specific
 +set(OE_ROOT_PATH_PREFIX "" CACHE STRING "OE sysroot")

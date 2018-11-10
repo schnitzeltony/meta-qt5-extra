@@ -1,5 +1,5 @@
 From f312d35d8430656d6fdabafc37073864afe1fcda Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Fri, 28 Nov 2014 11:16:49 +0100
 Subject: [PATCH 3/5] set meinproc5 executable so that it can be found for us
 MIME-Version: 1.0
