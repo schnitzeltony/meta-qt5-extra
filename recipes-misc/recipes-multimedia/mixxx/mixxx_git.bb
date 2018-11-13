@@ -3,7 +3,7 @@ HOMEPAGE = "http://mixxx.org/"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e029b0dfdd8cfff5e40a3741234b1ca7"
 
-inherit scons qmake5_paths
+inherit scons qmake5_paths pkgconfig
 
 DEPENDS += " \
     qtbase \
