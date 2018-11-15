@@ -20,21 +20,20 @@ DEPENDS += " \
     kdesignerplugin-native \
     sonnet-native \
     kdbusaddons \
-    kdelibs4support \
-    kdelibs4support-native \
     kglobalaccel \
     ki18n \
     kiconthemes \
     kxmlgui \
     plasma-framework \
+    kinit \
 "
 
 PACKAGECONFIG = "pulseaudio"    
 PACKAGECONFIG[pulseaudio] = ",,pulseaudio"
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "ebcbaee05b665aab2a16c21f820ec887"
-SRC_URI[sha256sum] = "066f71e6a47bae97397a5d90569ac130173282d5780a0f708b015f604cff8de5"
+SRC_URI[md5sum] = "5437e003e452efe4c3154c25d6fb42db"
+SRC_URI[sha256sum] = "2d27ad00533188d55f01c4d98b1ca91a22e0cdcd1f3f77bae9005a2a357e1214"
 
 SRC_URI += "file://0001-Fix-build-with-QT_NO_SESSIONMANAGER-set.patch"
 

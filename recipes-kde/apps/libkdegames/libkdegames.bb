@@ -32,7 +32,6 @@ DEPENDS += "\
     kbookmarks \
     kio \
     knewstuff \
-    kdelibs4support \
     kparts \
     solid \
     sonnet-native \
@@ -44,8 +43,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "0c04e9e5eff1cbdf1eab9ddd70a0ad3e"
-SRC_URI[sha256sum] = "250463ce73d3a2e5f33bab758491fad09125d121230659cfa6c8968bb4855a6f"
+SRC_URI[md5sum] = "df1e09cb399a166fa24f9387fd7b92f5"
+SRC_URI[sha256sum] = "3fca47c6d08081b44f184813b9fea3b5b47157da4dcba18d62eb04fb02b1546d"
 
 FILES_${PN} += " \
     ${datadir}/carddecks \

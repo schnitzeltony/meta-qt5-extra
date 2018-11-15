@@ -1,31 +1,28 @@
 From d7cf023376cb834f9becb63f2648c63c5ec3fd12 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 4 Sep 2015 14:01:36 +0200
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 15 Nov 2018 18:46:38 +0100
 Subject: [PATCH] CMakeLists.txt: make MLT_PREFIX configurable
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Inappropriate [embedded specific]
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  CMakeLists.txt | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d33b65e..2c1c376 100644
+index ec69e0c..0792bc3 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -108,7 +108,7 @@ set_package_properties(MLT PROPERTIES
-                 TYPE RUNTIME
+@@ -119,7 +119,7 @@ set_package_properties(MLT PROPERTIES
                  PURPOSE "Required to do video processing")
  
--set(MLT_PREFIX ${MLT_ROOT_DIR})
-+set(MLT_PREFIX ${MLT_ROOT_DIR} CACHE STRING "mlt prefix")
- 
- add_subdirectory(data)
- if(KF5DocTools_FOUND)
+ if(NOT WIN32)
+-    set(MLT_PREFIX ${MLT_ROOT_DIR})
++    set(MLT_PREFIX ${MLT_ROOT_DIR} CACHE STRING "mlt prefix")
+ else()
+     set(MLT_PREFIX "..")
+ endif()
 -- 
-2.14.3
+2.14.5
 
