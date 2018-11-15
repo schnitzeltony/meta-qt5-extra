@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=24ea4c7092233849b4394699333b5c56 \
 "
 
-inherit kde-apps gtk-icon-cache
+inherit kde-apps gtk-icon-cache mime
 
 DEPENDS += " \
     qca \
@@ -32,18 +32,17 @@ DEPENDS += " \
     shared-mime-info-native \
 "
 
-PV = "17.12.3"
-SRC_URI[md5sum] = "780530d53715ef8d579d7262b7eb823c"
-SRC_URI[sha256sum] = "64b2d5264ac3b2e8010cbcf58fe03c567d4e44684a4fcd6e135eb14007da9a0f"
+# After 17.2.3 okteta left KDE application release cycle and continued
+# with 0.25.0. To avoid package version going backwards set epoch;
+PE = "1"
+
+SRC_URI = "https://download.kde.org/stable/okteta/${PV}/src/${BPN}-${PV}.tar.xz"
+SRC_URI[md5sum] = "7b8a9bf185652dc6579e05f009ae220f"
+SRC_URI[sha256sum] = "ae2a72d0162184278d1c0e0a73b52751a0181deede0231a4c9d568bb7ac82a52"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${datadir}/config.kcfg \
     ${datadir}/kxmlgui5 \
     ${datadir}/mime \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
 "
