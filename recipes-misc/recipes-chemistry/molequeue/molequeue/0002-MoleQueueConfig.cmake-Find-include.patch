@@ -1,0 +1,29 @@
+From 6a5aae2b7a985d5600f0d0cce07141a203d97419 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 16 Nov 2018 13:51:41 +0100
+Subject: [PATCH] MoleQueueConfig.cmake: Find include
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ cmake/MoleQueueConfig.cmake.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/MoleQueueConfig.cmake.in b/cmake/MoleQueueConfig.cmake.in
+index 0a8ec9b..a625eef 100644
+--- a/cmake/MoleQueueConfig.cmake.in
++++ b/cmake/MoleQueueConfig.cmake.in
+@@ -15,5 +15,5 @@ set(MoleQueue_RUNTIME_DIR     "${MoleQueue_INSTALL_PREFIX}/@INSTALL_RUNTIME_DIR@
+ set(MoleQueue_CMAKE_DIR       "${MoleQueue_LIBRARY_DIR}/cmake/molequeue")
+ 
+ if(NOT TARGET MoleQueueClient)
+-  include("${MoleQueue_CMAKE_DIR}/MoleQueueTargets.cmake")
++  include("${CMAKE_CURRENT_LIST_DIR}/MoleQueueTargets.cmake")
+ endif()
+-- 
+2.14.4
+

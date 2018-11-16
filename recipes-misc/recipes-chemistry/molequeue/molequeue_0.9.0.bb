@@ -7,6 +7,7 @@ inherit cmake_qt5 cmake_lib
 SRC_URI = " \
     https://github.com/OpenChemistry/${BPN}/archive/${PV}.tar.gz \
     file://0001-Avoid-RPATH-if-not-configured.patch \
+    file://0002-MoleQueueConfig.cmake-Find-include.patch \
 "
 SRC_URI[md5sum] = "28e707668bfaf2ebc615da54fc98002f"
 SRC_URI[sha256sum] = "7dd234742c8d73be95281fedf4ed9d09648ecc351afb5f098cd32f48c3df3bd5"
