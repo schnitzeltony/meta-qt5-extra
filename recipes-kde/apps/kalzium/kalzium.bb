@@ -14,6 +14,11 @@ DEPENDS += " \
     openbabel \
     avogadrolibs \
     \
+    kcoreaddons-native \
+    kconfig-native \
+    kdoctools-native \
+    kauth-native \
+    kdesignerplugin-native \
     karchive \
     kconfig \
     kcoreaddons \
@@ -30,8 +35,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "72bde526067b7f54ba7d13a69cac5fc7"
-SRC_URI[sha256sum] = "50050c85fb1760a99b7bbd0ed0f1047b4456139eb8d3f012005f6106e16a880e"
+SRC_URI[md5sum] = "7d9eea9cb7b2111c1e0808cf68bfb0f2"
+SRC_URI[sha256sum] = "4b3b91fb86b2d97efc7ca8c3037f33101d402df7dd2fe311b12a87468e8a6b5c"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
