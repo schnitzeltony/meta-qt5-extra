@@ -13,7 +13,10 @@ DEPENDS = " \
 
 inherit cmake_lib
 
-SRC_URI += "file://0001-Avoid-RPATH-if-not-configured.patch"
+SRC_URI += " \
+    file://0001-Avoid-RPATH-if-not-configured.patch \
+    file://0002-AvogadroLibsConfig.cmake-Find-include.patch \
+"
 
 EXTRA_OECMAKE += "-DENABLE_RPATH=OFF"
 

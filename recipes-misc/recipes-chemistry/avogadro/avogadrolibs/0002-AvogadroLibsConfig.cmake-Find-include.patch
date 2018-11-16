@@ -1,0 +1,29 @@
+From a84b9bbc192fd27e8e87648b72331b8216993549 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 16 Nov 2018 18:21:00 +0100
+Subject: [PATCH] AvogadroLibsConfig.cmake: Find include
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ cmake/AvogadroLibsConfig.cmake.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/AvogadroLibsConfig.cmake.in b/cmake/AvogadroLibsConfig.cmake.in
+index ad57195c..dc6555f6 100644
+--- a/cmake/AvogadroLibsConfig.cmake.in
++++ b/cmake/AvogadroLibsConfig.cmake.in
+@@ -19,5 +19,5 @@ set(AvogadroLibs_PLUGINS         "@AvogadroLibs_PLUGINS@")
+ set(AvogadroLibs_STATIC_PLUGINS  "@AvogadroLibs_STATIC_PLUGINS@")
+ 
+ if(NOT TARGET AvogadroCore)
+-  include("${AvogadroLibs_CMAKE_DIR}/AvogadroLibsTargets.cmake")
++  include("${CMAKE_CURRENT_LIST_DIR}/AvogadroLibsTargets.cmake")
+ endif()
+-- 
+2.14.4
+
