@@ -66,7 +66,6 @@ RDEPENDS_${PN} = " \
     lmms \
     lrdf \
     lv2 \
-    mixxx \
     muse \
     nekobee \
     \
