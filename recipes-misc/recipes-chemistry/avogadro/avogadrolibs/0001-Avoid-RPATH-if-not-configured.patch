@@ -1,0 +1,35 @@
+From 2f43dc82563eef7fe844315939231f3fcb4b7817 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 16 Nov 2018 13:42:48 +0100
+Subject: [PATCH] Avoid RPATH if not configured
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ cmake/InstallLocation.cmake | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/cmake/InstallLocation.cmake b/cmake/InstallLocation.cmake
+index ca9e375..6061201 100644
+--- a/cmake/InstallLocation.cmake
++++ b/cmake/InstallLocation.cmake
+@@ -39,8 +39,10 @@ endif()
+ 
+ # Set up RPATH for the project too.
+ option(ENABLE_RPATH "Enable rpath support on Linux and Mac" ON)
+-if(NOT CMAKE_INSTALL_RPATH)
+-  set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${INSTALL_LIBRARY_DIR}")
++if(ENABLE_RPATH)
++  if(NOT CMAKE_INSTALL_RPATH)
++    set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${INSTALL_LIBRARY_DIR}")
++  endif()
+ endif()
+ if(APPLE AND NOT CMAKE_INSTALL_NAME_DIR)
+   set(CMAKE_INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/${INSTALL_LIBRARY_DIR}")
+-- 
+2.14.4
+

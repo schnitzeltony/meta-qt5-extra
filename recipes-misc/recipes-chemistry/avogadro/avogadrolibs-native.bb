@@ -1,5 +1,7 @@
 require ${BPN}.inc
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}-native:"
+
 inherit native
 
 SRC_URI += " \
