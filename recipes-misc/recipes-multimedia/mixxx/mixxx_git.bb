@@ -41,9 +41,9 @@ SRC_URI = " \
     file://0003-align-path-of-qt-build-tools-to-our-needs.patch \
     file://0004-add-vamp-float-math-build-option-to-force-vamp-calcu.patch \
 "
-SRCREV = "fab54081a9d1faed4e6f601ecdf2f4feb5c050c1"
+SRCREV = "b4e0fd7c215c7d9afa6fcef70a7f197200b5a5d1"
 S = "${WORKDIR}/git"
-PV = "2.1.4+git${SRCPV}"
+PV = "2.1.5"
 
 EXTRA_OESCONS_MATH ??= " \
     vampfloatmath=1 \
