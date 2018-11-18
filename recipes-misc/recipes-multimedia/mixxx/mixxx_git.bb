@@ -40,6 +40,7 @@ SRC_URI = " \
     file://0002-force-using-system-soundtouch.patch \
     file://0003-align-path-of-qt-build-tools-to-our-needs.patch \
     file://0004-add-vamp-float-math-build-option-to-force-vamp-calcu.patch \
+    file://0005-Do-not-add-QT-libdir-it-injectst-usr-lib-these-days.patch \
 "
 SRCREV = "b4e0fd7c215c7d9afa6fcef70a7f197200b5a5d1"
 S = "${WORKDIR}/git"
@@ -71,3 +72,7 @@ do_install_prepend() {
 }
 
 FILES_${PN} += "${datadir}/appdata"
+
+# was: 'probably-redundant RPATH /usr/lib' - not exactly a bad breaker. Looked
+# into but could't find why this is thrown - so ignore for now.
+INSANE_SKIP_${PN} = "useless-rpaths"
