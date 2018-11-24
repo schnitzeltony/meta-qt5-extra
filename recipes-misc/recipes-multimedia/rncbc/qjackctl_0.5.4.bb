@@ -51,6 +51,6 @@ RDEPENDS_${PN} += " \
 "
 
 RDEPENDS_${PN}-defconfig += " \
-    a2jmidi \
+    a2jmidid \
     audio-tweaks \
 "
