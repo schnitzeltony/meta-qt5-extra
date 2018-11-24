@@ -103,6 +103,7 @@ RDEPENDS_${PN} = " \
     \
     \
     fluidsynth-dssi \
+    fluidsynth-dssi-defconfig \
     hexter \
     whysynth \
     xsynth-dssi \

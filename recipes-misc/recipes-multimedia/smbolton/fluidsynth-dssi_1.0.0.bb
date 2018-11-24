@@ -13,11 +13,29 @@ DEPENDS += " \
     ladspa-sdk \
 "
 
-SRC_URI = "git://github.com/schnitzeltony/fluidsynth-dssi.git"
+SRC_URI = " \
+    git://github.com/schnitzeltony/fluidsynth-dssi.git \
+    file://fluidsynth-dssi.conf \
+"
 SRCREV = "f8c0165b60042d2976c0983261a3ad8c059e2926"
 S = "${WORKDIR}/git"
 PV = "1.0.0+git${SRCPV}"
 
+do_install_append() {
+    install -d ${D}/${sysconfdir}/skel/.config/fluidsynth-dssi
+    install -m 0644 ${WORKDIR}/fluidsynth-dssi.conf ${D}/${sysconfdir}/skel/.config/fluidsynth-dssi/
+}
+
+PACKAGES =+ "${PN}-defconfig"
+
 FILES_${PN} += " \
     ${libdir}/dssi \
+"
+
+FILES_${PN}-defconfig = " \
+    ${sysconfdir}/skel/.config/fluidsynth-dssi \
+"
+
+RDEPENDS_${PN}-defconfig += " \
+    audio-tweaks \
 "
