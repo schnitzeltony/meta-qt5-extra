@@ -50,7 +50,7 @@ RDEPENDS_${PN} += " \
     jack-server \
 "
 
-RDEPENDS_${PN}}-defconfig += " \
+RDEPENDS_${PN}-defconfig += " \
     a2jmidi \
     audio-tweaks \
 "
