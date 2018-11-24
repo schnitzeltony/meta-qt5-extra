@@ -18,6 +18,7 @@ DEPENDS += "libpam"
 SRC_URI = " \
     git://github.com/sddm/${BPN}.git;protocol=git;branch=master \
     file://0001-fix-qml-install-dir.patch \
+    file://0002-Workaround-missing-sessions.patch \
     file://sddm.pam \
     file://sddm-autologin.pam \
     file://sddm.conf \

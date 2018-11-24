@@ -1,0 +1,57 @@
+From 68dbaac218216d001706c1a72d2db4819e3ca8cc Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 25 Nov 2018 00:29:17 +0100
+Subject: [PATCH] Workaround missing sessions
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The current approach is wrong in many ways:
+
+* In case a session file does not set TryExec it is kept enabled accidentlty
+* Session files with TryExec without full path are ignored. Problem here: sddm
+  tries to find executables based on PATH environment. Problem at least for my
+  environment: There is no PATH variable set by systemd. So for session files
+  without path: Do not perform further checks / just trust for now.
+  
+Upstream-Sttaus: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/greeter/SessionModel.cpp | 19 ++++---------------
+ 1 file changed, 4 insertions(+), 15 deletions(-)
+
+diff --git a/src/greeter/SessionModel.cpp b/src/greeter/SessionModel.cpp
+index 2a3c091..927bce2 100644
+--- a/src/greeter/SessionModel.cpp
++++ b/src/greeter/SessionModel.cpp
+@@ -124,22 +124,11 @@ namespace SDDM {
+ 
+             Session *si = new Session(type, session);
+             bool execAllowed = true;
+-            QFileInfo fi(si->tryExec());
+-            if (fi.isAbsolute()) {
+-                if (!fi.exists() || !fi.isExecutable())
++            if(!si->tryExec().isEmpty()) {
++                QFileInfo fi(si->tryExec());
++                if (fi.isAbsolute()) {
++                    if (!fi.exists() || !fi.isExecutable())
+                     execAllowed = false;
+-            } else {
+-                execAllowed = false;
+-                QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+-                QString envPath = env.value(QStringLiteral("PATH"));
+-                QStringList pathList = envPath.split(QLatin1Char(':'));
+-                foreach(const QString &path, pathList) {
+-                    QDir pathDir(path);
+-                    fi.setFile(pathDir, si->tryExec());
+-                    if (fi.exists() && fi.isExecutable()) {
+-                        execAllowed = true;
+-                        break;
+-                    }
+                 }
+             }
+             // add to sessions list
+-- 
+2.14.5
+
