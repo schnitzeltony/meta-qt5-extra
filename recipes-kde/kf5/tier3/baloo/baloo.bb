@@ -11,9 +11,8 @@ DEPENDS += " \
     ki18n \
     kconfig \
     kconfig-native \
-    kidletime \
-    kauth \
     kauth-native \
+    kidletime \
     kcrash \
     solid \
     kio \
