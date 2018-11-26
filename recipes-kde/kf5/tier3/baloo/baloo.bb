@@ -30,9 +30,17 @@ SRC_URI[sha256sum] = "8ddf85c6ae74dac868f37b562b80fdad753888f0c75b97ab26f01bdfc7
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
+    file://baloo_file.desktop \
 "
 
+do_install_append() {
+   install -d ${D}/${sysconfdir}/skel/.config/autostart
+   install -m 0644 ${WORKDIR}/baloo_file.desktop ${D}/${sysconfdir}/skel/.config/autostart/
+}
+
 CMAKE_ALIGN_SYSROOT[1] = "KF5Baloo, -S${libdir}, -s${OE_QMAKE_PATH_HOST_LIBS}"
+
+PACKAGES =+ "${PN}-no-autostart"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
@@ -41,3 +49,5 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML}/org/kde/baloo \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
+
+FILES_${PN}-no-autostart = "${sysconfdir}/skel/.config/autostart"
