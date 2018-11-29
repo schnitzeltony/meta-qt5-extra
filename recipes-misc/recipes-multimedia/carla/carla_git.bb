@@ -19,12 +19,13 @@ PV = "1.9.11+git${SRCPV}"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit qmake5_base autotools-brokensep pkgconfig qemu-ext distro_features_check mime gtk-icon-cache
+inherit qmake5_base autotools-brokensep pkgconfig qemu-ext distro_features_check mime gtk-icon-cache python3native
 
 DEPENDS += " \
-    python3-pyqt5-native \
     qtbase-native \
     qtbase \
+    python3-pyqt5-native \
+    python3-pyqt5 \
     gtk+ \
     gtk+3 \
     liblo \
