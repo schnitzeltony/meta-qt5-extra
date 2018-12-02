@@ -120,6 +120,7 @@ RDEPENDS_${PN} += " \
     \
     soundtouch \
     stk \
+    supercollider \
     timidity++ \
     triceratops-lv2 \
     vamp-plugin-sdk \
