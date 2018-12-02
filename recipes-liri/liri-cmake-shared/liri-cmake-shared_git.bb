@@ -6,9 +6,12 @@ LIC_FILES_CHKSUM = " \
 
 inherit liri
 
+# Avoid depending on myself
+DEPENDS = "cmake-native"
+
 PV = "1.0.0+git${SRCPV}"
 
-SRCREV = "7d2b9b92528c2a3e098d27bfa29faba453a9306c"
+SRCREV = "4d888a8674c03411f4f2124b71e206133795d444"
 S = "${WORKDIR}/git"
 
 FILES_${PN}-dev += "${datadir}/LiriCMakeShared"
