@@ -15,8 +15,3 @@ DEPENDS += " \
     udev \
     umockdev \
 "
-
-FILES_SOLIBSDEV = ""
-FILES_${PN} += " \
-    ${libdir}/libQt5Udev.so \
-"
