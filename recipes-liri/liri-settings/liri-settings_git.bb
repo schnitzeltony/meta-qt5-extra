@@ -1,7 +1,7 @@
 SUMMARY = "Settings application for Liri OS"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = " \
-	file://LICENSE.GPLv3;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+	file://LICENSE.GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
 "
 
 inherit liri distro_features_check
@@ -10,32 +10,22 @@ REQUIRED_DISTRO_FEATURES = "wayland"
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "62dbafe134f8da22f336dd560b374693284531b5"
+SRCREV = "d5f5881da698fcb5e5b8e9e9176b85cd9f9cccbc"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
-    liri-wayland \
-    qtquickcontrols \
-    vibe \
-    qtaccountsservice \
-    polkit-qt-1 \
+    qtquickcontrols2 \
+    liri-qtaccountsservice \
+    liri-fluid \
+    libqtxdg \
+    polkit \
     xkeyboard-config \
 "
 
-EXTRA_OECMAKE += "-DQt5LinguistTools_DIR=${STAGING_LIBDIR_NATIVE}/cmake/Qt5LinguistTools"
-
 FILES_${PN} += " \
-    ${datadir}/liri/settings \
+    ${datadir}/liri-settings/modules \
     ${OE_QMAKE_PATH_QML} \
 "
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_QML}/Liri/*/.debug \
-"
-
-# cross libs / headers
-CMAKE_ALIGN_SYSROOT[1] = "LiriSettings, -S${libdir}/lib, -s${OE_QMAKE_PATH_HOST_LIBS}/lib"
-CMAKE_ALIGN_SYSROOT[2] = "LiriSettings, -S${includedir}, -s${CMAKE_QT5_EX_PATH_HOST_HEADERS}"
 
 RREPLACES_${PN} = "hawaii-system-preferences"
 RPROVIDES_${PN} = "hawaii-system-preferences"
