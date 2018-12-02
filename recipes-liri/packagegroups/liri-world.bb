@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 inherit packagegroup
 
 RDEPENDS_${PN} = " \
+    liri-eglfs \
     liri-fluid \
     liri-libliri \
     liri-networkmanager \
