@@ -2,7 +2,7 @@ LIRI_GIT_BRANCH ?= "develop"
 
 SRC_URI = "git://github.com/lirios/${@'${BPN}'.replace('liri-', '')}.git;protocol=git;branch=${LIRI_GIT_BRANCH}"
 
-DEPENDS += "qtbase qtdeclarative liri-cmake-shared extra-cmake-modules"
+DEPENDS += "qtbase qtdeclarative liri-cmake-shared extra-cmake-modules qttools qttools-native"
 
 inherit cmake_qt5_extra pkgconfig
 
