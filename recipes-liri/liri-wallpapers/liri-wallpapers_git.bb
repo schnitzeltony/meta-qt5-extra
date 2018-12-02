@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = " \
 
 inherit liri
 
-PV = "0.9.0+git${SRCPV}"
+PV = "0.10.0+git${SRCPV}"
 
-SRCREV = "50935fae9989b9c99a0a18d350d841e72e6e29bc"
+SRCREV = "9f34bae8032a221e7c1af78a401e28095abd21f3"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += "${datadir}"
