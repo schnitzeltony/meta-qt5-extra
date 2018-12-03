@@ -15,8 +15,8 @@ DEPENDS += " \
 "
 
 SRC_URI = "gitsm://github.com/x42/avldrums.lv2.git"
-SRCREV = "43b28a761ea980d176b66347a6f8a44fb4e84611"
-PV = "0.3.0"
+SRCREV = "4fefc621d4eb281521b591efa863a25383894882"
+PV = "0.3.1"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE += " \
