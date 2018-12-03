@@ -128,6 +128,7 @@ RDEPENDS_${PN} += " \
     \
     \
     avldrums.lv2 \
+    dpl.lv2 \
     fil4.lv2 \
     meters.lv2 \
     midifilter.lv2 \
