@@ -28,7 +28,7 @@ DEPENDS += " \
     fluidsynth \
 "
 
-inherit waf distro_features_check gtk-icon-cache pkgconfig
+inherit wafold distro_features_check gtk-icon-cache pkgconfig
 
 REQUIRED_DISTRO_FEATURE = "x11"
 

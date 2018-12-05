@@ -10,7 +10,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "78ebc879e5cd7a6e4bd43ff8aec562e1"
 SRC_URI[sha256sum] = "4ca93bd4226cd175456f37612acd28b46e13133db61c0f235917dbcc3347d5f1"
 
-inherit waf fontcache gettext
+inherit wafold fontcache gettext
 
 DEPENDS += " \
     gperf-native \
