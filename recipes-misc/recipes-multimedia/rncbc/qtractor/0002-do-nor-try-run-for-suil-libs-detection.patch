@@ -1,24 +1,39 @@
 From a32a7af99c5f241a08840ce0775c9aaa0c37a792 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Thu, 16 Feb 2017 23:36:22 +0100
 Subject: [PATCH] do nor try run for suil libs detection
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- configure.ac | 24 ++----------------------
- 1 file changed, 2 insertions(+), 22 deletions(-)
+ configure.ac | 28 ++++------------------------
+ 1 file changed, 4 insertions(+), 24 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index bb23d72..a5bf793 100644
+index 009a9d74..1d3e50c3 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1250,17 +1250,7 @@ if test "x$ac_lv2_ui_show" = "xyes"; then
+@@ -256,12 +256,12 @@ AC_ARG_ENABLE(lv2-ui-show,
+ AC_ARG_ENABLE(lv2-ui-gtk2,
+   AS_HELP_STRING([--enable-lv2-ui-gtk2], [enable LV2 plug-in UI GTK2 native support (default=yes)]),
+   [ac_lv2_ui_gtk2="$enableval"],
+-  [ac_lv2_ui_gtk2="no"])
++  [ac_lv2_ui_gtk2="yes"])
+ 
+ AC_ARG_ENABLE(lv2-ui-x11,
+   AS_HELP_STRING([--enable-lv2-ui-x11], [enable LV2 plug-in UI X11 native support (default=yes)]),
+   [ac_lv2_ui_x11="$enableval"],
+-  [ac_lv2_ui_x11="no"])
++  [ac_lv2_ui_x11="yes"])
+ 
+ # Enable JACK session support.
+ AC_ARG_ENABLE(jack-session,
+@@ -1232,17 +1232,7 @@ if test "x$ac_lv2_ui_show" = "xyes"; then
  fi
  
- if test "x$ac_qt4" = "xno" -a "x$ac_suil" = "xyes"; then
+ if test "x$ac_suil" = "xyes"; then
 -   AC_CACHE_CHECK([for LV2 UI GTK2 support (libsuil_gtk2_in_qt5)],
 -      ac_cv_suil_gtk2_in_qt5, [
 -      AC_TRY_RUN([
@@ -34,10 +49,10 @@ index bb23d72..a5bf793 100644
     if test "x$ac_cv_suil_gtk2_in_qt5" = "xyes"; then
        AC_DEFINE(CONFIG_LIBSUIL_GTK2_IN_QT5, 1, [Define if libsuil_gtk2_in_qt5 is available.])
     #  ac_lv2_ui_gtk2="no"
-@@ -1278,17 +1268,7 @@ else
+@@ -1260,17 +1250,7 @@ if test "x$ac_lv2_ui_gtk2" = "xyes"; then
  fi
  
- if test "x$ac_qt4" = "xno" -a "x$ac_suil" = "xyes"; then
+ if test "x$ac_suil" = "xyes"; then
 -   AC_CACHE_CHECK([for LV2 UI X11 support (libsuil_x11_in_qt5)],
 -      ac_cv_suil_x11_in_qt5, [
 -      AC_TRY_RUN([
@@ -54,5 +69,5 @@ index bb23d72..a5bf793 100644
        AC_DEFINE(CONFIG_LIBSUIL_X11_IN_QT5, 1, [Define if libsuil_x11_in_qt5 is available.])
     #  ac_lv2_ui_x11="no"
 -- 
-2.9.3
+2.14.5
 

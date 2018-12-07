@@ -1,20 +1,20 @@
 From e96d295e0d6b36b9b722ad3d4c0b2013e569e9d5 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 3 Oct 2017 21:45:43 +0200
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 8 Dec 2018 22:34:14 +0100
 Subject: [PATCH] Add ARM NEON acceleration for time stretch - not yet tested
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- src/qtractorTimeStretch.cpp | 58 +++++++++++++++++++++++++++++++++++++++++++++
+ src/qtractorWsolaTimeStretcher.cpp | 58 +++++++++++++++++++++++++++++++++++++++++++++
  1 file changed, 58 insertions(+)
 
-diff --git a/src/qtractorTimeStretch.cpp b/src/qtractorTimeStretch.cpp
+diff --git a/src/qtractorWsolaTimeStretcher.cpp b/src/qtractorWsolaTimeStretcher.cpp
 index 751b9bc8..6461b8b9 100644
---- a/src/qtractorTimeStretch.cpp
-+++ b/src/qtractorTimeStretch.cpp
+--- a/src/qtractorWsolaTimeStretcher.cpp
++++ b/src/qtractorWsolaTimeStretcher.cpp
 @@ -121,6 +121,60 @@ static inline float sse_cross_corr (
  
  #endif
