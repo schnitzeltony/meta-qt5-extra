@@ -11,12 +11,14 @@ RDEPENDS_${PN} = " \
     liri-networkmanager \
     liri-power-manager \
     ${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio", "liri-pulseaudio", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-qml-xwayland", "",d)} \
     liri-qtaccountsservice \
     liri-qtgsettings \
     liri-qtudev \
     liri-screencast \
     liri-screenshot \
     liri-settings \
+    liri-terminal \
     liri-wallpapers \
 "
 
@@ -27,7 +29,6 @@ RDEPENDS_${PN} = " \
 #    liri-calculator 
 #    liri-files 
 #    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-shell", "",d)} 
-#    liri-terminal 
 #    liri-themes-grub liri-themes-plymouth liri-themes-sddm 
 #    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-wayland", "",d)} 
 #    paper-icon-theme 
