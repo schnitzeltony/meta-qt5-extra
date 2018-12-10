@@ -7,5 +7,5 @@ inherit kde-kf5
 DEPENDS += "qttools kcoreaddons kconfig kdoctools"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "fc42adfbd144591fb6824d2e36509ba4"
-SRC_URI[sha256sum] = "8db46460457b696662a78d307949529356b1c2f6c6c540b957d866eb217ddf75"
+SRC_URI[md5sum] = "1d4e9805bb6d3748b01140fdb0ecff41"
+SRC_URI[sha256sum] = "06a3038e163e0c690d3be0c8636d033cc4e7bf9bbd5c5f6bb5f54aed6fd51ed4"

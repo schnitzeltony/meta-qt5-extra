@@ -26,13 +26,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "ac84f7cdcc0f5bae355cd32fbd15f5de"
-SRC_URI[sha256sum] = "e4624f4f8a630ee30093ea785f17833e7668915dd71d7058829049427001b631"
-
-# REVISIT remove ugly hack for wayland-only environments
-SRC_URI += " \
-    file://0001-no-session-management-if-not-supported-by-qtbase-ind.patch \
-"
+SRC_URI[md5sum] = "b4c155182fd4ce55a40c9805fb405952"
+SRC_URI[sha256sum] = "2ea9d75bf6405dad3db0cb6f017030be139e3bc6e223ed235237e3cf09bd97a9"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 

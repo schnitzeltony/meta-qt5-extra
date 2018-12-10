@@ -1,6 +1,6 @@
 From 760e76e826f935c72b4874f104773c954def532e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 28 Nov 2014 12:21:41 +0100
+Date: Mon, 10 Dec 2018 21:51:52 +0100
 Subject: [PATCH 4/4] don't build documentation
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -8,19 +8,19 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Inappropriate [configuration]
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  CMakeLists.txt | 5 -----
  1 file changed, 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 5927437..2e49d39 100644
+index 8ce562e..a1187fc 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -91,12 +91,7 @@ set(KDOCTOOLS_LANGUAGES_LIST af bg ca cs da de el en-GB en eo es et fi fo fr gl
- 
+@@ -95,12 +95,7 @@ set(KDOCTOOLS_LANGUAGES_LIST af bg ca cs da de el en-GB en eo es et fi fo fr gl
  set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5DocTools")
  add_definitions(-DTRANSLATION_DOMAIN=\"kdoctools5\")
+ #add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
 -if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po" AND KF5I18n_FOUND)
 -    ki18n_install(po)
 -    kdoctools_install(po)
@@ -31,5 +31,5 @@ index 5927437..2e49d39 100644
  if (BUILD_TESTING)
      add_subdirectory(autotests)
 -- 
-2.14.4
+2.14.5
 
