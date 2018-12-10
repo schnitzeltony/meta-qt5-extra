@@ -6,20 +6,24 @@ LIC_FILES_CHKSUM = " \
 
 inherit liri
 
-PV = "0.1.0+git${SRCPV}"
+PV = "0.2.0+git${SRCPV}"
 
-SRCREV = "4f3ea283907e11342a024e6272d660f7578c7e57"
+SRCREV = "2b81df03d5cd87b62b842939668786196108a490"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
     qttools \
+    qtquickcontrols2 \
     taglib \
-    fluid \
+    liri-fluid \
 "
 
 EXTRA_OECMAKE += "-DQt5LinguistTools_DIR=${STAGING_LIBDIR_NATIVE}/cmake/Qt5LinguistTools"
 
-FILES_${PN} += "${OE_QMAKE_PATH_QML} ${datadir}"
+FILES_${PN} += " \
+    ${datadir}/metainfo \
+    ${OE_QMAKE_PATH_QML} \
+"
 
 RREPLACES_${PN} = "swordfish"
 RPROVIDES_${PN} = "swordfish"
