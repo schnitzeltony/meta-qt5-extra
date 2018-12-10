@@ -6,6 +6,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     liri-eglfs \
+    liri-files \
     liri-fluid \
     liri-libliri \
     liri-networkmanager \
@@ -19,18 +20,18 @@ RDEPENDS_${PN} = " \
     liri-screenshot \
     liri-settings \
     liri-terminal \
+    liri-text \
     liri-wallpapers \
 "
 
 #LAYERDEPENDS_meta-qt5-extra += "gnome-layer"
 
+#    liri-calamares-branding \
 #    ${@bb.utils.contains("DISTRO_FEATURES", "flatpak", "liri-appcenter", "",d)} 
 #    liri-browser 
 #    liri-calculator 
-#    liri-files 
 #    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-shell", "",d)} 
 #    liri-themes-grub liri-themes-plymouth liri-themes-sddm 
 #    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-wayland", "",d)} 
 #    paper-icon-theme 
-#    vibe 
 
