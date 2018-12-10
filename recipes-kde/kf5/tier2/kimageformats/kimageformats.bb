@@ -19,4 +19,3 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${datadir}/kservices5 \
 "
-FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/*/.debug"

@@ -13,4 +13,3 @@ SRC_URI[sha256sum] = "20a09ace06d0f4d883435cd9ae01bd914cf180c0321c3f21829f6ddc95
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
-FILES_${PN}-dbg += "${OE_QMAKE_PATH_QML}/org/kde/bluezqt/.debug"

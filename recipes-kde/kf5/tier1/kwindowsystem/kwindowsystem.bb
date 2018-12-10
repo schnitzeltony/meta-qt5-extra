@@ -15,4 +15,3 @@ SRC_URI[sha256sum] = "9fb2009a1915167e243d4182a5cf8932bfe416b31a2f13f06256f3e1eb
 CMAKE_ALIGN_SYSROOT[1] = "KF5WindowSystem, -S${includedir}, -s${_IMPORT_PREFIX}/include"
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}"
-FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/*/*/.debug"

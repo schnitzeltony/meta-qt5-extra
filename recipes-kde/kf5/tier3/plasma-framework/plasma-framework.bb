@@ -53,11 +53,3 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
     ${libdir}/org/kde/plasma \
 "
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
-    ${libdir}/platformqml/*/org/kde/plasma/*/.debug \
-    ${libdir}/org/kde/plasma/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/plasma/*/.debug \
-"

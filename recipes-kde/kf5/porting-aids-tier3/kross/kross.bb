@@ -31,8 +31,3 @@ SRC_URI[sha256sum] = "5e7ef96c1c981d8c47928301eb1c84d69c1567ae46cf716275b2765bef
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-"

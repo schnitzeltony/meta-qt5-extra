@@ -30,6 +30,3 @@ SRC_URI[md5sum] = "b4c155182fd4ce55a40c9805fb405952"
 SRC_URI[sha256sum] = "2ea9d75bf6405dad3db0cb6f017030be139e3bc6e223ed235237e3cf09bd97a9"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
-
-# evt. put ksendbugmail to separate package later
-FILES_${PN}-dbg += "${libdir}/kxmlgui/kf5/.debug/"

@@ -21,4 +21,3 @@ FILES_${PN} += " \
     ${datadir}/k*5 \
     ${OE_QMAKE_PATH_QML} \
 "
-FILES_${PN}-dbg += "${OE_QMAKE_PATH_QML}/*/*/*/.debug"

@@ -18,7 +18,3 @@ FILES_${PN} += " \
     ${datadir}/k*5 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/kf5/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/kf5/*/.debug \
-"

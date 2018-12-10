@@ -31,7 +31,3 @@ FILES_${PN} += " \
     ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-"

@@ -28,4 +28,3 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${OE_QMAKE_PATH_QML}/org/kde \
 "
-FILES_${PN}-dbg += "${OE_QMAKE_PATH_QML}/org/kde/*/.debug"
