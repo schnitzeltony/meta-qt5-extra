@@ -6,12 +6,11 @@ LIC_FILES_CHKSUM = " \
 
 SRC_URI = " \
     git://github.com/DISTRHO/DPF-Plugins.git \
-    file://0001-Disable-modgui-we-don-t-support-modgui.patch \
 "
 
-SRCREV = "6454c590a2b5402195e655b1386358210e067dfd"
+SRCREV = "3adff289617ed32f9d0cb679b05e430531cbf0dd"
 S = "${WORKDIR}/git"
-PV = "v1.1"
+PV = "v1.1+git${SRCPV}"
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
@@ -29,7 +28,7 @@ do_compile_prepend() {
     export NOOPT=true
     rm -f ${LV2-TURTLE-BUILD-DATA}
     # manipulate Makefile/scripts to keep lv2_ttl_generator-calls in script for lv2-postinst-helper
-    sed -i 's|$GEN ./$FILE|echo lv2-ttl-generator `pwd`/$FILE >> ${LV2-TURTLE-BUILD-DATA}|g' ${S}/dpf/utils/generate-ttl.sh
+    sed -i 's|"$GEN" "./$FILE"|echo lv2-ttl-generator `pwd`/$FILE >> ${LV2-TURTLE-BUILD-DATA}|g' ${S}/dpf/utils/generate-ttl.sh
 }
 
 do_install() {
