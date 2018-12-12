@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 inherit packagegroup
 
 RDEPENDS_${PN} = " \
+    liri-calculator \
     liri-eglfs \
     liri-files \
     liri-fluid \
@@ -29,7 +30,6 @@ RDEPENDS_${PN} = " \
 #    liri-calamares-branding \
 #    ${@bb.utils.contains("DISTRO_FEATURES", "flatpak", "liri-appcenter", "",d)} 
 #    liri-browser 
-#    liri-calculator 
 #    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-shell", "",d)} 
 #    liri-themes-grub liri-themes-plymouth liri-themes-sddm 
 #    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-wayland", "",d)} 
