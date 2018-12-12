@@ -15,7 +15,5 @@ SRCREV = "303ae04affbdb6bfd8979692e4423fd3491ce9e9"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += " \
-    ${libdir}/libLiri1*.so \
     ${OE_QMAKE_PATH_QML}/Liri \
 "
-FILES_SOLIBSDEV = ""
