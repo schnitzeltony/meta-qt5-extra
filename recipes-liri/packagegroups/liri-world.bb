@@ -22,6 +22,7 @@ RDEPENDS_${PN} = " \
     liri-settings \
     liri-terminal \
     liri-text \
+    liri-themes liri-themes-plymouth liri-themes-sddm \
     liri-wallpapers \
 "
 
@@ -31,7 +32,6 @@ RDEPENDS_${PN} = " \
 #    ${@bb.utils.contains("DISTRO_FEATURES", "flatpak", "liri-appcenter", "",d)} 
 #    liri-browser 
 #    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-shell", "",d)} 
-#    liri-themes-grub liri-themes-plymouth liri-themes-sddm 
 #    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-wayland", "",d)} 
 #    paper-icon-theme 
-
+# liri-themes-grub
