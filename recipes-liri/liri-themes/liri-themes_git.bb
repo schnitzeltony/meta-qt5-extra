@@ -28,7 +28,7 @@ FILES_${PN}-grub += "/boot/grub/themes"
 FILES_${PN}-plymouth += "${datadir}/plymouth/themes"
 FILES_${PN}-sddm += "${datadir}/sddm/themes"
 
-pkg_postinst_${PN}-plymouth() {
-#!/bin/sh
-plymouth-set-default-theme -R lirios
+# there is no plymouth-native yet
+pkg_postinst_ontarget_${PN}-plymouth() {
+    plymouth-set-default-theme -R lirios
 }
