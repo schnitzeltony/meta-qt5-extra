@@ -9,8 +9,12 @@ inherit liri
 PV = "0.9.0+git${SRCPV}"
 
 SRC_URI += "file://0001-Set-correct-path-for-grub-themes.patch"
-SRCREV = "37e0c45704cdda48dedd31c10e20c632701e76c3"
+SRCREV = "2ff6669642cd49eacc83de479de110bb397408db"
 S = "${WORKDIR}/git"
+
+EXTRA_OECMAKE += " \
+    -DINSTALL_GRUBDIR=/boot/grub \
+"
 
 PACKAGES += " \
     ${PN}-grub \
