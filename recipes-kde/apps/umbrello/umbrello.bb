@@ -32,9 +32,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI += "file://0001-Fix-KDE-CI-compile-error-with-Qt-5.10-on-linux.patch"
-SRC_URI[md5sum] = "9be3855aecacc7566c400b03d9054e1a"
-SRC_URI[sha256sum] = "80d24252b958dea167d10ee97b969f85cfa86e3f95f4a9d94c6e368a3e9d667e"
+SRC_URI[md5sum] = "e4998fc4e92d2b1420b5fee4fc33e1ce"
+SRC_URI[sha256sum] = "6ed4c5021fe96d89000dfe56a1401a939da00d42845541c9ed8eb730c1e62597"
 
 EXTRA_OECMAKE += "-DBUILD_KF5=1"
 

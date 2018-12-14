@@ -12,7 +12,6 @@ LIC_FILES_CHKSUM = " \
 inherit kde-apps gettext
 
 DEPENDS += " \
-    libssh \
     qtsvg \
     qtwebengine \
     \
@@ -40,6 +39,7 @@ DEPENDS += " \
 "
 
 # REVISIT optionals
+# libssh \
 # openslp
 # openssh <-> dropbear
 DEPENDS += " \
@@ -49,8 +49,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "2a34d890b3b6d6ea52ae9ac8023816fa"
-SRC_URI[sha256sum] = "450d69b16a873da51190c9397b2b0ecb08bc0dcae0d2a07f7ab1d2efcd02c280"
+SRC_URI[md5sum] = "3b6666cb471cbb913f9cc84a89f48b94"
+SRC_URI[sha256sum] = "c5ac845efcc37f1710d3a5204181bbb27f9bd06429ec95d018c63bc2503d74e9"
 
 # gperf creates hard #line links
 do_install_prepend() {

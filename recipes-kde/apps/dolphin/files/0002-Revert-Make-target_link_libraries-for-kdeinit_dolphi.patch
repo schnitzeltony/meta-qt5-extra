@@ -21,7 +21,4 @@ index 5aff4b0fa..9dc77c3da 100644
 +target_link_libraries(kdeinit_dolphin
      dolphinstatic
      dolphinprivate
- )
--- 
-2.14.4
-
+     KF5::Crash
