@@ -8,7 +8,6 @@ inherit liri
 
 PV = "0.9.0+git${SRCPV}"
 
-SRC_URI += "file://0001-Set-correct-path-for-grub-themes.patch"
 SRCREV = "2ff6669642cd49eacc83de479de110bb397408db"
 S = "${WORKDIR}/git"
 
