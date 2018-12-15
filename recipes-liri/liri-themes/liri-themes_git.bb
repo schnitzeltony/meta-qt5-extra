@@ -15,10 +15,14 @@ EXTRA_OECMAKE += " \
     -DINSTALL_GRUBDIR=/boot/grub \
 "
 
+do_install_append() {
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-initramfs', '', 'rm -rf ${D}${datadir}/plymouth', d)}
+}
+
 PACKAGES += " \
     ${PN}-grub \
-    ${PN}-plymouth \
     ${PN}-sddm \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-initramfs', '${PN}-plymouth', '', d)} \
 "
 
 RDEPENDS_${PN}-plymouth += " \
