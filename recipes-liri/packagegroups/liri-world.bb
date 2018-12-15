@@ -22,7 +22,8 @@ RDEPENDS_${PN} = " \
     liri-settings \
     liri-terminal \
     liri-text \
-    liri-themes liri-themes-plymouth liri-themes-sddm \
+    liri-themes liri-themes-sddm \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-initramfs', 'liri-themes-plymouth', '', d)} \
     liri-wallpapers \
 "
 
