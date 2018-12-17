@@ -20,6 +20,7 @@ RDEPENDS_${PN} = " \
     liri-screencast \
     liri-screenshot \
     liri-settings \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-shell", "",d)} \
     liri-terminal \
     liri-text \
     liri-themes liri-themes-sddm \
@@ -32,7 +33,6 @@ RDEPENDS_${PN} = " \
 #    liri-calamares-branding \
 #    ${@bb.utils.contains("DISTRO_FEATURES", "flatpak", "liri-appcenter", "",d)} 
 #    liri-browser 
-#    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-shell", "",d)} 
 #    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-wayland", "",d)} 
 #    paper-icon-theme 
 # liri-themes-grub
