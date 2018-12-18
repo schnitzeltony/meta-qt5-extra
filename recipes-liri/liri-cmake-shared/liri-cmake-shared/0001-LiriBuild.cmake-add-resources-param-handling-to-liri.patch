@@ -1,0 +1,38 @@
+From e998e7cb89c3706729f314aac35e16af3ccc706e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 18 Dec 2018 15:02:54 +0100
+Subject: [PATCH] LiriBuild.cmake: add resources param handling to
+ liri_add_module name
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Submitted [1]
+
+[1] https://github.com/lirios/cmake-shared/pull/2
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ modules/LiriBuild.cmake | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/modules/LiriBuild.cmake b/modules/LiriBuild.cmake
+index 39d669e..620fa61 100644
+--- a/modules/LiriBuild.cmake
++++ b/modules/LiriBuild.cmake
+@@ -261,6 +261,12 @@ function(liri_add_module name)
+     endif()
+     add_library("Liri::${target}" ALIAS "${target}")
+ 
++    # add resources
++    if(DEFINED _arg_RESOURCES)
++        qt5_add_resources(RESOURCES ${_arg_RESOURCES})
++        list(APPEND _arg_SOURCES ${RESOURCES})
++    endif()
++
+     # Add target for the private API
+     set(target_private "${target}Private")
+     add_library("${target_private}" INTERFACE)
+-- 
+2.14.5
+
