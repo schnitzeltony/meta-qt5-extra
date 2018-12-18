@@ -11,7 +11,7 @@ DEPENDS = "cmake-native"
 
 PV = "1.0.0+git${SRCPV}"
 
-SRCREV = "f3308aa6029f22b8bde6f4ba08518d93bd176b22"
+SRCREV = "423d00716eb7f80a499e884e6927d7b17f883a3f"
 S = "${WORKDIR}/git"
 
 FILES_${PN}-dev += "${datadir}/LiriCMakeShared"
