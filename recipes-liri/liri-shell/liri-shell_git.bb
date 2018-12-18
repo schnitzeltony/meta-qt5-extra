@@ -9,6 +9,7 @@ inherit liri pythonnative distro_features_check gsettings
 
 REQUIRED_DISTRO_FEATURES = "wayland pam"
 
+SRC_URI += "file://0001-Install-liri-session-script-as-executable.patch"
 PV = "0.9.0+git${SRCPV}"
 SRCREV = "192e67c93c9acc871539b4e01d4d7c32111f7e93"
 S = "${WORKDIR}/git"
