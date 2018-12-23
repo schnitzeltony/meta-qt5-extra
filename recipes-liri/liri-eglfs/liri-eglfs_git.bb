@@ -8,16 +8,17 @@ LIC_FILES_CHKSUM = " \
 inherit liri
 
 DEPENDS += " \
-    liri-libliri \
-    liri-qtudev \
-    libinput \
+    fontconfig \
     drm \
     virtual/libgbm \
+    virtual/egl \
+    libinput \
+    liri-libliri \
+    liri-qtudev \
 "
 
 PV = "0.0.0+git${SRCPV}"
-
-SRCREV = "ad69d7331af5ea34a18f13da9ec18755fae92edb"
+SRCREV = "23941d3b59b11c24799b278dc28fa7c95588082b"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += " \
