@@ -31,8 +31,11 @@ EXTRA_OECMAKE += " \
     -DINSTALL_SYSCONFDIR=${sysconfdir} \
 "
 
-# for starter scripts (still necessary?)
-RDEPENDS_${PN} = "qttools-tools qtwayland-plugins"
+RDEPENDS_${PN} += " \
+    qttools-tools \
+    qtwayland-plugins \
+    qtgraphicaleffects-qmlplugins \
+"
 
 FILES_${PN} += " \
     ${systemd_user_unitdir} \
