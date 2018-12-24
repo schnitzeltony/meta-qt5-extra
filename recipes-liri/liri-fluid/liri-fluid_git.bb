@@ -33,3 +33,7 @@ FILES_${PN}-dev += " \
     ${datadir}/metainfo \
     ${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs \
 "
+
+RDEPENDS_${PN} += " \
+    qtsvg-plugins \
+"
