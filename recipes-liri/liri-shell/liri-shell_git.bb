@@ -9,15 +9,12 @@ inherit liri pythonnative distro_features_check gsettings
 
 REQUIRED_DISTRO_FEATURES = "wayland pam"
 
-SRC_URI += "file://0001-Install-liri-session-script-as-executable.patch"
 PV = "0.9.0+git${SRCPV}"
-SRCREV = "192e67c93c9acc871539b4e01d4d7c32111f7e93"
+SRCREV = "c07d193a7d1009f58cb7561316774521fe55a4ec"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
-    qtwayland-native \
     libpam \
-    qtwayland \
     qtquickcontrols2 \
     liri-qtaccountsservice \
     liri-qtgsettings \
