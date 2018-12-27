@@ -9,9 +9,8 @@ inherit liri
 # Avoid depending on myself
 DEPENDS = "cmake-native"
 
-SRC_URI += "file://0001-LiriBuild.cmake-add-resources-param-handling-to-liri.patch"
 PV = "1.0.0+git${SRCPV}"
-SRCREV = "423d00716eb7f80a499e884e6927d7b17f883a3f"
+SRCREV = "f81d3b95cd6439db8e0886a8c17647eccbdf15da"
 S = "${WORKDIR}/git"
 
 FILES_${PN}-dev += "${datadir}/LiriCMakeShared"
