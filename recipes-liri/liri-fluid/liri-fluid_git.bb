@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 inherit liri gtk-icon-cache
 
 PV = "1.1.0+git${SRCPV}"
-SRCREV = "ec6f8d84d4290ce37e3c25aeb3ed1cc69cd222f1"
+SRCREV = "55b047ade9437ac33469b7de9404bd69690f229c"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
