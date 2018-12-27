@@ -12,6 +12,7 @@ RDEPENDS_${PN} = " \
     liri-fluid \
     liri-libliri \
     liri-networkmanager \
+    liri-player \
     liri-power-manager \
     ${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio", "liri-pulseaudio", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-qml-xwayland", "",d)} \
