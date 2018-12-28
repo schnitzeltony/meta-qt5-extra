@@ -1,7 +1,7 @@
 SUMMARY = "Soundfont editor"
 HOMEPAGE = "http://polyphone-soundfonts.com/en/"
 LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = "file://main.cpp;beginline=6;endline=18;md5=092eabd5b12b1c1d876a94e06601bd81"
+LIC_FILES_CHKSUM = "file://main.cpp;beginline=6;endline=18;md5=11e8b245e7c8a15dafd52bc856ef3ff1"
 
 inherit qmake5 gtk-icon-cache mime
 
@@ -23,10 +23,9 @@ SRC_URI = " \
     file://polyphone.desktop \
     file://polyphone.mime \
     file://0001-align-compiler-switches-constants-for-cross-compilin.patch \
-    file://0002-config.ccp-include-QAction-explicitly-to-fix-build-w.patch \
 "
-SRCREV = "13beb7119bc573af3f5e595ae2989034c226e355"
-S = "${WORKDIR}/git/trunk"
+SRCREV = "9f9720f4fded286f253e85fc708ee9bbba507eb5"
+S = "${WORKDIR}/git/sources"
 
 do_configure_prepend() {
     sed -i \
@@ -37,10 +36,10 @@ do_configure_prepend() {
 
 do_install() {
     install -d ${D}${bindir}
-    install -m 0755 ${B}/RELEASE/polyphone ${D}${bindir}/
+    install -m 0755 ${B}/bin/polyphone ${D}${bindir}/
 
     install -d ${D}${datadir}/pixmaps
-    install -m 0644 ${S}/ressources/polyphone.png ${D}${datadir}/pixmaps/
+    install -m 0644 ${S}/resources/polyphone.png ${D}${datadir}/pixmaps/
 
     install -d ${D}${datadir}/applications
     install -m 0644 ${WORKDIR}/${BPN}.desktop ${D}${datadir}/applications/
