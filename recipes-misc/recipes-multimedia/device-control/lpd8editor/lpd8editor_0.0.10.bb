@@ -14,11 +14,11 @@ SRC_URI = " \
     git://github.com/charlesfleche/lpd8editor.git \
     file://lpd8-editor.desktop \
 "
-SRCREV = "bd15bd689329194a3c5c3d727c2318629b027e3a"
-PV = "0.0.10"
+SRCREV = "5ca6f2b90889893e0633b23ffe0e4a014096656a"
+PV = "0.0.12"
 S = "${WORKDIR}/git"
 
 do_install_append() {
     install -Dm 644 ${WORKDIR}/lpd8-editor.desktop ${D}/${datadir}/applications/lpd8-editor.desktop
-    install -Dm 644 ${S}/icon.svg ${D}/${datadir}/icons/hicolor/scalable/apps/lpd8-editor.svg
+    install -Dm 644 ${S}/lpd8editor.svg ${D}/${datadir}/icons/hicolor/scalable/apps/lpd8-editor.svg
 }
