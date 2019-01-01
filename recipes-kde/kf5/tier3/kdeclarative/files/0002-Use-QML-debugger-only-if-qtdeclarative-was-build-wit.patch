@@ -1,0 +1,35 @@
+From b9358754fa2d8cbca5ec2bcb89629edc5902f036 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 1 Jan 2019 17:44:23 +0100
+Subject: [PATCH] Use QML-debugger only if qtdeclarative was build with
+ debugger support
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/kdeclarative/kdeclarative.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/kdeclarative/kdeclarative.cpp b/src/kdeclarative/kdeclarative.cpp
+index b3906e2..9318af9 100644
+--- a/src/kdeclarative/kdeclarative.cpp
++++ b/src/kdeclarative/kdeclarative.cpp
+@@ -133,9 +133,11 @@ QString KDeclarative::translationDomain() const
+ 
+ void KDeclarative::setupQmlJsDebugger()
+ {
++#ifndef QT_NO_QML_DEBUGGER
+     if (QCoreApplication::arguments().contains(QLatin1String("-qmljsdebugger"))) {
+         QQmlDebuggingEnabler enabler;
+     }
++#endif
+ }
+ 
+ QString KDeclarative::defaultComponentsTarget()
+-- 
+2.20.1
+
