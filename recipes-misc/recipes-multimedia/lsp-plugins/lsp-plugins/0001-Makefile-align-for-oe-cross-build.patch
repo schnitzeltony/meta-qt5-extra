@@ -1,0 +1,181 @@
+From dd67553614ad90bb7454122b219f1cc1ef62d716 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 2 Jan 2019 23:04:53 +0100
+Subject: [PATCH] Makefiles: align for oe-cross-build
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ Makefile                  | 19 ++++++++-----------
+ scripts/make/configure.mk |  7 -------
+ src/core/Makefile         |  2 +-
+ src/dsp/Makefile          |  2 +-
+ src/metadata/Makefile     |  2 +-
+ src/plugins/Makefile      |  2 +-
+ src/test/Makefile         |  2 +-
+ src/ui/ws/x11/Makefile    |  2 +-
+ 8 files changed, 14 insertions(+), 24 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index c918fb1..2f20248 100644
+--- a/Makefile
++++ b/Makefile
+@@ -35,14 +35,11 @@ export BASEDIR          = ${CURDIR}
+ export INCLUDE          = ${INC_FLAGS}
+ export MAKE_OPTS        = -s
+ export CFLAGS           = $(CC_ARCH) -std=c++98 -fdata-sections -pthread -ffunction-sections -fno-exceptions -fno-asynchronous-unwind-tables -Wall -pipe -fno-rtti $(CC_FLAGS) -DLSP_MAIN_VERSION=\"$(VERSION)\" -DLSP_INSTALL_PREFIX=\"$(PREFIX)\"
+-export CC               = g++
+ export PHP              = php
+-export LD               = ld
+-export LDFLAGS          = $(LD_ARCH) -L$(LD_PATH)
+-export SO_FLAGS         = $(CC_ARCH) -Wl,-rpath,$(LD_PATH) -Wl,-z,relro,-z,now -Wl,--gc-sections -shared -Llibrary -lc -fPIC
++export SO_FLAGS         = $(CC_ARCH) $(LDFLAGS) -Wl,-z,relro,-z,now -Wl,--gc-sections -shared -Llibrary -lc -fPIC
+ export MERGE_FLAGS      = $(LD_ARCH) -r
+-export EXE_TEST_FLAGS   = $(CC_ARCH) -Wl,-rpath,$(LD_PATH)
+-export EXE_FLAGS        = $(CC_ARCH) -Wl,-rpath,$(LD_PATH) -Wl,-z,relro,-z,now -Wl,--gc-sections
++export EXE_TEST_FLAGS   = $(CC_ARCH)
++export EXE_FLAGS        = $(CC_ARCH) $(LDFLAGS) -Wl,-z,relro,-z,now -Wl,--gc-sections
+ 
+ # Objects
+ export OBJ_CORE         = $(OBJDIR)/core.o
+@@ -69,11 +66,11 @@ export BIN_PROFILE      = $(OBJDIR)/$(ARTIFACT_ID)-profile
+ export BIN_TEST         = $(OBJDIR)/$(ARTIFACT_ID)-test
+ 
+ # Utils
+-export UTL_GENTTL       = $(OBJDIR)/lv2_genttl.exe
+-export UTL_VSTMAKE      = $(OBJDIR)/vst_genmake.exe
+-export UTL_JACKMAKE     = $(OBJDIR)/jack_genmake.exe
+-export UTL_GENPHP       = $(OBJDIR)/gen_php.exe
+-export UTL_RESGEN       = $(OBJDIR)/gen_resources.exe
++export UTL_GENTTL       = lv2_genttl.exe
++export UTL_VSTMAKE      = vst_genmake.exe
++export UTL_JACKMAKE     = jack_genmake.exe
++export UTL_GENPHP       = gen_php.exe
++export UTL_RESGEN       = gen_resources.exe
+ export UTL_FILES        = $(UTL_GENTTL) $(UTL_VSTMAKE) $(UTL_GENPHP) $(UTL_RESGEN)
+ 
+ # Files
+diff --git a/scripts/make/configure.mk b/scripts/make/configure.mk
+index 5603a8f..498a5e5 100644
+--- a/scripts/make/configure.mk
++++ b/scripts/make/configure.mk
+@@ -53,12 +53,10 @@ export RELEASES
+ 
+ # Configure compiler and linker flags
+ LD_ARCH         =
+-CC_ARCH         =
+ LD_PATH         =
+ 
+ # Build profile
+ ifeq ($(BUILD_PROFILE),i586)
+-  CC_ARCH          = -m32
+   ifeq ($(BUILD_PLATFORM), Linux)
+     LD_ARCH          = -m elf_i386
+   endif
+@@ -69,7 +67,6 @@ ifeq ($(BUILD_PROFILE),i586)
+ endif
+ 
+ ifeq ($(BUILD_PROFILE),x86_64)
+-  CC_ARCH          = -m64
+   ifeq ($(BUILD_PLATFORM), Linux)
+     LD_ARCH          = -m elf_x86_64
+   endif
+@@ -80,21 +77,17 @@ ifeq ($(BUILD_PROFILE),x86_64)
+ endif
+ 
+ ifeq ($(BUILD_PROFILE),armv6a)
+-  CC_ARCH          = -march=armv6-a
+   LD_PATH          = /usr/lib64:/lib64:/usr/local/lib64
+ endif
+ 
+ ifeq ($(BUILD_PROFILE),armv7a)
+-  CC_ARCH          = -march=armv7-a
+   LD_PATH          = /usr/lib64:/lib64:/usr/local/lib64
+ endif
+ 
+ ifeq ($(BUILD_PROFILE),armv8a)
+-  CC_ARCH          = -march=armv8-a
+   LD_PATH          = /usr/lib:/lib:/usr/local/lib
+ endif
+ 
+-export CC_ARCH
+ export LD_ARCH
+ export LD_PATH
+ 
+diff --git a/src/core/Makefile b/src/core/Makefile
+index 1db8603..33aa15d 100644
+--- a/src/core/Makefile
++++ b/src/core/Makefile
+@@ -13,4 +13,4 @@ $(FILES):
+ 
+ $(OBJ_CORE): $(FILES)
+ 	@echo "  $(LD) $(notdir $(OBJ_CORE))"
+-	@$(LD) -o $(OBJ_CORE) -r $(LDFLAGS) $(FILES)  
++	@$(LD) -o $(OBJ_CORE) -r $(LDLDFLAGS) $(FILES)  
+diff --git a/src/dsp/Makefile b/src/dsp/Makefile
+index 97ed47f..7e099cd 100644
+--- a/src/dsp/Makefile
++++ b/src/dsp/Makefile
+@@ -42,7 +42,7 @@ all: $(OBJ_DSP)
+ 
+ $(OBJ_DSP): $(LINK_OBJECTS)
+ 	@echo "  $(LD) $(notdir $(OBJ_DSP))"
+-	@$(LD) -o $(OBJ_DSP) -r $(LDFLAGS) $(LINK_OBJECTS)
++	@$(LD) -o $(OBJ_DSP) -r $(LDLDFLAGS) $(LINK_OBJECTS)
+ 
+ $(DSP_IMPL) $(BITS_IMPL) $(NATIVE_IMPL) $(X86_IMPL) $(ARM_IMPL):
+ 	@echo "  $(CC) $(FILE)"
+diff --git a/src/metadata/Makefile b/src/metadata/Makefile
+index b3206ed..1f840de 100644
+--- a/src/metadata/Makefile
++++ b/src/metadata/Makefile
+@@ -10,7 +10,7 @@ target: all
+ 
+ $(OBJ_METADATA): $(FILES)
+ 	@echo "  $(LD) $(notdir $(OBJ_METADATA))"
+-	@$(LD) -o $(OBJ_METADATA) -r $(LDFLAGS) $(FILES) 
++	@$(LD) -o $(OBJ_METADATA) -r $(LDLDFLAGS) $(FILES) 
+ 
+ $(FILES):
+ 	@echo "  $(CC) $(FILE)"
+diff --git a/src/plugins/Makefile b/src/plugins/Makefile
+index 09bc4ce..7295c0f 100644
+--- a/src/plugins/Makefile
++++ b/src/plugins/Makefile
+@@ -8,7 +8,7 @@ all:  $(OBJ_PLUGINS)
+ 
+ $(OBJ_PLUGINS): $(FILES) $(SUBDIRS)
+ 	@echo "  $(LD) $(notdir $(OBJ_PLUGINS))"
+-	@$(LD) -o $(OBJ_PLUGINS) -r $(LDFLAGS) $(FILES) 
++	@$(LD) -o $(OBJ_PLUGINS) -r $(LDLDFLAGS) $(FILES) 
+ 
+ $(FILES):
+ 	@echo "  $(CC) $(FILE)"
+diff --git a/src/test/Makefile b/src/test/Makefile
+index 4f225d0..fe5d5b2 100644
+--- a/src/test/Makefile
++++ b/src/test/Makefile
+@@ -13,5 +13,5 @@ $(FILES):
+ 
+ $(OBJ_TEST_CORE): $(FILES)
+ 	@echo "  $(LD) $(notdir $(OBJ_TEST_CORE))"
+-	@$(LD) -o $(OBJ_TEST_CORE) -r $(LDFLAGS) $(FILES)  
++	@$(LD) -o $(OBJ_TEST_CORE) -r $(LDLDFLAGS) $(FILES)  
+ 
+diff --git a/src/ui/ws/x11/Makefile b/src/ui/ws/x11/Makefile
+index 649c6a4..5e45dd2 100644
+--- a/src/ui/ws/x11/Makefile
++++ b/src/ui/ws/x11/Makefile
+@@ -8,7 +8,7 @@ all: $(OBJ_WS_X11_CORE)
+ 
+ $(OBJ_WS_X11_CORE): $(FILES)
+ 	@echo "  $(LD) $(notdir $(@))"
+-	@$(LD) -o $(OBJ_WS_X11_CORE) $(LDFLAGS) -r $(FILES)
++	@$(LD) -o $(OBJ_WS_X11_CORE) $(LDLDFLAGS) -r $(FILES)
+ 
+ $(FILES):
+ 	@echo "  $(CC) $(FILE)"
+-- 
+2.20.1
+
