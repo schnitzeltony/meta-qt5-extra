@@ -70,6 +70,7 @@ RDEPENDS_${PN} += " \
     libxmp \
     lmms \
     lrdf \
+    lsp-plugins-standalone lsp-plugins-ladspa lsp-plugins-lv2 lsp-plugins-vst \
     lv2 \
     mixxx \
     muse \
