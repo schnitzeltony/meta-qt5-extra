@@ -13,3 +13,5 @@ SRCREV = "a368ce3564fd8715e50ecae52a862d30f565ad97"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
+
+RDEPENDS_${PN} += "dconf"
