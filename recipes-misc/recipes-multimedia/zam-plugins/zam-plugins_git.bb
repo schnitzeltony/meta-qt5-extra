@@ -11,7 +11,7 @@ DEPENDS += " \
     ladspa-sdk \
 "
 
-inherit pkgconfig qemu-ext distro_features_check
+inherit pkgconfig qemu-ext distro_features_check pack_audio_plugins
 
 REQUIRED_DISTRO_FEATURE = "x11"
 
@@ -45,8 +45,5 @@ do_install() {
     ${MAKE} DESTDIR=${D} PREFIX=${prefix} install
 }
 
-PACKAGES =+ "${PN}-standalone ${PN}-ladspa ${PN}-lv2 ${PN}-vst"
+PACKAGES =+ "${PN}-standalone"
 FILES_${PN}-standalone = "${bindir}"
-FILES_${PN}-ladspa = "${libdir}/ladspa"
-FILES_${PN}-lv2 = "${libdir}/lv2"
-FILES_${PN}-vst = "${libdir}/vst"
