@@ -137,6 +137,7 @@ RDEPENDS_${PN} += " \
     \
     \
     yoshimi \
+    zam-plugins-standalone zam-plugins-ladspa zam-plugins-lv2 zam-plugins-vst \
     zyn \
 "
 
