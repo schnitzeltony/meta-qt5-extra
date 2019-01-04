@@ -9,7 +9,7 @@ DEPENDS = " \
     lv2 \
 "
 
-inherit autotools-brokensep pkgconfig lv2-postinst-helper
+inherit autotools-brokensep pkgconfig qemu-ext
 
 SRC_URI = "gitsm://github.com/pdesaulniers/wolf-shaper.git"
 SRCREV = "adc67b3f923917b6b42f545451e6d4932f721e97"
@@ -18,8 +18,9 @@ S = "${WORKDIR}/git"
 export PREFIX="${prefix}"
 
 do_compile() {
-    # manipulate Makefile/scripts to keep lv2_ttl_generator-calls in script for lv2-postinst-helper
-    sed -i 's|"$GEN" "./$FILE"|echo lv2-ttl-generator `pwd`/$FILE >> ${LV2-TURTLE-BUILD-DATA}|g' ${S}/dpf/utils/generate-ttl.sh
+    rm -f ${WORKDIR}/lv2_ttl_generator-data
+    # manipulate scripts to keep lv2_ttl_generator-calls in script for qemu
+    sed -i 's|"$GEN" "./$FILE"|echo `pwd`/$FILE >> ${WORKDIR}/lv2_ttl_generator-data|g' ${S}/dpf/utils/generate-ttl.sh
 
     NOOPT=true \
     SKIP_STRIPPING=true \
@@ -28,6 +29,13 @@ do_compile() {
     BUILD_DSSI=true \
     BUILD_JACK=true \
     oe_runmake
+
+    # build ttl-files must be done in quemu
+    for sofile in `cat ${WORKDIR}/lv2_ttl_generator-data`; do
+        cd `dirname ${sofile}`
+        echo "QEMU lv2_ttl_generator for ${sofile}..."
+        ${@qemu_run_binary_local(d, '${STAGING_DIR_TARGET}', '${S}/dpf/utils/lv2_ttl_generator')} ${sofile} || echo "ERROR: for QEMU lv2_ttl_generator for ${sofile}!"
+    done
 }
 
 FILES_${PN} += " \
