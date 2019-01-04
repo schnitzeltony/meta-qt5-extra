@@ -17,7 +17,3 @@ S = "${WORKDIR}/${BPN}-trunk"
 INSANE_SKIP_${PN} = "useless-rpaths"
 
 EXTRA_OECMAKE_append = " -DTHREADS_PTHREAD_ARG=OFF "
-
-do_install_preend() {
-    install -d ${D}${mandir}
-}
