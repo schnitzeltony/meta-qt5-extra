@@ -125,7 +125,7 @@ RDEPENDS_${PN} += " \
     timidity++ \
     triceratops-lv2 \
     vamp-plugin-sdk \
-    wolf-shaper \
+    wolf-shaper-dssi wolf-shaper-lv2 wolf-shaper-vst \
     \
     \
     avldrums.lv2 \

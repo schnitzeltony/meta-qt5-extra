@@ -39,8 +39,7 @@ do_compile() {
     done
 }
 
-FILES_${PN} += " \
-    ${libdir}/dssi \
-    ${libdir}/lv2 \
-    ${libdir}/vst \
-"
+PACKAGES =+ "${PN}-dssi ${PN}-lv2 ${PN}-vst"
+FILES_${PN}-dssi = "${libdir}/dssi"
+FILES_${PN}-lv2 = "${libdir}/lv2"
+FILES_${PN}-vst = "${libdir}/vst"
