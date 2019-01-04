@@ -12,8 +12,9 @@ DEPENDS = " \
 inherit autotools-brokensep pkgconfig qemu-ext
 
 SRC_URI = "gitsm://github.com/pdesaulniers/wolf-shaper.git"
-SRCREV = "adc67b3f923917b6b42f545451e6d4932f721e97"
+SRCREV = "d0b46c9ece642488efed3cd255df22516966b334"
 S = "${WORKDIR}/git"
+PV = "0.1.7"
 
 export PREFIX="${prefix}"
 
