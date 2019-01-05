@@ -9,13 +9,21 @@ DEPENDS += " \
     liblo \
     jack \
     ladspa-sdk \
+    rubberband \
+    libsamplerate0 \
+    libsndfile1 \
+    fftw \
+    zita-convolver \
 "
 
 inherit pkgconfig qemu-ext distro_features_check pack_audio_plugins
 
 REQUIRED_DISTRO_FEATURE = "x11"
 
-SRC_URI = "gitsm://github.com/zamaudio/${PN}.git"
+SRC_URI = " \
+    gitsm://github.com/zamaudio/${PN}.git \
+    file://0001-remove-useles-braces-in-macros.patch \
+"
 SRCREV = "96ec0c7dbc9c034bc8716309b92fda84bb27cf92"
 S = "${WORKDIR}/git"
 PV = "3.10+git${SRCPV}"
