@@ -20,7 +20,7 @@ PV = "0.0.0+git${SRCPV}"
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
-inherit lv2-postinst-helper distro_features_check
+inherit lv2-postinst-helper distro_features_check pack_audio_plugins
 
 # distro-ports dependency for special hack script / libs 
 DEPENDS += " \
@@ -59,9 +59,11 @@ do_install() {
 
 FILES_${PN} += " \
     ${libdir}/cabbage* \
-    ${libdir}/lv2 \
-    ${libdir}/vst \
 "
+
+# for common (?) cabbage files
+RDEPENDS_${PN}-lv2 += "${PN}"
+RDEPENDS_${PN}-vst += "${PN}"
 
 # Have not found what causes stripping - debugging of plugins is unlikely
 INSANE_SKIP_${PN} = "already-stripped"

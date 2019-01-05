@@ -30,7 +30,7 @@ RDEPENDS_${PN} += " \
     \
     \
     distrho-ports-lv2 distrho-ports-presets distrho-ports-vst \
-    distrho-ports-extra \
+    distrho-ports-extra-lv2 distrho-ports-extra-vst \
     dpf-plugins \
     lv2-ttl-generator \
     \
