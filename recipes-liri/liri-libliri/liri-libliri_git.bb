@@ -7,11 +7,9 @@ LIC_FILES_CHKSUM = " \
 
 inherit liri
 
-DEPENDS += "libqtxdg"
-
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "303ae04affbdb6bfd8979692e4423fd3491ce9e9"
+SRCREV = "610646cb3f8e99e0bd124d565af42a40df54d11b"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += " \
