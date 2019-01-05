@@ -14,7 +14,7 @@ PV = "v1.1+git${SRCPV}"
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
-inherit lv2-postinst-helper distro_features_check pkgconfig pack_audio_plugins
+inherit qemu-ext distro_features_check pkgconfig pack_audio_plugins
 
 # TODO standalones: DEPEND jack / install / *.desktop
 DEPENDS += " \
@@ -26,9 +26,18 @@ DEPENDS += " \
 
 do_compile_prepend() {
     export NOOPT=true
-    rm -f ${LV2-TURTLE-BUILD-DATA}
-    # manipulate Makefile/scripts to keep lv2_ttl_generator-calls in script for lv2-postinst-helper
-    sed -i 's|"$GEN" "./$FILE"|echo lv2-ttl-generator `pwd`/$FILE >> ${LV2-TURTLE-BUILD-DATA}|g' ${S}/dpf/utils/generate-ttl.sh
+    rm -f ${WORKDIR}/lv2_ttl_generator-data
+    # manipulate scripts to keep lv2_ttl_generator-calls in script for qemu
+    sed -i 's|"$GEN" "./$FILE"|echo `pwd`/$FILE >> ${WORKDIR}/lv2_ttl_generator-data|g' ${S}/dpf/utils/generate-ttl.sh
+}
+
+do_compile_append() {
+    # build ttl-files must be done in quemu
+    for sofile in `cat ${WORKDIR}/lv2_ttl_generator-data`; do
+        cd `dirname ${sofile}`
+        echo "QEMU lv2_ttl_generator for ${sofile}..."
+        ${@qemu_run_binary_local(d, '${STAGING_DIR_TARGET}', '${S}/dpf/utils/lv2_ttl_generator')} ${sofile} || echo "ERROR: for QEMU lv2_ttl_generator for ${sofile}!"
+    done
 }
 
 do_install() {
@@ -41,7 +50,7 @@ do_install() {
     for plugindir in `find ${S}/bin/ -maxdepth 1 -name *.lv2`; do
         lv2dir=${D}${libdir}/lv2/`basename $plugindir`
         install -d $lv2dir
-        for plugin in `find $plugindir -name *.so`; do
+        for plugin in `find $plugindir -type f`; do
             install -m 644 $plugin $lv2dir/
         done
     done
