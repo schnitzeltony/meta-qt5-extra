@@ -12,13 +12,14 @@ DEPENDS += " \
     drm \
     virtual/libgbm \
     virtual/egl \
+    virtual/libgles2 \
     libinput \
     liri-libliri \
     liri-qtudev \
 "
 
 PV = "0.0.0+git${SRCPV}"
-SRCREV = "23941d3b59b11c24799b278dc28fa7c95588082b"
+SRCREV = "25b282a7e30ca0aa90286fcf4ba5461ec8d4692b"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += " \
