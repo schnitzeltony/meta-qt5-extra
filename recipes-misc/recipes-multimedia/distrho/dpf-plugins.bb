@@ -14,7 +14,7 @@ PV = "v1.1+git${SRCPV}"
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
-inherit lv2-postinst-helper distro_features_check pkgconfig
+inherit lv2-postinst-helper distro_features_check pkgconfig pack_audio_plugins
 
 # TODO standalones: DEPEND jack / install / *.desktop
 DEPENDS += " \
@@ -51,12 +51,6 @@ do_install() {
         install -m 644 $plugin ${D}${libdir}/vst/
     done
 }
-
-FILES_${PN} += " \
-    ${libdir}/ladspa \
-    ${libdir}/lv2 \
-    ${libdir}/vst \
-"
 
 # Have not found what causes stripping - debugging of plugins is unlikely
 INSANE_SKIP_${PN} = "already-stripped"
