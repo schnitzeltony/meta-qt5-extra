@@ -29,7 +29,7 @@ RDEPENDS_${PN} += " \
     lpd8editor \
     \
     \
-    distrho-ports distrho-ports-presets \
+    distrho-ports-lv2 distrho-ports-presets distrho-ports-vst \
     distrho-ports-extra \
     dpf-plugins \
     lv2-ttl-generator \

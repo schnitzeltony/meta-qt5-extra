@@ -31,7 +31,7 @@ SRC_URI[linuxsynths-vex-patches2.sha256sum] = "378cff261dab333c5f29246b6f3f557e0
 
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
-inherit lv2-postinst-helper distro_features_check
+inherit lv2-postinst-helper distro_features_check pack_audio_plugins
 
 DEPENDS += " \
     premake3-native \
@@ -83,11 +83,6 @@ do_install() {
 
 PACKAGES =+ "${PN}-presets"
 RDEPENDS_${PN}-presets = "${PN}"
-
-FILES_${PN} += " \
-    ${libdir}/lv2 \
-    ${libdir}/vst \
-"
 
 FILES_${PN}-presets = "${libdir}/lv2/*.preset.lv2"
 
