@@ -10,12 +10,14 @@ inherit liri pythonnative distro_features_check gsettings
 REQUIRED_DISTRO_FEATURES = "wayland pam"
 
 PV = "0.9.0+git${SRCPV}"
-SRCREV = "c07d193a7d1009f58cb7561316774521fe55a4ec"
+SRCREV = "10ed51d0cb790663acb0292d9fe7070e08a765e5"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
     libpam \
     qtquickcontrols2 \
+    qtsvg \
+    liri-libliri \
     liri-qtaccountsservice \
     liri-qtgsettings \
     liri-eglfs \
