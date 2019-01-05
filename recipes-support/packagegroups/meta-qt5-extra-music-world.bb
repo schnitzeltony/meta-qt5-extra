@@ -138,7 +138,7 @@ RDEPENDS_${PN} += " \
     \
     yoshimi \
     zam-plugins-standalone zam-plugins-ladspa zam-plugins-lv2 zam-plugins-vst \
-    zyn \
+    ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "zyn-fusion-dssi zyn-fusion-lv2 zyn-fusion-vst", "zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst",d)} \
 "
 
 # non working

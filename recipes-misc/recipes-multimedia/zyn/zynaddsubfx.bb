@@ -18,7 +18,5 @@ do_install_append() {
     install -m 0755 ${S}/ExternalPrograms/Spliter/spliter ${D}${bindir}/zynaddsubfx-spliter
 }
 
-PROVIDES = "zyn"
-RPROVIDES_${PN} = "zyn"
 RREPLACES_${PN} += "zyn-fusion"
 RCONFLICTS_${PN} += "zyn-fusion"

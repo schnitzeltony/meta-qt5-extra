@@ -2,7 +2,7 @@ HOMEPAGE = "http://zynaddsubfx.sourceforge.net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=21fa88a5e50a1c608d22612c1fbe1971"
 
-inherit cmake lv2-postinst-helper pkgconfig gtk-icon-cache distro_features_check
+inherit cmake lv2-postinst-helper pkgconfig gtk-icon-cache distro_features_check pack_audio_plugins
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
@@ -60,10 +60,3 @@ do_compile_append() {
         fi
     done
 }
-
-FILES_${PN} += " \
-    ${libdir}/dssi \
-    ${libdir}/lv2 \
-    ${libdir}/vst \
-"
-
