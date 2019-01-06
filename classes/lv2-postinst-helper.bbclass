@@ -12,7 +12,7 @@ LV2-DUMMY-TURTLE-STR = "lv2-dummy-turtle-string"
 
 # To make ontarget postinst/prerm happen, the names of all plugins with their
 # paths as installed on target a stored in a file called lv2-postinst-manifest
-LV2-POSTINST-MANIFEST = "${libdir}/lv2/lv2-postinst-manifest-${BPN}"
+LV2-POSTINST-MANIFEST = "${datadir}/${BPN}/lv2-postinst-manifest"
 
 do_install_append() {
     # remove dummy lv2-turtles again
@@ -49,4 +49,5 @@ pkg_prerm_${PN}-lv2() {
     done
 }
 
+FILES_${PN}-lv2 += "${LV2-POSTINST-MANIFEST}"
 RDEPENDS_${PN}-lv2 += "lv2-ttl-generator"
