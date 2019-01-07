@@ -15,7 +15,7 @@ RDEPENDS_${PN} = " \
 # overlook a package.
 
 RDEPENDS_${PN} += " \
-    amsynth \
+    amsynth-standalone amsynth-lv2 amsynth-vst \
     ardour5 \
     aubio \
     audio-tweaks \
