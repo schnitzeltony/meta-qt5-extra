@@ -11,7 +11,7 @@ DEPENDS += " \
     liri-fluid \
 "
 
-SRCREV = "fe7a193cf7d751d3009922d44f1ac91e69d802ad"
+SRCREV = "7caf7cf9ede6729f71de54ce6e8ed678056b8530"
 S = "${WORKDIR}/git"
 PV = "1.2.0+git${SRCPV}"
 
