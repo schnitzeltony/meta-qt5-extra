@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 inherit liri
 
 PV = "1.2.0+git${SRCPV}"
-SRCREV = "a92567854891555226501ba200bf4faabc16c4c9"
+SRCREV = "b36a9ad942ecade869ac8b98afae8a45bd8a3fa7"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
