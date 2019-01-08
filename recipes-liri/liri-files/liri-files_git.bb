@@ -1,14 +1,14 @@
 SUMMARY = "File manager"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = " \
-	file://LICENSE.GPLv3;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+	file://LICENSE.GPLv3;md5=1ebbd3e34237af26da5dc08a4e440464 \
 "
 
 inherit liri
 
 PV = "0.2.0+git${SRCPV}"
 
-SRCREV = "2b81df03d5cd87b62b842939668786196108a490"
+SRCREV = "a4c3e200bc460cbe1285edb97217c95cecabcddc"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
