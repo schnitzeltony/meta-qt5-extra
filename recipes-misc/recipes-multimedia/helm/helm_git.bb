@@ -3,7 +3,7 @@ HOMEPAGE = "http://tytel.org/helm/"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-inherit autotools-brokensep qemu-ext distro_features_check gtk-icon-cache
+inherit autotools-brokensep qemu-ext distro_features_check gtk-icon-cache pack_audio_plugins
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
@@ -54,8 +54,19 @@ do_compile_append() {
     cp *.ttl ${S}/builds/linux/LV2/helm.lv2/
 }
 
-FILES_${PN} += " \
+do_install_append() {
+    rm -f ${datadir}/helm/patches/*.patch
+    rm -f ${datadir}/helm/patches/series
+}
+
+PACKAGES =+ "${PN}-standalone"
+
+FILES_${PN}-standalone = " \
+    ${datadir}/applications \
     ${datadir}/icons \
-    ${libdir}/lv2 \
-    ${libdir}/vst \
+    ${bindir} \
 "
+
+RDEPENDS_${PN}-standalone += "${PN}"
+RDEPENDS_${PN}-lv2 += "${PN}"
+RDEPENDS_${PN}-vst += "${PN}"
