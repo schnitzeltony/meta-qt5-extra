@@ -9,7 +9,7 @@ inherit liri distro_features_check
 REQUIRED_DISTRO_FEATURES = "wayland"
 
 PV = "0.10.0+git${SRCPV}"
-SRCREV = "cb7d7a767567a490bb0d1d8b604a2079a58adcf9"
+SRCREV = "ce9b71bd470c92966e18ba7154c3677b0a9b7819"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
