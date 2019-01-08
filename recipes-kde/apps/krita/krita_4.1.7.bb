@@ -1,5 +1,6 @@
 SUMMARY = "Krita is a free digital painting application"
 LICENSE = "GPLv3 & BSD"
+HOMEPAGE = "https://krita.org/"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
     file://COPYING-CMAKE-SCRIPTS;md5=3775480a712fc46a69647678acb234cb \
@@ -32,11 +33,13 @@ DEPENDS += " \
     kcrash \
 "
 
+PVEXT = ".101"
 SRC_URI = " \
-    ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+    ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.gz \
 "
-SRC_URI[md5sum] = "ec8933f055944598fd05a331929d8776"
-SRC_URI[sha256sum] = "78792df8165b986b806dcf9960a2679f683f2263e06f3ad5a24b0f78d8f27ed5"
+SRC_URI[md5sum] = "a172b864ca7723b5a033fdc730d9296c"
+SRC_URI[sha256sum] = "5bc95baa3980b7d75eb6bf103f72344014eac7733fd8a0780a7ec87dc2826f5f"
+S = "${WORKDIR}/${BPN}-${PV}${PVEXT}"
 
 OECMAKE_GENERATOR="Unix Makefiles"
 
