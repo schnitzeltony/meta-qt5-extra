@@ -10,7 +10,7 @@ inherit liri pythonnative distro_features_check gsettings
 REQUIRED_DISTRO_FEATURES = "wayland pam"
 
 PV = "0.9.0+git${SRCPV}"
-SRCREV = "10ed51d0cb790663acb0292d9fe7070e08a765e5"
+SRCREV = "f9953f259422d570df3175774e108c3976d8b137"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
