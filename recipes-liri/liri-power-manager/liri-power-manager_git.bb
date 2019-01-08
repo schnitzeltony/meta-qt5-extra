@@ -8,7 +8,7 @@ inherit liri gsettings
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "c7f3d51d2526e3a983f0c01fadc628f2d44e6ae7"
+SRCREV = "22c9288d32c33569a1886a061f461e1735b546f0"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
