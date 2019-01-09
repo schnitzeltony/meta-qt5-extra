@@ -28,8 +28,10 @@ DEPENDS += " \
     cppunit \
 "
 
-# drumkits taken from http://www.hydrogen-music.org/feeds/drumkit_list.php (sf: http -> https)
-# NOTE: download of drumkits might fail -> repeat builds of this recipe usually helps
+# drumkits URIs from http://hydrogen-music.org/feeds/drumkit_list.php (downloaded to WORKDIR)
+# NOTES: 
+# * Licenses are included in drumkit_list.php
+# * download of drumkits might fail -> repeat builds of this recipe usually helps
 
 SRC_URI = " \
     git://github.com/hydrogen-music/hydrogen.git \
@@ -37,8 +39,10 @@ SRC_URI = " \
     file://0002-hydrogen.default.conf-do-not-show-developer-warnings.patch \
     file://0003-Fix-man-installation-path.patch \
     \
-    http://hydrogen-music.org/drumkits/Audiophob.h2drumkit;downloadfilename=Audiophob.tar.gz;name=Audiophob;subdir=drumkits \
-    http://hydrogen-music.org/drumkits/belofilms_GuitarStrums.h2drumkit;downloadfilename=belofilms_GuitarStrums.tar.gz;name=belofilms_GuitarStrums;subdir=drumkits \
+    http://hydrogen-music.org/feeds/drumkit_list.php;name=drumkit-list \
+    \
+    http://hydro.smoors.de/Audiophob.h2drumkit;downloadfilename=Audiophob.tar.gz;name=Audiophob;subdir=drumkits \
+    http://hydro.smoors.de/belofilms_GuitarStrums.h2drumkit;downloadfilename=belofilms_GuitarStrums.tar.gz;name=belofilms_GuitarStrums;subdir=drumkits \
     https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/BJA_Pacific.h2drumkit;downloadfilename=BJA_Pacific.tar.gz;name=BJA_Pacific;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/Boss_DR-110.h2drumkit;downloadfilename=Boss_DR-110.tar.gz;name=Boss_DR-110;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/3355606kit.h2drumkit;downloadfilename=3355606kit.tar.gz;name=3355606kit;subdir=drumkits \
@@ -48,40 +52,49 @@ SRC_URI = " \
     https://downloads.sourceforge.net/hydrogen/ColomboAcousticDrumkit.h2drumkit;downloadfilename=ColomboAcousticDrumkit.tar.gz;name=ColomboAcousticDrumkit;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/YamahaVintageKit.h2drumkit;downloadfilename=YamahaVintageKit.tar.gz;name=YamahaVintageKit;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/DeathMetal.h2drumkit;downloadfilename=DeathMetal.tar.gz;name=DeathMetal;subdir=drumkits \
-    http://hydrogen-music.org/drumkits/Denon%20CRB-90.h2drumkit;downloadfilename=Denon_CRB-90.tar.gz;name=Denon_CRB-90;subdir=drumkits \
-    http://hydrogen-music.org/drumkits/Drumkit%20excepcional.h2drumkit;downloadfilename=Drumkit_excepcional.tar.gz;name=Drumkit_excepcional;subdir=drumkits \
+    http://hydro.smoors.de/Denon%20CRB-90.h2drumkit;downloadfilename=Denon-CRB-90.tar.gz;name=Denon-CRB-90;subdir=drumkits \
+    http://hydro.smoors.de/Drumkit%20excepcional.h2drumkit;downloadfilename=Drumkit_excepcional.tar.gz;name=Drumkit_excepcional;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/EasternHop-1.h2drumkit;downloadfilename=EasternHop-1.tar.gz;name=EasternHop-1;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/ElectricEmpireKit.h2drumkit;downloadfilename=ElectricEmpireKit.tar.gz;name=ElectricEmpireKit;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/ErnysPercussion.h2drumkit;downloadfilename=ErnysPercussion.tar.gz;name=ErnysPercussion;subdir=drumkits \
     https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/ForzeeStereo.h2drumkit;downloadfilename=ForzeeStereo.tar.gz;name=ForzeeStereo;subdir=drumkits \
-    http://hydrogen-music.org/drumkits/Gimme%20A%20Hand%201.0.h2drumkit;downloadfilename=Gimme_A_Hand_1_0.tar.gz;name=Gimme_A_Hand_1_0;subdir=drumkits \
-    http://www.hydrogen-music.org/drumkits/Flac_GSCW-1.h2drumkit;downloadfilename=Flac_GSCW-1.tar.gz;name=Flac_GSCW-1;subdir=drumkits \
-    http://www.hydrogen-music.org/drumkits/Flac_GSCW-2.h2drumkit;downloadfilename=Flac_GSCW-2.tar.gz;name=Flac_GSCW-2;subdir=drumkits \
+    https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Gimme%20A%20Hand%201.0.h2drumkit;downloadfilename=Gimme_A_Hand_1_0.tar.gz;name=Gimme_A_Hand_1_0;subdir=drumkits \
+    http://hydro.smoors.de/Flac_GSCW-1.h2drumkit;downloadfilename=Flac_GSCW-1.tar.gz;name=Flac_GSCW-1;subdir=drumkits \
+    http://hydro.smoors.de/Flac_GSCW-2.h2drumkit;downloadfilename=Flac_GSCW-2.tar.gz;name=Flac_GSCW-2;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/HardElectro1.h2drumkit;downloadfilename=HardElectro1.tar.gz;name=HardElectro1;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/HipHop-1.h2drumkit;downloadfilename=HipHop-1.tar.gz;name=HipHop-1;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/HipHop-2.h2drumkit;downloadfilename=HipHop-2.tar.gz;name=HipHop-2;subdir=drumkits \
     https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/K-27_Trash_Kit.h2drumkit;downloadfilename=K-27_Trash_Kit.tar.gz;name=K-27_Trash_Kit;subdir=drumkits \
-    http://hydrogen-music.org/drumkits/Lightning1024.h2drumkit;downloadfilename=Lightning1024.tar.gz;name=Lightning1024;subdir=drumkits \
+    http://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/Lightning1024.h2drumkit;downloadfilename=Lightning1024.tar.gz;name=Lightning1024;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/Millo-Drums_v.1.h2drumkit;downloadfilename=Millo-Drums_v_1.tar.gz;name=Millo-Drums_v_1;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/Millo_MultiLayered2.h2drumkit;downloadfilename=Millo_MultiLayered2.tar.gz;name=Millo_MultiLayered2;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/Millo_MultiLayered3.h2drumkit;downloadfilename=Millo_MultiLayered3.tar.gz;name=Millo_MultiLayered3;subdir=drumkits \
-    http://hydrogen-music.org/drumkits/Roland_MC-307_CR78&Cheaps.h2drumkit;downloadfilename=Roland_MC-307_CR78_Cheaps.tar.gz;name=Roland_MC-307_CR78_Cheaps;subdir=drumkits \
-    http://hydrogen-music.org/drumkits/Roland_MC-307_TR-606.h2drumkit;downloadfilename=Roland_MC-307_TR-606.tar.gz;name=Roland_MC-307_TR-606;subdir=drumkits \
-    http://hydrogen-music.org/drumkits/Roland_MC-307_TR-808.h2drumkit;downloadfilename=Roland_MC-307_TR-808.tar.gz;name=Roland_MC-307_TR-808;subdir=drumkits \
-    http://hydrogen-music.org/drumkits/Roland_MC-307_TR-909.h2drumkit;downloadfilename=Roland_MC-307_TR-909.tar.gz;name=Roland_MC-307_TR-909;subdir=drumkits \
-    http://hydrogen-music.org/drumkits/Roland_MC-307_Techno1.h2drumkit;downloadfilename=Roland_MC-307_Techno1.tar.gz;name=Roland_MC-307_Techno1;subdir=drumkits \
-    http://hydrogen-music.org/drumkits/rumpf_kit_z01_h2.h2drumkit;downloadfilename=rumpf_kit_z01_h2.tar.gz;name=rumpf_kit_z01_h2;subdir=drumkits \
+    http://hydro.smoors.de/Roland_MC-307_CR78&Cheaps.h2drumkit;downloadfilename=Roland_MC-307_CR78_Cheaps.tar.gz;name=Roland_MC-307_CR78_Cheaps;subdir=drumkits \
+    http://hydro.smoors.de/Roland_MC-307_TR-606.h2drumkit;downloadfilename=Roland_MC-307_TR-606.tar.gz;name=Roland_MC-307_TR-606;subdir=drumkits \
+    http://hydro.smoors.de/Roland_MC-307_TR-808.h2drumkit;downloadfilename=Roland_MC-307_TR-808.tar.gz;name=Roland_MC-307_TR-808;subdir=drumkits \
+    http://hydro.smoors.de/Roland_MC-307_TR-909.h2drumkit;downloadfilename=Roland_MC-307_TR-909.tar.gz;name=Roland_MC-307_TR-909;subdir=drumkits \
+    http://hydro.smoors.de/Roland_MC-307_Techno1.h2drumkit;downloadfilename=Roland_MC-307_Techno1.tar.gz;name=Roland_MC-307_Techno1;subdir=drumkits \
+    http://hydro.smoors.de/rumpf_kit_z01_h2.h2drumkit;downloadfilename=rumpf_kit_z01_h2.tar.gz;name=rumpf_kit_z01_h2;subdir=drumkits \
+    https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/SF3007-2011-Set-03.h2drumkit;downloadfilename=SF3007-2011-Set-03.tar.gz;name=SF3007-2011-Set-03;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/Synthie-1.h2drumkit;downloadfilename=Synthie-1.tar.gz;name=Synthie-1;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/TD-7kit.h2drumkit;downloadfilename=TD-7kit.tar.gz;name=TD-7kit;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/Techno-1.h2drumkit;downloadfilename=Techno-1.tar.gz;name=Techno-1;subdir=drumkits \
-    http://hydrogen-music.org/drumkits/The%20Black%20Pearl%201.0.h2drumkit;downloadfilename=The_Black_Pearl_1_0.tar.gz;name=The_Black_Pearl_1_0;subdir=drumkits \
+    https://sourceforge.net/projects/hydrogen/files/Sound%20Libraries/Main%20sound%20libraries/The%20Black%20Pearl%201.0.h2drumkit;downloadfilename=The_Black_Pearl_1_0.tar.gz;name=The_Black_Pearl_1_0;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/TR808909.h2drumkit;downloadfilename=TR808909.tar.gz;name=TR808909;subdir=drumkits \
     https://downloads.sourceforge.net/hydrogen/VariBreaks.h2drumkit;downloadfilename=VariBreaks.tar.gz;name=VariBreaks;subdir=drumkits \
+    \
+    https://freewavesamples.com/files/KawaiXD-5Kit.h2drumkit;downloadfilename=KawaiXD-5Kit.tar.gz;name=KawaiXD-5Kit;subdir=drumkits \
+    https://freewavesamples.com/files/RolandJD-990Kit.h2drumkit;downloadfilename=RolandJD-990Kit.tar;name=RolandJD-990Kit;subdir=drumkits \
+    https://freewavesamples.com/files/YamahaRX15Kit.h2drumkit;downloadfilename=YamahaRX15Kit.tar.gz;name=YamahaRX15Kit;subdir=drumkits \
+    https://freewavesamples.com/files/YamahaTG-55Kit.h2drumkit;downloadfilename=YamahaTG-55Kit.tar.gz;name=YamahaTG-55Kit;subdir=drumkits \
 "
 SRCREV = "2cbb04f85d84bddb5a8a1caf614837cbe5323292"
 PV ="0.9.7+git${SRCPV}"
 
 S = "${WORKDIR}/git"
+
+SRC_URI[drumkit-list.md5sum] = "d7c54dba04092112fb012c1a0acc6404"
+SRC_URI[drumkit-list.sha256sum] = "c4ddfcff63e57e72ab376a9b85a1fdf7ba47ec244dcca45ab95984adfd585780"
 
 SRC_URI[Audiophob.md5sum] = "24cb2577a447bbd72aab769aacb3e8b4"
 SRC_URI[Audiophob.sha256sum] = "70b71304221a1287f257ed9a03bfb221af6ce335deec3a3385237e6be6fa9e0c"
@@ -116,8 +129,8 @@ SRC_URI[YamahaVintageKit.sha256sum] = "17005f5c79d92af3caef52ea313b1ac5bc49f1eef
 SRC_URI[DeathMetal.md5sum] = "0465025dcf6659657b773874d168c27b"
 SRC_URI[DeathMetal.sha256sum] = "7ae4f8e7bf52b84637100b6f781e94752ad738626cff912c7704522ea692fbe7"
 
-SRC_URI[Denon_CRB-90.md5sum] = "bcb4424b46938d0a2a5c94cbd4248c1f"
-SRC_URI[Denon_CRB-90.sha256sum] = "6a2b743b73a0e3df110bef830ccedec4560964e7f7af7b7810dc9d9b6e66e075"
+SRC_URI[Denon-CRB-90.md5sum] = "bcb4424b46938d0a2a5c94cbd4248c1f"
+SRC_URI[Denon-CRB-90.sha256sum] = "6a2b743b73a0e3df110bef830ccedec4560964e7f7af7b7810dc9d9b6e66e075"
 
 SRC_URI[Drumkit_excepcional.md5sum] = "49151a17ea5534cd08a9bc58d6972997"
 SRC_URI[Drumkit_excepcional.sha256sum] = "634cd9f40a00d8ac6bb1791aadd953fc92536838b206f7f374024bc34b920689"
@@ -185,6 +198,9 @@ SRC_URI[Roland_MC-307_Techno1.sha256sum] = "4a99341192ef8774049c10eaf4678358289f
 SRC_URI[rumpf_kit_z01_h2.md5sum] = "927094c3712ba0a3724a77e74b2102e9"
 SRC_URI[rumpf_kit_z01_h2.sha256sum] = "83f24b15c82d0b34ceaeeb86c5283201b7dd3f5e32b53dfd222d04886bc98740"
 
+SRC_URI[SF3007-2011-Set-03.md5sum] = "f0b243f7bbc0c4c04977b2efa96a07b4"
+SRC_URI[SF3007-2011-Set-03.sha256sum] = "cffa12c5a176d9c9532bafacba773c0a0f7e2fe71ea5a14dae402d2de0726ccb"
+
 SRC_URI[Synthie-1.md5sum] = "33f02627ac1489e4ab52c5f078c538b9"
 SRC_URI[Synthie-1.sha256sum] = "adcc4a3023708fab46108acfc99dfc04e2b2b62bb21aa87ed8a027ccbb46b576"
 
@@ -202,6 +218,18 @@ SRC_URI[TR808909.sha256sum] = "4637f0c39b488074943030d6cb0274f3e35d1da221eb6d078
 
 SRC_URI[VariBreaks.md5sum] = "a9c305829cd23c28ffd1647cb5c0bdfd"
 SRC_URI[VariBreaks.sha256sum] = "ed7bfa21abc05712ea89860b7e680808d14d567d49377fbc65914a9dd518e14d"
+
+SRC_URI[KawaiXD-5Kit.md5sum] = "ae974ec4550b64654cfb1fe42fe110af"
+SRC_URI[KawaiXD-5Kit.sha256sum] = "e3da8b98d8d5804e6ca9c047f2140430f12f8d4ae3db8ec4740f9364467c19ed"
+
+SRC_URI[RolandJD-990Kit.md5sum] = "ef5ecfdea55835789c143c0bc3ac15e9"
+SRC_URI[RolandJD-990Kit.sha256sum] = "0ae58586d479ecb0d9b850d832be0483a8aad28eaa7fa46be0d1956d45b0b50c"
+
+SRC_URI[YamahaRX15Kit.md5sum] = "9f143e9f764b1b0341a3e5a528bf3f13"
+SRC_URI[YamahaRX15Kit.sha256sum] = "04b7b7d5d56e4b5f6b7daa3579f594df66a5edb776f705413c1d3d2da90e5bd2"
+
+SRC_URI[YamahaTG-55Kit.md5sum] = "cf95db46c05287aaa1a18dff0b0ce335"
+SRC_URI[YamahaTG-55Kit.sha256sum] = "8dba9f8fa7027606765b3b9bd3d11470e39919683a8676b1598d96c2f7df1462"
 
 
 inherit cmake_qt5 manpages
