@@ -35,9 +35,8 @@ DEPENDS += " \
 
 SRC_URI = " \
     git://github.com/hydrogen-music/hydrogen.git \
-    file://0001-remove-qt5_use_modules.patch \
-    file://0002-hydrogen.default.conf-do-not-show-developer-warnings.patch \
-    file://0003-Fix-man-installation-path.patch \
+    file://0001-hydrogen.default.conf-do-not-show-developer-warnings.patch \
+    file://0002-Fix-man-installation-path.patch \
     \
     http://hydrogen-music.org/feeds/drumkit_list.php;name=drumkit-list \
     \
@@ -88,8 +87,8 @@ SRC_URI = " \
     https://freewavesamples.com/files/YamahaRX15Kit.h2drumkit;downloadfilename=YamahaRX15Kit.tar.gz;name=YamahaRX15Kit;subdir=drumkits \
     https://freewavesamples.com/files/YamahaTG-55Kit.h2drumkit;downloadfilename=YamahaTG-55Kit.tar.gz;name=YamahaTG-55Kit;subdir=drumkits \
 "
-SRCREV = "2cbb04f85d84bddb5a8a1caf614837cbe5323292"
-PV ="0.9.7+git${SRCPV}"
+SRCREV = "538eaeb9f4e9be2febf02e36a08e3e9fca2ae317"
+PV ="1.0.0~beta1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
