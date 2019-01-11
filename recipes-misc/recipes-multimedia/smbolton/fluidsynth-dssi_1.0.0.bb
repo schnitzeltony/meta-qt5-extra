@@ -17,7 +17,7 @@ SRC_URI = " \
     git://github.com/schnitzeltony/fluidsynth-dssi.git \
     file://fluidsynth-dssi.conf \
 "
-SRCREV = "f8c0165b60042d2976c0983261a3ad8c059e2926"
+SRCREV = "001fdea313b923185b7bcb40d317b9a278191ba2"
 S = "${WORKDIR}/git"
 PV = "1.0.0+git${SRCPV}"
 
