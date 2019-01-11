@@ -21,9 +21,12 @@ DEPENDS += " \
     libxft \
 "
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/1.5/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "5368486f9b1525ac9026e0934bbcb9ac"
-SRC_URI[sha256sum] = "20f3b36caf8d3d3ba038a33cb9e75b22fab60bca63c0fc814195046430ef1cdb"
+SRC_URI = " \
+    ${SOURCEFORGE_MIRROR}/project/${BPN}/1.5/${BPN}-${PV}.tar.bz2 \
+    file://0001-Keep-build-system-CXXFLAGS-when-not-selecting-a-spec.patch \
+"
+SRC_URI[md5sum] = "1c3b2eb1e85c9ecd07729b43746da288"
+SRC_URI[sha256sum] = "5445edf05157960303564cd7f9719faf009aba763e783f2293b613768bfd5f55"
 
 OECMAKE_SOURCEPATH = "${S}/src"
 
