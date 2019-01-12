@@ -11,7 +11,7 @@ DEPENDS += "kauth kconfig kcodecs kguiaddons kwidgetsaddons kdoctools \
             gettext-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "295ec19de064d7ce1e0d5a89b8a21fbb"
-SRC_URI[sha256sum] = "7b0a87f74462adf9738a41599c63f8fb044a5f955420c74a71274ee582a4fe2e"
+SRC_URI[md5sum] = "1a1abc37032b4ba98d371f40bd219416"
+SRC_URI[sha256sum] = "617090206976f2434e76d0bec2d96b89aa7ff01d602f558ab5f57cfbf08170d0"
 
 RDEPENDS_${PN} += "perl"
