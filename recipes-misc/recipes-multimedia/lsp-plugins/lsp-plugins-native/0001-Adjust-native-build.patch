@@ -1,7 +1,7 @@
-From 87c6b12457832689bea6a66cbc27d7b11bdde204 Mon Sep 17 00:00:00 2001
+From 1234ce86f2516148a6854247d9bd46f9adf87f94 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 1 Jan 2019 23:50:48 +0100
-Subject: [PATCH] Build native utils unconditionally
+Date: Sat, 12 Jan 2019 22:26:43 +0100
+Subject: [PATCH] Adjust native build
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -15,7 +15,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  2 files changed, 11 insertions(+), 19 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index c918fb1..282d590 100644
+index c918fb11..282d590d 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -39,10 +39,10 @@ export CC               = g++
@@ -33,7 +33,7 @@ index c918fb1..282d590 100644
  # Objects
  export OBJ_CORE         = $(OBJDIR)/core.o
 diff --git a/src/utils/Makefile b/src/utils/Makefile
-index 0d9b57f..c372c85 100644
+index 0d9b57f9..c372c850 100644
 --- a/src/utils/Makefile
 +++ b/src/utils/Makefile
 @@ -5,22 +5,14 @@ SUBDIRS                 =

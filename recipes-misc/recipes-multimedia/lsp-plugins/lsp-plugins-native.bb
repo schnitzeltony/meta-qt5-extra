@@ -6,9 +6,11 @@ inherit native
 
 DEPENDS += " \
     php-native \
+    lv2-native \
+    libsndfile1-native \
 "
 
-SRC_URI+= "file://0001-Build-native-utils-unconditionally.patch"
+SRC_URI+= "file://0001-Adjust-native-build.patch"
 
 EXTRA_OEMAKE += " \
     BUILD_PLATFORM=Linux \
