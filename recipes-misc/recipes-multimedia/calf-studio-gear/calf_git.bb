@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = " \
 SRC_URI = " \
     git://github.com/calf-studio-gear/calf.git \
     file://0001-Do-store-calfmakerdf-commandline-for-later-use-in-qe.patch \
+    file://0002-fluidsynth-Activate-synth.dynamic-sample-loading-for.patch \
 "
 SRCREV = "e5c08dc2483c444d18d24a37c395274002320f5c"
 S = "${WORKDIR}/git"

@@ -1,0 +1,33 @@
+From 579ce205281dc47c94b0e6392decac9763397a9d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 13 Jan 2019 12:14:52 +0100
+Subject: [PATCH] fluidsynth: Activate synth.dynamic-sample-loading for
+ fluidsynth >=2
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This reduces soundfont load time and memory consumption significantly
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/fluidsynth.cpp | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/fluidsynth.cpp b/src/fluidsynth.cpp
+index 54023dc8..14c018e3 100644
+--- a/src/fluidsynth.cpp
++++ b/src/fluidsynth.cpp
+@@ -59,6 +59,9 @@ fluid_synth_t *fluidsynth_audio_module::create_synth(int &new_sfid)
+     std::fill(set_presets, set_presets + 16, -1);
+     fluid_settings_t *new_settings = new_fluid_settings();
+     fluid_settings_setnum(new_settings, "synth.sample-rate", srate);
++#if FLUIDSYNTH_VERSION_MAJOR >= 2
++    fluid_settings_setint(new_settings, "synth.dynamic-sample-loading", 1);
++#endif
+     fluid_synth_t *s = new_fluid_synth(new_settings);
+     if (!soundfont.empty())
+     {
+-- 
+2.20.1
+
