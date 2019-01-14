@@ -1,0 +1,33 @@
+From e37bcc39a2f6c720335a1431e1a37d142f066c3d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 14 Jan 2019 21:03:35 +0100
+Subject: [PATCH 1/2] Reduce FSD_MAX_BURST_SIZE 512 -> 128
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+* This saves 96K RAM
+* Tested and 'paper debugged' fsd_run_multiple_synths: There are no issues to
+  expect
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/fluidsynth-dssi.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/fluidsynth-dssi.h b/src/fluidsynth-dssi.h
+index 6f0e57f..9f347ab 100644
+--- a/src/fluidsynth-dssi.h
++++ b/src/fluidsynth-dssi.h
+@@ -59,7 +59,7 @@
+ #define FSD_MAX_POLYPHONY     256
+ #define FSD_DEFAULT_POLYPHONY 256
+ 
+-#define FSD_MAX_BURST_SIZE  512
++#define FSD_MAX_BURST_SIZE  128
+ 
+ typedef enum {
+     PORT_OUTPUT_LEFT     = 0,
+-- 
+2.20.1
+

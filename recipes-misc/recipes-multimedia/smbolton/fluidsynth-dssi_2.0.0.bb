@@ -15,11 +15,13 @@ DEPENDS += " \
 
 SRC_URI = " \
     git://github.com/schnitzeltony/fluidsynth-dssi.git \
+    file://0001-Reduce-FSD_MAX_BURST_SIZE-512-128.patch \
+    file://0002-Don-t-trash-unused-channels.patch \
     file://fluidsynth-dssi.conf \
 "
-SRCREV = "001fdea313b923185b7bcb40d317b9a278191ba2"
+SRCREV = "c9b41073031dc2ba99c43db1babc9bbfbab2ec1e"
 S = "${WORKDIR}/git"
-PV = "1.0.0+git${SRCPV}"
+#PV = "2.0.0+git${SRCPV}"
 
 do_install_append() {
     install -d ${D}/${sysconfdir}/skel/.config/fluidsynth-dssi

@@ -1,0 +1,50 @@
+From 3a9b7f16ce00a069decd9e4b6efbe31389fefd6d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 13 Jan 2019 11:58:39 +0100
+Subject: [PATCH 2/2] Don't trash unused channels
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+* This enhances peformance: Useless buffer copies are avoided
+* Patches did not make it upstream but we have them in meta-multimedia
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/fluidsynth-dssi.c | 6 +++---
+ src/fluidsynth-dssi.h | 1 -
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/src/fluidsynth-dssi.c b/src/fluidsynth-dssi.c
+index e1e8251..11a92ee 100644
+--- a/src/fluidsynth-dssi.c
++++ b/src/fluidsynth-dssi.c
+@@ -883,10 +883,10 @@ fsd_run_multiple_synths(unsigned long instance_count, LADSPA_Handle *handles,
+             instances[i]->pending_preset_change = -1;
+         }
+     }
+-    /* Trash unmapped channels by default */
++    /* Default: Set unused by default */
+     for (i = 0; i < fsd_settings.channel_count; i++) {
+-        l_outputs[i] = fsd_synth.bit_bucket;
+-        r_outputs[i] = fsd_synth.bit_bucket;
++        l_outputs[i] = NULL;
++        r_outputs[i] = NULL;
+     }
+ 
+     /* fluid_synth_nwrite_float() works correctly in FluidSynth beginning
+diff --git a/src/fluidsynth-dssi.h b/src/fluidsynth-dssi.h
+index 9f347ab..c34377e 100644
+--- a/src/fluidsynth-dssi.h
++++ b/src/fluidsynth-dssi.h
+@@ -117,7 +117,6 @@ struct _fsd_synth_t {
+     float             gain;
+     int               polyphony;
+     fsd_instance_t   **channel_map;
+-    LADSPA_Data       bit_bucket[FSD_MAX_BURST_SIZE];
+ };
+ 
+ #endif /* _FLUIDSYNTH_DSSI_H */
+-- 
+2.20.1
+
