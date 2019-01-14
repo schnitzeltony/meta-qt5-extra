@@ -26,23 +26,6 @@ inherit allarch
 SRC_URI = " \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/airfont_a340u.tar.7z;subdir=linuxaudio.org;name=airfont \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3.tar.7z;subdir=linuxaudio.org;name=fluidr3 \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_bass.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-bass \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_brass.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-brass \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_chromaticpercussion.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-chromaticpercussion \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_drums.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-drums \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_ensemble.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-ensemble \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_ethnic.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-ethnic \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_guitar.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-guitar \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_organ.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-organ \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_percussive.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-percussive \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_pipe.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-pipe \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_piano.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-piano \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_reed.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-reed \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_soundeffects.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-soundeffects \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_strings.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-strings \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_syntheffects.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-syntheffects \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_synthlead.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-synthlead \
-    http://download.linuxaudio.org/musical-instrument-libraries/sf2/fluidr3-splitted/fluidr3gm_synthpad.sf2.tar.7z;subdir=linuxaudio.org;name=fluidr3gm-synthpad \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/jRhodes3.tar.7z;subdir=linuxaudio.org;name=jRhodes3 \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/melloflute.tar.7z;subdir=linuxaudio.org;name=melloflute \
     http://download.linuxaudio.org/musical-instrument-libraries/sf2/melloreed.tar.7z;subdir=linuxaudio.org;name=melloreed \
@@ -69,57 +52,6 @@ SRC_URI[avl-drumkits.sha256sum] = "46a5d0d1fd3894082ae0ecdab3396a9a1b9eecc007693
 
 SRC_URI[fluidr3.md5sum] = "8657c8d9dfcb51aa0e3d045dd63cc053"
 SRC_URI[fluidr3.sha256sum] = "a62235d86c920f141a1aa2a0921ceaee167478796d9e0ac1130fd87ec50a6a02"
-
-SRC_URI[fluidr3gm-bass.md5sum] = "3e14a74a89ee1193b3711e15c7718032"
-SRC_URI[fluidr3gm-bass.sha256sum] = "56619efac4550946d1fbe74bd059e358d5cef3fcc8257f6737b66e3e7bee11fe"
-
-SRC_URI[fluidr3gm-brass.md5sum] = "dc6808a91c0f8e6dfe566f2e776c4910"
-SRC_URI[fluidr3gm-brass.sha256sum] = "775295ae26f84cf6fb2069a176644bbc0038a42d5767fdd7ef218084091ef408"
-
-SRC_URI[fluidr3gm-chromaticpercussion.md5sum] = "b74fcfd86cbfe61819a11dc8b64ec998"
-SRC_URI[fluidr3gm-chromaticpercussion.sha256sum] = "c7850249adc7a667527129e3e1f7bae401d699df689f02b9ca2e526e06746388"
-
-SRC_URI[fluidr3gm-drums.md5sum] = "768911e416da5de0abfbfc467a0d0f5a"
-SRC_URI[fluidr3gm-drums.sha256sum] = "f961c6684880ae025912fcf4498ccdb0cb64d6e4f9329584efe85f51a41afb06"
-
-SRC_URI[fluidr3gm-ensemble.md5sum] = "ffb5f6eea836d485cbeaecb45bf7fb75"
-SRC_URI[fluidr3gm-ensemble.sha256sum] = "5d2d3be68780e8e0e191488b3cc81d1fc323aa67f141015be355b2abfe635c67"
-
-SRC_URI[fluidr3gm-ethnic.md5sum] = "c73cb01cb192f22defb5b744b8b2dd57"
-SRC_URI[fluidr3gm-ethnic.sha256sum] = "6105ddc8d85fd5b813250fb8135be3bc3cc8548eeece9542b2815363f9193f7c"
-
-SRC_URI[fluidr3gm-guitar.md5sum] = "c4d49ff884eb729da01fc159fbf96412"
-SRC_URI[fluidr3gm-guitar.sha256sum] = "31f46a5f2aaea7857780460dc4eba10aa698357b4f4f57b14ed0afa749efb2b4"
-
-SRC_URI[fluidr3gm-organ.md5sum] = "e4fb2e4428183a64548281deb911290e"
-SRC_URI[fluidr3gm-organ.sha256sum] = "d991c71083138f4f48995863bd4d77d1a3ca7e8b308511ecd350e4ca90c0f48b"
-
-SRC_URI[fluidr3gm-percussive.md5sum] = "c8a4afdc45cfefd5409ad39d9d0ebdd0"
-SRC_URI[fluidr3gm-percussive.sha256sum] = "c316f3fca1e955f9453414c7f22a940610d6e03c64ab0a52363681f9c30314bf"
-
-SRC_URI[fluidr3gm-piano.md5sum] = "fcedef3aea615926ff8d2e5e8cdf0004"
-SRC_URI[fluidr3gm-piano.sha256sum] = "593c0966d12624e76037f7023f7f5deca4dc965517ee90e945129fbefb094819"
-
-SRC_URI[fluidr3gm-pipe.md5sum] = "abe06dfb215b0cf6ec1fab953c1ee416"
-SRC_URI[fluidr3gm-pipe.sha256sum] = "c259df70894ef7a310e4bf897af9fd08fc5f4e252f9c779039c245b694de9f27"
-
-SRC_URI[fluidr3gm-reed.md5sum] = "f5ce696f7bcd2cf2ed475c5cd9c7db06"
-SRC_URI[fluidr3gm-reed.sha256sum] = "53497f0244ddd238125a6be7e80c7683c55093d1b63906cd53e7f36322e460f9"
-
-SRC_URI[fluidr3gm-soundeffects.md5sum] = "b8c03ebb67f17a1a58f1e799d8013191"
-SRC_URI[fluidr3gm-soundeffects.sha256sum] = "ddfd6b813fd69ce418b43458306823652e659d7e7b18652ff0af8c93147be869"
-
-SRC_URI[fluidr3gm-strings.md5sum] = "ab7303ba5586300d28a4e8f774356c2c"
-SRC_URI[fluidr3gm-strings.sha256sum] = "7a9d004b1045dc4e2dad0e05847f1beeb8cd0813c653ca6f8370dc1185c9ddda"
-
-SRC_URI[fluidr3gm-syntheffects.md5sum] = "68b558da70ee9d4838156e2c1bc5f3ab"
-SRC_URI[fluidr3gm-syntheffects.sha256sum] = "04ca477d361f7b6e01ca00bc1f3c5a414e873c29ead73e0b99929b9a362a9866"
-
-SRC_URI[fluidr3gm-synthlead.md5sum] = "cddd58f8f09c2bfe38605d909a77e32c"
-SRC_URI[fluidr3gm-synthlead.sha256sum] = "e510f95e8266924631cd1ed44eacd4eb3190ff95006381ec0bf023877d2bb12b"
-
-SRC_URI[fluidr3gm-synthpad.md5sum] = "54ee8656af107dc24fcb0a262815f673"
-SRC_URI[fluidr3gm-synthpad.sha256sum] = "b1297b4d8b28f3c4652b842bc19ebfe7ce72658b9423f3b3611e8155bd6997e0"
 
 SRC_URI[jRhodes3.md5sum] = "1cf933decd312535fb8d8aa5772a39cf"
 SRC_URI[jRhodes3.sha256sum] = "a50462992b19f4df65aa63d237bb0e45a071e63383ae9f2c5a2980d4ec3bcce1"
