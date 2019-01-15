@@ -1,0 +1,46 @@
+From daa954d6c4c663f5d7ee153189ebf37e9de31087 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 15 Jan 2019 22:37:28 +0100
+Subject: [PATCH] keysplit: Forward CCs to both target channels
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+miss my wheels...
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ filters/keysplit.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/filters/keysplit.c b/filters/keysplit.c
+index 356458c..bc8f386 100644
+--- a/filters/keysplit.c
++++ b/filters/keysplit.c
+@@ -40,7 +40,7 @@ filter_midi_keysplit(MidiFilter* self,
+ 	uint8_t mst = buffer[0] & 0xf0;
+ 
+ 	if (size != 3
+-			|| !(mst == MIDI_NOTEON || mst == MIDI_NOTEOFF || mst == MIDI_POLYKEYPRESSURE)
++			|| !(mst == MIDI_NOTEON || mst == MIDI_NOTEOFF || mst == MIDI_POLYKEYPRESSURE || mst == MIDI_CONTROLCHANGE)
+ 			|| !(floor(*self->cfg[0]) == 0 || chs == chn)
+ 		 )
+ 	{
+@@ -96,6 +96,14 @@ filter_midi_keysplit(MidiFilter* self,
+ 				buf[1] = midi_limit_val(key + transp1);
+ 			}
+ 			break;
++		case MIDI_CONTROLCHANGE:
++			buf[1] = buffer[1];
++			if (ch0 != ch1) {
++				buf[0] = mst | ch0;
++				forge_midimessage(self, tme, buf, size);
++			}
++			buf[0] = mst | ch1;
++			break;
+ 	}
+ 	forge_midimessage(self, tme, buf, size);
+ }
+-- 
+2.20.1
+
