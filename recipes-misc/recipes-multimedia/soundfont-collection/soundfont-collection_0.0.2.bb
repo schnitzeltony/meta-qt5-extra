@@ -120,10 +120,12 @@ do_install() {
     install ${WORKDIR}/freepats.zenvoid.org/*.sf2 ${D}${datadir}/sf2
     install ${WORKDIR}/www.philscomputerlab.com/*.sf2 ${D}${datadir}/sf2
     install "${WORKDIR}/GeneralUser GS 1.471/GeneralUser GS v1.471.sf2" ${D}${datadir}/sf2/general-user-gs-v1.471.sf2
-    for soundfont in `find ${WORKDIR}/avl-drumkits -name *.sf2`; do
+    for soundfont in `find ${WORKDIR}/avl-drumkits -name '*.sf2'`; do
         install $soundfont ${D}${datadir}/sf2
     done
-    for soundfont in `find ${WORKDIR}/linuxaudio.org -name *.sf2`; do
+
+    for soundfont in `find ${WORKDIR}/linuxaudio.org -name '*.sf2'`; do
+        echo "linuxaudio.org: $soundfont"
         install $soundfont ${D}${datadir}/sf2
     done
 
