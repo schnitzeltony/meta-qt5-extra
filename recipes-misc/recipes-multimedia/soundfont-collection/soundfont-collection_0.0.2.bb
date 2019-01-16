@@ -42,6 +42,8 @@ SRC_URI = " \
     http://www.philscomputerlab.com/uploads/3/7/2/3/37231621/choriumreva.sf2;subdir=www.philscomputerlab.com;name=choriumreva \
     \
     https://www.dropbox.com/s/4x27l49kxcwamp5/GeneralUser_GS_1.471.zip;name=christiancollins \
+    \
+    https://musical-artifacts.com/artifacts/248/iw_vint.zip;subdir=musical-artifacts;name=vintage-dreams-waves \
 "
 
 SRC_URI[airfont.md5sum] = "e1a0878510910b50786c9690ed7640b0"
@@ -86,6 +88,11 @@ SRC_URI[choriumreva.sha256sum] = "993a1683a67f30c56c248290e1eb6c13b779331856e9a7
 SRC_URI[christiancollins.md5sum] = "5eaa95224f6080864cf6aedc1c9820a6"
 SRC_URI[christiancollins.sha256sum] = "4203835164766f428c4926c097c9ea58dae431c7fb8f9dbe277b92d80da45ec2"
 
+
+SRC_URI[vintage-dreams-waves.md5sum] = "9d6151731c4edb91725bc4f530184f1a"
+SRC_URI[vintage-dreams-waves.sha256sum] = "2706ec973acc390b888e0084c7afd4ba75da58f2772c13b1e398a6a66b021f15"
+
+
 do_unpack[depends] += "p7zip-native:do_populate_sysroot"
 
 S = "${WORKDIR}"
@@ -99,6 +106,7 @@ PACKAGES = " \
     ${PN}-philscomputerlab-com \
     ${PN}-philscomputerlab-com-single \
     ${PN}-christiancollins \
+    ${PN}-musical-artifacts \
 "
 
 ALLOW_EMPTY_${PN}-meta = "1"
@@ -110,6 +118,7 @@ RRECOMMENDS_${PN}-meta = " \
     ${PN}-philscomputerlab-com \
     ${PN}-philscomputerlab-com-single \
     ${PN}-christiancollins \
+    ${PN}-musical-artifacts \
 "
 
 do_configure() {
@@ -176,3 +185,6 @@ FILES_${PN}-philscomputerlab-com-single = " \
 "
 
 FILES_${PN}-christiancollins = "${datadir}/sf2/general-user-gs-v1.471.sf2"
+
+FILES_${PN}-musical-artifacts = "${datadir}/sf2/Vintage-Dreams-Waves-V2.sf2"
+
