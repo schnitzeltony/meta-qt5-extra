@@ -11,4 +11,4 @@ SRC_URI = "http://download.drobilla.net/${BPN}-${PV}.tar.bz2"
 SRC_URI[md5sum] = "cae7e1700f83b0f1272f437919a68458"
 SRC_URI[sha256sum] = "f7ec65b1c1f1734ded3a6c051bbaf50f996a0b8b77e814a33a34e42bce50a522"
 
-EXTRA_OECONF = "--configdir=${sysconfdir}"
+EXTRA_OECONF = "--configdir=${sysconfdir} --dyn-manifest"
