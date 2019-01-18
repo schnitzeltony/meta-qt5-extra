@@ -8,5 +8,5 @@ inherit waf pkgconfig
 DEPENDS += "lv2 serd sord"
 
 SRC_URI = "http://download.drobilla.net/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "76f085e6d41bba57f4dc2a5ffeff9dde"
-SRC_URI[sha256sum] = "440ac2b1f4f0b7878f8b95698faa1e8f8c50929a498f68ec5d066863626a3d43"
+SRC_URI[md5sum] = "aa3c540032da43cf6cf68f684983d7f5"
+SRC_URI[sha256sum] = "0a514a55d6b6cb7b5d6f32d1dcb78a1e6e54537fa22fce533e4ef6adf240e853"
