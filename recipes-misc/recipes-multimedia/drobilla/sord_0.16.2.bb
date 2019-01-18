@@ -8,5 +8,5 @@ inherit waf pkgconfig
 DEPENDS += "libpcre serd"
 
 SRC_URI = "http://download.drobilla.net/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "010313c3baf5b8a4a639e9ee45310af6"
-SRC_URI[sha256sum] = "9d3cb2c9966e93f537f37377171f162023cea6784ca069699be4a7770c8a035a"
+SRC_URI[md5sum] = "eb1d1c62ffb5153d5e1f5d12a3b7279b"
+SRC_URI[sha256sum] = "09f51174dd8f3efbd95f44f0bb0b165f08e066e052d40095de59de787987da8d"
