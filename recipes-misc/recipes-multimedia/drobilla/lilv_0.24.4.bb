@@ -8,7 +8,7 @@ inherit waf bash-completion pkgconfig
 DEPENDS += "lv2 serd sord sratom"
 
 SRC_URI = "http://download.drobilla.net/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "cae7e1700f83b0f1272f437919a68458"
-SRC_URI[sha256sum] = "f7ec65b1c1f1734ded3a6c051bbaf50f996a0b8b77e814a33a34e42bce50a522"
+SRC_URI[md5sum] = "fb340958a6df5a683bf25e291493dc4d"
+SRC_URI[sha256sum] = "c33b84b7a6e8e8fffb412fbcd6f69e59ca297ef3e29d829249b4ccc94f634438"
 
 EXTRA_OECONF = "--configdir=${sysconfdir} --dyn-manifest"
