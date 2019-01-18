@@ -36,6 +36,7 @@ RDEPENDS_${PN} += " \
     \
     \
     ganv \
+    ingen-lv2 ingen-standalone \
     lilv \
     mda-lv2 \
     patchage \
