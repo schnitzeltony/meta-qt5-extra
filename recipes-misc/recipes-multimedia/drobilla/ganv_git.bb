@@ -12,6 +12,10 @@ DEPENDS += " \
     gtkmm \
 "
 
-SRC_URI = "http://download.drobilla.net/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "30c2c36d0c64d0a3b73e0bc7c564861c"
-SRC_URI[sha256sum] = "145028ade1567f258de6ad58ad0f7941646208d261028a9b74eb61126e2dfa3c"
+SRC_URI = " \
+    git://git.drobilla.net/ganv.git;protocol=http \
+    file://0001-Do-not-inject-usr-local-include-to-include-paths.patch \
+"
+SRCREV = "ccc9b971ab206fa3dc32a432a3e76db976192f58"
+S = "${WORKDIR}/git"
+PV = "1.4.2+git${SRCPV}"
