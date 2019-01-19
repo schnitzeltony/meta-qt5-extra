@@ -35,6 +35,9 @@ RDEPENDS_${PN} += " \
     lv2-ttl-generator \
     \
     \
+    drmr \
+    \
+    \
     ganv \
     ingen-lv2 ingen-standalone \
     lilv \
