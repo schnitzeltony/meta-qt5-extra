@@ -18,15 +18,16 @@ DEPENDS += " \
 inherit qmake5_base autotools-brokensep pkgconfig gtk-icon-cache mime qt5-translation
 
 SRC_URI = " \
-    git://github.com/rncbc//qtractor.git;branch=midiimportx \
+    git://github.com/schnitzeltony/qtractor.git;branch=midiimportx \
     file://0001-no-Qt4-find-native-qt-build-tools-by-configure-options-auto.patch \
     \
     file://0001-do-nor-try-run-for-float-sse-detection.patch \
     file://0002-do-nor-try-run-for-suil-libs-detection.patch \
     file://0003-Add-ARM-NEON-acceleration-for-time-stretch-not-yet-t.patch \
+    \
     file://Qtractor.conf \
 "
-SRCREV = "c199ad418be3f3b6efbc8f330f1ae0708e682ede"
+SRCREV = "e0570aa1519b25da89fca56e70b2ff61a6645145"
 PV = "0.9.3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
