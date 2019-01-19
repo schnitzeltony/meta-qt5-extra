@@ -9,6 +9,10 @@ Content-Transfer-Encoding: 8bit
 This fixes builds for cross/sysrooted build systems which set lots of flags to
 tailor build.
 
+Upstream-Status: Submitted [1]
+
+[1] https://github.com/nicklan/drmr/pull/22
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  CMakeLists.txt | 2 +-
