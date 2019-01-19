@@ -60,3 +60,16 @@ do_compile_append() {
         fi
     done
 }
+
+PACKAGES =+ "${PN}-standalone"
+FILES_${PN}-standalone = " \
+    ${datadir}/applications \
+    ${datadir}/pixmaps \
+    ${bindir}/zynaddsubfx \
+"
+
+RDEPENDS_${PN}-dssi += "${PN}"
+RDEPENDS_${PN}-lv2 += "${PN}"
+RDEPENDS_${PN}-vst += "${PN}"
+RDEPENDS_${PN}-standalone += "${PN}"
+
