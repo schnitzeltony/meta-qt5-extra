@@ -22,6 +22,10 @@ SRC_URI = " \
     http://linuxsynths.com/Padthv1PatchesDemos/Padthv1Patches.tar.gz;name=linuxsynths-padthv1-presets;subdir=linuxsynths-padthv1-presets \
     file://0001-no-Qt4-find-native-qt-build-tools-by-configure-options-auto.patch \
     \
+    file://lv2-backport/0001-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
+    file://lv2-backport/0002-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
+    file://lv2-backport/0003-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
+    \
     ${FFTWSINGLEPATCH} \
     file://0002-Remove-extra-rpath.patch \
     file://padthv1.conf \
