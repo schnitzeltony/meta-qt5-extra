@@ -20,6 +20,10 @@ SRC_URI = " \
     file://0001-no-Qt4-find-native-qt-build-tools-by-configure-options-auto.patch \
     file://0002-Remove-extra-rpath.patch \
     \
+    file://lv2-backport/0001-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
+    file://lv2-backport/0002-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
+    file://lv2-backport/0003-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
+    \
     file://synthv1.conf \
 "
 SRC_URI[md5sum] = "f909bfb55e3d23f7308478ab07477486"
