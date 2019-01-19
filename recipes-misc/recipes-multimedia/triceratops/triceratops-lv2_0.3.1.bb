@@ -12,7 +12,10 @@ DEPENDS += " \
 
 inherit waf pkgconfig
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/project/triceratops/${BPN}-v${PV}.tar.gz;subdir=${BPN}-${PV}"
+SRC_URI = " \
+    ${SOURCEFORGE_MIRROR}/project/triceratops/${BPN}-v${PV}.tar.gz;subdir=${BPN}-${PV} \
+    file://0001-Replace-lv2core-by-lv2.patch \
+"
 SRC_URI[md5sum] = "cdd3e94b05247061820e17d7c3d900e4"
 SRC_URI[sha256sum] = "0f678f2bebf5cd1e7aa3de82afa8bcbca64302cafb92d53dbb49143361517033"
 

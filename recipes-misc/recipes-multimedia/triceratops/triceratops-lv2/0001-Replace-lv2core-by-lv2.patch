@@ -1,0 +1,43 @@
+From d6671a285d8c2f5c42f2f55e490a98afab758324 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 18 Jan 2019 18:05:18 +0100
+Subject: [PATCH] Replace lv2core by lv2
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+When building lv2 from git, triceratops fails because it cannot find lv2 any
+more.
+
+Reason: lv2core.pc was removed in lv2 [1].
+
+Using lv2.pc works perfectly fine - the contents of both files in lv2 version
+1.14 are similar from pkg-config point of view.
+
+[1] https://github.com/drobilla/lv2/commit/4db67120efca2d4c200d2e1ba5cf3d7b97cab97e
+
+Upstream-Status: submitted [2]
+
+[2] https://github.com/thunderox/triceratops/pull/4
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ wscript | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/wscript b/wscript
+index 8dd3385..3f48ca8 100644
+--- a/wscript
++++ b/wscript
+@@ -34,7 +34,7 @@ def configure(conf):
+         	conf.env.append_unique('CXXFLAGS', ['-fPIC','-fpermissive','-finline-functions'])
+ 
+     if not autowaf.is_child():
+-        autowaf.check_pkg(conf, 'lv2core', uselib_store='LV2CORE')
++        autowaf.check_pkg(conf, 'lv2', uselib_store='LV2CORE')
+         autowaf.check_pkg(conf, 'gtkmm-2.4', uselib_store='GTKMM')
+ 
+     # Set env['pluginlib_PATTERN']
+-- 
+2.20.1
+
