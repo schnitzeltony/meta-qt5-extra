@@ -11,7 +11,10 @@ which was released in September 2016 and should be avalaible on most
 environments. This should be compatible to LV2 1.1.14 because from pkg-config
 point of view lv2-core.pc and lv2.pc look similar.
 
+Upstream-Status: Submitted [2]
+
 [1] https://github.com/drobilla/lv2/commit/4db67120efca2d4c200d2e1ba5cf3d7b97cab97e
+[2] https://github.com/calf-studio-gear/calf/pull/213
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
