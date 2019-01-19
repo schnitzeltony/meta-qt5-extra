@@ -12,10 +12,10 @@ DEPENDS += " \
     ganv \
 "
 
-SRC_URI = "http://download.drobilla.net/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "d16a3fc045faff7fd70f3b4769b65698"
-SRC_URI[sha256sum] = "6b21d74ef1b54fa62be8d6ba65ca8b61c7b6b5230cc85e093527081239bfeda9"
-
-FILES_${PN} += " \
-    ${datadir}/icons \
+SRC_URI = " \
+     git://git.drobilla.net/patchage.git;protocol=http \
+     file://0001-Do-not-inject-usr-local-include-to-include-paths.patch \
 "
+SRCREV = "b69a38d171758c6e979d74541fc21d12b7e6abda"
+PV = "1.0.0+git${SRCPV}"
+S = "${WORKDIR}/git"
