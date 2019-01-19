@@ -1,0 +1,38 @@
+From 24680511adcdf5a9d0ba417bd0bd561c2982920b Mon Sep 17 00:00:00 2001
+From: rncbc <rncbc@rncbc.org>
+Date: Fri, 28 Dec 2018 19:49:42 +0000
+Subject: [PATCH 2/3] - Comply with next LV2 headers location post-1.14.0git.
+ (FIXED)
+
+---
+ src/drumkv1_lv2.h   | 1 -
+ src/drumkv1_lv2ui.h | 1 -
+ 2 files changed, 2 deletions(-)
+
+diff --git a/src/drumkv1_lv2.h b/src/drumkv1_lv2.h
+index a651fbb..4a28a5e 100644
+--- a/src/drumkv1_lv2.h
++++ b/src/drumkv1_lv2.h
+@@ -24,7 +24,6 @@
+ 
+ #include "drumkv1.h"
+ 
+-#include "lv2.h"
+ #include "lv2/lv2plug.in/ns/ext/urid/urid.h"
+ #include "lv2/lv2plug.in/ns/ext/atom/atom.h"
+ #include "lv2/lv2plug.in/ns/ext/atom/forge.h"
+diff --git a/src/drumkv1_lv2ui.h b/src/drumkv1_lv2ui.h
+index 4cf9c80..1fcdaf1 100644
+--- a/src/drumkv1_lv2ui.h
++++ b/src/drumkv1_lv2ui.h
+@@ -24,7 +24,6 @@
+ 
+ #include "drumkv1_ui.h"
+ 
+-#include "lv2.h"
+ #include "lv2/lv2plug.in/ns/extensions/ui/ui.h"
+ 
+ 
+-- 
+2.20.1
+

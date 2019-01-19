@@ -19,6 +19,10 @@ SRC_URI = " \
     git://github.com/TuriSc/hydrogen2drumkv1.py.git;name=hydrogen2drumkv1;destsuffix=hydrogen2drumkv1 \
     file://0001-no-Qt4-find-native-qt-build-tools-by-configure-options-auto.patch \
     file://0002-Remove-extra-rpath.patch \
+    \
+    file://lv2-backport/0001-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
+    file://lv2-backport/0002-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
+    file://lv2-backport/0003-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
 "
 SRC_URI[md5sum] = "9cab2f1900698f543143675cd03450c7"
 SRC_URI[sha256sum] = "c9ff3d10df3def095e07e94188814bf06c5e4ace6c68c7c13fa1f141e104410a"
