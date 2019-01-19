@@ -1,0 +1,30 @@
+From 2809cd94274b418e5d5223fe4aaf837e50b42db1 Mon Sep 17 00:00:00 2001
+From: rncbc <rncbc@rncbc.org>
+Date: Fri, 28 Dec 2018 21:44:57 +0000
+Subject: [PATCH 3/3] - Comply with next LV2 headers location post-1.14.0git.
+ (FIXED+)
+
+---
+ configure.ac | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index f25cd69..36ac09d 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -497,11 +497,10 @@ if test "x$ac_lv2" = "xyes"; then
+       ac_lv2 cflags="$ac_lv2_cflags $LV2_CFLAGS"
+       CFLAGS="$CFLAGS $LV2_CFLAGS"
+       CPPFLAGS="$CPPFLAGS $LV2_CFLAGS"
+-   else
+-      AC_CHECK_HEADER(lv2/lv2.h, [ac_lv2="yes"], [ac_lv2="no"])
+    fi
+    if test "x$ac_lv2" = "xyes"; then
+       AC_CHECK_HEADERS(
++         lv2/lv2plug.in/ns/ext/urid/urid.h \
+          lv2/lv2plug.in/ns/ext/atom/atom.h \
+          lv2/lv2plug.in/ns/ext/atom/forge.h \
+          lv2/lv2plug.in/ns/ext/atom/util.h,
+-- 
+2.20.1
+

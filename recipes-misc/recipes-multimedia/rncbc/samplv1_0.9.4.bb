@@ -17,6 +17,10 @@ SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
     file://0001-no-Qt4-find-native-qt-build-tools-by-configure-options-auto.patch \
     file://0002-Remove-extra-rpath.patch \
+    \
+    file://lv2-backport/0001-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
+    file://lv2-backport/0002-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
+    file://lv2-backport/0003-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
 "
 SRC_URI[md5sum] = "7976e61b9db5fd7acd4a777b81faec1b"
 SRC_URI[sha256sum] = "8dea62391c207dd1196d4e0aa0866d84f3b3e7f878a03e16091ad21b290d469d"
