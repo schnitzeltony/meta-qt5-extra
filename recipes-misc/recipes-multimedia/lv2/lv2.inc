@@ -2,7 +2,10 @@ SUMMARY = "LV2 is an open standard for audio plugins"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0383f162366b0c5a316292759a55d292"
 
-SRC_URI = "git://github.com/drobilla/lv2.git"
+SRC_URI = " \
+    git://github.com/drobilla/lv2.git \
+    file://0001-Output-more-details-on-import-error-to-catch-missing.patch \
+"
 S = "${WORKDIR}/git"
 SRCREV = "8b2c3e5ca003a9cdf22a71f50866f9c25b3036c5"
 PV = "1.14.0+git${SRCPV}"
