@@ -3,7 +3,7 @@ HOMEPAGE = "http://drobilla.net/software/ingen"
 LICENSE = "AGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=73f1eb20517c55bf9493b7dd6e480788"
 
-inherit waf pkgconfig gtk-icon-cache pack_audio_plugins python-dir
+inherit waf pkgconfig gtk-icon-cache pack_audio_plugins pythonnative
 
 DEPENDS += " \
     boost \
@@ -23,7 +23,17 @@ SRCREV = "cc3d7ef610e5f93086eb46406cc600ee81a23e98"
 S = "${WORKDIR}/git"
 PV = "0.5.1+git${SRCPV}"
 
-PACKAGECONFIG[doc] = ",--no-webkit,webkitgtk"
+DOCDEPENDS = " \
+    lv2-native \
+    doxygen-native \
+    graphviz-native \
+    gdk-pixbuf-native \
+    libpng-native \
+    python-rdflib-native \
+    python-isodate-native \
+    python-six-native \
+"
+PACKAGECONFIG[doc] = "--docs,,${DOCDEPENDS}"
 
 PACKAGES =+ "${PN}-standalone ${PN}-python"
 
