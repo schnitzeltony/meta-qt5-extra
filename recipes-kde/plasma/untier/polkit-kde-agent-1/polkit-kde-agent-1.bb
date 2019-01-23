@@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
 "
 
-inherit kde-plasma gettext
+inherit kde-plasma gettext distro_features_check
+
+REQUIRED_DISTRO_FEATURE = "polkit"
 
 DEPENDS += " \
     ki18n \
