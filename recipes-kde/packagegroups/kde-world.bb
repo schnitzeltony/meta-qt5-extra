@@ -12,7 +12,7 @@ RDEPENDS_${PN} = " \
     kpmcore \
     partitionmanager \
     phonon \
-    polkit-qt-1 \
+    ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit-qt-1", "",d)} \
     qca \
 "
 
