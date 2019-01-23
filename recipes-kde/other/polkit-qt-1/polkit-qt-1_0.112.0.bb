@@ -2,7 +2,9 @@ SUMMARY = "PolicyKit Qt wrapper"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7dbc59dc445b2261c4fb2f9466e3446a"
 
-inherit kde-base cmake_lib
+inherit kde-base cmake_lib distro_features_check
+
+REQUIRED_DISTRO_FEATURE = "polkit"
 
 DEPENDS += "polkit glib-2.0"
 
