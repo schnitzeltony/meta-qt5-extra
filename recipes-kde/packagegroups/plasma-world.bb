@@ -53,7 +53,7 @@ UNTIER = " \
     plasma-pa \
     plasma-vault \
     plasma-workspace-wallpapers \
-    polkit-kde-agent-1 \
+    ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit-kde-agent-1", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "powerdevil", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sddm-kcm", "",d)} \
     systemsettings \
