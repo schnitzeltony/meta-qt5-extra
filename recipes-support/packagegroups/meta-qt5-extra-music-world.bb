@@ -41,6 +41,7 @@ RDEPENDS_${PN} += " \
     ganv \
     ingen-lv2 ingen-standalone \
     lilv \
+    lv2 \
     mda-lv2 \
     patchage \
     serd \
@@ -74,7 +75,6 @@ RDEPENDS_${PN} += " \
     libxmp \
     lmms \
     lrdf \
-    lv2 \
     mixxx \
     muse \
     nekobee \
