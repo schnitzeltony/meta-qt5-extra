@@ -7,7 +7,7 @@ SRC_URI = " \
     file://0001-Output-more-details-on-import-error-to-catch-missing.patch \
 "
 S = "${WORKDIR}/git"
-SRCREV = "8b2c3e5ca003a9cdf22a71f50866f9c25b3036c5"
+SRCREV = "96a6283a5fe023c59113242631f337da5f0eb278"
 PV = "1.14.0+git${SRCPV}"
 
 inherit waf pkgconfig
