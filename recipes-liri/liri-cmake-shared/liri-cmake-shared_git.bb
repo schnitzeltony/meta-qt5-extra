@@ -10,7 +10,7 @@ inherit liri
 DEPENDS = "cmake-native"
 
 PV = "1.0.0+git${SRCPV}"
-SRCREV = "0ad790f57475471bf4e505ef36edcb8eeefe1237"
+SRCREV = "655e4a9130c3c5293e3d8e7e72fba2a945f8d1c8"
 S = "${WORKDIR}/git"
 
 FILES_${PN}-dev += "${datadir}/LiriCMakeShared"
