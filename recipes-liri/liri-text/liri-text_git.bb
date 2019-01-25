@@ -14,7 +14,7 @@ DEPENDS += " \
 
 PV = "0.4.1+git${SRCPV}"
 
-SRCREV = "bd3ad1463fc5f5893caf122c6ee068e3203b91dd"
+SRCREV = "3f5b6040dcddfa86dd43f456c7e7dd67d8f1ade8"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += " \
