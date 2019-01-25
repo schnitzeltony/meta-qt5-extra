@@ -9,7 +9,7 @@ inherit liri gtk-icon-cache
 
 PV = "0.0.0+git${SRCPV}"
 
-SRCREV = "c914ffea326f24dcf8fd7ed799c4d001bd099ce3"
+SRCREV = "fb91e85c560a451879431eaaa4d8985d9ec3bfad"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
