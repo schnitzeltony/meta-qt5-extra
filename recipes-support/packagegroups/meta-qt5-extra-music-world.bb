@@ -40,6 +40,7 @@ RDEPENDS_${PN} += " \
     \
     ganv \
     ingen-lv2 ingen-standalone \
+    jalv \
     lilv \
     lv2 \
     mda-lv2 \
