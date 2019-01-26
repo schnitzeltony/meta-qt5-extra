@@ -140,6 +140,7 @@ RDEPENDS_${PN} += " \
     tuna.lv2 \
     \
     \
+    ykchorus ykchorus-dssi ykchorus-lv2 ykchorus-vst \
     yoshimi \
     zam-plugins-standalone zam-plugins-ladspa zam-plugins-lv2 zam-plugins-vst \
     ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "zyn-fusion-dssi zyn-fusion-lv2 zyn-fusion-vst zyn-fusion-standalone", "zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst zynaddsubfx-standalone",d)} \
