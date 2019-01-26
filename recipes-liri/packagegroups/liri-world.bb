@@ -11,6 +11,7 @@ RDEPENDS_${PN} = " \
     liri-files \
     liri-fluid \
     liri-libliri \
+    liri-materialdecoration \
     liri-networkmanager \
     liri-player \
     liri-power-manager \
