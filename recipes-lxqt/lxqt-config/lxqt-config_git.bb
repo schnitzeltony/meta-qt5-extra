@@ -6,15 +6,12 @@ inherit lxqt distro_features_check gtk-icon-cache
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "qtsvg liblxqt libkscreen libxcursor"
+DEPENDS += "qtsvg liblxqt libkscreen libxcursor xf86-input-libinput"
 
-SRCREV = "9bd6ae9205909f70101aebaa7f316478965905fe"
-PV = "0.13.0"
+SRCREV = "d69038af179f02601deeb68110fd905c403dd4d7"
+PV = "0.14.0"
 
-# there are no dev files / pack liblxqt-config-cursor.so correctly
 FILES_${PN} += " \
     ${datadir}/icons \
     ${datadir}/lxqt/icons \
-    ${libdir}/liblxqt-config-cursor.so \
 "
-FILES_${PN}-dev = ""
