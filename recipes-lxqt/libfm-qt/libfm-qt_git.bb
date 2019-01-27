@@ -13,7 +13,10 @@ CMAKE_ALIGN_FILES_FIND = "*targets.cmake"
 SRCREV = "781bbe3da673b3e9d5a141163b64959234e211b1"
 PV = "0.14.0"
 
-FILES_${PN} += "${datadir}/mime"
+FILES_${PN} += " \
+    ${datadir}/mime \
+    ${datadir}/${BPN}/*.list \
+"
 
 RRECOMMENDS_${PN} = "gvfs gvfsd-trash eject"
 
