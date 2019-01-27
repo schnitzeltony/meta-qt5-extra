@@ -10,8 +10,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
 inherit cmake_qt5_extra qmake5_base pkgconfig systemd useradd distro_features_check
 
 DEPENDS += "extra-cmake-modules-native qtbase qtdeclarative qttools libxcb"
-# REVISIT optionals
-DEPENDS += "libpam"
+
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
+PACKAGECONFIG[pam] = "-DENABLE_PAM=ON, -DENABLE_PAM=OFF, libpam"
 
 # Note: we should check default config changes by running sddm --example-config on target.
 # This is usually done during build but does not work for our cross environment
@@ -38,17 +39,21 @@ do_configure_append() {
     sed -i 's:${STAGING_DIR_HOST}.*${libdir}:${libdir}:g' ${B}/src/common/Constants.h
 }
 
+install_pam() {
+    install -d ${D}${sysconfdir}/pam.d
+    install -m 644 ${WORKDIR}/sddm.pam ${D}${sysconfdir}/pam.d/sddm
+    install -m 644 ${WORKDIR}/sddm-autologin.pam ${D}${sysconfdir}/pam.d/sddm-autologin
+}
+
 do_install_append() {
     install -d ${D}/${sysconfdir}/sddm.conf.d
     install -m 644 ${WORKDIR}/sddm.conf ${D}/${sysconfdir}/sddm.conf.d/00-default.conf
 
-    install -d ${D}${sysconfdir}/pam.d
-    install -m 644 ${WORKDIR}/sddm.pam ${D}${sysconfdir}/pam.d/sddm
-    install -m 644 ${WORKDIR}/sddm-autologin.pam ${D}${sysconfdir}/pam.d/sddm-autologin
-
     install -d ${D}${localstatedir}/lib/sddm
     chown -R sddm:sddm ${D}${localstatedir}/lib/sddm
     chmod 0750 ${D}${localstatedir}/lib/sddm
+
+    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'install_pam', '', d)}
 }
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
@@ -69,7 +74,7 @@ RDEPENDS_${PN} += " \
     qtbase-plugins \
     qtdeclarative-plugins \
     qtdeclarative-qmlplugins \
-    pam-plugin-tally \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam-plugin-tally', '', d)} \
 "
 
 RRECOMMENDS_${PN += " \
