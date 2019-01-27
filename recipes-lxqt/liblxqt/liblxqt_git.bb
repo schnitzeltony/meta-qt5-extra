@@ -24,6 +24,6 @@ RREPLACES_${PN} += "lxqt-common"
 RCONFLICTS_${PN} += "lxqt-common"
 
 FILES_${PN} += " \
-    /usr/share/polkit-1/ \
-    /usr/share/lxqt/ \
+    ${datadir}/polkit-1/ \
+    ${datadir}/lxqt/power.conf \
 "
