@@ -1,4 +1,4 @@
-inherit cmake_qt5_extra
+inherit cmake_qt5_extra qt5-translation
 
 HOMEPAGE = "http://lxqt.org/"
 
