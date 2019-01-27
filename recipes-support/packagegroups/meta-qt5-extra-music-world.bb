@@ -58,6 +58,7 @@ RDEPENDS_${PN} += " \
     ftgl \
     gmidimonitor \
     guitarix \
+    gxplugins.lv2 \
     helm-standalone helm-lv2 helm-vst \
     hydrogen hydrogen-drumkits \
     infamousplugins \
