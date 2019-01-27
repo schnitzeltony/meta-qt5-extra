@@ -15,7 +15,6 @@ RDEPENDS_${PN} = " \
     lxqt-admin \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-config", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-globalkeys", "",d)} \
-    lxqt-l10n \
     lxqt-notificationd \
     lxqt-openssh-askpass \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-panel", "",d)} \
@@ -31,6 +30,5 @@ RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pcmanfm-qt", "",d)} \
     qtermwidget \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qterminal", "",d)} \
-    lxqt-l10n \
     lxqt-themes \
 "
