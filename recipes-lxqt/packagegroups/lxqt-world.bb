@@ -6,29 +6,31 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "compton-conf", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libfm-qt", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "liblxqt", "",d)} \
     libqtxdg \
     libsysstat \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lximage-qt", "",d)} \
     lxmenu-data \
-    lxqt-about \
-    lxqt-admin \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-about", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-admin", "",d)} \
+    lxqt-build-tools \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-config", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-globalkeys", "",d)} \
-    lxqt-notificationd \
-    lxqt-openssh-askpass \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-notificationd", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-openssh-askpass", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-panel", "",d)} \
-    lxqt-policykit \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-policykit", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-powermanagement", "",d)} \
-    lxqt-qtplugin \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-qtplugin", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-runner", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-session", "",d)} \
-    lxqt-sudo \
-    menu-cache \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "obconf-qt", "",d)} \
-    pavucontrol-qt \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pcmanfm-qt", "",d)} \
-    qtermwidget \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qterminal", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-sudo", "",d)} \
     lxqt-themes \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "obconf-qt", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pavucontrol-qt", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pcmanfm-qt", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qps", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qterminal", "",d)} \
+    qtermwidget \
 "
