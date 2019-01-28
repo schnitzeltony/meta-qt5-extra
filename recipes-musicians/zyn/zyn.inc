@@ -52,7 +52,7 @@ do_compile_append() {
     # build ttl-files must be done in quemu
     for sofile in `cat ${WORKDIR}/lv2-ttl-generator-data`; do
         cd `dirname ${sofile}`
-        echo "QEMU v2-ttl-generator for ${sofile}..."
+        echo "QEMU lv2-ttl-generator for ${sofile}..."
         ${@qemu_run_binary_local(d, '${STAGING_DIR_TARGET}', '${B}/src/Plugin/lv2-ttl-generator')} ${sofile} || echo "ERROR: for QEMU lv2-ttl-generator for ${sofile}!"
     done
 }
