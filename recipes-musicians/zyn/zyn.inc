@@ -2,7 +2,7 @@ HOMEPAGE = "http://zynaddsubfx.sourceforge.net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=21fa88a5e50a1c608d22612c1fbe1971"
 
-inherit cmake lv2-postinst-helper pkgconfig gtk-icon-cache distro_features_check pack_audio_plugins
+inherit cmake qemu-ext pkgconfig gtk-icon-cache distro_features_check pack_audio_plugins
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
@@ -36,28 +36,24 @@ S = "${WORKDIR}/git"
 
 do_configure_prepend() {
     # reconfigure?
-    if [ ! -f ${LV2-TURTLE-BUILD-DATA} ] ; then
+    if [ ! -f ${WORKDIR}/lv2-ttl-generator-data ] ; then
         # We cannot run lv2-ttl-generator in cross environment so
         # manipulate CMakeLists.txt to keep commands in file
-        sed -i 's|../../lv2-ttl-generator|lv2-ttl-generator|g' `find ${S} -name CMakeLists.txt`
-        sed -i 's|lv2-ttl-generator $<TARGET_FILE.*|echo \"&\" >> ${LV2-TURTLE-BUILD-DATA}|g' `find ${S} -name CMakeLists.txt`
+        sed -i \
+            -e 's|../../lv2-ttl-generator|echo|g' \
+            -e 's|echo $<TARGET_FILE.*|& >> ${WORKDIR}/lv2-ttl-generator-data|g' \
+            `find ${S} -name CMakeLists.txt`
     else
-        rm -f ${LV2-TURTLE-BUILD-DATA}
+        rm -f ${WORKDIR}/lv2-ttl-generator-data
     fi
 }
 
 do_compile_append() {
-    # Create dummy lv2-turtles to make install happy
-    cd ${B}/src/Plugin/
-    for dir in `find -type d -mindepth 1 -maxdepth 1`; do
-        if [ -d $dir/lv2 ] ; then
-            echo ${LV2-DUMMY-TURTLE-STR} > $dir/lv2/manifest.ttl
-            echo ${LV2-DUMMY-TURTLE-STR} > $dir/lv2/presets.ttl
-            for so in `find $dir -name '*.so' -mindepth 2 -maxdepth 2`; do
-                pluginname=`basename $so | sed 's|.so||g'`
-                echo ${LV2-DUMMY-TURTLE-STR} > $dir/lv2/$pluginname.ttl
-            done
-        fi
+    # build ttl-files must be done in quemu
+    for sofile in `cat ${WORKDIR}/lv2-ttl-generator-data`; do
+        cd `dirname ${sofile}`
+        echo "QEMU v2-ttl-generator for ${sofile}..."
+        ${@qemu_run_binary_local(d, '${STAGING_DIR_TARGET}', '${B}/src/Plugin/lv2-ttl-generator')} ${sofile} || echo "ERROR: for QEMU lv2-ttl-generator for ${sofile}!"
     done
 }
 
