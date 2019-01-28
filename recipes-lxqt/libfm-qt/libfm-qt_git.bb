@@ -6,7 +6,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 inherit lxqt pkgconfig distro_features_check cmake_auto_align_paths cmake_lib mime
 
-DEPENDS += "qtx11extras glib-2.0 libfm menu-cache libxcb liblxqt"
+DEPENDS += "qtx11extras glib-2.0 libexif menu-cache libxcb liblxqt"
 
 CMAKE_ALIGN_FILES_FIND = "*targets.cmake"
 
