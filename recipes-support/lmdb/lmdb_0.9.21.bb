@@ -10,20 +10,12 @@ SRC_URI = " \
 SRCREV = "60d500206a108b2c64ca7e36b0113b2cd3711b98"
 S = "${WORKDIR}/git/libraries/liblmdb"
 
-inherit autotools-brokensep
-
-
 do_compile() {
     oe_runmake "CC=${CC}"
 }
 
 do_install() {
-    install -d ${D}${bindir}
-    install -d ${D}${libdir}
-    install -d ${D}${includedir}
-    install -d ${D}${mandir}
-    sed -i 's:\$(prefix)/man:${mandir}:' Makefile
-    oe_runmake DESTDIR=${D} prefix=${prefix} libprefix=${libdir} manprefix=${mandir} install
+    oe_runmake DESTDIR=${D} prefix=${prefix} libdir=${libdir} mandir=${mandir} install
     chown -R root:root ${D}${bindir}
     chown -R root:root ${D}${libdir}
 }
