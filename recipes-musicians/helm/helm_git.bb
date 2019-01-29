@@ -3,7 +3,7 @@ HOMEPAGE = "http://tytel.org/helm/"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-inherit autotools-brokensep qemu-ext distro_features_check gtk-icon-cache pack_audio_plugins
+inherit qemu-ext distro_features_check gtk-icon-cache pack_audio_plugins
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
@@ -22,11 +22,9 @@ DEPENDS += " \
 
 SRC_URI += " \
     git://github.com/mtytel/helm.git \
-    file://0001-Makefile-remove-machine-detection-it-won-t-work-for-.patch \
-    file://0002-do-not-create-ttl-files-it-won-t-work-fo-cross.patch \
-    file://0003-use-standard-vst-path.patch \
-    file://0004-set-VECTORIZE_LOOP-for-gcc.patch \
-    file://0005-use-single-precision-floats-it-performs-much-better.patch \
+    file://0001-do-not-create-ttl-files-it-won-t-work-fo-cross.patch \
+    file://0002-set-VECTORIZE_LOOP-for-gcc.patch \
+    file://0003-use-single-precision-floats-it-performs-much-better.patch \
 "
 SRCREV = "927d2ed27f71a735c3ff2a1226ce3129d1544e7e"
 PV = "0.9.0"
@@ -49,12 +47,14 @@ do_configure_prepend() {
     IFS="$OIFS"
 }
 
-do_compile_append() {
+do_compile() {
+    oe_runmake 'SIMDFLAGS='
     ${@qemu_run_binary_local(d, '${STAGING_DIR_TARGET}', '${S}/builds/linux/LV2/lv2_ttl_generator')} ${S}/builds/linux/LV2/build/helm.so
     cp *.ttl ${S}/builds/linux/LV2/helm.lv2/
 }
 
-do_install_append() {
+do_install() {
+    oe_runmake 'DESTDIR=${D}' 'SIMDFLAGS=' 'LIBDIR=${libdir}' 'VSTDIR=${D}${libdir}/vst' install
     rm -f ${datadir}/helm/patches/*.patch
     rm -f ${datadir}/helm/patches/series
 }
