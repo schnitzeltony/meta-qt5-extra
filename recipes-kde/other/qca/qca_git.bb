@@ -23,7 +23,10 @@ SRCREV = "32343842d359a60e3619f97aac983d587f6eca16"
 S = "${WORKDIR}/git"
 PV = "2.1.3+git${SRCPV}"
 
-EXTRA_OECMAKE += "-DQCA_FEATURE_INSTALL_DIR=${libdir}${QT_DIR_NAME}/mkspecs/features"
+EXTRA_OECMAKE += " \
+    -DQCA_FEATURE_INSTALL_DIR=${libdir}${QT_DIR_NAME}/mkspecs/features \
+    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
+"
 
 FILES_${PN} += "${libdir}/qca-qt5/crypto"
 
