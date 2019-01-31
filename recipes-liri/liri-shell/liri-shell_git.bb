@@ -28,6 +28,7 @@ DEPENDS += " \
 
 EXTRA_OECMAKE += " \
     -DINSTALL_SYSCONFDIR=${sysconfdir} \
+    -DLIRI_SHELL_DEVELOPMENT_BUILD=ON \
 "
 
 RDEPENDS_${PN} += " \
