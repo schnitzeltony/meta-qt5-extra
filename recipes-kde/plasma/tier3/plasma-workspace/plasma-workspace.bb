@@ -19,6 +19,7 @@ DEPENDS += " \
     kactivities \
     krunner \
     kjsembed \
+    kholidays \
     knotifyconfig \
     kdesu \
     knewstuff \
@@ -36,7 +37,6 @@ DEPENDS += " \
     networkmanager-qt \
     libksysguard \
     libkscreen \
-    libdbusmenu-qt5 \
     kwin \
     kpackage-native \
     kdoctools-native \
