@@ -34,8 +34,8 @@ SRC_URI = " \
     file://0001-Remove-freebsd-compilation-support.patch \
     file://0002-Hardcode-projectM-configuration-file-location.patch \
 "
-SRC_URI[md5sum] = "69ad876e40321d81284711e90a75624d"
-SRC_URI[sha256sum] = "dd6ee9ab475a18bf2594c59504f66f8ae870a79db5fad960fb1e2150cc9b48f7"
+SRC_URI[md5sum] = "fd4394057e51f5748a12554ee2483613"
+SRC_URI[sha256sum] = "98ce65685f686296db31a697121a6d86768ff34c30f4dc99ed56e0d10682f7fe"
 
 inherit cmake_qt5
 
