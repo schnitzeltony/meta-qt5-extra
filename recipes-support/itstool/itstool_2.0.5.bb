@@ -8,8 +8,8 @@ inherit autotools python3native
 DEPENDS = "python3-native python3-lxml-native"
 
 SRC_URI = "http://files.itstool.org/${BPN}/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "9415ddf6a12012ff688549d2ed767bc5"
-SRC_URI[sha256sum] = "97c208b51da33e0b553e830b92655f8deb9132f8fbe9a646771f95c33226eb60"
+SRC_URI[md5sum] = "655c6f78fc64faee45adcc45ccc5a57e"
+SRC_URI[sha256sum] = "100506f8df62cca6225ec3e631a8237e9c04650c77495af4919ac6a100d4b308"
 
 do_install_append() {
     # fix shebang of main script
