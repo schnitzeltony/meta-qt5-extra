@@ -9,7 +9,7 @@ inherit qmake5 gtk-icon-cache
 DEPENDS += "connman qtbase"
 
 SRC_URI = "git://github.com/andrew-bibb/cmst.git"
-SRCREV = "cf41767dfbb849f9c05bcdfc7fcb6a37c90b2ad0"
+SRCREV = "7778754988c3b68b3cfa757c45ed2e44dbe35dd8"
 S = "${WORKDIR}/git"
 
 # the *.pro file use some paths, e.g. for install which require ${B} = ${S}
@@ -21,10 +21,10 @@ EXTRA_QMAKEVARS_PRE += "DISTRO=debian"
 PACKAGES =+ "${PN}-big-icon"
 
 FILES_${PN} += " \
-  ${datadir}/dbus-1/system-services/org.cmst.roothelper.service \
-  ${datadir}/metainfo/org.cmst.cmst.appdata.xml \
-  ${datadir}/cmst/autostart/cmst-autostart.desktop \
-  ${datadir}/licenses/cmst/LICENSE \
+    ${datadir}/dbus-1/system-services/org.cmst.roothelper.service \
+    ${datadir}/metainfo/org.cmst.cmst.appdata.xml \
+    ${datadir}/cmst/autostart/cmst-autostart.desktop \
+    ${datadir}/licenses/cmst/LICENSE \
 "
 
 FILES_${PN}-big-icon += "${datadir}/icons/hicolor/???x???/*"
