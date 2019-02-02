@@ -5,11 +5,10 @@ HOMEPAGE = "http://toolkit.translatehouse.org/"
 
 inherit setuptools
 
-SRC_URI = " \
-    https://github.com/translate/translate/releases/download/${PV}/translate-toolkit-${PV}.tar.bz2 \
-"
-SRC_URI[md5sum] = "f9997a0deb3f1767bb20665a47cd2708"
-SRC_URI[sha256sum] = "dcbbf49058e4196a06e988d9dc1e762321ab0d057c4be035b84e3c11353fc2f8"
+SRC_URI = "git://github.com/translate/translate.git"
+SRCREV = "44fadd143869f3b03bb93a401891fe539543b2b2"
+S = "${WORKDIR}/git"
+PV = "2.3.1"
 
 do_install_append() {
     # move files to correct location
