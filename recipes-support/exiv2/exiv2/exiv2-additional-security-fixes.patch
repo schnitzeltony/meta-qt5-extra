@@ -1,0 +1,176 @@
+diff --git a/src/actions.cpp b/src/actions.cpp
+index 0ebe850..3cd398e 100644
+--- a/src/actions.cpp
++++ b/src/actions.cpp
+@@ -59,6 +59,7 @@ EXIV2_RCSID("@(#) $Id$")
+ #include <ctime>
+ #include <cmath>
+ #include <cassert>
++#include <stdexcept>
+ #include <sys/types.h>                  // for stat()
+ #include <sys/stat.h>                   // for stat()
+ #ifdef EXV_HAVE_UNISTD_H
+@@ -236,33 +237,43 @@ namespace Action {
+     }
+
+     int Print::run(const std::string& path)
+-    try {
+-        path_ = path;
+-        int rc = 0;
+-        Exiv2::PrintStructureOption option = Exiv2::kpsNone ;
+-        switch (Params::instance().printMode_) {
+-            case Params::pmSummary:   rc = printSummary();     break;
+-            case Params::pmList:      rc = printList();        break;
+-            case Params::pmComment:   rc = printComment();     break;
+-            case Params::pmPreview:   rc = printPreviewList(); break;
+-            case Params::pmStructure: rc = printStructure(std::cout,Exiv2::kpsBasic)     ; break;
+-            case Params::pmRecursive: rc = printStructure(std::cout,Exiv2::kpsRecursive) ; break;
+-
+-            case Params::pmXMP:
+-                 option = option == Exiv2::kpsNone ? Exiv2::kpsXMP        : option;  // drop
+-            case Params::pmIccProfile:{
+-                 option = option == Exiv2::kpsNone ? Exiv2::kpsIccProfile : option;
+-                 _setmode(_fileno(stdout),O_BINARY);
+-                 rc = printStructure(std::cout,option);
+-            } break;
++    {
++        try {
++            path_ = path;
++            int rc = 0;
++            Exiv2::PrintStructureOption option = Exiv2::kpsNone ;
++            switch (Params::instance().printMode_) {
++                case Params::pmSummary:   rc = printSummary();     break;
++                case Params::pmList:      rc = printList();        break;
++                case Params::pmComment:   rc = printComment();     break;
++                case Params::pmPreview:   rc = printPreviewList(); break;
++                case Params::pmStructure: rc = printStructure(std::cout,Exiv2::kpsBasic)     ; break;
++                case Params::pmRecursive: rc = printStructure(std::cout,Exiv2::kpsRecursive) ; break;
++
++                case Params::pmXMP:
++                    if (option == Exiv2::kpsNone)
++                        option = Exiv2::kpsXMP;
++                    // drop
++                case Params::pmIccProfile:
++                    if (option == Exiv2::kpsNone)
++                        option = Exiv2::kpsIccProfile;
++                    _setmode(_fileno(stdout),O_BINARY);
++                    rc = printStructure(std::cout,option);
++                    break;
++            }
++            return rc;
+         }
+-        return rc;
+-    }
+-    catch(const Exiv2::AnyError& e) {
+-        std::cerr << "Exiv2 exception in print action for file "
+-                  << path << ":\n" << e << "\n";
+-        return 1;
+-    } // Print::run
++        catch(const Exiv2::AnyError& e) {
++            std::cerr << "Exiv2 exception in print action for file "
++                      << path << ":\n" << e << "\n";
++            return 1;
++        }
++        catch(const std::overflow_error& e) {
++            std::cerr << "std::overflow_error exception in print action for file "
++                      << path << ":\n" << e.what() << "\n";
++            return 1;
++        }
++    }
+
+     int Print::printStructure(std::ostream& out, Exiv2::PrintStructureOption option)
+     {
+diff --git a/src/error.cpp b/src/error.cpp
+index e90a9c0..5d63957 100644
+--- a/src/error.cpp
++++ b/src/error.cpp
+@@ -109,6 +109,8 @@ namespace {
+         { 55, N_("tiff directory length is too large") },
+         { 56, N_("invalid type value detected in Image::printIFDStructure") },
+         { 57, N_("invalid memory allocation request") },
++        { 58, N_("corrupted image metadata") },
++        { 59, N_("Arithmetic operation overflow") },
+     };
+
+ }
+diff --git a/src/nikonmn.cpp b/src/nikonmn.cpp
+index 571ab80..34bf601 100644
+--- a/src/nikonmn.cpp
++++ b/src/nikonmn.cpp
+@@ -299,6 +299,8 @@ namespace Exiv2 {
+                                                const Value& value,
+                                                const ExifData* exifData)
+     {
++        if ( ! exifData ) return os << "undefined" ;
++
+         if ( value.count() >= 9 ) {
+             ByteOrder bo = getKeyString("Exif.MakerNote.ByteOrder",exifData) == "MM" ? bigEndian : littleEndian;
+             byte      p[4];
+diff --git a/src/pentaxmn.cpp b/src/pentaxmn.cpp
+index 4fc38be..b22cb43 100644
+--- a/src/pentaxmn.cpp
++++ b/src/pentaxmn.cpp
+@@ -1167,6 +1167,8 @@ namespace Exiv2 {
+
+     std::ostream& PentaxMakerNote::printShutterCount(std::ostream& os, const Value& value, const ExifData* metadata)
+     {
++        if ( ! metadata ) return os << "undefined" ;
++
+         ExifData::const_iterator dateIt = metadata->findKey(
+                 ExifKey("Exif.PentaxDng.Date"));
+         if (dateIt == metadata->end()) {
+diff --git a/src/pngchunk.cpp b/src/pngchunk.cpp
+index da4ccd0..4dcca4d 100644
+--- a/src/pngchunk.cpp
++++ b/src/pngchunk.cpp
+@@ -68,6 +68,8 @@ namespace Exiv2 {
+                                    int*           outWidth,
+                                    int*           outHeight)
+     {
++        assert(data.size_ >= 8);
++
+         // Extract image width and height from IHDR chunk.
+
+         *outWidth  = getLong((const byte*)data.pData_,     bigEndian);
+diff --git a/src/pngimage.cpp b/src/pngimage.cpp
+index 11b4198..ed7399a 100644
+--- a/src/pngimage.cpp
++++ b/src/pngimage.cpp
+@@ -441,7 +441,9 @@ namespace Exiv2 {
+ #ifdef DEBUG
+                     std::cout << "Exiv2::PngImage::readMetadata: Found IHDR chunk (length: " << dataOffset << ")\n";
+ #endif
+-                    PngChunk::decodeIHDRChunk(cdataBuf, &pixelWidth_, &pixelHeight_);
++                    if (cdataBuf.size_ >= 8) {
++                        PngChunk::decodeIHDRChunk(cdataBuf, &pixelWidth_, &pixelHeight_);
++                    }
+                 }
+                 else if (!memcmp(cheaderBuf.pData_ + 4, "tEXt", 4))
+                 {
+diff --git a/src/tiffvisitor.cpp b/src/tiffvisitor.cpp
+index 74f8d07..fad39b6 100644
+--- a/src/tiffvisitor.cpp
++++ b/src/tiffvisitor.cpp
+@@ -1493,6 +1493,11 @@ namespace Exiv2 {
+         }
+         p += 4;
+         uint32_t isize= 0; // size of Exif.Sony1.PreviewImage
++
++        if (count > std::numeric_limits<uint32_t>::max() / typeSize) {
++            throw Error(59);
++        }
++
+         uint32_t size = typeSize * count;
+         uint32_t offset = getLong(p, byteOrder());
+         byte* pData = p;
+@@ -1536,7 +1541,9 @@ namespace Exiv2 {
+             }
+         }
+         Value::AutoPtr v = Value::create(typeId);
+-        assert(v.get());
++        if (!v.get()) {
++            throw Error(58);
++        }
+         if ( !isize ) {
+         	v->read(pData, size, byteOrder());
+         } else {
