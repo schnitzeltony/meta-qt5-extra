@@ -138,6 +138,7 @@ RDEPENDS_${PN} += " \
     fil4.lv2 \
     meters.lv2 \
     midifilter.lv2 \
+    sisco.lv2 \
     tuna.lv2 \
     \
     \
