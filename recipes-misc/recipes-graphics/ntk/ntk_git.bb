@@ -22,6 +22,10 @@ DEPENDS = " \
     libxft \
 "
 
+WAF_EXTRA_CONF = " \
+    --libdir=${libdir} \
+"
+
 do_install_append() {
     rm ${D}${libdir}/libntk.a
     rm ${D}${libdir}/libntk.a.1
