@@ -24,6 +24,13 @@ SRC_URI = " \
 SRC_URI[md5sum] = "db0ecb4f1a647bdaf7e43ef2ca2f7883"
 SRC_URI[sha256sum] = "86bed06b7115b64441d32ae53634fcc0539a50b9b648ef87443f936782f6c3ca"
 
+EXTRA_OEMAKE += " \
+    INSTALL_LIBDIR=${libdir} \
+    INSTALL_VAMPDIR=${libdir}/vamp \
+    INSTALL_LADSPADIR=${libdir}/ladspa \
+    INSTALL_PKGDIR=${libdir}/pkgconfig \
+"
+
 CPPFLAGS += "-ftree-vectorize -DPROCESS_SAMPLE_TYPE=float"
 
 FILES_${PN} += " \
