@@ -11,7 +11,8 @@ DEPENDS += " \
 "
 
 EXTRA_OECMAKE += " \
-  ${@bb.utils.contains('TUNE_FEATURES', 'neon', '-DFFT_LIB=fftw3f', '', d)} \
+    ${@bb.utils.contains('TUNE_FEATURES', 'neon', '-DFFT_LIB=fftw3f', '', d)} \
+    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
 "
 
 SRC_URI = "https://bitbucket.org/acoustid/${BPN}/downloads/${BPN}-${PV}.tar.gz"
