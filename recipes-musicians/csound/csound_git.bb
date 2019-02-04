@@ -45,6 +45,7 @@ LUA_VERSION = "5.3"
 EXTRA_OECMAKE += " \
     -DUSE_DOUBLE=OFF \
     -DPYTHON_MODULE_INSTALL_DIR=${PYTHON_SITEPACKAGES_DIR} \
+    -DUSE_LIB64=${@bb.utils.contains("baselib", "lib64", "ON", "OFF",d)} \
 "
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)}"
