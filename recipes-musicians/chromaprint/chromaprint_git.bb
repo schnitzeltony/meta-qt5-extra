@@ -10,11 +10,13 @@ DEPENDS += " \
     ffmpeg \
 "
 
+
+SRC_URI = "git://github.com/acoustid/chromaprint.git"
+SRCREV = "ecd2edd73315530d4f9c1b1186aee24c63a7b6c2"
+PV = "1.4.3"
+S = "${WORKDIR}/git"
+
 EXTRA_OECMAKE += " \
     ${@bb.utils.contains('TUNE_FEATURES', 'neon', '-DFFT_LIB=fftw3f', '', d)} \
     -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
 "
-
-SRC_URI = "https://bitbucket.org/acoustid/${BPN}/downloads/${BPN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "895c42ba6d769840a2e10e507ad9f14d"
-SRC_URI[sha256sum] = "989609a7e841dd75b34ee793bd1d049ce99a8f0d444b3cea39d57c3e5d26b4d4"
