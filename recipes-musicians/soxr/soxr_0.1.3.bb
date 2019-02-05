@@ -11,4 +11,7 @@ SRC_URI[sha256sum] = "b111c15fdc8c029989330ff559184198c161100a59312f5dc19ddeb9b5
 
 S = "${WORKDIR}/${BPN}-${PV}-Source"
 
-EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+EXTRA_OECMAKE += " \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
+"
