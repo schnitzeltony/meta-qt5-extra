@@ -11,6 +11,7 @@ RDEPENDS_${PN} = " \
     katomic \
     kblocks \
     kbounce \
+    kbreakout \
     kdiamond \
     kmahjongg \
     kmines \
