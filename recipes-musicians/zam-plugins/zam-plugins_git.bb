@@ -50,7 +50,7 @@ do_compile_append() {
 }
 
 do_install() {
-    ${MAKE} DESTDIR=${D} PREFIX=${prefix} install
+    ${MAKE} DESTDIR=${D} PREFIX= LIBDIR=${libdir} BINDIR=${bindir} install
 }
 
 PACKAGES =+ "${PN}-standalone"
