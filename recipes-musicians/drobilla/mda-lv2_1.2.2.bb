@@ -13,5 +13,9 @@ SRC_URI = "http://download.drobilla.net/${BPN}-${PV}.tar.bz2"
 SRC_URI[md5sum] = "1962f48c54eafe52a3d2471cd3072aa8"
 SRC_URI[sha256sum] = "a476c31ed9f8b009ebacc32a02d06ba9584c0d0d03f03dd62b1354d10a030442"
 
+EXTRA_OECONF = " \
+    --lv2dir=${libdir}/lv2 \
+"
+
 FILES_${PN} += "${libdir}/lv2"
 
