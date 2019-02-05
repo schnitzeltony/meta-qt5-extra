@@ -20,21 +20,21 @@ do_compile_prepend() {
 do_install() {
     # stolen https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=qm-dsp
     cd ${S}
-    install -Dm644 -t ${D}/usr/lib libqm-dsp.a
-    install -Dm644 -t ${D}/usr/include/qm-dsp/base base/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/chromagram dsp/chromagram/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/keydetection dsp/keydetection/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/mfcc dsp/mfcc/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/onsets dsp/onsets/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/phasevocoder dsp/phasevocoder/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/rateconversion dsp/rateconversion/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/rhythm dsp/rhythm/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/segmentation dsp/segmentation/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/signalconditioning dsp/signalconditioning/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/tempotracking dsp/tempotracking/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/tonal dsp/tonal/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/transforms dsp/transforms/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/dsp/wavelet dsp/wavelet/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/maths maths/*.h 
-    install -Dm644 -t ${D}/usr/include/qm-dsp/thread thread/*.h 
+    install -Dm644 -t ${D}${libdir} libqm-dsp.a
+    install -Dm644 -t ${D}${includedir}/qm-dsp/base base/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/chromagram dsp/chromagram/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/keydetection dsp/keydetection/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/mfcc dsp/mfcc/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/onsets dsp/onsets/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/phasevocoder dsp/phasevocoder/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/rateconversion dsp/rateconversion/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/rhythm dsp/rhythm/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/segmentation dsp/segmentation/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/signalconditioning dsp/signalconditioning/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/tempotracking dsp/tempotracking/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/tonal dsp/tonal/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/transforms dsp/transforms/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/dsp/wavelet dsp/wavelet/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/maths maths/*.h 
+    install -Dm644 -t ${D}${includedir}/qm-dsp/thread thread/*.h 
 }
