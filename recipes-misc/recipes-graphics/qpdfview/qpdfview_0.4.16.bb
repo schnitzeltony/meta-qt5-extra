@@ -11,6 +11,10 @@ SRC_URI[sha256sum] = "fad416e8fefc3057fa1b8d12d964c7eccd16dffe0307a0d6e9d55a5432
 inherit qmake5
 
 QMAKE_PROFILES = "${S}/qpdfview.pro"
-EXTRA_QMAKEVARS_PRE += "CONFIG+=without_ps CONFIG+=without_djvu"
+EXTRA_QMAKEVARS_PRE += " \
+    CONFIG+=without_ps \
+    CONFIG+=without_djvu \
+    PLUGIN_INSTALL_PATH=${libdir}/${BPN} \
+"
 
 FILES_${PN} += "${datadir}"
