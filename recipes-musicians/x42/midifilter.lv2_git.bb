@@ -16,6 +16,7 @@ S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE += " \
     PREFIX=${prefix} \
+    LV2DIR=${libdir}/lv2 \
     STRIP=echo \
 "
 
