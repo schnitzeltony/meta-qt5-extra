@@ -3,7 +3,7 @@ HOMEPAGE = "http://setbfree.org/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4641e94ec96f98fabc56ff9cc48be14b"
 
-inherit autotools-brokensep pkgconfig gtk-icon-cache
+inherit pkgconfig gtk-icon-cache
 
 DEPENDS += " \
     virtual/libgl \
@@ -30,12 +30,13 @@ S = "${WORKDIR}/git"
 PV = "0.8.8"
 
 EXTRA_OEMAKE += " \
-    PREFIX=${prefix} \
     STRIP=echo \
     FONTFILE=${prefix}/share/fonts/ttf/VeraBd.ttf \
 "
 
-do_install_append() {
+do_install() {
+    oe_runmake 'DESTDIR=${D}' PREFIX=${prefix} lv2dir=${libdir}/lv2 install
+
     install -d  ${D}${datadir}/pixmaps
     install -m 0644 ${S}/doc/setBfree.png ${D}${datadir}/pixmaps
     install -m 0644 ${S}/doc/x42-whirl.png ${D}${datadir}/pixmaps
