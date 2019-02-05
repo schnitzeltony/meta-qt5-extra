@@ -18,6 +18,7 @@ DEPENDS += " \
 EXTRA_OECMAKE = " \
     -DFCS_WITH_TEST_SUITE=OFF \
     -DBUILD_STATIC_LIBRARY=OFF \
+    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
 "
 
 # was: 'probably-redundant RPATH /usr/lib' - not exactly a bad breaker. Looked
