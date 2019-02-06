@@ -66,6 +66,9 @@ EXTRA_OESCONS += " \
 "
 #    perftools=1
 
+# If we export in do_install only, mixxx is compiled twice
+export LIBDIR="${libdir}"
+
 do_install_prepend() {
     install -d ${D}${prefix}
     sed -i 's:/etc/udev:${D}/etc/udev:g' ${S}/src/SConscript
