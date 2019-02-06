@@ -21,4 +21,9 @@ SRCREV = "f244f3b09bb290dd6a4b9c14d4abaf69e9861f9d"
 S = "${WORKDIR}/git"
 PV = "0.0.0+git${SRCPV}"
 
+
+EXTRA_OECMAKE = " \
+    -DLV2_INSTALL_DIR:PATH=${baselib}/lv2 \
+"
+
 FILES_${PN} += "${libdir}/lv2"
