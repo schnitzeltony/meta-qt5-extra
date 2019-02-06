@@ -28,7 +28,10 @@ DEPENDS += " \
     lv2 \
 "
 
-EXTRA_OECONF += "--enable-experimental"
+EXTRA_OECONF += " \
+    --with-lv2-dir=${libdir}/lv2 \
+    --enable-experimental \
+"
 
 do_configure_prepend() {
     sed -i 's:%QEMUCOMMAND%:${WORKDIR}/QemuCommands:g' `find ${S} -name Makefile.am`
