@@ -9,7 +9,7 @@ DEPENDS = " \
     lv2 \
 "
 
-inherit autotools-brokensep pkgconfig qemu-ext pack_audio_plugins
+inherit pkgconfig qemu-ext pack_audio_plugins
 
 SRC_URI = "gitsm://github.com/pdesaulniers/wolf-shaper.git"
 SRCREV = "d0b46c9ece642488efed3cd255df22516966b334"
@@ -37,4 +37,8 @@ do_compile() {
         echo "QEMU lv2_ttl_generator for ${sofile}..."
         ${@qemu_run_binary_local(d, '${STAGING_DIR_TARGET}', '${S}/dpf/utils/lv2_ttl_generator')} ${sofile} || echo "ERROR: for QEMU lv2_ttl_generator for ${sofile}!"
     done
+}
+
+do_install() {
+    oe_runmake DESTDIR=${D} PREFIX=${prefix} install
 }
