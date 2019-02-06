@@ -233,8 +233,9 @@ SRC_URI[YamahaTG-55Kit.sha256sum] = "8dba9f8fa7027606765b3b9bd3d11470e39919683a8
 
 inherit cmake_qt5 manpages
 
-CMAKE_FLAGS = " \
+EXTRA_OECMAKE = " \
     -DWANT_DEBUG=OFF \
+    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
 "
 
 do_install_append() {
