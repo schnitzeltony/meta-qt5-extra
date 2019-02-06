@@ -19,6 +19,10 @@ SRC_URI = " \
 SRC_URI[md5sum] = "cdd3e94b05247061820e17d7c3d900e4"
 SRC_URI[sha256sum] = "0f678f2bebf5cd1e7aa3de82afa8bcbca64302cafb92d53dbb49143361517033"
 
+EXTRA_OECONF = "\
+    --libdir=${libdir} \
+"
+
 FILES_${PN} += " \
     ${libdir}/lv2 \
 "
