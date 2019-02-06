@@ -35,6 +35,7 @@ SIMD_OPTIONS ??= " \
 
 EXTRA_OECMAKE = "\
     -DCMAKE_BUILD_TYPE="Release" \
+    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
     -DBUILD_TESTING=OFF \
     -DENABLE_TESTSUITE=OFF \
     -DNATIVE=OFF \
