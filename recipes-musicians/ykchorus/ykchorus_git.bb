@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/SpotlightKid/ykchorus"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=02ad2afd072e9ce4a370bedb49e2b075"
 
-inherit autotools-brokensep pkgconfig gtk-icon-cache qemu-ext pack_audio_plugins
+inherit pkgconfig gtk-icon-cache qemu-ext pack_audio_plugins
 
 DEPENDS += " \
     liblo \
@@ -32,4 +32,8 @@ do_compile() {
         echo "QEMU lv2_ttl_generator for ${sofile}..."
         ${@qemu_run_binary_local(d, '${STAGING_DIR_TARGET}', '${S}/dpf/utils/lv2_ttl_generator')} ${sofile} || echo "ERROR: for QEMU lv2_ttl_generator for ${sofile}!"
     done
+}
+
+do_install() {
+    oe_runmake DESTDIR=${D} PREFIX=${prefix} LIBDIR=${libdir} install
 }
