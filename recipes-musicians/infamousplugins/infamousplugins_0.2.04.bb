@@ -19,4 +19,8 @@ SRC_URI = " \
 SRCREV = "970a5de32393cc92ab2144d6a8a5e92b302dc9b5"
 S = "${WORKDIR}/git"
 
+EXTRA_OECMAKE += " \
+    -DLIBDIR=${baselib} \
+"
+
 FILES_${PN} += "${libdir}/lv2"
