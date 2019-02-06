@@ -34,6 +34,8 @@ SRCREV = "6f8a61f6ee74316e471495f040660318a339d0c7"
 PV = "3.0.3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
+EXTRA_OECMAKE += "-DPluginLibDir=${baselib}"
+
 do_configure_prepend() {
     # reconfigure?
     if [ ! -f ${WORKDIR}/lv2-ttl-generator-data ] ; then
