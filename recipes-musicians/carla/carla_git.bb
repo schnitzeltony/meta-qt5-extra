@@ -19,7 +19,9 @@ PV = "1.9.11+git${SRCPV}"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit qmake5_base autotools-brokensep pkgconfig qemu-ext distro_features_check mime gtk-icon-cache
+inherit qmake5_base pkgconfig qemu-ext distro_features_check mime gtk-icon-cache
+
+B = "${S}"
 
 DEPENDS += " \
     python3-pyqt5-native \
@@ -35,7 +37,6 @@ DEPENDS += " \
 
 EXTRA_OEMAKE += " \
     DEFAULT_QT=5 \
-    PREFIX=${prefix} \
     NOOPT=true \
     HAVE_PYQT=true \
     HAVE_PYQT4=false \
@@ -52,6 +53,10 @@ do_configure() {
 do_compile_append() {
     cd ${S}/bin
     ${@qemu_run_binary_local(d, '${STAGING_DIR_TARGET}', 'carla-lv2-export')}
+}
+
+do_install() {
+    oe_runmake DESTDIR=${D} PREFIX=${prefix} LIBDIR=${libdir} install
 }
 
 FILES_${PN} += " \
