@@ -22,7 +22,7 @@ DEPENDS += " \
     solid \
 "
 
-EXTRA_OECMAKE = "-DINSTALL_SYSCONFDIR=${sysconfdir}"
+EXTRA_OECMAKE += "-DINSTALL_SYSCONFDIR=${sysconfdir}"
 
 FILES_${PN} += " \
     ${datadir}/liri-settings \
