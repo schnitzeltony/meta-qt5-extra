@@ -12,11 +12,11 @@ PV = "2.3.1"
 
 do_install_append() {
     # move files to correct location
-    # 1. /usr/share/lib -> ${libdir}
-    if [ -d ${D}${datadir}/lib ] ; then
+    # 1. /usr/share/lib(64) -> ${libdir}
+    if [ -d ${D}${datadir}/${baselib} ] ; then
         mkdir -p ${D}/${libdir}
-        cp -r ${D}${datadir}/lib/* ${D}/${libdir}
-        rm -rf ${D}${datadir}/lib
+        cp -r ${D}${datadir}/${baselib}/* ${D}/${libdir}
+        rm -rf ${D}${datadir}/${baselib}
     fi
     
     # if empty datadir -> delete
