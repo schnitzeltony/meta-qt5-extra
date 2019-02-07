@@ -28,6 +28,7 @@ DEPENDS += " \
 
 EXTRA_OECMAKE += " \
     -DINSTALL_SYSCONFDIR=${sysconfdir} \
+    -DINSTALL_SYSTEMDUSERUNITDIR=${systemd_user_unitdir} \
     -DLIRI_SHELL_DEVELOPMENT_BUILD=ON \
 "
 
