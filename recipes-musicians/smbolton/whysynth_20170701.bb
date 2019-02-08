@@ -13,7 +13,7 @@ DEPENDS += " \
 "
 
 SRC_URI = " \
-    http://smbolton.com/${PN}/${PN}-${PV}.tar.bz2 \
+    http://smbolton.com/${BPN}/${BPN}-${PV}.tar.bz2 \
     file://whysynth.desktop \
 "
 SRC_URI[md5sum] = "217bfeea23545c12cd0a1bc93de6ed0f"
