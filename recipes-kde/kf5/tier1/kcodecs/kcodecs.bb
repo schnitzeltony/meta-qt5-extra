@@ -10,8 +10,8 @@ inherit kde-kf5
 DEPENDS += "gperf-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "ec8d0b0ddb5ca0572be749688623f537"
-SRC_URI[sha256sum] = "4c4f59936999c824273b030ef4d0dc9faef5c3e26dbbbb1427232e7750f013e8"
+SRC_URI[md5sum] = "9cf8636f8ecd5699dc4cff2cd003bdaa"
+SRC_URI[sha256sum] = "4bd6fd48268d83b59f1b3c8ee19a50d9bee72f3601098dd5bb8e4b24a8912111"
 
 do_compile_append() {
     # gperf-native sets absolut debug comments/links in header

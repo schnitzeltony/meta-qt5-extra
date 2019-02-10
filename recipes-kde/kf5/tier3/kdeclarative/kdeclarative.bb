@@ -16,7 +16,7 @@ SRC_URI += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "3ed4fd64a611fd7677f16c7d8c80f65e"
-SRC_URI[sha256sum] = "40b2daa0d9843c6802ff250e7d0b9d3ffe740447b76c2b756243da4b3396d32a"
+SRC_URI[md5sum] = "df0b9df0c1241debaeae2acc634ce917"
+SRC_URI[sha256sum] = "aa51a98e66dcfeb08d26cc79b230fac3eac9235a5d3dee08805cf964f3a17210"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}/org/kde"
