@@ -25,6 +25,8 @@ SRC_URI = " \
     file://0002-do-nor-try-run-for-suil-libs-detection.patch \
     file://0003-Add-ARM-NEON-acceleration-for-time-stretch-not-yet-t.patch \
     \
+    file://0004-Clear-internal-config-state-keys-on-release-virtual-.patch \
+    \
     file://Qtractor.conf \
 "
 SRCREV = "c1d436de7a37d142344d9013151bfcddb2f081b3"

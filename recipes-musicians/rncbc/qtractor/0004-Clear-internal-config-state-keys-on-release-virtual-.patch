@@ -1,0 +1,107 @@
+From c56870929ecd2952aaa10100980c49654d1a0c7b Mon Sep 17 00:00:00 2001
+From: rncbc <rncbc@rncbc.org>
+Date: Sun, 10 Feb 2019 16:58:12 +0000
+Subject: [PATCH] - Clear internal config/state keys on release virtual method.
+ (REGRESSION)
+
+Upstream-Status: Backport [1]
+
+[1] https://github.com/rncbc/qtractor/commit/3bc6f2c
+---
+ src/qtractorInsertPlugin.cpp | 10 +++++-----
+ src/qtractorInsertPlugin.h   |  2 +-
+ src/qtractorPlugin.cpp       |  2 +-
+ src/qtractorVstPlugin.cpp    |  2 +-
+ 5 files changed, 20 insertions(+), 8 deletions(-)
+
+diff --git a/src/qtractorInsertPlugin.cpp b/src/qtractorInsertPlugin.cpp
+index aed8b9b5..1f400420 100644
+--- a/src/qtractorInsertPlugin.cpp
++++ b/src/qtractorInsertPlugin.cpp
+@@ -1,7 +1,7 @@
+ // qtractorInsertPlugin.cpp
+ //
+ /****************************************************************************
+-   Copyright (C) 2005-2018, rncbc aka Rui Nuno Capela. All rights reserved.
++   Copyright (C) 2005-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+    Copyright (C) 2011, Holger Dehnhardt.
+ 
+    This program is free software; you can redistribute it and/or
+@@ -695,7 +695,7 @@ void qtractorAudioInsertPlugin::releaseConfigs (void)
+ 	qDebug("qtractorAudioInsertPlugin[%p]::releaseConfigs()", this);
+ #endif
+ 
+-	qtractorPlugin::releaseConfigs();
++	qtractorPlugin::clearConfigs();
+ }
+ 
+ 
+@@ -1002,7 +1002,7 @@ void qtractorMidiInsertPlugin::releaseConfigs (void)
+ 	qDebug("qtractorMidiInsertPlugin[%p]::releaseConfigs()", this);
+ #endif
+ 
+-	qtractorPlugin::releaseConfigs();
++	qtractorPlugin::clearConfigs();
+ }
+ 
+ 
+@@ -1433,7 +1433,7 @@ void qtractorAudioAuxSendPlugin::releaseConfigs (void)
+ 	qDebug("qtractorAudioAuxSendPlugin[%p]::releaseConfigs()", this);
+ #endif
+ 
+-	qtractorPlugin::releaseConfigs();
++	qtractorPlugin::clearConfigs();
+ }
+ 
+ 
+@@ -1682,7 +1682,7 @@ void qtractorMidiAuxSendPlugin::releaseConfigs (void)
+ 	qDebug("qtractorMidiAuxSendPlugin[%p]::releaseConfigs()", this);
+ #endif
+ 
+-	qtractorPlugin::releaseConfigs();
++	qtractorPlugin::clearConfigs();
+ }
+ 
+ 
+diff --git a/src/qtractorInsertPlugin.h b/src/qtractorInsertPlugin.h
+index 6aeb02e7..31339df6 100644
+--- a/src/qtractorInsertPlugin.h
++++ b/src/qtractorInsertPlugin.h
+@@ -1,7 +1,7 @@
+ // qtractorInsertPlugin.h
+ //
+ /****************************************************************************
+-   Copyright (C) 2005-2018, rncbc aka Rui Nuno Capela. All rights reserved.
++   Copyright (C) 2005-2019, rncbc aka Rui Nuno Capela. All rights reserved.
+    Copyright (C) 2011, Holger Dehnhardt.
+ 
+    This program is free software; you can redistribute it and/or
+diff --git a/src/qtractorPlugin.cpp b/src/qtractorPlugin.cpp
+index f7370efe..2f74ce69 100644
+--- a/src/qtractorPlugin.cpp
++++ b/src/qtractorPlugin.cpp
+@@ -905,7 +905,7 @@ void qtractorPlugin::releaseConfigs (void)
+ 	qDebug("qtractorPlugin[%p]::releaseConfigs()", this);
+ #endif
+ 
+-	clearConfigs();
++	// Do nothing...
+ }
+ 
+ 
+diff --git a/src/qtractorVstPlugin.cpp b/src/qtractorVstPlugin.cpp
+index 8f0130de..de3287a8 100644
+--- a/src/qtractorVstPlugin.cpp
++++ b/src/qtractorVstPlugin.cpp
+@@ -1098,7 +1098,7 @@ void qtractorVstPlugin::releaseConfigs (void)
+ 	qDebug("qtractorVstPlugin[%p]::releaseConfigs()", this);
+ #endif
+ 
+-	qtractorPlugin::releaseConfigs();
++	qtractorPlugin::clearConfigs();
+ }
+ 
+ 
+-- 
+2.20.1
+
