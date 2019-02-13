@@ -51,7 +51,3 @@ FILES_${PN} += " \
     ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_QML} \
 "
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_QML}/*/*/*/*/.debug \
-"

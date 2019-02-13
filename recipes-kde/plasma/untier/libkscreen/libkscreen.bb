@@ -21,8 +21,3 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/kf5/kscreen/.debug \
-    ${libexecdir}/kf5/.debug \
-"

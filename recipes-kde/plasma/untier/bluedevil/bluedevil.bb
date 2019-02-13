@@ -38,10 +38,3 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML}/org/kde/plasma/private/bluetooth \
 "
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/plasma/private/bluetooth/.debug \
-"

@@ -45,10 +45,4 @@ FILES_${PN} += " \
     ${libdir}/kconf_update_bin \
 "
 
-FILES_${PN}-dbg += " \
-    ${libdir}/*/.debug \
-    ${libdir}/*/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-"
-
 RDEPENDS_${PN} += "milou"

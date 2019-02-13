@@ -62,10 +62,3 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
     ${libdir}/*.so \
 "
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-	${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
-    ${OE_QMAKE_PATH_QML}/*/*/*/*/.debug \
-"

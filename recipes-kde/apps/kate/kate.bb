@@ -54,8 +54,3 @@ FILES_${PN} += " \
     ${libdir}/libkdeinit5*.so \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
-"

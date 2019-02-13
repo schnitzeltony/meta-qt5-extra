@@ -39,6 +39,3 @@ FILES_${PN} += " \
     ${datadir}/icons \
     ${libdir}/libkdeinit5_ksysguard.so \
 "
-
-FILES_${PN}-dbg += " \
-"

@@ -91,16 +91,6 @@ FILES_${PN} += " \
     ${libdir}/*.so \
 "
 
-FILES_${PN}-dbg += " \
-    ${libdir}/*/.debug \
-    ${libdir}/*/*/.debug \
-    ${libdir}/*/*/*/.debug \
-    ${libdir}/*/*/*/*/.debug \
-    ${libdir}/*/*/*/*/*/.debug \
-    ${libdir}/*/*/*/*/*/*/.debug \
-    ${libdir}/*/*/*/*/*/*/*/.debug \
-"
-
 RDEPENDS_${PN} += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland", "xserver-xorg-xwayland", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "qtwayland", "",d)} \

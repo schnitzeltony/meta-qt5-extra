@@ -41,7 +41,7 @@ EXTRA_OECMAKE += " \
 
 PACKAGES =+ " \
     ${PN}-qt \
-    ${PN}-designer-plugin-dbg ${PN}-designer-plugin \
+    ${PN}-designer-plugin \
 "
 
 CMAKE_ALIGN_SYSROOT[1] = "Marble, -S${includedir}, -s${_IMPORT_PREFIX}/include"
@@ -63,16 +63,6 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
 "
 
-FILES_${PN}-dbg += " \
-    ${libdir}/marble/plugins/.debug \
-    ${libdir}/marble/plugins/org/kde/edu/marble/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-"
-
 FILES_${PN}-designer-plugin += " \
     ${OE_QMAKE_PATH_PLUGINS}/designer \
-"
-
-FILES_${PN}-designer-plugin-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/designer/.debug \
 "

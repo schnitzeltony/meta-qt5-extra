@@ -16,8 +16,3 @@ FILES_${PN} += " \
     ${datadir}/plymouth \
     ${libdir}/plymouth \
 "
-
-FILES_${PN}-dbg += " \
-    ${libdir}/plymouth/.debug \
-"
-

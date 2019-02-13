@@ -75,15 +75,6 @@ FILES_${PN} += " \
     ${libdir}/kconf_update_bin \
 "
 
-FILES_${PN}-dbg += " \
-    ${libdir}/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/*/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/*/*/*/.debug \
-"
-
 RDEPENDS_${PN} += " \
     qtgraphicaleffects \
     qtquickcontrols-qmlplugins \

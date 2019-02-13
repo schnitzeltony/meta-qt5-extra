@@ -23,4 +23,3 @@ SRC_URI += " \
 EXTRA_OECMAKE += "-DCMAKE_INSTALL_LIBDIR=${base_libdir}"
 
 FILES_${PN} += "${base_libdir}/security"
-FILES_${PN}-dbg += "${base_libdir}/security/.debug"

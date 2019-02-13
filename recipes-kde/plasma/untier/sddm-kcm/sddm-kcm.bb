@@ -35,8 +35,3 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${libdir}/kauth \
 "
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${libdir}/kauth/.debug \
-"

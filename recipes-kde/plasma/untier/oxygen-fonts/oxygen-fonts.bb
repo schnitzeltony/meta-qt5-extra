@@ -19,6 +19,3 @@ EXTRA_OECMAKE += "-DOXYGEN_FONT_INSTALL_DIR=${datadir}/fonts/truetype/oxygen"
 FILES_${PN} += " \
     ${datadir}/fonts \
 "
-
-FILES_${PN}-dbg += " \
-"

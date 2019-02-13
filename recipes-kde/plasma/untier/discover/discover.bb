@@ -39,10 +39,4 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
 "
 
-FILES_${PN}-dbg += " \
-    ${libdir}/plasma-discover/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/*/.debug \
-"
-
 RDEPENDS_${PN} += "python3 kirigami"
