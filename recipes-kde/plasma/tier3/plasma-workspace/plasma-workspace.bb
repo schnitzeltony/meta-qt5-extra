@@ -11,10 +11,15 @@ REQUIRED_DISTRO_FEATURES = "x11"
 inherit kde-plasma distro_features_check gettext
 
 DEPENDS += " \
+    kpackage-native \
+    kdoctools-native \
+    sonnet-native \
+    kdesignerplugin-native \
+    kdelibs4support-native \
+    kauth-native \
     baloo \
     kdeclarative \
     plasma-framework \
-    kauth-native \
     kconfig \
     kactivities \
     krunner \
@@ -38,18 +43,13 @@ DEPENDS += " \
     libksysguard \
     libkscreen \
     kwin \
-    kpackage-native \
-    kdoctools-native \
-    sonnet-native \
-    kdesignerplugin-native \
-    kdelibs4support-native \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 libsm libxcb", "", d)} \
     zlib \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "95b10cf1fdc0016cddc5b60bf011b1a2"
-SRC_URI[sha256sum] = "903ef4dd2ca3040b2be7435d8f170a9df78a6d05f3525cfa8f212e52b5e5a391"
+SRC_URI[md5sum] = "5424d6b8af2025c44acdaea10615a539"
+SRC_URI[sha256sum] = "c9e696b0cb6040c90256709f68ea153da86da97a743c8ca8f96412d744e77b65"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
@@ -65,21 +65,20 @@ SRC_URI += " \
 # REVISIT
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
-    ${datadir}/k*5 \
     ${datadir}/dbus-1 \
-    ${datadir}/kstyle \
-    ${datadir}/wayland-sessions \
-    ${datadir}/ksplash \
-    ${datadir}/drkonqi \
-    ${datadir}/kio_desktop \
-    ${datadir}/solid \
-    ${datadir}/xsessions \
     ${datadir}/desktop-directories \
-    ${datadir}/sddm \
-    ${datadir}/plasma \
-    ${datadir}/ksmserver \
-    ${datadir}/kdevappwizard \
     ${datadir}/kconf_update \
+    ${datadir}/kdevappwizard \
+    ${datadir}/kio_desktop \
+    ${datadir}/k*5 \
+    ${datadir}/kpackage \
+    ${datadir}/ksplash \
+    ${datadir}/kstyle \
+    ${datadir}/plasma \
+    ${datadir}/sddm \
+    ${datadir}/solid \
+    ${datadir}/wayland-sessions \
+    ${datadir}/xsessions \
     \
     ${libdir}/libkdeinit5*.so \
     ${libdir}/kconf_update_bin \

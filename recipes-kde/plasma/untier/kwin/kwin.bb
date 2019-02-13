@@ -57,8 +57,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "996d3477d0016e999d6d517ec072e983"
-SRC_URI[sha256sum] = "447e7d269627f4e7354b206248a3ef393463f4dca688f95b5cb9f9c1bfa5cd45"
+SRC_URI[md5sum] = "52f86eb52dda1ccd547a8a66893d439e"
+SRC_URI[sha256sum] = "3c313eac0d8daa13b6949325edbc447167cb00597d4b0b079deca3ef6d6f1738"
 
 SRC_URI += " \
     file://0001-fix-build-for-qtbase-without-session-management.patch \
@@ -73,12 +73,12 @@ CXXFLAGS_append_mx6 += " -DLINUX=1"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
-    ${datadir}/kservices5 \
-    ${datadir}/kwincompositing \
     ${datadir}/dbus-1 \
-    ${datadir}/icons \
-    ${datadir}/*5 \
     ${datadir}/kconf_update \
+    ${datadir}/k*5 \
+    ${datadir}/kpackage \
+    ${datadir}/kwincompositing \
+    ${datadir}/icons \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
     ${libdir}/kconf_update_bin \

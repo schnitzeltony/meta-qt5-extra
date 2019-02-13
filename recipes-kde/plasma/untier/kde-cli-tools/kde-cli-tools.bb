@@ -12,10 +12,10 @@ DEPENDS += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "",d)} \
     \
     kauth-native \
-    kconfig \
     kconfig-native \
     kdoctools-native \
     kcoreaddons-native \
+    kpackage-native \
     kactivities \
     kiconthemes \
     ki18n \
@@ -27,8 +27,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "be9fe02e19e8e815b9b50b05b25faf0e"
-SRC_URI[sha256sum] = "9626655df213c3b386f4ba0d16ab523bc97d05b6a1dcb02c3b001345b1b4b906"
+SRC_URI[md5sum] = "7033a941eef914415feea7051bf1e42f"
+SRC_URI[sha256sum] = "a0a5c175b9a5908d765bd81fe21c345eeeb8d15473339bb3e4119afca2a5c9a0"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

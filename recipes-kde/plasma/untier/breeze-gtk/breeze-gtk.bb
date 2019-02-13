@@ -4,18 +4,16 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=1ed3208c1cce3d1926ccfc5bf65db050 \
 "
 
-inherit kde-plasma
+inherit kde-plasma python3native
+
+DEPENDS += "sassc-native cairo breeze python3-pycairo-native"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "a63c068eaadc620edc5871d2407bc5a1"
-SRC_URI[sha256sum] = "15ac26cbf7e1a39912fbd1c67b385ac6644aa9693f94463959b0e2d507c2da2f"
+SRC_URI[md5sum] = "9a0d85a3a6b97e0f0920604e73c8f4f8"
+SRC_URI[sha256sum] = "b53861a26248a75e3d91d514bb7d9a192c7b3c3d19528985bec9aef2668c753b"
 
 FILES_${PN} += " \
     ${datadir}/kconf_update \
     ${datadir}/themes \
     ${libdir}/kconf_update_bin \
-"
-
-FILES_${PN}-dbg += " \
-    ${libdir}/kconf_update_bin/.debug \
 "
