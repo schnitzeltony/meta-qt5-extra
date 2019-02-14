@@ -11,7 +11,7 @@ SRCREV = "63f19485984c002caddec734a9ee94faad2acb55"
 S = "${WORKDIR}/git"
 PV = "0.6"
 
-inherit autotools-brokensep pkgconfig
+inherit pkgconfig
 
 DEPENDS += " \
     cairo \
@@ -19,9 +19,13 @@ DEPENDS += " \
     lv2 \
 "
 
-EXTRA_OEMAKE += " \
-    PREFIX=${prefix} \
-    STRIP=echo \
-"
+do_compile() {
+    oe_runmake SSE_CFLAGS= STRIP=echo 
+}
+
+do_install() {
+    oe_runmake DESTDIR=${D} PREFIX=${prefix}INSTALL_DIR=${libdir}/lv2 install
+}
+
 
 FILES_${PN} += "${libdir}/lv2"
