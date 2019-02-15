@@ -24,7 +24,7 @@ do_compile() {
 }
 
 do_install() {
-    oe_runmake DESTDIR=${D} PREFIX=${prefix}INSTALL_DIR=${libdir}/lv2 install
+    oe_runmake DESTDIR=${D} PREFIX=${prefix} INSTALL_DIR=${libdir}/lv2 install
 }
 
 
