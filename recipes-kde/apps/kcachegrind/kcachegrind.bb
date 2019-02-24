@@ -1,4 +1,5 @@
 SUMMARY = "GUI to profilers such as Valgrind"
+HOMEPAGE = "https://kcachegrind.github.io/html/Home.html"
 LICENSE = "GPLv2 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=7974e16b472f00bbbadf2d006aa00c50 \
