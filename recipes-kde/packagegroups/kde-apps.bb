@@ -15,6 +15,7 @@ RDEPENDS_${PN} = " \
     gwenview \
     kalgebra \
     kate \
+    kcachegrind \
     kcalc \
     kcolorchooser \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
