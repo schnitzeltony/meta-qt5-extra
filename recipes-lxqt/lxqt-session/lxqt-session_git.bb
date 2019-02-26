@@ -9,8 +9,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 DEPENDS += "liblxqt kwindowsystem"
 
 SRC_URI += "file://0001-do-not-check-for-xdg-udser-dirs-at-build-time-it-is-.patch"
-SRCREV = "d85d4579d437ad5181f4e640323ab6ef5c7a13ac"
-PV = "0.14.0"
+SRCREV = "02a93f295a2abe86da3efce8e2d98c49fd923b73"
+PV = "0.14.1"
 
 FILES_${PN} += " \
     ${datadir}/lxqt/*.conf \
