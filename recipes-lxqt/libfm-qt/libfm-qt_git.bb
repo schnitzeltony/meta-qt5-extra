@@ -10,8 +10,8 @@ DEPENDS += "qtx11extras glib-2.0 libexif menu-cache libxcb liblxqt"
 
 CMAKE_ALIGN_FILES_FIND = "*targets.cmake"
 
-SRCREV = "781bbe3da673b3e9d5a141163b64959234e211b1"
-PV = "0.14.0"
+SRCREV = "50a8f20c82443b00702a61f150ab4c0d71878116"
+PV = "0.14.1"
 
 FILES_${PN} += " \
     ${datadir}/mime \
