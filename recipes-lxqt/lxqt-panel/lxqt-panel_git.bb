@@ -18,8 +18,8 @@ DEPENDS += " \
 SRC_URI += " \
     file://0001-add-Qt5-X11Extras-to-QTX_LIBRARIES.patch \
 "
-SRCREV = "cea61f56b52c03e05091e9bff7e4e521c4bb15aa"
-PV = "0.14.0"
+SRCREV = "823a29c5254aecd51b89a8f009e279a2899a1aac"
+PV = "0.14.1"
 
 PACKAGECONFIG[cpu_plugin] = "-DCPULOAD_PLUGIN=Yes,-DCPULOAD_PLUGIN=No, libstatgrab"
 PACKAGECONFIG[dom] = "-DDOM_PLUGIN=Yes,-DDOM_PLUGIN=No"
