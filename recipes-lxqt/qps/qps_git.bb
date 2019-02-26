@@ -6,8 +6,8 @@ inherit lxqt pkgconfig  gtk-icon-cache
 
 DEPENDS += "qtx11extras qttools"
 
-SRCREV = "9969f909ede5e26c1a3c8800cc584ea065dbd1c4"
-PV = "1.10.19"
+SRCREV = "f418b91afccffbed31744c1e23e220ad79985acf"
+PV = "1.10.20"
 
 FILES_${PN} += " \
     ${datadir}/icons \
