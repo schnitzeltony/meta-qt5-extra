@@ -22,16 +22,12 @@ SRC_URI = " \
     http://linuxsynths.com/Padthv1PatchesDemos/Padthv1Patches.tar.gz;name=linuxsynths-padthv1-presets;subdir=linuxsynths-padthv1-presets \
     file://0001-no-Qt4-find-native-qt-build-tools-by-configure-options-auto.patch \
     \
-    file://lv2-backport/0001-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
-    file://lv2-backport/0002-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
-    file://lv2-backport/0003-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
-    \
     ${FFTWSINGLEPATCH} \
     file://0002-Remove-extra-rpath.patch \
     file://padthv1.conf \
 "
-SRC_URI[md5sum] = "907c17f342d2bedf7a1e0f301a95c483"
-SRC_URI[sha256sum] = "9e38f6dbff1deaf4b2b2d9f3196be8365dcaa364bb46112689c26acac6a39b4c"
+SRC_URI[md5sum] = "aaaf3dc7fdeac004b04b6232f24eec8d"
+SRC_URI[sha256sum] = "70c11342c473e230d2df19be4f5e6fcd475af45eda7189fed2d9593f9693a131"
 
 SRC_URI[linuxsynths-padthv1-presets.md5sum] = "951484ad2fe404d233a704d444147827"
 SRC_URI[linuxsynths-padthv1-presets.sha256sum] = "ad9eadc707784b6931955b1fc63308b9e5dc59d24903e6405e9d34d30794fd0b"
