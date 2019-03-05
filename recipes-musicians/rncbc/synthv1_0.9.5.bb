@@ -20,14 +20,10 @@ SRC_URI = " \
     file://0001-no-Qt4-find-native-qt-build-tools-by-configure-options-auto.patch \
     file://0002-Remove-extra-rpath.patch \
     \
-    file://lv2-backport/0001-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
-    file://lv2-backport/0002-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
-    file://lv2-backport/0003-Comply-with-next-LV2-headers-location-post-1.14.0git.patch \
-    \
     file://synthv1.conf \
 "
-SRC_URI[md5sum] = "f909bfb55e3d23f7308478ab07477486"
-SRC_URI[sha256sum] = "dbcb240456361bd7a61e62c4c481308b6b55586f2b0d973d5fd63ef44890b2a3"
+SRC_URI[md5sum] = "aa050d2fbe7c06c9393a2293214589f1"
+SRC_URI[sha256sum] = "e1f92404f9fd67f455b8ff0dca919e891aada062a220381378acb2412b233cad"
 
 SRC_URI[autostatic-synthv1-presets1.md5sum] = "02210e5576310554cfe316fb72e88b74"
 SRC_URI[autostatic-synthv1-presets1.sha256sum] = "587ac8cb4cb645fc71603d1b4b351b24f3e4d9f15a53aca59c0f30cc9f66e253"
