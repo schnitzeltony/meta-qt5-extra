@@ -40,8 +40,8 @@ DEPENDS += " \
 
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "dd1e7f65977034ef91e2037c8a00245a"
-SRC_URI[sha256sum] = "5ed541d963184b6d851660c1f0c6708708cba8832718c1a407b2480794cdab56"
+SRC_URI[md5sum] = "1378218f3e108403decdbc8ad846cc49"
+SRC_URI[sha256sum] = "01ff3245d755a6e38207e58e50e5f82e5c681ead2ad7176d46aec00a8a562e08"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
