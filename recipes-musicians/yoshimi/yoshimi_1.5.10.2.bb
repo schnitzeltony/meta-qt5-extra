@@ -23,14 +23,11 @@ DEPENDS += " \
 
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/1.5/${BPN}-${PV}.tar.bz2 \
-    file://0001-Keep-build-system-CXXFLAGS-when-not-selecting-a-spec.patch \
 "
-SRC_URI[md5sum] = "1c3b2eb1e85c9ecd07729b43746da288"
-SRC_URI[sha256sum] = "5445edf05157960303564cd7f9719faf009aba763e783f2293b613768bfd5f55"
+SRC_URI[md5sum] = "953662f7552f4f55851554ee76215bfd"
+SRC_URI[sha256sum] = "0128bff8926e19344058499756772ba11e6055678cf4b1a3a0480384274e29e7"
 
 OECMAKE_SOURCEPATH = "${S}/src"
-
-LDFLAGS += "-lpng16 -ljpeg -lXrender -lXft"
 
 FILES_${PN} += " \
     ${datadir}/metainfo \
