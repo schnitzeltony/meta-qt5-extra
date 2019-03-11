@@ -13,8 +13,8 @@ DEPENDS += " \
 
 PV = "${KF5_VERSION}"
 
-SRC_URI[md5sum] = "bf939786cff333aa2d4c25502e4b2d08"
-SRC_URI[sha256sum] = "739cb40f918694aefc775a4d2d51ca14d634fef1e2cb4a53b0f7605622edb285"
+SRC_URI[md5sum] = "b53c211a97fc1574d372922fbf528463"
+SRC_URI[sha256sum] = "fea01ea5d277a1d415a3b2f0fe8f7659bf345933c4fd1c78c5f92fab40c97e5d"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
