@@ -13,7 +13,6 @@ DEPENDS += " \
     qtsvg \
     qtdeclarative \
     \
-    kauth \
     kauth-native \
     plasma-framework \
     kdoctools \
@@ -70,7 +69,6 @@ FILES_${PN} += " \
     \
     ${libdir}/libkdeinit5_kaccess.so \
     ${OE_QMAKE_PATH_QML} \
-    ${libdir}/kauth \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${libdir}/kconf_update_bin \
 "
