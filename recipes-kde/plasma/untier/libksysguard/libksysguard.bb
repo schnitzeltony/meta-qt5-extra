@@ -17,7 +17,6 @@ DEPENDS += " \
     ki18n \
     kwindowsystem \
     kcompletion \
-    kauth \
     kwidgetsaddons \
     kiconthemes \
     kconfigwidgets \
