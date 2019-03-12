@@ -33,6 +33,5 @@ FILES_${PN} += " \
     ${datadir}/polkit-1 \
     ${datadir}/icons \
     ${datadir}/k*5 \
-    ${libdir}/kauth \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
