@@ -32,5 +32,4 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
-    ${libdir}/kauth \
 "
