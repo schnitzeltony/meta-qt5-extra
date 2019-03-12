@@ -24,8 +24,6 @@ do_compile_prepend() {
 }
 
 FILES_${PN} += "${libdir}/plugins/kf5 ${datadir}/kf5 ${libexecdir}/kf5"
-FILES_${PN}-dev += "${libdir}/cmake"
-FILES_${PN}-dbg += "${libdir}/plugins/kf5/.debug ${libexecdir}/kf5/.debug"
 
 EXTRA_OECMAKE += " \
     -DECM_MKSPECS_INSTALL_DIR=${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/modules \
