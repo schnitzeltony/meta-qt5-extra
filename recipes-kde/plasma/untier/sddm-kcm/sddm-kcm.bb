@@ -14,7 +14,6 @@ DEPENDS += " \
     kconfig-native \
     ki18n \
     kxmlgui \
-    kauth \
     kauth-native \
     kconfigwidgets \
     kio \
