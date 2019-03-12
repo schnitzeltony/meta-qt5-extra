@@ -9,7 +9,6 @@ inherit kde-plasma gettext
 DEPENDS += " \
     bluez-qt \
     kactivities \
-    kauth \
     kauth-native \
     kidletime \
     kconfig \
