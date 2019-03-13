@@ -8,8 +8,9 @@ SRC_URI = " \
     file://0002-mruby-zest-Align-build-to-our-needs.patch \
     file://0003-src-osc-bridge-Align-build-to-our-needs.patch \
 "
-SRCREV = "b312953ba991b15d1076ba819ca5a44ed4386b28"
-PV = "3.02+git${SRCPV}"
+SRCREV = "3f112eeb6a0d7b6ce65c1be3f591e02fde965923"
+PV = "3.0.4+git${SRCPV}"
+PE = "1"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
