@@ -56,13 +56,12 @@ DEPENDS += " \
     kdoctools-native \
 "
 
-PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "de8fe09420b0dc01b78c7df8dcd39267"
-SRC_URI[sha256sum] = "de4997170d11adb175e0c9499e03c06b4d83aa572a5f71040a873bf7b0f65d84"
+PV = "${PLASMA_FIXUP_VERSION}"
+SRC_URI[md5sum] = "d297109766835e43cea21af920b88b3c"
+SRC_URI[sha256sum] = "3c7b5ced440cf9ecd23b5905727cea4730188fbfe6388b4fcdb5eb3f52323147"
 
 SRC_URI += " \
-    file://0001-fix-build-for-qtbase-without-session-management.patch \
-    file://0002-Make-building-of-QPA-wayland-plugin-an-option.patch \
+    file://0001-Make-building-of-QPA-wayland-plugin-an-option.patch \
 "
 
 # pure X11 environments fail to build wayland plugin

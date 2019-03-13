@@ -24,8 +24,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "a62af8b85540c1da48026ef3881b8de5"
-SRC_URI[sha256sum] = "449528ef124835386f12db86dd349e582369652796aba5f51fc2ba6abd3dcf1e"
+SRC_URI[md5sum] = "fc76a4f8bdb2a031fdadff946514ae3d"
+SRC_URI[sha256sum] = "488f678d65352f74b96149371f49098be8f22adbdbceb9d2699e8beeb4115cfb"
 
 FILES_${PN} += " \
     ${datadir}/kservices5 \
