@@ -30,8 +30,8 @@ SRC_URI = " \
     file://0003-Nio.cpp-Do-not-use-ps-aux-to-find-jack-busybox-s-ps-.patch \
     file://0004-Keep-our-build-flags.patch \
 "
-SRCREV = "6f8a61f6ee74316e471495f040660318a339d0c7"
-PV = "3.0.3+git${SRCPV}"
+SRCREV = "576f1371b44db44865d57bbd50609e906bd2bfd7"
+PV = "3.0.4+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DPluginLibDir=${baselib}"

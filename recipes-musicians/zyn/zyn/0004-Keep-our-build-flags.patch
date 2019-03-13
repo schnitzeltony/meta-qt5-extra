@@ -27,7 +27,7 @@ index 365c129..1fa1b24 100644
  set(CMAKE_REQUIRED_FLAGS "")
  
  
-@@ -255,7 +252,7 @@ if (BuildForDebug)
+@@ -328,7 +325,7 @@ if (BuildForDebug)
  else (BuildForDebug)
  	set (CMAKE_BUILD_TYPE "Release")
  	

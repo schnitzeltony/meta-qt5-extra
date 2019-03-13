@@ -17,7 +17,7 @@ diff --git a/src/globals.h b/src/globals.h
 index f3fb1c7..e6a908d 100644
 --- a/src/globals.h
 +++ b/src/globals.h
-@@ -248,15 +248,7 @@ enum LegatoMsg {
+@@ -252,15 +252,7 @@ enum LegatoMsg {
  };
  
  //is like i=(int)(floor(f))
