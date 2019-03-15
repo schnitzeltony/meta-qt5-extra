@@ -35,6 +35,5 @@ RDEPENDS_${PN} = " \
 
 #    liri-calamares-branding \
 #    ${@bb.utils.contains("DISTRO_FEATURES", "flatpak", "liri-appcenter", "",d)} 
-#    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-wayland", "",d)} 
 #    paper-icon-theme 
 # liri-themes-grub
