@@ -13,5 +13,3 @@ SRC_URI += " \
 "
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/platformthemes"
-FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/platformthemes/.debug"
-

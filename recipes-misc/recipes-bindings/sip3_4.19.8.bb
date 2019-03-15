@@ -42,4 +42,3 @@ do_install() {
 }
 
 FILES_python3-sip = "${libdir}/${PYTHON_DIR}/site-packages/"
-FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
