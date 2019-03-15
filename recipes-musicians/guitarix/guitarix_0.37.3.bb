@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=384f45fb7968a0fe30622ce6160d3b69"
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}2-${PV}.tar.xz \
     file://0001-do-not-perform-link-test-durin-cross-build.patch \
+    file://0002-Fix-build-with-boost-1.69.0.patch \
 "
 SRC_URI[md5sum] = "78ebc879e5cd7a6e4bd43ff8aec562e1"
 SRC_URI[sha256sum] = "4ca93bd4226cd175456f37612acd28b46e13133db61c0f235917dbcc3347d5f1"

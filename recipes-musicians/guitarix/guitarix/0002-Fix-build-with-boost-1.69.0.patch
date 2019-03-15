@@ -1,0 +1,38 @@
+From d4e6aa415af0b3a836cbfb882a31e960e5e60246 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 15 Mar 2019 21:14:10 +0100
+Subject: [PATCH] Fix build with boost >= 1.69.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+| In file included from ../src/headers/engine.h:73,
+|                  from ../src/gx_head/engine/ladspaplugin.cpp:22:
+| ../src/headers/gx_system.h:353:40: error: expected class-name before '{' token
+| class BasicOptions: boost::noncopyable {
+|                                         ^
+
+and more
+
+Upstream-Status: Backport
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/headers/engine.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/headers/engine.h b/src/headers/engine.h
+index 95f4497..2b6155e 100644
+--- a/src/headers/engine.h
++++ b/src/headers/engine.h
+@@ -39,6 +39,7 @@
+ #include <sys/stat.h>
+ #include <boost/format.hpp>
+ #include <boost/thread/mutex.hpp>
++#include <boost/core/noncopyable.hpp>
+ #include <glibmm/i18n.h>     // NOLINT
+ #include <glibmm/optioncontext.h>   // NOLINT
+ #include <glibmm/dispatcher.h>
+-- 
+2.20.1
+
