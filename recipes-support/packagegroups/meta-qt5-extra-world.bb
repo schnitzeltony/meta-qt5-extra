@@ -19,7 +19,6 @@ RDEPENDS_${PN} = " \
     exiv2 \
     grantlee \
     libcddb \
-    libcdio-paranoia \
     libdbusmenu-qt5 \
     libpwquality \
     libraw \
