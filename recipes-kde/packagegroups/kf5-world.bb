@@ -102,7 +102,12 @@ UNTIER = " \
     extra-cmake-modules \
 "
 
+# avoid performance sink
 RDEPENDS_${PN} = " \
+    baloo-no-autostart \
+"
+
+RDEPENDS_${PN} += " \
     ${TIER_1} \
     ${TIER_2} \
     ${TIER_3} \
