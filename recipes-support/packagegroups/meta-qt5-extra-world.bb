@@ -18,7 +18,6 @@ RDEPENDS_${PN} = " \
     \
     exiv2 \
     grantlee \
-    libcddb \
     libdbusmenu-qt5 \
     libpwquality \
     libraw \
@@ -31,5 +30,4 @@ RDEPENDS_${PN} = " \
     liri-world \
     kde-world \
     lxqt-world \
-    meta-qt5-extra-music-world \
 "
