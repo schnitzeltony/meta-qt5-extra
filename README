@@ -1,5 +1,7 @@
 OE layer to desktop environments based on qt5
 
+Note: The musician recipes not QT5 related in the first place were moved to [1].
+
 This layer depends on:
 
 URI: git://git.openembedded.org/openembedded-core
@@ -15,3 +17,5 @@ branch: master
 revision: HEAD
 
 Layer maintainer: Andreas Müller <schnitzeltony@gmail.com>
+
+[1] https://github.com/schnitzeltony/meta-musicians
