@@ -12,6 +12,7 @@ DEPENDS += "\
     fftw \
     libopus \
     libsamplerate0 \
+    librsvg-native \
     \
     kcompletion \
     kconfig-native \
