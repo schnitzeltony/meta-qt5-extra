@@ -17,8 +17,8 @@ diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 index a615ca8..300772a 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -184,18 +184,6 @@ if(INSTALL_INTERNAL_TOOLS)
-     install(TARGETS docbookl10nhelper EXPORT KF5DocToolsTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+@@ -209,18 +209,6 @@ if(INSTALL_INTERNAL_TOOLS)
+     install(TARGETS docbookl10nhelper EXPORT KF5DocToolsToolsTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
  endif()
  
 -if(CMAKE_CROSSCOMPILING AND DOCBOOKL10NHELPER_EXECUTABLE)

@@ -6,5 +6,5 @@ inherit lxqt pkgconfig
 
 DEPENDS += "liblxqt"
 
-SRCREV = "12271ddd3b022c52411728e57938b5f44760c0d0"
-PV = "0.13.0"
+SRCREV = "2237ac6f85edcc339b3cdcef35385ef204589ac2"
+PV = "0.14.1"

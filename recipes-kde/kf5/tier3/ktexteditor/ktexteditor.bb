@@ -22,8 +22,8 @@ DEPENDS += "qtxmlpatterns \
             libgit2"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "5aa4136165bafccd4dc0acd8336c256e"
-SRC_URI[sha256sum] = "215c38142a8ca5d001f945f98056463adc808b1c195bca0c505ad69cb4ad03a3"
+SRC_URI[md5sum] = "82b4b54dbba12f86671461cb1224c0ce"
+SRC_URI[sha256sum] = "4c88d0033775e0715ad115370a36680ede95d29c7c4b840c0e06f23ef64959a8"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
@@ -33,7 +33,4 @@ FILES_${PN} += " \
     ${datadir}/polkit-1 \
     ${datadir}/kdevappwizard \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/kf5/parts/.debug \
 "

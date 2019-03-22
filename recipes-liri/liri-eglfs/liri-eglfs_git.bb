@@ -8,16 +8,19 @@ LIC_FILES_CHKSUM = " \
 inherit liri
 
 DEPENDS += " \
-    liri-libliri \
-    liri-qtudev \
-    libinput \
+    fontconfig \
     drm \
     virtual/libgbm \
+    virtual/egl \
+    virtual/libgles2 \
+    libinput \
+    liri-libliri \
+    liri-qtudev \
 "
 
 PV = "0.0.0+git${SRCPV}"
-
-SRCREV = "ad69d7331af5ea34a18f13da9ec18755fae92edb"
+SRCREV = "7bbc508bc03ab0f6a6b1633b322a83db5d99ab5b"
+SRC_URI += "file://0001-Do-not-enable-recording-by-default-it-requires-GLES3.patch"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += " \

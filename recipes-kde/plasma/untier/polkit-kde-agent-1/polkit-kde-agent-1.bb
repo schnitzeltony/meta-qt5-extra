@@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
 "
 
-inherit kde-plasma gettext
+inherit kde-plasma gettext distro_features_check
+
+REQUIRED_DISTRO_FEATURE = "polkit"
 
 DEPENDS += " \
     ki18n \
@@ -21,8 +23,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "25e9a3d1745d0c11d8568074229671a3"
-SRC_URI[sha256sum] = "abda7dcd87a57430a0174e76d0e81fd8612df40960a90c95d920941b9eec7edf"
+SRC_URI[md5sum] = "4b364062f59fb9599ef7c60fbcc1d9e2"
+SRC_URI[sha256sum] = "5e7b4db91293b00c0267b73a1d5186cd65bcd8d2d369b10f5f4fd59fe029f41d"
 
 SRC_URI += "file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch"
 

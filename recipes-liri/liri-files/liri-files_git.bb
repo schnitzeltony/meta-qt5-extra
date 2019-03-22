@@ -1,25 +1,29 @@
 SUMMARY = "File manager"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = " \
-	file://LICENSE.GPLv3;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+	file://LICENSE.GPLv3;md5=1ebbd3e34237af26da5dc08a4e440464 \
 "
 
 inherit liri
 
-PV = "0.1.0+git${SRCPV}"
+PV = "0.2.0+git${SRCPV}"
 
-SRCREV = "4f3ea283907e11342a024e6272d660f7578c7e57"
+SRCREV = "0d46d331cc107b9feb74570fe93edf5883da3265"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
     qttools \
+    qtquickcontrols2 \
     taglib \
-    fluid \
+    liri-fluid \
 "
 
 EXTRA_OECMAKE += "-DQt5LinguistTools_DIR=${STAGING_LIBDIR_NATIVE}/cmake/Qt5LinguistTools"
 
-FILES_${PN} += "${OE_QMAKE_PATH_QML} ${datadir}"
+FILES_${PN} += " \
+    ${datadir}/metainfo \
+    ${OE_QMAKE_PATH_QML} \
+"
 
 RREPLACES_${PN} = "swordfish"
 RPROVIDES_${PN} = "swordfish"

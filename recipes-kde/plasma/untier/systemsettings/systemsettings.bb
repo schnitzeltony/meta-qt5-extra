@@ -32,16 +32,12 @@ DEPENDS += " \
     plasma-workspace \
 "
 
-PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "1c119822295205f625c7fcc6ea7b01bb"
-SRC_URI[sha256sum] = "9e7a49e4448b708e6e62891f5bc2b8205f78cd828cb2da1cd0574d944e9a9e3e"
+PV = "${PLASMA_FIXUP_VERSION}"
+SRC_URI[md5sum] = "4f27f409f8660e5656cfae2c7fe2c4a3"
+SRC_URI[sha256sum] = "42095b95a7866aa667e30c15a7ebc9b00225fdb4f06668510fdf63a18573102f"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/kpackage \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "

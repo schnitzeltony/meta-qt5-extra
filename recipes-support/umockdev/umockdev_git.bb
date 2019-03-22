@@ -7,11 +7,11 @@ SRCREV = "a9a34ac0e71f6eae4432261ad3fd647dbee070cb"
 PV = "0.12.1"
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig gobject-introspection gtk-doc vala
+inherit autotools pkgconfig vala gobject-introspection gtk-doc
 
 DEPENDS += "glib-2.0 udev libgudev"
 
-EXTRA_OECONF = "--disable-gtk-doc --enable-introspection"
+EXTRA_OECONF += "--disable-gtk-doc"
 # Although we disable doc we need ${S}/docs/gtk-doc.make
 GTKDOC_DOCDIR = "${S}/docs"
 

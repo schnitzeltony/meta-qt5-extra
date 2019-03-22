@@ -7,7 +7,7 @@ inherit lxqt pkgconfig
 DEPENDS += "qtx11extras openbox"
 
 SRC_URI += "file://0001-finding-sed-does-not-work-and-is-not-neccessary.patch"
-SRCREV = "056881dd2c941936124bafe6657c111ca0627586"
-PV = "0.13.0"
+SRCREV = "2d67ed426a1fde62e1300b2e1e4db8724ca51d6c"
+PV = "0.14.1"
 
 FILES_${PN} += "${datadir}/icons"

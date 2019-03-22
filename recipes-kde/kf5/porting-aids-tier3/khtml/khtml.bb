@@ -37,8 +37,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "109d9802560834c03464690388d0c840"
-SRC_URI[sha256sum] = "150737b9bb55ec6eec6ca77349bc7556e68c403254bd8f69b0340bfcec7a115a"
+SRC_URI[md5sum] = "248a4a4990f3230b4d410f6265348c39"
+SRC_URI[sha256sum] = "7d381c2a7d15710b4ba404111135c1aadbd3fc8027ad77f153b81a5208c3acf2"
 
 do_compile_append() {
     # gperf-native sets absolut debug comments/links in header
@@ -49,8 +49,4 @@ do_compile_append() {
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/kf5/*/.debug \
 "

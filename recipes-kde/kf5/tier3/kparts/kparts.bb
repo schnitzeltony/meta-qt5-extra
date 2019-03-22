@@ -25,12 +25,11 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "2e52a46ef3f4a031a3ce790661c8fcc9"
-SRC_URI[sha256sum] = "072d893e6466a50781c46168616cc165586f75751bd2290a0790b166e751f783"
+SRC_URI[md5sum] = "863c68ed99fa8e143e4aa298bf5a22ca"
+SRC_URI[sha256sum] = "1ff0d7ffc327f29c250d9c13c782a772b630d6146de68fe5fd1c38575a5645ee"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/kdevappwizard \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
-FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/.debug"

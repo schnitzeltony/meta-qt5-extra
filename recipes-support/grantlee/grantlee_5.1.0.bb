@@ -14,5 +14,6 @@ inherit cmake_qt5 pkgconfig
 
 DEPENDS += "qtscript"
 
-FILES_${PN}-dev += "${libdir}/cmake"
-FILES_${PN}-dbg += "${libdir}/grantlee/*/.debug"
+EXTRA_OECMAKE += " \
+    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
+"

@@ -28,8 +28,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "623c3feaea00c573dbe2308f85ed0cfb"
-SRC_URI[sha256sum] = "aeb735ad332514d284b2bad9e6dd41261a81f901ff896001ef9e5b986620b3fb"
+SRC_URI[md5sum] = "72d72ddaa13a10cd8ed6319fe00e51be"
+SRC_URI[sha256sum] = "ecf781b5d3691bb967c9170938c1133e2972ee97d71aab2de65487a952700722"
 SRC_URI += "file://0001-fix-build-with-QT_NO_SESSIONMANAGER-set.patch"
 
 FILES_${PN} += " \
@@ -38,10 +38,4 @@ FILES_${PN} += " \
     ${datadir}/mime \
     ${datadir}/k*5 \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/kf5/kio_dnd/.debug \
 "

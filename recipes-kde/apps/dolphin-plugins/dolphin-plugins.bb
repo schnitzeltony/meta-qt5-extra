@@ -19,15 +19,11 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "ea42d71187245acdf204aa03610b41f5"
-SRC_URI[sha256sum] = "8324e4552d896970c90f9c63f202979b6520f18f291f4fa8b9baf33c25105e42"
+SRC_URI[md5sum] = "f4be0f56a4935ef177375ab7f22ce25b"
+SRC_URI[sha256sum] = "1bff5f828f11e9b9a527b59f12ec16745fa19fb09392ca1872d6b0c909212427"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/kservices5 \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "

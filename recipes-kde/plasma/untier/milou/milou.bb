@@ -22,17 +22,12 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "ea0c7fe6cf49049b9a68b9d0094634b9"
-SRC_URI[sha256sum] = "6e567177f3deccc5794e7c214e68e811a26c7ed3a1e63488ff41451b7fc973b6"
+SRC_URI[md5sum] = "95d1078a08dcf21266a9cce51bac9dc6"
+SRC_URI[sha256sum] = "017c8e26583926eb15936227236d19e120868775521b7bdc64e86b9f5b4d38df"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/plasma \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_QML}/*/*/*/.debug \
 "

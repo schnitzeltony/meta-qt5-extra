@@ -39,8 +39,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "34c5a84a8d6a135cb947b6ecd17803ee"
-SRC_URI[sha256sum] = "2cc73fac179bd9bcf5c9ed82c9aec6c861e414d70d0042435882da76c66b09da"
+SRC_URI[md5sum] = "8064140c272452f7610e35b714930ca4"
+SRC_URI[sha256sum] = "996788d374e53d1d50093a88641c7cde791b3ba1c890ed72d5ee5507aece1066"
 SRC_URI += "file://0001-fix-build-in-x11-less-environments.patch"
 
 FILES_${PN} += " \
@@ -50,9 +50,4 @@ FILES_${PN} += " \
     ${datadir}/kpackage \
     \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
 "

@@ -1,0 +1,41 @@
+From e557abec62aa4c9c90ae50db3fe938a97e910288 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 26 Dec 2018 22:39:08 +0100
+Subject: [PATCH] Do not try to build macOS cocoa
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Seems the headers are installed for unknown reason - so make sure support is
+remains disabled.
+
+Fixes:
+| arm-mortsgna-linux-gnueabi-g++: error: ../suil-0.10.2/src/cocoa_in_qt5.mm: Objective-C++ compiler not installed on this system
+
+Upstream-Status: Pending [1]
+
+[1] https://github.com/drobilla/suil/issues/6
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ wscript | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/wscript b/wscript
+index 89ab039..352e569 100644
+--- a/wscript
++++ b/wscript
+@@ -91,10 +91,6 @@ def configure(conf):
+         if not conf.options.no_qt5:
+             autowaf.check_pkg(conf, 'Qt5Widgets', uselib_store='QT5',
+                               atleast_version='5.1.0', mandatory=False)
+-            if conf.check_cxx(header_name = 'QMacCocoaViewContainer',
+-                              uselib      = 'QT5',
+-                              mandatory   = False):
+-                autowaf.define(conf, 'SUIL_WITH_COCOA_IN_QT5', 1)
+ 
+     conf.check_cc(define_name   = 'HAVE_LIBDL',
+                   lib           = 'dl',
+-- 
+2.20.1
+

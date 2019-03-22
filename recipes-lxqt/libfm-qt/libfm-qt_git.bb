@@ -6,15 +6,17 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 inherit lxqt pkgconfig distro_features_check cmake_auto_align_paths cmake_lib mime
 
-DEPENDS += "qtx11extras glib-2.0 libfm menu-cache libxcb liblxqt"
+DEPENDS += "qtx11extras glib-2.0 libexif menu-cache libxcb liblxqt"
 
 CMAKE_ALIGN_FILES_FIND = "*targets.cmake"
 
-SRC_URI += "file://0001-fix-cross-include-path.patch"
-SRCREV = "422f867a94442fdfe5db06836403b5bc7b5c68db"
-PV = "0.13.1"
+SRCREV = "50a8f20c82443b00702a61f150ab4c0d71878116"
+PV = "0.14.1"
 
-FILES_${PN} += "${datadir}/mime"
+FILES_${PN} += " \
+    ${datadir}/mime \
+    ${datadir}/${BPN}/*.list \
+"
 
 RRECOMMENDS_${PN} = "gvfs gvfsd-trash eject"
 

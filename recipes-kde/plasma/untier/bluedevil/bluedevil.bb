@@ -26,8 +26,8 @@ DEPENDS += " \
 
 PV = "${PLASMA_VERSION}"
 SRC_URI += "file://0001-Hack-build-with-gcc8.patch"
-SRC_URI[md5sum] = "fe29af65a55d434bfb5a1806f7ca61b0"
-SRC_URI[sha256sum] = "7b725e7adc88df65b88fa0044bff06a4dbb49a169f27dfbbc4b54d5e29b78711"
+SRC_URI[md5sum] = "7bb9a0a7cb5c751d1a94fcf9cb260bd4"
+SRC_URI[sha256sum] = "40edc97e2236655114ef0fe77fa357c70fcf07c555fbe1b40d45f2dc7c90b1ed"
 
 FILES_${PN} += " \
     ${datadir}/bluedevilwizard \
@@ -37,11 +37,4 @@ FILES_${PN} += " \
     ${datadir}/remoteview \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML}/org/kde/plasma/private/bluetooth \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/plasma/private/bluetooth/.debug \
 "

@@ -28,8 +28,8 @@ DEPENDS += "\
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "2fd69bedd600e7bfa8e4cae6e2425fc9"
-SRC_URI[sha256sum] = "26b107c07ded53d1dd7c93814c59c76086cfd9019d18997f1491e290498414b3"
+SRC_URI[md5sum] = "0efcace3965f868e4b474f501c4c3130"
+SRC_URI[sha256sum] = "0e9945afce9d616ab34da5a985410aac8fd3d9f15630db74d53e6540ad0af8c7"
 
 FILES_${PN} += " \
     ${datadir}/k*_kscreen \
@@ -37,9 +37,4 @@ FILES_${PN} += " \
     ${datadir}/icons \
     ${datadir}/plasma \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
 "

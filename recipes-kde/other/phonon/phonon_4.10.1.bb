@@ -22,9 +22,8 @@ PACKAGECONFIG[pulseaudio] = "-DCMAKE_DISABLE_FIND_PACKAGE_PULSEAUDIO=FALSE -DCMA
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)}"
 
-PACKAGES =+ "${PN}-designer-plugin-dbg ${PN}-designer-plugin"
+PACKAGES =+ "${PN}-designer-plugin"
 FILES_${PN}-designer-plugin = "${OE_QMAKE_PATH_PLUGINS}/designer"
-FILES_${PN}-designer-plugin-dbg = "${OE_QMAKE_PATH_PLUGINS}/designer/.debug"
 
 FILES_${PN} += "${datadir}/dbus-1"
 FILES_${PN}-dev += "${datadir}/qt5/mkspecs ${OE_QMAKE_PATH_ARCHDATA}/mkspecs ${datadir}/phonon4qt5/buildsystem"

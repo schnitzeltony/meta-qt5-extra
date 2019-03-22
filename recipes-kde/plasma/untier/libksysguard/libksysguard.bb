@@ -17,7 +17,6 @@ DEPENDS += " \
     ki18n \
     kwindowsystem \
     kcompletion \
-    kauth \
     kwidgetsaddons \
     kiconthemes \
     kconfigwidgets \
@@ -28,8 +27,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "8b43076fe3d8845d7f890721a90b8210"
-SRC_URI[sha256sum] = "2233a024aa1d19c0f0d4142ae436df44cf98e0de3203da1a62556891779ad4d9"
+SRC_URI[md5sum] = "94d5a8505d3ecc69726aa9deb592bf97"
+SRC_URI[sha256sum] = "d2e22a6ed3cb04c1b398f4609faa8eea10a97d89c29230c544ab57d643598e15"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \

@@ -36,8 +36,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "40824d0309f2f7a467812cbc1901dc13"
-SRC_URI[sha256sum] = "587941cccff85ff87063dbb70fe1a67f140fce207a46e35ce136cbf104e35d15"
+SRC_URI[md5sum] = "57e49c3995117945938669e24aff9352"
+SRC_URI[sha256sum] = "fcfe2474bc271e730ed95edb21ae46e93c1ce773ed036f63c9fb2db02cbc7e64"
 
 SRC_URI += " \
     file://0001-CMakeLists.txt-make-MLT_PREFIX-configurable.patch \
@@ -52,10 +52,6 @@ FILES_${PN} += " \
     ${datadir}/menu \
     ${datadir}/icons \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "
 
 RRECOMMENDS_${PN} += "ffmpeg"

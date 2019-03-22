@@ -36,4 +36,3 @@ PACKAGECONFIG[kdewebkit] = "-DWITH_KDEWEBKIT=ON,,kdewebkit"
 CMAKE_ALIGN_SYSROOT[1] = "KF5DesignerPlugin, -s${_IMPORT_PREFIX}/bin, -s${KDE_PATH_EXTERNAL_HOST_BINS}"
 
 FILES_${PN} += "${libdir}/plugins/designer"
-FILES_${PN}-dbg += "${libdir}/plugins/designer/.debug"

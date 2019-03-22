@@ -1,6 +1,6 @@
 From ac2556aa6a1bdbbdb7347079bfe4bddb74756263 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Mon, 8 Dec 2014 13:37:14 +0100
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 10 Dec 2018 22:47:59 +0100
 Subject: [PATCH 3/3] only build kf5-config for native
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -8,24 +8,24 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Inappropriate [cross-specific]
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 
 ---
- CMakeLists.txt                |  29 +------
- src/CMakeLists.txt            | 197 +-----------------------------------------
+ CMakeLists.txt                |  29 +-----
+ src/CMakeLists.txt            | 200 +-----------------------------------------
  src/kdecore/kglobal.cpp       |  18 ----
  src/kdecore/klocale_kde.cpp   |   4 -
  src/kdecore/kstandarddirs.cpp |   1 -
- 5 files changed, 4 insertions(+), 245 deletions(-)
+ 5 files changed, 4 insertions(+), 248 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a3ea743..237b801 100644
+index 2d1f57a..5394b0a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -20,30 +20,11 @@ include(GenerateExportHeader)
  include(CMakeFindFrameworks)
  
- set(REQUIRED_QT_VERSION 5.8.0)
+ set(REQUIRED_QT_VERSION 5.10.0)
 -find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network Widgets DBus Test Svg PrintSupport Designer)
 +find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network DBus Test)
  
@@ -38,7 +38,7 @@ index a3ea743..237b801 100644
 -find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5Emoticons ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5GuiAddons ${KF5_DEP_VERSION} REQUIRED)
-+ find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
++find_package(KF5CoreAddons ${KF5_DEP_VERSION} REQUIRED)
  find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5IconThemes ${KF5_DEP_VERSION} REQUIRED)
 -find_package(KF5KIO ${KF5_DEP_VERSION} REQUIRED)
@@ -63,7 +63,7 @@ index a3ea743..237b801 100644
  endif ()
  if (APPLE)
      cmake_find_frameworks(CoreFoundation)
-@@ -151,13 +131,8 @@ install(
+@@ -153,13 +133,8 @@ install(
  
  
  
@@ -78,7 +78,7 @@ index a3ea743..237b801 100644
  
  if (BUILD_TESTING)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index ab0b246..e134bd9 100644
+index ab0b246..0751644 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -1,6 +1,4 @@
@@ -96,15 +96,16 @@ index ab0b246..e134bd9 100644
  find_package(OpenSSL)
  set_package_properties(OpenSSL PROPERTIES DESCRIPTION "Support for secure network communications (SSL and TLS)"
                         URL "http://openssl.org"
-@@ -51,6 +50,7 @@ else()
+@@ -50,7 +49,7 @@ else()
+    set(libkdelibs4support_SRCS solid/networking_unix.cpp)
  endif()
  
- 
+-
 +endif()
  set(libkdelibs4support_SRCS
      ${libkdelibs4support_SRCS}
      kdecore/k4aboutdata.cpp
-@@ -58,39 +58,9 @@ set(libkdelibs4support_SRCS
+@@ -58,39 +57,9 @@ set(libkdelibs4support_SRCS
      kdecore/kcurrencycode.cpp
      kdecore/kdebug.cpp
      kdecore/kdebugdbusiface.cpp
@@ -144,7 +145,7 @@ index ab0b246..e134bd9 100644
      kdecore/kcalendarera.cpp
      kdecore/kcalendarsystem.cpp
      kdecore/kcalendarsystemcoptic.cpp
-@@ -115,95 +85,6 @@ set(libkdelibs4support_SRCS
+@@ -115,95 +84,6 @@ set(libkdelibs4support_SRCS
      kdecore/klocale.cpp
      kdecore/klocale_kde.cpp
  
@@ -240,7 +241,7 @@ index ab0b246..e134bd9 100644
  )
  
  set_source_files_properties( solid/org.freedesktop.PowerManagement.xml
-@@ -211,36 +92,6 @@ set_source_files_properties( solid/org.freedesktop.PowerManagement.xml
+@@ -211,37 +91,6 @@ set_source_files_properties( solid/org.freedesktop.PowerManagement.xml
                               solid/org.kde.Solid.PowerManagement.PolicyAgent.xml
                               PROPERTIES NO_NAMESPACE TRUE)
  
@@ -274,10 +275,11 @@ index ab0b246..e134bd9 100644
 -else()
 -    set(libkdelibs4support_SRCS ${libkdelibs4support_SRCS} kdecore/klockfile_unix.cpp)
 -endif ()
- 
+-
  if (APPLE)
      set(libkdelibs4support_SRCS ${libkdelibs4support_SRCS}
-@@ -266,10 +117,6 @@ configure_file(kdecore/config-date.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-da
+                             kdecore/klocale_mac.cpp
+@@ -266,10 +115,6 @@ configure_file(kdecore/config-date.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-da
  configure_file(kdecore/config-localization.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-localization.h)
  
  
@@ -288,7 +290,7 @@ index ab0b246..e134bd9 100644
  check_function_exists(mmap HAVE_MMAP)
  check_symbol_exists(posix_madvise "sys/mman.h" HAVE_MADVISE)
  configure_file(config-kdelibs4support.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kdelibs4support.h )
-@@ -315,32 +162,12 @@ endif()
+@@ -315,32 +160,12 @@ endif()
  
  target_link_libraries(KF5KDELibs4Support
  PUBLIC
@@ -321,7 +323,7 @@ index ab0b246..e134bd9 100644
     ${platformLinkLibraries}
  )
  
-@@ -368,26 +195,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
+@@ -368,27 +193,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
  )
  
  
@@ -345,11 +347,12 @@ index ab0b246..e134bd9 100644
 -install(TARGETS kf5deprecatedwidgets DESTINATION ${KDE_INSTALL_QTPLUGINDIR}/designer)
 -
 -##########
- 
+-
  add_subdirectory(pics)
  
+ install(TARGETS KF5KDELibs4Support
 diff --git a/src/kdecore/kglobal.cpp b/src/kdecore/kglobal.cpp
-index bd2ba59..f06f73e 100644
+index ac3daa6..2dcafe2 100644
 --- a/src/kdecore/kglobal.cpp
 +++ b/src/kdecore/kglobal.cpp
 @@ -42,7 +42,6 @@
@@ -362,8 +365,8 @@ index bd2ba59..f06f73e 100644
  #undef QT_NO_TRANSLATION
 @@ -50,14 +49,12 @@
  #define QT_NO_TRANSLATION
- #include <QtCore/QDebug>
- #include <QtCore/QTextCodec>
+ #include <QDebug>
+ #include <QTextCodec>
 -#include <unistd.h> // umask
  
  // ~KConfig needs qrand(). qrand() depends on a Q_GLOBAL_STATIC. With this Q_CONSTRUCTOR_FUNCTION we
@@ -405,17 +408,17 @@ index bd2ba59..f06f73e 100644
  {
      return KComponentData::activeComponent();
 diff --git a/src/kdecore/klocale_kde.cpp b/src/kdecore/klocale_kde.cpp
-index d7e45ed..278cf0c 100644
+index dd58c73..c66bd48 100644
 --- a/src/kdecore/klocale_kde.cpp
 +++ b/src/kdecore/klocale_kde.cpp
 @@ -42,7 +42,6 @@
- #include <QtCore/QTextCodec>
- #include <QtCore/QFile>
- #include <QtCore/QDebug>
+ #include <QTextCodec>
+ #include <QFile>
+ #include <QDebug>
 -#include <QPrinter>
- #include <QtCore/QRegExp>
- #include <QtCore/QLocale>
- #include <QtCore/QHash>
+ #include <QRegExp>
+ #include <QLocale>
+ #include <QHash>
 @@ -485,9 +484,6 @@ void KLocalePrivate::initFormat()
                         m_weekNumberSystem, KLocale::WeekNumberSystem);
  
@@ -427,7 +430,7 @@ index d7e45ed..278cf0c 100644
      QString calendarType;
      readConfigEntry("CalendarSystem", "gregorian", calendarType);
 diff --git a/src/kdecore/kstandarddirs.cpp b/src/kdecore/kstandarddirs.cpp
-index 01560dc..344aa43 100644
+index f366c9d..e5ded7f 100644
 --- a/src/kdecore/kstandarddirs.cpp
 +++ b/src/kdecore/kstandarddirs.cpp
 @@ -35,7 +35,6 @@
@@ -439,5 +442,5 @@ index 01560dc..344aa43 100644
  #include <config-kstandarddirs.h>
  #include <config-kdelibs4support.h>
 -- 
-1.9.3
+2.14.5
 

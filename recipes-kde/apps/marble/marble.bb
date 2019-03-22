@@ -31,8 +31,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "1d4f5bbcbce52716370bdab6656e23f0"
-SRC_URI[sha256sum] = "a81c9047a9596922671eca91007dc066cbe10e4424e44f3980673494c839b331"
+SRC_URI[md5sum] = "49b86d84d38ccc0804c922a9502a2b12"
+SRC_URI[sha256sum] = "0bfd7ae576e42ebbddadc8c83c2fec5edaf462bcf284642b1002d36d751b24ee"
 
 EXTRA_OECMAKE += " \
     -DMARBLE_PRI_INSTALL_DIR=${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/modules \
@@ -41,7 +41,7 @@ EXTRA_OECMAKE += " \
 
 PACKAGES =+ " \
     ${PN}-qt \
-    ${PN}-designer-plugin-dbg ${PN}-designer-plugin \
+    ${PN}-designer-plugin \
 "
 
 CMAKE_ALIGN_SYSROOT[1] = "Marble, -S${includedir}, -s${_IMPORT_PREFIX}/include"
@@ -63,16 +63,6 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
 "
 
-FILES_${PN}-dbg += " \
-    ${libdir}/marble/plugins/.debug \
-    ${libdir}/marble/plugins/org/kde/edu/marble/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-"
-
 FILES_${PN}-designer-plugin += " \
     ${OE_QMAKE_PATH_PLUGINS}/designer \
-"
-
-FILES_${PN}-designer-plugin-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/designer/.debug \
 "

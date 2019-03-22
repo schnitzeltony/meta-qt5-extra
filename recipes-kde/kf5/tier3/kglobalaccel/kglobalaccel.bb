@@ -16,15 +16,11 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "3b8877d0dbd6ee92601a4b82307045e0"
-SRC_URI[sha256sum] = "1eb6b54d6114e98d0f30c41d54288bca65ba9725d062a5c4f40b0772aa3ba30d"
+SRC_URI[md5sum] = "1dd09569d7824f2bef24a110b3fde08e"
+SRC_URI[sha256sum] = "c3a7c694f257d9331c8cb6f398532e89e9cb962f2224524fe69937c17edcaf5e"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/kservices5 \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
 "

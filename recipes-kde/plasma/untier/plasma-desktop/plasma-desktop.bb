@@ -13,7 +13,6 @@ DEPENDS += " \
     qtsvg \
     qtdeclarative \
     \
-    kauth \
     kauth-native \
     plasma-framework \
     kdoctools \
@@ -49,9 +48,9 @@ DEPENDS += " \
     fontconfig \
 "
 
-PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "2db6c86391fcb083a0ff079a14875821"
-SRC_URI[sha256sum] = "721c684085268726591a93c11db251cddf13b2ea094d8d1f7aa9beadfc42b049"
+PV = "${PLASMA_FIXUP_VERSION}"
+SRC_URI[md5sum] = "0aedba1ccd551bf3137cbadedf140c3c"
+SRC_URI[sha256sum] = "21e54d489817751173049122410737db641a8e58955b84264a4ec861e302ff8a"
 
 SRC_URI += "file://0001-Ensure-xkb_base-is-not-empty-instead-of-checking-if-.patch"
 
@@ -70,18 +69,8 @@ FILES_${PN} += " \
     \
     ${libdir}/libkdeinit5_kaccess.so \
     ${OE_QMAKE_PATH_QML} \
-    ${libdir}/kauth \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${libdir}/kconf_update_bin \
-"
-
-FILES_${PN}-dbg += " \
-    ${libdir}/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/*/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/*/*/*/.debug \
 "
 
 RDEPENDS_${PN} += " \

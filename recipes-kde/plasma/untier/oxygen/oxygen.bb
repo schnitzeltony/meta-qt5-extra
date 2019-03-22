@@ -25,8 +25,8 @@ DEPENDS += " \
 
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "a194273fcb39e57b694121d258188a7a"
-SRC_URI[sha256sum] = "1f4c1e7c94204af3d146670df4a6a271b433b23b4543b6ad5adcfb9aad8ebde5"
+SRC_URI[md5sum] = "b0224262aaea0611a5304e9586d9ddbf"
+SRC_URI[sha256sum] = "6bb7e108291f1b82881de71a1df99429e90922e8fb2318d99a7002be6b4c0628"
 SRC_URI += "file://0001-kstyle-add-an-option-BUILD_OXYGEN_SETTINGS-disabled-.patch"
 
 PACKAGECONFIG ??= ""
@@ -38,9 +38,4 @@ FILES_${PN} += " \
     ${datadir}/kstyle \
     ${datadir}/plasma \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
 "

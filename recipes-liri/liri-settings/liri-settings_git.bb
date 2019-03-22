@@ -10,14 +10,14 @@ REQUIRED_DISTRO_FEATURES = "wayland"
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "d5f5881da698fcb5e5b8e9e9176b85cd9f9cccbc"
+SRCREV = "0e689bd1f7cc019e8e0809242aab544eb4f6c993"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
     qtquickcontrols2 \
+    liri-libliri \
     liri-qtaccountsservice \
     liri-fluid \
-    libqtxdg \
     polkit \
     xkeyboard-config \
 "

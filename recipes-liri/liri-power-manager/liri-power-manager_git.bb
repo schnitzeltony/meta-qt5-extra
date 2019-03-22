@@ -8,7 +8,7 @@ inherit liri gsettings
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "2164b6d8e15ddab562b1b51792b5b0515d06bbcd"
+SRCREV = "22c9288d32c33569a1886a061f461e1735b546f0"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
@@ -22,7 +22,7 @@ DEPENDS += " \
     solid \
 "
 
-EXTRA_OECMAKE = "-DINSTALL_SYSCONFDIR=${sysconfdir}"
+EXTRA_OECMAKE += "-DINSTALL_SYSCONFDIR=${sysconfdir}"
 
 FILES_${PN} += " \
     ${datadir}/liri-settings \

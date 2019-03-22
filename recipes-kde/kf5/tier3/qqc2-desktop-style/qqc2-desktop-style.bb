@@ -18,14 +18,10 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "0aad32d67d7a3e9d6a7897167ba0918c"
-SRC_URI[sha256sum] = "2ee8a3b3a50b2d8a71e097dd9f687ace823dca05acb30595b9bb88cb473b10b7"
+SRC_URI[md5sum] = "2018e747ed94f81f718ec6147a8562b0"
+SRC_URI[sha256sum] = "0b00eb10646593a57aff1b1ba79ddb34f5e2a3fb5f955df1bf9b02af5ff04e21"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "

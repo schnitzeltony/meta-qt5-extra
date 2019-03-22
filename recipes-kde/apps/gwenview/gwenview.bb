@@ -25,12 +25,11 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "75eb27efb8710a063bb4b7f247f0ddff"
-SRC_URI[sha256sum] = "0c95452ad82e2a5e7bc6bdb4464e7be44b6af9c75a972678f8925e2a6bb15671"
+SRC_URI[md5sum] = "93019f12a8b494b22d00d9489832246b"
+SRC_URI[sha256sum] = "0b4ff869fc09140e258e894f5169fc6c96f1126891b8ed1a391d4624d6ab0c35"
 
 SRC_URI += " \
-    file://0001-Set-Kipi-package-properties.patch  \
-    file://0002-Avoid-try_run.patch \
+    file://0001-Avoid-try_run.patch \
 "
 
 CXXFLAGS += "-isystem ${STAGING_INCDIR}/phonon4qt5/KDE"
@@ -41,8 +40,4 @@ FILES_${PN} += " \
     ${datadir}/solid \
     ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "

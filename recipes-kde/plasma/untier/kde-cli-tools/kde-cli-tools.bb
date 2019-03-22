@@ -12,10 +12,10 @@ DEPENDS += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "",d)} \
     \
     kauth-native \
-    kconfig \
     kconfig-native \
     kdoctools-native \
     kcoreaddons-native \
+    kpackage-native \
     kactivities \
     kiconthemes \
     ki18n \
@@ -27,8 +27,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "d008931a914d5748da62f6667915c7d6"
-SRC_URI[sha256sum] = "de8b4f6fd3e80d0b7eb6c2b9ace965da6c8c40864263905b468795642dbdf385"
+SRC_URI[md5sum] = "882890f64e5143e67e061f6267feea5f"
+SRC_URI[sha256sum] = "ef7ac31b6499739779b2c4e1ecbde3500346ca805875e2f93ca6928494f62adf"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
@@ -37,10 +37,4 @@ FILES_${PN} += " \
     ${datadir}/kservices5 \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${libdir}/libkdeinit5_kcmshell5.so \
-"
-
-FILES_${PN}-dbg += " \
-    ${libdir}/*/.debug \
-    ${libdir}/${BPN}/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "

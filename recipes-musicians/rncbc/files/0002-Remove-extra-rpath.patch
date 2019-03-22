@@ -1,0 +1,70 @@
+From 45215d29d71a54e79230454d698346299a9182df Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 28 Oct 2018 20:51:23 +0100
+Subject: [PATCH] Remove extra rpath
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/src_jack.pro  | 2 +-
+ src/src_lv2.pro   | 2 +-
+ src/src_lv2ui.pro | 2 +-
+ src/src_ui.pro    | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/src_jack.pro b/src/src_jack.pro
+index 4aa3349..d9d4415 100644
+--- a/src/src_jack.pro
++++ b/src/src_jack.pro
+@@ -75,7 +75,7 @@ unix {
+ 	mimetypes_scalable.path = $${DATADIR}/icons/hicolor/scalable/mimetypes
+ 	mimetypes_scalable.files += mimetypes/application-x-$${NAME}-preset.svg
+ 
+-	LIBS += -l$${NAME} -l$${NAME}_ui -Wl,-rpath,$${LIBDIR}
++	LIBS += -l$${NAME} -l$${NAME}_ui
+ }
+ 
+ QT += widgets xml
+diff --git a/src/src_lv2.pro b/src/src_lv2.pro
+index 069e1ee..6eb8485 100644
+--- a/src/src_lv2.pro
++++ b/src/src_lv2.pro
+@@ -59,7 +59,7 @@ unix {
+ 
+ 	QMAKE_CLEAN += $${TARGET_LV2}.so
+ 
+-	LIBS += -l$${NAME} -Wl,-rpath,$${LIBDIR}
++	LIBS += -l$${NAME}
+ }
+ 
+ QT -= gui
+diff --git a/src/src_lv2ui.pro b/src/src_lv2ui.pro
+index 50f5798..7b0bad4 100644
+--- a/src/src_lv2ui.pro
++++ b/src/src_lv2ui.pro
+@@ -59,7 +59,7 @@ unix {
+ 
+ 	QMAKE_CLEAN += $${TARGET_LV2UI}.so
+ 
+-	LIBS += -l$${NAME} -l$${NAME}_ui -L$${NAME}.lv2 -Wl,-rpath,$${LIBDIR}:$${LV2DIR}/$${NAME}.lv2
++	LIBS += -l$${NAME} -l$${NAME}_ui -L$${NAME}.lv2
+ }
+ 
+ QT += widgets xml
+diff --git a/src/src_ui.pro b/src/src_ui.pro
+index 081e3af..132d5b4 100644
+--- a/src/src_ui.pro
++++ b/src/src_ui.pro
+@@ -69,7 +69,7 @@ unix {
+ 
+ 	target.path = $${LIBDIR}
+ 
+-	LIBS += -l$${NAME} -Wl,-rpath,$${LIBDIR}
++	LIBS += -l$${NAME}
+ }
+ 
+ QT += widgets xml

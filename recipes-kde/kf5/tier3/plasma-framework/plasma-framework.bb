@@ -39,8 +39,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "c986caf7998d6ace12580ba7637aef54"
-SRC_URI[sha256sum] = "64c2d459ec6fc58b52c9313b1b82eee3152f5a67a1b1ea79536477318fd538cf"
+SRC_URI[md5sum] = "1291b03536fb9719acc910f6d3c2af98"
+SRC_URI[sha256sum] = "0accc21e8dd47531821d9a4a339fb790d3695fe12868d8c92e1b00564e028943"
 
 FILES_${PN} += " \
     ${datadir}/kdevappwizard \
@@ -52,12 +52,4 @@ FILES_${PN} += " \
     ${libdir}/platformqml \
     ${OE_QMAKE_PATH_QML} \
     ${libdir}/org/kde/plasma \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
-    ${libdir}/platformqml/*/org/kde/plasma/*/.debug \
-    ${libdir}/org/kde/plasma/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/plasma/*/.debug \
 "

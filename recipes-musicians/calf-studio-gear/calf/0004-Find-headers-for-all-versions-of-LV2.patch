@@ -1,0 +1,75 @@
+From 855cf20b9bb9fec30b72fa05a9b4cd28a1b4d35d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 19 Jan 2019 23:00:49 +0100
+Subject: [PATCH 2/2] Find headers for all versions of LV2
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Submitted [1]
+
+[1] https://github.com/calf-studio-gear/calf/pull/213
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/calf/lv2_options.h | 2 +-
+ src/calf/lv2_ui.h      | 2 +-
+ src/calf/lv2wrap.h     | 2 +-
+ src/makerdf.cpp        | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/calf/lv2_options.h b/src/calf/lv2_options.h
+index 29568b8d..d66153da 100644
+--- a/src/calf/lv2_options.h
++++ b/src/calf/lv2_options.h
+@@ -20,7 +20,7 @@
+ #include <stdint.h>
+ 
+ #include "lv2_urid.h"
+-#include "lv2.h"
++#include "lv2/lv2plug.in/ns/lv2core/lv2.h"
+ 
+ #define LV2_OPTIONS_URI    "http://lv2plug.in/ns/ext/options"
+ #define LV2_OPTIONS_PREFIX LV2_OPTIONS_URI "#"
+diff --git a/src/calf/lv2_ui.h b/src/calf/lv2_ui.h
+index b802ec59..c3e60822 100644
+--- a/src/calf/lv2_ui.h
++++ b/src/calf/lv2_ui.h
+@@ -27,7 +27,7 @@
+ 
+ #include <stdint.h>
+ 
+-#include "lv2.h"
++#include "lv2/lv2plug.in/ns/lv2core/lv2.h"
+ 
+ #define LV2_UI_URI "http://lv2plug.in/ns/extensions/ui"
+ #define LV2_UI_PREFIX LV2_UI_URI "#"
+diff --git a/src/calf/lv2wrap.h b/src/calf/lv2wrap.h
+index 8d6b13c4..d19eae7b 100644
+--- a/src/calf/lv2wrap.h
++++ b/src/calf/lv2wrap.h
+@@ -25,7 +25,7 @@
+ 
+ #include <string>
+ #include <vector>
+-#include <lv2.h>
++#include "lv2/lv2plug.in/ns/lv2core/lv2.h"
+ #include <calf/giface.h>
+ #include <calf/lv2_atom.h>
+ #include <calf/lv2_atom_util.h>
+diff --git a/src/makerdf.cpp b/src/makerdf.cpp
+index 0b6cec5c..9f782534 100644
+--- a/src/makerdf.cpp
++++ b/src/makerdf.cpp
+@@ -22,7 +22,7 @@
+ #include <calf/preset.h>
+ #include <calf/utils.h>
+ #if USE_LV2
+-#include <lv2.h>
++#include "lv2/lv2plug.in/ns/lv2core/lv2.h"
+ #include <calf/lv2_atom.h>
+ #include <calf/lv2_options.h>
+ #include <calf/lv2_state.h>
+-- 
+2.20.1
+

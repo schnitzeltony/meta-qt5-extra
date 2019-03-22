@@ -1,10 +1,9 @@
 SUMMARY = "KDE's terminal emulator"
-LICENSE = "GPLv2 & GFDL-1.2 & LGPLv2 & MIT"
+LICENSE = "GPLv2 & GFDL-1.2 & LGPLv2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
     file://COPYING.DOC;md5=24ea4c7092233849b4394699333b5c56 \
     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-    file://COPYING.Unicode;md5=ca09fbc4ba99ecc01ce41d513908dcd3 \
 "
 
 inherit kde-apps gettext
@@ -41,8 +40,8 @@ DEPENDS += " \
 
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "c6fd2099ffd9129290c6d201f5430e76"
-SRC_URI[sha256sum] = "a0c8535f0260c67c86c2563cb224f57da53a8800ba8388dfa14e326b5050f7d3"
+SRC_URI[md5sum] = "1378218f3e108403decdbc8ad846cc49"
+SRC_URI[sha256sum] = "01ff3245d755a6e38207e58e50e5f82e5c681ead2ad7176d46aec00a8a562e08"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

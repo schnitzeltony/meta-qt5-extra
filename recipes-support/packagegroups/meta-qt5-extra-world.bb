@@ -7,10 +7,7 @@ inherit packagegroup
 RDEPENDS_${PN} = " \
     antimony \
     \
-    gottet \
-    hexalate \
-    peg-e \
-    simsu \
+    gottcode-world \
     \
     compton \
     qpdfview \

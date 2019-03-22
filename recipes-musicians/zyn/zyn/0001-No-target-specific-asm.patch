@@ -1,0 +1,38 @@
+From 20401a8a78c4f6757b887579f940365ef2e0f01f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 30 Dec 2016 01:37:15 +0100
+Subject: [PATCH] No target specific asm
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/globals.h | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/src/globals.h b/src/globals.h
+index f3fb1c7..e6a908d 100644
+--- a/src/globals.h
++++ b/src/globals.h
+@@ -252,15 +252,7 @@ enum LegatoMsg {
+ };
+ 
+ //is like i=(int)(floor(f))
+-#ifdef ASM_F2I_YES
+-#define F2I(f, \
+-            i) __asm__ __volatile__ ("fistpl %0" : "=m" (i) : "t" (f \
+-                                                                   - \
+-                                                                   0.49999999f) \
+-                                     : "st");
+-#else
+ #define F2I(f, i) (i) = ((f > 0) ? ((int)(f)) : ((int)(f - 1.0f)));
+-#endif
+ 
+ 
+ 
+-- 
+2.5.5
+

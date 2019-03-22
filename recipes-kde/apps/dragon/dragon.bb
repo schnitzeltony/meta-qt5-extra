@@ -29,8 +29,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "8ebe9af5816d17a84094da963f77b3ef"
-SRC_URI[sha256sum] = "e202596ffc56e6d45fbd42d0259be2ebe148c29c940c9d87282e2998dac7448e"
+SRC_URI[md5sum] = "fcf5e0ec51b65619fcfe8c7bc59bd162"
+SRC_URI[sha256sum] = "115d60bfdef498ea75bc077a7091fb738615b399b03ec2a76a4bf34f19b407f3"
 
 CXXFLAGS += "-isystem ${STAGING_INCDIR}/phonon4qt5/KDE"
 
@@ -39,8 +39,4 @@ FILES_${PN} += " \
     ${datadir}/solid \
     ${datadir}/icons \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "

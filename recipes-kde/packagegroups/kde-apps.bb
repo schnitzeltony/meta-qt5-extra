@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 inherit packagegroup
 
 RDEPENDS_${PN} = " \
+    analitza \
     ark \
     baloo-widgets \
     dolphin \
@@ -12,16 +13,20 @@ RDEPENDS_${PN} = " \
     dragon \
     filelight \
     gwenview \
+    kalgebra \
     kate \
+    kcachegrind \
     kcalc \
     kcolorchooser \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
     kdf \
     kexi \
+    kfind \
     khelpcenter \
     kio-extras \
     kmag \
     kmix \
+    kmplot \
     kolourpaint \
     konsole \
     krita \

@@ -46,8 +46,8 @@ DEPENDS += " \
 # MobileBroadbandProviderInfo
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "3e1200ad29cae12d7672902164449403"
-SRC_URI[sha256sum] = "b3cfa41e0116b896a121ffe5ae0d6bc4cbc0f599d89e7fddff0feb8595525292"
+SRC_URI[md5sum] = "46492d319950a48f3a192f1d883a4020"
+SRC_URI[sha256sum] = "7fe3d72bd81f57cf2df0fcb33e957355110efe31f4b1a71a4c0b6ca121813cd1"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
@@ -61,11 +61,4 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
     ${libdir}/*.so \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-	${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
-    ${OE_QMAKE_PATH_QML}/*/*/*/*/.debug \
 "

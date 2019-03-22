@@ -24,8 +24,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "bfb9fcf08b2200a37c9938c708a9aaad"
-SRC_URI[sha256sum] = "50d74198e98debef6409c8f7e3e90261e2f7ff6955dcaaa753f426edea741762"
+SRC_URI[md5sum] = "6d90a44ee14a0937bc5a1f983fc46421"
+SRC_URI[sha256sum] = "78232285c08241dc06cd6da88dcdce0d850417dd73f0d07034ec6d9a6f97f478"
 SRC_URI += "file://0001-fix-build-with-QT_NO_SESSIONMANAGER-set.patch"
 
 FILES_${PN} += " \
@@ -33,11 +33,5 @@ FILES_${PN} += " \
     ${datadir}/polkit-1 \
     ${datadir}/icons \
     ${datadir}/k*5 \
-    ${libdir}/kauth \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${libdir}/kauth/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "

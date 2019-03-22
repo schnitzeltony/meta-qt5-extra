@@ -24,8 +24,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "d2ef43f119c8afa91745092f649205ff"
-SRC_URI[sha256sum] = "f5698b015569e22538d69056db685611a48afe2c231ad48a779a51fe30d60eaa"
+SRC_URI[md5sum] = "242dbc1fc363e90dad8350c9138918c3"
+SRC_URI[sha256sum] = "d5e7afeb00b81fe79b7730b5a13765a47e8c8fd606d89179475c44ba40ade3d3"
 SRC_URI += "file://0001-replace-try_run-by-try_compile-in-compiler-feature-c.patch"
 
 # Workaround
@@ -39,8 +39,4 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${libdir}/libkactivitymanagerd_plugin.so \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
 "

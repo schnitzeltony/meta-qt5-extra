@@ -12,7 +12,6 @@ LIC_FILES_CHKSUM = " \
 inherit kde-apps gettext
 
 DEPENDS += " \
-    libssh \
     qtsvg \
     qtwebengine \
     \
@@ -40,6 +39,7 @@ DEPENDS += " \
 "
 
 # REVISIT optionals
+# libssh \
 # openslp
 # openssh <-> dropbear
 DEPENDS += " \
@@ -49,8 +49,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "2a34d890b3b6d6ea52ae9ac8023816fa"
-SRC_URI[sha256sum] = "450d69b16a873da51190c9397b2b0ecb08bc0dcae0d2a07f7ab1d2efcd02c280"
+SRC_URI[md5sum] = "93e86cccf0b4d4868d5b32e16fa5299f"
+SRC_URI[sha256sum] = "f8879abaea6fcf31ee0bd4a55d0c24a5fded6d61abed1b059f704f797793aef2"
 
 # gperf creates hard #line links
 do_install_prepend() {
@@ -72,9 +72,4 @@ FILES_${PN} += " \
     ${datadir}/solid \
     \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/kf5/*/.debug \
 "

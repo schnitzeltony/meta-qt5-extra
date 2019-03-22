@@ -14,7 +14,6 @@ DEPENDS += " \
     kconfig-native \
     ki18n \
     kxmlgui \
-    kauth \
     kauth-native \
     kconfigwidgets \
     kio \
@@ -23,8 +22,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "1a28a56b8b76b2c84c9d880f546274c4"
-SRC_URI[sha256sum] = "9fbd6af14d2c3b8be917c94a3c09f38a8de2730250d51edd2f6820f481d3b10f"
+SRC_URI[md5sum] = "b2a458ec19d39cdecc969b1e5ad226dd"
+SRC_URI[sha256sum] = "026a2ab9746d0705c5069b48d3bc6b641119a44f62fa68a0b155b334c34577d7"
 
 RDEPENDS_${PN} = "sddm"
 
@@ -33,10 +32,4 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
-    ${libdir}/kauth \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${libdir}/kauth/.debug \
 "

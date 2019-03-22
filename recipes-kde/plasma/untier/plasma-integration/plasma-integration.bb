@@ -26,14 +26,10 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "14289404eeff5fd571aefbe2a025dc86"
-SRC_URI[sha256sum] = "68a43e222ed8c6d6f8dca780a6ad59a5d46fc040fff7542ca3ef87d21f584e4a"
+SRC_URI[md5sum] = "509f18cd766b6a63de42eaf3d8d91946"
+SRC_URI[sha256sum] = "659c4a8c5b890cdf41b788e0609f680b00d6f609610d46af8656484057141c23"
 
 FILES_${PN} += " \
     ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
 "

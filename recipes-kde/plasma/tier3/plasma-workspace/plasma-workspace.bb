@@ -11,14 +11,20 @@ REQUIRED_DISTRO_FEATURES = "x11"
 inherit kde-plasma distro_features_check gettext
 
 DEPENDS += " \
+    kpackage-native \
+    kdoctools-native \
+    sonnet-native \
+    kdesignerplugin-native \
+    kdelibs4support-native \
+    kauth-native \
     baloo \
     kdeclarative \
     plasma-framework \
-    kauth-native \
     kconfig \
     kactivities \
     krunner \
     kjsembed \
+    kholidays \
     knotifyconfig \
     kdesu \
     knewstuff \
@@ -36,20 +42,14 @@ DEPENDS += " \
     networkmanager-qt \
     libksysguard \
     libkscreen \
-    libdbusmenu-qt5 \
     kwin \
-    kpackage-native \
-    kdoctools-native \
-    sonnet-native \
-    kdesignerplugin-native \
-    kdelibs4support-native \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 libsm libxcb", "", d)} \
     zlib \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "eaeaeaf57be7d45752ec92f0b5beda0b"
-SRC_URI[sha256sum] = "c5391f714d50828e10b58616ea8a9873cd6bd183039b8693bfc968c68d98af36"
+SRC_URI[md5sum] = "582ef2fb97a9020c09d86118c04f3b0a"
+SRC_URI[sha256sum] = "a9b8e2af593929695c3b2f9d3c709d4a0a4d760dcbe439ca2f24efd8d06b3922"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
@@ -65,34 +65,25 @@ SRC_URI += " \
 # REVISIT
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
-    ${datadir}/k*5 \
     ${datadir}/dbus-1 \
-    ${datadir}/kstyle \
-    ${datadir}/wayland-sessions \
-    ${datadir}/ksplash \
-    ${datadir}/drkonqi \
-    ${datadir}/kio_desktop \
-    ${datadir}/solid \
-    ${datadir}/xsessions \
     ${datadir}/desktop-directories \
-    ${datadir}/sddm \
-    ${datadir}/plasma \
-    ${datadir}/ksmserver \
-    ${datadir}/kdevappwizard \
     ${datadir}/kconf_update \
+    ${datadir}/kdevappwizard \
+    ${datadir}/kio_desktop \
+    ${datadir}/k*5 \
+    ${datadir}/kpackage \
+    ${datadir}/ksplash \
+    ${datadir}/kstyle \
+    ${datadir}/plasma \
+    ${datadir}/sddm \
+    ${datadir}/solid \
+    ${datadir}/wayland-sessions \
+    ${datadir}/xsessions \
     \
     ${libdir}/libkdeinit5*.so \
     ${libdir}/kconf_update_bin \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
-"
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/*/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/*/*/*/.debug \
 "
 
 FILES_${PN}-dev = " \

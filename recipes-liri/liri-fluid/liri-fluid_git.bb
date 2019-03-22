@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 inherit liri gtk-icon-cache
 
 PV = "1.1.0+git${SRCPV}"
-SRCREV = "ec6f8d84d4290ce37e3c25aeb3ed1cc69cd222f1"
+SRCREV = "9eefdc9b5ca691441b4f312b6b63e11669f39ca5"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
@@ -32,4 +32,8 @@ FILES_${PN}-dev += " \
     ${datadir}/icons \
     ${datadir}/metainfo \
     ${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs \
+"
+
+RDEPENDS_${PN} += " \
+    qtsvg-plugins \
 "

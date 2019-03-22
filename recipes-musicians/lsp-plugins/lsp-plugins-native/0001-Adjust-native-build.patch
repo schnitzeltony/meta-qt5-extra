@@ -1,0 +1,72 @@
+From 1234ce86f2516148a6854247d9bd46f9adf87f94 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 12 Jan 2019 22:26:43 +0100
+Subject: [PATCH] Adjust native build
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ Makefile           |  6 +++---
+ src/utils/Makefile | 24 ++++++++----------------
+ 2 files changed, 11 insertions(+), 19 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index c918fb11..282d590d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -39,10 +39,10 @@ export CC               = g++
+ export PHP              = php
+ export LD               = ld
+ export LDFLAGS          = $(LD_ARCH) -L$(LD_PATH)
+-export SO_FLAGS         = $(CC_ARCH) -Wl,-rpath,$(LD_PATH) -Wl,-z,relro,-z,now -Wl,--gc-sections -shared -Llibrary -lc -fPIC
++export SO_FLAGS         = $(CC_ARCH) -Wl,-z,relro,-z,now -Wl,--gc-sections -shared -Llibrary -lc -fPIC
+ export MERGE_FLAGS      = $(LD_ARCH) -r
+-export EXE_TEST_FLAGS   = $(CC_ARCH) -Wl,-rpath,$(LD_PATH)
+-export EXE_FLAGS        = $(CC_ARCH) -Wl,-rpath,$(LD_PATH) -Wl,-z,relro,-z,now -Wl,--gc-sections
++export EXE_TEST_FLAGS   = $(CC_ARCH)
++export EXE_FLAGS        = $(CC_ARCH) -Wl,-z,relro,-z,now -Wl,--gc-sections
+ 
+ # Objects
+ export OBJ_CORE         = $(OBJDIR)/core.o
+diff --git a/src/utils/Makefile b/src/utils/Makefile
+index 0d9b57f9..c372c850 100644
+--- a/src/utils/Makefile
++++ b/src/utils/Makefile
+@@ -5,22 +5,14 @@ SUBDIRS                 =
+ OBJ_FILES               = $(OBJ_CORE) $(OBJ_METADATA)
+ OBJ_LIBS                = $(PTHREAD_LIBS) $(MATH_LIBS)
+ 
+-ifeq ($(findstring lv2,$(BUILD_MODULES)),lv2)
+-  MODULES                += $(UTL_GENTTL)
+-  FILELIST               += lv2_genttl.o
+-endif
+-ifeq ($(findstring vst,$(BUILD_MODULES)),vst)
+-  MODULES                += $(UTL_VSTMAKE)
+-  FILELIST               += vst_genmake.o
+-endif
+-ifeq ($(findstring jack,$(BUILD_MODULES)),jack)
+-  MODULES                += $(UTL_JACKMAKE)
+-  FILELIST               += jack_genmake.o 
+-endif
+-ifeq ($(findstring doc,$(BUILD_MODULES)),doc)
+-  MODULES                += $(UTL_GENPHP)
+-  FILELIST               += gen_php.o 
+-endif
++MODULES                += $(UTL_GENTTL)
++FILELIST               += lv2_genttl.o
++MODULES                += $(UTL_VSTMAKE)
++FILELIST               += vst_genmake.o
++MODULES                += $(UTL_JACKMAKE)
++FILELIST               += jack_genmake.o
++MODULES                += $(UTL_GENPHP)
++FILELIST               += gen_php.o
+ 
+ FILES                   = $(addprefix $(OBJDIR)/, $(FILELIST))
+ 
+-- 
+2.20.1
+

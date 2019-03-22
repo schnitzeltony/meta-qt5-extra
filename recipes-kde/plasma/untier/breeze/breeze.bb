@@ -27,8 +27,8 @@ DEPENDS += "\
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "4bea8ee0b3b165235ebfc2c02be6dc1c"
-SRC_URI[sha256sum] = "ce1e0d54309341eac8279e5f91f1458a4a827bc01c1ce389e526f93fb775b675"
+SRC_URI[md5sum] = "9c11d520682160d4704cddb8386d3de8"
+SRC_URI[sha256sum] = "4be0b50deb6a3b42e3c09461ebef76f0af758c400c998b627bc72931d8b3fe50"
 
 FILES_${PN} += " \
     ${datadir}/color-schemes \
@@ -43,12 +43,6 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
     ${libdir}/kconf_update_bin \
-"
-
-FILES_${PN}-dbg += " \
-    ${libdir}/*/.debug \
-    ${libdir}/*/*/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
 "
 
 RDEPENDS_${PN} += "milou"

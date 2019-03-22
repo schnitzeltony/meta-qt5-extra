@@ -1,0 +1,71 @@
+From 84ec8305a0e4c67277929a812e6796d9f054cb02 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 13 Mar 2019 22:26:35 +0100
+Subject: [PATCH 1/2] mruby: Align build to our needs
+
+* Add build flags
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ build_config.rb | 11 ++++++++++-
+ mruby/tasks/toolchains/gcc.rake |  2 +-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/build_config.rb b/build_config.rb
+index 664e84a..fda7fd7 100644
+--- a/build_config.rb
++++ b/build_config.rb
+@@ -102,18 +102,22 @@ build_type.new(build_name) do |conf|
+       cc.flags << "-mstackrealign"      if windows
+       cc.flags << "-mwindows"           if windows
+       cc.flags << "-Wno-declaration-after-statement"
++      cc.flags << ENV['CFLAGS']
++      cc.command = ENV['CC']
+       cc.defines << "DEMO_MODE=#{demo_mode ? '1':'0'}"
+   end
+ 
+   conf.linker do |linker|
+       #linker.library_paths  << "#{`pwd`.strip}/../deps/nanovg/build/"
+       #linker.library_paths  << "#{`pwd`.strip}/../deps/rtosc/build/"
++      linker.command = ENV['CC']
++      linker.flags = [ENV['LDFLAGS'] || []]
+       linker.library_paths  << "#{`pwd`.strip}/../src/osc-bridge/"
+       linker.libraries << 'osc-bridge'
+       linker.flags_after_libraries  << "#{`pwd`.strip}/../deps/pugl/build/libpugl-0.a"
+       linker.flags_after_libraries  << "#{`pwd`.strip}/../deps/libnanovg.a"
+       if(!windows)
+-        linker.flags_after_libraries  << "#{`pwd`.strip}/../deps/libuv.a"
++        linker.flags_after_libraries  << "-luv"
+         if(ENV['OS'] != "Mac")
+           linker.libraries << 'GL'
+           linker.libraries << 'X11'
+@@ -135,6 +139,11 @@ build_type.new(build_name) do |conf|
+   conf.gem 'src/mruby-widget-lib'
+ 
+   #conf.gem 'deps/mruby-profiler'
++
++  # Archiver settings
++  conf.archiver do |archiver|
++    archiver.command = ENV['AR']
++  end
+ end
+ 
+ MRuby::Build.new('host-debug') do |conf|
+diff --git a/mruby/tasks/toolchains/gcc.rake b/mruby/tasks/toolchains/gcc.rake
+index f370c0ab..a2ab5ed4 100644
+--- a/mruby/tasks/toolchains/gcc.rake
++++ b/mruby/tasks/toolchains/gcc.rake
+@@ -22,7 +22,7 @@ MRuby::Toolchain.new(:gcc) do |conf, _params|
+   end
+ 
+   conf.linker do |linker|
+-    linker.command = ENV['LD'] || 'gcc'
++    linker.command = ENV['CC']
+     linker.flags = [ENV['LDFLAGS'] || %w()]
+     linker.libraries = %w(m)
+     linker.library_paths = []
+-- 
+2.20.1
+

@@ -1,56 +1,48 @@
 SUMMARY = "Responsive shell for Liri OS"
-LICENSE = "GPLv3"
+LICENSE = "LGPLv3 & GPLv3"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE.GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
+	file://LICENSE.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
-inherit liri systemd pythonnative distro_features_check
+inherit liri pythonnative distro_features_check gsettings
 
 REQUIRED_DISTRO_FEATURES = "wayland pam"
 
-SRC_URI += " \
-    file://0001-find-host-s-git.patch \
-    file://0002-remove-Werror-from-build-flags.patch \
-"
 PV = "0.9.0+git${SRCPV}"
-SRCREV = "9f5ed08fe14820e6f5e03b91410dd280f3678430"
+SRCREV = "bc130914550f2592f3d426beff54cb5cc6b30d5b"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
-    qtwayland-native \
-    qtaccountsservice \
     libpam \
-    vibe \
-    liri-wayland \
-    liri-workspace \
+    qtquickcontrols2 \
+    qtsvg \
+    liri-libliri \
+    liri-qtaccountsservice \
+    liri-qtgsettings \
+    liri-eglfs \
+    solid \
+    polkit-qt-1 \
+    pipewire \
 "
 
 EXTRA_OECMAKE += " \
-    -DSYSTEMD_USER_UNIT_DIR=${systemd_system_unitdir} \
+    -DINSTALL_SYSCONFDIR=${sysconfdir} \
+    -DINSTALL_SYSTEMDUSERUNITDIR=${systemd_user_unitdir} \
+    -DLIRI_SHELL_DEVELOPMENT_BUILD=ON \
 "
 
-SYSTEMD_SERVICE_${PN} = "liri.service"
-
-# for starter scripts
-RDEPENDS_${PN} = "qttools-tools qtwayland-plugins"
-
-# REVISIT optionals
-RRECOMMENDS_${PN} += " \
-    liri-wallpapers \
-    paper-icon-theme \
-    qtvirtualkeyboard-qmlplugins \
+RDEPENDS_${PN} += " \
+    qttools-tools \
+    qtwayland-plugins \
+    qtgraphicaleffects-qmlplugins \
 "
 
 FILES_${PN} += " \
-    ${datadir} \
-    ${systemd_unitdir} \
-    ${OE_QMAKE_PATH_QML}/Liri \
-    ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_QML}/Liri/*/.debug \
+    ${systemd_user_unitdir} \
+    ${datadir}/wayland-sessions \
+    ${datadir}/desktop-directories \
+    ${OE_QMAKE_PATH_QML} \
 "
 
 RREPLACES_${PN} = "hawaii-shell"

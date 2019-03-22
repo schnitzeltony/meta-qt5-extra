@@ -23,15 +23,11 @@ DEPENDS += " \
 RRECCOMENDS_${PN} += "oxygen-fonts"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "6cd4c73285aea20b09ff2c035daea2e1"
-SRC_URI[sha256sum] = "017ea17befc773614fbe4074baee66be16e79801c6af964087fd01b718097ae9"
+SRC_URI[md5sum] = "5a2cc48884abc1eac8fa51b45842ff70"
+SRC_URI[sha256sum] = "ee8d46b629a95e49fda80e50ba8863504a6c463fec887f83370b7e7977db80f5"
 
 FILES_${PN} += " \
     ${datadir}/knotifications5 \
     ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
 "

@@ -13,8 +13,8 @@ DEPENDS += "boost kconfig kcoreaddons ki18n kservice kwindowsystem kglobalaccel 
             kauth-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "242b533d6f2511581bb429250685162e"
-SRC_URI[sha256sum] = "add14c6331d4a282ca8313a5a931f111cb85efaf13079035428c50e2f65c935d"
+SRC_URI[md5sum] = "73e6b1ddb49999ffad14ea3485bd6121"
+SRC_URI[sha256sum] = "e76a4d44ca6e7ce2273d8c3b133fdd12e32367aeffd66098ec46e7b28c491750"
 
 do_compile_prepend() {
     # Error: Could not locate service type file kservicetypes5/ "kfileitemactionplugin.desktop" , tried ...
@@ -26,7 +26,4 @@ RDEPENDS_${PN} += "kactivitymanagerd"
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${OE_QMAKE_PATH_QML}/org/kde \
-"
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_QML}/org/kde/*/.debug \
 "

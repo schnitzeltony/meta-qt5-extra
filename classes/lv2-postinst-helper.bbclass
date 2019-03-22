@@ -31,7 +31,7 @@ do_install_append() {
 }
 
 
-pkg_postinst_ontarget_${PN}() {
+pkg_postinst_ontarget_${PN}-lv2() {
     oldpath=`pwd`
     for sofile in `cat ${LV2-POSTINST-MANIFEST}`; do
         cd `dirname "$sofile"`
@@ -40,7 +40,7 @@ pkg_postinst_ontarget_${PN}() {
     cd $oldpath
 }
 
-pkg_prerm_${PN}() {
+pkg_prerm_${PN}-lv2() {
     for sofile in `cat ${LV2-POSTINST-MANIFEST}`; do
         path=`dirname "$sofile"`
         for turtle in `find $path -name '*.ttl'`; do
@@ -49,5 +49,5 @@ pkg_prerm_${PN}() {
     done
 }
 
-RDEPENDS_${PN} += "lv2-ttl-generator"
-
+FILES_${PN}-lv2 += "${LV2-POSTINST-MANIFEST}"
+RDEPENDS_${PN}-lv2 += "lv2-ttl-generator"

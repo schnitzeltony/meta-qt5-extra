@@ -26,15 +26,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "ac84f7cdcc0f5bae355cd32fbd15f5de"
-SRC_URI[sha256sum] = "e4624f4f8a630ee30093ea785f17833e7668915dd71d7058829049427001b631"
-
-# REVISIT remove ugly hack for wayland-only environments
-SRC_URI += " \
-    file://0001-no-session-management-if-not-supported-by-qtbase-ind.patch \
-"
+SRC_URI[md5sum] = "4686179511ed09440032b3dcd6f1815c"
+SRC_URI[sha256sum] = "34af5e4b23c13a92d7103fd0c6464da886ed816367ede78d1bfa19382d06eac6"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
-
-# evt. put ksendbugmail to separate package later
-FILES_${PN}-dbg += "${libdir}/kxmlgui/kf5/.debug/"

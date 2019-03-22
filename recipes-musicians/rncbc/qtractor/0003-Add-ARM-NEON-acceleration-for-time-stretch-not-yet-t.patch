@@ -1,0 +1,92 @@
+From e96d295e0d6b36b9b722ad3d4c0b2013e569e9d5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 8 Dec 2018 22:34:14 +0100
+Subject: [PATCH] Add ARM NEON acceleration for time stretch - not yet tested
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/qtractorWsolaTimeStretcher.cpp | 58 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 58 insertions(+)
+
+diff --git a/src/qtractorWsolaTimeStretcher.cpp b/src/qtractorWsolaTimeStretcher.cpp
+index 751b9bc8..6461b8b9 100644
+--- a/src/qtractorWsolaTimeStretcher.cpp
++++ b/src/qtractorWsolaTimeStretcher.cpp
+@@ -121,6 +121,60 @@ static inline float sse_cross_corr (
+ 
+ #endif
+ 
++#if defined(__ARM_NEON__)
++#include "arm_neon.h"
++
++// NEON enabled version.
++static inline float neon_cross_corr (
++	const float *pV1, const float *pV2, unsigned int iOverlapLength )
++{
++	float32x4_t vCorr, vNorm, vTemp;
++
++	// See notes in sse_cross_corr
++
++	// Ensure overlapLength is divisible by 8
++	// assert((m_iOverlapLength % 8) == 0);
++	iOverlapLength >>= 4;
++
++	// Calculates the cross-correlation value between 'pV1' and 'pV2' vectors
++	vCorr = vdupq_n_f32(0.0);
++	vNorm = vdupq_n_f32(0.0);
++
++	// Unroll the loop by factor of 4 * 4 operations
++	for (unsigned int i = 0; i < iOverlapLength; ++i) {
++		// vCorr += pV1[0..3] * pV2[0..3]
++		vTemp = vld1q_f32(pV1);
++		vCorr = vmlaq_f32(vCorr, vTemp, vld1q_f32(pV2));
++		vNorm = vmlaq_f32(vNorm, vTemp, vTemp);
++		// vCorr += pV1[4..7] * pV2[4..7]
++		vTemp = vld1q_f32(pV1 + 4);
++		vCorr = vmlaq_f32(vCorr, vTemp, vld1q_f32(pV2 + 4));
++		vNorm = vmlaq_f32(vNorm, vTemp, vTemp);
++		// vCorr += pV1[8..11] * pV2[8..11]
++		vTemp = vld1q_f32(pV1 + 8);
++		vCorr = vmlaq_f32(vCorr, vTemp, vld1q_f32(pV2 + 8));
++		vNorm = vmlaq_f32(vNorm, vTemp, vTemp);
++		// vCorr += pV1[12..15] * pV2[12..15]
++		vTemp = vld1q_f32(pV1 + 12);
++		vCorr = vmlaq_f32(vCorr, vTemp, vld1q_f32(pV2 + 12));
++		vNorm = vmlaq_f32(vNorm, vTemp, vTemp);
++		pV1 += 16;
++		pV2 += 16;
++	}
++
++	float pvNorm[4];
++	vst1q_f32(pvNorm, vNorm);
++	float fNorm = (pvNorm[0] + pvNorm[1] + pvNorm[2] + pvNorm[3]);
++
++	if (fNorm < 1e-9f) fNorm = 1.0f; // avoid div by zero
++
++	float pvCorr[4];
++	vst1q_f32(pvCorr, vCorr);
++	return (pvCorr[0] + pvCorr[1] + pvCorr[2] + pvCorr[3]) / ::sqrtf(fNorm);
++}
++
++#endif
++
+ 
+ // Standard (slow) version.
+ static inline float std_cross_corr (
+@@ -166,6 +220,10 @@ qtractorTimeStretch::qtractorTimeStretch (
+ 	if (sse_enabled())
+ 		m_pfnCrossCorr = sse_cross_corr;
+ 	else
++#endif
++#if defined(__ARM_NEON__)
++	m_pfnCrossCorr = neon_cross_corr;
++	if(false)
+ #endif
+ 	m_pfnCrossCorr = std_cross_corr;
+ 
+-- 
+2.14.3
+

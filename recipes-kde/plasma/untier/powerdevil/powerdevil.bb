@@ -9,7 +9,6 @@ inherit kde-plasma gettext
 DEPENDS += " \
     bluez-qt \
     kactivities \
-    kauth \
     kauth-native \
     kidletime \
     kconfig \
@@ -30,8 +29,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "fdb962c816db14a40c5e455c6f25523a"
-SRC_URI[sha256sum] = "634858948fbee9054a8d28a91d26c4355a9d15f52ae6767331d25b66e5f91e13"
+SRC_URI[md5sum] = "72da38b000b84ebb350b2842c22438bb"
+SRC_URI[sha256sum] = "24acaef3e78b8cea665ca12ade119d8e589de74cc5bf0bdcc7398201e998f1b8"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
@@ -39,11 +38,6 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug \
 "
 
 RDEPENDS_${PN} += "upower"

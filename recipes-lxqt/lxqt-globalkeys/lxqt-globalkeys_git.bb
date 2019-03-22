@@ -8,5 +8,5 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "liblxqt"
 
-SRCREV = "6bb0e30c9cbda5e7995d01b815692ff46294dda6"
-PV = "0.13.0"
+SRCREV = "69dfa8d9ee668bc72d5f7dccb414ea6f6acd40b5"
+PV = "0.14.1"

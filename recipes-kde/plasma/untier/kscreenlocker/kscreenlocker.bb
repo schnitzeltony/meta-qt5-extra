@@ -29,8 +29,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "f46412c02e11d53723c89a1f7505a3dd"
-SRC_URI[sha256sum] = "e2731b79f26910dda11c281705d0eb4db404f8a9610e20da3099862644b3f3ba"
+SRC_URI[md5sum] = "d7ae9eaa8ff3208df01935fc0cd0c28a"
+SRC_URI[sha256sum] = "cafe0b7b2ce65e1cf86e6b87f8281380d531949c445e22a23714b1bce2bbf42d"
 
 SRC_URI += "file://kde.pam"
 
@@ -47,8 +47,4 @@ FILES_${PN} += " \
     ${datadir}/ksmserver \
     ${sysconfdir} \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "

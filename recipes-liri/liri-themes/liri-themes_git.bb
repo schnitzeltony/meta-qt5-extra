@@ -8,28 +8,34 @@ inherit liri
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "884d5faa15f53627c3ca2e3f2e5872e7b157ef25"
+SRCREV = "7300b146a21c052dc96736e41464dab6dd9ce51f"
 S = "${WORKDIR}/git"
 
-PACKAGES = " \
+EXTRA_OECMAKE += " \
+    -DINSTALL_GRUBDIR=/boot/grub \
+"
+
+do_install_append() {
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-initramfs', '', 'rm -rf ${D}${datadir}/plymouth', d)}
+}
+
+PACKAGES += " \
     ${PN}-grub \
-    ${PN}-plymouth \
     ${PN}-sddm \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-initramfs', '${PN}-plymouth', '', d)} \
 "
 
 RDEPENDS_${PN}-plymouth += " \
     plymouth \
     plymouth-set-default-theme \
 "
-RDEPENDS_${PN}-sddm += " \
-    liri-shell \
-"
 
+FILES_${PN} += "${datadir}/color-schemes"
 FILES_${PN}-grub += "/boot/grub/themes"
 FILES_${PN}-plymouth += "${datadir}/plymouth/themes"
 FILES_${PN}-sddm += "${datadir}/sddm/themes"
 
-pkg_postinst_${PN}() {
-#!/bin/sh
-plymouth-set-default-theme -R lirios
+# there is no plymouth-native yet
+pkg_postinst_ontarget_${PN}-plymouth() {
+    plymouth-set-default-theme -R lirios
 }

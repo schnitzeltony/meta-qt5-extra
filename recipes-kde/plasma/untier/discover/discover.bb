@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gtk-icon-cache
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "e14211fc2b0d995d3cf142168056c144"
-SRC_URI[sha256sum] = "d172ce8a5288e64920512a975985382e09c202b454633ffd88fedfe785f63b5e"
+SRC_URI[md5sum] = "1ffd8fe39532ef5093e42d4b330de5dd"
+SRC_URI[sha256sum] = "2b38184677542fabfe6e45217d838570487126aab2242e57129493dc0362d5ac"
 
 DEPENDS += " \
     qtdeclarative \
@@ -37,12 +37,6 @@ FILES_${PN} += " \
     ${libdir}/plasma-discover \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
-"
-
-FILES_${PN}-dbg += " \
-    ${libdir}/plasma-discover/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-    ${OE_QMAKE_PATH_QML}/org/kde/*/.debug \
 "
 
 RDEPENDS_${PN} += "python3 kirigami"

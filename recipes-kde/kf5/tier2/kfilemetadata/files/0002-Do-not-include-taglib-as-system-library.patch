@@ -1,0 +1,44 @@
+From 5dc359caa176d40245e8b1f7bdc0a0ff6d769383 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 11 Mar 2019 14:14:26 +0100
+Subject: [PATCH] Do not include taglib as system library
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/CMakeLists.txt         | 2 +-
+ src/writers/CMakeLists.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index c3cbe8c..710e7b0 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -39,7 +39,7 @@ target_link_libraries(KF5FileMetaData
+ )
+ 
+ if(TAGLIB_FOUND)
+-    target_include_directories(KF5FileMetaData SYSTEM PRIVATE ${TAGLIB_INCLUDES})
++    target_include_directories(KF5FileMetaData PRIVATE ${TAGLIB_INCLUDES})
+ 
+     target_link_libraries(KF5FileMetaData
+         PRIVATE
+diff --git a/src/writers/CMakeLists.txt b/src/writers/CMakeLists.txt
+index 864dc51..039d24e 100644
+--- a/src/writers/CMakeLists.txt
++++ b/src/writers/CMakeLists.txt
+@@ -1,6 +1,6 @@
+ if(TAGLIB_FOUND)
+     add_library(kfilemetadata_taglibwriter MODULE taglibwriter.cpp)
+-    target_include_directories(kfilemetadata_taglibwriter SYSTEM PRIVATE ${TAGLIB_INCLUDES})
++    target_include_directories(kfilemetadata_taglibwriter PRIVATE ${TAGLIB_INCLUDES})
+ 
+     target_link_libraries( kfilemetadata_taglibwriter
+         KF5::FileMetaData
+-- 
+2.20.1
+

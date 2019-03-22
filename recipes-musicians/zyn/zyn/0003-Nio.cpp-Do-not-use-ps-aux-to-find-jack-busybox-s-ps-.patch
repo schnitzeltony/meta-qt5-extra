@@ -1,0 +1,46 @@
+From 1f8fe80a2e80b8cc44ccf4e48c7ae693d314469a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sat, 17 Jun 2017 22:16:18 +0200
+Subject: [PATCH] Nio.cpp: Do not use 'ps aux' to find jack - busybox's ps does
+ not support aux
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/Nio/Nio.cpp | 15 +--------------
+ 1 file changed, 1 insertion(+), 14 deletions(-)
+
+diff --git a/src/Nio/Nio.cpp b/src/Nio/Nio.cpp
+index 1e26b65..9bbb5bc 100644
+--- a/src/Nio/Nio.cpp
++++ b/src/Nio/Nio.cpp
+@@ -136,21 +136,8 @@ string Nio::getSink()
+ #include <jack/jack.h>
+ void Nio::preferredSampleRate(unsigned &rate)
+ {
+-#if __linux__
+-    //avoid checking in with jack if it's off
+-    FILE *ps = popen("ps aux", "r");
+-    char buffer[4096];
+-    while(fgets(buffer, sizeof(buffer), ps))
+-        if(strstr(buffer, "jack"))
+-            break;
+-    fclose(ps);
+-
+-    if(!strstr(buffer, "jack"))
+-        return;
+-#endif
+-
+     jack_client_t *client = jack_client_open("temp-client",
+-                                             JackNoStartServer, 0);
++                                             JackNullOption, 0);
+     if(client) {
+         rate = jack_get_sample_rate(client);
+         jack_client_close(client);
+-- 
+2.9.4
+

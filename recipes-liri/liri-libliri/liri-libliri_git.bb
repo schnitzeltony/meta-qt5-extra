@@ -7,15 +7,11 @@ LIC_FILES_CHKSUM = " \
 
 inherit liri
 
-DEPENDS += "libqtxdg"
-
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "303ae04affbdb6bfd8979692e4423fd3491ce9e9"
+SRCREV = "fb7784a92a3abe45504076f7debc7eb5b6c5d795"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += " \
-    ${libdir}/libLiri1*.so \
     ${OE_QMAKE_PATH_QML}/Liri \
 "
-FILES_SOLIBSDEV = ""

@@ -14,11 +14,10 @@ DEPENDS += "kcoreaddons \
             kitemviews"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "85db5bccf51436dbe2749a324c00a479"
-SRC_URI[sha256sum] = "98b96d57ba66c8966bf53da065416763dd54761dd1f82628a5a5a719bffbb6c4"
+SRC_URI[md5sum] = "fb175e8643f8d70a0aaac2296b7afeac"
+SRC_URI[sha256sum] = "79e6d54a1b5c3d41717cb94898ab52a5e0c6187a069cb1e35cd4930ee5348540"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${OE_QMAKE_PATH_QML} \
 "
-FILES_${PN}-dbg += "${OE_QMAKE_PATH_QML}/*/*/*/.debug"

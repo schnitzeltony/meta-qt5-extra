@@ -18,4 +18,5 @@ EXTRA_OECMAKE += " \
     -DDESIRED_QT_VERSION=5 \
     -DENABLE_TESTS=FALSE \
     -DENABLE_FARSTREAM=FALSE \
+    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
 "

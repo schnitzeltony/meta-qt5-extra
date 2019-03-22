@@ -56,13 +56,12 @@ DEPENDS += " \
     kdoctools-native \
 "
 
-PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "3d9ce77dd5671b514d9943c5119fca61"
-SRC_URI[sha256sum] = "d146dd3742400684328b5ae268b24ebfb118b2cce75ab1b8994ea883491a323d"
+PV = "${PLASMA_FIXUP_VERSION}"
+SRC_URI[md5sum] = "d297109766835e43cea21af920b88b3c"
+SRC_URI[sha256sum] = "3c7b5ced440cf9ecd23b5905727cea4730188fbfe6388b4fcdb5eb3f52323147"
 
 SRC_URI += " \
-    file://0001-fix-build-for-qtbase-without-session-management.patch \
-    file://0002-Make-building-of-QPA-wayland-plugin-an-option.patch \
+    file://0001-Make-building-of-QPA-wayland-plugin-an-option.patch \
 "
 
 # pure X11 environments fail to build wayland plugin
@@ -73,12 +72,12 @@ CXXFLAGS_append_mx6 += " -DLINUX=1"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
-    ${datadir}/kservices5 \
-    ${datadir}/kwincompositing \
     ${datadir}/dbus-1 \
-    ${datadir}/icons \
-    ${datadir}/*5 \
     ${datadir}/kconf_update \
+    ${datadir}/k*5 \
+    ${datadir}/kpackage \
+    ${datadir}/kwincompositing \
+    ${datadir}/icons \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
     ${libdir}/kconf_update_bin \
@@ -89,16 +88,6 @@ FILES_${PN} += " \
 FILES_SOLIBSDEV = "${base_libdir}/lib*${SOLIBSDEV} ${libdir}/lib*s${SOLIBSDEV}"
 FILES_${PN} += " \
     ${libdir}/*.so \
-"
-
-FILES_${PN}-dbg += " \
-    ${libdir}/*/.debug \
-    ${libdir}/*/*/.debug \
-    ${libdir}/*/*/*/.debug \
-    ${libdir}/*/*/*/*/.debug \
-    ${libdir}/*/*/*/*/*/.debug \
-    ${libdir}/*/*/*/*/*/*/.debug \
-    ${libdir}/*/*/*/*/*/*/*/.debug \
 "
 
 RDEPENDS_${PN} += " \

@@ -1,0 +1,41 @@
+From 6a3b212c7a945bdd951d2ba1e8293a491ac26a24 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 18 Jun 2017 14:25:49 +0200
+Subject: [PATCH] Keep our build flags
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/CMakeLists.txt | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 365c129..1fa1b24 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -44,9 +44,6 @@ CHECK_CXX_SOURCE_COMPILES(
+     #endif
+     int main(){return 0;}" HAVE_ASYNC)
+ 
+-check_cxx_compiler_flag("-msse2" SUPPORT_SSE)
+-check_cxx_compiler_flag("-mfpu=neon -Werror" SUPPORT_NEON)
+-
+ set(CMAKE_REQUIRED_FLAGS "")
+ 
+ 
+@@ -328,7 +325,7 @@ if (BuildForDebug)
+ else (BuildForDebug)
+ 	set (CMAKE_BUILD_TYPE "Release")
+ 	
+-	set (CMAKE_CXX_FLAGS_RELEASE ${BuildOptionsBasic})
++	set (CMAKE_CXX_FLAGS_RELEASE ${CMAKE_CXX_FLAGS})
+ 	
+ 	if (BuildForAMD_X86_64)
+ 		set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${BuildOptions_x86_64AMD}")
+-- 
+2.9.4
+

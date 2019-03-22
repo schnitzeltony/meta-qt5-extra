@@ -15,7 +15,7 @@ RDEPENDS_${PN} = " \
 # overlook a package.
 
 RDEPENDS_${PN} += " \
-    amsynth \
+    amsynth-standalone amsynth-lv2 amsynth-vst \
     ardour5 \
     aubio \
     audio-tweaks \
@@ -29,14 +29,20 @@ RDEPENDS_${PN} += " \
     lpd8editor \
     \
     \
-    distrho-ports distrho-ports-presets \
-    distrho-ports-extra \
-    dpf-plugins \
+    distrho-ports-lv2 distrho-ports-presets distrho-ports-vst \
+    distrho-ports-extra-lv2 distrho-ports-extra-vst \
+    dpf-plugins-ladspa dpf-plugins-lv2 dpf-plugins-vst \
     lv2-ttl-generator \
     \
     \
+    drmr \
+    \
+    \
     ganv \
+    ingen-lv2 ingen-standalone \
+    jalv \
     lilv \
+    lv2 \
     mda-lv2 \
     patchage \
     serd \
@@ -52,7 +58,8 @@ RDEPENDS_${PN} += " \
     ftgl \
     gmidimonitor \
     guitarix \
-    helm \
+    gxplugins.lv2 \
+    helm-standalone helm-lv2 helm-vst \
     hydrogen hydrogen-drumkits \
     infamousplugins \
     \
@@ -70,7 +77,6 @@ RDEPENDS_${PN} += " \
     libxmp \
     lmms \
     lrdf \
-    lv2 \
     mixxx \
     muse \
     nekobee \
@@ -124,7 +130,7 @@ RDEPENDS_${PN} += " \
     timidity++ \
     triceratops-lv2 \
     vamp-plugin-sdk \
-    wolf-shaper \
+    wolf-shaper-dssi wolf-shaper-lv2 wolf-shaper-vst \
     \
     \
     avldrums.lv2 \
@@ -132,14 +138,19 @@ RDEPENDS_${PN} += " \
     fil4.lv2 \
     meters.lv2 \
     midifilter.lv2 \
+    sisco.lv2 \
     tuna.lv2 \
     \
     \
+    ykchorus ykchorus-dssi ykchorus-lv2 ykchorus-vst \
     yoshimi \
-    zyn \
+    zam-plugins-standalone zam-plugins-ladspa zam-plugins-lv2 zam-plugins-vst \
+    ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "zyn-fusion-dssi zyn-fusion-lv2 zyn-fusion-vst zyn-fusion-standalone", "zynaddsubfx-dssi zynaddsubfx-lv2 zynaddsubfx-vst zynaddsubfx-standalone",d)} \
 "
 
 # non working
+#    lsp-plugins-standalone lsp-plugins-ladspa lsp-plugins-lv2 lsp-plugins-vst 
+
 # tomahawk
 
 # empty

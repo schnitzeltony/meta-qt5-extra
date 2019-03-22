@@ -45,44 +45,24 @@ Upstream-Status: Pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- src/extractors/CMakeLists.txt | 22 ++++++++++++++++------
- 1 file changed, 16 insertions(+), 6 deletions(-)
+ src/extractors/CMakeLists.txt | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
 diff --git a/src/extractors/CMakeLists.txt b/src/extractors/CMakeLists.txt
-index 3888d1d..0401429 100644
+index 15399f7..5c9fd60 100644
 --- a/src/extractors/CMakeLists.txt
 +++ b/src/extractors/CMakeLists.txt
-@@ -16,8 +16,10 @@ if(Poppler_Qt5_FOUND)
+@@ -16,8 +16,8 @@ if(Poppler_Qt5_FOUND)
  endif()
  
  if(TAGLIB_FOUND)
 +    include_directories( ${TAGLIB_INCLUDES} )
-+
      add_library(kfilemetadata_taglibextractor MODULE taglibextractor.cpp )
 -    target_include_directories(kfilemetadata_taglibextractor SYSTEM PRIVATE ${TAGLIB_INCLUDES})
-+
      target_link_libraries( kfilemetadata_taglibextractor
          KF5::FileMetaData
          ${TAGLIB_LIBRARIES}
-@@ -27,12 +29,15 @@ if(TAGLIB_FOUND)
-     install(
-     TARGETS kfilemetadata_taglibextractor
-     DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/kfilemetadata)
-+
- endif()
- 
- if(EXIV2_FOUND)
-+    include_directories( ${EXIV2_INCLUDE_DIR} )
-+
-+    kde_enable_exceptions()
-     add_library(kfilemetadata_exiv2extractor MODULE exiv2extractor.cpp)
--    target_include_directories(kfilemetadata_exiv2extractor SYSTEM PRIVATE ${EXIV2_INCLUDE_DIR})
--    kde_target_enable_exceptions(kfilemetadata_exiv2extractor PRIVATE)
-+
-     target_link_libraries(kfilemetadata_exiv2extractor
-         KF5::FileMetaData
-         ${EXIV2_LIBRARIES}
-@@ -46,8 +46,8 @@ if(EXIV2_FOUND)
+@@ -45,8 +45,8 @@ if(LibExiv2_FOUND)
  endif()
  
  if(FFMPEG_FOUND)
@@ -92,7 +72,7 @@ index 3888d1d..0401429 100644
      target_link_libraries(kfilemetadata_ffmpegextractor
          KF5::FileMetaData
  	${AVCODEC_LIBRARIES}
-@@ -62,8 +69,10 @@ endif()
+@@ -63,8 +63,9 @@ endif()
  
  
  if(EPUB_FOUND)
@@ -100,20 +80,18 @@ index 3888d1d..0401429 100644
 +
      add_library(kfilemetadata_epubextractor MODULE epubextractor.cpp)
 -    target_include_directories(kfilemetadata_epubextractor SYSTEM PRIVATE ${EPUB_INCLUDE_DIR})
-+
      target_link_libraries(kfilemetadata_epubextractor
          KF5::FileMetaData
          ${EPUB_LIBRARIES}
-@@ -163,7 +172,8 @@ DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/kfilemetadata)
+@@ -202,7 +203,7 @@ DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/kfilemetadata)
  #
  if (QMOBIPOCKET_FOUND)
      add_library(kfilemetadata_mobiextractor MODULE mobiextractor.cpp)
 -    target_include_directories(kfilemetadata_mobiextractor SYSTEM PRIVATE ${QMOBIPOCKET_INCLUDE_DIR})
-+
 +    include_directories(${QMOBIPOCKET_INCLUDE_DIR})
      target_link_libraries(kfilemetadata_mobiextractor
          KF5::FileMetaData
          ${QMOBIPOCKET_LIBRARIES}
 -- 
-2.14.3
+2.14.5
 

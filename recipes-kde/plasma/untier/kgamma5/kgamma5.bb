@@ -19,15 +19,11 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "3c3ba960cca9349126dcafcbf702eab1"
-SRC_URI[sha256sum] = "2134ff79b14550c448b497126b4d7b587fa43bdb231878d617ec227380a40a09"
+SRC_URI[md5sum] = "cb4e1b8f8d4b4f3bf53a35b7bb02fe48"
+SRC_URI[sha256sum] = "be0a76bf328dedeb9911d9d560e625a10850ea438374f39c22e17291abcd9689"
 
 FILES_${PN} += " \
     ${datadir}/kgamma \
     ${datadir}/kservices5 \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
 "

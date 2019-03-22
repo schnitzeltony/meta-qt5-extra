@@ -8,8 +8,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qttools libqtxdg kwindowsystem libxscrnsaver polkit-qt-1"
 
-SRCREV = "d9f9f62e48de432ce2fe3e9c4c91f21dc089d777"
-PV = "0.13.0"
+SRCREV = "5ce41d8ffa31b2f80983237bfa0488a942a07621"
+PV = "0.14.1"
 
 EXTRA_OECMAKE += " \
     -DCMAKE_INSTALL_DATAROOTDIR=share \
@@ -24,6 +24,6 @@ RREPLACES_${PN} += "lxqt-common"
 RCONFLICTS_${PN} += "lxqt-common"
 
 FILES_${PN} += " \
-    /usr/share/polkit-1/ \
-    /usr/share/lxqt/ \
+    ${datadir}/polkit-1/ \
+    ${datadir}/lxqt/power.conf \
 "

@@ -32,8 +32,8 @@ PACKAGECONFIG = "pulseaudio"
 PACKAGECONFIG[pulseaudio] = ",,pulseaudio"
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "5437e003e452efe4c3154c25d6fb42db"
-SRC_URI[sha256sum] = "2d27ad00533188d55f01c4d98b1ca91a22e0cdcd1f3f77bae9005a2a357e1214"
+SRC_URI[md5sum] = "2071a1c7b592a238bc03503e8d0f3cfc"
+SRC_URI[sha256sum] = "4edf31a36a5d700cc190ba7a5a0d76789729069d48324a22bda7977cb4ed081a"
 
 SRC_URI += "file://0001-Fix-build-with-QT_NO_SESSIONMANAGER-set.patch"
 
@@ -49,9 +49,4 @@ FILES_${PN} += " \
     \
     ${libdir}/libkdeinit5*.so \
     ${OE_QMAKE_PATH_PLUGINS} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/.debug \
-    ${OE_QMAKE_PATH_PLUGINS}/plasma/*/.debug \
 "

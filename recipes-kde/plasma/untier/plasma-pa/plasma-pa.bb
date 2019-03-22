@@ -25,8 +25,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "bf60a089095cfeca423a2e1dfc7fc627"
-SRC_URI[sha256sum] = "e3629b417d4830c0e4c5f4a4a26392c4e44e98c54bd51676a56391ff940aaca2"
+SRC_URI[md5sum] = "97752f6f9a57d39eaa1b68b99f5880af"
+SRC_URI[sha256sum] = "450476c3eb8175e339615b93e0cf5cbc1dd7abdbe2b25e87b0b292555a8b70d2"
 
 FILES_SOLIBSDEV = ""
 
@@ -41,9 +41,4 @@ FILES_${PN} += " \
     ${libdir}/lib*Private.so \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
-"
-
-FILES_${PN}-dbg += " \
-    ${OE_QMAKE_PATH_PLUGINS}/*/.debug \
-    ${OE_QMAKE_PATH_QML}/*/*/*/*/*/.debug \
 "

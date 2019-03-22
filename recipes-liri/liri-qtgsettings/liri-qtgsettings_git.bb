@@ -9,7 +9,9 @@ inherit liri
 DEPENDS += "glib-2.0"
 
 PV = "1.0.0+git${SRCPV}"
-SRCREV = "a368ce3564fd8715e50ecae52a862d30f565ad97"
+SRCREV = "3132cd4e46d8a2069594e36cb5be1eac36727a6a"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"
+
+RDEPENDS_${PN} += "dconf"
