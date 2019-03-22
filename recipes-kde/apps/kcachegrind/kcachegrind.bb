@@ -28,5 +28,3 @@ SRC_URI[sha256sum] = "48011190a0ef28998e6c96b9d644e3d06b68606b7d1467c84a8d176eee
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
 "
-
-RRECOMMENDS_${PN} += "graphviz"
