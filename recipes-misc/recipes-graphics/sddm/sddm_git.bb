@@ -23,8 +23,8 @@ SRC_URI = " \
     file://sddm-autologin.pam \
     file://sddm.conf \
 "
-SRCREV = "c8867e02890502151a314c529348e9a42d0a061c"
-PV = "0.18.0"
+SRCREV = "de41b8ea555f2e42ba47d83530ad654ca708cf85"
+PV = "0.18.1"
 
 S = "${WORKDIR}/git"
 
