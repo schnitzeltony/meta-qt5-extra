@@ -1,0 +1,94 @@
+From e04f58b58b3fd55786e3bc4ef5e8db10327aee1f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 22 Mar 2019 15:51:42 +0100
+Subject: [PATCH] qeglfskmsgbmscreen: remove frame recording completely
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+* Maybe I am paranoid but it is at least questionable what it is good for
+* It seems causes build trouble for at least iMX/vivante [1]
+
+[1] https://github.com/schnitzeltony/meta-qt5-extra/issues/67
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../eglfs_kms/qeglfskmsgbmscreen.cpp          | 55 +------------------
+ 1 file changed, 1 insertion(+), 54 deletions(-)
+
+diff --git a/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmscreen.cpp b/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmscreen.cpp
+index 61cc94f..33a7568 100644
+--- a/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmscreen.cpp
++++ b/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms/qeglfskmsgbmscreen.cpp
+@@ -45,7 +45,6 @@
+ #include "qeglfsintegration_p.h"
+ 
+ #include <QtCore/QLoggingCategory>
+-#include <QOpenGLFunctions_3_0>
+ #include <QtGui/private/qguiapplication_p.h>
+ #include <QtFbSupport/private/qfbvthandler_p.h>
+ 
+@@ -348,59 +347,7 @@ void QEglFSKmsGbmScreen::flip()
+ 
+ void QEglFSKmsGbmScreen::recordFrame(EGLClientBuffer bo, int width, int height)
+ {
+-    // Create EGL image from BO
+-    EGLImage image = eglCreateImage(display(), nullptr, EGL_NATIVE_PIXMAP_KHR, bo, nullptr);
+-    if (image == EGL_NO_IMAGE_KHR) {
+-        qCritical("Error creating EGLImage: %s", formatGLError(glGetError()));
+-        return;
+-    }
+-
+-    // Create GL 2D texture for framebuffer
+-    GLuint texture;
+-    glGenTextures(1, &texture);
+-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+-    glBindTexture(GL_TEXTURE_2D, texture);
+-    PFNGLEGLIMAGETARGETTEXTURE2DOESPROC imageTexture2D =
+-        reinterpret_cast<PFNGLEGLIMAGETARGETTEXTURE2DOESPROC>(eglGetProcAddress("glEGLImageTargetTexture2DOES"));
+-    if (imageTexture2D)
+-        imageTexture2D(GL_TEXTURE_2D, image);
+-    else
+-        qCritical("No glEGLImageTargetTexture2DOES function available");
+-
+-    // OpenGL 3.0 functions
+-    auto glContext = QOpenGLContext::currentContext();
+-    auto funcs = glContext->versionFunctions<QOpenGLFunctions_3_0>();
+-
+-    // Bind framebuffer to copy pixels from
+-    GLuint framebuffer;
+-    funcs->glGenFramebuffers(1, &framebuffer);
+-    funcs->glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+-    funcs->glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+-    const GLenum status = funcs->glCheckFramebufferStatus(GL_FRAMEBUFFER);
+-    if (status != GL_FRAMEBUFFER_COMPLETE) {
+-        qCritical("glCheckFramebufferStatus failed: %s", formatGLError(glGetError()));
+-        funcs->glDeleteTextures(1, &texture);
+-        funcs->glDeleteFramebuffers(1, &framebuffer);
+-        eglDestroyImage(display(), image);
+-        return;
+-    }
+-
+-    // Capture to an image
+-    QImage capture(QSize(width, height), QImage::Format_RGBA8888);
+-    glViewport(0, 0, width, height);
+-    glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, capture.bits());
+-
+-    // Post the event
+-    QCoreApplication::postEvent(QCoreApplication::instance(),
+-                                new Liri::Platform::FrameCaptureEvent(capture));
+-
+-    // Free resources
+-    funcs->glDeleteTextures(1, &texture);
+-    funcs->glDeleteFramebuffers(1, &framebuffer);
+-    eglDestroyImage(display(), image);
++    qWarning("Frame recording is not supported on embedded devices!");
+ }
+ 
+ void QEglFSKmsGbmScreen::pageFlipHandler(int fd, unsigned int sequence, unsigned int tv_sec, unsigned int tv_usec, void *user_data)
+-- 
+2.20.1
+
