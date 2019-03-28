@@ -13,26 +13,26 @@ FILES_${PN}_remove = "${datadir}/${BPN}"
 python qt_do_split_locales() {
     import glob
 
-    if (d.getVar('PACKAGE_NO_LOCALE', True) == '1'):
+    if (d.getVar('PACKAGE_NO_LOCALE') == '1'):
         bb.debug(1, "package requested not splitting locales")
         return
 
-    packages = (d.getVar('PACKAGES', True) or "").split()
+    packages = (d.getVar('PACKAGES') or "").split()
 
-    datadir = d.getVar('datadir', True)
+    datadir = d.getVar('datadir')
     if not datadir:
         bb.note("datadir not defined")
         return
 
-    dvar = d.getVar('PKGD', True)
-    pn = d.getVar('LOCALEBASEPN', True)
+    dvar = d.getVar('PKGD')
+    pn = d.getVar('LOCALEBASEPN')
 
     if pn + '-locale' in packages:
         packages.remove(pn + '-locale')
 
     # extract locales from *.qm files into list in locales
     locales = []
-    for transvar in d.getVar('QT_TRANSLATION_FILES', True).split():
+    for transvar in d.getVar('QT_TRANSLATION_FILES').split():
         translocation = '%s%s' % (dvar, transvar)
         transfiles = glob.glob(translocation)
         for l in sorted(transfiles):
@@ -44,16 +44,16 @@ python qt_do_split_locales() {
         bb.debug(1, "No locale files in this package")
         return
 
-    summary = d.getVar('SUMMARY', True) or pn
-    description = d.getVar('DESCRIPTION', True) or ""
-    locale_section = d.getVar('LOCALE_SECTION', True)
-    mlprefix = d.getVar('MLPREFIX', True) or ""
+    summary = d.getVar('SUMMARY') or pn
+    description = d.getVar('DESCRIPTION') or ""
+    locale_section = d.getVar('LOCALE_SECTION')
+    mlprefix = d.getVar('MLPREFIX') or ""
     for l in sorted(locales):
         ln = legitimize_package_name(l)
         pkg = pn + '-locale-' + ln
         packages.append(pkg)
         files = ''
-        for transvar in d.getVar('QT_TRANSLATION_FILES', True).split():
+        for transvar in d.getVar('QT_TRANSLATION_FILES').split():
             files = '%s %s' % (files, transvar.replace('*.qm', '*_%s.qm' % l))
         d.setVar('FILES_' + pkg, files )
         d.setVar('RRECOMMENDS_' + pkg, '%svirtual-locale-%s' % (mlprefix, ln))
