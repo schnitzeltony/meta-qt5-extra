@@ -81,7 +81,7 @@ python () {
     if get_flags_ignore(cmakehideflags):
         return
 
-    pn = d.getVar('PN', True)
+    pn = d.getVar('PN')
     if cmakehideflags:
         for flag, flagval in sorted(cmakehideflags.items()):
             items = flagval.split(",")
@@ -96,7 +96,7 @@ python () {
 
 # 4. Handle CMAKE_ALIGN_SYSROOT
 python do_populate_sysroot_append() {
-    pn = d.getVar('PN', True)
+    pn = d.getVar('PN')
 
     # parse single parameter in CMAKE_ALIGN_SYSROOT[..] and return array of line strings extracted
     def parseparam(param, flag):
@@ -107,7 +107,7 @@ python do_populate_sysroot_append() {
 
             # handle file in WORKDIR
             if cmd == '-f' or cmd == '-F':
-                filename = "%s/%s" % (d.getVar('WORKDIR', True), cmdparam)
+                filename = "%s/%s" % (d.getVar('WORKDIR'), cmdparam)
                 if os.path.isfile(filename):
                     fd = open(filename, 'r')
                     str = fd.read()
@@ -144,7 +144,7 @@ python do_populate_sysroot_append() {
         return
 
     # check if cmake files were installed to sysroot
-    tmpfile = d.getVar('CMAKEINSTALLED', True)
+    tmpfile = d.getVar('CMAKEINSTALLED')
     if (not os.path.isfile(tmpfile)) or os.path.getsize(tmpfile) == 0:
         bb.warn("There were no cmake files installed by %s" % pn)
     else:
@@ -157,7 +157,7 @@ python do_populate_sysroot_append() {
             if len(cmakedir) == 0:
                 bb.fatal('Directory in CMAKE_ALIGN_SYSROOT[%s] must not be empty in %s' % (flag, pn))
             # check if this directory is created by us
-            pipe = os.popen('grep %s %s' % (cmakedir, d.getVar('CMAKEINSTALLED', True)))
+            pipe = os.popen('grep %s %s' % (cmakedir, d.getVar('CMAKEINSTALLED')))
             matching_files = pipe.readlines()
             pipe.close()
             if len(matching_files) == 0:

@@ -5,7 +5,7 @@ CMAKEINSTALLED = "${WORKDIR}/staged_cmake_files"
 
 # 1. remove tmp file from last build
 python do_populate_sysroot_prepend() {
-    tmpfile = d.getVar('CMAKEINSTALLED', True)
+    tmpfile = d.getVar('CMAKEINSTALLED')
     if os.path.isfile(tmpfile):
         os.remove(tmpfile)
 }
