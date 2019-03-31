@@ -14,8 +14,9 @@ DEPENDS = " \
 "
 
 SRC_URI = "http://gottcode.org/${BPN}/${BPN}-${PV}-src.tar.bz2"
-SRC_URI[md5sum] = "b3bcf028c519b6a6daabfc71055d4ca8"
-SRC_URI[sha256sum] = "0190fff4930213b2e32d5d76750af784f45f89046d239da466dc5c9f625ec05b"
+SRC_URI[md5sum] = "1e12c067978a6eb2ef6d7677e84c9c56"
+SRC_URI[sha256sum] = "b32029286c61de39ce6cba4ba6da0727e708e247161bcaf881408fca74664ee3"
+PV = "1.7.2"
 
 EXTRA_QMAKEVARS_PRE += "PREFIX=${prefix}"
 
@@ -23,7 +24,6 @@ FILES_${PN} += " \
     ${datadir}/metainfo \
     ${datadir}/${BPN}/icons \
     ${datadir}/${BPN}/symbols1000.dat \
-    ${datadir}/${BPN}/icons \
     ${datadir}/${BPN}/themes \
     ${datadir}/${BPN}/sounds \
 "
