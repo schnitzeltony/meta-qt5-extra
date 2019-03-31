@@ -10,6 +10,7 @@ DEPENDS = "qttools-native qtbase hicolor-icon-theme"
 SRC_URI = "http://gottcode.org/${BPN}/${BPN}-${PV}-src.tar.bz2"
 SRC_URI[md5sum] = "f7567be498c365b6a2e301346d08659a"
 SRC_URI[sha256sum] = "a3c56b6339fd314b198b7ec89d27f1919d4b480e7e0eae03980dda5fec31cd6a"
+PV = "1.3.7"
 
 EXTRA_QMAKEVARS_PRE += "PREFIX=${prefix}"
 
