@@ -56,9 +56,9 @@ DEPENDS += " \
     kdoctools-native \
 "
 
-PV = "${PLASMA_FIXUP_VERSION}"
-SRC_URI[md5sum] = "d297109766835e43cea21af920b88b3c"
-SRC_URI[sha256sum] = "3c7b5ced440cf9ecd23b5905727cea4730188fbfe6388b4fcdb5eb3f52323147"
+PV = "${PLASMA_VERSION}"
+SRC_URI[md5sum] = "577e15de4dced022534c5919432a7bd8"
+SRC_URI[sha256sum] = "4bdb01713d0d5605810bcbfddfbc9cb5e5bb2e7c89846f37f20e083b84c00ec1"
 
 SRC_URI += " \
     file://0001-Make-building-of-QPA-wayland-plugin-an-option.patch \

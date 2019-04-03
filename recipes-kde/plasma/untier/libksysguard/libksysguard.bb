@@ -27,8 +27,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "94d5a8505d3ecc69726aa9deb592bf97"
-SRC_URI[sha256sum] = "d2e22a6ed3cb04c1b398f4609faa8eea10a97d89c29230c544ab57d643598e15"
+SRC_URI[md5sum] = "484370212d3a69dce87a68e3ffedff5c"
+SRC_URI[sha256sum] = "e4476b180f0f342d83ce1097ae10b1b9c88160b0c7fc9432259402ebbbdf4a14"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \

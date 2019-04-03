@@ -32,9 +32,9 @@ DEPENDS += " \
     plasma-workspace \
 "
 
-PV = "${PLASMA_FIXUP_VERSION}"
-SRC_URI[md5sum] = "4f27f409f8660e5656cfae2c7fe2c4a3"
-SRC_URI[sha256sum] = "42095b95a7866aa667e30c15a7ebc9b00225fdb4f06668510fdf63a18573102f"
+PV = "${PLASMA_VERSION}"
+SRC_URI[md5sum] = "daec598ce850801ce69dbf66d4f129a8"
+SRC_URI[sha256sum] = "2cff11f842266296192381a214df6fd55debfd444b754b6dec80f70a3154defb"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

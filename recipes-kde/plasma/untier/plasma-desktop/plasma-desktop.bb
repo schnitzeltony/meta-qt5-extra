@@ -48,9 +48,9 @@ DEPENDS += " \
     fontconfig \
 "
 
-PV = "${PLASMA_FIXUP_VERSION}"
-SRC_URI[md5sum] = "0aedba1ccd551bf3137cbadedf140c3c"
-SRC_URI[sha256sum] = "21e54d489817751173049122410737db641a8e58955b84264a4ec861e302ff8a"
+PV = "${PLASMA_VERSION}"
+SRC_URI[md5sum] = "6db405ca8fd210e6eb9b1a38916d7f5f"
+SRC_URI[sha256sum] = "0c4900ce7cc46261185bfc4fce2b47dc69a659f6c1fc8d94d770ee6a0d06d028"
 
 SRC_URI += "file://0001-Ensure-xkb_base-is-not-empty-instead-of-checking-if-.patch"
 
