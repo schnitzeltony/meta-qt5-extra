@@ -19,6 +19,8 @@ SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz"
 # extra-cmake-modules cause dependent to check for python
 inherit cmake_qt5_extra pythonnative
 
+DEPENDS += "libxml2-native"
+
 do_compile_prepend() {
     export XDG_DATA_HOME=${STAGING_DATADIR}
 }
