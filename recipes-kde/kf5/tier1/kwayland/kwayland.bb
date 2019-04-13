@@ -9,5 +9,5 @@ inherit kde-kf5 cmake_auto_align_paths
 DEPENDS += "wayland wayland-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "97ba639374122d2ae0fa8bb3cc43b85a"
-SRC_URI[sha256sum] = "bbe76d398b96e0f0ba4342616b91de49e7cbc1f0a7f5038cd97a981f8a8de99c"
+SRC_URI[md5sum] = "eb7a86ca138a5c68ff59de90695330d2"
+SRC_URI[sha256sum] = "f00d2997163f559cecf30f5e945d5456628a0d120acafba49fa14af28c22b1d6"
