@@ -35,6 +35,7 @@ DEPENDS += " \
     solid \
     kbookmarks \
     kguiaddons \
+    syntax-highlighting \
     shared-mime-info-native \
 "
 
