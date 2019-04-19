@@ -1,0 +1,49 @@
+From 7ac6c099cef0c106136437da76bb31d16f7d56f4 Mon Sep 17 00:00:00 2001
+From: Max Krummenacher <max.krummenacher@toradex.com>
+Date: Fri, 26 Apr 2019 13:23:34 +0000
+Subject: [PATCH] HACK: fix wrongly included native QtCore/qconfig.h
+
+For whatever reason the CPP includes qconfig.h from the native sysroot.
+This causes QT_NO_WIDGETS to be true and as a result the following error
+is thrown:
+
+| .../0.14.1-r0/git/src/imageview.cpp: In member function 'void LxImage::ImageView::setSVG(const QString&)':
+| .../0.14.1-r0/git/src/imageview.cpp:329:5: error: 'QGraphicsSvgItem' was not declared in this scope
+|      QGraphicsSvgItem *svgItem = new QGraphicsSvgItem(fileName);
+|      ^~~~~~~~~~~~~~~~
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
+ src/graphicsscene.h | 1 +
+ src/mainwindow.h    | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/src/graphicsscene.h b/src/graphicsscene.h
+index 79049f6..b2195f0 100644
+--- a/src/graphicsscene.h
++++ b/src/graphicsscene.h
+@@ -22,6 +22,7 @@
+ #define LXIMAGE_GRAPHICSSCENE_H
+ 
+ #include <QGraphicsScene>
++#undef QT_NO_WIDGETS
+ #include <QGraphicsSceneDragDropEvent>
+ 
+ namespace LxImage {
+diff --git a/src/mainwindow.h b/src/mainwindow.h
+index 3b13fc3..c72ed2b 100644
+--- a/src/mainwindow.h
++++ b/src/mainwindow.h
+@@ -22,6 +22,7 @@
+ #define LXIMAGE_MAINWINDOW_H
+ 
+ #include <QMainWindow>
++#undef QT_NO_WIDGETS
+ #include "ui_mainwindow.h"
+ 
+ #include "imageview.h"
+-- 
+2.13.6
+
