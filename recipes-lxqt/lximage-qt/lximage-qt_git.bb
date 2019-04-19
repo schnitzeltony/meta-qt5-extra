@@ -8,6 +8,7 @@ inherit lxqt pkgconfig distro_features_check gtk-icon-cache mime
 
 DEPENDS += "qtx11extras qtsvg libfm-qt libexif libxfixes"
 
+SRC_URI += " file://0001-HACK-fix-wrongly-included-native-QtCore-qconfig.h.patch"
 SRCREV = "6c2efe769d0514846c78e4a9147f3425440643ec"
 PV = "0.14.1"
 
