@@ -3,7 +3,7 @@ LICENSE = "GPLv2 & GFDL-1.2 & LGPL-2.1"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5a3169a2d39a757efd8b7aa66a69d97b \
     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-    file://COPYING.DOC;md5=24ea4c7092233849b4394699333b5c56 \
+    file://COPYING.DOC;md5=d8855fca80aa0b428deafa405d0ea17a \
 "
 
 inherit kde-apps gtk-icon-cache

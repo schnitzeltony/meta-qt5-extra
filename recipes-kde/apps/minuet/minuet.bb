@@ -2,7 +2,7 @@ SUMMARY = "A KDE Software for Music Education"
 LICENSE = "GPLv2 & GFDL-1.3"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.DOC;md5=10b9de612d532fdeeb7fe8fcd1435cc6 \
+    file://COPYING.DOC;md5=10ce6fc3438e5c4c933bfb5db3b097ec \
 "
 
 inherit kde-apps gtk-icon-cache

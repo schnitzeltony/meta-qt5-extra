@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE.GPL-3;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
     file://LICENSE.txt;md5=e9b5891877660f283be4bc396de0570f \
     file://COPYING-CMAKE-SCRIPTS;md5=54c7042be62e169199200bc6477f04d1 \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://COPYING.DOC;md5=28d73eafa40ebd0ccdc6b37df8de10a3 \
 "
 
 inherit kde-apps cmake_lib gettext
