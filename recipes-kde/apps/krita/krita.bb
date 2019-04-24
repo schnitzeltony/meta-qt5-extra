@@ -33,12 +33,13 @@ DEPENDS += " \
     kcrash \
 "
 
-PVEXT = ".101"
+PV = "4.1.8"
+PVEXT = ""
 SRC_URI = " \
     ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.gz \
 "
-SRC_URI[md5sum] = "a172b864ca7723b5a033fdc730d9296c"
-SRC_URI[sha256sum] = "5bc95baa3980b7d75eb6bf103f72344014eac7733fd8a0780a7ec87dc2826f5f"
+SRC_URI[md5sum] = "995192161d98489d7ced1fd493fe150e"
+SRC_URI[sha256sum] = "0476c9e2279f0ae690c2ed02e1aa9c3d491943643f9859355a02657318bd5940"
 S = "${WORKDIR}/${BPN}-${PV}${PVEXT}"
 
 OECMAKE_GENERATOR="Unix Makefiles"
