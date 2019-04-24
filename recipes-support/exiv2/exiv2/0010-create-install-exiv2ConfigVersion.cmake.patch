@@ -1,0 +1,50 @@
+From 487567b209ca40e56f9357b89c907253a7be8bf0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 24 Apr 2019 18:59:13 +0200
+Subject: [PATCH] create & install exiv2ConfigVersion.cmake
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Backport [1]
+
+[1] https://github.com/Exiv2/exiv2/commit/ce0284bc1f5cef635583130a7e807f70f034bc01
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/CMakeLists.txt | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 6418bbd..f0b663a 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -7,6 +7,7 @@ if( EXIV2_BUILD_UNIT_TESTS )
+ endif()
+ 
+ 
++include(CMakePackageConfigHelpers)
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ 
+ 
+@@ -218,6 +219,7 @@ if( ICONV_FOUND )
+     target_link_libraries( exiv2lib PRIVATE Iconv::Iconv )
+ endif()
+ 
++write_basic_package_version_file(exiv2ConfigVersion.cmake COMPATIBILITY ExactVersion)
+ 
+ install(TARGETS exiv2lib EXPORT exiv2Config
+     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+@@ -232,6 +234,9 @@ install(FILES
+ 
+ install(EXPORT exiv2Config DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/exiv2")
+ 
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/exiv2ConfigVersion.cmake DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/exiv2")
++
++
+ # ******************************************************************************
+ # exiv2 application
+ 
+-- 
+2.20.1
+
