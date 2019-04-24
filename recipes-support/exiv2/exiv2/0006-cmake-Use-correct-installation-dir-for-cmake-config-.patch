@@ -1,0 +1,124 @@
+From 420e4631da1372da1be06af8f6032429c1f14d02 Mon Sep 17 00:00:00 2001
+From: Andreas Schneider <asn@cryptomilk.org>
+Date: Thu, 3 Jan 2019 10:18:27 +0100
+Subject: [PATCH 67/70] cmake: Use correct installation dir for cmake config
+ files
+
+This is the path cmake will look for those files by default. At least on
+UNIX systems.
+
+Fixes #623
+
+Signed-off-by: Andreas Schneider <asn@cryptomilk.org>
+---
+ releasenotes/CYGWIN/ReadMe.txt | 2 +-
+ releasenotes/Darwin/ReadMe.txt | 2 +-
+ releasenotes/Linux/ReadMe.txt  | 1 +
+ releasenotes/MinGW/ReadMe.txt  | 2 +-
+ releasenotes/msvc/ReadMe.txt   | 2 +-
+ releasenotes/releasenotes.txt  | 5 +++++
+ src/CMakeLists.txt             | 2 +-
+ 7 files changed, 11 insertions(+), 5 deletions(-)
+
+diff --git a/releasenotes/CYGWIN/ReadMe.txt b/releasenotes/CYGWIN/ReadMe.txt
+index 9161ca34..bba70fe6 100644
+--- a/releasenotes/CYGWIN/ReadMe.txt
++++ b/releasenotes/CYGWIN/ReadMe.txt
+@@ -7,9 +7,9 @@ Structure of the bundle:
+ bin/exiv2.exe                             exiv2 and sample applications
+ bin/cygexiv2-27.dll                       DLL
+ lib/libexiv2.dll.a & libxmp.a             link libraries
++lib/cmake/exiv2                           consume CMake files
+ lib/pkgconfig/exiv2.pc                    pkg-config file
+ share/man                                 man pages
+-share/exiv2/cmake                         consume CMake files
+ samples/exifprint.cpp                     sample code
+ logs                                      build and test logs
+ 
+diff --git a/releasenotes/Darwin/ReadMe.txt b/releasenotes/Darwin/ReadMe.txt
+index d3e61177..57910713 100644
+--- a/releasenotes/Darwin/ReadMe.txt
++++ b/releasenotes/Darwin/ReadMe.txt
+@@ -6,10 +6,10 @@ Structure of the bundle
+ 
+ bin/exiv2                                 exiv2 and sample applications
+ lib/libexiv2.0.27.0.0.dylib & libxmp.a    libraries
++lib/cmake/exiv2                           consume CMake files
+ lib/pkgconfig/exiv2.pc                    pkg-config file
+ include/exiv2/                            include files
+ share/man                                 man pages
+-share/exiv2/cmake                         consume CMake files
+ samples/exifprint.cpp                     sample code
+ logs                                      build and test logs
+ 
+diff --git a/releasenotes/Linux/ReadMe.txt b/releasenotes/Linux/ReadMe.txt
+index 03348302..0737b3a4 100644
+--- a/releasenotes/Linux/ReadMe.txt
++++ b/releasenotes/Linux/ReadMe.txt
+@@ -7,6 +7,7 @@ Structure of the bundle:
+ bin/exiv2                                 exiv2 and sample applications
+ lib/libexiv2.so.0.27.0.0 & libxmp.a       libraries
+ lib/pkgconfig/exiv2.pc                    pkg-config file
++lib/cmake/exiv2                           consume CMake files
+ include/exiv2/                            include files
+ share/                                    man pages
+ samples/exifprint.cpp                     sample code
+diff --git a/releasenotes/MinGW/ReadMe.txt b/releasenotes/MinGW/ReadMe.txt
+index 884d7502..98cd7770 100644
+--- a/releasenotes/MinGW/ReadMe.txt
++++ b/releasenotes/MinGW/ReadMe.txt
+@@ -7,10 +7,10 @@ Structure of the bundle:
+ bin/exiv2.exe                             exiv2 and sample applications
+ bin/msys-exiv2-27.dll                     exiv2 dll
+ lib/libexiv2.dll.a & libxmp.a             link libraries
++lib/cmake/exiv2                           consume CMake files
+ lib/pkgconfig/exiv2.pc                    pkg-config file
+ include/exiv2/                            include files
+ share/man                                 man pages
+-share/exiv2/cmake                         consume CMake files
+ samples/exifprint.cpp                     sample code
+ logs                                      build and test logs
+ 
+diff --git a/releasenotes/msvc/ReadMe.txt b/releasenotes/msvc/ReadMe.txt
+index de1dcbfe..e625ab49 100644
+--- a/releasenotes/msvc/ReadMe.txt
++++ b/releasenotes/msvc/ReadMe.txt
+@@ -7,8 +7,8 @@ Structure of the bundle:
+ bin/exiv2.exe                             exiv2 and sample applications
+ bin/exiv2.dll                             dll
+ lib/exiv2.lib & xmp.lib                   link libraries
++lib/cmake/exiv2                           consume CMake files
+ include/exiv2/                            include files
+-share/exiv2/cmake                         consume CMake files
+ samples/exifprint.cpp                     sample code
+ logs                                      build and test logs
+ 
+diff --git a/releasenotes/releasenotes.txt b/releasenotes/releasenotes.txt
+index b71b4519..226c078b 100644
+--- a/releasenotes/releasenotes.txt
++++ b/releasenotes/releasenotes.txt
+@@ -1,3 +1,8 @@
++Exiv2 v0.27.1
++-------------
++
++#623 Use correct installation path for generated docs and cmake config files
++
+ Exiv2 v0.27.0
+ -------------
+ 
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index adb285b1..4a05ee4f 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -234,7 +234,7 @@ install(FILES
+     ${CMAKE_BINARY_DIR}/exiv2lib_export.h
+     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/exiv2)
+ 
+-install(EXPORT exiv2Config DESTINATION "share/exiv2/cmake")
++install(EXPORT exiv2Config DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/exiv2")
+ 
+ # ******************************************************************************
+ # exiv2 application
+-- 
+2.17.2
+

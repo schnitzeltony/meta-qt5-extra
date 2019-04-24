@@ -1,0 +1,64 @@
+From e57f311e629762fbf2b08d9a5b1e0cad1035b42f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Luis=20D=C3=ADaz=20M=C3=A1s?= <piponazo@gmail.com>
+Date: Tue, 18 Dec 2018 10:33:11 +0100
+Subject: [PATCH 35/70] cmake: ignore warnings about missing PDB files in 3rd
+ party libs
+
+---
+ samples/CMakeLists.txt | 11 +++++++++++
+ src/CMakeLists.txt     |  4 ++++
+ 2 files changed, 15 insertions(+)
+
+diff --git a/samples/CMakeLists.txt b/samples/CMakeLists.txt
+index a3e491e0..4e8c14c6 100644
+--- a/samples/CMakeLists.txt
++++ b/samples/CMakeLists.txt
+@@ -43,6 +43,9 @@ foreach(entry ${SAMPLES})
+     add_test( ${target}_test ${target} )
+     target_include_directories(${target} PRIVATE ${CMAKE_SOURCE_DIR}/src) # To find unused.h
+     install( TARGETS ${target} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
++    if (MSVC)
++        set_target_properties(${target} PROPERTIES LINK_FLAGS "/ignore:4099")
++    endif()
+ endforeach()
+ 
+ ###################################
+@@ -69,6 +72,11 @@ list(APPEND APPLICATIONS exiv2json)
+ 
+ install( TARGETS metacopy pathtest exiv2json RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+ 
++if (MSVC)
++    set_target_properties(exiv2json PROPERTIES LINK_FLAGS "/ignore:4099")
++    set_target_properties(metacopy PROPERTIES LINK_FLAGS "/ignore:4099")
++endif()
++
+ if( EXPAT_FOUND )
+     add_executable(        geotag    geotag.cpp)
+     list(APPEND APPLICATIONS geotag)
+@@ -103,6 +111,9 @@ foreach(application ${APPLICATIONS})
+     if( EXIV2_ENABLE_PNG )
+         target_link_libraries( ${application} PRIVATE ${ZLIB_LIBRARIES} )
+     endif()
++    if (MSVC)
++        set_target_properties(${application} PROPERTIES LINK_FLAGS "/ignore:4099")
++    endif()
+ endforeach()
+ 
+ # ******************************************************************************
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 0d093924..adb285b1 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -274,5 +274,9 @@ if(EXIV2_BUILD_EXIV2_COMMAND)
+ 
+     install(TARGETS exiv2 RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+     install( FILES exiv2.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1 )
++
++    if (MSVC)
++        set_target_properties(exiv2 PROPERTIES LINK_FLAGS "/ignore:4099")
++    endif()
+ endif()
+ 
+-- 
+2.17.2
+
