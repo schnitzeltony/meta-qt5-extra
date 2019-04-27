@@ -17,6 +17,7 @@ RDEPENDS_${PN} = " \
     kate \
     kcachegrind \
     kcalc \
+    kcharselect \
     kcolorchooser \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
     kdf \
