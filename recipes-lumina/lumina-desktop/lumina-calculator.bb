@@ -1,7 +1,7 @@
 SUMMARY = "Calculator Utility from the Lumina Desktop"
 HOMEPAGE = "https://lumina-desktop.org/"
-LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=45b10a7bfb52b622b91ca67ea02e4afa"
+LICENSE = "BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=5c6121c97944d0eef19da2dbc0925ba5"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
