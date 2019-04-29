@@ -15,13 +15,12 @@ DEPENDS += " \
     qtx11extras \
     qtmultimedia \
     qtsvg \
-    poppler \
 "
 
-SRC_URI = "git://github.com/trueos/lumina.git"
-SRCREV = "afcece7d649bf7fecb39c815d5b5603d31df00c9"
+SRC_URI = "git://github.com/lumina-desktop/lumina.git"
+SRCREV = "05f260c7363ee9bcc67d6897a33a15cb0b2c2964"
 S = "${WORKDIR}/git"
-PV = "1.4.0+git${SRCPV}"
+PV = "1.5.0"
 
 do_configure_prepend() {
     # change paths by sed instead of endles escapes in 'DEFINES+=..' below
