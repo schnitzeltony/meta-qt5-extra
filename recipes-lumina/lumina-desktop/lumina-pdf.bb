@@ -1,7 +1,7 @@
 SUMMARY = "PDF Viewer Utility from the Lumina Desktop"
 HOMEPAGE = "https://lumina-desktop.org/"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=45b10a7bfb52b622b91ca67ea02e4afa"
+LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=45b10a7bfb52b622b91ca67ea02e4afa"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
