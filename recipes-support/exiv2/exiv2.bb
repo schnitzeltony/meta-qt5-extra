@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=625f055f41728f84a8d7938acc35bdc2"
 DEPENDS = "zlib expat"
 
 SRC_URI = " \
-    http://exiv2.org/builds/${BPN}-${PV}-Source.tar.gz \
+    https://exiv2.org/releases/${BPN}-${PV}-Source.tar.gz \
     file://0001-cmake-man-pages-only-installed-with-the-exiv2-app.patch \
     file://0002-cmake-ignore-warnings-about-missing-PDB-files-in-3rd.patch \
     file://0003-cmake-Rename-xmp-to-exiv2-xmp-to-avoid-name-conflict.patch \
