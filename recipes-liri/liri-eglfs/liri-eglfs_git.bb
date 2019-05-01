@@ -19,7 +19,7 @@ DEPENDS += " \
 "
 
 PV = "0.0.0+git${SRCPV}"
-SRCREV = "7bbc508bc03ab0f6a6b1633b322a83db5d99ab5b"
+SRCREV = "eae17fdb00a874edd67f073f087cc74436c71ea9"
 SRC_URI += " \
     file://0001-Do-not-enable-recording-by-default-it-requires-GLES3.patch \
     file://0002-qeglfskmsgbmscreen-remove-frame-recording-completely.patch \
