@@ -26,8 +26,8 @@ DEPENDS += " \
 
 PV = "${PLASMA_VERSION}"
 SRC_URI += "file://0001-Hack-build-with-gcc8.patch"
-SRC_URI[md5sum] = "1512800d87f0537cb134ef865e4adc7a"
-SRC_URI[sha256sum] = "8a686180ae056fd70073e48430864bf9248943f6d8e23665878b87a7cceb3504"
+SRC_URI[md5sum] = "f5cacbe4bfc12ca36535711d0562122f"
+SRC_URI[sha256sum] = "7379230de96c5e6d4ea40f4dfa8732e20a6ee3bd291e6f119ccb57646c33fe1f"
 
 FILES_${PN} += " \
     ${datadir}/bluedevilwizard \

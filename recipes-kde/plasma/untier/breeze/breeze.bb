@@ -26,9 +26,9 @@ DEPENDS += "\
     fftw \
 "
 
-PV = "${PLASMA_FIXUP_VERSION}"
-SRC_URI[md5sum] = "3564e702dabcfe556134cb1faacb47a7"
-SRC_URI[sha256sum] = "9a95fb9c5be7c84164d3ce337d15cad57cdd495fe84e1da8487a463d69293497"
+PV = "${PLASMA_VERSION}"
+SRC_URI[md5sum] = "52221a5e47ffca0cffdc4577e9b097e2"
+SRC_URI[sha256sum] = "a13de0472dacd5240c3d38d0841ea7b9098405cf1f8cff77504d1824d09dcac4"
 
 FILES_${PN} += " \
     ${datadir}/color-schemes \
