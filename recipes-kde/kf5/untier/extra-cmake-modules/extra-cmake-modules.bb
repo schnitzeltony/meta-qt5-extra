@@ -6,8 +6,8 @@ inherit kde-kf5
 
 DEPENDS = "qttools-native"
 
-SRC_URI[md5sum] = "b1815b93489fbed46b1512c2567a889e"
-SRC_URI[sha256sum] = "aa53f8953792b452672f275c2ea9b96ab2adf3e13d9645c3451b06dbc8055b18"
+SRC_URI[md5sum] = "ab2e42031a1aa96eca27d029827fe9d8"
+SRC_URI[sha256sum] = "514011c12eeb2ac99d3118975832a279af2c2eea5e8b36b49c81962930b2ecc7"
 SRC_URI += "file://0001-Temporary-workaround-gold-linker-errors.patch"
 
 PV = "${KF5_VERSION}"

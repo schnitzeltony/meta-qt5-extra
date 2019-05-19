@@ -25,8 +25,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "23d9bf1aa0bb7b27df5f640adbfffebd"
-SRC_URI[sha256sum] = "32ab4ed2d295fe734a4a475403dea72e2feef27f662ae64c841c410eb7bb3dd3"
+SRC_URI[md5sum] = "cf5ba6707cd5ee804bc6ee57b712bd84"
+SRC_URI[sha256sum] = "a1e9340f1046f2df1568da6cd07b26bac9361725cd32b46fd69c370aab0c7227"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \

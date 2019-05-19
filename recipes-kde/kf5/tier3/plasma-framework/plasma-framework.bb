@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 gettext
 
 DEPENDS += " \
+    gzip-native \
     qtdeclarative \
     qtsvg \
     qtscript \
@@ -39,8 +40,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "e03ee53a6b5e0af40e4e2a283098d23a"
-SRC_URI[sha256sum] = "b886aeee6691911ead25e6fd5631fa41ce2330b0fbbdc040717fa576bacae2ca"
+SRC_URI[md5sum] = "fc77bd0e0e3d0905be7b32cb7ae0f9eb"
+SRC_URI[sha256sum] = "0b0826a2292612112e78198938d660e913756f8712d1f2c71eafbead42605cad"
 
 FILES_${PN} += " \
     ${datadir}/kdevappwizard \

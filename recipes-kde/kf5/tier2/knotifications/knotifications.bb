@@ -22,7 +22,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "a5381274fb940b1ce06850c2c8995b5e"
-SRC_URI[sha256sum] = "7de068f4cf9bcefef54ae1cb180e2c0af9be951afbcaa960245507259620cf15"
+SRC_URI[md5sum] = "4865198f8406068c67254ee3b59faab4"
+SRC_URI[sha256sum] = "5a388e05ae3416a5120c268e48fa505e6666403772e8f03fe4670ab1d0bb0469"
 
 FILES_${PN} += "${datadir}/dbus-1 ${datadir}/kservicetypes5"
