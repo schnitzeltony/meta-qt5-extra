@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 pkgconfig gettext
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "5bd7d7b91b0c1e70a0c49bedc8eac381"
-SRC_URI[sha256sum] = "76665ba8ba6ab90cc0e8d682a5c5421fde7c436f5521c614d0b63c5277fabf9c"
+SRC_URI[md5sum] = "9c025d95630d06225ea0199f00ef942c"
+SRC_URI[sha256sum] = "7aeacfc538375dae4c8b3ab6411216a48a6971f012f1ab1b9d1e0f835429d6c9"
 SRC_URI += " \
     file://0001-Revert-extractors-Hide-warnings-from-system-headers.patch \
     file://0002-Do-not-include-taglib-as-system-library.patch \
