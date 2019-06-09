@@ -21,8 +21,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "af29e34770994094b42b15422078ddd0"
-SRC_URI[sha256sum] = "3bdf5470a154b2be4bfcd97db7374ef81ca8eefba3bb12030dd6d39f1466cc78"
+SRC_URI[md5sum] = "38e01b8ab136cd5539dc9701a64f2812"
+SRC_URI[sha256sum] = "5cb2147e3bb1c5b2e0bee6322a5ce89221b3aeeed131851dcb67c14740e74ca8"
 SRC_URI += "file://0001-Do-not-try-to-find-qtquick-compiler.patch"
 
 FILES_${PN} += " \

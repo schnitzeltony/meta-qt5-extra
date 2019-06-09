@@ -36,8 +36,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "25196e7b234e4fd55968cdd98c22d1e3"
-SRC_URI[sha256sum] = "f3f45b9048c283252067eebfad8c6e1efc6bc64d43fcba78b933850ea4762375"
+SRC_URI[md5sum] = "97c30f4801fbc6c278537378f5ee5361"
+SRC_URI[sha256sum] = "1aacf622e1830ac458e3ab706b1a895eec467b9e0401c9bc88f1eb381205df79"
 SRC_URI += " \
     file://0001-fix-build-for-qtbase-without-session-management.patch \
     file://0002-Revert-Make-target_link_libraries-for-kdeinit_dolphi.patch \

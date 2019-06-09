@@ -33,8 +33,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "385f903641b3def71e43036d1b5749f6"
-SRC_URI[sha256sum] = "510b99740c87ade2e644b8b62ece9ac46721e636aeb83f253939d4d191d03a52"
+SRC_URI[md5sum] = "b8ec58cfab52182441327c86902fcb54"
+SRC_URI[sha256sum] = "68c19b2f66b13e7a78c6a583ced088a9532bc31f1bb40c653cdd139bc34d2cce"
 SRC_URI += "file://0001-FIND_REQUIRED_PROGRAM-is-broken-use-the-tools-direct.patch"
 
 # Aagh: To select a soundcard we need to select another type - so keep oss in as dummy
