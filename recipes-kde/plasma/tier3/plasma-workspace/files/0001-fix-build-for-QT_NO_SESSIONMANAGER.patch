@@ -47,7 +47,7 @@ index 36539b63..522608a4 100644
    QCommandLineParser parser;
    aboutData.setupCommandLine(&parser);
 diff --git a/krunner/main.cpp b/krunner/main.cpp
-index a90324e..b8d2a74 100644
+index e0395cf..9dce8c5 100644
 --- a/krunner/main.cpp
 +++ b/krunner/main.cpp
 @@ -24,7 +24,9 @@
@@ -57,10 +57,10 @@ index a90324e..b8d2a74 100644
 +#ifndef QT_NO_SESSIONMANAGER
  #include <QSessionManager>
 +#endif
+ #include <QDBusMessage>
+ #include <QDBusConnection>
  
- #include <KAuthorized>
- #include <KAboutData>
-@@ -81,6 +83,7 @@ int main(int argc, char **argv)
+@@ -91,6 +93,7 @@ int main(int argc, char **argv)
  
      KDBusService service(KDBusService::Unique);
  
@@ -68,7 +68,7 @@ index a90324e..b8d2a74 100644
      QGuiApplication::setFallbackSessionManagementEnabled(false);
  
      auto disableSessionManagement = [](QSessionManager &sm) {
-@@ -88,6 +91,7 @@ int main(int argc, char **argv)
+@@ -98,6 +101,7 @@ int main(int argc, char **argv)
      };
      QObject::connect(&app, &QGuiApplication::commitDataRequest, disableSessionManagement);
      QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);

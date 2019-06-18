@@ -1,9 +1,6 @@
 SUMMARY = "KDE's window manager"
-LICENSE = "LGPLv2.1 & GFDL-1.2"
-LIC_FILES_CHKSUM = " \
-	file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-	file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
-"
+LICENSE = "GPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
@@ -57,8 +54,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "91401cff50e97b2f153080e1a9d295d0"
-SRC_URI[sha256sum] = "e341c8165354643fd201292e53418050970bf8819b2cd0dd932423a342d2f805"
+SRC_URI[md5sum] = "763f90156343bee01abf2809f20c70fc"
+SRC_URI[sha256sum] = "82685526c32830a54ecd2034049d86dd5b59b97c434788798da1b5c217f2495e"
 
 SRC_URI += " \
     file://0001-Make-building-of-QPA-wayland-plugin-an-option.patch \
@@ -75,8 +72,8 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/kconf_update \
     ${datadir}/k*5 \
+    ${datadir}/knsrcfiles \
     ${datadir}/kpackage \
-    ${datadir}/kwincompositing \
     ${datadir}/icons \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \

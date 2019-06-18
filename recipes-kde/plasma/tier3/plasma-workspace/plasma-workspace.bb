@@ -48,12 +48,11 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "a8598e9d6504f08389e5b0cdceae468c"
-SRC_URI[sha256sum] = "c25f9b348e3ab2d370325f7da989a3f599a408dabfadda65cbb590fb26a2f973"
+SRC_URI[md5sum] = "edc65cf3c9a50c8e309bf74659b6a27e"
+SRC_URI[sha256sum] = "52da11a30708b375136ec5c280d75948e2651ecdb03f745e596d10168ab0ffae"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
-    \
     file://0002-align-phonon-path.patch \
     file://0003-startkde-add-meta-qt5-standard-binary-path-to-PATH.patch \
     file://0004-startkde-create-kde-s-home.patch \
@@ -71,6 +70,7 @@ FILES_${PN} += " \
     ${datadir}/kdevappwizard \
     ${datadir}/kio_desktop \
     ${datadir}/k*5 \
+    ${datadir}/knsrcfiles \
     ${datadir}/kpackage \
     ${datadir}/ksplash \
     ${datadir}/kstyle \
@@ -86,16 +86,15 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
 "
 
-FILES_${PN}-dev = " \
-    ${includedir} \
-    ${libdir}/cmake \
-    ${libdir}/libkworkspace5.so \
-    ${libdir}/libweather_ion.so \
-    ${libdir}/libplasma-geolocation-interface.so \
-    ${libdir}/libtaskmanager.so \
-    ${libdir}/liblegacytaskmanager.so \
-    ${libdir}/libcolorcorrect.so \
+FILES_SOLIBSDEV = " \
+    ${libdir}/libcolorcorrect${SOLIBSDEV} \
+    ${libdir}/libkworkspace5${SOLIBSDEV} \
+    ${libdir}/libnotificationmanager${SOLIBSDEV} \
+    ${libdir}/libplasma-geolocation-interface${SOLIBSDEV} \
+    ${libdir}/libtaskmanager${SOLIBSDEV} \
+    ${libdir}/libweather_ion${SOLIBSDEV} \
 "
+
 
 # startkde/startplasmacompositor require:
 RDEPENDS_${PN} += " \

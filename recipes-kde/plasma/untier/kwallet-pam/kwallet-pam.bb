@@ -11,11 +11,12 @@ inherit kde-plasma distro_features_check
 DEPENDS += " \
     libpam \
     libgcrypt \
+    kwallet \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "4f563fc433dfd43960832fb7ddac6137"
-SRC_URI[sha256sum] = "36f3e50019dcd9919755d47b62abf99412299aa87ee27fecbf1dca212a94d22e"
+SRC_URI[md5sum] = "0f50c861f78cbb81fc0462ad05fc7e7c"
+SRC_URI[sha256sum] = "498425290ca53b31a82d763d1191b8f0f489311e69f070cda3c4885f951b6581"
 SRC_URI += " \
     file://0001-use-pkgconfig-to-find-libgcrypt.patch \
 "

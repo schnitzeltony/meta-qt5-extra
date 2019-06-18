@@ -24,12 +24,13 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "5790d8f3be565c9f78a1a3dbe77dafe6"
-SRC_URI[sha256sum] = "958163b1134b7c9e9735b5b6a4448973f09dbf43991511f768b29bd038baa185"
+SRC_URI[md5sum] = "35b11a9233f961fc238839fce00e82ef"
+SRC_URI[sha256sum] = "539f6ea694d5709b4be14ff8c1d1b70dc8c01737ab86cc1b7055e9ac1463da93"
 
 FILES_${PN} += " \
-    ${datadir}/kservices5 \
-    ${datadir}/kcm-gtk-module \
     ${datadir}/icons \
+    ${datadir}/kcm-gtk-module \
+    ${datadir}/knsrcfiles \
+    ${datadir}/kservices5 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

@@ -34,12 +34,13 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "a194936a5fc7101d95bd92c43b377735"
-SRC_URI[sha256sum] = "1e11158f636e1d4bb25bbe4bb2f2fca37728c6aae07340ca6c2c1ec9e882ece3"
+SRC_URI[md5sum] = "bb5e4e09704a5c5d380f204457d04ba2"
+SRC_URI[sha256sum] = "d7fc80d63c7e1aea37a9ba28e5309bd538ac0c3c889b3dd9af1730a25acb8eb6"
 
 FILES_${PN} += " \
     ${datadir}/icons \
     ${datadir}/kdevappwizard \
+    ${datadir}/knsrcfiles \
     ${datadir}/k*5 \
     ${datadir}/kwin \
     ${datadir}/plasma \

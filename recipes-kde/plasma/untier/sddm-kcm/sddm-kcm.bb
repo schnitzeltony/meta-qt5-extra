@@ -22,14 +22,15 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "ebc9becccf08be045caf8c6ca86bf2fd"
-SRC_URI[sha256sum] = "4d5ee74e494f78a90d1586862749d53f4dc34970f47307d62a4e6ead9161c25b"
+SRC_URI[md5sum] = "7a3cc20aaba6baae3d340a233151828d"
+SRC_URI[sha256sum] = "dba4bf7e730553459f00b2102c56b468a385ca5dfe32ce7a13d10414e109ff80"
 
 RDEPENDS_${PN} = "sddm"
 
 FILES_${PN} += " \
-    ${datadir}/kservices5 \
     ${datadir}/dbus-1 \
+    ${datadir}/knsrcfiles \
+    ${datadir}/kservices5 \
     ${datadir}/polkit-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
