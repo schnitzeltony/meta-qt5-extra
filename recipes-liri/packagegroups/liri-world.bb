@@ -20,7 +20,6 @@ RDEPENDS_${PN} = " \
     liri-qtaccountsservice \
     liri-qtgsettings \
     liri-qtudev \
-    liri-screencast \
     liri-screenshot \
     liri-settings \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-shell", "",d)} \
