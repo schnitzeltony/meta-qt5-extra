@@ -27,8 +27,8 @@ DEPENDS += "\
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "4360230fe65dccdeaaa7c3759ae75354"
-SRC_URI[sha256sum] = "bf4fba98f83311365f249d706689f327380db2de61ca7bb2a8442472e0b1316e"
+SRC_URI[md5sum] = "804b9aca66dbe5ac00e4d1217251ed4f"
+SRC_URI[sha256sum] = "bd33e97fd21a2314d5d6a8e90327851c8aa75bf2583feb56dcb0a2485c950a9d"
 
 FILES_${PN} += " \
     ${datadir}/color-schemes \
