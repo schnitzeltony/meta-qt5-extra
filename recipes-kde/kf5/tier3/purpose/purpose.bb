@@ -6,18 +6,19 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 gettext gtk-icon-cache
 
-SRC_URI[md5sum] = "a56a20ee5dda3eb6e133c14203bd975e"
-SRC_URI[sha256sum] = "078837cece687455e97d2c3721b95eaa4329e2026d8e0c3f55dbba32f15d4238"
+SRC_URI[md5sum] = "4455d785c8bf317cacf3989f1394fada"
+SRC_URI[sha256sum] = "830669315e15a3edbf91130711b604967d1dae2cabb1fa79e0d72866f05b9f0a"
 
 PV = "${KF5_VERSION}"
 
 DEPENDS += " \
     qtdeclarative \
+    kauth-native \
     kcoreaddons-native kcoreaddons \
     ki18n-native ki18n \
     kconfig-native kconfig \
     kio \
-    kauth-native \
+    kirigami2 \
 "
 
 FILES_${PN} += " \

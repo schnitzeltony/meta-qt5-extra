@@ -57,7 +57,7 @@ index 15399f7..5c9fd60 100644
  
  if(TAGLIB_FOUND)
 +    include_directories( ${TAGLIB_INCLUDES} )
-     add_library(kfilemetadata_taglibextractor MODULE taglibextractor.cpp )
+     add_library(kfilemetadata_taglibextractor MODULE taglibextractor.cpp ${debug_SRCS})
 -    target_include_directories(kfilemetadata_taglibextractor SYSTEM PRIVATE ${TAGLIB_INCLUDES})
      target_link_libraries( kfilemetadata_taglibextractor
          KF5::FileMetaData

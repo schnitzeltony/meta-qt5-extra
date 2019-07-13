@@ -15,10 +15,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index c3cbe8c..710e7b0 100644
+index de087a4..62a13e0 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -39,7 +39,7 @@ target_link_libraries(KF5FileMetaData
+@@ -43,7 +43,7 @@ target_link_libraries(KF5FileMetaData
  )
  
  if(TAGLIB_FOUND)
@@ -28,17 +28,17 @@ index c3cbe8c..710e7b0 100644
      target_link_libraries(KF5FileMetaData
          PRIVATE
 diff --git a/src/writers/CMakeLists.txt b/src/writers/CMakeLists.txt
-index 864dc51..039d24e 100644
+index a57c123..1e1d2af 100644
 --- a/src/writers/CMakeLists.txt
 +++ b/src/writers/CMakeLists.txt
 @@ -1,6 +1,6 @@
  if(TAGLIB_FOUND)
-     add_library(kfilemetadata_taglibwriter MODULE taglibwriter.cpp)
+     add_library(kfilemetadata_taglibwriter MODULE taglibwriter.cpp ${debug_SRCS})
 -    target_include_directories(kfilemetadata_taglibwriter SYSTEM PRIVATE ${TAGLIB_INCLUDES})
 +    target_include_directories(kfilemetadata_taglibwriter PRIVATE ${TAGLIB_INCLUDES})
  
      target_link_libraries( kfilemetadata_taglibwriter
          KF5::FileMetaData
 -- 
-2.20.1
+2.21.0
 

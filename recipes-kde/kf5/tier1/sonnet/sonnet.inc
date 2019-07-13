@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1"
 inherit kde-kf5
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "23815283db2bd44605878c3cb7de1589"
-SRC_URI[sha256sum] = "f30e4d622bed2979bdd140adc6fdd537c3bd7f632f49d9efec7d9789cdcff025"
+SRC_URI[md5sum] = "2ca92137613156e24367eb3349e0e5b8"
+SRC_URI[sha256sum] = "f6734ac4a8dcef69f159ce0810a66ebbc2bdb8f67aac58376e8af35eb7c3dfc3"

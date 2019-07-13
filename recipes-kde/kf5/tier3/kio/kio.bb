@@ -26,8 +26,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "08f2a7be3903071cb23da047e469e775"
-SRC_URI[sha256sum] = "1960a44900d804727a235388c32ce95c903d439699469945d87602cd224709b9"
+SRC_URI[md5sum] = "e1c8bf207ee1721d8537c78a7dc4f166"
+SRC_URI[sha256sum] = "be433fcf665679671a2e320556c39b708ed0789271e76ebb6142df058260238d"
 
 SRC_URI += "file://0001-Extend-upstream-workaround-for-bug-371721-to-also-co.patch"
 

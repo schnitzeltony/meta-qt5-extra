@@ -25,7 +25,12 @@ do_compile_prepend() {
     export XDG_DATA_HOME=${STAGING_DATADIR}
 }
 
-FILES_${PN} += "${libdir}/plugins/kf5 ${datadir}/kf5 ${libexecdir}/kf5"
+FILES_${PN} += " \
+    ${datadir}/kf5 \
+    ${datadir}/qlogging-categories5 \
+    ${libdir}/plugins/kf5 \
+    ${libexecdir}/kf5 \
+"
 
 EXTRA_OECMAKE += " \
     -DECM_MKSPECS_INSTALL_DIR=${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/modules \

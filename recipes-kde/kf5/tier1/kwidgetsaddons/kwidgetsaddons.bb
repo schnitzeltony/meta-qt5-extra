@@ -10,5 +10,5 @@ inherit kde-kf5
 DEPENDS += "qttools"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "48fc132eb9102827258cd0b31940d66c"
-SRC_URI[sha256sum] = "69e22fd0a685386a0c00dd4b3865471affbd8a947bba5b2e70bd8eb42a82f3bb"
+SRC_URI[md5sum] = "e788ac09828cadec194ebf186156b205"
+SRC_URI[sha256sum] = "2e74d3897290c43871836a55ce0dbf4e6f3563f97016827d7ffccf0e5342a39d"

@@ -9,5 +9,5 @@ inherit kde-kf5
 DEPENDS += "qtdeclarative"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "5247dfe0a5040021876e5bf854f35401"
-SRC_URI[sha256sum] = "602e652803780fe04ad2d3237cb3669c1be06ac3ae5518ca0552d521069f4d26"
+SRC_URI[md5sum] = "5ac5d11f5edc55d11b4ed81ead58a9bf"
+SRC_URI[sha256sum] = "364799922efa153d5bd6c326a8c3311d7170356807be1e67eb4d5135ec62f5ff"
