@@ -1,0 +1,43 @@
+From 3aacbbaab50ac6e0557c5d69c430459eb3d71ad7 Mon Sep 17 00:00:00 2001
+From: Luca Beltrame <lbeltrame@kde.org>
+Date: Fri, 5 Jul 2019 07:01:09 +0200
+Subject: [PATCH] Do not use Q_DECLARE_METATYPE(KPluginMetaData) with KF 5.60+
+
+It is already defined in kcoreaddons since 318b0e75242931ea420caf3e7123d54eb8351c51
+and will break compilation.
+
+Use a version macro instead, so that it is correctly used only with KF
+5.59 or lower.
+
+I put this in stable branch in case people will use 19.04 with 5.60
+(likely), but feel free to revert in case it is not appropriate.
+
+Upstream-Status: Applied
+---
+ kerfuffle/archive_kerfuffle.h | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/kerfuffle/archive_kerfuffle.h b/kerfuffle/archive_kerfuffle.h
+index 578b5ce2..78e628cf 100644
+--- a/kerfuffle/archive_kerfuffle.h
++++ b/kerfuffle/archive_kerfuffle.h
+@@ -33,6 +33,7 @@
+ 
+ #include <KJob>
+ #include <KPluginMetaData>
++#include <kcoreaddons_version.h>
+ 
+ #include <QHash>
+ #include <QMimeType>
+@@ -244,6 +245,8 @@ private:
+ 
+ } // namespace Kerfuffle
+ 
++#if KCOREADDONS_VERSION < QT_VERSION_CHECK(5,60,0)
+ Q_DECLARE_METATYPE(KPluginMetaData)
++#endif
+ 
+ #endif // ARCHIVE_H
+-- 
+2.21.0
+
