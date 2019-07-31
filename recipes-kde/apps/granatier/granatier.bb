@@ -24,8 +24,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "d9875c78fe85919c93d1c990f2db2513"
-SRC_URI[sha256sum] = "af7787cd2b4901dfb48f9ca1654dddc52e97f87b4e004c658a89404eaa52adf4"
+SRC_URI[md5sum] = "de07999e76024dfdbdd279a8695fca0f"
+SRC_URI[sha256sum] = "996dafafc4a72cf49748c9e7046267980d5c9639b84c26e85266850dd1a9df21"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \

@@ -28,8 +28,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "bfecb779782abd51b7a5e8a8a4e25beb"
-SRC_URI[sha256sum] = "b0c4e4150aa6595e1a2c6fdd2a38046fa03cf594875fb1e8af284e84c5923211"
+SRC_URI[md5sum] = "2e0f624437db034abb98d74be083ad14"
+SRC_URI[sha256sum] = "a06cc2937aa4ed41bab0a38344164f367b993a80bcd74011e4ab72643bfee8ee"
 SRC_URI += " \
     file://0001-fix-build-with-QT_NO_SESSIONMANAGER-set.patch \
     file://0002-Do-not-use-Q_DECLARE_METATYPE-KPluginMetaData-with-K.patch \

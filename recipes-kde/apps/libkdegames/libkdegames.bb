@@ -43,8 +43,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "71e6d9ecf59d2b9be2fc6cec8a4ff54a"
-SRC_URI[sha256sum] = "83c79aa05f116b284a9ba3e20eab286822e28a46eb45cad39fcdb357a553cf0a"
+SRC_URI[md5sum] = "f9a880d1ee572dabc59572664e5b65c7"
+SRC_URI[sha256sum] = "187aa81539113bc6786d861e1f5302fa17533ae1108299bbd1a86be18accfbc4"
 
 FILES_${PN} += " \
     ${datadir}/carddecks \
