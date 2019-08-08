@@ -13,3 +13,7 @@ SRC_URI[sha256sum] = "f18ccc4e42d6ddb763983d0bfdc1da4ff91faa83289796e1b238f5fa54
 PV = "1.5.9"
 
 EXTRA_QMAKEVARS_PRE += "PREFIX=${prefix}"
+
+FILES_${PN} += " \
+    ${datadir}/metainfo \
+"
