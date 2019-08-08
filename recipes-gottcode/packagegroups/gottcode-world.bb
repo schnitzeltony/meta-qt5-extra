@@ -8,6 +8,7 @@ RDEPENDS_${PN} = " \
     focuswriter \
     gottet \
     hexalate \
+    kapow \
     peg-e \
     simsu \
     tetzle \
