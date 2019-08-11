@@ -18,12 +18,10 @@ DEPENDS += " \
 "
 
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/src/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "ee888d41a677ddc6b8c63f0f71e82026"
-SRC_URI[sha256sum] = "7ede8ee868ba480e4666a32b4b26d279b1e45177f83b0ada32a15fa9cee514a3"
+SRC_URI[md5sum] = "4964e28440f3a808297efb0cb786bd14"
+SRC_URI[sha256sum] = "67af0c2d74715957bd5373a6a30589ff0a996cb1d267dfd0538dccaa9a768dfa"
 
 FILES_${PN} += " \
-    ${datadir}/kpropertywidgets3 \
-    ${datadir}/kservicetypes5 \
-    ${datadir}/kreport3 \
+    ${datadir}/kproperty3 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
