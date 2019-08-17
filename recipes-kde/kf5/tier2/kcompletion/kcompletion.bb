@@ -9,5 +9,5 @@ inherit kde-kf5
 DEPENDS += "kconfig kconfig-native kwidgetsaddons"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "30d0925015e0e80de704aef5571d6897"
-SRC_URI[sha256sum] = "d5afb075661dfe2da5e300bd73dee89f92736f39859be711f186310bed245f7c"
+SRC_URI[md5sum] = "39c8b31802d32fe59bc9487a542bdb18"
+SRC_URI[sha256sum] = "68697be65d6c9e0053fc3e504170d23c3162c05a0a9027249c575bc6dc8bd3ec"
