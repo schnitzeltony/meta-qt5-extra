@@ -27,6 +27,9 @@ PV = "${PLASMA_VERSION}"
 SRC_URI[md5sum] = "d57f164978aa8ddaa2029834197cd79c"
 SRC_URI[sha256sum] = "c271b1caebac0837483af7ae11d2e4786a7770ff85753f1a3da4c8d28681111c"
 
+CFLAGS += "-isystem ${STAGING_INCDIR}/harfbuzz"
+CXXFLAGS += "-isystem ${STAGING_INCDIR}/harfbuzz"
+
 FILES_${PN} += " \
     ${datadir}/icons \
     ${datadir}/kcm-gtk-module \
