@@ -8,7 +8,15 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-apps gtk-icon-cache
 
+SRC_URI += "file://0001-Do-not-build-docs.patch"
+
 DEPENDS += " \
+    ki18n-native \
+    kconfig-native \
+    kauth-native \
+    kcoreaddons-native \
+    kdoctools-native \
+    sonnet-native \
     libkexiv2 \
     qca \
     tiff \
@@ -18,16 +26,14 @@ DEPENDS += " \
     karchive \
     kbookmarks \
     kcompletion \
-    kconfig-native \
     kconfigwidgets \
-    kauth-native \
-    kcoreaddons-native \
     kdbusaddons \
-    kdoctools-native \
-    sonnet-native \
     kiconthemes \
+    kirigami2 \
+    purpose \
     kjs \
     kio \
+    ki18n \
     kparts \
     threadweaver \
     kwallet \
@@ -36,8 +42,10 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "b4d49701aed98c07801cf171c2094c73"
-SRC_URI[sha256sum] = "87ab5ffd852109d549d021b8fe94b9a4de212b2f164e9cc796b144732ff94282"
+SRC_URI[md5sum] = "0ff6de9c7dba4580c7f34d47a13b7302"
+SRC_URI[sha256sum] = "721a0d02d5ff9277c4a9a13dbde0ede3528eff848622e83abc36d57d9759b3ec"
+
+EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

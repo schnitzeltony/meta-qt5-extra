@@ -9,6 +9,7 @@ inherit kde-apps gettext
 
 DEPENDS += "\
     gmp \
+    mpfr \
     kauth-native \
     kconfig-native \
     kcoreaddons-native \
@@ -22,8 +23,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "5d3f9b88e8396bedf0f2b276ac945157"
-SRC_URI[sha256sum] = "42da5439af4f59402d27f2c48d4ee9c68d4a84bfda8d16a5ab9d7ab6bdcc02d5"
+SRC_URI[md5sum] = "42b066d7920a5041928ab4da6a76bd70"
+SRC_URI[sha256sum] = "58c26a9698bfc9e0d3a5614ab26c53878e87fc601688ad6c5848fbdbc21c4103"
 
 FILES_SOLIBSDEV = ""
 

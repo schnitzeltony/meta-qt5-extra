@@ -21,9 +21,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "7a64352f3a160726330a5ab6ab486aac"
-SRC_URI[sha256sum] = "6d4614b7b42391c8b68627b879f61f59c22942ff1b340a25f75d90e296cdeb33"
-SRC_URI += "file://0001-Do-not-try-to-find-qtquick-compiler.patch"
+SRC_URI[md5sum] = "abca361f3cc370dea139bc2bbb265a81"
+SRC_URI[sha256sum] = "3827a7e8dd3c48e12521fd0aa76eccbeaf9f2627935f19647f2147e87db63554"
 
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
