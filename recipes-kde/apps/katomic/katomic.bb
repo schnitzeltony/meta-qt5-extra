@@ -36,3 +36,5 @@ FILES_${PN} += " \
     ${datadir}/kconf_update \
     ${datadir}/icons \
 "
+
+RDEPENDS_${PN} += "perl"
