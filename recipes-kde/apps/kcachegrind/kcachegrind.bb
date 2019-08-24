@@ -30,3 +30,4 @@ FILES_${PN} += " \
 "
 
 RRECOMMENDS_${PN} += "graphviz"
+RDEPENDS_${PN} += "perl"
