@@ -57,3 +57,5 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
+
+RDEPENDS_${PN} += "perl"
