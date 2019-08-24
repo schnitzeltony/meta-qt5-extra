@@ -30,7 +30,7 @@ SRC_URI[sha256sum] = "9b166e11f7115576181c17f0ced51b9a7ec689334d4b15ebb55d4e6e7f
 
 FILES_SOLIBSDEV = ""
 
-RDEPENDS_${PN} = "pulseaudio-server"
+RDEPENDS_${PN} += "pulseaudio-server perl"
 
 FILES_${PN} += " \
     ${datadir}/kpackage \
