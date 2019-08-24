@@ -74,3 +74,5 @@ FILES_${PN} += " \
     \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
+
+RDEPENDS_${PN} += "perl"
