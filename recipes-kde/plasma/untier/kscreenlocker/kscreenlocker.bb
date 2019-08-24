@@ -48,3 +48,5 @@ FILES_${PN} += " \
     ${sysconfdir} \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
+
+RDEPENDS_${PN} += "perl"
