@@ -33,3 +33,5 @@ FILES_${PN} += " \
     ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
+
+RDEPENDS_${PN} += "perl"
