@@ -22,11 +22,12 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "0024dedeb755d142d25c259f3292722b"
-SRC_URI[sha256sum] = "856649529f0c19749a2b73125351400f401521664c9044fc33f92a09073d5270"
+SRC_URI[md5sum] = "447466379d5a9d30edab30e048532c61"
+SRC_URI[sha256sum] = "676dd522eb9976789da17eea1dc103c9c67b6df7bfa70d998e29c0e7dde0608b"
 
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
 "
 
 RRECOMMENDS_${PN} += "graphviz"
+RDEPENDS_${PN} += "perl"

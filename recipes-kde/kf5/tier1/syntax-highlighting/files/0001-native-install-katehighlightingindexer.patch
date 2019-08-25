@@ -1,0 +1,28 @@
+From 1f09ebf9e47db90ede7dea36c6b79a6cec65fd92 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 17 Aug 2019 22:34:37 +0200
+Subject: [PATCH] native: install katehighlightingindexer
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/indexer/CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/indexer/CMakeLists.txt b/src/indexer/CMakeLists.txt
+index 9fa26b2..89e549d 100644
+--- a/src/indexer/CMakeLists.txt
++++ b/src/indexer/CMakeLists.txt
+@@ -34,3 +34,5 @@ else()
+         target_link_libraries(katehighlightingindexer Qt5::Core)
+     endif()
+ endif()
++
++install(TARGETS katehighlightingindexer DESTINATION "${CMAKE_INSTALL_BINDIR}")
+-- 
+2.21.0
+

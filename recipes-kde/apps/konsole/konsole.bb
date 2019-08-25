@@ -40,8 +40,8 @@ DEPENDS += " \
 
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "02716a4a9b9b175a499970ff609e1e1c"
-SRC_URI[sha256sum] = "20cadcda75a22ce7b4cb19240a16c9b286fa6ed836f352b8b337fb418e9a3b4c"
+SRC_URI[md5sum] = "8cb4b9121c05df8150a132ef8b8752c4"
+SRC_URI[sha256sum] = "4d495bf42fad1f457282a57f19fe2aece1ddbc88239352f0ebadfbcebf52ad6e"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
@@ -49,6 +49,7 @@ FILES_SOLIBSDEV = ""
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/khotkeys \
+    ${datadir}/knsrcfiles \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${libdir}/libkdeinit5_konsole.so \
 "

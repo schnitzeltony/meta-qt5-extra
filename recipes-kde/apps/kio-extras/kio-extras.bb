@@ -50,8 +50,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "f395b9d4079a4ec93993cb9a748a0c1d"
-SRC_URI[sha256sum] = "b65cb37a5965782a9eaae80840fdd7e06505aece33cc6774510c65e1fea3f55b"
+SRC_URI[md5sum] = "d749392cbfc3e1c28bfc5465f7b209cc"
+SRC_URI[sha256sum] = "792a6a6d1ea2457dda10aedc6cefd3518064c8f47c62f9c3c4a508442b83d3cd"
 
 # gperf creates hard #line links
 do_install_prepend() {
@@ -74,3 +74,5 @@ FILES_${PN} += " \
     \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
+
+RDEPENDS_${PN} += "perl"

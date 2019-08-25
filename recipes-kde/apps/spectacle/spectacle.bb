@@ -31,11 +31,14 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "3984f30856c12e1e670db9d9ea0de2a9"
-SRC_URI[sha256sum] = "bbf2c17298608dc69139f1f0a07de05b724d83cf57e8fe085a376723d83d15d1"
+SRC_URI[md5sum] = "417c29a55b8423533041d775e50cc76a"
+SRC_URI[sha256sum] = "8ada4f765f81ee496f9fd00b74764690df9c479e343a035e363f7159f93c35a4"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/khotkeys \
     ${datadir}/knotifications5 \
+    ${datadir}/kglobalaccel \
+    ${datadir}/kconf_update \
+    ${libdir}/kconf_update_bin \
 "

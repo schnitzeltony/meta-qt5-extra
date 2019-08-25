@@ -1,0 +1,30 @@
+From b4e62f10ad907cc3db7adac75e0171e88bb9172d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 18 Aug 2019 15:10:02 +0200
+Subject: [PATCH] Fix build with Qt 5.13
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/plugins/forms/widgets/kexidbdatepicker.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/plugins/forms/widgets/kexidbdatepicker.cpp b/src/plugins/forms/widgets/kexidbdatepicker.cpp
+index 1e0692d..c719964 100644
+--- a/src/plugins/forms/widgets/kexidbdatepicker.cpp
++++ b/src/plugins/forms/widgets/kexidbdatepicker.cpp
+@@ -24,6 +24,7 @@
+ 
+ #include <QLineEdit>
+ #include <QInputMethodEvent>
++#include <QDate>
+ 
+ KexiDBDatePicker::KexiDBDatePicker(QWidget *parent)
+         : KDatePicker(parent)
+-- 
+2.21.0
+

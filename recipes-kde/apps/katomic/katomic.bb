@@ -27,8 +27,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "a43a3569316362b2da0af0d849cd5211"
-SRC_URI[sha256sum] = "e4edc6a0058ed929204b64bb99af294752bc20b1693e5930c2616af45d0587c3"
+SRC_URI[md5sum] = "70795d40845ce31ccc6cbbedc159b1f5"
+SRC_URI[sha256sum] = "12b2a0e703312159a8a217ddb5e19c9a9bea1825d668dd4377fe8e52101f3c90"
 SRC_URI += "file://0001-fix-build-for-qtbase-build-without-session-support-Q.patch"
 
 FILES_${PN} += " \
@@ -36,3 +36,5 @@ FILES_${PN} += " \
     ${datadir}/kconf_update \
     ${datadir}/icons \
 "
+
+RDEPENDS_${PN} += "perl"

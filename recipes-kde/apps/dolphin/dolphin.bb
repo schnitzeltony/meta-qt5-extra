@@ -36,18 +36,21 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "49a0ec82b4dcfa3f61358d8adcfb7828"
-SRC_URI[sha256sum] = "67a2b283049591fa0f00304b4da6532e9d59d9dc9067916e0ffe8aa19d93f579"
+SRC_URI[md5sum] = "2c9aebc32016b521f62cb73e34c92635"
+SRC_URI[sha256sum] = "fd44714541ae7082d4615e441242afdba2d7810a373bfc8c3e64ff5c7db0a0f0"
 SRC_URI += " \
     file://0001-fix-build-for-qtbase-without-session-management.patch \
     file://0002-Revert-Make-target_link_libraries-for-kdeinit_dolphi.patch \
 "
+
+EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 FILES_SOLIBSDEV = "${libdir}/libdolphin*${SOLIBSDEV}"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/k*5 \
+    ${datadir}/kglobalaccel \
     ${datadir}/dbus-1 \
     ${libdir}/libkdeinit5_dolphin.so \
     ${OE_QMAKE_PATH_PLUGINS} \

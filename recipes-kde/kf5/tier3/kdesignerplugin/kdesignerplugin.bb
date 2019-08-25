@@ -9,6 +9,8 @@ DEPENDS += " \
 
 # optional -> TBD packageconfig
 DEPENDS += " \
+    kauth-native \
+    sonnet-native \
     kcompletion \
     kconfigwidgets \
     kiconthemes \
@@ -19,14 +21,10 @@ DEPENDS += " \
     kxmlgui \
     sonnet \
     ki18n \
-    kauth-native \
-    sonnet-native \
+    kplotting \
 "
 
-SRC_URI += " \
-	file://0001-make-kplotting-and-kdewebkit-support-optional.patch \
-	file://0002-set-kgendesignerplugin-executable-so-that-it-can-be-.patch \
-"
+SRC_URI += "file://0001-set-kgendesignerplugin-executable-so-that-it-can-be-.patch"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[kplotting] = "-DWITH_KPLOTTING=ON,,kplotting"
