@@ -45,3 +45,5 @@ FILES_${PN} += " \
     ${datadir}/kde4 \
     ${libdir}/libkdeinit5_khelpcenter.so \
 "
+
+RDEPENDS_${PN} += "perl"
