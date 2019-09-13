@@ -16,7 +16,7 @@ diff --git a/src/dolphinmainwindow.cpp b/src/dolphinmainwindow.cpp
 index f7a7613..127cd85 100644
 --- a/src/dolphinmainwindow.cpp
 +++ b/src/dolphinmainwindow.cpp
-@@ -386,9 +386,11 @@ void DolphinMainWindow::closeEvent(QCloseEvent* event)
+@@ -434,9 +434,11 @@ void DolphinMainWindow::closeEvent(QCloseEvent* event)
      // Find out if Dolphin is closed directly by the user or
      // by the session manager because the session is closed
      bool closedByUser = true;
@@ -32,7 +32,7 @@ diff --git a/src/main.cpp b/src/main.cpp
 index b4ca2c6..5c058a9 100644
 --- a/src/main.cpp
 +++ b/src/main.cpp
-@@ -156,6 +156,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
+@@ -168,6 +168,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
  
      mainWindow->show();
  
@@ -40,14 +40,11 @@ index b4ca2c6..5c058a9 100644
      if (app.isSessionRestored()) {
          const QString className = KXmlGuiWindow::classNameOfToplevel(1);
          if (className == QLatin1String("DolphinMainWindow")) {
-@@ -164,6 +165,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
+@@ -176,6 +177,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
             qCWarning(DolphinDebug) << "Unknown class " << className << " in session saved data!";
          }
      }
 +#endif
  
-     return app.exec(); // krazy:exclude=crash;
- }
--- 
-2.1.0
-
+     KDBusService dolphinDBusService;
+     DBusInterface interface;
