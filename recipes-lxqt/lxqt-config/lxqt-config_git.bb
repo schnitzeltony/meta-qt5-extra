@@ -6,7 +6,7 @@ inherit lxqt distro_features_check gtk-icon-cache
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "qtsvg liblxqt libkscreen libxcursor xf86-input-libinput"
+DEPENDS += "qtsvg liblxqt libkscreen libxcursor libxi xf86-input-libinput"
 
 SRCREV = "12e8c8f0819e1ed1bf54986ce7aa5e9cba2b55ea"
 PV = "0.14.1"
