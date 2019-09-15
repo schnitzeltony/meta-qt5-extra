@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 cmake_auto_align_paths
 
-DEPENDS += "wayland wayland-native"
+DEPENDS += "wayland wayland-native wayland-protocols"
 
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "fab6a981a5c604d45466bdfce204848f"
