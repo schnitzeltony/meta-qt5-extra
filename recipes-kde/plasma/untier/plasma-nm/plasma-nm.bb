@@ -19,7 +19,6 @@ DEPENDS += " \
     kcoreaddons \
     kcoreaddons-native \
     kpackage-native \
-    kdesignerplugin-native \
     kwallet \
     kitemviews \
     kitemmodels \

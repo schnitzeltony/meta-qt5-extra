@@ -16,7 +16,6 @@ DEPENDS += " \
     kcoreaddons-native \
     kconfig-native \
     kauth-native \
-    kdesignerplugin-native \
     sonnet-native \
     kxmlgui \
     kfilemetadata \

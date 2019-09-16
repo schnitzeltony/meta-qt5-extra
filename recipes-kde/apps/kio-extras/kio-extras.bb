@@ -24,7 +24,6 @@ DEPENDS += " \
     kcoreaddons-native \
     kdbusaddons \
     kdoctools-native \
-    kdesignerplugin-native \
     sonnet-native \
     kdnssd \
     kiconthemes \

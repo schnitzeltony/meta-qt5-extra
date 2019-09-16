@@ -22,7 +22,6 @@ DEPENDS += " \
     kscreen \
     kdelibs4support \
     kdelibs4support-native \
-    kdesignerplugin-native \
     sonnet-native \
     plasma-workspace \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb qtx11extras", "", d)} \

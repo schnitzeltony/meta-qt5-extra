@@ -58,7 +58,6 @@ TIER_3 = " \
     kdeclarative \
     kded \
     kdesu \
-    kdewebkit \
     kemoticons \
     kglobalaccel \
     kiconthemes \
@@ -96,6 +95,7 @@ PORTING_AIDS_TIER_3 = " \
     khtml \
     kjsembed \
     kross \
+    kdewebkit \
 "
 
 UNTIER = " \

@@ -13,7 +13,6 @@ DEPENDS += "\
     kauth-native \
     kconfig-native \
     kcoreaddons-native \
-    kdesignerplugin-native \
     sonnet-native \
     kpackage-native \
     kglobalaccel \

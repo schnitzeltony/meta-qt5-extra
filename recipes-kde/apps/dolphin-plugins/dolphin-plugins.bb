@@ -8,7 +8,6 @@ DEPENDS += "\
     kauth-native \
     kconfig-native \
     kcoreaddons-native \
-    kdesignerplugin-native \
     kdelibs4support-native \
     kdelibs4support \
     sonnet-native \

@@ -17,7 +17,6 @@ DEPENDS += " \
     kcoreaddons-native \
     kconfigwidgets \
     kpackage-native \
-    kdesignerplugin-native \
     sonnet-native \
     kdbusaddons \
     kglobalaccel \

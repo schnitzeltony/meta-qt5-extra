@@ -20,7 +20,6 @@ DEPENDS += "\
     kauth-native \
     sonnet-native \
     kpackage-native \
-    kdesignerplugin-native \
 "
 
 SRC_URI = "git://anongit.kde.org/${BPN}.git"

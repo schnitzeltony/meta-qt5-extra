@@ -11,7 +11,6 @@ inherit kde-apps gtk-icon-cache
 DEPENDS += "\
     kauth-native \
     kconfig-native \
-    kdesignerplugin-native \
     sonnet-native \
     kdelibs4support \
     kdelibs4support-native \

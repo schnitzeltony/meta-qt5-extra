@@ -35,7 +35,6 @@ DEPENDS += " \
     kactivities-stats \
     kcoreaddons-native \
     kpackage-native \
-    kdesignerplugin-native \
     sonnet-native \
     \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 libxcb libxkbfile qtx11extras", "", d)} \

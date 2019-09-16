@@ -14,7 +14,6 @@ DEPENDS += " \
     kpackage-native \
     kdoctools-native \
     sonnet-native \
-    kdesignerplugin-native \
     kdelibs4support-native \
     kauth-native \
     baloo \
@@ -32,7 +31,6 @@ DEPENDS += " \
     kcmutils \
     kidletime \
     kdeclarative \
-    kdewebkit \
     ktextwidgets \
     ktexteditor \
     kdelibs4support \

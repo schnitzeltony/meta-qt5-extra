@@ -23,7 +23,6 @@ DEPENDS += " \
     ki18n \
     kiconthemes \
     kcmutils \
-    kdesignerplugin-native \
     kpackage-native \
     sonnet-native \
     kio \

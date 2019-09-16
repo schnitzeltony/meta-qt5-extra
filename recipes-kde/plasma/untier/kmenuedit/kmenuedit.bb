@@ -20,7 +20,6 @@ DEPENDS += " \
     sonnet-native \
     kdelibs4support \
     kdelibs4support-native \
-    kdesignerplugin-native \
 "
 
 # REVISIT optionals

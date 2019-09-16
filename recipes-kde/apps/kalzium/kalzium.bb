@@ -18,7 +18,6 @@ DEPENDS += " \
     kconfig-native \
     kdoctools-native \
     kauth-native \
-    kdesignerplugin-native \
     karchive \
     kconfig \
     kcoreaddons \

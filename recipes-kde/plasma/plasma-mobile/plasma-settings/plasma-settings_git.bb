@@ -13,7 +13,6 @@ DEPENDS += "\
     kauth-native \
     kdelibs4support-native \
     kpackage-native \
-    kdesignerplugin-native \
     kwindowsystem \
     kcoreaddons \
     solid \
