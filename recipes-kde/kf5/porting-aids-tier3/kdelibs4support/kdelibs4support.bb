@@ -4,6 +4,9 @@ inherit gettext
 
 DEPENDS += " \
     ${BPN}-native \
+    kdoctools-native \
+    kauth-native \
+    sonnet-native \
     qtsvg \
     qttools \
     kcompletion \
@@ -28,11 +31,8 @@ DEPENDS += " \
     ktextwidgets \
     kunitconversion \
     kwidgetsaddons \
-    kwindowsystem \
     kxmlgui \
     kded \
-    kauth-native \
-    sonnet-native \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras", "", d)} \
 "
 

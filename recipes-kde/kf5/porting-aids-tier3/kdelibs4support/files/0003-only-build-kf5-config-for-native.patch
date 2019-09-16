@@ -19,7 +19,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  5 files changed, 4 insertions(+), 248 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 2d1f57a..5394b0a 100644
+index 74b8066..b8edca7 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -20,30 +20,11 @@ include(GenerateExportHeader)
@@ -55,15 +55,16 @@ index 2d1f57a..5394b0a 100644
  
  if(WIN32)
      find_package(KDEWin REQUIRED)
-@@ -55,7 +36,6 @@ endif()
+@@ -55,8 +36,6 @@ endif()
  set(HAVE_X11 ${X11_FOUND})
  if (HAVE_X11)
    add_feature_info("X11 Session Management (libSM)" X11_SM_FOUND "Support for session management in KApplication")
 -  find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED X11Extras)
+-  find_package(XCB REQUIRED COMPONENTS XCB)
  endif ()
  if (APPLE)
      cmake_find_frameworks(CoreFoundation)
-@@ -153,13 +133,8 @@ install(
+@@ -154,13 +133,8 @@ install(
  
  
  

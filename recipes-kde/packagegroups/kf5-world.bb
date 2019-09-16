@@ -57,7 +57,6 @@ TIER_3 = " \
     kconfigwidgets \
     kdeclarative \
     kded \
-    kdesignerplugin \
     kdesu \
     kdewebkit \
     kemoticons \
@@ -93,6 +92,7 @@ PORTING_AIDS_TIER_1 = " \
 
 PORTING_AIDS_TIER_3 = " \
     kdelibs4support \
+    kdesignerplugin \
     khtml \
     kjsembed \
     kross \
