@@ -15,6 +15,7 @@ DEPENDS += " \
     kdoctools-native \
     sonnet-native \
     kdelibs4support-native \
+    kdesignerplugin-native \
     kauth-native \
     baloo \
     kdeclarative \
