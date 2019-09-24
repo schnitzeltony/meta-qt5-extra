@@ -15,12 +15,13 @@ DEPENDS += "\
     kcoreaddons-native \
     sonnet-native \
     kpackage-native \
+    kdelibs4support-native \
+    kdesignerplugin-native \
     kglobalaccel \
     ki18n \
     kio \
     kxmlgui \
     kdelibs4support \
-    kdelibs4support-native \
     kdbusaddons \
     kcmutils \
     plasma-framework \
