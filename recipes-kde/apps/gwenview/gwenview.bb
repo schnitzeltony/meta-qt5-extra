@@ -5,12 +5,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5a3169a2d39a757efd8b7aa66a69d97b"
 inherit kde-apps gettext
 
 DEPENDS += " \
+    kdelibs4support-native \
+    kdoctools-native \
     jpeg \
     exiv2 \
     lcms \
     phonon \
     kdelibs4support \
-    kdelibs4support-native \
     kded \
     kactivities \
     kcoreaddons-native \
