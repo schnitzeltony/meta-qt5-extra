@@ -15,6 +15,7 @@ DEPENDS += " \
     kauth-native \
     kconfig-native \
     kcoreaddons-native \
+    kdoctools-native \
     kconfigwidgets \
     kpackage-native \
     sonnet-native \
