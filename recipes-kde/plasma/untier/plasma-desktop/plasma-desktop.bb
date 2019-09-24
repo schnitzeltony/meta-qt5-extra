@@ -8,20 +8,25 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gettext
 
 DEPENDS += " \
+    kcoreaddons-native \
+    kpackage-native \
+    sonnet-native \
+    kdelibs4support-native \
+    kdoctools-native \
+    kauth-native \
+    kdesignerplugin-native \
+    \
     libcanberra \
     \
     qtsvg \
     qtdeclarative \
     \
-    kauth-native \
     plasma-framework \
     kdoctools \
-    kdoctools-native \
     ki18n \
     kcmutils \
     knewstuff \
     kdelibs4support \
-    kdelibs4support-native \
     knotifyconfig \
     attica \
     kwallet \
@@ -33,9 +38,6 @@ DEPENDS += " \
     baloo \
     kpeople \
     kactivities-stats \
-    kcoreaddons-native \
-    kpackage-native \
-    sonnet-native \
     \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 libxcb libxkbfile qtx11extras", "", d)} \
 "
