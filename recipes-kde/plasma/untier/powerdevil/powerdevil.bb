@@ -7,13 +7,17 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gettext
 
 DEPENDS += " \
-    bluez-qt \
-    kactivities \
+    sonnet-native \
     kauth-native \
-    kidletime \
-    kconfig \
     kconfig-native \
     kcoreaddons-native \
+    kdelibs4support-native \
+    kdesignerplugin-native \
+    kdoctools-native \
+    bluez-qt \
+    kactivities \
+    kidletime \
+    kconfig \
     solid \
     ki18n \
     kglobalaccel \
@@ -21,8 +25,6 @@ DEPENDS += " \
     knotifyconfig \
     kscreen \
     kdelibs4support \
-    kdelibs4support-native \
-    sonnet-native \
     plasma-workspace \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb qtx11extras", "", d)} \
 "
