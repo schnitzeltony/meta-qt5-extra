@@ -11,15 +11,17 @@ DEPENDS += " \
     kauth-native \
     kconfig-native \
     kcoreaddons-native \
+    kdoctools-native \
+    kdesignerplugin-native \
+    kdelibs4support-native \
+    sonnet-native \
     ki18n \
     kxmlgui \
     kdbusaddons \
     kiconthemes \
     kio \
     sonnet \
-    sonnet-native \
     kdelibs4support \
-    kdelibs4support-native \
 "
 
 # REVISIT optionals
