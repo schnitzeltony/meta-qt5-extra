@@ -12,6 +12,7 @@ DEPENDS += "\
     kconfig-native \
     kauth-native \
     kdelibs4support-native \
+    kdesignerplugin-native \
     kpackage-native \
     kwindowsystem \
     kcoreaddons \
