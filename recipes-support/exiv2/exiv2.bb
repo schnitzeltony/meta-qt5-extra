@@ -4,23 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=625f055f41728f84a8d7938acc35bdc2"
 
 DEPENDS = "zlib expat"
 
-SRC_URI = " \
-    https://exiv2.org/releases/${BPN}-${PV}-Source.tar.gz \
-    file://0001-cmake-man-pages-only-installed-with-the-exiv2-app.patch \
-    file://0002-cmake-ignore-warnings-about-missing-PDB-files-in-3rd.patch \
-    file://0003-cmake-Rename-xmp-to-exiv2-xmp-to-avoid-name-conflict.patch \
-    file://0004-cmake-Install-header-files-without-globbing.patch \
-    file://0005-cmake-Use-correct-installation-dir-for-generated-doc.patch \
-    file://0006-cmake-Use-correct-installation-dir-for-cmake-config-.patch \
-    file://0007-xmpsdk-Build-with-DBanAllEntityUsage-1.patch \
-    file://0008-xmpsdk-Fix-compile-warnings-in-ExpatAdapter.cpp.patch \
-    file://0009-Fixes-in-.pc-file-for-being-compatible-with-more-dis.patch \
-    file://0010-create-install-exiv2ConfigVersion.cmake.patch \
-"
-SRC_URI[md5sum] = "57d58c9cef127c5fa24bf0e1fbbd1f8c"
-SRC_URI[sha256sum] = "ee88bc81539b73c65010651785d094fad0b39760a424b3c16c17e1856cfef2d7"
-PV = "0.27.0"
+SRC_URI = "https://exiv2.org/releases/${BPN}-${PV}-Source.tar.gz"
+SRC_URI[md5sum] = "56d064517ae5903dd963b84514a121c1"
+SRC_URI[sha256sum] = "f125286980fd1bcb28e188c02a93946951c61e10784720be2301b661a65b3081"
+
+PV = "0.27.1"
 S = "${WORKDIR}/${BPN}-${PV}-Source"
 
 inherit cmake gettext
-
