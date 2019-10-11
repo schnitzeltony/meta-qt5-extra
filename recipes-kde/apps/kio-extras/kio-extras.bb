@@ -49,8 +49,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "828171767c4eaf137a60705b814d76b0"
-SRC_URI[sha256sum] = "de0ba7f3ce73db34b878cb88e36711d6b31aad57a5a735744330f92920666c52"
+SRC_URI[md5sum] = "fb1820f4c0dd06629a36e639d0b59b21"
+SRC_URI[sha256sum] = "a0b8f08ab8f9d36cfdc950470f75726e90e9fba159bc2035931cfa6efbfe4394"
 
 # gperf creates hard #line links
 do_install_prepend() {
