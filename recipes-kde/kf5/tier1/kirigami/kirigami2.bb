@@ -13,10 +13,11 @@ DEPENDS += " \
 
 PV = "${KF5_VERSION}"
 
-SRC_URI[md5sum] = "ba5e2ded15210ad19ec2d4e5c84968e3"
-SRC_URI[sha256sum] = "b3cc36bddb5e52617075961b2cbaecbb94492523bcc6801a3ad29a35c43bd912"
+SRC_URI[md5sum] = "b8cc003f5fc14671da992030f4251f70"
+SRC_URI[sha256sum] = "db03144ea410bf9c400589f05b52e51c06ddd5cfc613cc639f33c5fa7a68e6ec"
 
 FILES_${PN} += " \
+    ${datadir}/kdevappwizard \
     ${OE_QMAKE_PATH_QML} \
 "
 

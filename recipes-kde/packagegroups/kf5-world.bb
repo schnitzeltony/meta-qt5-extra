@@ -9,6 +9,7 @@ TIER_1 = " \
     bluez-qt \
     breeze-icons \
     karchive \
+    kcalendarcore \
     kcodecs \
     kconfig \
     kcoreaddons \
@@ -36,7 +37,9 @@ TIER_1 = " \
 
 TIER_2 = " \
     kactivities-stats \
+    kauth \
     kcompletion \
+    kcontacts \
     kcrash \
     kdoctools \
     kfilemetadata \
@@ -47,7 +50,6 @@ TIER_2 = " \
     kunitconversion \
     syndication \
 "
-#    kauth 
 
 TIER_3 = " \
     baloo \

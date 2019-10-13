@@ -23,8 +23,8 @@ DEPENDS += " \
 RRECCOMENDS_${PN} += "oxygen-fonts"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "8f66bc40892d14ac828f694c16ddc72d"
-SRC_URI[sha256sum] = "0d43d6cd008359eac4840c8b6e12d2b17eeb53c95111af1f7e8ca6ae8e6aca2c"
+SRC_URI[md5sum] = "ec7f31a4254f7d429117c2789c84941d"
+SRC_URI[sha256sum] = "a080657c5fae216b596dd04cca7d0b1eb4b959264b788c08c22272fd2d351659"
 
 FILES_${PN} += " \
     ${datadir}/knotifications5 \
