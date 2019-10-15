@@ -44,20 +44,17 @@ DEPENDS += " \
     kwin \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 libsm libxcb", "", d)} \
     zlib \
+    kpeople \
+    kactivities-stats \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "0e8defb3a66ff92ad78d2d131f5c6538"
-SRC_URI[sha256sum] = "43364fe4e7ea10ad7b5b1d7af4f1baa1d8796b60692f2dfc0d58693f63e458ff"
+SRC_URI[md5sum] = "c378aebe24ed165e8e971eb47db632b0"
+SRC_URI[sha256sum] = "4480ccf0b9168bdd10d4a5fa3ee40e5e77f10c12713f9de55c5d19e23fe993f0"
 
 SRC_URI += " \
     file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
     file://0002-align-phonon-path.patch \
-    file://0003-startkde-add-meta-qt5-standard-binary-path-to-PATH.patch \
-    file://0004-startkde-create-kde-s-home.patch \
-    file://0005-startkde-enable-starting-X.patch \
-    file://0006-startplasmacompositor-align-qt5-bin-path.patch \
-    file://0007-startplasma.cmake-fix-paths-to-qdbus.patch \
 "
 
 # REVISIT
@@ -78,6 +75,7 @@ FILES_${PN} += " \
     ${datadir}/solid \
     ${datadir}/wayland-sessions \
     ${datadir}/xsessions \
+    ${datadir}/kglobalaccel \
     \
     ${libdir}/libkdeinit5*.so \
     ${libdir}/kconf_update_bin \

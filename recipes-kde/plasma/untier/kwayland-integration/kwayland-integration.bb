@@ -10,11 +10,12 @@ inherit kde-plasma
 DEPENDS += " \
     kidletime \
     kwindowsystem \
+    kguiaddons \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "bcd44ec98c9a8e6b99c703ea7eeef087"
-SRC_URI[sha256sum] = "63724ecfb6db053ee949273979b393192309dbeed45b59bc193a605f90232282"
+SRC_URI[md5sum] = "957501803ec62d7f09b0d728e2e5442f"
+SRC_URI[sha256sum] = "6cf410dd8286e9d6b26e10d8ba297d36d13c93a329c463326b47f0bffeb3c4c2"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
