@@ -49,13 +49,9 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "c378aebe24ed165e8e971eb47db632b0"
-SRC_URI[sha256sum] = "4480ccf0b9168bdd10d4a5fa3ee40e5e77f10c12713f9de55c5d19e23fe993f0"
-
-SRC_URI += " \
-    file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch \
-    file://0002-align-phonon-path.patch \
-"
+SRC_URI[md5sum] = "ea4064d3b5efffac6101862b4032690b"
+SRC_URI[sha256sum] = "21c69bca0b358073fb0b945e79727d65f104dda54c6cfd643719fdd603831616"
+SRC_URI += "file://0001-align-phonon-path.patch"
 
 # REVISIT
 FILES_${PN} += " \

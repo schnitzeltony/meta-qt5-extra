@@ -10,8 +10,8 @@ inherit kde-plasma
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras", "", d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "87e862906d3b3abb7701f3b1e8e844f6"
-SRC_URI[sha256sum] = "80f72afc9a2409dfe80853c007b596e4c1bcc92bee95741b894646ef3176dd7e"
+SRC_URI[md5sum] = "4821d41c0f3249e28034853e25bddc76"
+SRC_URI[sha256sum] = "299e8e2d8be71674666002d850383ec01bfc794fcb180811c2e2cd70a5574078"
 
 SRC_URI += " \
     file://0001-fix-configuration-build-on-x-less-systems.patch \
