@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5
 
+DEPENDS += "qttools"
+
 PV = "${KF5_VERSION}"
 SRC_URI[md5sum] = "319f2eae1a05f32de9bd5dd84cd56768"
 SRC_URI[sha256sum] = "dfe37a7baf4069d18834485e2b5ce0a5fb3b22194bbe4d7e9f24c9c74de00096"
