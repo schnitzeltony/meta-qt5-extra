@@ -13,8 +13,10 @@ DEPENDS = " \
 "
 
 SRC_URI = "gitsm://github.com/schnitzeltony/markdown-qt.git"
-SRCREV = "50d30346e2da4ce167d96ff0cf239b236e6b1b83"
+SRCREV = "850ff2e313ec7f0bf3ea2882048a4e358bbd83d9"
 PV = "0.0.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 inherit cmake_qt5
+
+FILES_${PN} += "${libdir}/libmarkdown-qt"
