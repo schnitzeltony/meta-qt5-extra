@@ -10,11 +10,12 @@ LIC_FILES_CHKSUM = " \
 DEPENDS = " \
     qtbase \
     qtdeclarative \
+    qtwebengine \
     cmark \
 "
 
 SRC_URI = "gitsm://github.com/schnitzeltony/markdown-qt.git"
-SRCREV = "02f2d92a18c1cd24340da6a28bfe664fd0379f1e"
+SRCREV = "35ae95329cc59afc5f79bb7ec8eb366627432b5c"
 PV = "0.0.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
