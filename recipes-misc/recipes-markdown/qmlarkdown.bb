@@ -12,7 +12,7 @@ DEPENDS = " \
 "
 
 SRC_URI = "gitsm://github.com/schnitzeltony/qmlarkdown.git"
-SRCREV = "eecb476c0184e0d9283d9e25f68c7278945d6e71"
+SRCREV = "da21e9750f2b0ba6e8091f2a94336906bc2bc2de"
 PV = "0.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"
 
