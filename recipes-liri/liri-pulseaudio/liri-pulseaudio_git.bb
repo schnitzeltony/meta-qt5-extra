@@ -10,7 +10,7 @@ REQUIRED_DISTRO_FEATURES = "pulseaudio"
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "fdd90a3555b01ad12bec5ce8b5071f54f155d5a0"
+SRCREV = "d4f3b905ad6c4854c997dfc0afc6beccba64e669"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
