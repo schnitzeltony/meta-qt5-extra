@@ -1,0 +1,35 @@
+From 56be2d68e5a8213c199006bbb8b3461764764e24 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 17 Nov 2019 21:16:59 +0100
+Subject: [PATCH] Disable nfs for now
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+It seems there was a change in oe-core's glibc/libtirpc causing missing symbols
+for libtirpc.
+
+Upstream-Status: Inappropriate
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 55236d4..0f31e67 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -177,9 +177,6 @@ if(NOT WIN32)
+    endif()
+    check_include_files(rpc/rpc.h HAVE_RPC_RPC_H)
+    add_feature_info("NFS kioslave" HAVE_RPC_RPC_H "The RPC library is needed to build the NFS kioslave")
+-   if(HAVE_RPC_RPC_H)
+-     add_subdirectory( nfs )
+-   endif()
+ endif()
+ 
+ # KDNSSD before 5.54 suffers from a race condition in avahi's dbus API and
+-- 
+2.21.0
+

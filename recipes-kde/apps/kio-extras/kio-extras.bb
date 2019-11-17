@@ -16,6 +16,7 @@ DEPENDS += " \
     qtwebengine \
     \
     exiv2 \
+    taglib \
     kactivities \
     karchive \
     kauth-native \
@@ -51,6 +52,10 @@ DEPENDS += " \
 PV = "${KDE_APP_VERSION}"
 SRC_URI[md5sum] = "3da78e506ba30497ac303f8fe80628f7"
 SRC_URI[sha256sum] = "e38e872f78ff24fe512ec7ff9ed4f6b6a8e1fef6111fdb0222c133bed0a8861f"
+SRC_URI += " \
+    file://0001-Do-not-find-use-taglib-config.patch \
+    file://0002-Disable-nfs-for-now.patch \
+"
 
 # gperf creates hard #line links
 do_install_prepend() {
