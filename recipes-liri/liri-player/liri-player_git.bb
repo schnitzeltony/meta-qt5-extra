@@ -1,23 +1,19 @@
 SUMMARY = "Cross-platform media player"
-LICENSE = "AGPLv3"
+LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = " \
-	file://LICENSE;md5=4e2aee3f50167a8482c5b569294ffe7a \
+	file://LICENSE.GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
 "
 
-inherit qmake5
+inherit liri
 
 DEPENDS += " \
+    qtquickcontrols2 \
     qtmultimedia \
     vlc \
 "
 
-LIRI_GIT_BRANCH ?= "develop"
-SRC_URI = "gitsm://github.com/lirios/${@'${BPN}'.replace('liri-', '')}.git;protocol=git;branch=${LIRI_GIT_BRANCH}"
-SRCREV = "dceddc6f941ee7249e7253a88b7e4f34251fc83f"
+SRCREV = "04d239f4504daa1ea161d27dab23f6b1b5238f9d"
 S = "${WORKDIR}/git"
 PV = "0.0.0+git${SRCPV}"
 
-do_install() {
-    install -d ${D}${bindir}
-    install -m 755 ${B}/liri-player ${D}${bindir}
-}
+FILES_${PN} += "${datadir}/metainfo"
