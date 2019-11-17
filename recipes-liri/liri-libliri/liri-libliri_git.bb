@@ -9,7 +9,7 @@ inherit liri
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "fb7784a92a3abe45504076f7debc7eb5b6c5d795"
+SRCREV = "ddc3b049db412a89e91a37bd35e0435e76df7adc"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += " \
