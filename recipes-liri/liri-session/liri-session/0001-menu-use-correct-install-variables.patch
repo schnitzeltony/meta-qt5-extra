@@ -1,0 +1,29 @@
+From 0153e502bdb7642e43ce9cad20ae39841ca691af Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 17 Nov 2019 23:09:48 +0100
+Subject: [PATCH] menu: use correct install variables for sysconfig
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+At least on openembedded/yocto configuration files are installed to /usr/etc
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ data/menu/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/data/menu/CMakeLists.txt b/data/menu/CMakeLists.txt
+index e4ca44d..1bf9558 100644
+--- a/data/menu/CMakeLists.txt
++++ b/data/menu/CMakeLists.txt
+@@ -13,5 +13,5 @@ install(
+     FILES
+         liri-applications.menu
+     DESTINATION
+-        "${INSTALL_SYSCONFDIR}/xdg/menus"
++        "${CMAKE_INSTALL_SYSCONFDIR}/xdg/menus"
+ )
+-- 
+2.21.0
+
