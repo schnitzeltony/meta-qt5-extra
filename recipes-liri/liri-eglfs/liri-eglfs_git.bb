@@ -19,10 +19,9 @@ DEPENDS += " \
 "
 
 PV = "0.0.0+git${SRCPV}"
-SRCREV = "eae17fdb00a874edd67f073f087cc74436c71ea9"
+SRCREV = "127e9b5ce68902ad35bb8ce23be121d8b632e5eb"
 SRC_URI += " \
-    file://0001-Do-not-enable-recording-by-default-it-requires-GLES3.patch \
-    file://0002-qeglfskmsgbmscreen-remove-frame-recording-completely.patch \
+    file://0001-qeglfskmsgbmscreen-remove-frame-recording-completely.patch \
 "
 S = "${WORKDIR}/git"
 
