@@ -8,12 +8,13 @@ inherit liri
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "25521d5e29569f557f3bdfae527d81042c54d866"
+SRCREV = "bcd5806d237da97f5901dc6d29b68f57666e45f6"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
     qtquickcontrols2 \
     liri-fluid \
+    liri-session \
     networkmanager-qt \
     modemmanager-qt \
 "
