@@ -8,7 +8,7 @@ inherit liri gsettings
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "22c9288d32c33569a1886a061f461e1735b546f0"
+SRCREV = "794ef0dc8a139b62fad277699042232191487186"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
@@ -19,6 +19,7 @@ DEPENDS += " \
     liri-fluid \
     liri-qtgsettings \
     liri-libliri \
+    liri-session \
     solid \
 "
 
@@ -28,4 +29,6 @@ FILES_${PN} += " \
     ${datadir}/liri-settings \
     ${datadir}/liri-shell \
     ${OE_QMAKE_PATH_QML} \
+    ${OE_QMAKE_PATH_PLUGINS} \
+    ${systemd_user_unitdir} \
 "
