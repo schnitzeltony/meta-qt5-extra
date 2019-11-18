@@ -10,7 +10,7 @@ REQUIRED_DISTRO_FEATURES = "wayland"
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "0e689bd1f7cc019e8e0809242aab544eb4f6c993"
+SRCREV = "58fd88465544fa4b0ce206c5e369eec57c1dbfee"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
@@ -23,6 +23,7 @@ DEPENDS += " \
 "
 
 FILES_${PN} += " \
+    ${datadir}/dbus-1 \
     ${datadir}/liri-settings/modules \
     ${OE_QMAKE_PATH_QML} \
 "
