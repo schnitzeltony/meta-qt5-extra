@@ -15,7 +15,7 @@ DEPENDS = " \
 "
 
 SRC_URI = "gitsm://github.com/schnitzeltony/markdown-qt.git"
-SRCREV = "35ae95329cc59afc5f79bb7ec8eb366627432b5c"
+SRCREV = "cd0f5943f08b61444059b875d113140adbb7e3be"
 PV = "0.0.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
