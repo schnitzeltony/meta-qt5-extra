@@ -13,6 +13,7 @@ RDEPENDS_${PN} = " \
     liri-libliri \
     liri-materialdecoration \
     liri-networkmanager \
+    liri-platformtheme \
     liri-player \
     liri-power-manager \
     ${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio", "liri-pulseaudio", "",d)} \
@@ -21,6 +22,7 @@ RDEPENDS_${PN} = " \
     liri-qtgsettings \
     liri-qtudev \
     liri-screenshot \
+    liri-session \
     liri-settings \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-shell", "",d)} \
     liri-terminal \
@@ -28,6 +30,7 @@ RDEPENDS_${PN} = " \
     liri-themes liri-themes-sddm \
     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-initramfs', 'liri-themes-plymouth', '', d)} \
     liri-wallpapers \
+    liri-wayland \
 "
 
 #LAYERDEPENDS_meta-qt5-extra += "gnome-layer"
