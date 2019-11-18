@@ -12,9 +12,9 @@ DEPENDS += " \
     sqlite3 \
 "
 
-PV = "0.4.1+git${SRCPV}"
+PV = "0.5.0+git${SRCPV}"
 
-SRCREV = "3f5b6040dcddfa86dd43f456c7e7dd67d8f1ade8"
+SRCREV = "53a995fae34e5bfd67182cd44f66a50fa81d5d4a"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += " \
