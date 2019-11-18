@@ -8,8 +8,9 @@ inherit liri
 
 DEPENDS += " \
     qtquickcontrols2 \
+    liri-wayland \
 "
 
 PV = "0.9.0+git${SRCPV}"
-SRCREV = "50839f8dc7dfb21f7e44ef1657ffc84683624961"
+SRCREV = "2a7dba67156961dc9853799a6c4267ac0419c0bf"
 S = "${WORKDIR}/git"
