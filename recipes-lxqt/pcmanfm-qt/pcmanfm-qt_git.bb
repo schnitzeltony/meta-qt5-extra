@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4641e94ec96f98fabc56ff9cc48be14b"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit lxqt pkgconfig distro_features_check
+inherit lxqt pkgconfig features_check
 
 DEPENDS += "libfm-qt"
 

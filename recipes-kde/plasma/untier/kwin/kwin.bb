@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma distro_features_check gettext
+inherit kde-plasma features_check gettext
 
 DEPENDS += " \
     libinput \

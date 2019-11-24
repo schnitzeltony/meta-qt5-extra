@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "pam"
 
-inherit kde-plasma distro_features_check
+inherit kde-plasma features_check
 
 DEPENDS += " \
     libpam \

@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
-inherit liri distro_features_check
+inherit liri features_check
 
 REQUIRED_DISTRO_FEATURES = "wayland"
 

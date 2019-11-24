@@ -7,7 +7,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 QT_TRANSLATION_FILES = "${datadir}/*/i18n/*.qm"
 
-inherit qmake5 distro_features_check gtk-icon-cache qt5-translation manpages
+inherit qmake5 features_check gtk-icon-cache qt5-translation manpages
 
 DEPENDS += " \
     qttools-native \

@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e90c7c0bee6fc368be0ba779e0eac053"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit autotools-brokensep pkgconfig distro_features_check manpages
+inherit autotools-brokensep pkgconfig features_check manpages
 
 DEPENDS = " \
     virtual/libx11 \

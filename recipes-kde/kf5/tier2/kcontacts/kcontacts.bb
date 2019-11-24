@@ -2,7 +2,7 @@ SUMMARY = "ibrary for working with contact information"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
-inherit kde-kf5 gettext distro_features_check
+inherit kde-kf5 gettext features_check
 
 REQUIRED_DISTRO_FEATURE = "x11"
 

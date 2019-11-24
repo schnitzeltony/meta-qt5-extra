@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit lxqt pkgconfig distro_features_check cmake_auto_align_paths cmake_lib mime
+inherit lxqt pkgconfig features_check cmake_auto_align_paths cmake_lib mime
 
 DEPENDS += "qtx11extras glib-2.0 libexif menu-cache libxcb liblxqt"
 

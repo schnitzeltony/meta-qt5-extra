@@ -1,6 +1,6 @@
 require ${BPN}.inc
 
-inherit cmake_lib distro_features_check
+inherit cmake_lib features_check
 
 DEPENDS += "${BPN}-native kcoreaddons polkit-qt-1"
 

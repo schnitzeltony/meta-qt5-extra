@@ -2,7 +2,7 @@ SUMMARY = "The LXQt desktop panel"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
 
-inherit lxqt distro_features_check pkgconfig
+inherit lxqt features_check pkgconfig
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
