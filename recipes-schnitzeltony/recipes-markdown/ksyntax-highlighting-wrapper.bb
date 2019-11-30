@@ -1,7 +1,7 @@
 SUMMARY = "Meta-Object (QML) wrapper for KSyntaxHighlighting"
 LICENSE = "LGPLv3"
 LIC_FILES_CHKSUM = " \
-    file://COPYING.LGPL-3;md5=5b4473596678d62d9d83096273422c8c \
+    file://COPYING.LGPL-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
 DEPENDS = " \
