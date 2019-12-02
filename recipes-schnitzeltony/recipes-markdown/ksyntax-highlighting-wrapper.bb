@@ -11,7 +11,7 @@ DEPENDS = " \
 
 
 SRC_URI = "git://github.com/schnitzeltony/ksyntax-highlighting-wrapper.git"
-SRCREV = "a27b4284942f2f46c6776c32b8abb69dbbc43a85"
+SRCREV = "5185c30f6897aa956dd527542389090a4c4b18e2"
 PV = "0.0.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
