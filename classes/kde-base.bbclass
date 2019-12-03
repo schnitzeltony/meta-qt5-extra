@@ -17,7 +17,7 @@ ${KDE_MIRROR}	http://kde.c3sl.ufpr.br \n \
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz"
 
 # extra-cmake-modules cause dependent to check for python
-inherit cmake_qt5_extra pythonnative
+inherit cmake_qt5_extra python3native
 
 DEPENDS += "libxml2-native"
 
