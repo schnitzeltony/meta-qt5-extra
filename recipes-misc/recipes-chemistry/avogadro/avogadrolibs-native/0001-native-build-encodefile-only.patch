@@ -1,6 +1,6 @@
 From d242b39515dbd268ecd4eaec63d3424497827488 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@mail.com>
-Date: Sun, 18 Dec 2016 23:02:14 +0100
+Date: Tue, 3 Dec 2019 18:11:35 +0100
 Subject: [PATCH] native: build encodefile only
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -19,7 +19,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 52226cd..ff8863e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -54,6 +54,7 @@ option(USE_MOLEQUEUE "Enable the MoleQueue dependent functionality" ON)
+@@ -55,6 +55,7 @@ option(USE_MOLEQUEUE "Enable the MoleQueue dependent functionality" ON)
  option(USE_PYTHON "Use Python to wrap some of our API" OFF)
  
  add_subdirectory(utilities)
@@ -27,11 +27,10 @@ index 52226cd..ff8863e 100644
  add_subdirectory(thirdparty)
  add_subdirectory(avogadro)
  
-@@ -107,3 +108,5 @@ install(FILES
-   DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/avogadrolibs")
- install(EXPORT "AvogadroLibsTargets"
-   DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/avogadrolibs")
-+
+@@ -114,3 +115,4 @@ if (NOT SKBUILD)
+   install(EXPORT "AvogadroLibsTargets"
+     DESTINATION "${INSTALL_LIBRARY_DIR}/cmake/avogadrolibs")
+ endif()
 +endif()
 diff --git a/utilities/CMakeLists.txt b/utilities/CMakeLists.txt
 index e459934..6a76c75 100644

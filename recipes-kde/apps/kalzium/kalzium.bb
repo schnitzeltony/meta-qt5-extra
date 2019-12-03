@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=24ea4c7092233849b4394699333b5c56 \
 "
 
-inherit kde-apps pythonnative gettext pkgconfig gtk-icon-cache
+inherit kde-apps gettext pkgconfig gtk-icon-cache
 
 DEPENDS += " \
     qtsvg \
