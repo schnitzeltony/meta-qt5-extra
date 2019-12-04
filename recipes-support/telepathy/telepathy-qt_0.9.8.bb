@@ -11,7 +11,7 @@ SRC_URI = " \
 SRCREV = "6ccb59117fdb261016d06b42167c24c99cbcecc4"
 S = "${WORKDIR}/git"
 
-inherit cmake_qt5 python3native
+inherit cmake_qt5 python3native cmake_lib
 
 EXTRA_OECMAKE += " \
     -DDESIRED_QT_VERSION=5 \
@@ -19,3 +19,5 @@ EXTRA_OECMAKE += " \
     -DENABLE_FARSTREAM=FALSE \
     -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
 "
+
+CMAKE_ALIGN_SYSROOT[1] = "TelepathyQt5, -S${libdir}/lib, -s${OE_QMAKE_PATH_HOST_LIBS}/lib"
