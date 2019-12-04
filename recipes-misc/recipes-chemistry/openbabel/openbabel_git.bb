@@ -9,15 +9,17 @@ DEPENDS = " \
     cairo \
     libxml2 \
     zlib \
+    libtirpc \
 "
 
 SRC_URI = " \
-    ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+    git://github.com/openbabel/openbabel.git \
+    file://0001-Workaround-xdr-linker-error.patch \
     file://openbabel-gui.desktop \
-    file://0001-take-care-for-ARM-s-unsigned-char.patch \
 "
-SRC_URI[md5sum] = "d9defcd7830b0592fece4fe54a137b99"
-SRC_URI[sha256sum] = "204136582cdfe51d792000b20202de8950218d617fd9c6e18cee36706a376dfc"
+SRCREV = "49f9cfb32bd0bc6ea440639d338123eb27accbe2"
+S = "${WORKDIR}/git"
+PV = "3.0.0"
 
 do_install_append() {
     install -d ${D}${datadir}/applications
@@ -27,4 +29,4 @@ do_install_append() {
     convert.im7 ${S}/src/GUI/babel.xpm -transparent white ${D}${datadir}/pixmaps/babel.png
 }
 
-FILES_${PN} += "${libdir}/cmake"
+FILES_${PN}-dev += "${libdir}/cmake"
