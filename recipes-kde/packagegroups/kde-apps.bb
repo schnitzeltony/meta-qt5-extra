@@ -14,6 +14,7 @@ RDEPENDS_${PN} = " \
     filelight \
     gwenview \
     kalgebra \
+    kalzium \
     kate \
     kcachegrind \
     kcalc \
