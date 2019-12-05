@@ -3,10 +3,10 @@ LICENSE = "GPLv2 & GFDL-1.2 & LGPLv2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-    file://COPYING.DOC;md5=24ea4c7092233849b4394699333b5c56 \
+    file://COPYING.DOC;md5=d8855fca80aa0b428deafa405d0ea17a \
 "
 
-inherit kde-apps pythonnative gettext pkgconfig gtk-icon-cache
+inherit kde-apps gettext pkgconfig gtk-icon-cache
 
 DEPENDS += " \
     qtsvg \
@@ -34,8 +34,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "7d9eea9cb7b2111c1e0808cf68bfb0f2"
-SRC_URI[sha256sum] = "4b3b91fb86b2d97efc7ca8c3037f33101d402df7dd2fe311b12a87468e8a6b5c"
+SRC_URI[md5sum] = "2fccaa6a98ca5678bf75e0b17dd3c56c"
+SRC_URI[sha256sum] = "5dc3423a0f2646b59233f92b6a6e81b4a0bcdb819aa543c83270fe4cc5592933"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
