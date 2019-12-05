@@ -1,14 +1,16 @@
 require ${BPN}.inc
 
 DEPENDS = " \
-   ${BPN}-native \
-   glew \
-   openbabel \
-   libeigen \
-   molequeue \
-   spglib \
-   libmsym \
-   libarchive \
+    ${BPN}-native \
+    glew \
+    openbabel \
+    libeigen \
+    molequeue \
+    spglib \
+    libmsym \
+    libarchive \
+    msgpack-c \
+    mmtf-cpp \
 "
 
 inherit cmake_lib
