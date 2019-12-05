@@ -23,7 +23,10 @@ DEPENDS += " \
     qtwebkit \
 "
 
-SRC_URI = "${KDE_MIRROR}/stable/${BPN}/src/${BPN}-${PV}.tar.xz"
+SRC_URI = " \
+    ${KDE_MIRROR}/stable/${BPN}/src/${BPN}-${PV}.tar.xz \
+    file://0001-Do-not-rely-on-python2.patch \
+"
 SRC_URI[md5sum] = "f11fa519d7f5519c8e48906fa96cab2f"
 SRC_URI[sha256sum] = "22716d719654e8f887fe4d33654e252ddf3d3d818c44e15a8af0e6f2e7d6ccd7"
 
