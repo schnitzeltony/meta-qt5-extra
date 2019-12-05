@@ -1,6 +1,6 @@
 SUMMARY = "Molecular point group symmetry lib"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=5e13e4b13c9ea72dbc9fda34255d9371"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=60a6a261d3c9d47b608d8e02d24c119a"
 
 inherit cmake cmake_lib
 
