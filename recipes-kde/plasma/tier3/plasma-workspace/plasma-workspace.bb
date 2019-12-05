@@ -49,8 +49,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "90a8576c6d95d0e6f74213df041f1df1"
-SRC_URI[sha256sum] = "d346271f5b55ead66b02da389aea9e0f5842c01faa5a33d03946d83b083da888"
+SRC_URI[md5sum] = "db54824a806d946273c27fcdde3c8e0a"
+SRC_URI[sha256sum] = "62ca5bd2c8bc962682f6e2d7ff43aa8fae13bf5e684082dd8b92f2a4ce436c5b"
 SRC_URI += "file://0001-align-phonon-path.patch"
 
 # REVISIT
