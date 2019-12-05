@@ -5,12 +5,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e64c567d31d109fd44cbe6f1fe113daa"
 inherit cmake_qt5 cmake_lib
 
 SRC_URI = " \
-    https://github.com/OpenChemistry/${BPN}/archive/${PV}.tar.gz \
+    git://github.com/OpenChemistry/molequeue.git \
     file://0001-Avoid-RPATH-if-not-configured.patch \
     file://0002-MoleQueueConfig.cmake-Find-include.patch \
 "
-SRC_URI[md5sum] = "28e707668bfaf2ebc615da54fc98002f"
-SRC_URI[sha256sum] = "7dd234742c8d73be95281fedf4ed9d09648ecc351afb5f098cd32f48c3df3bd5"
+SRCREV = "efcca963c478ea5fd7d9f56f619260480904c0f3"
+S = "${WORKDIR}/git"
+PV = "0.9.0"
 
 EXTRA_OECMAKE += "-DENABLE_RPATH=OFF"
 
