@@ -59,6 +59,7 @@ SRC_URI[sha256sum] = "fba18f7d8a3f97a1852313ebc9ba65094957fda8deefc09c27fd0a9720
 
 SRC_URI += " \
     file://0001-Make-building-of-QPA-wayland-plugin-an-option.patch \
+    file://0002-add-xcb-namespace-to-effects-cpp.patch \
 "
 
 # pure X11 environments fail to build wayland plugin
