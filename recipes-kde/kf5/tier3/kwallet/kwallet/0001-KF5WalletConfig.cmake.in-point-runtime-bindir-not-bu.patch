@@ -1,0 +1,32 @@
+From c8d4391111ca43db1d85ef5ea03c8e765d018c46 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 12 Dec 2019 22:52:19 +0100
+Subject: [PATCH] KF5WalletConfig.cmake.in: point runtime bindir - not build
+ bindir
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/api/KWallet/KF5WalletConfig.cmake.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/api/KWallet/KF5WalletConfig.cmake.in b/src/api/KWallet/KF5WalletConfig.cmake.in
+index a472bc8..6425f6f 100644
+--- a/src/api/KWallet/KF5WalletConfig.cmake.in
++++ b/src/api/KWallet/KF5WalletConfig.cmake.in
+@@ -1,7 +1,7 @@
+ @PACKAGE_INIT@
+ 
+ set(KWALLET_DBUS_INTERFACES_DIR "@PACKAGE_KDE_INSTALL_DBUSINTERFACEDIR@")
+-set(KWALLETD_BIN_PATH "@PACKAGE_KDE_INSTALL_BINDIR@/kwalletd5")
++set(KWALLETD_BIN_PATH "@CMAKE_INSTALL_FULL_BINDIR@/kwalletd5")
+ 
+ include(CMakeFindDependencyMacro)
+ find_dependency(Qt5Gui @REQUIRED_QT_VERSION@)
+-- 
+2.21.0
+
