@@ -38,8 +38,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "1d24264b2a20d8a14fa601c626f72a6d"
-SRC_URI[sha256sum] = "64ab3cf06222b95f021941d8c430c70918c04c3ea988f7ccf5ef87c6b69b4465"
+SRC_URI[md5sum] = "cd22741663a80133c2c11c52b5321cbc"
+SRC_URI[sha256sum] = "4f3f434a89169a948c3ea402df8333ebaef2f24dc23247be0244538c856c7717"
 
 SRC_URI += " \
     file://0001-CMakeLists.txt-make-MLT_PREFIX-configurable.patch \

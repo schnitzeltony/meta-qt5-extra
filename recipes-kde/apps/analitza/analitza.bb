@@ -15,8 +15,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "71b431cf4d65c14e413d3e0bf9ee657e"
-SRC_URI[sha256sum] = "9247172f3ffbc0fd3308b4b40f5d76eaa2a5012dc49525c3087caf5cdfc1513e"
+SRC_URI[md5sum] = "ae7880c7c9aa570e97dba3a8e9e73932"
+SRC_URI[sha256sum] = "b227607549e331d2c291ae078e0568fbc7ae4750ec5450a3b50160aa116f7cb2"
 
 FILES_${PN} += " \
     ${datadir}/libanalitza \
