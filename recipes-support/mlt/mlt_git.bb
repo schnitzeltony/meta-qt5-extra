@@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "git://github.com/mltframework/mlt.git"
-SRCREV = "02bc8795adf708be46b36fa8985e160e2ecf6d7b"
+SRCREV = "221ff239b9cbbc0e0b749f24e3f754eb087cb1f9"
+PV = "6.18.0"
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
