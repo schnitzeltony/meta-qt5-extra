@@ -37,12 +37,12 @@ DEPENDS += " \
 PE = "1"
 
 SRC_URI = "https://download.kde.org/stable/okteta/${PV}/src/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "7b8a9bf185652dc6579e05f009ae220f"
-SRC_URI[sha256sum] = "ae2a72d0162184278d1c0e0a73b52751a0181deede0231a4c9d568bb7ac82a52"
+SRC_URI[md5sum] = "69b3b9189bb71dac3b49da5380721684"
+SRC_URI[sha256sum] = "bb8d819af1d2d7ebb286542918985afcd1937f0ec6172180ff5b1acc5383684c"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${datadir}/config.kcfg \
-    ${datadir}/kxmlgui5 \
+    ${datadir}/k*5 \
     ${datadir}/mime \
 "
