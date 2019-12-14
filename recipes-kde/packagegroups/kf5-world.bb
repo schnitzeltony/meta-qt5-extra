@@ -23,6 +23,7 @@ TIER_1 = " \
     kitemmodels \
     kitemviews \
     kplotting \
+    kquickcharts \
     kwayland \
     kwidgetsaddons \
     kwindowsystem \

@@ -1,5 +1,5 @@
 From d372a1593e1d22e84034ac3ea14d401d5ae4ef71 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Wed, 17 Jun 2015 10:00:25 +0200
 Subject: [PATCH 1/2] kconfiggui: do only compile in case sessions are
  avaliable
@@ -9,7 +9,7 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: pending
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  src/gui/kconfiggui.cpp | 2 ++
  1 file changed, 2 insertions(+)
@@ -26,8 +26,8 @@ index 67b6009..e313ff4 100644
  static QString configName(const QString &id, const QString &key)
  {
      return(QLatin1String("session/") + QGuiApplication::applicationName() +
-@@ -73,3 +74,4 @@ QString KConfigGui::sessionConfigName()
-     return sessionConfig()->name();
+@@ -77,3 +78,4 @@ QString KConfigGui::sessionConfigName()
+     }
  }
  #endif
 +#endif // QT_NO_SESSIONMANAGER

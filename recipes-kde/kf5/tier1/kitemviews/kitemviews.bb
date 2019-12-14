@@ -10,7 +10,7 @@ inherit kde-kf5
 DEPENDS += "qttools"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "be56db58cd6537fe3a138f2b04fdf5c7"
-SRC_URI[sha256sum] = "0b3f8a0116c042ae187b67f35ffd40872352b91f5f236d19dd26ffad8db83fee"
+SRC_URI[md5sum] = "9109bd9a4a20d5324d524312a02e110b"
+SRC_URI[sha256sum] = "689f2517432861932a05b5c71e1c8c1378bee6773850e8a13a5907d0af58d5cb"
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/designer"
