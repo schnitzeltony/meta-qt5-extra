@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
     file://HACKING;md5=ea929f30c0ac1f4fe1a778821aecc4cd \
 "
 
-inherit kde-plasma gettext
+inherit kde-plasma gettext mime
 
 DEPENDS += " \
     kauth-native \
