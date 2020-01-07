@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
     file://man/LICENSE;md5=d975629b732b61cb58f9595c6baa9379 \
 "
 
-inherit kde-apps gettext
+inherit kde-apps gettext mime
 
 DEPENDS += " \
     qtsvg \
