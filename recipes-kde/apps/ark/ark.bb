@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.icons;md5=6e01bfa20e899e8ad569d5488923cbd2 \
 "
 
-inherit kde-apps gtk-icon-cache
+inherit kde-apps gtk-icon-cache mime
 
 DEPENDS += "\
     libarchive \
