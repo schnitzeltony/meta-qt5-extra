@@ -50,8 +50,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "4a5c2aff84ce55dc91ae13f3f9e1cf59"
-SRC_URI[sha256sum] = "c17d1854947c6e647bcf359773da8c8081fb562338b84fdc6739a063348943ff"
+SRC_URI[md5sum] = "91994f226fb50b08bc3e9a74f2eabe25"
+SRC_URI[sha256sum] = "7f741ab026989bdcc68701955fc290d5ead38bf4bc310f18a2f32c64b411ab04"
 
 SRC_URI += "file://0001-Ensure-xkb_base-is-not-empty-instead-of-checking-if-.patch"
 

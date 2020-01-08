@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING-GPL3;md5=d32239bcb673463ab874e80d47fae504"
 inherit kde-plasma gettext
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "671791402dbede348edd14ed3643f2c9"
-SRC_URI[sha256sum] = "312a45447d76ee01fd45c656c256b1b2b2ec9805ebec7d8bcc93ae7cd9e9c628"
+SRC_URI[md5sum] = "2111370abdbcfe86c3d9c61191931ff0"
+SRC_URI[sha256sum] = "07bc4285991ab43830873a12b8c07f60e4faea1ec81121db783c425f18a4f87d"
 
 DEPENDS += " \
     kauth-native \
