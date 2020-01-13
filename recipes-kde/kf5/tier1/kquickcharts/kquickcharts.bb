@@ -6,8 +6,8 @@ inherit kde-kf5
 
 DEPENDS += "qtquickcontrols2"
 
-SRC_URI[md5sum] = "ca6c2d62374549c5528123e6a683b9e7"
-SRC_URI[sha256sum] = "f9ab7697845c872d25e998f2b213d4c32c0b2ccdef99de018dc486d1c4a98388"
+SRC_URI[md5sum] = "d0b60c318cfaca243e97b098aab89a16"
+SRC_URI[sha256sum] = "70fae10b2af1c504e3b166beb0a342cdef0e0f8eb42e53ba88f0e3b174331624"
 
 PV = "${KF5_VERSION}"
 

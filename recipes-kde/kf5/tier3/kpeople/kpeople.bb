@@ -14,8 +14,8 @@ DEPENDS += "kcoreaddons \
             kitemviews"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "c9350507c81bafe4a7b09535136aa296"
-SRC_URI[sha256sum] = "e12ab7b8b02369a505f2f408b9ffba6742369e9f8b9fa7cafed9b23a49526eac"
+SRC_URI[md5sum] = "5b5774f99987e15e6ef0d502237bd3e2"
+SRC_URI[sha256sum] = "2728f08a9417ceb62aa9fc5a3340aed291aeb8a852e5f6f46c5a23fcc34168ab"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
