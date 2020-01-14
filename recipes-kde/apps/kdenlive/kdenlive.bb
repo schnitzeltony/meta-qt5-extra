@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=38adfe5a9f2953129da1774430b28adf \
 "
 
-inherit kde-apps gtk-icon-cache mime
+inherit kde-apps gtk-icon-cache mime mime-xdg
 
 DEPENDS += "\
     shared-mime-info-native \
