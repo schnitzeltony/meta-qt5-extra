@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=3214f080875748938ba060314b4f727d \
 "
 
-inherit kde-apps gtk-icon-cache
+inherit kde-apps gtk-icon-cache mime-xdg
 
 DEPENDS += "\
     kauth-native \
