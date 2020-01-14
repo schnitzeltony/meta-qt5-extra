@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=28d73eafa40ebd0ccdc6b37df8de10a3 \
 "
 
-inherit kde-apps gettext gtk-icon-cache
+inherit kde-apps gettext gtk-icon-cache mime-xdg
 
 DEPENDS += "\
     ncurses \
