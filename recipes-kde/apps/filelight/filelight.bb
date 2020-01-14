@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING-DOCS;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-apps gettext
+inherit kde-apps gettext mime-xdg
 
 DEPENDS += "\
     kauth-native \
