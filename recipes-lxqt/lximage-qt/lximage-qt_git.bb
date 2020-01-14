@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4641e94ec96f98fabc56ff9cc48be14b"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit lxqt pkgconfig features_check gtk-icon-cache mime
+inherit lxqt pkgconfig features_check gtk-icon-cache mime mime-xdg
 
 DEPENDS += "qtx11extras qtsvg libfm-qt libexif libxfixes"
 
