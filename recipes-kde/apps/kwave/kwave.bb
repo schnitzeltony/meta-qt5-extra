@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://GNU-LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 "
 
-inherit kde-apps gtk-icon-cache
+inherit kde-apps gtk-icon-cache mime-xdg
 
 DEPENDS += "\
     audiofile \
