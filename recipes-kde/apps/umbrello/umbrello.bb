@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=24ea4c7092233849b4394699333b5c56 \
 "
 
-inherit kde-apps gtk-icon-cache
+inherit kde-apps gtk-icon-cache mime-xdg
 
 DEPENDS += " \
     kcoreaddons-native \
