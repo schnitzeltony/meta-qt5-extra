@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.GFDL;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-plasma gtk-icon-cache
+inherit kde-plasma gtk-icon-cache mime-xdg
 
 PV = "${PLASMA_VERSION}"
 SRC_URI[md5sum] = "8f96a68c78c079310f884bae4d908206"
