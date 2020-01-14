@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING-CMAKE-SCRIPTS;md5=3775480a712fc46a69647678acb234cb \
 "
 
-inherit kde-apps python3native gtk-icon-cache
+inherit kde-apps python3native gtk-icon-cache mime-xdg
 
 DEPENDS += " \
     qtmultimedia \
