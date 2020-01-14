@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING-LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
-inherit kde-apps gettext
+inherit kde-apps gettext mime-xdg
 
 DEPENDS += " \
     qtscript \
