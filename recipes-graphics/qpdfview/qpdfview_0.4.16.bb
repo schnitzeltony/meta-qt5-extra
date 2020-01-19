@@ -8,7 +8,7 @@ SRC_URI = "https://launchpad.net/qpdfview/trunk/${PV}/+download/${BPN}-${PV}.tar
 SRC_URI[md5sum] = "4b317c4536332a7fe437abe50eca1716"
 SRC_URI[sha256sum] = "fad416e8fefc3057fa1b8d12d964c7eccd16dffe0307a0d6e9d55a543294da7f"
 
-inherit qmake5
+inherit qmake5 mime-xdg
 
 QMAKE_PROFILES = "${S}/qpdfview.pro"
 EXTRA_QMAKEVARS_PRE += " \
