@@ -3,7 +3,7 @@ HOMEPAGE = "http://drumstick.sourceforge.net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d9d415d3d8c5523e5586ff7b785095f1"
 
-inherit cmake_qt5 pkgconfig mime gtk-icon-cache
+inherit cmake_qt5 pkgconfig mime mime-xdg gtk-icon-cache
 
 DEPENDS += " \
     qtbase \
