@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 inherit qmake5 qt5-translation gtk-icon-cache mime-xdg
 
-DEPENDS = "qttools-native qtbase hicolor-icon-theme"
+DEPENDS += "qttools-native qtbase hicolor-icon-theme"
 
 SRC_URI = "http://gottcode.org/${BPN}/${BPN}-${PV}-src.tar.bz2"
 SRC_URI[md5sum] = "85685c336812e6e46133ab5e82be4a4d"
