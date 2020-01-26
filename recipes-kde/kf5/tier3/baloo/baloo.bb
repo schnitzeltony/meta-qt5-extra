@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit kde-kf5 cmake_auto_align_paths cmake_lib gtk-icon-cache
+inherit kde-kf5 gtk-icon-cache
 
 DEPENDS += " \
     ki18n \
@@ -33,12 +33,17 @@ SRC_URI += " \
     file://baloo_file.desktop \
 "
 
+do_configure_append() {
+    # remove absolute paths from exported cmake files
+    for f in `find ${B} -name '*Targets*.cmake'`; do
+        sed -i 's:${RECIPE_SYSROOT}${prefix}:${_IMPORT_PREFIX}:g' $f
+    done
+}
+
 do_install_append() {
    install -d ${D}/${sysconfdir}/skel/.config/autostart
    install -m 0644 ${WORKDIR}/baloo_file.desktop ${D}/${sysconfdir}/skel/.config/autostart/
 }
-
-CMAKE_ALIGN_SYSROOT[1] = "KF5Baloo, -S${libdir}, -s${OE_QMAKE_PATH_HOST_LIBS}"
 
 PACKAGES =+ "${PN}-no-autostart"
 
