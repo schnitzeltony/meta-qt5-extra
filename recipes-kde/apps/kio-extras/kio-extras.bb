@@ -50,8 +50,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "7ca6172287e8d046e27b6b0f3052c74d"
-SRC_URI[sha256sum] = "7943c14a5a095a8d8d3ee868be085ddc59d6a0ec172637c3551e148fadc9ac6c"
+SRC_URI[md5sum] = "666f8aa5627d871050fa9b168b52f015"
+SRC_URI[sha256sum] = "79b3735510c3c8da9b3e019ee5a54b115f85bb8d89f1c04dbbf16dde3007e7b6"
 SRC_URI += " \
     file://0001-Do-not-find-use-taglib-config.patch \
     file://0002-Disable-nfs-for-now.patch \
