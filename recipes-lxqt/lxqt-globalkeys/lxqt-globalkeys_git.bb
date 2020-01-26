@@ -8,5 +8,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "liblxqt"
 
-SRCREV = "69dfa8d9ee668bc72d5f7dccb414ea6f6acd40b5"
-PV = "0.14.1"
+SRCREV = "33637a417a5464fd5353d49eff83b786942e1b00"
+PV = "0.14.3+git${SRCPV}"
+
+FILES_${PN} += "${datadir}/lxqt"
