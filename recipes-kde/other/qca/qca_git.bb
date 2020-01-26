@@ -19,9 +19,9 @@ SRC_URI = " \
     git://github.com/KDE/qca.git \
     file://0001-use-pkg-config-to-find-libgcrypt.patch \
 "
-SRCREV = "32343842d359a60e3619f97aac983d587f6eca16"
+SRCREV = "db5f82be2ad72658f7b575ebd1e97f4748033d04"
 S = "${WORKDIR}/git"
-PV = "2.1.3+git${SRCPV}"
+PV = "2.2.1+git${SRCPV}"
 
 EXTRA_OECMAKE += " \
     -DQCA_FEATURE_INSTALL_DIR=${libdir}${QT_DIR_NAME}/mkspecs/features \
