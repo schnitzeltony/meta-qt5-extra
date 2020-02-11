@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 pkgconfig gettext
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "c26da0482fdcb286689a1cf1e3c38f97"
-SRC_URI[sha256sum] = "d78c2128887591229e6c61c60e77af8647e407d570b07892f5f06ab682f807b9"
+SRC_URI[md5sum] = "6fa27bb4fb5e3a08bc58b6d67e4ca396"
+SRC_URI[sha256sum] = "a121c73c0fd733a1e258914346c30a9a2365fd4909a474fa7818de35b7e1b763"
 
 # TODO: optionals PACKAGECONFIG (poppler-qt5 / exiv2 / ffmpeg / epub)
 DEPENDS += " \

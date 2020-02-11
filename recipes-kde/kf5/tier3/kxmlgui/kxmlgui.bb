@@ -26,8 +26,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "ccf7310c466ba0a43bd1bba307237c87"
-SRC_URI[sha256sum] = "a8f9ed354e30ff1f40306e876d96fcd1fa3a26a8e6acfccdeab8f3437d7231bc"
+SRC_URI[md5sum] = "4565a3d1f277653e41310a3ae26dcc1e"
+SRC_URI[sha256sum] = "edcff92a69a8167bed02f69a06c8cab4be693fd0f3b975ebf611704ced6b3b2d"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 

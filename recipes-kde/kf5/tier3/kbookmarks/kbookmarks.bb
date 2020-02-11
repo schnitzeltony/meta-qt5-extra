@@ -10,5 +10,5 @@ DEPENDS += "kconfigwidgets kconfig kiconthemes kxmlgui kconfig-native kcoreaddon
             kauth-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "79ee853160049beebcf36c419d738313"
-SRC_URI[sha256sum] = "b225463ec0fe2424a1f5e70c83b02e3ece6a3ca80832cd2621732d18d7160a43"
+SRC_URI[md5sum] = "1236b6fd559c9ac85e5c7d82fe5bbb02"
+SRC_URI[sha256sum] = "5c6853f7d3d10fb3997393e8347bf790d98cb1c2ceb1a6a292fa27302a3a005e"

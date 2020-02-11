@@ -7,5 +7,5 @@ inherit kde-kf5
 DEPENDS += "wayland wayland-native wayland-protocols"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "8a9bbb74a205206d4b98f617707664b5"
-SRC_URI[sha256sum] = "f43231f10a5294f7ac3d43d2b903f1cf9649364782ca55831e0c069a54cc170d"
+SRC_URI[md5sum] = "5141cdc1fcd46d43ac0043c10112be2b"
+SRC_URI[sha256sum] = "91314f19f5c99cd7763656c95362f81635142732feff02f05c554da3f094e168"

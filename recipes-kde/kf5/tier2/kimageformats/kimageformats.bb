@@ -12,8 +12,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "2b820b9d247a2be52a2d0ac2aa911618"
-SRC_URI[sha256sum] = "c3b02befbb03f25deca0c7ffafea8c8a5eb79e21d8e2e566bf6fddf4f8afe04d"
+SRC_URI[md5sum] = "3d17d70e54a82063c032ee9efee45874"
+SRC_URI[sha256sum] = "aedd22e3c05bb45011c369159fd99dde23ec8355a5f15d4cc5031e7928122d90"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \

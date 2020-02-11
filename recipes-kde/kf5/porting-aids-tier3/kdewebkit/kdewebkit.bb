@@ -20,7 +20,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "703acf6d8db56896cb68760edcd823b3"
-SRC_URI[sha256sum] = "f73d2599ce2269eaab45ddc11bdeb49dc887e950ded57454f3fd6499c370a777"
+SRC_URI[md5sum] = "a447900424cd04dbaf49e8bf9617f6dc"
+SRC_URI[sha256sum] = "8c04b2daf19c9c8c49801a3a312e21b0e9c6306331c3476159c5b68dbd0ba5a4"
 
 FILES_${PN} += "${libdir}/plugins"
