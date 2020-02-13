@@ -14,9 +14,9 @@ DEPENDS += " \
 "
 
 SRC_URI = "http://gottcode.org/${BPN}/${BPN}-${PV}-src.tar.bz2"
-SRC_URI[md5sum] = "a9a33873fc7c0f919fe575b78278fdbf"
-SRC_URI[sha256sum] = "5886054427da20ef0542dc97c8d2b4308b0a169b49f0409633dd8b17fe71bc94"
-PV = "1.7.3"
+SRC_URI[md5sum] = "5c4aecfb11e93e87e42bda24aefc6be9"
+SRC_URI[sha256sum] = "6f48c21a0156db0a4a8679b5368501bddac059c3cc563ec5d30f95966e4191ba"
+PV = "1.7.4"
 
 EXTRA_QMAKEVARS_PRE += "PREFIX=${prefix}"
 
