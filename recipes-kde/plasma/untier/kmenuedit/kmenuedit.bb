@@ -30,8 +30,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "a105d945143093687349995f586452ff"
-SRC_URI[sha256sum] = "59beed03298cd9fd6b05d67844794ed6a77be0d1b25b55d5bbcdf72e15e357de"
+SRC_URI[md5sum] = "bf513fd5cb621fe6188ae539af1357a0"
+SRC_URI[sha256sum] = "32b25d420a6b351c5c5689ba9bdfbaaa25bb4efb4bd96155da50eeacec166af9"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
@@ -40,4 +40,5 @@ FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
     ${datadir}/icons \
     ${libdir}/libkdeinit5_kmenuedit.so \
+    ${libdir}/kconf_update_bin \
 "

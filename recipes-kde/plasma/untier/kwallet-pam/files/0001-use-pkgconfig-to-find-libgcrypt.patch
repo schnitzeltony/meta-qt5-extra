@@ -1,6 +1,6 @@
 From 02ed7d968dc1c4e8140c73bfe8e9becac1e2aad7 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Sat, 29 Aug 2015 23:16:15 +0200
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 15 Feb 2020 11:16:18 +0100
 Subject: [PATCH 1/2] use pkgconfig to find libgcrypt
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -8,17 +8,17 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Inappropriate [embedded specific]
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  CMakeLists.txt | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 15977ae..9f8f072 100644
+index a54d9a1..5337bc2 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -10,7 +10,8 @@ set (CMAKE_MODULE_PATH ${ECM_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
- include(KDEInstallDirs)
+@@ -12,7 +12,8 @@ include(KDEInstallDirs)
+ include(KDEClangFormat)
  
  find_package(PAM REQUIRED)
 -find_package(LibGcrypt 1.5.0 REQUIRED)
@@ -28,5 +28,5 @@ index 15977ae..9f8f072 100644
  find_program(SOCAT_EXECUTABLE socat)
  
 -- 
-2.5.0
+2.21.0
 

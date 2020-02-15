@@ -9,6 +9,7 @@ inherit kde-plasma gettext
 
 DEPENDS += "\
     qtdeclarative \
+    qtsensors \
     \
     kauth-native \
     kconfig-native \
@@ -28,8 +29,8 @@ DEPENDS += "\
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "ec13568ea2f73644ae7bb938d879940e"
-SRC_URI[sha256sum] = "de8a00b33d0254245a53a5c097347aa86709d415754b3e3c675eef8fb4fe5bc0"
+SRC_URI[md5sum] = "a24eb028b1942bbb6be277830c883ca4"
+SRC_URI[sha256sum] = "0bd7faba198bb8d2b0fe867494bf22647342462f57ecb608ab98593b54a2d7de"
 
 FILES_${PN} += " \
     ${datadir}/k*_kscreen \

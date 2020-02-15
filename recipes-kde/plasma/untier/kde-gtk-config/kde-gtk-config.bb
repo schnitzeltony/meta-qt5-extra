@@ -24,16 +24,15 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "acf4d444fcb294d4bf3e3ab988def5c8"
-SRC_URI[sha256sum] = "5feff23c756f1fb0ba9ab88c2aed92c0e7c5521c757f5a0cdd057273538f0010"
+SRC_URI[md5sum] = "0bdcc24e5892f1ef18dacec5a7a02335"
+SRC_URI[sha256sum] = "3be3c38e1b90063b8f62bd182a67e456588aa05fd1c9f773c75fd16f5f09e8a1"
 
 CFLAGS += "-isystem ${STAGING_INCDIR}/harfbuzz"
 CXXFLAGS += "-isystem ${STAGING_INCDIR}/harfbuzz"
 
 FILES_${PN} += " \
-    ${datadir}/icons \
     ${datadir}/kcm-gtk-module \
-    ${datadir}/knsrcfiles \
-    ${datadir}/kservices5 \
+    ${datadir}/kconf_update \
+    ${libdir}/kconf_update_bin \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

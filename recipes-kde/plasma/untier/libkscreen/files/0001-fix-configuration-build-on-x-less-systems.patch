@@ -22,16 +22,16 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 601d34a..1320625 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -21,7 +21,7 @@ include(CheckCXXCompilerFlag)
- include(CMakePackageConfigHelpers)
+@@ -22,7 +22,7 @@ include(CMakePackageConfigHelpers)
  include(GenerateExportHeader)
+ include(KDEClangFormat)
  
 -find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Gui Test X11Extras)
 +find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core DBus Gui Test)
  
  # Wayland backend
  find_package(KF5Wayland ${KF5_MIN_VERSION} CONFIG REQUIRED)
-@@ -35,6 +35,11 @@ set_package_properties(XCB PROPERTIES
+@@ -36,6 +36,11 @@ set_package_properties(XCB PROPERTIES
                         PURPOSE "Required for building XRandR backends"
  )
  
