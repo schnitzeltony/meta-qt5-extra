@@ -51,6 +51,7 @@ UNTIER = " \
     plasma-integration \
     plasma-nm \
     plasma-pa \
+    plasma-phone-components \
     plasma-vault \
     plasma-workspace-wallpapers \
     ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit-kde-agent-1", "",d)} \

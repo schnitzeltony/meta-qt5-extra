@@ -15,33 +15,33 @@ Upstream-Status: Pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- CMakeLists.txt | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ CMakeLists.txt | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 99405d4..1035709 100644
+index 1c5b4c2..558c5d3 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -8,6 +8,7 @@ set(KF5_MIN_VERSION "5.0.0")
- set(CMAKE_AUTOMOC ON)
- set(CMAKE_INCLUDE_CURRENT_DIR ON)
+@@ -25,6 +25,8 @@ include(ECMGenerateHeaders)
+ include(GenerateExportHeader)
+ include(FeatureSummary)
  
 +option(BUILD_DIALER "Set this option to build dialer - requires libphonenumber (+JAVA)" OFF)
++
+ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Gui Widgets Qml Quick Test Sql)
  
- find_package(ECM 0.0.9 REQUIRED NO_MODULE)
- set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_SOURCE_DIR}/cmake)
-@@ -57,8 +58,10 @@ add_subdirectory(bin)
- #add_subdirectory(services)
+ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma Service Declarative I18n KIO People)
+@@ -54,7 +56,9 @@ install( DIRECTORY qtvirtualkeyboardplugin/ DESTINATION ${KDE_INSTALL_QMLDIR}/Qt
+ add_subdirectory(bin)
  add_subdirectory(applets)
  add_subdirectory(containments)
-- add_subdirectory(components)
-+add_subdirectory(components)
+-add_subdirectory(dialer)
 +if(BUILD_DIALER)
- add_subdirectory(dialer)
++    add_subdirectory(dialer)
 +endif(BUILD_DIALER)
  add_subdirectory(sounds)
  #add_subdirectory(touchscreentest)
  
 -- 
-2.14.4
+2.21.0
 

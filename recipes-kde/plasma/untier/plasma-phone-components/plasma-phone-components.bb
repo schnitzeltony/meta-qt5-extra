@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = " \
 DEPENDS += " \
     kpackage-native \
     kauth-native \
+    gstreamer1.0 \
     qtdeclarative \
     telepathy-qt \
     kpeople \
@@ -19,14 +20,10 @@ DEPENDS += " \
 
 inherit kde-plasma gettext
 
-SRC_URI = " \
-    git://anongit.kde.org/${BPN} \
-    file://0001-Make-build-of-dialer-optional.patch \
-"
-SRCREV = "306512efe93f925b5e5f35cac0eb76b6ba7afa77"
-S = "${WORKDIR}/git"
-# Did not find version anywhere
-PV = "0.0.0+git${SRCPV}"
+SRC_URI += "file://0001-Make-build-of-dialer-optional.patch"
+PV = "${PLASMA_VERSION}"
+SRC_URI[md5sum] = "498e4c99016d51bc44abdb8416e7dba2"
+SRC_URI[sha256sum] = "fc87919a11408cf21f9a3f3ad9f45bc87d304ebb3dcd80feec73ffca13cdd2da"
 
 FILES_${PN} += " \
     ${datadir}/kservices5 \

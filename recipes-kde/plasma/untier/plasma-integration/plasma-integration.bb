@@ -26,8 +26,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "75ba0f7a3eb652b8aa52cdb2bb6cf449"
-SRC_URI[sha256sum] = "52991999c7182424593fc36211f7be1142fca7e2c404b3cd03b5c6aa53ffac43"
+SRC_URI[md5sum] = "fa2e316a15f24c64a71c36d30b7f7585"
+SRC_URI[sha256sum] = "e59363f8d0e965d5b66b1cfe8c5df188c0b9a8b6e989f4979987b6375b87837f"
 
 FILES_${PN} += " \
     ${datadir}/kconf_update \

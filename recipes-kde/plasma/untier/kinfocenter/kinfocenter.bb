@@ -1,9 +1,12 @@
 SUMMARY = "KINFOCENTER"
+# Have no idea how kinfocenter is licensed now (and change came in with minor
+# point release !!)
+# [1] https://cgit.kde.org/kinfocenter.git/commit/?id=4ea9df96ae038f28f3e9f6ecef6a64681bb3e189
 LICENSE = "GPLv2 & LGPLv2.1 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-    file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
+    file://LICENSES/GFDL-1.2-only.txt;md5=9a4c4207e152ff95aa8539e9c1ed53e9 \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
 "
 
 inherit kde-plasma gettext
@@ -38,8 +41,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "49a00ae8e8516ee9c63b1361e7e8b35a"
-SRC_URI[sha256sum] = "e99eeeea690d5badfd2fe036e6554a11281e410f1a89ce8292a163df461ddf36"
+SRC_URI[md5sum] = "c687fdd7a0c36a3a6d7ebd063f3aee61"
+SRC_URI[sha256sum] = "05c628787cdc5c40256ae821d3dfd72ed16e5510e5489b678f302655edc75eaa"
 SRC_URI += "file://0001-fix-build-in-x11-less-environments.patch"
 
 FILES_${PN} += " \
