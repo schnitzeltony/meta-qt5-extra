@@ -27,8 +27,8 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "0d73054005e220aa3ba375d466248573"
-SRC_URI[sha256sum] = "c0ef0f5691c5335690af5f8d5456cccfca018a2710c5c5b814554f905ba4697f"
+SRC_URI[md5sum] = "7d4c2ec150cc31837b4228554b2ebb3f"
+SRC_URI[sha256sum] = "d7ed527e2546e94cb091e433a2e61618301152704c48e1f003e1f8e60b4f0cbd"
 
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \

@@ -29,8 +29,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "482d11a7ccbc2002435d4c6bdeec5eaf"
-SRC_URI[sha256sum] = "3fc3cb73acd54455198396dbce0ba8997b40acf7d914feb286b5bb931e21aa7b"
+SRC_URI[md5sum] = "a958d6b072d3daade9d7fb2f14dfe14f"
+SRC_URI[sha256sum] = "c5b09b2bd37f4e86f8412d3b950331d330257ba53278b1a569f36bf3fbf560ee"
 
 CXXFLAGS += "-isystem ${STAGING_INCDIR}/phonon4qt5/KDE"
 
