@@ -4,9 +4,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
 "
 
-inherit kde-apps gtk-icon-cache features_check
-
-#REQUIRED_DISTRO_FEATURES = "x11 opengl"
+inherit kde-apps gettext
 
 DEPENDS += " \
     ki18n-native \
@@ -29,6 +27,3 @@ SRC_URI = " \
 "
 SRC_URI[md5sum] = "7404820abdc89bc4ad4331878b218178"
 SRC_URI[sha256sum] = "5cc45c0b50a1b6b2ce64ad0384128f4ac3bc0e4a1417eb58e5e992b510fca100"
-
-FILES_${PN} += " \
-"
