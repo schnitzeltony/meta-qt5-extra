@@ -1,0 +1,48 @@
+From b0e0593b5d690d760df77b325bfc7c575d2d6aa7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 9 Mar 2020 23:05:16 +0100
+Subject: [PATCH] Find libgmp with pkgconfig
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Choose old-school pkgconfig instead of try_run crap
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt     | 3 ++-
+ src/CMakeLists.txt | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fad43c5..3871396 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -55,7 +55,8 @@ find_package(KF5 "${KF5_MIN_VERSION}" REQUIRED COMPONENTS
+ )
+ 
+ find_package(Boost "${Boost_MIN_VERSION}" REQUIRED)
+-find_package(LibGMP "${LibGMP_MIN_VERSION}" REQUIRED)
++find_package(PkgConfig REQUIRED)
++pkg_check_modules(LibGMP REQUIRED gmp>=${LibGMP_MIN_VERSION})
+ find_package(LibGcrypt "${LibGcrypt_MIN_VERSION}" REQUIRED)
+ find_package(Qca-qt5 CONFIG REQUIRED)
+ 
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index d347e07..0645e95 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -242,7 +242,7 @@ PUBLIC
+     KF5::I18n
+     Qt5::Xml
+     LibGcrypt::LibGcrypt
+-    LibGMP::LibGMP
++    gmp
+ )
+ 
+ if(WIN32)
+-- 
+2.21.1
+
