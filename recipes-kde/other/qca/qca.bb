@@ -14,12 +14,12 @@ DEPENDS += " \
 "
 
 SRC_URI = " \
-    git://github.com/KDE/qca.git \
+    https://download.kde.org/stable/${BPN}/${PV}/${BP}.tar.xz \
     file://0001-use-pkg-config-to-find-libgcrypt.patch \
 "
-SRCREV = "db5f82be2ad72658f7b575ebd1e97f4748033d04"
-S = "${WORKDIR}/git"
-PV = "2.2.1+git${SRCPV}"
+SRC_URI[md5sum] = "139829d029fe70248f0b059b43dc4316"
+SRC_URI[sha256sum] = "1d68ef41a1b61dc9786beb923a68902a6276a77cced5e5ea7ff985ef113932d7"
+PV = "2.3.0"
 
 EXTRA_OECMAKE += " \
     -DQCA_FEATURE_INSTALL_DIR=${libdir}${QT_DIR_NAME}/mkspecs/features \
