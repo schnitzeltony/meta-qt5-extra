@@ -12,9 +12,10 @@ Upstream-Status: Pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- CMakeLists.txt     | 3 ++-
- src/CMakeLists.txt | 2 +-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ CMakeLists.txt            | 3 ++-
+ KF5TorrentConfig.cmake.in | 1 -
+ src/CMakeLists.txt        | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 index fad43c5..3871396 100644
@@ -43,6 +44,18 @@ index d347e07..0645e95 100644
  )
  
  if(WIN32)
+diff --git a/KF5TorrentConfig.cmake.in b/KF5TorrentConfig.cmake.in
+index d40dc0b..b593917 100644
+--- a/KF5TorrentConfig.cmake.in
++++ b/KF5TorrentConfig.cmake.in
+@@ -10,7 +10,6 @@ find_dependency(Qt5Core "@QT_MIN_VERSION@")
+ find_dependency(Qt5Network "@QT_MIN_VERSION@")
+ 
+ find_dependency(Boost "@Boost_MIN_VERSION@")
+-find_dependency(LibGMP "@LibGMP_MIN_VERSION@")
+ find_dependency(LibGcrypt "@LibGcrypt_MIN_VERSION@")
+ 
+ include("${CMAKE_CURRENT_LIST_DIR}/KF5TorrentTargets.cmake")
 -- 
 2.21.1
 
