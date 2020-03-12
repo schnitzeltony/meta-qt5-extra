@@ -33,6 +33,7 @@ RDEPENDS_${PN} = " \
     konsole \
     krita \
     ksystemlog \
+    ktorrent \
     kwalletmanager \
     kwave \
     libkdcraw \
