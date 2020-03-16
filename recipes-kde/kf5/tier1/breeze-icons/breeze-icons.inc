@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 gtk-icon-cache
 
-SRC_URI[md5sum] = "18d27b2f7d443a6e7e4fdc41a3fb9ae4"
-SRC_URI[sha256sum] = "0583ca2ee6bdde1db283241dba9cf11e0014f91f35bd0150c3fb70eb5b67faa3"
+SRC_URI[md5sum] = "5b6e1dee2548af9dc058eecfc25e686d"
+SRC_URI[sha256sum] = "750fff6560abfa85a2243187d14f1b8f1d3d1c4097d84cbf8c58d2f48102fe8d"
 SRC_URI += "file://0001-Force-build-of-Qt-binary-resource-files.patch"
 
 PV = "${KF5_VERSION}"

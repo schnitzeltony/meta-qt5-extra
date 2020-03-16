@@ -11,8 +11,8 @@ inherit kde-kf5 perlnative
 DEPENDS += "docbook-xml-dtd4 docbook-xsl-stylesheets liburi-perl-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "6f9879d824b265096b8384ab5061ccca"
-SRC_URI[sha256sum] = "181d005583e7e2dc0159bcd42fb39bb2981976c736c9e305c5f2416278005c6a"
+SRC_URI[md5sum] = "ae7e866c4214298b61b4bd7254954e27"
+SRC_URI[sha256sum] = "93f5bee9dfaacacacfbeb3e915b192b5e645c1d01057b0cea4081c9ae5285670"
 
 # allarch packages do only install into machine sysroot
 # for xml4

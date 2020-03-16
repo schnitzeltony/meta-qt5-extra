@@ -10,15 +10,15 @@ Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- src/CMakeLists.txt        | 4 ++--
- src/ConfigureChecks.cmake | 17 ++++-------------
- 2 files changed, 16 insertions(+), 18 deletions(-)
+ src/CMakeLists.txt        |  4 ++--
+ src/ConfigureChecks.cmake | 14 ++++----------
+ 2 files changed, 6 insertions(+), 12 deletions(-)
 
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index a0aa965..243f402 100644
+index 074c834..fcea92b 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -82,7 +82,7 @@ endif()
+@@ -108,7 +108,7 @@ endif()
  
  # Compile only if fake backend has not been selected
  
@@ -27,7 +27,7 @@ index a0aa965..243f402 100644
      # KAUTH_POLICY_GEN_SRCS has been generated from ConfigureChecks.cmake
      add_executable(kauth-policy-gen ${KAUTH_POLICY_GEN_SRCS})
      add_executable(KF5::kauth-policy-gen ALIAS kauth-policy-gen)
-@@ -94,7 +94,7 @@ if (NOT "${KAUTH_BACKEND_NAME}" STREQUAL "FAKE")
+@@ -120,7 +120,7 @@ if (NOT "${KAUTH_BACKEND_NAME}" STREQUAL "FAKE")
      # KAUTH_POLICY_GEN_LIBRARIES has been generated from ConfigureChecks.cmake
      target_link_libraries( kauth-policy-gen PRIVATE ${KAUTH_POLICY_GEN_LIBRARIES} )
  
@@ -37,10 +37,10 @@ index a0aa965..243f402 100644
  
  # KAuth backend plugin
 diff --git a/src/ConfigureChecks.cmake b/src/ConfigureChecks.cmake
-index d46761a..48f33a2 100644
+index ee9ec0c..f4443f6 100644
 --- a/src/ConfigureChecks.cmake
 +++ b/src/ConfigureChecks.cmake
-@@ -169,19 +169,10 @@ set(KAUTH_POLICY_GEN_SRCS
+@@ -131,16 +131,10 @@ set(KAUTH_POLICY_GEN_SRCS
      policy-gen/policy-gen.cpp )
  set(KAUTH_POLICY_GEN_LIBRARIES)
  
@@ -48,9 +48,6 @@ index d46761a..48f33a2 100644
 -   set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
 -       backends/mac/kauth-policy-gen-mac.cpp)
 -   set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES} ${CORE_FOUNDATION_LIBRARY} ${SECURITY_LIBRARY} Qt5::Core)
--elseif(KAUTH_BACKEND_NAME STREQUAL "POLKITQT")
--   set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
--       backends/policykit/kauth-policy-gen-polkit.cpp )
 -elseif(KAUTH_BACKEND_NAME STREQUAL "POLKITQT5-1")
 -  set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
 -      backends/polkit-1/kauth-policy-gen-polkit1.cpp )
@@ -65,5 +62,5 @@ index d46761a..48f33a2 100644
  ########################
  # Helper backend probing
 -- 
-2.9.5
+2.21.1
 
