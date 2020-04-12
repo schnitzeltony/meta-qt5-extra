@@ -14,11 +14,14 @@ Contributing
 
 Policies
 --------
-* Please do not send private emails to maintainers. For questions/suggestions.. use GitHub issues.
+* **Please do not send private emails to maintainer - they will not be answered anymore**. For questions/suggestions.. use [issues](https://github.com/schnitzeltony/meta-qt5-extra/issues).
 * Pull requests should follow [OE-Styleguide](https://www.openembedded.org/wiki/Styleguide) with the following additions:
-  * Use 4 spaces for indention always
+  * Use 4 spaces for indention always (shell and python code)
   * For splitting of long list values use four-space indentation on sucessive lines and prefer the closing quote as the first character ([OE-Styleguide](https://www.openembedded.org/wiki/Styleguide) - second example)
   * Pull-requests with patches fixing issues for musl, clang or gold-linker are accepeted only if patches have upstream-status "Applied" or "Backport" and contain a link to the upstream patch.
+* Be aware that **this layer changes other layer's defaults by bbappends**. Maintainer disagrees with common 'configure to death policy' and won't waste time explaining dozens of knobs that are mandatory to ge working/useful builds. See
+   [extends-meta-oe](extends-meta-oe) / [extends-meta-qt5](extends-meta-qt5) / [extends-oe-core](extends-oe-core).
+   Pull requests removing appends for sake of magic 'compliant' scripts  are not accepted.
 
 
 Maintainers
