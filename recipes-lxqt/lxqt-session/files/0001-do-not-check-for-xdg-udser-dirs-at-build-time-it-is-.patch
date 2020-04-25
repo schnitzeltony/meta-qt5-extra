@@ -1,18 +1,24 @@
-From 22ce88122c616771e715873cc715b1ded65f0b52 Mon Sep 17 00:00:00 2001
+From 5621e3b7cf8c105914e4aa10126ffb5bad4c5640 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Sun, 27 Jan 2019 23:51:28 +0100
 Subject: [PATCH] do not check for xdg-udser-dirs at build time - it is a
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
  runtime dependency
 
 Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+
 ---
  CMakeLists.txt | 3 ---
  1 file changed, 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1b9905d..86dce96 100644
+index a27471f..7b2c8ac 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -32,9 +32,6 @@ find_package(lxqt ${LXQT_MINIMUM_VERSION} REQUIRED)
@@ -23,8 +29,5 @@ index 1b9905d..86dce96 100644
 -find_package(XdgUserDirs REQUIRED)
 -
  # Patch Version
- set(LXQT_SESSION_PATCH_VERSION 1)
+ set(LXQT_SESSION_PATCH_VERSION 0)
  
--- 
-2.20.1
-
