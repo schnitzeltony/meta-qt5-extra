@@ -8,7 +8,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qtsvg liblxqt libqtxdg solid kidletime"
 
-SRCREV = "fc1add5b00ba85520a7598a13366ae0fe01bbc90"
-PV = "0.14.1"
+SRCREV = "522c571ff8bbd9cf4ea1bc67f0e5e8ace51c8609"
+PV = "0.15.0"
 
 FILES_${PN} += "${datadir}/icons"
