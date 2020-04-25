@@ -14,6 +14,7 @@ RDEPENDS_${PN} = " \
     lxmenu-data \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-about", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-admin", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-archiver", "",d)} \
     lxqt-build-tools \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-config", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-globalkeys", "",d)} \
