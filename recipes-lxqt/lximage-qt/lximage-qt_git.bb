@@ -9,7 +9,7 @@ inherit lxqt pkgconfig features_check gtk-icon-cache mime mime-xdg
 DEPENDS += "qtx11extras qtsvg libfm-qt libexif libxfixes"
 
 SRC_URI += " file://0001-HACK-fix-wrongly-included-native-QtCore-qconfig.h.patch"
-SRCREV = "6c2efe769d0514846c78e4a9147f3425440643ec"
-PV = "0.14.1"
+SRCREV = "de334fb9e0aa851bd1533a449c7bbee7a49511fe"
+PV = "0.15.0"
 
 FILES_${PN} += "${datadir}/icons"
