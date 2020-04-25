@@ -8,8 +8,8 @@ inherit lxqt pkgconfig features_check mime-xdg
 
 DEPENDS += "libfm-qt"
 
-SRCREV = "9a91aa161936713bb317e77f7973d707c284e370"
-PV = "0.14.1"
+SRCREV = "8947db9cb4b461c947c872af417a79aad81ad66c"
+PV = "0.15.0"
 
 FILES_${PN} += " \
     ${datadir}/${BPN}/lxqt/settings.conf \
