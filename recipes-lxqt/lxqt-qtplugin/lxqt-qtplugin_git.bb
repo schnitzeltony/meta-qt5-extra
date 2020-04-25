@@ -6,8 +6,8 @@ inherit lxqt
 
 DEPENDS += "liblxqt libdbusmenu-qt5 libfm-qt"
 
-SRCREV = "07e10038af7f6cc93e6bd7927e910c060bf2e357"
-PV = "0.14.0"
+SRCREV = "418162b36eff24fe70fd9195c60fae7276afa286"
+PV = "0.16.0"
 SRC_URI += " \
     file://0001-set-installation-path-fixed-cmake-query-returns-sysr.patch \
 "
