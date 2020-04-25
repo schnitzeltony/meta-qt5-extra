@@ -6,7 +6,7 @@ inherit lxqt
 
 DEPENDS += "glib-2.0 liblxqt pulseaudio"
 
-SRCREV = "97d2950abe74c0b40dcde1e30c6e5119c0392370"
-PV = "0.14.1"
+SRCREV = "2a2579db78336aeda10159385ac8e2da249b180d"
+PV = "0.15.0"
 
 RDEPENDS_${PN} += "pulseaudio-server"
