@@ -22,8 +22,8 @@ inherit kde-plasma gettext
 
 SRC_URI += "file://0001-Make-build-of-dialer-optional.patch"
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "f48b0261a2635dd6e3c8e53b5cc94483"
-SRC_URI[sha256sum] = "46502811841d45ae9027a2fdbddfe95661f246bc123a553ea0786cf8688c62f7"
+SRC_URI[md5sum] = "af6d01e56794acc9ca9e721064878133"
+SRC_URI[sha256sum] = "d0c091367ae07c71457a0c03d1023ac48d8665385a6a1b0e32f6ae7ad1fa7070"
 
 FILES_${PN} += " \
     ${datadir}/kservices5 \
