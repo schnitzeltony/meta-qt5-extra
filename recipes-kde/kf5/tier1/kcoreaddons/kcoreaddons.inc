@@ -7,5 +7,5 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 mime
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "6a910c5d6017baf4a3a25532afb14e83"
-SRC_URI[sha256sum] = "e9cc3bc95dd2e3382d0221fbb6ebe8eb8afe5d14fbd2ce8d375eace9e4e74856"
+SRC_URI[md5sum] = "1a7001a1cacf0fdd96f0ac882c071503"
+SRC_URI[sha256sum] = "fa86760b2074ccadab0417220fee1253d731ab7f2f4d7a2857ba463ab4ff4781"

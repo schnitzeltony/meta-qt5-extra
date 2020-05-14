@@ -9,7 +9,7 @@ inherit kde-kf5
 DEPENDS += "qtdeclarative"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "0aeb304c8e7c9f4a97a913d86fb4c94a"
-SRC_URI[sha256sum] = "a67bca5267a2f25d6bb07c10bbb534b480b74479b27ad4f91058f3c94b909dcb"
+SRC_URI[md5sum] = "fb178ef04b48741b3a56a3eb9a464a88"
+SRC_URI[sha256sum] = "ecdbf98705cedb7b2a193800106452900520d10ae8cfba2148e45ef1a02efe74"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"

@@ -7,5 +7,5 @@ inherit kde-kf5
 DEPENDS += "qtwayland qtwayland-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "733db6aca706abb750879fc8cb0ac70d"
-SRC_URI[sha256sum] = "977d599f8f83ee5f6d6789bcddc21648238fb429e8b25cbebee79562ff084c85"
+SRC_URI[md5sum] = "a5bd12d4f453e7fa2873887f8b67ed24"
+SRC_URI[sha256sum] = "3e9b424cf41799ddfe3f22e89c01b2e702e75cc0c6f4829377f6ca1ebf5b3743"
