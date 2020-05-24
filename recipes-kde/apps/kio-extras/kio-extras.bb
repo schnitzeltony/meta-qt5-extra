@@ -15,6 +15,7 @@ DEPENDS += " \
     qtsvg \
     qtwebengine \
     \
+    kdsoap-native kdsoap \
     exiv2 \
     taglib \
     kactivities \
@@ -50,16 +51,14 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "82735ca0ee7ec51f0b8f3fa7af0a3fa0"
-SRC_URI[sha256sum] = "413cb21479fedf1421a6e2585b4df813c3a3fadaa77c248a9f810021f58cea4b"
+SRC_URI[md5sum] = "9a0b327120584116b1a4248174d0a231"
+SRC_URI[sha256sum] = "4a81b3f8f81fa7b6d0677d6706bbb9c995db27643ce40fca6501c2c56c2d8f33"
 SRC_URI += " \
     file://0001-Do-not-find-use-taglib-config.patch \
-    file://0002-Disable-nfs-for-now.patch \
 "
 
-# gperf creates hard #line links
-do_install_prepend() {
-    no_staging_check=true
+do_configure_append() {
+    sed -i 's:${S}/smb/kdsoap-ws-discovery-client/src/kdwsdl2cpp:${STAGING_BINDIR_NATIVE}/kdwsdl2cpp:g' ${B}/build.ninja
 }
 
 FILES_${PN} += " \

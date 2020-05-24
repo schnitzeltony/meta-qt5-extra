@@ -1,6 +1,6 @@
-From 821988e0cc73b7dda590aabe903eb8c5605fefe3 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 16 Dec 2016 12:16:24 +0100
+From e74c303363ad3d09d0987c7d6b807479a23ef186 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 22 May 2020 14:38:40 +0200
 Subject: [PATCH] FIND_REQUIRED_PROGRAM is broken - use the tools directly
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -8,69 +8,31 @@ Content-Transfer-Encoding: 8bit
 
 Upstream-Status: Pending
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- CMakeLists.txt        |  4 ++--
- cmake/KwaveL10N.cmake | 12 ++++++------
- doc/CMakeLists.txt    |  2 +-
- 3 files changed, 9 insertions(+), 9 deletions(-)
+ cmake/FindRequiredProgram.cmake | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
 
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b509ab1..ffb7baa 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -91,7 +91,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
- ### Kwave version number                                                  ###
+diff --git a/cmake/FindRequiredProgram.cmake b/cmake/FindRequiredProgram.cmake
+index 11af04e..673b981 100644
+--- a/cmake/FindRequiredProgram.cmake
++++ b/cmake/FindRequiredProgram.cmake
+@@ -26,14 +26,7 @@
+ # usage: FIND_REQUIRED_PROGRAM(variable name1 [name2] ...)
+ MACRO(FIND_REQUIRED_PROGRAM _variable)
  
- INCLUDE(FindRequiredProgram)
--FIND_REQUIRED_PROGRAM(CAT_EXECUTABLE cat)
-+SET(CAT_EXECUTABLE cat)
- SET(KWAVE_VERSION_MAJOR ${KDE_APPLICATIONS_VERSION_MAJOR})
- SET(KWAVE_VERSION_MINOR ${KDE_APPLICATIONS_VERSION_MINOR})
- SET(KWAVE_VERSION_MICRO ${KDE_APPLICATIONS_VERSION_MICRO})
-@@ -406,7 +406,7 @@ ADD_CUSTOM_TARGET(distfiles
- #############################################################################
- ### uninstall support                                                     ###
+-    FIND_PROGRAM(${_variable} NAMES ${ARGN})
+-
+-    IF (${_variable})
+-        GET_FILENAME_COMPONENT(_basename ${${_variable}} NAME_WE)
+-        MESSAGE(STATUS "Found ${_basename}: ${${_variable}}")
+-    ELSE (${_variable})
+-        MESSAGE(FATAL_ERROR "Unable to find executable for ${ARGN}")
+-    ENDIF (${_variable})
++    SET(_variable, ${ARGN})
  
--FIND_REQUIRED_PROGRAM(RMDIR_EXECUTABLE rmdir)
-+SET(RMDIR_EXECUTABLE rmdir)
+ ENDMACRO(FIND_REQUIRED_PROGRAM)
  
- CONFIGURE_FILE(
-     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake.in
-diff --git a/cmake/KwaveL10N.cmake b/cmake/KwaveL10N.cmake
-index cd036cd..9b63f0a 100644
---- a/cmake/KwaveL10N.cmake
-+++ b/cmake/KwaveL10N.cmake
-@@ -22,11 +22,11 @@
- #                                                                           #
- #############################################################################
- 
--FIND_REQUIRED_PROGRAM(FIND_EXECUTABLE find)
--FIND_REQUIRED_PROGRAM(MSGCAT_EXECUTABLE msgcat)
--FIND_REQUIRED_PROGRAM(XGETTEXT_EXECUTABLE xgettext)
--FIND_REQUIRED_PROGRAM(MSGMERGE_EXECUTABLE msgmerge)
--FIND_REQUIRED_PROGRAM(MSGFMT_EXECUTABLE msgfmt)
-+SET(FIND_EXECUTABLE find)
-+SET(MSGCAT_EXECUTABLE msgcat)
-+SET(XGETTEXT_EXECUTABLE xgettext)
-+SET(MSGMERGE_EXECUTABLE msgmerge)
-+SET(MSGFMT_EXECUTABLE msgfmt)
- 
- SET(PO_SRC_DIR "${CMAKE_SOURCE_DIR}/po")
- SET(PO_BIN_DIR "${CMAKE_BINARY_DIR}/po")
-diff --git a/doc/CMakeLists.txt b/doc/CMakeLists.txt
-index 37a3626..6d4b6cc 100644
---- a/doc/CMakeLists.txt
-+++ b/doc/CMakeLists.txt
-@@ -28,7 +28,7 @@ SET(UPDATE_PLUGIN_XREF     ${CMAKE_SOURCE_DIR}/bin/update-plugin-xref.pl)
- SET(_index_docbook         ${CMAKE_CURRENT_SOURCE_DIR}/en/index.docbook)
- SET(_index_docbook_updated ${CMAKE_CURRENT_BINARY_DIR}/index-updated.docbook)
- 
--FIND_REQUIRED_PROGRAM(CP_EXECUTABLE cp)
-+SET(CP_EXECUTABLE cp)
- 
- #############################################################################
- ### how to convert from svg to png                                        ###
 -- 
-2.9.3
+2.21.1
 

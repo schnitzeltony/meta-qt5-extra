@@ -8,8 +8,6 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-apps gtk-icon-cache mime-xdg
 
-SRC_URI += "file://0001-Do-not-build-docs.patch"
-
 DEPENDS += " \
     ki18n-native \
     kconfig-native \
@@ -42,8 +40,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "0e64aea385c937cbc72d50cc706777b7"
-SRC_URI[sha256sum] = "c5de22cc4292e3b7adae3f6ef6566dcba33a1dd5995fb0b968ea3e705a4c04e0"
+SRC_URI[md5sum] = "b4f1115022ec0c421d7a6b25a5535eda"
+SRC_URI[sha256sum] = "10e29f50f7616b4784ce673ef7fd6c04d622b02c175f96cd127a99cc5cffa9bc"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
