@@ -1,0 +1,117 @@
+From 4c0ea920ab34615d3cf83ef018c8485e3c07fa4f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 22 May 2020 09:56:41 +0200
+Subject: [PATCH] Just build bare kdwsdl2cpp for native
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt                     | 4 ++--
+ kdwsdl2cpp/common/fileprovider.cpp | 2 +-
+ kdwsdl2cpp/src/main.cpp            | 6 +++---
+ kdwsdl2cpp/src/settings.cpp        | 2 +-
+ kdwsdl2cpp/src/settings.h          | 4 ++--
+ 5 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index addbafe2..596425e4 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -190,9 +190,9 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
+   )
+ endif()
+ 
+-add_subdirectory(src)
++#add_subdirectory(src)
+ add_subdirectory(kdwsdl2cpp)
+-if(${PROJECT_NAME}_IS_ROOT_PROJECT)
++if(false)
+ 
+   export(TARGETS kdsoap kdsoap-server kdwsdl2cpp NAMESPACE KDSoap::
+     FILE "${CMAKE_CURRENT_BINARY_DIR}/KDSoap/KDSoapTargets.cmake"
+diff --git a/kdwsdl2cpp/common/fileprovider.cpp b/kdwsdl2cpp/common/fileprovider.cpp
+index 1f23554d..45124850 100644
+--- a/kdwsdl2cpp/common/fileprovider.cpp
++++ b/kdwsdl2cpp/common/fileprovider.cpp
+@@ -106,7 +106,7 @@ bool FileProvider::get( const QUrl &url, QString &target )
+ 
+     QNetworkAccessManager manager;
+     QNetworkRequest request(url);
+-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
++#if FALSE
+     if (Settings::self()->certificateLoaded()) {
+         QSslConfiguration sslConfig = request.sslConfiguration();
+         sslConfig.setPrivateKey(Settings::self()->sslKey());
+diff --git a/kdwsdl2cpp/src/main.cpp b/kdwsdl2cpp/src/main.cpp
+index 8905b6dc..8ac65f9e 100644
+--- a/kdwsdl2cpp/src/main.cpp
++++ b/kdwsdl2cpp/src/main.cpp
+@@ -67,7 +67,7 @@ static void showHelp(const char *appName)
+             "                            use of the import-path option\n"
+             "  -help-on-missing          When groups or basic types could not be found, display\n"
+             "                            available types (helps with wrong namespaces)\n"
+-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
++#if FALSE
+             "  -pkcs12file               Load a certificate from a PKCS12 file. You can use this option\n"
+             "                            if the WSDL file (or files refering to it) is served from a \n"
+             "                            location which require certificate based authentication\n"
+@@ -217,7 +217,7 @@ int main(int argc, char **argv)
+             useLocalFilesOnly = true;
+         } else if (opt == QLatin1String("-help-on-missing")) {
+             helpOnMissing = true;
+-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
++#if FALSE
+         } else if (opt == QLatin1String("-pkcs12file")) {
+             ++arg;
+             if (!argv[arg]) {
+@@ -288,7 +288,7 @@ int main(int argc, char **argv)
+     Settings::self()->setHelpOnMissing(helpOnMissing);
+ 
+     KWSDL::Compiler compiler;
+-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
++#if FALSE
+     if (!pkcs12File.isEmpty()) {
+         if (!Settings::self()->loadCertificate(pkcs12File, pkcs12Password))
+             return -1;
+diff --git a/kdwsdl2cpp/src/settings.cpp b/kdwsdl2cpp/src/settings.cpp
+index 2e25e01a..db7b8aab 100644
+--- a/kdwsdl2cpp/src/settings.cpp
++++ b/kdwsdl2cpp/src/settings.cpp
+@@ -252,7 +252,7 @@ bool Settings::helpOnMissing() const
+     return mHelpOnMissing;
+ }
+ 
+-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
++#if FALSE
+ bool Settings::loadCertificate(const QString &certPath, const QString & password)
+ {
+     QFile certFile(certPath);
+diff --git a/kdwsdl2cpp/src/settings.h b/kdwsdl2cpp/src/settings.h
+index c5ca846f..f177ea77 100644
+--- a/kdwsdl2cpp/src/settings.h
++++ b/kdwsdl2cpp/src/settings.h
+@@ -87,7 +87,7 @@ public:
+     bool helpOnMissing() const;
+     void setHelpOnMissing(bool b);
+ 
+-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
++#if FALSE
+     bool loadCertificate(const QString & certPath, const QString &password = QString());
+     bool certificateLoaded() const;
+     QSslKey sslKey() const;
+@@ -115,7 +115,7 @@ private:
+     bool mKeepUnusedTypes;
+     bool mUseLocalFilesOnly;
+     bool mHelpOnMissing;
+-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
++#if FALSE
+     QSslKey mSslKey;
+     QSslCertificate mCertificate;
+     QList<QSslCertificate> mCaCertificates;
+-- 
+2.21.1
+

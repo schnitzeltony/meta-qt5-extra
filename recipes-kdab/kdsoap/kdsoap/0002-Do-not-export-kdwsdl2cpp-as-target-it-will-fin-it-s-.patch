@@ -1,0 +1,46 @@
+From 1d666d5c6ea5e3b1633c6692572f480e86531a37 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 24 May 2020 00:27:46 +0200
+Subject: [PATCH] Do not export kdwsdl2cpp as target - it will fin it's way
+ into cross sysroot
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt            | 2 +-
+ kdwsdl2cpp/CMakeLists.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index addbafe2..3558dd48 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -194,7 +194,7 @@ add_subdirectory(src)
+ add_subdirectory(kdwsdl2cpp)
+ if(${PROJECT_NAME}_IS_ROOT_PROJECT)
+ 
+-  export(TARGETS kdsoap kdsoap-server kdwsdl2cpp NAMESPACE KDSoap::
++  export(TARGETS kdsoap kdsoap-server NAMESPACE KDSoap::
+     FILE "${CMAKE_CURRENT_BINARY_DIR}/KDSoap/KDSoapTargets.cmake"
+   )
+ 
+diff --git a/kdwsdl2cpp/CMakeLists.txt b/kdwsdl2cpp/CMakeLists.txt
+index 82418be3..61c46688 100644
+--- a/kdwsdl2cpp/CMakeLists.txt
++++ b/kdwsdl2cpp/CMakeLists.txt
+@@ -72,7 +72,7 @@ target_link_libraries(kdwsdl2cpp_lib ${QT_LIBRARIES})
+ add_executable(kdwsdl2cpp ${SOURCES_EXE})
+ target_link_libraries(kdwsdl2cpp kdwsdl2cpp_lib ${QT_LIBRARIES})
+ 
+-install(TARGETS kdwsdl2cpp EXPORT "KDSoapTargets"
++install(TARGETS kdwsdl2cpp
+   RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
+   BUNDLE DESTINATION .
+ )
+-- 
+2.21.1
+
