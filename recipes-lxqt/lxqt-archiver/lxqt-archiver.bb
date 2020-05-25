@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit lxqt features_check mime-xdg
+inherit lxqt features_check mime-xdg gtk-icon-cache
 
 
 DEPENDS += " \
@@ -13,5 +13,7 @@ DEPENDS += " \
     libfm-qt \
 "
 
-SRCREV = "f6897c96029324181d026338683d5ab274422c6a"
-PV = "0.1.1"
+SRCREV = "b6d1ac2cd834edefdb8a754d114da2a89b9323fa"
+PV = "0.2.0"
+
+FILES_${PN} += "${datadir}/icons"
