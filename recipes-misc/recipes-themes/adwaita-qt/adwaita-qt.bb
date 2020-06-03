@@ -8,8 +8,8 @@ inherit cmake_qt5
 DEPENDS = "qtbase"
 
 SRC_URI = "git://github.com/MartinBriza/${BPN}.git"
-SRCREV = "828d3eec5ee60216a7c2e68ff08c23667aff14bd"
-PV = "1.1.0"
+SRCREV = "e5dfd0be75b31dc3b823de0c4bd320b9a6995b89"
+PV = "1.1.4"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += " \
