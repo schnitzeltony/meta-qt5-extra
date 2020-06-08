@@ -38,6 +38,7 @@ PV = "4.2.9"
 PVEXT = ""
 SRC_URI = " \
     ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.gz \
+    file://0001-Fix-build-with-Qt-5.15.patch \
 "
 SRC_URI[md5sum] = "670d5a1855277c42745e3a46157917da"
 SRC_URI[sha256sum] = "9f85bb81eaf4976af57352a482af1fdb86f338051a991f6f43976e0b65956da8"
