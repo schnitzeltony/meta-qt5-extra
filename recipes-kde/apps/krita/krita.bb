@@ -10,6 +10,7 @@ inherit kde-apps python3native gtk-icon-cache mime-xdg
 
 DEPENDS += " \
     qtmultimedia \
+    quazip \
     curl \
     poppler \
     boost \
@@ -33,13 +34,13 @@ DEPENDS += " \
     kcrash \
 "
 
-PV = "4.1.8"
+PV = "4.2.9"
 PVEXT = ""
 SRC_URI = " \
     ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.gz \
 "
-SRC_URI[md5sum] = "995192161d98489d7ced1fd493fe150e"
-SRC_URI[sha256sum] = "0476c9e2279f0ae690c2ed02e1aa9c3d491943643f9859355a02657318bd5940"
+SRC_URI[md5sum] = "670d5a1855277c42745e3a46157917da"
+SRC_URI[sha256sum] = "9f85bb81eaf4976af57352a482af1fdb86f338051a991f6f43976e0b65956da8"
 S = "${WORKDIR}/${BPN}-${PV}${PVEXT}"
 
 OECMAKE_GENERATOR="Unix Makefiles"
