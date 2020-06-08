@@ -1,0 +1,33 @@
+From 04d58fcb669c9d6ee79cdd630f04791b61f417cc Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 8 Jun 2020 17:10:03 +0200
+Subject: [PATCH] Fix build with Qt >= 5.15
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Fixes:
+| ../qpdfview-0.4.18/sources/model.h:46:22: error: field 'boundary' has incomplete type 'QPainterPath'
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ sources/model.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/sources/model.h b/sources/model.h
+index 6363c32..dc10a8c 100644
+--- a/sources/model.h
++++ b/sources/model.h
+@@ -27,6 +27,7 @@ along with qpdfview.  If not, see <http://www.gnu.org/licenses/>.
+ #include <QtPlugin>
+ #include <QWidget>
+ #include <QVector>
++#include <QPainterPath>
+ 
+ class QAbstractItemModel;
+ class QColor;
+-- 
+2.26.2
+
