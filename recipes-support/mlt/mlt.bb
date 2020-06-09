@@ -7,7 +7,10 @@ LIC_FILES_CHKSUM = " \
     file://GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
 "
 
-SRC_URI = "git://github.com/mltframework/mlt.git"
+SRC_URI = " \
+    git://github.com/mltframework/mlt.git \
+    file://0001-Fix-build-with-Qt-5.15.0.patch \
+"
 SRCREV = "af9b08853e4ce88733ec7e358ba6ae7af5c26fad"
 PV = "6.20.0"
 S = "${WORKDIR}/git"
