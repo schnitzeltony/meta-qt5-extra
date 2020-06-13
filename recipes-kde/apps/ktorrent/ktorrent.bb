@@ -1,8 +1,6 @@
 SUMMARY = "A powerful BitTorrent client"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24"
 
 inherit kde-apps gtk-icon-cache mime-xdg
 
@@ -17,10 +15,10 @@ DEPENDS += " \
     kparts \
 "
 
-PV = "5.1.2"
+PV = "5.2.0"
 SRC_URI = "https://download.kde.org/stable/ktorrent/${PV}/${BP}.tar.xz"
-SRC_URI[md5sum] = "d917be1111bcdaea27feba3fc707c219"
-SRC_URI[sha256sum] = "641427a3d6ecb18b0b28c1cc2ec3ba54612abf684df5e10e6c953cd7af058d4f"
+SRC_URI[md5sum] = "0aeed9807a578e7aabc9c4e7cae83d56"
+SRC_URI[sha256sum] = "d1031d745c1ace02d11b59c426610aee779d208e3d1ae81f8559c265173732ff"
 
 FILES_${PN} += " \
     ${datadir}/knotifications5 \
