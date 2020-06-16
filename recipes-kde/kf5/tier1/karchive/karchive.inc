@@ -10,7 +10,7 @@ inherit kde-kf5
 DEPENDS += "bzip2 xz zlib"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "5c759116a6fd6e9ccb760c8c7668f4be"
-SRC_URI[sha256sum] = "f5f361a2ce857d7e7af49276ab70506c6a2ece45a183971ed9abdd5386d50a7d"
+SRC_URI[md5sum] = "67a3b31f2cce390437019f0611c0a313"
+SRC_URI[sha256sum] = "cc81e856365dec2bcf3ec78aa01d42347ca390a2311ea12050f309dfbdb09624"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
