@@ -89,4 +89,5 @@ RDEPENDS_${PN} += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "qtwayland", "",d)} \
     qtmultimedia \
     qtvirtualkeyboard-qmlplugins \
+    perl \
 "
