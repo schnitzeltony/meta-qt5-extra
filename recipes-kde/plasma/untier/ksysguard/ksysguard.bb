@@ -28,16 +28,18 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "27f1ef3c7d6b9fb6d9b70d676afc88b7"
-SRC_URI[sha256sum] = "4acb352698b612a21a5eccf22042ab46265d50bbf3aa85844bbca762a64c9e2f"
+SRC_URI[md5sum] = "efe7e52ca09bd5100273209f490a1177"
+SRC_URI[sha256sum] = "8641b5ba300bcc86bd7127aa4a75554ff775e146232fdb3176053f679d22a7e6"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
 
 FILES_${PN} += " \
+    ${datadir}/dbus-1 \
     ${datadir}/icons \
     ${datadir}/k*5 \
     ${datadir}/knsrcfiles \
     ${libdir}/libkdeinit5_ksysguard.so \
+    ${libdir}/libksgrdbackend.so \
     ${OE_QMAKE_PATH_PLUGINS}/ksysguard \
 "

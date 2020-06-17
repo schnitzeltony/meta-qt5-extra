@@ -24,8 +24,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "3b7d4749556d01fe8eae098b68239366"
-SRC_URI[sha256sum] = "9d7b1fd8b61f9f99c5a5721ea0227c4562588834a4886d66637f4c092f0e53ab"
+SRC_URI[md5sum] = "a68bddb244038727a00fcb6c9e73dcb4"
+SRC_URI[sha256sum] = "6a20a76cbb73904ca9fda81dd82c57c94dc0235c3db8edba7900f94c1a6b628b"
 
 CFLAGS += "-isystem ${STAGING_INCDIR}/harfbuzz"
 CXXFLAGS += "-isystem ${STAGING_INCDIR}/harfbuzz"
@@ -34,5 +34,6 @@ FILES_${PN} += " \
     ${datadir}/kcm-gtk-module \
     ${datadir}/kconf_update \
     ${libdir}/kconf_update_bin \
+    ${libdir}/gtk-3.0/modules \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

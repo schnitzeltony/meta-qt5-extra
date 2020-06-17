@@ -33,11 +33,12 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "8d46069f6129eea764e3e17469b53bd1"
-SRC_URI[sha256sum] = "cde5b714261aaa54f937887657c3d3e74814c5447448b989159ee6035be4783b"
+SRC_URI[md5sum] = "bc8ba98ce2218fc6d4bed8214735414a"
+SRC_URI[sha256sum] = "3f1dddbab63e65d5c70b23e27fe5b26c29b5c7d4395d147baa32db78f093d839"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/kpackage \
+    ${datadir}/kglobalaccel \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

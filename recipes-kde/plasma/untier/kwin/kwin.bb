@@ -12,18 +12,22 @@ DEPENDS += " \
     fontconfig \
     \
     kauth-native \
-    kconfig \
     kconfig-native \
+    kcoreaddons-native \
+    kdoctools-native \
+    kpackage-native \
+    sonnet-native \
+    kactivities \
+    kconfig \
     kconfigwidgets \
     kcoreaddons \
-    kcoreaddons-native \
     kcrash \
+    kdoctools \
     kglobalaccel \
     ki18n \
     kinit \
     knotifications \
     kpackage \
-    kpackage-native \
     kservice \
     plasma-framework \
     kwidgetsaddons \
@@ -38,7 +42,7 @@ DEPENDS += " \
     kxmlgui \
     kdecoration \
     kscreenlocker \
-    sonnet-native \
+    kwayland-server \
 "
 
 # this condition matches always currently - it is kept in this way as a marker
@@ -46,16 +50,9 @@ DEPENDS += " \
 	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)} \
 "
 
-# REVISIT: PACKAGECONFIG for optionals
-DEPENDS += " \
-    kactivities \
-    kdoctools \
-    kdoctools-native \
-"
-
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "2881bc40c660bb3a3290f0c08cc189e6"
-SRC_URI[sha256sum] = "ca39c63fd740432e95490031fd9d5ac003da034582014fa41c2be2b89627ddf8"
+SRC_URI[md5sum] = "82bb8d8892d0268ee3deda8e41b33590"
+SRC_URI[sha256sum] = "c9b072699d700abc87b36f6b513d6c2d785c540fbb9e39d4d33ab33e85a6826e"
 
 SRC_URI += " \
     file://0001-Make-building-of-QPA-wayland-plugin-an-option.patch \

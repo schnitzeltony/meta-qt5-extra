@@ -9,8 +9,8 @@ inherit kde-plasma python3native
 DEPENDS += "sassc-native cairo breeze python3-pycairo-native"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "ccdb725c872bf797e4ce305a03de3eab"
-SRC_URI[sha256sum] = "41c7e83a28c033903d4fcab3da28a4c74ddb72958e66693a2d2e451f716cb7e9"
+SRC_URI[md5sum] = "b8d1b972e47364fe0002c1813a049dc8"
+SRC_URI[sha256sum] = "1c941556b1f753dbbd009e8cda7af5f9865183dab8773b47ef29cafb4399ffca"
 
 FILES_${PN} += " \
     ${datadir}/kconf_update \
