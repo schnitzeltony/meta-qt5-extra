@@ -32,8 +32,8 @@ PACKAGECONFIG = "pulseaudio"
 PACKAGECONFIG[pulseaudio] = ",,pulseaudio"
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "c468d796e9cd6dbefedab14cb20c5ef6"
-SRC_URI[sha256sum] = "cd06a84b3b94ac8f3cebd69e34c36ed19998ba8d70067a0dcb989f72af1745d9"
+SRC_URI[md5sum] = "ce7b9465c5232aec05ec8aefba87f5cd"
+SRC_URI[sha256sum] = "6cbd745bd3214c7b14ddae13d6d214d866734028192865fda25ebc944e7f75d7"
 
 EXTRA_OECMAKE += "-DKMIX_KF5_BUILD=1"
 

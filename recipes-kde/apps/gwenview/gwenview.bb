@@ -25,8 +25,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "b1fbcebcf534f9eb824d72dbcf6ebc59"
-SRC_URI[sha256sum] = "80c2103f8ec8333b8ab08949dea8c5b670a4e3f73309fbaf5172f7e8371f13e1"
+SRC_URI[md5sum] = "1bfdc9f68217c9cfd29a66b9babce6bd"
+SRC_URI[sha256sum] = "49c3a14bc2b5cc14d027b3500cf1386b8c57b65b9a1edef001c4222aa616587e"
 
 SRC_URI += " \
     file://0001-Avoid-try_run.patch \
