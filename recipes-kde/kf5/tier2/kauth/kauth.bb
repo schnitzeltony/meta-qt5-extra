@@ -4,7 +4,7 @@ inherit cmake_lib features_check
 
 DEPENDS += "${BPN}-native kcoreaddons polkit-qt-1"
 
-REQUIRED_DISTRO_FEATURE = "polkit"
+REQUIRED_DISTRO_FEATURES = "polkit"
 EXTRA_OECMAKE += "-DKAUTH_BACKEND_NAME=POLKITQT5-1"
 
 # executables

@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 features_check
 
-REQUIRED_DISTRO_FEATURE = "x11"
+REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += " \
     kcodecs \

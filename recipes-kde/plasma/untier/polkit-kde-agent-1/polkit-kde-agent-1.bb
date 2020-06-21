@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-plasma gettext features_check
 
-REQUIRED_DISTRO_FEATURE = "polkit"
+REQUIRED_DISTRO_FEATURES = "polkit"
 
 DEPENDS += " \
     ki18n \
