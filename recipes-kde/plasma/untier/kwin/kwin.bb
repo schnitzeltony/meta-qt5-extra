@@ -51,8 +51,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "82bb8d8892d0268ee3deda8e41b33590"
-SRC_URI[sha256sum] = "c9b072699d700abc87b36f6b513d6c2d785c540fbb9e39d4d33ab33e85a6826e"
+SRC_URI[md5sum] = "8b3e10590e542483842e4f694831c2b5"
+SRC_URI[sha256sum] = "998a4c9651c412a7e8b1e24d88e7c59d158497955f6da1d69624f53cb59688b9"
 
 SRC_URI += " \
     file://0001-Make-building-of-QPA-wayland-plugin-an-option.patch \
