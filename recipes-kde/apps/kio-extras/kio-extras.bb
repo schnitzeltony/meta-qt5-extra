@@ -51,8 +51,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "a8c91be966c473ba6b010c8fc5be6bf1"
-SRC_URI[sha256sum] = "fd81859ac88a53dddd4e421bd4b7d1b9c9073f18d381dc9a3370fc703bd3e629"
+SRC_URI[md5sum] = "5a5bca04b980d5805a6f34313f066cf2"
+SRC_URI[sha256sum] = "ff0edabe83ee4958ce7559e935f6b7ae3f76aee43ee5774543368ca334b21090"
 SRC_URI += " \
     file://0001-Do-not-find-use-taglib-config.patch \
 "
