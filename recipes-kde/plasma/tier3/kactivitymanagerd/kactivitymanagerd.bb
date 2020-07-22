@@ -24,8 +24,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "d2d2833cb29edad99e32a2a5d8f8fab6"
-SRC_URI[sha256sum] = "6a4ac8f229a7dc8c26d4798b2e66f19f9bb933701f1c680fc3a793003ec4b1a2"
+SRC_URI[md5sum] = "1bbc910dd5264ac4bff2526edb49374d"
+SRC_URI[sha256sum] = "d1566fc2069eec4a4f891b86b24576c8baf61c49b17bcea740fa6760e6e1b989"
 
 # Workaround
 # default_constructible_unary_fn.hpp:38:9: error: no match for 'operator==' (operand types are 'const boost::optional<std::_Bind<ActivityInfo (Activities::*(const Activities*, std::_Placeholder<1>))(const QString&) const> >' and 'int')
