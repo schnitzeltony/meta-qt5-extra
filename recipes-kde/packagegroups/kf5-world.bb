@@ -58,6 +58,7 @@ TIER_3 = " \
     kbookmarks \
     kcmutils \
     kconfigwidgets \
+    kdav \
     kdeclarative \
     kded \
     kdesu \
