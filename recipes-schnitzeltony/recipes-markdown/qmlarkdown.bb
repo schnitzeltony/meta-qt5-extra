@@ -10,10 +10,11 @@ DEPENDS = " \
     qtwebengine \
     markdown-qt \
     ksyntax-highlighting-wrapper \
+    fontawesome-qml \
 "
 
-SRC_URI = "gitsm://github.com/schnitzeltony/qmlarkdown.git"
-SRCREV = "6b7f8e8b687b5ede3a1f083d1e1dd995b94aa2d4"
+SRC_URI = "git://github.com/schnitzeltony/qmlarkdown.git"
+SRCREV = "fd47a751e7bc7a00f8c9738131280ba2831397c7"
 PV = "0.0.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
