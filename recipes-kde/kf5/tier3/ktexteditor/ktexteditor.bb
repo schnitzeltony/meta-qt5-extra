@@ -22,8 +22,7 @@ DEPENDS += "qtxmlpatterns \
             libgit2"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "e9ced67d1ddbbd9a16a3cf0ae768371e"
-SRC_URI[sha256sum] = "575421c4d7e84adc3210a6e9bc3a456ee19a719baf485b7775d8e49c117c6728"
+SRC_URI[sha256sum] = "032b3ac31aa099ed67471f78401d13cf318646b0b9b5e20bb94796ac3ed6cf18"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 

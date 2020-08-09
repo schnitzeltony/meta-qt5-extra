@@ -10,7 +10,6 @@ inherit kde-kf5
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb qtx11extras libxscrnsaver", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[md5sum] = "80bfef6a433bb3176a75f15df9fb1fe2"
-SRC_URI[sha256sum] = "6f3120724569d596a0e9b70512ca14fe13751b0bcd7fca224a69299eb92b3ee8"
+SRC_URI[sha256sum] = "52a8af3f061101c406a592ec277a2c84846e3910af1d3dbfc3e15beb9cfd24a2"
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}"
