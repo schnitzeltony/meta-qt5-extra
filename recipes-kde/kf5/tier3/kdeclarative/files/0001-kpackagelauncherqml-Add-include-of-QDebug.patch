@@ -29,8 +29,8 @@ index 79e3fa1..3adf2d1 100644
  #include <QApplication>
 +#include <QDebug>
  
- #include <klocalizedstring.h>
- #include <qcommandlineparser.h>
+ #include <KLocalizedString>
+ #include <QCommandLineParser>
 -- 
 2.1.4
 
