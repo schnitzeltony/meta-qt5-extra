@@ -38,7 +38,7 @@ SRC_URI[sha256sum] = "c34a5f6ca945dd409921903abd2e0078b6a056a0d221d59674980ce424
 EXTRA_OECMAKE += "-DBUILD_KF5=1"
 
 PACKAGECONFIG ?= " \
-    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'clang-layer', 'clang', '', d)} \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'clang-layer', 'clang', 'clang', d)} \
 "
 
 PACKAGECONFIG[clang] = ",,clang"
