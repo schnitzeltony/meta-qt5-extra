@@ -37,10 +37,10 @@ SRC_URI[sha256sum] = "49e9f7e0748b8f103f72bbc3fbe0ab7b3605646b5024512118dd9beafd
 EXTRA_OECMAKE += "-DBUILD_KF5=1"
 
 PACKAGECONFIG ?= " \
-    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'clang-layer', 'clang', 'clang', d)} \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'clang-layer', 'clang', '', d)} \
 "
 
-PACKAGECONFIG[clang] = ",,clang"
+PACKAGECONFIG[clang] = ",,clang,clang"
 
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
