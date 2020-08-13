@@ -18,7 +18,6 @@ DEPENDS += " \
 "
 
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/src/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "4964e28440f3a808297efb0cb786bd14"
 SRC_URI[sha256sum] = "67af0c2d74715957bd5373a6a30589ff0a996cb1d267dfd0538dccaa9a768dfa"
 
 FILES_${PN} += " \

@@ -36,11 +36,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "85ba725771fd5ce2bf3f438109a1009c"
-SRC_URI[sha256sum] = "5e493e898e02005780b59474f506904742625b50e4669c113906d4f30daa863e"
-SRC_URI += " \
-    file://0001-fix-build-for-qtbase-without-session-management.patch \
-"
+SRC_URI[sha256sum] = "fe5a68d9afd0771ba9ffc2d5d79e7bc43da85fd3ee3c2493a9a2d5c359c3cd6f"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
@@ -50,6 +46,7 @@ FILES_${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/k*5 \
     ${datadir}/kglobalaccel \
+    ${datadir}/knsrcfiles \
     ${datadir}/dbus-1 \
     ${libdir}/libkdeinit5_dolphin.so \
     ${OE_QMAKE_PATH_PLUGINS} \

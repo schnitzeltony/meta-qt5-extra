@@ -19,7 +19,6 @@ SRC_URI = " \
     ${KDE_MIRROR}/stable/${BPN}/src/${BPN}-${PV}.tar.xz \
     file://0001-Do-not-rely-on-python2.patch \
 "
-SRC_URI[md5sum] = "78f66c9b8f9d1e61d421eea7ce5241c7"
 SRC_URI[sha256sum] = "8f8983bc8d143832dc14bc2003ba6af1af27688e477c0c791fd61445464f2069"
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}"

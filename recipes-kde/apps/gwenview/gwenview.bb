@@ -25,12 +25,9 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "73b08987aa9df900867d73d202167f54"
-SRC_URI[sha256sum] = "d176021d6784e33cb0aaa6fa2517e81f9eac237079d2a06d6b55b8f4b04e8bd9"
+SRC_URI[sha256sum] = "e7a6d96801bfc41156292faac915691b929d4da641cf04839c74a68debc95c44"
 
-SRC_URI += " \
-    file://0001-Avoid-try_run.patch \
-"
+SRC_URI += "file://0001-Avoid-try_run.patch"
 
 CXXFLAGS += "-isystem ${STAGING_INCDIR}/phonon4qt5/KDE"
 

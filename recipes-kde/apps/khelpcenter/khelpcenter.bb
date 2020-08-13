@@ -28,12 +28,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "3eeeeb8d30159428635fddc7dd5c0837"
-SRC_URI[sha256sum] = "3930c321388f27925a63add5f11fe65eb34b7301fb22d78f16f5f3de8467a9ed"
-
-SRC_URI += " \
-    file://0001-fix-build-for-qtbase-without-session-management.patch \
-"
+SRC_URI[sha256sum] = "2c45fb76c5503441dcf9ab1cae386dd2e10a2ad1af08f60090d362e82364e98c"
+SRC_URI += "file://0001-fix-build-for-qtbase-without-session-management.patch"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

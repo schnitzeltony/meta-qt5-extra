@@ -17,7 +17,6 @@ DEPENDS += " \
 
 PV = "5.2.0"
 SRC_URI = "https://download.kde.org/stable/ktorrent/${PV}/${BP}.tar.xz"
-SRC_URI[md5sum] = "0aeed9807a578e7aabc9c4e7cae83d56"
 SRC_URI[sha256sum] = "d1031d745c1ace02d11b59c426610aee779d208e3d1ae81f8559c265173732ff"
 
 FILES_${PN} += " \

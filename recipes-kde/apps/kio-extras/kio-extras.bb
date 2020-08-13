@@ -51,11 +51,8 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[md5sum] = "5a5bca04b980d5805a6f34313f066cf2"
-SRC_URI[sha256sum] = "ff0edabe83ee4958ce7559e935f6b7ae3f76aee43ee5774543368ca334b21090"
-SRC_URI += " \
-    file://0001-Do-not-find-use-taglib-config.patch \
-"
+SRC_URI[sha256sum] = "6bfbb92dd56755ec0b2dee0cd889d6081ae00df339c05b4cb7a173a463275e2d"
+SRC_URI += "file://0001-Do-not-find-use-taglib-config.patch"
 
 do_configure_append() {
     sed -i 's:${S}/smb/kdsoap-ws-discovery-client/src/kdwsdl2cpp:${STAGING_BINDIR_NATIVE}/kdwsdl2cpp:g' ${B}/build.ninja

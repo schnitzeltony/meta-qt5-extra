@@ -39,7 +39,6 @@ DEPENDS += " \
 PV = "4.3.0"
 PVEXT = ""
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.gz"
-SRC_URI[md5sum] = "fcdac4ffd09ec7e3a054af20618b945f"
 SRC_URI[sha256sum] = "d071887c73bffbdc179054826b9752f5e5ab43fdcd9ffdd0402e9ab2ceee4bda"
 S = "${WORKDIR}/${BPN}-${PV}${PVEXT}"
 
