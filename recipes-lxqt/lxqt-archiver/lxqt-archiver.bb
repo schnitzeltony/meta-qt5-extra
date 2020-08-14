@@ -11,7 +11,8 @@ DEPENDS += " \
     qtx11extras \
     json-glib \
     libfm-qt \
-"
+
+SRC_URI += "file://0001-fix-compilation-error.patch"
 
 SRCREV = "b6d1ac2cd834edefdb8a754d114da2a89b9323fa"
 PV = "0.2.0"
