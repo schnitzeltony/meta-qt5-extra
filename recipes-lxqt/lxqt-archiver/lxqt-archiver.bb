@@ -11,6 +11,7 @@ DEPENDS += " \
     qtx11extras \
     json-glib \
     libfm-qt \
+"
 
 SRC_URI += "file://0001-fix-compilation-error.patch"
 
