@@ -8,8 +8,8 @@ DEPENDS = " \
 "
 
 SRC_URI = "git://github.com/schnitzeltony/ksyntax-highlighting-wrapper.git"
-SRCREV = "6bad8796243898c6f2e166a72059cca912bc3f6c"
-PV = "0.1.1"
+SRCREV = "f309a268588cabd85791569fe9e63a63f79163c8"
+PV = "0.1.2"
 S = "${WORKDIR}/git"
 
 inherit cmake_qt5
