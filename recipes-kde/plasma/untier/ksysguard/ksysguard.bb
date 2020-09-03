@@ -23,13 +23,10 @@ DEPENDS += " \
 "
 
 # REVISIT optionals
-DEPENDS += " \
-    lmsensors \
-"
+DEPENDS += "lmsensors"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "79a948dbf0bb8c83f1f2ee17efd61385"
-SRC_URI[sha256sum] = "1f49c29f361c7831ac540bf267855563633f9b7ad4c3b7ec0d6f600af81e5179"
+SRC_URI[sha256sum] = "e1a66dc9750482ada19da5d3e9ec06893f859930f0e8e5a910a5751e9f267c47"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

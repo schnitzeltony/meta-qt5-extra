@@ -12,7 +12,6 @@ DEPENDS += "fontforge-native"
 
 PV = "5.4.3"
 SRC_URI = "${KDE_MIRROR}/Attic/plasma/${PV}/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "8d8ab61a65642a18a40de9f3945ce584"
 SRC_URI[sha256sum] = "a02f6580e9a53cb16694a99adbb6dbf76f17584f3e97f469a22286299507838c"
 
 EXTRA_OECMAKE += "-DOXYGEN_FONT_INSTALL_DIR=${datadir}/fonts/truetype/oxygen"

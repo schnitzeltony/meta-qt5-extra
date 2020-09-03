@@ -16,12 +16,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "96faee06be1d88890c421b4d6334b783"
-SRC_URI[sha256sum] = "3f64acb63ce009c849ca3a49288795e20a894afc6fc77a0e2480ab294cce8272"
-
-SRC_URI += " \
-    file://0001-fix-build-for-qtbase-without-session-management.patch \
-"
+SRC_URI[sha256sum] = "c934d9c85581db575da0559713f1c0bba0541749ea36a51f9cbce7454c2af4db"
+SRC_URI += "file://0001-fix-build-for-qtbase-without-session-management.patch"
 
 FILES_${PN} += " \
     ${datadir}/knotifications5 \

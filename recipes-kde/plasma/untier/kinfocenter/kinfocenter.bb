@@ -36,13 +36,10 @@ DEPENDS += " \
 "
 
 # REVISIT optionals
-DEPENDS += " \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11", "", d)} \
-"
+DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11", "", d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "d1ce45d4d530d1257416ad1c0ff0286f"
-SRC_URI[sha256sum] = "0fa59a49ef26c0a096e80498947557cc11e1458a17570b85b54754ac3cb2846b"
+SRC_URI[sha256sum] = "ffae6f6fc311cedfac2b380dcbc9f15588952cbcd66b144f4ae717801cb2bc31"
 SRC_URI += "file://0001-fix-build-in-x11-less-environments.patch"
 
 FILES_${PN} += " \

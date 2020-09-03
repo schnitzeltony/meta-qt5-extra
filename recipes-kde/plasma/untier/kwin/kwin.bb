@@ -46,17 +46,11 @@ DEPENDS += " \
 "
 
 # this condition matches always currently - it is kept in this way as a marker
-DEPENDS += " \
-	${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)} \
-"
+DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[md5sum] = "197cadd24436310957258d2b40244ae8"
-SRC_URI[sha256sum] = "456205b964efadadc6df8e5f3db40da3719bec567cf93f2719b015561a57672e"
-
-SRC_URI += " \
-    file://0001-Make-building-of-QPA-wayland-plugin-an-option.patch \
-"
+SRC_URI[sha256sum] = "36afa37b773d31c0bcb8f4e32fa1f06cc33e15ad00e729ba36f120bbe034903b"
+SRC_URI += "file://0001-Make-building-of-QPA-wayland-plugin-an-option.patch"
 
 # pure X11 environments fail to build wayland plugin
 EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DKWIN_BUILD_QPA=ON', '-DKWIN_BUILD_QPA=OFF', d)}"
