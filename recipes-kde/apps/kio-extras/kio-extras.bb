@@ -51,7 +51,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "6bfbb92dd56755ec0b2dee0cd889d6081ae00df339c05b4cb7a173a463275e2d"
+SRC_URI[sha256sum] = "1122635926052f34fd35d8aeef9c3c1d892690d8372f2b7d902e6449cdab988a"
 SRC_URI += "file://0001-Do-not-find-use-taglib-config.patch"
 
 do_configure_append() {
