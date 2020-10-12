@@ -17,9 +17,9 @@ SRC_URI = " \
     file://0001-Workaround-xdr-linker-error.patch \
     file://openbabel-gui.desktop \
 "
-SRCREV = "49f9cfb32bd0bc6ea440639d338123eb27accbe2"
+SRCREV = "cbd4db43f8908b874864280fdc03bf92569eebc1"
 S = "${WORKDIR}/git"
-PV = "3.0.0"
+PV = "3.1.1"
 
 do_install_append() {
     install -d ${D}${datadir}/applications
