@@ -38,7 +38,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "f99e3f22c3d5e41a3ca251299d010ac2bc44933091c25d360104d562a1090873"
+SRC_URI[sha256sum] = "535df45a148f0f94271e045ef0c93575fded83da7a2b727aeaf90e61e1d7c418"
 
 SRC_URI += " \
     file://0001-CMakeLists.txt-make-MLT_PREFIX-configurable.patch \
@@ -48,10 +48,11 @@ EXTRA_OECMAKE += "-DMLT_PREFIX=${prefix}"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
+    ${datadir}/icons \
     ${datadir}/k*5 \
+    ${datadir}/knsrcfiles \
     ${datadir}/mime \
     ${datadir}/menu \
-    ${datadir}/icons \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
