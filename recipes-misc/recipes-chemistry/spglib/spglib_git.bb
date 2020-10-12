@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5e13e4b13c9ea72dbc9fda34255d9371"
 inherit autotools
 
 SRC_URI = "git://github.com/atztogo/spglib.git"
-SRCREV = "4c9ad83acfd29b34b929b8384d22e8bc85aac81c"
+SRCREV = "ee34712a9f7fe228e100b8ec1080d8f206309e2a"
 S = "${WORKDIR}/git"
-PV = "1.11.2"
+PV = "1.16.0"
 
 do_configure_prepend() {
     touch ${S}/NEWS ${S}/README ${S}/AUTHORS
