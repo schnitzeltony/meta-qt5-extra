@@ -43,6 +43,7 @@ RDEPENDS_${PN} = " \
     minuet \
     okteta \
     okular \
+    partitionmanager \
     spectacle \
     umbrello \
 "

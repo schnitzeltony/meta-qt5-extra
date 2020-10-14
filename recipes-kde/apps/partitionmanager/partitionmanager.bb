@@ -1,8 +1,6 @@
 SUMMARY = "KDE Partition Manage"
 LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = " \
-    file://COPYING.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
-"
+LIC_FILES_CHKSUM = "file://COPYING.md;md5=97a733ff40c50b4bfc74471e1f6ca88b"
 
 inherit kde-base pkgconfig gtk-icon-cache
 
@@ -25,9 +23,9 @@ DEPENDS += " \
     util-linux \
 "
 
-SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "d50698661f443fa5ac99de6329f9d0cf"
-SRC_URI[sha256sum] = "26f880c0955797778612223d3cd68345bc47ec4903b4c541dd04e7998d3083c6"
+SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/src/${BP}.tar.xz"
+SRC_URI[sha256sum] = "d61e20237c854cd3622b19cec5939c51bf4f350741106fdb44fc5a82155735b4"
+PV = "4.1.0"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \

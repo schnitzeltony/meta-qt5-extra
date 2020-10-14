@@ -10,7 +10,6 @@ RDEPENDS_${PN} = " \
     kde-apps-world \
     \
     kpmcore \
-    partitionmanager \
     phonon \
     ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit-qt-1", "",d)} \
     qca \
