@@ -1,8 +1,6 @@
 SUMMARY = "Library for managing partitions"
 LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = " \
-    file://COPYING.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
-"
+LIC_FILES_CHKSUM = "file://COPYING.md;md5=97a733ff40c50b4bfc74471e1f6ca88b"
 
 inherit kde-base pkgconfig gettext
 
@@ -10,6 +8,7 @@ DEPENDS += " \
     kconfig-native \
     kauth-native \
     kcoreaddons-native \
+    qca \
     ki18n \
     kiconthemes \
     kio \
@@ -20,10 +19,12 @@ DEPENDS += " \
 "
 
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "14570132ef88df21060198fdcc4b8e7a"
-SRC_URI[sha256sum] = "aa4a89c8a3745b2c06971f916aef30d87b3393a3b8c55ffc791cf46eb86b2454"
+SRC_URI[sha256sum] = "b545a357cc348c84e8875531fdfe40fc63d915f03581e5004c4bd547d579514b"
+PV = "4.1.0"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
+    ${datadir}/dbus-1 \
+    ${datadir}/polkit-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
