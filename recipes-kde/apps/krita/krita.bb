@@ -36,10 +36,10 @@ DEPENDS += " \
     kcrash \
 "
 
-PV = "4.3.0"
+PV = "4.4.0"
 PVEXT = ""
-SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.gz"
-SRC_URI[sha256sum] = "d071887c73bffbdc179054826b9752f5e5ab43fdcd9ffdd0402e9ab2ceee4bda"
+SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.xz"
+SRC_URI[sha256sum] = "837ff7c94553f2ff2a8876994810b4e14b9296adc9726c0116a6fa8828eeb579"
 S = "${WORKDIR}/${BPN}-${PV}${PVEXT}"
 
 FILES_${PN} += " \
