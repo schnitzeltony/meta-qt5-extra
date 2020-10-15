@@ -55,9 +55,9 @@ DEPENDS += " \
     threadweaver \
 "
 
-PV = "5.5.2"
+PV = "5.6.0"
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz"
-SRC_URI[sha256sum] = "228e981a268704fef0f8fa437e37e3e2e0d261d3a2afbabff0f4d060c31f74da"
+SRC_URI[sha256sum] = "38adc7d4c4cf2f0fb4191650001e979b5e1b5a3476db28737020baf2fb56f532"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
@@ -66,6 +66,9 @@ do_configure_append() {
     sed -i 's:${STAGING_DIR_NATIVE}::g' ${B}/plugins/clang/libclang_include_path.h
 }
 
+# Yeah nasty but...
+FILES_SOLIBSDEV = "${libdir}/libKDevC*so ${libdir}/libKDevPlatform*so"
+
 FILES_${PN} += " \
     ${datadir}/kdev* \
     ${datadir}/k*5 \
@@ -73,6 +76,7 @@ FILES_${PN} += " \
     ${datadir}/knotifications5 \
     ${datadir}/mime \
     ${datadir}/plasma \
+    ${libdir}/libKDevelopSessionsWatch.so \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
 "
