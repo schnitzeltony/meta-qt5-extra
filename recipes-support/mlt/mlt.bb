@@ -7,12 +7,9 @@ LIC_FILES_CHKSUM = " \
     file://GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
 "
 
-SRC_URI = " \
-    git://github.com/mltframework/mlt.git \
-    file://0001-Fix-build-with-Qt-5.15.0.patch \
-"
-SRCREV = "af9b08853e4ce88733ec7e358ba6ae7af5c26fad"
-PV = "6.20.0"
+SRC_URI = "git://github.com/mltframework/mlt.git;branch=v6.22"
+SRCREV = "f6e57f2659b1a5a136fa1c9df1b3359bd0b91647"
+PV = "6.22.1"
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
