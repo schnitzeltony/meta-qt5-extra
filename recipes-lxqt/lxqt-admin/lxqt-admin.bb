@@ -8,8 +8,8 @@ DEPENDS += " \
     liblxqt \
 "
 
-SRCREV = "bb2072ea999d4feef4ecca3836250001169be9ec"
-PV = "0.15.0"
+SRCREV = "2954b6bc8b4d0558f3270840b8420b6330439dc2"
+PV = "0.16.0"
 
 FILES_${PN} += "${datadir}/polkit-1"
 
