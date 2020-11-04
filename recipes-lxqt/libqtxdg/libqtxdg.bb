@@ -14,8 +14,8 @@ EXTRA_OECMAKE += " \
     -DQTXDGX_ICONENGINEPLUGIN_INSTALL_PATH=${OE_QMAKE_PATH_PLUGINS}/iconengines \
 "
 
-SRCREV = "ae412d30c695f3d4ce9b79feabc937eefde5537b"
-PV = "3.5.0"
+SRCREV = "bb2d852b70171fe86de8aa682f76c01966e2c5d5"
+PV = "3.6.0"
 
 do_configure_append() {
     # remove absolute paths from exported cmake files
