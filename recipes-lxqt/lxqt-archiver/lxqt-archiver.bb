@@ -13,9 +13,7 @@ DEPENDS += " \
     libfm-qt \
 "
 
-SRC_URI += "file://0001-fix-compilation-error.patch"
-
-SRCREV = "b6d1ac2cd834edefdb8a754d114da2a89b9323fa"
-PV = "0.2.0"
+SRCREV = "b3a60a87eb1381411920f674a95d7c57f6256df3"
+PV = "0.3.0"
 
 FILES_${PN} += "${datadir}/icons"
