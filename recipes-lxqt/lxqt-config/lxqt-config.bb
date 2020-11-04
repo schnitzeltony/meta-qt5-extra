@@ -8,10 +8,11 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qtsvg liblxqt libkscreen libxcursor libxi xf86-input-libinput"
 
-SRCREV = "e98213d17938779a8a5c7f877a5746c9a7747e85"
-PV = "0.15.0"
+SRCREV = "846c5446a014b8bf6115deb88f3a33754ec7adcd"
+PV = "0.16.0"
 
 FILES_${PN} += " \
     ${datadir}/icons \
     ${datadir}/lxqt/icons \
+    ${datadir}/desktop-directories \
 "
