@@ -6,8 +6,8 @@ inherit lxqt pkgconfig
 
 DEPENDS += "libconfig"
 
-SRCREV = "6696ddbf58c50811a9c6005c78d4d63792ee5d20"
-PV = "0.15.0"
+SRCREV = "3a624037ee476bec3cce63990dd70f332f002242"
+PV = "0.16.0"
 
 FILES_${PN} += "${datadir}/${BPN}/compton.conf.example"
 
