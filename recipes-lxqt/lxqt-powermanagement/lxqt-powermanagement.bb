@@ -6,9 +6,16 @@ inherit lxqt features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "qtsvg liblxqt libqtxdg solid kidletime"
+DEPENDS += " \
+    qtsvg \
+    solid \
+    kidletime \
+    liblxqt \
+    libqtxdg \
+    lxqt-globalkeys \
+"
 
-SRCREV = "522c571ff8bbd9cf4ea1bc67f0e5e8ace51c8609"
-PV = "0.15.0"
+SRCREV = "33a3da98d6466418cb3284892bc572e6edf321f1"
+PV = "0.16.0"
 
 FILES_${PN} += "${datadir}/icons"
