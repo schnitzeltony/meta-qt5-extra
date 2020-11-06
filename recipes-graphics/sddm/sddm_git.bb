@@ -18,14 +18,13 @@ PACKAGECONFIG[pam] = "-DENABLE_PAM=ON, -DENABLE_PAM=OFF, libpam"
 # This is usually done during build but does not work for our cross environment
 SRC_URI = " \
     git://github.com/sddm/${BPN}.git;protocol=git;branch=master \
-    file://0001-fix-qml-install-dir.patch \
-    file://0002-Workaround-missing-sessions.patch \
+    file://0001-Workaround-missing-sessions.patch \
     file://sddm.pam \
     file://sddm-autologin.pam \
     file://sddm.conf \
 "
-SRCREV = "de41b8ea555f2e42ba47d83530ad654ca708cf85"
-PV = "0.18.1"
+SRCREV = "c5e7043291a6d237e33c2f666d9937c93d668594"
+PV = "0.19.0"
 
 S = "${WORKDIR}/git"
 
