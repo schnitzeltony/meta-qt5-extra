@@ -1,7 +1,9 @@
 SUMMARY = "Library for Interfacing with Calendars"
-LICENSE = "LGPLv2"
+LICENSE = "BSD-3-Clause & LGPLv2.0+ & LGPLv3+"
 LIC_FILES_CHKSUM = " \
-	file://COPYING;md5=c2d143c0ce3f53108f9725bcd58abf25 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-3.0-or-later.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
 inherit kde-kf5
@@ -9,4 +11,4 @@ inherit kde-kf5
 DEPENDS += "libical"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "e3486b41b833c0ba72f839d8a61bdffaf9b3ece3da20f478c2981b3296e7b713"
+SRC_URI[sha256sum] = "e6fd390b8ba2a899e7abda3de8d9ab7e5155fede6bbee9ca2b302b931a0232ae"

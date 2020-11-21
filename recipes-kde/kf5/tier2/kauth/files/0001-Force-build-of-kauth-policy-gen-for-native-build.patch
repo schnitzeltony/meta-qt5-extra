@@ -40,8 +40,8 @@ diff --git a/src/ConfigureChecks.cmake b/src/ConfigureChecks.cmake
 index ee9ec0c..f4443f6 100644
 --- a/src/ConfigureChecks.cmake
 +++ b/src/ConfigureChecks.cmake
-@@ -131,16 +131,10 @@ set(KAUTH_POLICY_GEN_SRCS
-     policy-gen/policy-gen.cpp )
+@@ -127,16 +127,10 @@ set(KAUTH_POLICY_GEN_SRCS
+     policy-gen/policy-gen.cpp)
  set(KAUTH_POLICY_GEN_LIBRARIES)
  
 -if(KAUTH_BACKEND_NAME STREQUAL "OSX")
@@ -50,12 +50,12 @@ index ee9ec0c..f4443f6 100644
 -   set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES} ${CORE_FOUNDATION_LIBRARY} ${SECURITY_LIBRARY} Qt5::Core)
 -elseif(KAUTH_BACKEND_NAME STREQUAL "POLKITQT5-1")
 -  set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
--      backends/polkit-1/kauth-policy-gen-polkit1.cpp )
+-      backends/polkit-1/kauth-policy-gen-polkit1.cpp)
 -  set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES}
 -      Qt5::Core)
 -endif()
 +set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
-+    backends/polkit-1/kauth-policy-gen-polkit1.cpp )
++    backends/polkit-1/kauth-policy-gen-polkit1.cpp)
 +set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES}
 +    Qt5::Core)
  

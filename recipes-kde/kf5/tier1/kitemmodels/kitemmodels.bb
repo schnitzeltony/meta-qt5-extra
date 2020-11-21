@@ -1,7 +1,9 @@
 SUMMARY = "Models for Qt Model/View system"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPLv2.0+ & LGPLv2.1 & LGPLv2.1+"
 LIC_FILES_CHKSUM = " \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
 "
 
 inherit kde-kf5
@@ -9,6 +11,6 @@ inherit kde-kf5
 DEPENDS += "qtdeclarative"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "6569e289ac9263d87ef6641fe2f3914b9ace6814832ac9c61825b1c6805ae371"
+SRC_URI[sha256sum] = "53855ccdd1105aa792914f9c88f357039bf2394af8400beaaecd9729f70e9cb0"
 
 FILES_${PN} += "${OE_QMAKE_PATH_QML}"

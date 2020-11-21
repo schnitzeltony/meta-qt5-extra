@@ -1,11 +1,15 @@
 SUMMARY = "Syntax highlighting Engine for Structured Text and Code"
-LICENSE = "MIT"
+LICENSE = "GPLv2.0 & LGPLv2.0 & LGPLv2.0+ & LGPLv2.1+ & MIT"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=61be4d272e55cc2609d58596cf084908 \
+    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
+    file://LICENSES/MIT.txt;md5=38aa75cf4c4c87f018227d5ec9638d75 \
 "
 
 inherit kde-kf5 perlnative
 
-SRC_URI[sha256sum] = "51ed4a68ba42d0dc88d91a0c11ac55ada199b7e93b0ff74b80b5e9304fe8901b"
+SRC_URI[sha256sum] = "3cb61a8c478b76f797db53ed9e8a16c6e70bb1c564f05938680db81c3062bab3"
 
 PV = "${KF5_VERSION}"

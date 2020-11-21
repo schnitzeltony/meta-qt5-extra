@@ -1,12 +1,15 @@
 SUMMARY = "Library to assist determining when holidays occur"
-LICENSE = "LGPLv2.1"
+LICENSE = "Bison-exception-2.2 & BSD-2-Clause & GPLv3+ & LGPLv2.0+"
 LIC_FILES_CHKSUM = " \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/Bison-exception-2.2.txt;md5=fe1adebe74bce848e36673c70d09e755 \
+    file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \
+    file://LICENSES/GPL-3.0-or-later.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
 "
 
 inherit kde-kf5
 
-SRC_URI[sha256sum] = "b0ae4b77aa7c183959bc18baa09a1a4f7208fcad2a238c1590377bf6cf8b68ab"
+SRC_URI[sha256sum] = "2eeae5812b33b2527c27a137fee0d7ec66fe7164bd28afd0d2a8362f6114618b"
 
 PV = "${KF5_VERSION}"
 

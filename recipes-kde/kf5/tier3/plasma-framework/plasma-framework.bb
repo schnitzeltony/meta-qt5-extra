@@ -1,8 +1,16 @@
 SUMMARY = "Plugin based UI runtime used to write primary user interfaces"
-LICENSE = "GPLv2 | LGPLv2.1"
+LICENSE = "BSD-2-Clause & BSD-3-Clause & GPLv2.0 & GPLv2.0+ & GPLv2 & LGPLv2.0+ & LGPLv2.1 & LGPLv2.1+ & LGPLv3 & Qt-LGPL-exception-1.1"
 LIC_FILES_CHKSUM = " \
-	file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
+    file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
+    file://LICENSES/Qt-LGPL-exception-1.1.txt;md5=38d22f987f077611a625f5729dd0fd39 \
 "
 
 inherit kde-kf5 gettext
@@ -40,7 +48,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "e5415143f0a08cd75cf758b0692021d2a2febdcb1364e2aa1e5c8fbeee148c93"
+SRC_URI[sha256sum] = "5bea341bc7b22ffa6a78bf7475c25b138150314c96b3d5154d8bccc532be242a"
 
 FILES_${PN} += " \
     ${datadir}/kdevappwizard \

@@ -1,13 +1,13 @@
 SUMMARY = "Library to load and install packages of non binary files as they were a plugin"
-LICENSE = "GPLv2 | LGPLv2.1"
+LICENSE = "GPLv2.0+ & LGPLv2.0+"
 LIC_FILES_CHKSUM = " \
-	file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
 "
 
 inherit kde-kf5
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "480b1e11733fe272d1a5680afea39bcc940f01bd3d1267be0981e3c92e098c4f"
+SRC_URI[sha256sum] = "97791ef08ca18892d6aa6a50fa0a87ae72cad10de9f17e3fb503a370de829772"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"

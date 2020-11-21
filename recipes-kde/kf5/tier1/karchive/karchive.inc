@@ -1,8 +1,10 @@
 SUMMARY = "Qt 5 addon providing access to numerous types of archives"
-LICENSE = "GPLv2 & LGPLv2.1"
+LICENSE = "BSD-2-Clause & LGPLv2.0 & LGPLv2.0+ & LGPLv3+"
 LIC_FILES_CHKSUM = " \
-	file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
 inherit kde-kf5
@@ -10,6 +12,6 @@ inherit kde-kf5
 DEPENDS += "bzip2 xz zlib"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "25481ebbba8f58d9ab45bde804ab0d873c45550b482e27e7856b362cd9aa434f"
+SRC_URI[sha256sum] = "503d33b247ae24260c73aac2c48601eb4f8be3f10c9149549ea5dd2d22082a2a"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"

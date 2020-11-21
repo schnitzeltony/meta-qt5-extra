@@ -1,6 +1,10 @@
 SUMMARY = "Workspace and cross-framework integration plugins"
-LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1"
+LICENSE = "LGPLv2.0 & LGPLv2.0+ & LGPLv3"
+LIC_FILES_CHKSUM = " \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
+"
 
 inherit kde-kf5 gettext
 
@@ -23,7 +27,7 @@ DEPENDS += " \
 RRECCOMENDS_${PN} += "oxygen-fonts"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "21ef7f1a6d48f9fb14ccac9bc37e803c92cf83c9e235a5ca8bd7eb08fd0a6fb3"
+SRC_URI[sha256sum] = "7ac6c070190ab4c0c2ac15a921886ed7f3b70d6a0b7c41766d21a913e9f086fb"
 
 FILES_${PN} += " \
     ${datadir}/knotifications5 \

@@ -1,12 +1,14 @@
 SUMMARY = "Offers available actions for a specific purpose"
-LICENSE = "LGPLv2.1"
+LICENSE = "GPLv2.0+ & LGPLv2.0+ & LGPLv2.1+"
 LIC_FILES_CHKSUM = " \
-	file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
 "
 
 inherit kde-kf5 gettext gtk-icon-cache
 
-SRC_URI[sha256sum] = "6f4d440cb708b636430e3206f879ca5c2e6cdfcf62f92ce173d43e291fbeed32"
+SRC_URI[sha256sum] = "fd0edb0e7ba8b5336436848fe2452ff98c1b5bf2c49ea7744a8c0038d4e8887d"
 
 PV = "${KF5_VERSION}"
 

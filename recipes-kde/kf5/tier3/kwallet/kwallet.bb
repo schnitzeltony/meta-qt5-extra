@@ -1,7 +1,11 @@
 SUMMARY = "Secure and unified container for user passwords"
-LICENSE = "LGPLv2.1"
+LICENSE = "BSD-3-Clause & LGPLv2.0 & LGPLv2.0+ & LGPLv2.1+ & LGPLv3+"
 LIC_FILES_CHKSUM = " \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
+    file://LICENSES/LGPL-3.0-or-later.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
 inherit kde-kf5
@@ -26,7 +30,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "4a9c8a538054fc51b30679d5180d09bb6d12a833f595a8d6875b6d4c29074de1"
+SRC_URI[sha256sum] = "5addd560d3f650fbb43cd9c8c9e964c2d6893fa45ac53420b711f6bbb4e7a4fc"
 SRC_URI += "file://0001-KF5WalletConfig.cmake.in-point-runtime-bindir-not-bu.patch"
 
 FILES_${PN} += "${datadir}"

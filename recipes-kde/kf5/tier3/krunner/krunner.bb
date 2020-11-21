@@ -1,25 +1,30 @@
 SUMMARY = "Framework for providing different actions given a string query"
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://src/abstractrunner.h;endline=18;md5=a6a49d7635ef149bcddf8c46f0eae999"
+LICENSE = "LGPLv2.0+ & LGPLv2.1+"
+LIC_FILES_CHKSUM = " \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
+"
 
 inherit kde-kf5 gettext
 
-DEPENDS += "qtdeclarative \
-            kauth-native \
-            kconfig \
-            kconfig-native \
-            kcoreaddons \
-            kcoreaddons-native \
-            kpackage-native \
-            ki18n \
-            kio \
-            kservice \
-            plasma-framework \
-            solid \
-            threadweaver"
+DEPENDS += " \
+    qtdeclarative \
+    kauth-native \
+    kconfig \
+    kconfig-native \
+    kcoreaddons \
+    kcoreaddons-native \
+    kpackage-native \
+    ki18n \
+    kio \
+    kservice \
+    plasma-framework \
+    solid \
+    threadweaver \
+"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "b4e8427083b6546327eeb36b05a7e438e58f922d4cc5ae0c24cd8241924e9e09"
+SRC_URI[sha256sum] = "08c8addcdd3dac87472e84bd14c6d02b99f98c5efbbda7802de92286105dcdda"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

@@ -1,13 +1,17 @@
 SUMMARY = "Qt wrapper for BlueZ 5 DBus AP"
-LICENSE = "LGPLv2"
-LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
+LICENSE = "LGPLv2.1 & LGPLv2.1+ & LGPLv3"
+LIC_FILES_CHKSUM = " \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
+"
 
 inherit kde-kf5
 
 DEPENDS += "qtdeclarative"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "70264edb82b2627c0ec3740374b90b8402e0f432fe4a10650fa3d22191d8cfd4"
+SRC_URI[sha256sum] = "a3f99a10e5f018bac91b4bd88be23a6ea9399aa1ab29d16840d5ee2c20537835"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 

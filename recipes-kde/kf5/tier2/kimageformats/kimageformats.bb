@@ -1,7 +1,10 @@
 SUMMARY = "Image format plugins for Qt"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPLv2.0+ & LGPLv2.1 & LGPLv2.1+ & LGPLv3"
 LIC_FILES_CHKSUM = " \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
 inherit kde-kf5
@@ -12,7 +15,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "473d0f67d5357bbf08aa4f4504ceaceabc720b1f5433b456ddc5f8ad0d7e3b8b"
+SRC_URI[sha256sum] = "78ced2665f8918beb617b74962d188dcbb01a92a90ba49bfd173671bdb14e68d"
 
 FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \

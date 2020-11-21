@@ -1,7 +1,11 @@
 SUMMARY = "Document centric plugin system"
-LICENSE = "LGPLv2.1"
+LICENSE = "GPLv2.0+ & LGPLv2.0 & LGPLv2.0+ & LGPLv2.1+ & LGPLv3"
 LIC_FILES_CHKSUM = " \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
 inherit kde-kf5 gettext
@@ -25,7 +29,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "5546d2a474c80a601ba013642775682b087d086bd26d0b0d025b68d680c98bf2"
+SRC_URI[sha256sum] = "c516b5c1f2bca4a109dc2d186ef6729c1ad53a242877dfe942b84f131e93412d"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

@@ -1,8 +1,12 @@
 SUMMARY = "Addons to QtGui"
-LICENSE = "GPLv2 | LGPLv2.1"
+LICENSE = "GPLv2.0 & GPLv3.0 & LGPLv2.0 & LGPLv2.0+ & LGPLv2.1 & LGPLv3"
 LIC_FILES_CHKSUM = " \
-	file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
+    file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
 inherit kde-kf5
@@ -12,4 +16,4 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "45b4c5e0195abd79930635bbf20886b15b1b68b13fe4c56068579b91ef147350"
+SRC_URI[sha256sum] = "bdaa2ed104bfa9c2ebd702f033935a83560e1d00c7302620a6ae52cb309c7125"

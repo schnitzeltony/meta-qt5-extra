@@ -1,8 +1,8 @@
 SUMMARY = "Abstraction to system DNSSD features"
-LICENSE = "MIT & LGPLv2.1"
+LICENSE = "BSD-3-Clause & LGPLv2.0+"
 LIC_FILES_CHKSUM = " \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-	file://COPYING-CMAKE-SCRIPTS;md5=54c7042be62e169199200bc6477f04d1 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
 "
 
 inherit kde-kf5
@@ -10,4 +10,4 @@ inherit kde-kf5
 DEPENDS += "avahi"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "bee7f654f704d928b1219b75a289042474c1450e9f8acb02a905a4a177bc5b7d"
+SRC_URI[sha256sum] = "9cc2979e56915b5c4d8f8e66053a41406bff46aefd65af1ab07d2b87d8f4a753"

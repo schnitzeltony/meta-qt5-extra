@@ -1,7 +1,8 @@
 SUMMARY = "Extensible deamon for providing system level services"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPLv2.0 & LGPLv2.0+"
 LIC_FILES_CHKSUM = " \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
 "
 
 inherit kde-kf5
@@ -17,7 +18,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "f21647a5f35eebaa9bf12b5d5da25c24611c1971f94f27c510d22a48c79b0895"
+SRC_URI[sha256sum] = "2e94a4737ffc359d3614a1dff15b9727d54cb5fe639828946e0efcdcdbff3516"
 SRC_URI += "file://0001-hardcode-path-to-kconf_update.patch"
 
 FILES_${PN} += " \

@@ -1,7 +1,10 @@
 SUMMARY = "Add support for global workspace shortcuts"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPLv2.0 & LGPLv2.0+ & LGPLv2.1 & LGPLv3"
 LIC_FILES_CHKSUM = " \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
 inherit kde-kf5
@@ -16,10 +19,11 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "0062db9adde4dab0be6b64430010c0a5653355d0d1680abc9ec8e71988ff871f"
+SRC_URI[sha256sum] = "3a846f783ccb68da1f152fb5778612c4ed14cd79c6b5929ef729cf59e47462d4"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/kservices5 \
+    ${systemd_user_unitdir} \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

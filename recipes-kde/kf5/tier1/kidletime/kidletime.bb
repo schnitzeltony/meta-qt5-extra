@@ -1,8 +1,9 @@
 SUMMARY = "Monitoring user activity"
-LICENSE = "GPLv2 | LGPLv2.1"
+LICENSE = "GPLv2.0+ & LGPLv2.0 & MIT"
 LIC_FILES_CHKSUM = " \
-	file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/MIT.txt;md5=38aa75cf4c4c87f018227d5ec9638d75 \
 "
 
 inherit kde-kf5
@@ -10,6 +11,6 @@ inherit kde-kf5
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb qtx11extras libxscrnsaver", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "52a8af3f061101c406a592ec277a2c84846e3910af1d3dbfc3e15beb9cfd24a2"
+SRC_URI[sha256sum] = "0866fc98b5b045158742f03f5810909b24f1edf374a6014d476d67fe0466eb62"
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}"

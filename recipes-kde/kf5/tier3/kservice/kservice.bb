@@ -1,9 +1,13 @@
 SUMMARY = "Advanced plugin and service introspection"
-LICENSE = "GPLv2 | GPLv3 | LGPLv2.1"
+LICENSE = "GPLv2.0 & GPLv2.0+ & GPLv3 & LGPLv2.0 & LGPLv2.0+ & LGPLv2.1 & LGPLv3"
 LIC_FILES_CHKSUM = " \
-	file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-	file://COPYING.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
+    file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
 inherit kde-kf5 gettext
@@ -21,6 +25,6 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "a64bf7543870240f0d8f8c2bcf43759d98962ba94a4ed34bd23232df25bb408b"
+SRC_URI[sha256sum] = "ef7715e5d3e0bf4fc2d28a7713913a1283fb9c658b3c3536a6db8da649d185bf"
 
 FILES_${PN} += "${datadir}/kservicetypes5"

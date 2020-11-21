@@ -1,28 +1,33 @@
 SUMMARY = "Advanced embeddable text editor"
-LICENSE = "LGPLv2.1"
+LICENSE = "BSD-2-Clause & LGPLv2.0 & LGPLv2.0+ & MIT"
 LIC_FILES_CHKSUM = " \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/MIT.txt;md5=38aa75cf4c4c87f018227d5ec9638d75 \
 "
 
 inherit kde-kf5 gettext
 
-DEPENDS += "qtxmlpatterns \
-            syntax-highlighting \
-            karchive \
-            kconfig \
-            kconfig-native \
-            kcoreaddons-native \
-            kauth-native \
-            kguiaddons \
-            ki18n \
-            kio \
-            kparts \
-            sonnet \
-            sonnet-native \
-            libgit2"
+DEPENDS += " \
+    qtxmlpatterns \
+    syntax-highlighting \
+    karchive \
+    kconfig \
+    kconfig-native \
+    kcoreaddons-native \
+    kauth-native \
+    kguiaddons \
+    ki18n \
+    kio \
+    kparts \
+    sonnet \
+    sonnet-native \
+    libgit2 \
+"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "032b3ac31aa099ed67471f78401d13cf318646b0b9b5e20bb94796ac3ed6cf18"
+SRC_URI[sha256sum] = "6f937b7af06562a238f091deef9c4332e94311a697af8466b7f091720eaab2b2"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 

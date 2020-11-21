@@ -1,15 +1,30 @@
 SUMMARY = "Utilities for working with KCModules"
-LICENSE = "LGPLv2.1"
+LICENSE = "GPLv2.0 & GPLv3 & LGPLv2.0 & LGPLv2.0+"
 LIC_FILES_CHKSUM = " \
-	file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
+    file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
 "
 
 inherit kde-kf5 gettext
 
-DEPENDS += "kitemviews kconfigwidgets kcoreaddons ki18n kiconthemes kservice kxmlgui \
-            kdeclarative kcoreaddons-native kauth-native kconfig-native kpackage-native"
+DEPENDS += " \
+    kcoreaddons-native \
+    kauth-native \
+    kconfig-native \
+    kpackage-native \
+    kitemviews \
+    kconfigwidgets \
+    kcoreaddons \
+    ki18n \
+    kiconthemes \
+    kservice \
+    kxmlgui \
+    kdeclarative \
+"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "b28bf672bbe21e8d1b4e6ea924c1bb318c81c43dcbb86bebb3f5775e18945ca9"
+SRC_URI[sha256sum] = "0ea51ea9e46e6359c76fe099fd2cd03c20891a1cad26ea156ca921a9f0869009"
 
 FILES_${PN} += "${datadir}/kservicetypes5"

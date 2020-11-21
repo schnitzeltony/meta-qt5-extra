@@ -1,7 +1,8 @@
 SUMMARY = "Barcode abstraction layer"
-LICENSE = "MIT"
+LICENSE = "BSD-3-Clause & MIT"
 LIC_FILES_CHKSUM = " \
-    file://LICENSE;md5=02744127548d68b579a51bda5af08e2b \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/MIT.txt;md5=38aa75cf4c4c87f018227d5ec9638d75 \
 "
 
 inherit kde-kf5
@@ -11,6 +12,6 @@ DEPENDS += " \
     libdmtx \
 "
 
-SRC_URI[sha256sum] = "a2b135ffdf1af240366f3fb077c02c02094fb1706c6e84fab5186802544a5b87"
+SRC_URI[sha256sum] = "6c369efc354f8f3a0e08b0de565fd523f1480d563bec0d19382e9ab01f3efb78"
 
 PV = "${KF5_VERSION}"

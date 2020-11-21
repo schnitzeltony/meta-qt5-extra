@@ -1,6 +1,8 @@
 SUMMARY = "QtQuick plugins to build user interfaces based on the KDE UX guidelines"
-LICENSE = "LGPLv2"
-LIC_FILES_CHKSUM = "file://LICENSE.LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+LICENSE = "LGPLv2+"
+LIC_FILES_CHKSUM = " \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+"
 
 inherit kde-kf5
 
@@ -13,7 +15,7 @@ DEPENDS += " \
 
 PV = "${KF5_VERSION}"
 
-SRC_URI[sha256sum] = "9b2a097071f77804f6f2f2a478e5db602c8b5fee00de34fc44842f31223401bb"
+SRC_URI[sha256sum] = "90806125143807b74ee7f2fc74cd781d99b4e69ce5f15dcc28e1923f7a34a80a"
 
 FILES_${PN} += " \
     ${datadir}/kdevappwizard \

@@ -11,15 +11,15 @@ Upstream-Status: Inappropriate [cross-specific]
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 
 ---
- CMakeLists.txt                |  29 +-----
- src/CMakeLists.txt            | 200 +-----------------------------------------
- src/kdecore/kglobal.cpp       |  18 ----
+ CMakeLists.txt                |  30 +----
+ src/CMakeLists.txt            | 200 +---------------------------------
+ src/kdecore/kglobal.cpp       |  18 ---
  src/kdecore/klocale_kde.cpp   |   4 -
  src/kdecore/kstandarddirs.cpp |   1 -
- 5 files changed, 4 insertions(+), 248 deletions(-)
+ 5 files changed, 4 insertions(+), 249 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 74b8066..b8edca7 100644
+index 5dd56c6..7e4864b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -20,30 +20,11 @@ include(GenerateExportHeader)
@@ -64,7 +64,7 @@ index 74b8066..b8edca7 100644
  endif ()
  if (APPLE)
      cmake_find_frameworks(CoreFoundation)
-@@ -154,13 +133,8 @@ install(
+@@ -156,13 +135,8 @@ install(
  
  
  
@@ -79,7 +79,7 @@ index 74b8066..b8edca7 100644
  
  if (BUILD_TESTING)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index ab0b246..0751644 100644
+index b249bd5..95fd86c 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -1,6 +1,4 @@
@@ -291,7 +291,7 @@ index ab0b246..0751644 100644
  check_function_exists(mmap HAVE_MMAP)
  check_symbol_exists(posix_madvise "sys/mman.h" HAVE_MADVISE)
  configure_file(config-kdelibs4support.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kdelibs4support.h )
-@@ -315,32 +160,12 @@ endif()
+@@ -318,32 +163,12 @@ endif()
  
  target_link_libraries(KF5KDELibs4Support
  PUBLIC
@@ -324,7 +324,7 @@ index ab0b246..0751644 100644
     ${platformLinkLibraries}
  )
  
-@@ -368,27 +193,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
+@@ -371,27 +196,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
  )
  
  
@@ -353,20 +353,19 @@ index ab0b246..0751644 100644
  
  install(TARGETS KF5KDELibs4Support
 diff --git a/src/kdecore/kglobal.cpp b/src/kdecore/kglobal.cpp
-index ac3daa6..2dcafe2 100644
+index 8403437..e65a99f 100644
 --- a/src/kdecore/kglobal.cpp
 +++ b/src/kdecore/kglobal.cpp
-@@ -42,7 +42,6 @@
+@@ -41,21 +41,18 @@
+ #include <k4aboutdata.h>
  #include <kconfig.h>
- #include <klocale.h>
  #include <klocalizedstring.h>
 -#include <kcharsets.h>
  #include "kstandarddirs.h"
  #include <kcomponentdata.h>
  #undef QT_NO_TRANSLATION
-@@ -50,14 +49,12 @@
+ #include <QCoreApplication>
  #define QT_NO_TRANSLATION
- #include <QDebug>
  #include <QTextCodec>
 -#include <unistd.h> // umask
  
@@ -379,7 +378,7 @@ index ac3daa6..2dcafe2 100644
  
  class KGlobalPrivate
  {
-@@ -66,10 +63,6 @@ public:
+@@ -64,10 +61,6 @@ public:
          : dirs(nullptr),
            stringDict(nullptr)
      {
@@ -390,7 +389,7 @@ index ac3daa6..2dcafe2 100644
      }
  
      inline ~KGlobalPrivate()
-@@ -126,17 +119,6 @@ bool KGlobal::hasLocale()
+@@ -124,17 +117,6 @@ bool KGlobal::hasLocale()
      return QCoreApplication::instance() != nullptr;
  }
  
@@ -409,7 +408,7 @@ index ac3daa6..2dcafe2 100644
  {
      return KComponentData::activeComponent();
 diff --git a/src/kdecore/klocale_kde.cpp b/src/kdecore/klocale_kde.cpp
-index dd58c73..c66bd48 100644
+index 5a46421..9479b75 100644
 --- a/src/kdecore/klocale_kde.cpp
 +++ b/src/kdecore/klocale_kde.cpp
 @@ -42,7 +42,6 @@
@@ -431,7 +430,7 @@ index dd58c73..c66bd48 100644
      QString calendarType;
      readConfigEntry("CalendarSystem", "gregorian", calendarType);
 diff --git a/src/kdecore/kstandarddirs.cpp b/src/kdecore/kstandarddirs.cpp
-index f366c9d..e5ded7f 100644
+index 23064a9..c5fdc4b 100644
 --- a/src/kdecore/kstandarddirs.cpp
 +++ b/src/kdecore/kstandarddirs.cpp
 @@ -35,7 +35,6 @@
