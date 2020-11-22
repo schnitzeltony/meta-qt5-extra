@@ -1,5 +1,5 @@
 SUMMARY = "Support for icon themes"
-LICENSE = "GPLv2.0 & GPLv3 & LGPLv2.0 & LGPLv2.0+ & LGPLv2.1 & LGPLv3.0"
+LICENSE = "GPLv2.0 & GPLv3 & LGPLv2.0 & LGPLv2.0+ & LGPLv2.1 & LGPLv3"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
     file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
