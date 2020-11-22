@@ -1,5 +1,5 @@
 SUMMARY = "Components necessary to integrate browsers into the Plasma Desktop"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = "file://COPYING-GPL3;md5=d32239bcb673463ab874e80d47fae504"
 
 inherit kde-plasma gettext

@@ -1,5 +1,5 @@
 SUMMARY = "KDE oxygen icons"
-LICENSE = "LGPLv3"
+LICENSE = "LGPL-3.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=6e01bfa20e899e8ad569d5488923cbd2 \
 "

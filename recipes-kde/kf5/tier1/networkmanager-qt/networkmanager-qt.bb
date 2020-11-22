@@ -1,5 +1,5 @@
 SUMMARY = "Qt wrapper for NetworkManager API"
-LICENSE = "BSD-3-Clause & GPLv2.0 & LGPLv2.1 & LGPLv3"
+LICENSE = "BSD-3-Clause & GPL-2.0 & LGPL-2.1 & LGPL-3.0"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
     file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \

@@ -1,5 +1,5 @@
 SUMMARY = "Addons to QtDBus"
-LICENSE = "LGPLv2.0 & LGPLv2.0+ & LGPLv2.1 & LGPLv3"
+LICENSE = "LGPL-2.0 & LGPL-2.0+ & LGPL-2.1 & LGPL-3.0"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
     file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \

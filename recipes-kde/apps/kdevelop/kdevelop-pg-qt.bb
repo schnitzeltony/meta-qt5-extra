@@ -1,5 +1,5 @@
 SUMMARY = "KDevelop-PG-Qt is a parser generator"
-LICENSE = "LGPLv2"
+LICENSE = "LGPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=15ce55ef03e0531acfa5ca508b9f85b2"
 
 inherit kde-base

@@ -1,5 +1,5 @@
 SUMMARY = "QtQuick plugins to build user interfaces based on the KDE UX guidelines"
-LICENSE = "LGPLv2+"
+LICENSE = "LGPL-2.0+"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
 "

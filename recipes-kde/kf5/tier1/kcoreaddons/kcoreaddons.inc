@@ -1,5 +1,5 @@
 SUMMARY = "Addons to QtCore"
-LICENSE = "BSD-2-Clause & BSD-3-Clause & CC0-1.0 & GPLv2.0 & GPLv2.0+ & LGPLv2.0 & LGPLv2.0+ & LGPLv2.1 & LGPLv2.1+ & LGPLv3 & MPL-1.1 & Qt-LGPL-exception-1.1"
+LICENSE = "BSD-2-Clause & BSD-3-Clause & CC0-1.0 & GPL-2.0 & GPL-2.0+ & LGPL-2.0 & LGPL-2.0+ & LGPL-2.1 & LGPL-2.1+ & LGPL-3.0 & MPL-1.1 & Qt-LGPL-exception-1.1"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \
     file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \

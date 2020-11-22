@@ -1,5 +1,5 @@
 SUMMARY = "A library for accessing the usage data collected by the activities system"
-LICENSE = "GPLv2.0 & GPLv2.0+ & GPLv3 & LGPLv2.0+ & LGPLv2.1 & LGPLv3 & Qt-LGPL-exception-1.1"
+LICENSE = "GPL-2.0 & GPL-2.0+ & GPL-3.0 & LGPL-2.0+ & LGPL-2.1 & LGPL-3.0 & Qt-LGPL-exception-1.1"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
     file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \

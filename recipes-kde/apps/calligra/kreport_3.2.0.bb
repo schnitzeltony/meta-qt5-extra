@@ -1,6 +1,6 @@
 SUMMARY = "Framework for creation and generation of reports"
 HOMEPAGE = "https://community.kde.org/KReport"
-LICENSE = "LGPLv2 & GFDL-1.2 & BSD"
+LICENSE = "LGPL-2.0 & GFDL-1.2 & BSD-3-Clause"
 LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=1634220ce20ef95161c3b8401908638c \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \

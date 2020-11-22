@@ -1,5 +1,5 @@
 SUMMARY = "Okteta is a simple hex editor"
-LICENSE = "GPLv3 & GFDL-1.2 & LGPLv3"
+LICENSE = "GPL-3.0 & GFDL-1.2 & LGPL-3.0"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/LicenseRef-KDE-Accepted-GPL.txt;md5=b4c280013bbbadfbe92219498dc5228c \
     file://LICENSES/LicenseRef-KDE-Accepted-LGPL.txt;md5=e4b79a181b6483b37d39a27f4d75e60a \

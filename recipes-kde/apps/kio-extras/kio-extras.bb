@@ -1,5 +1,5 @@
 SUMMARY = "Additional components to increase the functionality of KIO"
-LICENSE = "GPLv2 & MIT"
+LICENSE = "GPL-2.0 & MIT"
 
 LIC_FILES_CHKSUM = " \
     file://fish/COPYING;md5=30716a35f5010d5fdbe911cc67144b31 \

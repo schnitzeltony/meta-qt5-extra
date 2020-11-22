@@ -1,5 +1,5 @@
 SUMMARY = "KDE document viewer"
-LICENSE = "GPLv2 & GFDL-1.2 & LGPL-2.1"
+LICENSE = "GPL-2.0 & GFDL-1.2 & LGPL-2.1"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5a3169a2d39a757efd8b7aa66a69d97b \
     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \

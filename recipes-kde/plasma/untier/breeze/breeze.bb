@@ -1,5 +1,5 @@
 SUMMARY = "Artwork, styles and assets for the Breeze visual style for the Plasma Desktop"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
 "

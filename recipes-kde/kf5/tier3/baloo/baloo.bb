@@ -1,5 +1,5 @@
 SUMMARY = "Baloo provides searching and indexing infrastucture with an emphasis on files"
-LICENSE = "BSD-3-Clause & bzip2-1.0.6 & GPLv2.0 & GPLv2.0+ & GPLv3 & LGPLv2.0+ & LGPLv2.1 & LGPLv2.1+ & LGPLv3"
+LICENSE = "BSD-3-Clause & bzip2-1.0.6 & GPL-2.0 & GPL-2.0+ & GPL-3.0 & LGPL-2.0+ & LGPL-2.1 & LGPL-2.1+ & LGPL-3.0"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
     file://LICENSES/bzip2-1.0.6.txt;md5=f1d2fdc6b1d232981a8007aa1854d24d \

@@ -1,5 +1,5 @@
 SUMMARY = "A file metadata and text extraction library"
-LICENSE = "BSD-3-Clause & LGPLv2.1 & LGPLv2.1+ & LGPLv3"
+LICENSE = "BSD-3-Clause & LGPL-2.1 & LGPL-2.1+ & LGPL-3.0"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
     file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \

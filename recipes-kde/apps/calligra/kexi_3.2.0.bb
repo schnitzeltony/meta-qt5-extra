@@ -1,6 +1,6 @@
 SUMMARY = "Kexi is a visual database applications creator"
 HOMEPAGE = "https://www.calligra.org/kexi/"
-LICENSE = "GPLv2 & LGPLv2 & GFDL-1.2 & BSD"
+LICENSE = "GPL-2.0 & LGPL-2.0 & GFDL-1.2 & BSD-3-Clause"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=8608b1f74c58ebcb11718f46e8619749 \
     file://COPYING.LIB;md5=7537f2f34ef162007ae9f34b9f256dcb \

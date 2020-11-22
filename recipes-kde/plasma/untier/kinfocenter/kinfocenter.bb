@@ -2,7 +2,7 @@ SUMMARY = "KINFOCENTER"
 # Have no idea how kinfocenter is licensed now (and change came in with minor
 # point release !!)
 # [1] https://cgit.kde.org/kinfocenter.git/commit/?id=4ea9df96ae038f28f3e9f6ecef6a64681bb3e189
-LICENSE = "GPLv2 & LGPLv2.1 & GFDL-1.2"
+LICENSE = "GPL-2.0 & LGPL-2.1 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
     file://LICENSES/GFDL-1.2-only.txt;md5=9a4c4207e152ff95aa8539e9c1ed53e9 \

@@ -1,5 +1,5 @@
 SUMMARY = "Simple KDE multimedia player"
-LICENSE = "GPLv2 & GFDL-1.2"
+LICENSE = "GPL-2.0 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=393a5ca445f6965873eca0259a17f833 \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \

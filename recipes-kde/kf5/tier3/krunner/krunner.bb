@@ -1,5 +1,5 @@
 SUMMARY = "Framework for providing different actions given a string query"
-LICENSE = "LGPLv2.0+ & LGPLv2.1+"
+LICENSE = "LGPL-2.0+ & LGPL-2.1+"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
     file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \

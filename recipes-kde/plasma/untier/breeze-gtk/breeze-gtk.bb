@@ -1,5 +1,5 @@
 SUMMARY = "Widget theme for GTK 2 and 3"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=1ed3208c1cce3d1926ccfc5bf65db050 \
 "

@@ -1,5 +1,5 @@
 SUMMARY = "Ark is KDE's file archiver"
-LICENSE = "GPLv2 & LGPLv3"
+LICENSE = "GPL-2.0 & LGPL-3.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
     file://COPYING.icons;md5=78d89b1a70de936b57b7231c94b75ca6 \

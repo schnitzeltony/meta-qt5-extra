@@ -1,5 +1,5 @@
 SUMMARY = "Models for Qt Model/View system"
-LICENSE = "LGPLv2.0+ & LGPLv2.1 & LGPLv2.1+"
+LICENSE = "LGPL-2.0+ & LGPL-2.1 & LGPL-2.1+"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
     file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \

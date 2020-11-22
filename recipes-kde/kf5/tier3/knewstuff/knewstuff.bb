@@ -1,5 +1,5 @@
 SUMMARY = "Support for downloading application assets from the network"
-LICENSE = "GPLv2.0 & GPLv3 & LGPLv2.0+ & LGPLv2.1 & LGPLv2.1+ & LGPLv3"
+LICENSE = "GPL-2.0 & GPL-3.0 & LGPL-2.0+ & LGPL-2.1 & LGPL-2.1+ & LGPL-3.0"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
     file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \

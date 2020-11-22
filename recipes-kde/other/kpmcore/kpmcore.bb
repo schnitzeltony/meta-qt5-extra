@@ -1,5 +1,5 @@
 SUMMARY = "Library for managing partitions"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = "file://COPYING.md;md5=97a733ff40c50b4bfc74471e1f6ca88b"
 
 inherit kde-base pkgconfig gettext

@@ -1,5 +1,5 @@
 SUMMARY = "Marble is a Virtual Globe and World Atlas"
-LICENSE = "GPLv3 & GFDL-1.2 & LGPLv2 & MIT"
+LICENSE = "GPL-3.0 & GFDL-1.2 & LGPL-2.0 & MIT"
 LIC_FILES_CHKSUM = " \
     file://LICENSE.GPL-3;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
     file://LICENSE.txt;md5=e9b5891877660f283be4bc396de0570f \

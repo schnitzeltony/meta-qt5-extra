@@ -1,5 +1,5 @@
 SUMMARY = "An advanced editor component which is used in numerous KDE applications requiring a text editing component"
-LICENSE = "GPLv2 & LGPLv3 & GPLv3"
+LICENSE = "GPL-2.0 & LGPL-3.0 & GPL-3.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=334069b3769dfd935f3e668e638a26ad \
     file://COPYING-GPL3;md5=d32239bcb673463ab874e80d47fae504 \

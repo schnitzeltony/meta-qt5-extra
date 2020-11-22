@@ -1,5 +1,5 @@
 SUMMARY = "Mathematical Function Plotter"
-LICENSE = "GPLv2 & GFDL-1.2"
+LICENSE = "GPL-2.0 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=7974e16b472f00bbbadf2d006aa00c50 \
     file://COPYING.DOC;md5=28d73eafa40ebd0ccdc6b37df8de10a3 \

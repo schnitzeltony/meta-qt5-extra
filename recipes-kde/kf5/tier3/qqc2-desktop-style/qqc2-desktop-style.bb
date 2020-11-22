@@ -1,5 +1,5 @@
 SUMMARY = "QtQuickControls 2 style that integrates with the desktop"
-LICENSE = "GPLv2.0 & GPLv2.0+ & GPLv3 & LGPLv2.0 & LGPLv3"
+LICENSE = "GPL-2.0 & GPL-2.0+ & GPL-3.0 & LGPL-2.0 & LGPL-3.0"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
     file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \

@@ -1,5 +1,5 @@
 SUMMARY = "Cross-platform IDE for C, C++, Python, QML/JavaScript and PHP"
-LICENSE = "GPLv2 & GFDL-1.2 & LGPLv2"
+LICENSE = "GPL-2.0 & GFDL-1.2 & LGPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=7974e16b472f00bbbadf2d006aa00c50 \
     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \

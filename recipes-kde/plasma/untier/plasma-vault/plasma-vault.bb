@@ -1,5 +1,5 @@
 SUMMARY = "A collection of package management tools for Debian-based systems"
-LICENSE = "GPLv2 & LGPLv2 & LGPLv2.1"
+LICENSE = "GPL-2.0 & LGPL-2.0 & LGPL-2.1"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://COPYING.LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \

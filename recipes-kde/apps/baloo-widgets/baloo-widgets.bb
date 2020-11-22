@@ -1,5 +1,5 @@
 SUMMARY = "Widgets for Baloo"
-LICENSE = "LGPLv2"
+LICENSE = "LGPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING.README;md5=f5d7c5af660f94231a1d4e19501bce8f \
     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \

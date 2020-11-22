@@ -1,5 +1,5 @@
 SUMMARY = "Qt Platform Theme integration plugins for the Plasma workspaces"
-LICENSE = "LGPLv3"
+LICENSE = "LGPL-3.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING.LGPL-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "

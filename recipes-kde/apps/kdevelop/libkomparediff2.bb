@@ -1,5 +1,5 @@
 SUMMARY = "Library to compare files and strings, used in Kompare and KDevelop"
-LICENSE = "GPLv2 & LGPLv2"
+LICENSE = "GPL-2.0 & LGPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8d8cc811a0870dd8391a69e61a77967a"
 
 inherit kde-apps gettext

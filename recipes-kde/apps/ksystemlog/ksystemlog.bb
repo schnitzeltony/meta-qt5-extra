@@ -1,5 +1,5 @@
 SUMMARY = "KDE SystemLog Application"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5a3169a2d39a757efd8b7aa66a69d97b \
 "

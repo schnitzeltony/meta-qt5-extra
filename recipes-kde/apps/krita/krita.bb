@@ -1,5 +1,5 @@
 SUMMARY = "Krita is a free digital painting application"
-LICENSE = "GPLv3 & BSD"
+LICENSE = "GPL-3.0 & BSD-3-Clause"
 HOMEPAGE = "https://krita.org/"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \

@@ -1,5 +1,5 @@
 SUMMARY = "Application to show KDE Applications' documentation"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=7108e5acd7ce861dee282297d7c2f38c \
 "

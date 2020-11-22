@@ -1,5 +1,5 @@
 SUMMARY = "Kdenlive is an intuitive and powerful multi-track video editor"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=38adfe5a9f2953129da1774430b28adf \
 "

@@ -1,5 +1,5 @@
 SUMMARY = "Unlock KWallet using PAM"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "

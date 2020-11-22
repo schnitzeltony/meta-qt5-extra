@@ -1,6 +1,6 @@
 SUMMARY = "Database Connectivity and Creation Framework"
 HOMEPAGE = "https://community.kde.org/KDb"
-LICENSE = "LGPLv2 & GFDL-1.2 & BSD"
+LICENSE = "LGPL-2.0 & GFDL-1.2 & BSD-3-Clause"
 LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=a9cc0417b6424a8311f616fa527d0755 \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \

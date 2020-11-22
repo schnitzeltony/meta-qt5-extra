@@ -1,5 +1,5 @@
 SUMMARY = "GUI for diagramming Unified Modelling Language (UML)"
-LICENSE = "GPLv2 & GFDL-1.2 & LGPL-2.0"
+LICENSE = "GPL-2.0 & GFDL-1.2 & LGPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=7974e16b472f00bbbadf2d006aa00c50 \
     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \

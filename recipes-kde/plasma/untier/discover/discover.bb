@@ -1,5 +1,5 @@
 SUMMARY = "KDE and Plasma resources management GUI"
-LICENSE = "GPLv3 & GFDL-1.2"
+LICENSE = "GPL-3.0 & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=6679dc9ea294d0d265902ab8c9936a9c \
     file://COPYING.GFDL;md5=ad1419ecc56e060eccf8184a87c4285f \
