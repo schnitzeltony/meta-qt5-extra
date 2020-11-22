@@ -1,6 +1,8 @@
 SUMMARY = "Client-side decoration for all Qt-based Wayland clients"
-LICENSE = "LGPLv3"
-LIC_FILES_CHKSUM = "file://LICENSE.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02"
+LICENSE = "LGPL-3.0"
+LIC_FILES_CHKSUM = " \
+    file://LICENSE.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
+"
 
 inherit liri
 

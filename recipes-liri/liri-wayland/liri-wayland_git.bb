@@ -1,5 +1,5 @@
 SUMMARY = "Wayland client and server extensions"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "

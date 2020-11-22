@@ -1,5 +1,5 @@
 SUMMARY = "File manager"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE.GPLv3;md5=1ebbd3e34237af26da5dc08a4e440464 \
 "

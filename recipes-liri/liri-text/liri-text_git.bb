@@ -1,5 +1,5 @@
 SUMMARY = "Material Design text editor"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE.GPLv3;md5=7702f203b58979ebbc31bfaeb44f219c \
 "

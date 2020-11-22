@@ -1,5 +1,5 @@
 SUMMARY = "Responsive shell for Liri OS"
-LICENSE = "LGPLv3 & GPLv3"
+LICENSE = "LGPL-3.0 & GPL-3.0"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE.GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
 	file://LICENSE.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02 \

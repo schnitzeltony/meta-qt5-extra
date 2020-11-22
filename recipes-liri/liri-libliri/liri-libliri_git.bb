@@ -1,5 +1,5 @@
 SUMMARY = "Library for Liri apps"
-LICENSE = "LGPLv3 & GFDL-1.3"
+LICENSE = "LGPL-3.0 & GFDL-1.3"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 	file://LICENSE.FDL;md5=10b9de612d532fdeeb7fe8fcd1435cc6 \
