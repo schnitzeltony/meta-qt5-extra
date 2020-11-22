@@ -1,5 +1,5 @@
 SUMMARY = "A library to ease up Font-Awesome handling in QML"
-LICENSE = "GPLv3 & OFL-1.1"
+LICENSE = "GPL-3.0 & OFL-1.1"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fecd21dee2128ddcc4579bc72ad08b80"
 
 DEPENDS = " \

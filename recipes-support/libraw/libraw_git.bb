@@ -1,5 +1,5 @@
 SUMMARY = "raw image decoder"
-LICENSE = "LGPLv2.1 | CDDL-1.0"
+LICENSE = "LGPL-2.1 | CDDL-1.0"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=49dc9ed77b52e7fb5a619e055be195f3"
 
 SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=0.19-stable"

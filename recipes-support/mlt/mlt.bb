@@ -1,6 +1,6 @@
 SUMMARY = "MLT Multimedia Framework"
 HOMEPAGE = "http://www.mltframework.org"
-LICENSE = "GPLv2 & LGPLv2.1"
+LICENSE = "GPL-2.0 & LGPL-2.1"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d \
     file://GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263 \

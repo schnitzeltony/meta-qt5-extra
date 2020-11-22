@@ -1,5 +1,5 @@
 SUMMARY = "A Qt-based client-side and server-side SOAP component"
-LICENSE = "(GPLv2 & LGPLv2.1 & AGPL-3.0) | KDAB-Commercial"
+LICENSE = "(GPLv2 & LGPL-2.1 & AGPL-3.0) | KDAB-Commercial"
 LIC_FILES_CHKSUM = " \
     file://LICENSE.GPL.txt;md5=63e3028b49eac8f84ab29661f079f159 \
     file://LICENSE.LGPL.txt;md5=ce198ec102c2f0b1d13f26967a934670 \
