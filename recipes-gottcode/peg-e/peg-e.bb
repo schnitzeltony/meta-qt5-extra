@@ -1,6 +1,6 @@
 SUMMARY = "Peg-E is a peg solitaire game"
 HOMEPAGE = "http://gottcode.org/peg-e/"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 inherit qmake5 qt5-translation gtk-icon-cache

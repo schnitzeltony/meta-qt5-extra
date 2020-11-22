@@ -1,6 +1,6 @@
 SUMMARY = "A tetris clone using the Qt GUI toolkit"
 HOMEPAGE = "http://gottcode.org/gottet/"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 inherit qmake5 qt5-translation gtk-icon-cache
