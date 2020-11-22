@@ -1,5 +1,5 @@
 SUMMARY = "Qt port of obconf, the Openbox configuration tool"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4641e94ec96f98fabc56ff9cc48be14b"
 
 inherit lxqt pkgconfig
