@@ -33,7 +33,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "6e15a67022ef96f07b9825139cc7aaacbc6f60729570c31ce6cb25184602b434"
+SRC_URI[sha256sum] = "88dd969f4830cd638eb04a555ca9eabccf2bc5d408c60b37f086313cc08c687e"
 SRC_URI += "file://0001-FIND_REQUIRED_PROGRAM-is-broken-use-the-tools-direct.patch"
 
 # Aagh: To select a soundcard we need to select another type - so keep oss in as dummy
