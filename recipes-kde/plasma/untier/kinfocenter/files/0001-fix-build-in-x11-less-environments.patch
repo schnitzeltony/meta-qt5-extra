@@ -46,12 +46,12 @@ index ab45779..2e05799 100644
  find_library(DL_LIBRARY dl)
  if (DL_LIBRARY)
 diff --git a/Modules/opengl/opengl.cpp b/Modules/opengl/opengl.cpp
-index 340af6d..e03973d 100644
+index 2d9cfce..a73f865 100644
 --- a/Modules/opengl/opengl.cpp
 +++ b/Modules/opengl/opengl.cpp
-@@ -39,9 +39,12 @@
+@@ -40,9 +40,12 @@
  #include <KLocalizedString>
- #include <kmessagebox.h>
+ #include <KMessageBox>
  
 +#include <config-X11.h>
 +#if HAVE_X11
@@ -62,7 +62,7 @@ index 340af6d..e03973d 100644
  
  #include <openglconfig.h>
  
-@@ -783,6 +786,7 @@ static QTreeWidgetItem *get_gl_info_glx(Display *dpy, int scrnum, Bool allowDire
+@@ -798,6 +801,7 @@ static QTreeWidgetItem *get_gl_info_glx(Display *dpy, int scrnum, Bool allowDire
  #endif
  
  #if KCM_HAVE_EGL
@@ -70,7 +70,7 @@ index 340af6d..e03973d 100644
  static QTreeWidgetItem *get_gl_info_egl(Display *dpy, int scrnum, QTreeWidgetItem *l1, QTreeWidgetItem *after)
  {
     Window win;
-@@ -898,6 +902,7 @@ static QTreeWidgetItem *get_gl_info_egl(Display *dpy, int scrnum, QTreeWidgetIte
+@@ -913,6 +917,7 @@ static QTreeWidgetItem *get_gl_info_egl(Display *dpy, int scrnum, QTreeWidgetIte
     return result;
  
  }
@@ -78,7 +78,7 @@ index 340af6d..e03973d 100644
  
  static QTreeWidgetItem *get_gl_info_egl_qt(QTreeWidgetItem *l1, QTreeWidgetItem *after, QSurfaceFormat::OpenGLContextProfile profile, const QString &title)
  {
-@@ -943,7 +948,9 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
+@@ -958,7 +963,9 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
  {
      QTreeWidgetItem *l1, *l2 = nullptr;
  
@@ -88,7 +88,7 @@ index 340af6d..e03973d 100644
      static bool isWayland = QGuiApplication::platformName().contains(QLatin1String("wayland"));
  
      QTreeWidgetItem *header = new QTreeWidgetItem();
-@@ -955,6 +962,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
+@@ -970,6 +977,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
  
      l1 = new QTreeWidgetItem(treeWidget);
  
@@ -96,7 +96,7 @@ index 340af6d..e03973d 100644
      if (isX11) {
          char *displayName = nullptr;
          Display *dpy;
-@@ -1000,6 +1008,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
+@@ -1015,6 +1023,7 @@ bool GetInfo_OpenGL(QTreeWidget *treeWidget)
  #endif
          XCloseDisplay(dpy);
      }

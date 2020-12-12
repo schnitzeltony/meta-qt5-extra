@@ -1,14 +1,20 @@
 SUMMARY = "KDE and Plasma resources management GUI"
-LICENSE = "GPL-3.0 & GFDL-1.2"
+LICENSE = "BSD-3-Clause & GPL-2.0 & GPL-2.0+ & GPL-3.0 & LGPL-2.0+ & LGPL-2.1 & LGPL-3.0 & MIT"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=6679dc9ea294d0d265902ab8c9936a9c \
-    file://COPYING.GFDL;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
+    file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
+    file://LICENSES/MIT.txt;md5=38aa75cf4c4c87f018227d5ec9638d75 \
 "
 
 inherit kde-plasma gtk-icon-cache mime-xdg
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "6f989060450fbbfa596424fa6d3c4d0c5ea6ab532d09e58a935a109c628a3f82"
+SRC_URI[sha256sum] = "3669648fa39e14a8da059373c9a01caacfd5b126d61daed65d5d7aae7ab30012"
 
 DEPENDS += " \
     qtdeclarative \
@@ -36,4 +42,4 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
 "
 
-RDEPENDS_${PN} += "python3 kirigami"
+RDEPENDS_${PN} += "python3-core kirigami"

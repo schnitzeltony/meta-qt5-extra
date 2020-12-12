@@ -12,11 +12,12 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "50fd9c9f68fd514dfd1ad05e65c8767afa154a3eed792f335214eee188c8541a"
+SRC_URI[sha256sum] = "3edc7b73baa6fa8b0bec51272e8786bab41998b0f675262d5086fdf6c1e9bb44"
 
 do_configure_append() {
     # adjust path to protocol sources in sysroot
     # once there are more consumers of plasma-wayland-protocols we might need
     # to find another solution
     sed -i 's: ${datadir}/plasma-wayland-protocols: ${STAGING_DATADIR}/plasma-wayland-protocols:g' ${B}/build.ninja
+    sed -i 's: ${datadir}/wayland/wayland.xml: ${STAGING_DATADIR}/wayland/wayland.xml:g' ${B}/build.ninja
 }

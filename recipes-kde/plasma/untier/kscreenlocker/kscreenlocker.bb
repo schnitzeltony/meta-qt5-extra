@@ -29,7 +29,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "b13b2081971db1347d6a77dec416725995ca20a5b7bf05f21c72a68e15d6a5b9"
+SRC_URI[sha256sum] = "d80d4625a0a48a7a63c5ff8255e8639eb2fb57ebc436c46979949b39fc530126"
 SRC_URI += "file://kde.pam"
 
 do_install_append() {
@@ -41,6 +41,7 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/kconf_update \
     ${datadir}/k*5 \
+    ${datadir}/kpackage \
     ${datadir}/plasma \
     ${datadir}/ksmserver \
     ${sysconfdir} \

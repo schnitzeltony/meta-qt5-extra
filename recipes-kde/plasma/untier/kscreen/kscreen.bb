@@ -29,7 +29,7 @@ DEPENDS += "\
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "0d72c687a405358e6aa6b388a648134e8e9236b7ed60e36a31068960d07b56e8"
+SRC_URI[sha256sum] = "4063fae5cb40a22a98fd0cc217e9b0ea4aef6518203c4bbe2664d5d01dfb9d9c"
 
 FILES_${PN} += " \
     ${datadir}/k*_kscreen \

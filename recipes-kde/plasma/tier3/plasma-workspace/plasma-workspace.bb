@@ -8,9 +8,10 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma features_check gettext
+inherit kde-plasma features_check gettext gtk-icon-cache mime-xdg
 
 DEPENDS += " \
+    qtwayland-native \
     kpackage-native \
     kdoctools-native \
     sonnet-native \
@@ -49,7 +50,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "490329e08e63016edd696a9132bf80b76ef51dacf53308b865d2e27b67ce8127"
+SRC_URI[sha256sum] = "12bfe6c3f62e4d1d2f7bc02ccb2e2ed5aee2ffe21c310987e42a2205374c30c9"
 SRC_URI += "file://0001-align-phonon-path.patch"
 
 # REVISIT
@@ -57,20 +58,13 @@ FILES_${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/dbus-1 \
     ${datadir}/desktop-directories \
-    ${datadir}/kconf_update \
-    ${datadir}/kdevappwizard \
-    ${datadir}/kio_desktop \
-    ${datadir}/k*5 \
-    ${datadir}/knsrcfiles \
-    ${datadir}/kpackage \
-    ${datadir}/ksplash \
-    ${datadir}/kstyle \
+    ${datadir}/k* \
     ${datadir}/plasma \
+    ${datadir}/polkit-1 \
     ${datadir}/sddm \
     ${datadir}/solid \
     ${datadir}/wayland-sessions \
     ${datadir}/xsessions \
-    ${datadir}/kglobalaccel \
     \
     ${libdir}/libkdeinit5*.so \
     ${libdir}/kconf_update_bin \
@@ -85,6 +79,7 @@ FILES_SOLIBSDEV = " \
     ${libdir}/libplasma-geolocation-interface${SOLIBSDEV} \
     ${libdir}/libtaskmanager${SOLIBSDEV} \
     ${libdir}/libweather_ion${SOLIBSDEV} \
+    ${libdir}/libkfontinst*${SOLIBSDEV} \
 "
 
 

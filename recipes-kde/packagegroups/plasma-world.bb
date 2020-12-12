@@ -58,7 +58,6 @@ UNTIER = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "powerdevil", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sddm-kcm", "",d)} \
     systemsettings \
-    user-manager \
 "
 
 RDEPENDS_${PN} = " \

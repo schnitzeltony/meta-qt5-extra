@@ -25,12 +25,13 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "e857e3c73a3d6c08bb44506f35a8359b480e960d32ae189b9b5bddcbcf5ffe2d"
+SRC_URI[sha256sum] = "522ad4ff3f3fc4e213328f821041d40b5126d0d3ca49ecc9aea35c59e2c64129"
 
 FILES_${PN} += " \
     ${datadir}/bluedevilwizard \
     ${datadir}/mime \
     ${datadir}/k*5 \
+    ${datadir}/kpackage \
     ${datadir}/plasma \
     ${datadir}/remoteview \
     ${OE_QMAKE_PATH_PLUGINS} \

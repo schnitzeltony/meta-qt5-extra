@@ -1,7 +1,8 @@
 SUMMARY = "Widget theme for GTK 2 and 3"
-LICENSE = "LGPL-2.1"
+LICENSE = "BSD-3-Clause & LGPL-2.1"
 LIC_FILES_CHKSUM = " \
-    file://COPYING.LIB;md5=1ed3208c1cce3d1926ccfc5bf65db050 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
 "
 
 inherit kde-plasma python3native
@@ -9,7 +10,7 @@ inherit kde-plasma python3native
 DEPENDS += "sassc-native cairo breeze python3-pycairo-native"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "5213b2f6815e542cda6bf9ae153636285e178962c6a59ff9ab4fe5c07dc256c8"
+SRC_URI[sha256sum] = "8905b3a0ff40a48ed2f00f69b7e30c4658deb9fbd1afc61700a28d078693b61d"
 
 FILES_${PN} += " \
     ${datadir}/kconf_update \

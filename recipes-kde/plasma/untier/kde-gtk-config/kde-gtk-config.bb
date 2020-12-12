@@ -1,8 +1,11 @@
 SUMMARY = "GTK2 and GTK3 Configurator for KDE"
-LICENSE = "GPL-2.0 & LGPL-2.1"
+LICENSE = "BSD-2-Clause & BSD-3-Clause & GPL-2.0 & GPL-2.0+ & GPL-3.0"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
+    file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
+    file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
 "
 
 REQUIRED_DISTRO_FEATURES = "x11"
@@ -10,21 +13,23 @@ REQUIRED_DISTRO_FEATURES = "x11"
 inherit kde-plasma features_check gettext
 
 DEPENDS += " \
+    sassc-native \
     gtk+ \
     gtk+3 \
     gsettings-desktop-schemas \
-    ki18n \
     kauth-native \
     kconfig-native \
-    kconfigwidgets \
     kcoreaddons-native \
+    ki18n \
+    kconfigwidgets \
     knewstuff \
     karchive \
     kcmutils \
+    kdecoration \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "e9b79917994a18001691ce675d5f2e95367c872694d82540fb245ab6e57035a3"
+SRC_URI[sha256sum] = "db3510cb08788c915be5e034106145597de5a412236b60c57b8db4b64dbbd7b1"
 
 CFLAGS += "-isystem ${STAGING_INCDIR}/harfbuzz"
 CXXFLAGS += "-isystem ${STAGING_INCDIR}/harfbuzz"
@@ -32,6 +37,7 @@ CXXFLAGS += "-isystem ${STAGING_INCDIR}/harfbuzz"
 FILES_${PN} += " \
     ${datadir}/kcm-gtk-module \
     ${datadir}/kconf_update \
+    ${datadir}/themes \
     ${libdir}/kconf_update_bin \
     ${libdir}/gtk-3.0/modules \
     ${OE_QMAKE_PATH_PLUGINS} \
