@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
 "
 
-inherit kde-apps gettext
+inherit kde-apps gettext gtk-icon-cache
 
 DEPENDS += "\
     kauth-native \
@@ -26,9 +26,9 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "fd168af82bfec1cca87beb1f9b89520fdd4aa31401db690855615ac5c79b4153"
+SRC_URI[sha256sum] = "f1531c598595c2765d7ba6faccd82cba6d1de2e651033851515a094146cfddc7"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
-    ${datadir}/icons \
+    ${datadir}/knsrcfiles \
 "

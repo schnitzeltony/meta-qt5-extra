@@ -24,10 +24,11 @@ DEPENDS += " \
     kxmlgui \
     libkdegames \
     freecell-solver \
+    black-hole-solver \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "493b20d53806cbb1bd656817ef139de80197ec585bb097c4bd28c23b655aa4c5"
+SRC_URI[sha256sum] = "c00f9afeb7b2d4e37e626a9379df08f30077d0c1965a674795b099dd11588d8f"
 
 FILES_SOLIBSDEV = ""
 
@@ -35,6 +36,7 @@ FILES_${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/icons \
     ${datadir}/mime \
+    ${datadir}/knsrcfiles \
     ${datadir}/kxmlgui5 \
     ${libdir}/libkcardgame.so \
 "

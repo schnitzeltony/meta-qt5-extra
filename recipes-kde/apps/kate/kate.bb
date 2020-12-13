@@ -1,9 +1,14 @@
 SUMMARY = "An advanced editor component which is used in numerous KDE applications requiring a text editing component"
-LICENSE = "GPL-2.0 & LGPL-3.0 & GPL-3.0"
+LICENSE = "GPL-2.0+ & GPL-3.0 & LGPL-2.0 & LGPL-2.0+ & LGPL-2.1 & LGPL-3.0 & MIT & The-Qt-Company-GPL-Exception-1.0"
 LIC_FILES_CHKSUM = " \
-    file://COPYING.LIB;md5=334069b3769dfd935f3e668e638a26ad \
-    file://COPYING-GPL3;md5=d32239bcb673463ab874e80d47fae504 \
-    file://COPYING-LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
+    file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
+    file://LICENSES/MIT.txt;md5=38aa75cf4c4c87f018227d5ec9638d75 \
+    file://LICENSES/Qt-GPL-exception-1.0.txt;md5=06c4b774de9d70e39292959b3e6757be \
 "
 
 inherit kde-apps gettext mime-xdg
@@ -34,7 +39,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "e9b7a9b11ae54a387b5a6d6f4253f9da7f63972fe2928d7fa280d969638dfdd4"
+SRC_URI[sha256sum] = "69017d7369bbcac7a3e350fc0e02cbcfbf5ce09e89149e765a1cd647f3cb3c0f"
 
 FILES_SOLIBSDEV = ""
 

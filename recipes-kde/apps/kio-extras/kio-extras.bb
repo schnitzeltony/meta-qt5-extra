@@ -1,12 +1,15 @@
 SUMMARY = "Additional components to increase the functionality of KIO"
-LICENSE = "GPL-2.0 & MIT"
+LICENSE = "BSD-3-Clause & GPL-2.0 & GPL-2.0+ & GPL-3.0 & GPL-3.0+ & LGPL-2.0+ & MIT"
 
 LIC_FILES_CHKSUM = " \
-    file://fish/COPYING;md5=30716a35f5010d5fdbe911cc67144b31 \
-    file://info/LICENSE;md5=45306e1027c3de81e7855c7cc3110a0c \
-    file://mtp/LICENCE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://mtp/COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://man/LICENSE;md5=d975629b732b61cb58f9595c6baa9379 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/CC0-1.0.txt;md5=6fd064768b8d61c31ddd0540570fbd33 \
+    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
+    file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
+    file://LICENSES/GPL-3.0-or-later.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/MIT.txt;md5=38aa75cf4c4c87f018227d5ec9638d75 \
 "
 
 inherit kde-apps gettext mime
@@ -51,8 +54,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "2c0001a2e864173988c5b0916de4511ff4c5ea711e96e928f9299fc4b44af344"
-SRC_URI += "file://0001-Do-not-find-use-taglib-config.patch"
+SRC_URI[sha256sum] = "530a9643009647d6b8e8e799b4018ce5d06a687c918f53af6652dbfa7fe3ab29"
 
 do_configure_append() {
     sed -i 's:${S}/smb/kdsoap-ws-discovery-client/src/kdwsdl2cpp:${STAGING_BINDIR_NATIVE}/kdwsdl2cpp:g' ${B}/build.ninja

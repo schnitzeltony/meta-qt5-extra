@@ -14,7 +14,7 @@ DEPENDS += "\
     kauth-native \
     mlt \
     qtsvg \
-    qtwebkit \
+    qtwebengine \
     karchive \
     sonnet-native \
     kbookmarks \
@@ -35,10 +35,11 @@ DEPENDS += "\
     xapian-core \
     purpose \
     kdeclarative \
+    v4l-utils \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "9f8f3636f65f42a73fd1a97e29f8493fbcb8297ca755852eae93258ce12ceda0"
+SRC_URI[sha256sum] = "c2be4227edc29e9d835dbe21ee3ca2986a44cd494dffc8b353a526510fb40d74"
 
 SRC_URI += " \
     file://0001-CMakeLists.txt-make-MLT_PREFIX-configurable.patch \

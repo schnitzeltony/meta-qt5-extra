@@ -31,7 +31,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "cb3991a2395162795022ab0c09edb626229aeba06036370c98277d228e7ffdf6"
+SRC_URI[sha256sum] = "aa5a7891a7f8d0b6b9abdcbc99fc4dc783f6b93e898b3b9fcbe69b7348c1eb85"
 
 EXTRA_OECMAKE += " \
     -DMARBLE_PRI_INSTALL_DIR=${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/modules \
@@ -51,8 +51,7 @@ FILES_${PN}-qt = "${bindir}/${BPN}-qt"
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/icons \
-    ${datadir}/k*5 \
-    ${datadir}/mime \
+    ${datadir}/k* \
     ${datadir}/plasma \
     ${libdir}/libmarbledeclarative.so \
     ${OE_QMAKE_PATH_PLUGINS} \

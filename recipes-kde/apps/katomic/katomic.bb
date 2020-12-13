@@ -27,12 +27,12 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "d336fdaa10d5d1deb66d6764e07a1288dc79692b789b63d8662ce57086e961ec"
+SRC_URI[sha256sum] = "00bca558a18de42ff896376c1c2665dde19e7e041d18e6ed13ac16c3754189b6"
 
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
     ${datadir}/kconf_update \
-    ${datadir}/icons \
+    ${datadir}/knsrcfiles \
 "
 
 RDEPENDS_${PN} += "perl"
