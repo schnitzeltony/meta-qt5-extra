@@ -15,9 +15,8 @@ DEPENDS += " \
     kparts \
 "
 
-PV = "5.2.0"
-SRC_URI = "https://download.kde.org/stable/ktorrent/${PV}/${BP}.tar.xz"
-SRC_URI[sha256sum] = "d1031d745c1ace02d11b59c426610aee779d208e3d1ae81f8559c265173732ff"
+PV = "${KDE_APP_VERSION}"
+SRC_URI[sha256sum] = "e4b55c47ceea349e8cc248b74e27ae42c53cd48dc6bfcf416519c7bb5a399749"
 
 FILES_${PN} += " \
     ${datadir}/knotifications5 \
