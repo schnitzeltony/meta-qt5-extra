@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 cmake_lib
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "153d3ed114954594b0dcc00e1317483609649c064203e6eb8b110686dbaba686"
+SRC_URI[sha256sum] = "30e81a7d00cc862e9d07d0e6d0fa55b561641850b7aaffcf51d4b390f1eff981"
 
 # REVISIT remove ugly hack for wayland-only environments
 SRC_URI += "file://0001-kconfiggui-do-only-compile-in-case-sessions-are-aval.patch"

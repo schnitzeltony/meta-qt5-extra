@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5-porting-aids perlnative
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "b581273dfaebc5697eb7aa616d858119227dd6c5b781f216abdbff1d93076f0d"
+SRC_URI[sha256sum] = "d62ebe8aaa63218b293bc77b68aa9e6394ca314d525f8b170692a9465a436f7c"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 

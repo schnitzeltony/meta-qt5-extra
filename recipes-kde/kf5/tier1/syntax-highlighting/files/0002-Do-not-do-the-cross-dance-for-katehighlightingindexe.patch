@@ -31,7 +31,7 @@ index 9fa26b2..d2f7255 100644
 +endif()
  else()
      # host build
-     add_executable(katehighlightingindexer katehighlightingindexer.cpp)
+     add_executable(katehighlightingindexer katehighlightingindexer.cpp ../lib/worddelimiters.cpp)
 -- 
 2.14.3
 

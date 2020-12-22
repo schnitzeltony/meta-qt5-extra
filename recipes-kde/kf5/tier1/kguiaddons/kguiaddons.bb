@@ -12,8 +12,10 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5
 
 DEPENDS += " \
+    qtwayland-native \
+    qtwayland \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)} \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "bdaa2ed104bfa9c2ebd702f033935a83560e1d00c7302620a6ae52cb309c7125"
+SRC_URI[sha256sum] = "df674a64142d494345daed77cb64ab5b27960ebeda94ae30287bf311acaef63c"
