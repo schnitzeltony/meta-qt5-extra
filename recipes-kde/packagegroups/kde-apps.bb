@@ -25,6 +25,7 @@ RDEPENDS_${PN} = " \
     kdf \
     kexi \
     kfind \
+    kgeography \
     khelpcenter \
     kio-extras \
     kmag \
