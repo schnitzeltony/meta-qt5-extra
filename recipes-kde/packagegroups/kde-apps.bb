@@ -7,6 +7,7 @@ inherit packagegroup
 RDEPENDS_${PN} = " \
     analitza \
     ark \
+    artikulate \
     baloo-widgets \
     dolphin \
     dolphin-plugins \
