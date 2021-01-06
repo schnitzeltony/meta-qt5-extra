@@ -26,7 +26,7 @@ DEPENDS += " \
 DEPENDS += "lmsensors"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "a5f247b24ce75a28f301446fbeb25abf968e77e0c32cd4be9b574a21d3bbfaf4"
+SRC_URI[sha256sum] = "32f5227b2c1f91cd64fcee6b401209582cfffb16e2b015c6d6513e9f4d1dab35"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
