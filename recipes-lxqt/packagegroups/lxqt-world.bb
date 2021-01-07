@@ -34,3 +34,7 @@ RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qterminal", "",d)} \
     qtermwidget \
 "
+
+RRECOMMENDS_${PN} = " \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "picom", "",d)} \
+"
