@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 inherit packagegroup
 
 RDEPENDS_${PN} = " \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "compton-conf", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libfm-qt", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "liblxqt", "",d)} \
     libqtxdg \
