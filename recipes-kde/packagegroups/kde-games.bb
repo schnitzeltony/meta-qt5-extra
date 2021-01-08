@@ -13,6 +13,7 @@ RDEPENDS_${PN} = " \
     kbounce \
     kbreakout \
     kdiamond \
+    kgoldrunner \
     kmahjongg \
     kmines \
     kpat \
