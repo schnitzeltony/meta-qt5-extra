@@ -39,7 +39,7 @@ python qt_do_split_locales() {
                 locales.append(locale)
 
     if not locales:
-        bb.debug(1, "No locale files in this package")
+        bb.warn("No locale files for recipe %s. Remove qt5-translation from inherit?" % d.getVar('PN'))
         return
 
     summary = d.getVar('SUMMARY') or pn
