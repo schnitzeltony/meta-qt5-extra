@@ -19,13 +19,13 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  5 files changed, 4 insertions(+), 249 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 5dd56c6..7e4864b 100644
+index 20b0bbf..6b7950e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -20,30 +20,11 @@ include(GenerateExportHeader)
  include(CMakeFindFrameworks)
  
- set(REQUIRED_QT_VERSION 5.13.0)
+ set(REQUIRED_QT_VERSION 5.14.0)
 -find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network Widgets DBus Test Svg PrintSupport Designer)
 +find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Network DBus Test)
  
