@@ -10,14 +10,8 @@ DEPENDS += " \
     qtsvg \
     fluidsynth \
 "
-SRC_URI = " \
-    ${SOURCEFORGE_MIRROR}/project/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \
-    file://0001-Do-not-set-lib-suffix-oe-will-take-care.patch \
-"
-SRC_URI[md5sum] = "a1fd83216f65619fea766dfc0a6f5266"
-SRC_URI[sha256sum] = "367743764c8f5c6e40bb19b9581f083da2881b9c9516d6b3b247e5644dee7c2b"
-
-EXTRA_OECMAKE = "-DLIB_SUFFIX=`echo ${baselib} | sed -e s/lib//`"
+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${PV}/${BPN}-${PV}.tar.bz2"
+SRC_URI[sha256sum] = "75aca4281da25fe0186b44c07772c5f0b4d1f2bba875c4667e7e6e9fcedb3cd9"
 
 FILES_${PN} += " \
     ${datadir}/mime \
