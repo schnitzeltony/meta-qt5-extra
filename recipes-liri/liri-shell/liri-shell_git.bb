@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
-inherit liri features_check gsettings
+inherit liri qt5-translation features_check gsettings
 
 REQUIRED_DISTRO_FEATURES = "wayland pam"
 
