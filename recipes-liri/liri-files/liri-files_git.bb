@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.GPLv3;md5=1ebbd3e34237af26da5dc08a4e440464 \
 "
 
-inherit liri
+inherit liri qt5-translation
 
 PV = "0.2.0+git${SRCPV}"
 

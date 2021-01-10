@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.GPLv3;md5=7702f203b58979ebbc31bfaeb44f219c \
 "
 
-inherit liri gtk-icon-cache mime-xdg
+inherit liri qt5-translation gtk-icon-cache mime-xdg
 
 DEPENDS += " \
     qtquickcontrols2 \

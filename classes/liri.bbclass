@@ -13,7 +13,7 @@ DEPENDS += " \
     qtwayland \
 "
 
-inherit cmake_qt5_extra pkgconfig qt5-translation
+inherit cmake_qt5_extra pkgconfig
 
 EXTRA_OECMAKE += " \
     -DINSTALL_LIBDIR:PATH=${baselib} \
