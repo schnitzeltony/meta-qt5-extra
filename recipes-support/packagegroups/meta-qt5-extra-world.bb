@@ -30,4 +30,5 @@ RDEPENDS_${PN} = " \
     lxqt-world \
     \
     libquotient \
+    quaternion \
 "
