@@ -7,17 +7,15 @@ QT_TRANSLATION_FILES ??= "${datadir}/*/translations/*.qm ${datadir}/*/translatio
 
 FILES_${PN}-locale = "${datadir}/*/translations"
 
-# remove ${datadir}/${BPN} set by bitbake.conf
-FILES_${PN}_remove = "${datadir}/${BPN}"
-
 python qt_do_split_locales() {
     import glob
+    import collections
 
     if (d.getVar('PACKAGE_NO_LOCALE') == '1'):
         bb.debug(1, "package requested not splitting locales")
         return
 
-    packages = (d.getVar('PACKAGES') or "").split()
+    packages = collections.deque((d.getVar('PACKAGES') or "").split())
 
     datadir = d.getVar('datadir')
     if not datadir:
@@ -51,7 +49,7 @@ python qt_do_split_locales() {
     for l in sorted(locales):
         ln = legitimize_package_name(l)
         pkg = pn + '-locale-' + ln
-        packages.append(pkg)
+        packages.appendleft(pkg)
         files = ''
         for transvar in d.getVar('QT_TRANSLATION_FILES').split():
             files = '%s %s' % (files, transvar.replace('*.qm', '*_%s.qm' % l))
@@ -63,7 +61,7 @@ python qt_do_split_locales() {
         if locale_section:
             d.setVar('SECTION_' + pkg, locale_section)
 
-    d.setVar('PACKAGES', ' '.join(packages))
+    d.setVar('PACKAGES', ' '.join(list(packages)))
 }
 
 PACKAGESPLITFUNCS_prepend = "qt_do_split_locales "
