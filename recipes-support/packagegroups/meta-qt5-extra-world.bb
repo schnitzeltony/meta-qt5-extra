@@ -28,4 +28,6 @@ RDEPENDS_${PN} = " \
     liri-world \
     kde-world \
     lxqt-world \
+    \
+    libquotient \
 "
