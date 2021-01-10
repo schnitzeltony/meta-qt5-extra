@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit lxqt features_check mime-xdg gtk-icon-cache
+inherit lxqt qt5-translation features_check mime-xdg gtk-icon-cache
 
 
 DEPENDS += " \

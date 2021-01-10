@@ -2,7 +2,7 @@ SUMMARY = "pavucontrol-qt is the Qt port of pulseaudio volume control pavucontro
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
-inherit lxqt
+inherit lxqt qt5-translation
 
 DEPENDS += "glib-2.0 liblxqt pulseaudio"
 
