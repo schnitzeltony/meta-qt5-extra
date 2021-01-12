@@ -38,7 +38,10 @@ DEPENDS += " \
 
 PV = "4.4.1"
 PVEXT = ""
-SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.xz"
+SRC_URI = " \
+    ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.xz \
+    file://0001-Make-C++14-default.patch \
+"
 SRC_URI[sha256sum] = "799770a624b4fbb9ab1b889f14b5b3e446355de7b9e939f182915aaeea76b5ae"
 S = "${WORKDIR}/${BPN}-${PV}${PVEXT}"
 
