@@ -74,7 +74,6 @@ RDEPENDS_${PN} += " \
     qtbase-plugins \
     qtdeclarative-plugins \
     qtdeclarative-qmlplugins \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam-plugin-tally', '', d)} \
 "
 
 RRECOMMENDS_${PN += " \
