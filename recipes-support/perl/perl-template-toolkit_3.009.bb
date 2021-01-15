@@ -8,8 +8,7 @@ LIC_FILES_CHKSUM = " \
 " 
 
 SRC_URI = "https://cpan.metacpan.org/authors/id/A/AT/ATOOMIC/Template-Toolkit-${PV}.tar.gz"
-SRC_URI[md5sum] = "64d0bb7fc74bcc56164d7418144b52f8"
-SRC_URI[sha256sum] = "71af368009f13582ef907e33d3812776b597f42b3da0bc0fd3bc7418e4785dd7"
+SRC_URI[sha256sum] = "d6ad23bbf637a59b5dfd1ac006460dfcb185982e4852cde77150fbd085f1f5b6"
 
 S = "${WORKDIR}/Template-Toolkit-${PV}"
 
