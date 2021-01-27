@@ -55,9 +55,9 @@ DEPENDS += " \
     threadweaver \
 "
 
-PV = "5.6.0"
+PV = "5.6.1"
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz"
-SRC_URI[sha256sum] = "38adc7d4c4cf2f0fb4191650001e979b5e1b5a3476db28737020baf2fb56f532"
+SRC_URI[sha256sum] = "9e4488522275ebef9d68eebb68523a99e1c58d35e8d75127f7d749784c2e370a"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
