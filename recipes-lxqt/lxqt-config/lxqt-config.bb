@@ -8,8 +8,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qtsvg liblxqt libkscreen libxcursor libxi xf86-input-libinput"
 
-SRCREV = "846c5446a014b8bf6115deb88f3a33754ec7adcd"
-PV = "0.16.0"
+SRCREV = "f22cee687bf186d5c1875ae921331c7ba0cc4955"
+PV = "0.16.1"
 
 FILES_${PN} += " \
     ${datadir}/icons \
