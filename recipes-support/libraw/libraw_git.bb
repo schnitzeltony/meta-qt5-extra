@@ -1,11 +1,11 @@
 SUMMARY = "raw image decoder"
 LICENSE = "LGPL-2.1 | CDDL-1.0"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=49dc9ed77b52e7fb5a619e055be195f3"
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=74c9dffdc42805f9c0de2f97df6031fc"
 
-SRC_URI = "git://github.com/LibRaw/LibRaw.git;branch=0.19-stable"
-SRCREV = "beeb572687270d49c16734c9ca620982151dbeff"
+SRC_URI = "git://github.com/LibRaw/LibRaw.git"
+SRCREV = "0209b6a2caec189e6d1a9b21c10e9e49f46e5a92"
 S = "${WORKDIR}/git"
-PV = "0.19.5"
+PV = "0.20.2"
 
 inherit autotools pkgconfig
 
