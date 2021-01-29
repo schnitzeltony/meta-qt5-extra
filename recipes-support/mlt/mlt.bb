@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = " \
     file://GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
 "
 
-SRC_URI = "git://github.com/mltframework/mlt.git;branch=v6.22"
-SRCREV = "f6e57f2659b1a5a136fa1c9df1b3359bd0b91647"
-PV = "6.22.1"
+SRC_URI = "git://github.com/mltframework/mlt.git"
+SRCREV = "902c4c2d82514e812b3129a0aa3146a89bb898ec"
+PV = "6.24.0"
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
