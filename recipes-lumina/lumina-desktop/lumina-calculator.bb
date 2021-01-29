@@ -16,9 +16,9 @@ DEPENDS += " \
 "
 
 SRC_URI = "git://github.com/lumina-desktop/lumina-calculator.git"
-SRCREV = "ccb792fc713aa7163fffd37fc20c83ffe9ca7523"
+SRCREV = "31807e06a3a6bd194bad6b0fd204ca2d81cc3810"
 S = "${WORKDIR}/git/src-qt5"
-PV = "1.5.0"
+PV = "1.6.0"
 
 do_configure_prepend() {
     # change paths by sed instead of endles escapes in 'DEFINES+=..' below
