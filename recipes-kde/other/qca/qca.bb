@@ -17,9 +17,8 @@ SRC_URI = " \
     https://download.kde.org/stable/${BPN}/${PV}/${BP}.tar.xz \
     file://0001-use-pkg-config-to-find-libgcrypt.patch \
 "
-SRC_URI[md5sum] = "139829d029fe70248f0b059b43dc4316"
-SRC_URI[sha256sum] = "1d68ef41a1b61dc9786beb923a68902a6276a77cced5e5ea7ff985ef113932d7"
-PV = "2.3.0"
+SRC_URI[sha256sum] = "c13851109abefc4623370989fae3a745bf6b1acb3c2a13a8958539823e974e4b"
+PV = "2.3.1"
 
 EXTRA_OECMAKE += " \
     -DQCA_FEATURE_INSTALL_DIR=${libdir}${QT_DIR_NAME}/mkspecs/features \
