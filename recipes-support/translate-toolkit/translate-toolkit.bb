@@ -6,13 +6,13 @@ HOMEPAGE = "http://toolkit.translatehouse.org/"
 inherit setuptools3
 
 SRC_URI = "git://github.com/translate/translate.git"
-SRCREV = "2ac3101666208d2186c096f9865e00cf1b257fc0"
+SRCREV = "d98ef03f11129fd2072c11474089a13030e93b7b"
 S = "${WORKDIR}/git"
-PV = "2.5.0"
+PV = "3.3.1"
 
 do_install_append() {
     # if empty datadir -> delete
-    rmdir ${D}${datadir} || true
+    rmdir --ignore-fail-on-non-empty ${D}${datadir}
 
     # ${D}${STAGING_DIR_HOST} -> ${D}
     # this is a bad hack aligning installed locations - but have not found a better way
