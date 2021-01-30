@@ -11,6 +11,7 @@ SRC_URI = "http://gottcode.org/${BPN}/${BPN}-${PV}-src.tar.bz2"
 SRC_URI[md5sum] = "6ec03e98a79b8404a414353a3538aec7"
 SRC_URI[sha256sum] = "a711da70bd08383dd06b5f7ccbd92dcd201165426dfd20343c64f584a23f9de1"
 PV = "1.2.11"
+UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)\-src\.tar"
 
 EXTRA_QMAKEVARS_PRE += "PREFIX=${prefix}"
 
