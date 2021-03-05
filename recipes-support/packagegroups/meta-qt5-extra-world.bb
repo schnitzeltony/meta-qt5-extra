@@ -7,7 +7,6 @@ inherit packagegroup
 RDEPENDS_${PN} = " \
     gottcode-world \
     \
-    compton \
     qpdfview \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sddm", "",d)} \
     xcb-util-cursor \
