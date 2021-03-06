@@ -13,5 +13,5 @@ DEPENDS += " \
 "
 
 SRC_URI += " \
-	file://0003-only-build-kf5-config-for-native.patch \
+	file://0002-only-build-kf5-config-for-native.patch \
 "

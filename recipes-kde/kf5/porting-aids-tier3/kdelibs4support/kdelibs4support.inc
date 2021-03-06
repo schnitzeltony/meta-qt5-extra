@@ -14,5 +14,4 @@ EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 SRC_URI += " \
 	file://0001-make-broken-glib-a-configure-option-we-cannot-run-co.patch \
-	file://0002-fix-build-for-QT_NO_SESSIONMANAGER.patch \
 "
