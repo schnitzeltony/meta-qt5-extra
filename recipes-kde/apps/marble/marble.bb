@@ -31,7 +31,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "420ddc73a34bd2ed4ac6c6bde3cd05c7ea2dc05f20b1b2457a167a54bae6f14d"
+SRC_URI[sha256sum] = "57b1b129dd0301c124ab5f930af9dfe044cedfcd42a6b180c6cf3c594fba7bc2"
 
 EXTRA_OECMAKE += " \
     -DMARBLE_PRI_INSTALL_DIR=${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/modules \
