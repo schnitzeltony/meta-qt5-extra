@@ -15,7 +15,7 @@ DEPENDS += " \
 
 PV = "${KF5_VERSION}"
 
-SRC_URI[sha256sum] = "5e4e2be2a03d4ff4aae99c9451c2fc81015f9e5c22cc679e188346e83be3c718"
+SRC_URI[sha256sum] = "f7d39c9dbc20ce0fda1adfe27745ffcd8ec02ca79e8f344efc5b858fd1312b07"
 
 FILES_${PN} += " \
     ${datadir}/kdevappwizard \

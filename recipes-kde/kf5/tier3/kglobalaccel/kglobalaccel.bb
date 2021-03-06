@@ -19,7 +19,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "3f196edde20388b2c1b1aa0139de7701e86d1faa85578827e89f96f56293b822"
+SRC_URI[sha256sum] = "c8778522f31a677d99b199247b43858ad4aa3e6c5db3f6a6aa84ac53c7de1d63"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \

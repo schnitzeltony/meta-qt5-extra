@@ -13,7 +13,7 @@ inherit kde-kf5 pkgconfig
 DEPENDS += "modemmanager"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "d9db3adb4f6e4103bbf2d584a6286c3995169090c072a6e8adeeb7b395bcc327"
+SRC_URI[sha256sum] = "8d17f3873ec858dabf33142f4a8193f1ab14fb263385f58d91b263a53c64cb75"
 
 do_configure_append() {
     # remove absolute paths from exported cmake files

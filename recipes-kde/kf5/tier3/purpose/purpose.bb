@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 gettext gtk-icon-cache
 
-SRC_URI[sha256sum] = "498017bdbd1f46773963d2b97bfb8b7d9e480fa6d958a83ce629c7d327e1628f"
+SRC_URI[sha256sum] = "ffe22c66aa638e984db9c0c30e49b739aa91878dc3b551f7a41c3bfe6b8197d6"
 
 PV = "${KF5_VERSION}"
 
