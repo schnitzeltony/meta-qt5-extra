@@ -27,9 +27,10 @@ DEPENDS += " \
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "b6eca42c1c627fda083a8db32cbf785e1778e937af4b65a1d912d9b8ad942633"
 
-SRC_URI += "file://0001-Avoid-try_run.patch"
-
-CXXFLAGS += "-isystem ${STAGING_INCDIR}/phonon4qt5/KDE"
+EXTRA_OECMAKE += " \
+    -DJPEGLIB_RUN_RESULT=true \
+    -DJPEGLIB_RUN_RESULT__TRYRUN_OUTPUT=0 \
+"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
