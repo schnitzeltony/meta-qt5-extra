@@ -14,9 +14,8 @@ PACKAGECONFIG_GL_use-mainline-bsp = "${QT5_EXTRA_QTBASE_IMX_MAINLINE_GL} gbm kms
 # override QT5_EXTRA_QTBASE_IMX_MAINLINE_GL with 'gles2'
 QT5_EXTRA_QTBASE_IMX_MAINLINE_GL ??= ""
 
-# session management only for x11 environment
-PACKAGECONFIG_DISTRO += " \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "sm", "", d)} \
+PACKAGECONFIG_DISTRO_append = " \
+    sm \
     accessibility \
     sql-sqlite \
     cups \
