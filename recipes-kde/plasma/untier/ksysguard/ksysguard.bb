@@ -20,13 +20,18 @@ DEPENDS += " \
     kiconthemes \
     kdelibs4support \
     libksysguard \
+    libnl \
 "
 
 # REVISIT optionals
-DEPENDS += "lmsensors"
+# TODO libcap
+DEPENDS += " \
+    lmsensors \
+    networkmanager-qt \
+"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "32f5227b2c1f91cd64fcee6b401209582cfffb16e2b015c6d6513e9f4d1dab35"
+SRC_URI[sha256sum] = "547e32d87c32f6c883ebb08a54486d49ad9d87185bae8f82c82fef95b4e028d2"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

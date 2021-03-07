@@ -50,8 +50,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "357ef43092efb4d45f7c6ae9249a538be3484c855d0e35ae3b0b1e8d3db6c624"
-SRC_URI += "file://0001-align-phonon-path.patch"
+SRC_URI[sha256sum] = "f3c30b3c51dd9d127ba4086252eebef22a7fe5dd34c7fa19498559ccab73d4cc"
 
 # REVISIT
 FILES_${PN} += " \
@@ -70,6 +69,7 @@ FILES_${PN} += " \
     ${libdir}/kconf_update_bin \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
+    ${systemd_user_unitdir} \
 "
 
 FILES_SOLIBSDEV = " \

@@ -23,7 +23,9 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "5ba485c5db38815961ba8737ece74908d9b9a35229f1cd8c7a7df79122b37be6"
-SRC_URI += "file://0001-fix-build-for-QT_NO_SESSIONMANAGER.patch"
+SRC_URI[sha256sum] = "4f3b40a866b1b3994cf3b464b7bdad4da10e8c391312dafb1fd5e1c72a7a29fc"
 
-FILES_${PN} += "${datadir}/knotifications5"
+FILES_${PN} += " \
+    ${datadir}/knotifications5 \
+    ${systemd_user_unitdir} \
+"

@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gtk-icon-cache mime-xdg
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "c5bad44f28f85782b011b775992a66b823920c44a8b898a6ff21bab53362b521"
+SRC_URI[sha256sum] = "7ae56514adca76276dba0bd185389e12ea05dbd0e4d297684e4ed67bfddfd291"
 
 DEPENDS += " \
     qtdeclarative \
@@ -29,6 +29,7 @@ DEPENDS += " \
     knotifications \
     kirigami2 \
     plasma-framework \
+    kidletime \
 "
 
 FILES_${PN} += " \
@@ -36,6 +37,7 @@ FILES_${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/knsrcfiles \
     ${datadir}/plasma \
+    ${datadir}/kpackage \
     \
     ${libdir}/plasma-discover \
     ${OE_QMAKE_PATH_PLUGINS} \

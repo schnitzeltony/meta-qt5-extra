@@ -34,7 +34,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "56c4bba1fa743d675b340014bfd31c546421ff8e09dfd1ef29d45c278eadd7eb"
+SRC_URI[sha256sum] = "237ebfce30f84ff5612d5b42bc6d8229032f81c0e392cbd8a4f1f31260c79938"
 
 FILES_${PN} += " \
     ${datadir}/icons \

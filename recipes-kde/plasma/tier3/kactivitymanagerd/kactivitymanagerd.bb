@@ -24,7 +24,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "c800c2782884cdbb906c99709f8bbce4a45c5b9abde73cf4fa5222acf8d0facb"
+SRC_URI[sha256sum] = "92aa23f36751bb24b00ef0e818783f997437b15c7589074adc6bb962e3559a15"
 
 FILES_SOLIBSDEV = ""
 
@@ -33,4 +33,5 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${libdir}/libkactivitymanagerd_plugin.so \
     ${OE_QMAKE_PATH_PLUGINS} \
+    ${systemd_user_unitdir} \
 "

@@ -30,7 +30,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "32fb5ca72bed38d9bffc47f24a6c4dcee03b1da52b200d0f5bb976f9d48b6ef0"
+SRC_URI[sha256sum] = "55aacf9183171bf9accdf71158940e76ff6cbc71c00eca5a3917cb69efaa371b"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
@@ -38,6 +38,7 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
+    ${systemd_user_unitdir} \
 "
 
 RDEPENDS_${PN} += "upower"

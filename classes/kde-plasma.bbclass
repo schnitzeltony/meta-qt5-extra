@@ -1,6 +1,6 @@
 inherit kde-base
 
-PLASMA_VERSION = "5.20.5"
+PLASMA_VERSION = "5.21.2"
 
 SRC_URI = "${KDE_MIRROR}/stable/plasma/${PLASMA_VERSION}/${BPN}-${PV}.tar.xz"
 

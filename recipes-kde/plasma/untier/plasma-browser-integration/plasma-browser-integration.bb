@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING-GPL3;md5=d32239bcb673463ab874e80d47fae504"
 inherit kde-plasma gettext
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "c2a665733e09887782ab4235e9e6b3aab2418f3666fd687ab6431546dbafff0f"
+SRC_URI[sha256sum] = "e52eef2933eeaadbec405c9bf2ca16cd03008e517c13ee3705bc31f711085d30"
 
 DEPENDS += " \
     kauth-native \
@@ -20,11 +20,13 @@ DEPENDS += " \
     kactivities \
     kfilemetadata \
     purpose \
+    plasma-workspace \
 "
 
 # TBD split chrome/chromium/mozilla
 FILES_${PN} += " \
     ${datadir}/k*5 \
+    ${datadir}/krunner \
     ${libdir}/mozilla \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
