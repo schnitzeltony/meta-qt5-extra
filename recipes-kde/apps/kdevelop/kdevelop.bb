@@ -63,7 +63,10 @@ EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 do_configure_append() {
     # although the name is missleading I still love cmake_extra_sanity.bbclass...
-    sed -i 's:${STAGING_DIR_NATIVE}::g' ${B}/plugins/clang/libclang_include_path.h
+    sed -i \
+        -e 's:${STAGING_DIR_NATIVE}::g' \
+        -e 's:${STAGING_DIR_HOST}::g' \
+        ${B}/plugins/clang/libclang_include_path.h
 }
 
 # Yeah nasty but...
