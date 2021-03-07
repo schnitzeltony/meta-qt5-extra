@@ -10,8 +10,7 @@ inherit kde-kf5-porting-aids perlnative
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "a542e75e0b20325e5a88d33229441416da4c8d467742a229b2aa87e368053411"
 
-EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
-
-SRC_URI += " \
-	file://0001-make-broken-glib-a-configure-option-we-cannot-run-co.patch \
+EXTRA_OECMAKE += " \
+    -DBUILD_TESTING=OFF \
+    -DHAVE_GOOD_GETADDRINFO=ON \
 "

@@ -12,6 +12,4 @@ DEPENDS += " \
     gettext-native \
 "
 
-SRC_URI += " \
-	file://0002-only-build-kf5-config-for-native.patch \
-"
+SRC_URI += "file://0001-only-build-kf5-config-for-native.patch"
