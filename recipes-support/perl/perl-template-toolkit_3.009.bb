@@ -1,7 +1,7 @@
 SUMMARY = "Template processing system"
 HOMEPAGE = "http://www.template-toolkit.org/"
 
-LICENSE = "Artisticv1 | GPLv1+"
+LICENSE = "Artistic-1.0 | GPL-1.0-only"
 LIC_FILES_CHKSUM = " \
     file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
     file://${COMMON_LICENSE_DIR}/GPL-1.0-only;md5=e9e36a9de734199567a4d769498f743d \
