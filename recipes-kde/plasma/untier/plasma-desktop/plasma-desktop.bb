@@ -75,4 +75,5 @@ FILES_${PN} += " \
 RDEPENDS_${PN} += " \
     qtgraphicaleffects \
     qtquickcontrols-qmlplugins \
+    gawk \
 "
