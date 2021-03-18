@@ -29,7 +29,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "f4903fa1ad41cfb23e419b287070c51d8df12d10ee5cde538c8b621c07d16d34"
+SRC_URI[sha256sum] = "1a90e14a16e2efa5ae460843f05e88ca412c7fe078fc077dee8a1cf022303592"
 
 do_compile_prepend() {
     # Error: Could not locate service type file kservicetypes5/ "kfileitemactionplugin.desktop" , tried ...

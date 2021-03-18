@@ -36,7 +36,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "767c67aab4e1a43d1d2ebf74f9deab21791150cc5f533be561dc1346d16e25e6"
+SRC_URI[sha256sum] = "5a85fc02cec6ef550d4465e8126ac0a4d9d77c745ab7b05b6b6334a0e54e9775"
 
 PACKAGECONFIG[full] = "-DKIOCORE_ONLY=OFF,-DKIOCORE_ONLY=ON, kbookmarks kcompletion kconfigwidgets kiconthemes kitemviews kjobwidgets kwidgetsaddons kwindowsystem"
 # Note that kdeclarative fails without KIOWidgets
@@ -56,6 +56,7 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/k*5 \
     ${datadir}/polkit-1 \
+    ${datadir}/kdevappwizard \
     ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

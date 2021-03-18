@@ -17,12 +17,12 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 4 insertions(+)
 
 diff --git a/src/plugins/CMakeLists.txt b/src/plugins/CMakeLists.txt
-index f275f63..dbad160 100644
+index 8a87b76..691b9ef 100644
 --- a/src/plugins/CMakeLists.txt
 +++ b/src/plugins/CMakeLists.txt
-@@ -35,6 +35,9 @@ endif ()
- #   add_subdirectory( enchant )
- #endif ()
+@@ -23,6 +23,9 @@ if (HSPELL_FOUND)
+    add_subdirectory( hspell )
+ endif ()
  
 +option(BUILD_HUNSPELL "Build hunspell" OFF)
 +
@@ -30,7 +30,7 @@ index f275f63..dbad160 100644
  find_package(HUNSPELL)
  set_package_properties(HUNSPELL PROPERTIES
      URL "http://hunspell.sourceforge.net/"
-@@ -44,6 +47,7 @@ set_package_properties(HUNSPELL PROPERTIES
+@@ -32,6 +35,7 @@ set_package_properties(HUNSPELL PROPERTIES
  if (HUNSPELL_FOUND)
     add_subdirectory( hunspell )
  endif ()

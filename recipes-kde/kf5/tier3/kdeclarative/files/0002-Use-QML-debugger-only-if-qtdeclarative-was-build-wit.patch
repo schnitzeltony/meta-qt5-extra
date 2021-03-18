@@ -18,7 +18,7 @@ diff --git a/src/kdeclarative/kdeclarative.cpp b/src/kdeclarative/kdeclarative.c
 index b3906e2..9318af9 100644
 --- a/src/kdeclarative/kdeclarative.cpp
 +++ b/src/kdeclarative/kdeclarative.cpp
-@@ -133,9 +133,11 @@ QString KDeclarative::translationDomain() const
+@@ -134,9 +134,11 @@ QString KDeclarative::translationDomain() const
  
  void KDeclarative::setupQmlJsDebugger()
  {

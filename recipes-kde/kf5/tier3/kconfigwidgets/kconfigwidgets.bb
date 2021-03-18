@@ -17,7 +17,7 @@ DEPENDS += "kauth kconfig kcodecs kguiaddons kwidgetsaddons kdoctools \
             gettext-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "7ea01c69328f460a1e70131626d00a7a668814ab415dca7692dbc6a1631330d3"
+SRC_URI[sha256sum] = "479eef40642498adf5f1fd2ef5004be105e1d06d7981136d9f560b18121d2c8b"
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/designer"
 

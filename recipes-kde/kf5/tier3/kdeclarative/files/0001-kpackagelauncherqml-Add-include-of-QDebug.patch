@@ -30,7 +30,4 @@ index 2f2c0d9..2ffcf17 100644
 +#include <QDebug>
  
  #include <KLocalizedString>
- #include <QCommandLineParser>
--- 
-2.1.4
-
+ #include <QCommandLineOption>

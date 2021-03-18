@@ -9,15 +9,16 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Inappropriate [cross specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+
 ---
  CMakeLists.txt | 4 ----
  1 file changed, 4 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index f76650a..3c67d5b 100644
+index 88f784f..19a506b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -84,8 +84,4 @@ if(NOT WIN32)
+@@ -133,10 +133,6 @@ endif()
  
  add_definitions(-DQT_NO_FOREACH)
  
@@ -26,6 +27,5 @@ index f76650a..3c67d5b 100644
 -add_subdirectory(icons-dark)
 -
  feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES INCLUDE_QUIET_PACKAGES)
--- 
-2.14.3
-
+ 
+ kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
