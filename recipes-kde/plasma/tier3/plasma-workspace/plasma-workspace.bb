@@ -50,7 +50,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "f3c30b3c51dd9d127ba4086252eebef22a7fe5dd34c7fa19498559ccab73d4cc"
+SRC_URI[sha256sum] = "80602e458ebabbf1685c918485bff4cb30eaae71cfd2bf2c4c9cea7a58b74ab6"
 
 # REVISIT
 FILES_${PN} += " \

@@ -15,7 +15,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "864717b9082e83bf93f0d9fbf8c31adf31c64af2fc4729cbaf67982fba93ff8b"
+SRC_URI[sha256sum] = "4372d688ccc5e996e8bc1683939786f40dce3f21113067a5ab21f84ca688d6b6"
 SRC_URI += "file://0001-use-pkgconfig-to-find-libgcrypt.patch"
 
 EXTRA_OECMAKE += "-DCMAKE_INSTALL_LIBDIR=${base_libdir}"
