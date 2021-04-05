@@ -8,9 +8,8 @@ REQUIRED_DISTRO_FEATURES = "polkit"
 
 DEPENDS += "polkit glib-2.0"
 
-SRC_URI = "${KDE_MIRROR}/stable/apps/KDE4.x/admin/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "bee71b71c12797e6fc498540a06c829b"
-SRC_URI[sha256sum] = "67fb03bf6ca3e0bdbd98d374dfb5b1651a07d17ae6c23e11a81b4b084447e7c6"
+SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${BPN}-${PV}.tar.xz"
+SRC_URI[sha256sum] = "5b866a2954ef10ffb66156e2fe8ad0321b5528a8df2e4a91b02f5041ce5563a7"
 
 CMAKE_ALIGN_SYSROOT[1] = "PolkitQt5-1, -S${libdir}, -s${OE_QMAKE_PATH_HOST_LIBS}/"
 CMAKE_ALIGN_SYSROOT[2] = "PolkitQt5-1, -s${POLKITQT-1_LIB_DIR}, -s${OE_QMAKE_PATH_HOST_LIBS}"
