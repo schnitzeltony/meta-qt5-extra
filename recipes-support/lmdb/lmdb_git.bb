@@ -7,9 +7,9 @@ SRC_URI = " \
     git://github.com/LMDB/lmdb.git;branch=mdb.RE/0.9 \
     file://0001-Patch-the-main-Makefile.patch \
 "
-SRCREV = "0c357cc88a00bda03aa4a982fc227a5872707df2"
+SRCREV = "51a29155e1609f325e4155556f242bc58b7d8287"
 S = "${WORKDIR}/git/libraries/liblmdb"
-PV = "0.9.24"
+PV = "0.9.28"
 
 do_compile() {
     oe_runmake "CC=${CC}"
