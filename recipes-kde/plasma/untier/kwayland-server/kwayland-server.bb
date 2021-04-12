@@ -17,7 +17,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "4409119a0e8c6dae5295490f965b26c1160b8df863cce6e46287a5ffe9d26a34"
+SRC_URI[sha256sum] = "ff32f4e6b92fc900db41780cb2f2645c472e6ec5d3999aa17fb0fba807df71d6"
 
 do_configure_append() {
     # adjust path to protocol sources in sysroot
