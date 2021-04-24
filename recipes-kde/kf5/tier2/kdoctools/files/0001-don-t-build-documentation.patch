@@ -1,6 +1,6 @@
 From 760e76e826f935c72b4874f104773c954def532e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 12 Nov 2019 13:34:38 +0100
+Date: Sat, 24 Apr 2021 15:57:57 +0200
 Subject: [PATCH 4/4] don't build documentation
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -14,13 +14,13 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  1 file changed, 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ea1e25c..9126ba0 100644
+index 5181f8c..0e043a8 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -97,12 +97,7 @@ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5DocTools")
  add_definitions(-DTRANSLATION_DOMAIN=\"kdoctools5\")
  add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050e00)
- add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054F00)
+ add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055000)
 -if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po" AND KF5I18n_FOUND)
 -    ki18n_install(po)
 -    kdoctools_install(po)
@@ -31,5 +31,5 @@ index ea1e25c..9126ba0 100644
  if (BUILD_TESTING)
      add_subdirectory(autotests)
 -- 
-2.26.2
+2.30.2
 

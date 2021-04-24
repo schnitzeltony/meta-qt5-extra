@@ -11,4 +11,4 @@ inherit kde-kf5
 DEPENDS += "libical"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "e5cdec2ed0b2bee08e5d5395aee1dc13626e2287a235cd9f1506ad5f96d012fd"
+SRC_URI[sha256sum] = "bac828b363a7b406b3ccdc98854fb3ebd4d06b503c298dc676215a4612451529"
