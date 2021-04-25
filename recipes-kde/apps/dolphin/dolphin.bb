@@ -36,7 +36,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "9794b825de2440f53bd237c0bc1c974e89431b5c440ab81ccc1135e696f8a1f3"
+SRC_URI[sha256sum] = "4988e59d4e3edfd58c2d0857745398fc1840c87ec03ea13b0d73254874cfbdbe"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
@@ -50,4 +50,5 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${libdir}/libkdeinit5_dolphin.so \
     ${OE_QMAKE_PATH_PLUGINS} \
+    ${systemd_user_unitdir} \
 "

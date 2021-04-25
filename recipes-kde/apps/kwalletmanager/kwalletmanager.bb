@@ -1,8 +1,11 @@
 SUMMARY = "KDE Wallet Manager is a tool to manage the passwords on your KDE system"
-LICENSE = "GPL-2.0 & LGPL-2.1"
+LICENSE = "GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & LGPL-2.0-only & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-    file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/LGPL-2.0-only.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
 "
 
 inherit kde-apps gtk-icon-cache mime-xdg
@@ -24,7 +27,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "995414a017735a0dedf19bffdc715cc0f526925b597bba9aa7f5d34e97059d9a"
+SRC_URI[sha256sum] = "7323e7d548bec44ba53e77bf4e482024644529f25d2b339244bc4d6079eb07e6"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \

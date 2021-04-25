@@ -1,8 +1,7 @@
 SUMMARY = "KDE file find utility"
-LICENSE = "GPL-2.0 & GFDL-1.3"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.DOC;md5=10b9de612d532fdeeb7fe8fcd1435cc6 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-apps gettext gtk-icon-cache
@@ -21,7 +20,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "e6f608fcd717021bc2f4c69def81f18361c05abb72503deb268d219fb8a6f167"
+SRC_URI[sha256sum] = "72bfa8708e0e627fff6cc78693f6c778ba27cebdc65f84c69189385de5814284"
 
 FILES_${PN} += " \
     ${datadir}/icons \

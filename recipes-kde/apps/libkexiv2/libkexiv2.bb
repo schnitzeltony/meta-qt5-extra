@@ -1,9 +1,8 @@
 SUMMARY = "Libkexiv2 is a wrapper around Exiv2 library"
-LICENSE = "GPL-2.0 & BSD-3-Clause & LGPL-2.0"
+LICENSE = "BSD-3-Clause & GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=7974e16b472f00bbbadf2d006aa00c50 \
-    file://COPYING-CMAKE-SCRIPTS;md5=54c7042be62e169199200bc6477f04d1 \
-    file://COPYING.LIB;md5=3214f080875748938ba060314b4f727d \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-apps
@@ -13,4 +12,4 @@ DEPENDS += "\
 " 
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "b762730416f8c9db6075695222027c0c37cec8c8defe0c5723af570fa49021e4"
+SRC_URI[sha256sum] = "39dfb5d67ed22175972fb179c7b3ee5b18be34b821c3266b52cb1f82ef8a303f"

@@ -1,9 +1,9 @@
 SUMMARY = "Katomic is a fun and educational game built around molecular geometry"
 DESCRIPTION = "KAtomic is a fun educational game built around molecular geometry. It employs simplistic two-dimensional looks at different chemical elements."
-LICENSE = "GPL-2.0 & GFDL-1.2"
+LICENSE = "GFDL-1.2+ & GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9a4c4207e152ff95aa8539e9c1ed53e9 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-apps gtk-icon-cache
@@ -27,7 +27,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "1868fd6b08f9ce33e7b7a80eaf2772aa6aa380596cf9ae320ce3eb7099f0abe2"
+SRC_URI[sha256sum] = "33fb70505ffac3db6380ef14aeecbe88017026ff00194cc6d876006ef1af3443"
 
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \

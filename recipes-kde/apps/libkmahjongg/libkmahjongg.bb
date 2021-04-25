@@ -1,8 +1,7 @@
 SUMMARY = "Common code, backgrounds and tile sets for Mahjongg games"
-LICENSE = "GPL-2.0 & GFDL-1.2"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-apps gtk-icon-cache
@@ -19,7 +18,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "9b3c960b09935c234cad92abaf959750421a4f6d24ff34d37f99c4f508398b9b"
+SRC_URI[sha256sum] = "8b5da3f5fe62ea6ab0f07588b0c5202321a7a2b5c0e1ad319389edbb1bd752d8"
 
 FILES_${PN} += " \
     ${datadir}/kmahjongglib \

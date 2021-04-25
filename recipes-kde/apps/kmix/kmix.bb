@@ -32,7 +32,7 @@ PACKAGECONFIG = "pulseaudio"
 PACKAGECONFIG[pulseaudio] = ",,pulseaudio"
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "68f892958eec984685567ad36624084118b6dc5e7a4633733a6c3e6aea34ea17"
+SRC_URI[sha256sum] = "e29742d0618e704fc9593051527347eac8aaf209f90451180f17b279ebb24ce8"
 
 EXTRA_OECMAKE += "-DKMIX_KF5_BUILD=1"
 
@@ -40,6 +40,7 @@ FILES_SOLIBSDEV = ""
 
 FILES_${PN} += " \
     ${datadir}/k*5 \
+    ${datadir}/config.kcfg \
     ${datadir}/plasma \
     ${datadir}/icons \
     ${datadir}/dbus-1 \

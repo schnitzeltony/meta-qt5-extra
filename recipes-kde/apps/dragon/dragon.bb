@@ -1,8 +1,10 @@
 SUMMARY = "Simple KDE multimedia player"
-LICENSE = "GPL-2.0 & GFDL-1.2"
+LICENSE = "GFDL-1.2 & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=393a5ca445f6965873eca0259a17f833 \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9a4c4207e152ff95aa8539e9c1ed53e9 \
+    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
+    file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
 "
 
 inherit kde-apps gettext mime-xdg
@@ -29,7 +31,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "ea218014245455ed90a695c0031485ea9935053dd12cd6579367053d7d9f372a"
+SRC_URI[sha256sum] = "690e64200d82f9b41b1a9b92f3706b814fa99c7acc2704cb7194f5fda6ce9602"
 
 CXXFLAGS += "-isystem ${STAGING_INCDIR}/phonon4qt5/KDE"
 

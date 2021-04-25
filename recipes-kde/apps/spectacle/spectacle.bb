@@ -1,8 +1,11 @@
 SUMMARY = "The new screenshot capture utility, replaces KSnapshot"
-LICENSE = "GPL-2.0 & GFDL-1.3"
+LICENSE = "GFDL-1.2+ & GPL-2.0-only & GPL-2.0-or-later & LGPL-2.0-or-later & LGPL-2.1-only"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.DOC;md5=10ce6fc3438e5c4c933bfb5db3b097ec \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9f58808219e9a42ff1228309d6f83dc6 \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=147a320ed8b16b036829a0c71d424153 \
 "
 
 inherit kde-apps gtk-icon-cache
@@ -31,7 +34,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "4ce20ea1a81be1ec81c3917fc12e3c904cd95e58d559d56bd3d3bd2a15e149c0"
+SRC_URI[sha256sum] = "e08a9820f9b53efbefaceaf00a477b95370bfba9c620e371a19e1756cf4d0e33"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \

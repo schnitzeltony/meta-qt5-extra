@@ -1,8 +1,8 @@
 SUMMARY = "KBlocks - Falling Blocks Game"
-LICENSE = "GPL-2.0 & GFDL-1.2"
+LICENSE = "GFDL-1.2+ & GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9a4c4207e152ff95aa8539e9c1ed53e9 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-apps gtk-icon-cache
@@ -23,7 +23,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "4256a643c64d5d8df226f56f65fdba241caeb25f87491cd1c99b21d307a0a6cf"
+SRC_URI[sha256sum] = "9859b6e970d0a47254ff385cd095acbbae8d7aa0d3286818ca7127eb94bd8e70"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \

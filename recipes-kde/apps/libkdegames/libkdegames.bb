@@ -1,8 +1,13 @@
 SUMMARY = "Common code and data for many KDE games"
-LICENSE = "GPL-2.0 & GFDL-1.2"
+LICENSE = "BSD-2-Clause & BSD-3-Clause & GFDL-1.2+ & GPL-2.0-or-later & ISC & LGPL-2.0-only & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/BSD-2-Clause.txt;md5=4e290b17e3e05732730de37b44abef90 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9a4c4207e152ff95aa8539e9c1ed53e9 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/ICS.txt;md5=1108ca4f15e2e55accf0f66de647cfd6 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
 "
 
 inherit kde-apps gettext
@@ -43,7 +48,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "401b919640eea95ec8feab1ce0914db2750fafc19893c424eed8ea37e5e216d1"
+SRC_URI[sha256sum] = "4766ce2c73a17b05a7a79c326edaa2c29718719218f48d7ea7543f31f02415e0"
 
 FILES_${PN} += " \
     ${datadir}/carddecks \

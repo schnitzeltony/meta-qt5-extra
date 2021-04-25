@@ -6,7 +6,10 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.DOC;md5=d8855fca80aa0b428deafa405d0ea17a \
 "
 
-inherit kde-apps gettext pkgconfig gtk-icon-cache mime-xdg
+# avogadrolibs -> glew
+REQUIRED_DISTRO_FEATURES = "opengl"
+
+inherit kde-apps gettext pkgconfig gtk-icon-cache mime-xdg features_check
 
 DEPENDS += " \
     qtsvg \
@@ -34,10 +37,11 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "8233969b13f104e8388a771df2561f49fa65a6913184a0d92c7d4ec4ecdcffe4"
+SRC_URI[sha256sum] = "f5f5fe033f03031e565ba594963521147b7ffdfa5fc8d31d2f6b3e6a7b90d83a"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/kxmlgui5 \
+    ${datadir}/knsrcfiles \
     ${datadir}/libkdeedu \
 "

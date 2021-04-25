@@ -15,6 +15,7 @@ DEPENDS += "\
     mlt \
     qtsvg \
     qtwebengine \
+    qtnetworkauth \
     karchive \
     sonnet-native \
     kbookmarks \
@@ -39,7 +40,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "8d9f94699befc59b0a410d99dcafd445f33126678c18d859df4fceb553a88586"
+SRC_URI[sha256sum] = "b0be8f0adef51d3305ec6bebde089b8e4d2fb4519c83456cd91647e7763d4bdf"
 
 SRC_URI += " \
     file://0001-CMakeLists.txt-make-MLT_PREFIX-configurable.patch \

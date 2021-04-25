@@ -1,6 +1,6 @@
 From d7cf023376cb834f9becb63f2648c63c5ec3fd12 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sun, 13 Dec 2020 14:08:12 +0100
+Date: Sun, 25 Apr 2021 00:26:18 +0200
 Subject: [PATCH] CMakeLists.txt: make MLT_PREFIX configurable
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -14,18 +14,18 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 2b25f04..fff0f52 100644
+index 0144610..f6b2105 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -70,7 +70,7 @@ if(WIN32)
+@@ -71,7 +71,7 @@ if(WIN32)
      find_package(DrMinGW)
      set(MLT_PREFIX "..")
  else()
 -    set(MLT_PREFIX ${MLT_ROOT_DIR})
 +    set(MLT_PREFIX ${MLT_ROOT_DIR} CACHE STRING "mlt prefix")
-     find_package(Qt5 OPTIONAL_COMPONENTS WebEngineWidgets QUIET)
  endif()
  
+ if(KF5FileMetaData_FOUND)
 -- 
-2.26.2
+2.30.2
 

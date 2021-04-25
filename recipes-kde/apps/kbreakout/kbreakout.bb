@@ -1,9 +1,9 @@
 SUMMARY = "KBreakout: Destroy as many bricks as possible without losing the ball"
 DESCRIPTION = "KBreakout is a Breakout-like game. Its objective is to destroy as many bricks as possible without losing the ball"
-LICENSE = "GPL-2.0 & GFDL-1.2"
+LICENSE = "GFDL-1.2+ & GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9a4c4207e152ff95aa8539e9c1ed53e9 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-apps gettext
@@ -23,7 +23,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "011b5491d9c0765f648824553ecb58f1897d80e513ee859ab845a8c6738f51b6"
+SRC_URI[sha256sum] = "d2c941ac6db29d8d886fb0c7ce4cc7df63bf2ecbafd029f9a9614cce498b0401"
 
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \

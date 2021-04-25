@@ -1,9 +1,10 @@
 SUMMARY = "Granatier is a clone of the classic Bomberman game"
 DESCRIPTION = "Granatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone"
-LICENSE = "GPL-2.0 & GFDL-1.2"
+LICENSE = "GFDL-1.2+ & GPL-2.0-or-later & LGPL-2.0-only"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9a4c4207e152ff95aa8539e9c1ed53e9 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=da48810c4ddf8e49efa031294a26b98c \
 "
 
 inherit kde-apps gtk-icon-cache
@@ -24,7 +25,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "740fdf55a24e26ad83678290641676d3cc40127234332cb2010e67de934b54f4"
+SRC_URI[sha256sum] = "e84bf46f618e6ab66cae8baee528486bba14eed38c92bff89b3e0022ecc99661"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \

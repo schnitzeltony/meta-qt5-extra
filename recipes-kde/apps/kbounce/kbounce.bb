@@ -1,10 +1,9 @@
 SUMMARY = "KBounce is a single player arcade game with the elements of puzzle"
 DESCRIPTION = "KBounce is a single player arcade game with the elements of puzzle. It is played on a field, surrounded by wall, with two or more balls bouncing around within the walls. The object of the game is to build new walls to decrease the size of the active field."
-LICENSE = "GPL-2.0 & LGPL-2.0 & GFDL-1.2"
+LICENSE = "GFDL-1.2+ & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9a4c4207e152ff95aa8539e9c1ed53e9 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
 "
 
 inherit kde-apps gettext
@@ -28,7 +27,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "ba942d26d8959cd0415a0ea8ad0a0fecdddff2236d0fe17776ca6d5d3fc8df7b"
+SRC_URI[sha256sum] = "42ca5f40793ffb1757aee0d68ef4f5765ea8577250dc212b138746487c259e17"
 
 FILES_${PN} += " \
     ${datadir}/kxmlgui5 \
