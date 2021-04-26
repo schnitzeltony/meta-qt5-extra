@@ -6,10 +6,15 @@ LIC_FILES_CHKSUM = " \
 
 inherit liri
 
+# HACK
+# support qtwayland's qwaylanddisplay_p.h find
+# <QtXkbCommonSupport/private/qxkbcommon_p.h>
+# have no idea where to fix properly
+CXXFLAGS += "-I${STAGING_INCDIR}/QtXkbCommonSupport/5.15.2"
+
 PV = "1.1.0+git${SRCPV}"
 
-SRC_URI += "file://0001-Fix-build-with-Qt-5.15.patch"
-SRCREV = "6eb7686bb0538d815f52d6bb96a415d41e15b636"
+SRCREV = "6a5de23f2e5162fbee39d16f938473ff970a2ec0"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += " \
