@@ -1,0 +1,53 @@
+From 0690fc08719e29d0d026102d54deb6cd667fed2a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 1 May 2021 10:47:22 +0200
+Subject: [PATCH] Set extern "C" after including common headers
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Latest gcc/glibc complains:
+| /home/superandy/tmp/oe-core-glibc/work/cortexa72-mortsgna-linux/kexi/3.2.0-r0/recipe-sysroot/usr/include/c++/10.3.0/type_traits:101:3: error: template with C linkage
+|  101 |   template<typename...>
+|      |   ^~~~~~~~
+| In file included from /home/superandy/tmp/oe-core-glibc/work/cortexa72-mortsgna-linux/kexi/3.2.0-r0/kexi-3.2.0/src/migration/mdb/src/keximdb/mdbmigrate.h:24,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa72-mortsgna-linux/kexi/3.2.0-r0/kexi-3.2.0/src/migration/mdb/src/keximdb/mdbmigrate.cpp:21:
+| /home/superandy/tmp/oe-core-glibc/work/cortexa72-mortsgna-linux/kexi/3.2.0-r0/kexi-3.2.0/src/migration/mdb/3rdparty/mdbtools/include/mdbtools.h:22:3: note: 'extern "C"' linkage started here
+|    22 |   extern "C" {
+|       |   ^~~~~~~~~~
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/migration/mdb/3rdparty/mdbtools/include/mdbtools.h | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/src/migration/mdb/3rdparty/mdbtools/include/mdbtools.h b/src/migration/mdb/3rdparty/mdbtools/include/mdbtools.h
+index 31f48c1..d5e0075 100644
+--- a/src/migration/mdb/3rdparty/mdbtools/include/mdbtools.h
++++ b/src/migration/mdb/3rdparty/mdbtools/include/mdbtools.h
+@@ -18,9 +18,6 @@
+ #ifndef _mdbtools_h_
+ #define _mdbtools_h_
+ 
+-#ifdef __cplusplus
+-  extern "C" {
+-#endif
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <stdarg.h>
+@@ -34,6 +31,10 @@
+ #include <string.h>
+ #include <glib.h>
+ 
++#ifdef __cplusplus
++  extern "C" {
++#endif
++
+ #ifdef HAVE_ICONV
+ #include <iconv.h>
+ #endif
+-- 
+2.30.2
+

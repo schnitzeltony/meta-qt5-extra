@@ -41,6 +41,7 @@ SRC_URI = " \
     file://0001-remove-try_run-by-try_compile-in-breeze-icon-check.patch \
     file://0002-Add-missing-include-to-fix-build-with-Qt-5.11.patch \
     file://0003-Fix-build-with-Qt-5.13.patch \
+    file://0004-Set-extern-C-after-including-common-headers.patch \
 "
 SRC_URI[sha256sum] = "7a813f9ea815a09c1e733d0e7dc879c64eee85f075389e87e6aab99cf0c1c1ff"
 
