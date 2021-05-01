@@ -1,9 +1,13 @@
 SUMMARY = "Okteta is a simple hex editor"
-LICENSE = "GPL-3.0 & GFDL-1.2 & LGPL-3.0"
+LICENSE = "BSD-3-Clause & GFDL-1.2+ & GPL-2.0-only & GPL-3.0-only & LGPL-2.1-only & LGPL-2.1-or-later & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
-    file://LICENSES/LicenseRef-KDE-Accepted-GPL.txt;md5=b4c280013bbbadfbe92219498dc5228c \
-    file://LICENSES/LicenseRef-KDE-Accepted-LGPL.txt;md5=e4b79a181b6483b37d39a27f4d75e60a \
-    file://COPYING.DOC;md5=24ea4c7092233849b4394699333b5c56 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9a4c4207e152ff95aa8539e9c1ed53e9 \
+    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
+    file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
 inherit kde-apps gtk-icon-cache mime
@@ -35,9 +39,9 @@ DEPENDS += " \
 # After 17.2.3 okteta left KDE application release cycle and continued
 # with 0.25.0. To avoid package version going backwards set epoch;
 PE = "1"
-PV = "0.26.4"
+PV = "0.26.6"
 SRC_URI = "https://download.kde.org/stable/okteta/${PV}/src/${BPN}-${PV}.tar.xz"
-SRC_URI[sha256sum] = "ef22b096c4d8a682b5467ee7d8e9e05ede44cde116daef804312745c4bfd0f03"
+SRC_URI[sha256sum] = "c569cd5b55503e46df1a5b5c9162b08888c426aa52c6f3f2f926c658bee0144c"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
