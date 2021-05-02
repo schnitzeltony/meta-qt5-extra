@@ -92,7 +92,7 @@ FILES_${PN} += " \
 "
 
 RDEPENDS_${PN} += " \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland", "xserver-xorg-xwayland", "",d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland", "xwayland", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "qtwayland", "",d)} \
     qtmultimedia \
     qtvirtualkeyboard-qmlplugins \
