@@ -19,7 +19,10 @@ PACKAGECONFIG ??= "decode"
 
 inherit cmake_qt5 mime-xdg
 
-SRC_URI = "git://github.com/sigrokproject/pulseview.git"
+SRC_URI = " \
+    git://github.com/sigrokproject/pulseview.git \
+    file://0001-Move-C-linking-below-standard-includes-to-fix-build-.patch \
+"
 SRCREV = "89b7b94a048ec53e82f38412a4b65cabb609f395"
 PV = "0.4.2+git${SRCPV}"
 S = "${WORKDIR}/git"

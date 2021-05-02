@@ -1,0 +1,83 @@
+From 0149150f46ac4159aa887197ea431c26b53fcd9d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 2 May 2021 14:53:39 +0200
+Subject: [PATCH] Move C linking below other includes to fix build with
+ latest glibc
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+To be sure not to fail by other headers including standard headers move C
+headers ad last position.
+
+Fixes:
+| In file included from /home/superandy/tmp/oe-core-glibc/work/cortexa72-mortsgna-linux/pulseview/0.4.2+gitAUTOINC+89b7b94a04-r0/recipe-sysroot/usr/include/glib-2.0/glib/gatomic.h:31,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa72-mortsgna-linux/pulseview/0.4.2+gitAUTOINC+89b7b94a04-r0/recipe-sysroot/usr/include/glib-2.0/glib/gthread.h:32,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa72-mortsgna-linux/pulseview/0.4.2+gitAUTOINC+89b7b94a04-r0/recipe-sysroot/usr/include/glib-2.0/glib/gasyncqueue.h:32,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa72-mortsgna-linux/pulseview/0.4.2+gitAUTOINC+89b7b94a04-r0/recipe-sysroot/usr/include/glib-2.0/glib.h:32,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa72-mortsgna-linux/pulseview/0.4.2+gitAUTOINC+89b7b94a04-r0/recipe-sysroot/usr/include/libsigrokdecode/libsigrokdecode.h:25,
+|                  from /home/superandy/tmp/oe-core-glibc/work/cortexa72-mortsgna-linux/pulseview/0.4.2+gitAUTOINC+89b7b94a04-r0/git/pv/data/decode/annotation.cpp:21:
+| /home/superandy/tmp/oe-core-glibc/work/cortexa72-mortsgna-linux/pulseview/0.4.2+gitAUTOINC+89b7b94a04-r0/recipe-sysroot/usr/include/c++/10.3.0/type_traits:56:3: error: template with C linkage
+|    56 |   template<typename _Tp, _Tp __v>
+|       |   ^~~~~~~~
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ pv/data/decode/annotation.cpp  | 8 ++++----
+ pv/views/trace/decodetrace.cpp | 7 ++++---
+ 2 files changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/pv/data/decode/annotation.cpp b/pv/data/decode/annotation.cpp
+index 7f233478..e689f01d 100644
+--- a/pv/data/decode/annotation.cpp
++++ b/pv/data/decode/annotation.cpp
+@@ -17,10 +17,6 @@
+  * along with this program; if not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-extern "C" {
+-#include <libsigrokdecode/libsigrokdecode.h>
+-}
+-
+ #include <cassert>
+ #include <vector>
+ 
+@@ -28,6 +24,10 @@ extern "C" {
+ #include <pv/data/decode/decoder.hpp>
+ #include "pv/data/decode/rowdata.hpp"
+ 
++extern "C" {
++#include <libsigrokdecode/libsigrokdecode.h>
++}
++
+ using std::vector;
+ 
+ namespace pv {
+diff --git a/pv/views/trace/decodetrace.cpp b/pv/views/trace/decodetrace.cpp
+index 409f1d28..060fd8d7 100644
+--- a/pv/views/trace/decodetrace.cpp
++++ b/pv/views/trace/decodetrace.cpp
+@@ -17,9 +17,6 @@
+  * along with this program; if not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-extern "C" {
+-#include <libsigrokdecode/libsigrokdecode.h>
+-}
+ 
+ #include <limits>
+ #include <mutex>
+@@ -60,6 +57,10 @@ extern "C" {
+ #include <pv/widgets/decodermenu.hpp>
+ #include <pv/widgets/flowlayout.hpp>
+ 
++extern "C" {
++#include <libsigrokdecode/libsigrokdecode.h>
++}
++
+ using std::abs;
+ using std::find_if;
+ using std::lock_guard;
+-- 
+2.30.2
+
