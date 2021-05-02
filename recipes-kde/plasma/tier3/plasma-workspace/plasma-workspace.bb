@@ -94,6 +94,6 @@ RDEPENDS_${PN} += " \
     xinit \
     xset \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsetroot xmessage xprop", "", d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland", "xserver-xorg-xwayland", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland", "xwayland", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "qtwayland-plugins", "", d)} \
 "
