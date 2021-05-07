@@ -6,7 +6,7 @@ inherit lxqt qt5-translation
 
 DEPENDS += "glib-2.0 liblxqt pulseaudio"
 
-SRCREV = "650876762e4e3f715b3804fa45d66a7377c8eea9"
-PV = "0.16.0"
+SRCREV = "0d3f3e56a4adcc46a264dcbeeaba2ed534b02ffa"
+PV = "0.17.0"
 
 RDEPENDS_${PN} += "pulseaudio-server"
