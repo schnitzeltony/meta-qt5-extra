@@ -7,7 +7,7 @@ inherit lxqt qt5-translation pkgconfig
 DEPENDS += "qtx11extras openbox"
 
 SRC_URI += "file://0001-finding-sed-does-not-work-and-is-not-neccessary.patch"
-SRCREV = "28c488716e448a55720d6db5590bc1eec003f1f7"
-PV = "0.16.0"
+SRCREV = "e2eb2f152f95ffd858d998f3432a2baff18f272f"
+PV = "0.16.1"
 
 FILES_${PN} += "${datadir}/icons"
