@@ -15,11 +15,8 @@ DEPENDS += " \
     kwindowsystem \
 "
 
-SRC_URI += " \
-    file://0001-add-Qt5-X11Extras-to-QTX_LIBRARIES.patch \
-"
-SRCREV = "196b97b23a4c1fe2a98d4a5f2157bf2eb0a15f83"
-PV = "0.16.1"
+SRCREV = "e1598971e17ec6a0b5ef125366ceab5f29a78d24"
+PV = "0.17.1"
 
 PACKAGECONFIG[cpu_plugin] = "-DCPULOAD_PLUGIN=Yes,-DCPULOAD_PLUGIN=No, libstatgrab"
 PACKAGECONFIG[dom] = "-DDOM_PLUGIN=Yes,-DDOM_PLUGIN=No"
