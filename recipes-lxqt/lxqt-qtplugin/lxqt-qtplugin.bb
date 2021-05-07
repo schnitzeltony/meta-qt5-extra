@@ -6,10 +6,8 @@ inherit lxqt
 
 DEPENDS += "liblxqt libdbusmenu-qt5 libfm-qt"
 
-SRCREV = "3add33730c7b5e500b9101ef783dae7b953d1ab5"
-PV = "0.16.0"
-SRC_URI += " \
-    file://0001-set-installation-path-fixed-cmake-query-returns-sysr.patch \
-"
+SRCREV = "f1fd8df7f2d96b1393d70998e55c57b6404c46f9"
+PV = "0.17.0"
+SRC_URI += "file://0001-set-installation-path-fixed-cmake-query-returns-sysr.patch"
 
 FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/platformthemes"
