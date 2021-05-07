@@ -1,33 +1,30 @@
-From 5621e3b7cf8c105914e4aa10126ffb5bad4c5640 Mon Sep 17 00:00:00 2001
+From 3e03b06f27c3e4471f6f2ea25e5cca61b59ff131 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sun, 27 Jan 2019 23:51:28 +0100
+Date: Fri, 7 May 2021 13:20:03 +0200
 Subject: [PATCH] do not check for xdg-udser-dirs at build time - it is a
+ runtime dependency
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
- runtime dependency
-
-Upstream-Status: Inappropriate [embedded specific]
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-
 ---
- CMakeLists.txt | 3 ---
- 1 file changed, 3 deletions(-)
+ CMakeLists.txt | 2 --
+ 1 file changed, 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a27471f..7b2c8ac 100644
+index a219f31..848acf9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -32,9 +32,6 @@ find_package(lxqt ${LXQT_MINIMUM_VERSION} REQUIRED)
- find_package(X11 REQUIRED)
- message(STATUS "Building with Qt${Qt5Core_VERSION}")
+@@ -36,8 +36,6 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+     pkg_search_module(PROCPS REQUIRED libprocps)
+ endif()
  
 -# Please don't move, must be after lxqt
 -find_package(XdgUserDirs REQUIRED)
--
- # Patch Version
- set(LXQT_SESSION_PATCH_VERSION 0)
  
+ # Patch Version
+ set(LXQT_SESSION_PATCH_VERSION 1)
+-- 
+2.30.2
+

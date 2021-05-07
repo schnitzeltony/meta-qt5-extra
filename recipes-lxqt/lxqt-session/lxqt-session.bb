@@ -6,11 +6,11 @@ inherit lxqt qt5-translation features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "liblxqt kwindowsystem"
+DEPENDS += "procps liblxqt kwindowsystem"
 
 SRC_URI += "file://0001-do-not-check-for-xdg-udser-dirs-at-build-time-it-is-.patch"
-SRCREV = "9c0a863df1dddf7ebddc882bdce88b66dcbe8f79"
-PV = "0.16.0"
+SRCREV = "b50536c6c92f41fefa1ac0e4fd5bf7fbbae2f4c2"
+PV = "0.17.1"
 
 FILES_${PN} += " \
     ${datadir}/lxqt/*.conf \
