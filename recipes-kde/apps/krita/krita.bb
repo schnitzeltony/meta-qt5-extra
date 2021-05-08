@@ -36,13 +36,14 @@ DEPENDS += " \
     kcrash \
 "
 
-PV = "4.4.2"
+PV = "4.4.3"
 PVEXT = ""
+# odd: could unpack 4.4.3 tar.xz -> temp tar.gz
 SRC_URI = " \
-    ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.xz \
+    ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.gz \
     file://0001-Make-C++14-default.patch \
 "
-SRC_URI[sha256sum] = "1ee503afc86178e1abbae63e8334e26116a6779aa9ef202656a1c35b76932e88"
+SRC_URI[sha256sum] = "d4062323c2237ab9195c0b8bce1a69e30bd6fd10fadbad6395c27211d9878f67"
 S = "${WORKDIR}/${BPN}-${PV}${PVEXT}"
 
 FILES_${PN} += " \
