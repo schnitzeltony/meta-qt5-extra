@@ -1,0 +1,36 @@
+From 56d122a4639054dad694cbfeecb0920b0d3b1397 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 8 May 2021 12:22:10 +0200
+Subject: [PATCH] Fix build with gcc11
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Fixes:
+| util/fluxbox-remote.cc:76:32: error: ordered comparison of pointer with integer zero ('unsigned char*' and 'int')
+|    76 |             && text_prop.value > 0
+|       |                ~~~~~~~~~~~~~~~~^~~
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ util/fluxbox-remote.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/util/fluxbox-remote.cc b/util/fluxbox-remote.cc
+index 59852e6..504015b 100644
+--- a/util/fluxbox-remote.cc
++++ b/util/fluxbox-remote.cc
+@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
+     if (strcmp(cmd, "result") == 0) {
+         XTextProperty text_prop;
+         if (XGetTextProperty(disp, root, &text_prop, atom_result) != 0
+-            && text_prop.value > 0
++            && text_prop.value != 0
+             && text_prop.nitems > 0) {
+ 
+             printf("%s", text_prop.value);
+-- 
+2.30.2
+

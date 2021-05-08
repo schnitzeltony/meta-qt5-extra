@@ -19,6 +19,7 @@ DEPENDS = " \
 
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+    file://0001-Fix-build-with-gcc11.patch \
     file://fluxbox.desktop \
 "
 SRC_URI[md5sum] = "d99d7710f9daf793e0246dae5304b595"
