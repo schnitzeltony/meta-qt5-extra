@@ -7,4 +7,4 @@ inherit kde-kf5-porting-aids
 DEPENDS += "qttools kcoreaddons kconfig kdoctools"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "4307cd1c3bb681ec1c28cb4399ef952a1966273963f6511eb0b6256d9791f6e5"
+SRC_URI[sha256sum] = "4556c3001f6558cf8ecaf9ce98b60bc130099b0af5d35be48561405b778d6f79"

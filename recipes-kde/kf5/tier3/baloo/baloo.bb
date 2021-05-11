@@ -32,7 +32,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "5ed2c781ce7603f1e798fe645427814a3f2116f3793a047a82d707560512d556"
+SRC_URI[sha256sum] = "d864f0c073209065bafe24995c70984cb92ca70f37ca647fb052627c7a3685fe"
 
 SRC_URI += " \
     file://baloo_file.desktop \
@@ -53,6 +53,7 @@ do_install_append() {
 PACKAGES =+ "${PN}-no-autostart"
 
 FILES_${PN} += " \
+    ${systemd_user_unitdir} \
     ${datadir}/dbus-1 \
     ${datadir}/icons \
     ${datadir}/kservices5 \
