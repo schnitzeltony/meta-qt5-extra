@@ -61,7 +61,7 @@ DEPENDS += " \
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "a9cbcf293c58bef10650399a7fe15c08b54fd009a0d9d859f75b54bc6c87232f"
+SRC_URI[sha256sum] = "a286edfaa13bf73565514ee3edb092cfbccac2307c48058a7302a4676c808331"
 SRC_URI += "file://0001-Make-building-of-QPA-wayland-plugin-an-option.patch"
 
 # pure X11 environments fail to build wayland plugin
