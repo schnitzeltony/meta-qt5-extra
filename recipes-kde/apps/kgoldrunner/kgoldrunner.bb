@@ -23,7 +23,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "a28e7addae40b67b04731474e8aaf6006a66ffebd1cfec6bfdff4544cf6ef409"
+SRC_URI[sha256sum] = "d7a85d11f93cfacfea7325f11fe0af87447a24a4d4e403a1ece0b12776079451"
 
 FILES_${PN} += " \
     ${datadir}/knsrcfiles \
