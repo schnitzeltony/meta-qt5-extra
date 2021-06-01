@@ -7,6 +7,13 @@ DEPENDS += " \
 	${BPN}-native \
 "
 
+DEPENDS += " \
+    qttools \
+    kcoreaddons \
+    kconfig \
+    kdoctools \
+"
+
 # optional -> TBD packageconfig
 DEPENDS += " \
     kauth-native \
