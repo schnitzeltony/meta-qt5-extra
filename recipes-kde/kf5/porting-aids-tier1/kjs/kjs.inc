@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "59d955c697bd918f0a854748e7ed542ec467cb7c59ce1e85532ae97f6c
 SRC_URI += "file://0001-create_hash_table-avoid-polution-of-files-with-build.patch"
 
 DEPENDS += " \
-    kdoctools \
+    kdoctools-native \
 "
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
