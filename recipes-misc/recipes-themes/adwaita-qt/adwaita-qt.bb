@@ -1,5 +1,5 @@
 SUMMARY = "Make Qt applications look gnomeish"
-HOMEPAGE = "https://github.com/MartinBriza/adwaita-qt"
+HOMEPAGE = "https://github.com/FedoraQt/adwaita-qt"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24"
 
@@ -9,9 +9,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS = "qtbase qtx11extras"
 
-SRC_URI = "git://github.com/MartinBriza/${BPN}.git"
-SRCREV = "60b1abf2ab5a4efd320bddd761260f52ac862621"
-PV = "1.2.0"
+SRC_URI = "git://github.com/FedoraQt/adwaita-qt.git;branch=1.3"
+SRCREV = "906c4d8e63b5a6cd2c54511ca5d6062515a79c5f"
+PV = "1.3.1"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += " \
