@@ -30,4 +30,5 @@ RDEPENDS_${PN} = " \
     \
     libquotient \
     quaternion \
+    scribus \
 "
