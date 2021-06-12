@@ -61,11 +61,7 @@ DEPENDS += " \
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "a286edfaa13bf73565514ee3edb092cfbccac2307c48058a7302a4676c808331"
-SRC_URI += "file://0001-Make-building-of-QPA-wayland-plugin-an-option.patch"
-
-# pure X11 environments fail to build wayland plugin
-EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DKWIN_BUILD_QPA=ON', '-DKWIN_BUILD_QPA=OFF', d)}"
+SRC_URI[sha256sum] = "56e6cfe23d445b1ee0650c5ac484e8cc63ba39e2f2d77a0d32c4c23905cc0e01"
 
 # kwin check libepoxy only -> egl pkgconfig is skipped
 CXXFLAGS_append_mx6 += " -DLINUX=1"

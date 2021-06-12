@@ -1,0 +1,70 @@
+From c5f3a664e22b1cb5941ea2704e0e740fbddee647 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 11 Jun 2021 22:56:19 +0200
+Subject: [PATCH] Build qtwaylandscanner_kde only for native build
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate[oe-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt     | 6 +++++-
+ src/CMakeLists.txt | 4 +++-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 47ecfd4..7690823 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -39,7 +39,8 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KWAYLANDSERVER
+                         SOVERSION 5)
+ 
+ # Dependencies
+-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Concurrent Gui WaylandClient)
++find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core)
++if(FALSE)
+ find_package(KF5Wayland ${KF5_MIN_VERSION} CONFIG REQUIRED)
+ find_package(PlasmaWaylandProtocols CONFIG REQUIRED)
+ 
+@@ -71,9 +72,11 @@ add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
+ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
+     ecm_install_po_files_as_qm(po)
+ endif()
++endif()
+ 
+ add_subdirectory(src)
+ 
++if(FALSE)
+ if (BUILD_TESTING)
+     add_subdirectory(autotests)
+     add_subdirectory(tests)
+@@ -107,5 +110,6 @@ install(EXPORT KWaylandServerTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FI
+ 
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kwaylandserver_version.h
+         DESTINATION ${KDE_INSTALL_INCLUDEDIR} COMPONENT Devel )
++endif()
+ 
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 93c174e..8d75147 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1,6 +1,6 @@
+ add_subdirectory(tools)
+-add_subdirectory(server)
+ 
++if(FALSE)
+ ecm_qt_install_logging_categories(
+     EXPORT KWAYLANDSERVER
+     FILE kwaylandserver.categories
+@@ -46,3 +46,5 @@ if(BUILD_QCH)
+         COMPONENT Devel
+     )
+ endif()
++endif()
++
+-- 
+2.31.1
+

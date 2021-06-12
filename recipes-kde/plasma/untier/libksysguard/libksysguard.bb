@@ -8,27 +8,36 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gettext
 
 DEPENDS += " \
-    qtwebkit \
+    qtwebengine \
+    qtwebchannel \
     kauth-native \
     kconfig-native \
     kcoreaddons-native \
     kpackage-native \
+    kdesignerplugin-native \
     kcoreaddons \
     kconfig \
     ki18n \
+    kjobwidgets \
     kwindowsystem \
     kcompletion \
     kwidgetsaddons \
     kiconthemes \
     kconfigwidgets \
     kservice \
-    plasma-framework \
+    kglobalaccel \
+    kio \
+    kdeclarative \
     knewstuff \
+    zlib \
+    libnl \
+    libpcap \
+    libcap \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libxres", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "5ff8c687a9d245d28ec4b92c019d2234cd931796c619ebb096de6e49cd18ebe8"
+SRC_URI[sha256sum] = "a2d3973aaf7d5c4a1cb6dd463ec8183dd4e9a6c6b851df4b8824f8dd562607a9"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \

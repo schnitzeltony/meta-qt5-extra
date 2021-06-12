@@ -50,7 +50,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "9cb16ef4bca9ade0ca82d0cc539533ba9f9be47811ae13d154effc085618e90a"
+SRC_URI += "file://0001-Fix-typo.patch"
+SRC_URI[sha256sum] = "1ed41a30208d87f7586734fa0ee84eb308f5da57ea614ef537171eac8bbbb77c"
 
 # REVISIT
 FILES_${PN} += " \
@@ -80,6 +81,7 @@ FILES_SOLIBSDEV = " \
     ${libdir}/libtaskmanager${SOLIBSDEV} \
     ${libdir}/libweather_ion${SOLIBSDEV} \
     ${libdir}/libkfontinst*${SOLIBSDEV} \
+    ${libdir}/libkrdb${SOLIBSDEV} \
 "
 
 

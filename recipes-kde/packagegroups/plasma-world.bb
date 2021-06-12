@@ -36,11 +36,11 @@ UNTIER = " \
     kscreen \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kscreenlocker", "",d)} \
     ksshaskpass \
-    ksysguard \
     kwallet-pam \
     kwayland-integration \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \
     kwrited \
+    layer-shell-qt \
     libkscreen \
     libksysguard \
     milou \
@@ -52,6 +52,7 @@ UNTIER = " \
     plasma-nm \
     plasma-pa \
     plasma-phone-components \
+    plasma-systemmonitor \
     plasma-vault \
     plasma-workspace-wallpapers \
     ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit-kde-agent-1", "",d)} \

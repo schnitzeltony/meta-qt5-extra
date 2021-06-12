@@ -1,9 +1,13 @@
 DESCRIPTION = "Plasma Phone Components"
 HOMEPAGE = "https://community.kde.org/Plasma/Mobile/Code"
-LICENSE = "GPL-2.0 & LGPL-2.1"
+LICENSE = "GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.1-only.txt;md5=147a320ed8b16b036829a0c71d424153 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=8d51f5b5fd447f7a1040c3dc9f0a8de6 \
 "
 
 DEPENDS += " \
@@ -16,12 +20,13 @@ DEPENDS += " \
     plasma-framework \
     kdbusaddons \
     knotifications \
+    kwin \
 "
 
 inherit kde-plasma gettext
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "811bd9986f0cbcb2f24ce6a99005868340184c33c655009330168dec8a45e769"
+SRC_URI[sha256sum] = "9126c165a1a647e8753bf602d4a7b419beffe89223a5c53801c78b63f7bbe1af"
 
 FILES_${PN} += " \
     ${datadir}/k*5 \

@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gtk-icon-cache
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "7519b5da20e59f571128b66fc22e5d2b2027752e01caa1c70574b12dcfd8979b"
+SRC_URI[sha256sum] = "1f3bbabc5e29b88e85276894020f881360cafaf756f929ec2ae96dba612e96ab"
 
 DEPENDS += " \
     kauth-native \
@@ -21,10 +21,11 @@ DEPENDS += " \
     kconfigwidgets \
     kdbusaddons \
     kio \
+    libksysguard \
     plasma-framework \
     kwidgetsaddons \
-    ksysguard \
     networkmanager-qt \
+    libksysguard \
 "
 
 FILES_${PN} += " \

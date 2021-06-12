@@ -20,6 +20,7 @@ DEPENDS += " \
     kdelibs4support \
     kcrash \
     kglobalaccel \
+    layer-shell-qt \
     libxcb \
     systemd \
     qtx11extras \
@@ -29,7 +30,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "1dad76b7c791e1077777bc9e1b309a6778c4e2124a1211105f2ca9dffa903637"
+SRC_URI[sha256sum] = "9feacfa447b64bd039e6bb0e339d723927754f2c53161bfd915fe5b1b30fdc75"
 SRC_URI += "file://kde.pam"
 
 do_install_append() {
