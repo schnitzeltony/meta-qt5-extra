@@ -1,7 +1,7 @@
 SUMMARY = "ssh-add helper that uses kwallet and kpassworddialog"
-LICENSE = "GPL-2.0"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=393a5ca445f6965873eca0259a17f833 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-plasma gettext

@@ -1,9 +1,10 @@
 SUMMARY = "A collection of package management tools for Debian-based systems"
-LICENSE = "GPL-2.0 & LGPL-2.0 & LGPL-2.1"
+LICENSE = "GPL-2.0-only & GPL-3.0-only & LGPL-2.1-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-    file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
+    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
+    file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
+    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
+    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
 inherit kde-plasma gtk-icon-cache

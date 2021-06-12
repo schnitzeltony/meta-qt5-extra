@@ -67,6 +67,7 @@ FILES_${PN} += " \
     ${datadir}/xsessions \
     \
     ${libdir}/libkdeinit5*.so \
+    ${libdir}/libkrdb.so \
     ${libdir}/kconf_update_bin \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
@@ -81,7 +82,6 @@ FILES_SOLIBSDEV = " \
     ${libdir}/libtaskmanager${SOLIBSDEV} \
     ${libdir}/libweather_ion${SOLIBSDEV} \
     ${libdir}/libkfontinst*${SOLIBSDEV} \
-    ${libdir}/libkrdb${SOLIBSDEV} \
 "
 
 
