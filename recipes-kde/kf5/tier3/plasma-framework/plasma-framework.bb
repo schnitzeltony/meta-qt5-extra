@@ -16,6 +16,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 gettext
 
 DEPENDS += " \
+    virtual/egl \
     gzip-native \
     qtdeclarative \
     qtsvg \
@@ -48,7 +49,8 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "f128726985a21b895591bf694520dac3580e539d517c6e80230fc80166f8b9a1"
+SRC_URI += "file://0001-Fix-EGL-link.patch"
+SRC_URI[sha256sum] = "7adf5f77d7ecf6a45626e7a329c941f6bfe21154b2ff9c6c943727b0e68f145d"
 
 FILES_${PN} += " \
     ${datadir}/kdevappwizard \

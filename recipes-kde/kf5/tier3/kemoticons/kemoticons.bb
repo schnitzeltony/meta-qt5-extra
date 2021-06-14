@@ -13,7 +13,7 @@ inherit kde-kf5 gettext
 DEPENDS += "karchive kconfig kconfig-native kservice kcoreaddons kcoreaddons-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "d1d21ad980d8964ecc79d83a707c253f1c08e06c807b29d52c053964f145795a"
+SRC_URI[sha256sum] = "9c43f0a68aebc2ab16a59b54bf9d9a821db56fe4e1fddb90bcf7300567eae4c0"
 
 FILES_${PN} += " \
     ${datadir}/emoticons \

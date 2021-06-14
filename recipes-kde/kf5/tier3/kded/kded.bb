@@ -18,7 +18,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "585f3e64cdbf0167ea79316f2131fa0051876bf2d60af8c7333c9f578bfb060c"
+SRC_URI[sha256sum] = "69319e6bc587c1089ee46fc8933484790a816355909df2830721b25911a09b3b"
 SRC_URI += "file://0001-hardcode-path-to-kconf_update.patch"
 
 FILES_${PN} += " \

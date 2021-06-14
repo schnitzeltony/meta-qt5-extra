@@ -19,7 +19,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  5 files changed, 4 insertions(+), 249 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1953be6..fbc3cb6 100644
+index 6452b2f..beebfab 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -20,30 +20,11 @@ include(GenerateExportHeader)
@@ -64,14 +64,12 @@ index 1953be6..fbc3cb6 100644
  endif ()
  if (APPLE)
      cmake_find_frameworks(CoreFoundation)
-@@ -156,13 +135,8 @@ install(
+@@ -169,11 +148,8 @@ install(
  
  
  
--if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
--    ki18n_install(po)
--    kdoctools_install(po)
--endif()
+-ki18n_install(po)
+-kdoctools_install(po)
  add_subdirectory(cmake)
  add_subdirectory(data)
 -add_subdirectory(docs)
@@ -106,7 +104,7 @@ index b249bd5..95fd86c 100644
  set(libkdelibs4support_SRCS
      ${libkdelibs4support_SRCS}
      kdecore/k4aboutdata.cpp
-@@ -58,39 +57,9 @@ set(libkdelibs4support_SRCS
+@@ -58,39 +58,9 @@ set(libkdelibs4support_SRCS
      kdecore/kcurrencycode.cpp
      kdecore/kdebug.cpp
      kdecore/kdebugdbusiface.cpp
@@ -246,10 +244,10 @@ index b249bd5..95fd86c 100644
                               solid/org.kde.Solid.PowerManagement.PolicyAgent.xml
                               PROPERTIES NO_NAMESPACE TRUE)
  
--qt5_add_dbus_interface(libkdelibs4support_SRCS solid/org.kde.Solid.Networking.Client.xml
+-qt_add_dbus_interface(libkdelibs4support_SRCS solid/org.kde.Solid.Networking.Client.xml
 -                       org_kde_solid_networking_client)
 -
--qt5_add_dbus_interfaces(libkdelibs4support_SRCS solid/org.freedesktop.PowerManagement.xml
+-qt_add_dbus_interfaces(libkdelibs4support_SRCS solid/org.freedesktop.PowerManagement.xml
 -                        solid/org.freedesktop.PowerManagement.Inhibit.xml
 -                        solid/org.kde.Solid.PowerManagement.PolicyAgent.xml)
 -

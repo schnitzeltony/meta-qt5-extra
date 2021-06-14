@@ -1,6 +1,6 @@
 From 2edcfaf8e189ac569192f48ed00aa0e13fc79962 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 28 Jun 2018 00:41:48 +0200
+Date: Mon, 14 Jun 2021 00:32:24 +0200
 Subject: [PATCH] build native qrcAlias only
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -15,12 +15,12 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  1 file changed, 4 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 88f784f..19a506b 100644
+index 06080af..d5f1da0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -133,10 +133,6 @@ endif()
+@@ -132,10 +132,6 @@ if(NOT WIN32 AND NOT CMAKE_CROSSCOMPILING)
+ endif()
  
- add_definitions(-DQT_NO_FOREACH)
  
 -add_subdirectory(autotests)
 -add_subdirectory(icons)
@@ -29,3 +29,6 @@ index 88f784f..19a506b 100644
  feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES INCLUDE_QUIET_PACKAGES)
  
  kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+-- 
+2.31.1
+

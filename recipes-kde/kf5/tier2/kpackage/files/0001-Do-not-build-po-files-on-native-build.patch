@@ -1,6 +1,6 @@
 From 632015125044fad5b268329570b55246002cd792 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sat, 10 Nov 2018 20:39:47 +0100
+Date: Sun, 13 Jun 2021 23:11:35 +0200
 Subject: [PATCH] Do not build po-files on native build
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -14,10 +14,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 4e6aa9c..acb8ba3 100644
+index ba41271..11ae64d 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -75,6 +75,7 @@ include(KF5PackageMacros.cmake)
+@@ -68,6 +68,7 @@ include(KF5PackageMacros.cmake)
  include_directories(${CMAKE_CURRENT_BINARY_DIR})
  
  ################# list the subdirectories #################
@@ -25,14 +25,14 @@ index 4e6aa9c..acb8ba3 100644
  if (KF5DocTools_FOUND)
      add_subdirectory(docs)
  endif()
-@@ -85,6 +86,7 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
-         kdoctools_install(po)
-     endif()
+@@ -76,6 +77,7 @@ ki18n_install(po)
+ if (KF5DocTools_FOUND)
+     kdoctools_install(po)
  endif()
 +endif()
  add_subdirectory(src)
  if (BUILD_TESTING)
      add_subdirectory(autotests)
 -- 
-2.14.4
+2.31.1
 

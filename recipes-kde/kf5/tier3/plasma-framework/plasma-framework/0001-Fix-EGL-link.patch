@@ -1,0 +1,62 @@
+From 95d769946706abf85f817396996f5bff6c9ac18e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 14 Jun 2021 23:44:53 +0200
+Subject: [PATCH] Fix EGL link
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This a partial revert of a70957d96c29aa6059753cbfe23d0615ea688b36
+'Fix build with CMake 3.16'
+
+and fixes:
+| CMake Error at src/declarativeimports/core/CMakeLists.txt:29 (add_library):
+|   Target "corebindingsplugin" links to target "OpenGL::EGL" but the target
+|   was not found.  Perhaps a find_package() call is missing for an IMPORTED
+|   target, or an ALIAS target is missing?
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt                             | 1 +
+ src/declarativeimports/core/CMakeLists.txt | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3e68d148f..c24d1207d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -111,10 +111,12 @@ else()
+     set(HAVE_GLX 0)
+ endif()
+ 
+-add_feature_info(EGL ${OpenGL_EGL_FOUND}
+-                 "A platform-agnostic mechanism for creating rendering surfaces for use with other graphics libraries, such as OpenGL|ES and OpenVG.")
+-# OpenGL_EGL_FOUND is defined by FindOpenGL
+-set(HAVE_EGL ${OpenGL_EGL_FOUND})
++find_package(EGL)
++set_package_properties(EGL PROPERTIES
++                       PURPOSE "Support for Window Thumbnail on EGL platform"
++                       TYPE OPTIONAL
++                      )
++set(HAVE_EGL ${EGL_FOUND})
+ 
+ 
+ #########################################################################
+diff --git a/src/declarativeimports/core/CMakeLists.txt b/src/declarativeimports/core/CMakeLists.txt
+index 816f8fd..c89dbf2 100644
+--- a/src/declarativeimports/core/CMakeLists.txt
++++ b/src/declarativeimports/core/CMakeLists.txt
+@@ -58,7 +58,7 @@ if(HAVE_X11)
+ endif()
+ 
+ if(HAVE_EGL)
+-    target_link_libraries(corebindingsplugin OpenGL::EGL)
++    target_link_libraries(corebindingsplugin ${OPENGL_gl_LIBRARY} EGL::EGL)
+ endif()
+ 
+ if (${Qt5Gui_OPENGL_IMPLEMENTATION} STREQUAL "GLESv2")
+-- 
+2.31.1
+
