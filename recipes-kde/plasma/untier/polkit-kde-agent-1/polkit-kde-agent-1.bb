@@ -23,7 +23,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "83caf23430e2ebba52163d523455f66e18c58fa74489bc0f93c7adec0df3d240"
+SRC_URI[sha256sum] = "de9a6f1bdf434d013a8d6f0c1498257bc4a48349e652375b4dd036eb161214ee"
 
 FILES_${PN} += " \
     ${datadir}/knotifications5 \
