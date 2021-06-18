@@ -49,6 +49,7 @@ UNTIER = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', bb.utils.contains('BBFILE_COLLECTIONS', 'browser-layer', 'plasma-browser-integration', '', d), '', d)} \
     plasma-desktop \
     plasma-integration \
+    plasma-nano \
     plasma-nm \
     plasma-pa \
     plasma-phone-components \
