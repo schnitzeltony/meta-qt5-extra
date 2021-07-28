@@ -31,7 +31,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "c9984f0e88a39590ca464e3f3806a3be03c52217a2d045fa72b200b25991e4d3"
+SRC_URI[sha256sum] = "8b0d43e91d8ba368fed96d63b34aee7f401a9c0cc47533b363bca365a69c86be"
 
 FILES_${PN} += " \
     ${datadir}/config.kcfg \
