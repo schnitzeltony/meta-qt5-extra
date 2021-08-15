@@ -11,8 +11,8 @@ DEPENDS += "libfm-qt"
 SRCREV = "8d4138c75f044c6d2a21cff83cd1006be5a18358"
 PV = "0.17.0"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/${BPN}/lxqt/settings.conf \
 "
 
-RRECOMMENDS_${PN} = "gvfs gvfsd-trash eject"
+RRECOMMENDS:${PN} = "gvfs gvfsd-trash eject"

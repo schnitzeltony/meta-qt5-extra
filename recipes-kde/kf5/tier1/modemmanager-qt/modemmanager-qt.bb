@@ -15,13 +15,13 @@ DEPENDS += "modemmanager"
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "36f6341c4c9fa8dcd87484e75339b1b12dad31ef6b97733ccce1ad3ff05b0dcc"
 
-do_configure_append() {
+do_configure:append() {
     # remove absolute paths from exported cmake files
     for f in `find ${B} -name '*Targets*.cmake'`; do
         sed -i 's:${RECIPE_SYSROOT}${prefix}:${_IMPORT_PREFIX}:g' $f
     done
 }
 
-RPROVIDES_${PN} += "libmm-qt"
-RREPLACES_${PN} += "libmm-qt"
-RCONFLICTS_${PN} += "libmm-qt"
+RPROVIDES:${PN} += "libmm-qt"
+RREPLACES:${PN} += "libmm-qt"
+RCONFLICTS:${PN} += "libmm-qt"

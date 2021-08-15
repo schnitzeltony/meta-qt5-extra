@@ -22,7 +22,7 @@ SRCREV = "ee85f9b4254ee98a06d169d14fb3cbb37c74f098"
 S = "${WORKDIR}/git"
 PV = "1.6.0"
 
-do_configure_prepend() {
+do_configure:prepend() {
     # change paths by sed instead of endles escapes in 'DEFINES+=..' below
     sed -i 's:L_ETCDIR:QString("${sysconfdir}"):' `find ${S} -name *.cpp`
     sed -i 's:L_SHAREDIR:QString("${datadir}"):' `find ${S} -name *.cpp`
@@ -48,7 +48,7 @@ PACKAGES =+ "${PN}-icon-themes"
 
 # We have to be very precise for ${datadir}/lumina-desktop otherwise locale
 # packages remain empty
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/lthemeengine \
     ${datadir}/lumina-desktop/menu-scripts \
     ${datadir}/lumina-desktop/syntax_rules \
@@ -62,7 +62,7 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
-FILES_${PN}-icon-themes = "${datadir}/icons"
+FILES:${PN}-icon-themes = "${datadir}/icons"
 
-RDEPENDS_${PN} += "fluxbox"
-RRECOMMENDS_${PN} += "${PN}-icon-themes"
+RDEPENDS:${PN} += "fluxbox"
+RRECOMMENDS:${PN} += "${PN}-icon-themes"

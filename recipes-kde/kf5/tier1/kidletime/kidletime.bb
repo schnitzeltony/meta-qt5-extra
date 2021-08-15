@@ -13,4 +13,4 @@ DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb qtx11extras l
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "645fb3aa763f3c06091c359824b80c1dedc4012e0ea34ca7382ea55180fc732a"
 
-FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}"
+FILES:${PN} += "${OE_QMAKE_PATH_PLUGINS}"

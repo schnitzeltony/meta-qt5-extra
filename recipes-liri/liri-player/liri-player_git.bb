@@ -16,4 +16,4 @@ SRCREV = "04d239f4504daa1ea161d27dab23f6b1b5238f9d"
 S = "${WORKDIR}/git"
 PV = "0.0.0+git${SRCPV}"
 
-FILES_${PN} += "${datadir}/metainfo"
+FILES:${PN} += "${datadir}/metainfo"

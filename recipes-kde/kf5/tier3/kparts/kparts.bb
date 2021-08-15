@@ -31,7 +31,7 @@ DEPENDS += " \
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "deeda3f10b806b1822bed7573fb5f6c2ba76c465c8c76bbf85696f173af775b9"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/kdevappwizard \
     ${OE_QMAKE_PATH_PLUGINS} \

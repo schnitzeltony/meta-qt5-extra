@@ -11,7 +11,7 @@ inherit autotools-brokensep pkgconfig
 
 EXTRA_OECONF = "--with-install-root=${D}"
 
-do_install_prepend() {
+do_install:prepend() {
     install -d ${D}/${datadir}/man/man1
     install -d ${D}/${datadir}/${BPN}
 }

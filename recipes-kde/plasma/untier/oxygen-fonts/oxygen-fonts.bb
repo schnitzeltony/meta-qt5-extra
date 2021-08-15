@@ -16,6 +16,6 @@ SRC_URI[sha256sum] = "a02f6580e9a53cb16694a99adbb6dbf76f17584f3e97f469a222862995
 
 EXTRA_OECMAKE += "-DOXYGEN_FONT_INSTALL_DIR=${datadir}/fonts/truetype/oxygen"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/fonts \
 "

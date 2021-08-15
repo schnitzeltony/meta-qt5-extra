@@ -15,6 +15,6 @@ DEPENDS += "bison-native qtdeclarative"
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "9a7cbf477238eb6e804cafad5ecd3fa232531168c3ec227cc9bd64f78fae3153"
 
-FILES_${PN} += "${OE_QMAKE_PATH_QML}"
+FILES:${PN} += "${OE_QMAKE_PATH_QML}"
 
-RRECOMMENDS_${PN} += "udisks2"
+RRECOMMENDS:${PN} += "udisks2"

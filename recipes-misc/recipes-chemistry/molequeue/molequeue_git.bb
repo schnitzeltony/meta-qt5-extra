@@ -18,4 +18,4 @@ EXTRA_OECMAKE += "-DENABLE_RPATH=OFF"
 CMAKE_ALIGN_SYSROOT[1] = "molequeue, -S${prefix}, -S${STAGING_DIR_HOST}/${prefix}"
 
 FILES_SOLIBSDEV = ""
-FILES_${PN} += "${libdir}/libMoleQueue*.so"
+FILES:${PN} += "${libdir}/libMoleQueue*.so"

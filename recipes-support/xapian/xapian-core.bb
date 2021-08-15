@@ -11,6 +11,6 @@ inherit autotools cmake_lib
 
 DEPENDS = "util-linux zlib"
 
-FILES_${PN}-dev += "${libdir}/cmake"
+FILES:${PN}-dev += "${libdir}/cmake"
 
 CMAKE_ALIGN_SYSROOT[1] = "xapian, -S${libdir}, -s${OE_QMAKE_PATH_HOST_LIBS}/"

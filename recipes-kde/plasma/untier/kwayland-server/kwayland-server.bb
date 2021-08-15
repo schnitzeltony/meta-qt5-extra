@@ -11,25 +11,25 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-plasma
 
-DEPENDS_remove_class-native = " kwayland-native"
-DEPENDS_append_class-native = " \
+DEPENDS:remove:class-native = " kwayland-native"
+DEPENDS:append:class-native = " \
     qtwayland-native \
 "
 
-DEPENDS_append_class-target = " \
+DEPENDS:append:class-target = " \
     ${BPN}-native \
     qtwayland-native \
     plasma-wayland-protocols \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI_append_class-native = " \
+SRC_URI:append:class-native = " \
     file://0001-Build-qtwaylandscanner_kde-only-for-native-build.patch \
     file://0002-Avoid-traces-to-sysroot-to-avoid-false-fails-by-cmak.patch \
 "
 SRC_URI[sha256sum] = "da167417221610d521fefbe4ae1322aa20e7d6ac782cadcb61972f915589767c"
 
-do_configure_append() {
+do_configure:append() {
     # adjust path to protocol sources in sysroot
     # once there are more consumers of plasma-wayland-protocols we might need
     # to find another solution
@@ -37,7 +37,7 @@ do_configure_append() {
     sed -i 's: ${datadir}/wayland/wayland.xml: ${STAGING_DATADIR}/wayland/wayland.xml:g' ${B}/build.ninja
 }
 
-do_install_class-native() {
+do_install:class-native() {
     install -d ${D}${bindir}
     install -m0755 ${B}/bin/* ${D}${bindir}/
 }

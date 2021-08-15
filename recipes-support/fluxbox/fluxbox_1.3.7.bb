@@ -29,9 +29,9 @@ SRC_URI[sha256sum] = "c99e2baa06fff1e96342b20415059d12ff1fa2917ade0173c75b2fa570
 # HOSTTOOLS_NONFATAL += "gencat" in layer.conf
 EXTRA_OECONF += "${@bb.utils.contains('HOSTTOOLS_NONFATAL', 'gencat', '--enable-nls', '--disable-nls', d)}"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}/${datadir}/xsessions
     install -m 0644 -p ${WORKDIR}/fluxbox.desktop ${D}/${datadir}/xsessions
 }
 
-FILES_${PN} += "${datadir}/xsessions"
+FILES:${PN} += "${datadir}/xsessions"

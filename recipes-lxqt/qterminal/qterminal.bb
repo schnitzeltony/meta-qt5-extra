@@ -13,6 +13,6 @@ PV = "0.17.0"
 
 S = "${WORKDIR}/git"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/appdata \
 "

@@ -42,16 +42,16 @@
 #
 # Native overriding:
 #
-#   CMAKE_ALIGN_SYSROOT_class-native[<unique-id>] = "<dir>, <search>, <replace>"
+#   CMAKE_ALIGN_SYSROOT:class-native[<unique-id>] = "<dir>, <search>, <replace>"
 #
 # Native extended recipe -> no native alignement:
 #
-#   CMAKE_ALIGN_SYSROOT_class-native[<unique-id>] = "ignore"
+#   CMAKE_ALIGN_SYSROOT:class-native[<unique-id>] = "ignore"
 #   CMAKE_ALIGN_SYSROOT[<unique-id>] = "<dir>, <search>, <replace>"
 #
 # Native extended recipe -> no cross alignement:
 #
-#   CMAKE_ALIGN_SYSROOT_class-native[<unique-id>] = "<dir>, <search>, <replace>"
+#   CMAKE_ALIGN_SYSROOT:class-native[<unique-id>] = "<dir>, <search>, <replace>"
 #   CMAKE_ALIGN_SYSROOT[<unique-id>] = "ignore"
 #
 
@@ -63,7 +63,7 @@ SSTATE_SYSROOT = "${STAGING_DIR}-components/${PACKAGE_ARCH}/${PN}"
 def get_align_flags(d):
     ret = {}
     if bb.data.inherits_class('native', d):
-        ret = d.getVarFlags("CMAKE_ALIGN_SYSROOT_class-native") or {}
+        ret = d.getVarFlags("CMAKE_ALIGN_SYSROOT:class-native") or {}
     if ret == {}:
         ret = d.getVarFlags("CMAKE_ALIGN_SYSROOT") or {}
     return ret
@@ -95,7 +95,7 @@ python () {
 # 2. 3. in cmake_sysroot
 
 # 4. Handle CMAKE_ALIGN_SYSROOT
-python do_populate_sysroot_append() {
+python do_populate_sysroot:append() {
     pn = d.getVar('PN')
 
     # parse single parameter in CMAKE_ALIGN_SYSROOT[..] and return array of line strings extracted
@@ -201,10 +201,10 @@ python do_populate_sysroot_append() {
                     bb.warn("No cmake replacements performed in %s for CMAKE_ALIGN_SYSROOT[%s]" % (pn, flag))
 }
 
-do_populate_sysroot[vardeps] += "CMAKE_ALIGN_SYSROOT CMAKE_ALIGN_SYSROOT_class-native"
+do_populate_sysroot[vardeps] += "CMAKE_ALIGN_SYSROOT CMAKE_ALIGN_SYSROOT:class-native"
 
 # change of CMAKE_ALIGN_SYSROOT causes configure rerun which currently seems
 # the only way to force a rebuild at change of CMAKE_ALIGN_SYSROOT for recipes
 # depending on this recipe
 
-sysroot_cleansstate[vardeps] += "CMAKE_ALIGN_SYSROOT CMAKE_ALIGN_SYSROOT_class-native"
+sysroot_cleansstate[vardeps] += "CMAKE_ALIGN_SYSROOT CMAKE_ALIGN_SYSROOT:class-native"

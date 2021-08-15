@@ -46,7 +46,7 @@ PACKAGECONFIG[mp3] = "-DWITH_MP3=ON,-DWITH_MP3=OFF,id3lib libmad"
 PACKAGECONFIG[pulseaudio] = "-DWITH_PULSEAUDIO=ON,-DWITH_PULSEAUDIO=OFF,pulseaudio,pulseaudio-server"
 PACKAGECONFIG[qtmultimedia] = "-DWITH_QT_AUDIO=ON,-DWITH_QT_AUDIO=OFF,qtmultimedia"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kservicetypes5 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

@@ -31,7 +31,7 @@ DEPENDS += " \
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "88fe060ea9d9e6f14822c7231a026b34fe7daecf4fd8794cf239b5c1c097c88a"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/icons \
     ${datadir}/kxmlgui5 \
 "

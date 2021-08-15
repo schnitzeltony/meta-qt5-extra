@@ -27,9 +27,9 @@ DEPENDS += "\
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "25d01173e31b8715bd1b22546ef9c39cf4f555d9860a106d34588bae55793926"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kxmlgui5 \
 "
 
-RRECOMMENDS_${PN} += "graphviz"
-RDEPENDS_${PN} += "perl"
+RRECOMMENDS:${PN} += "graphviz"
+RDEPENDS:${PN} += "perl"

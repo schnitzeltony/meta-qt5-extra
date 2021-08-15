@@ -38,21 +38,21 @@ SRC_URI += " \
     file://baloo_file.desktop \
 "
 
-do_configure_append() {
+do_configure:append() {
     # remove absolute paths from exported cmake files
     for f in `find ${B} -name '*Targets*.cmake'`; do
         sed -i 's:${RECIPE_SYSROOT}${prefix}:${_IMPORT_PREFIX}:g' $f
     done
 }
 
-do_install_append() {
+do_install:append() {
    install -d ${D}/${sysconfdir}/skel/.config/autostart
    install -m 0644 ${WORKDIR}/baloo_file.desktop ${D}/${sysconfdir}/skel/.config/autostart/
 }
 
 PACKAGES =+ "${PN}-no-autostart"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${systemd_user_unitdir} \
     ${datadir}/dbus-1 \
     ${datadir}/icons \
@@ -61,4 +61,4 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
-FILES_${PN}-no-autostart = "${sysconfdir}/skel/.config/autostart"
+FILES:${PN}-no-autostart = "${sysconfdir}/skel/.config/autostart"

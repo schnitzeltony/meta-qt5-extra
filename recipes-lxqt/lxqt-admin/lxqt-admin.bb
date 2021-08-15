@@ -11,7 +11,7 @@ DEPENDS += " \
 SRCREV = "a1d90aca4651a96c769e141365d6f7028f9802cc"
 PV = "0.17.0"
 
-FILES_${PN} += "${datadir}/polkit-1"
+FILES:${PN} += "${datadir}/polkit-1"
 
-RDEPENDS_${PN} += "lxqt-policykit"
-RRECOMMENDS_${PN} += "polkit-group-rule-datetime"
+RDEPENDS:${PN} += "lxqt-policykit"
+RRECOMMENDS:${PN} += "polkit-group-rule-datetime"

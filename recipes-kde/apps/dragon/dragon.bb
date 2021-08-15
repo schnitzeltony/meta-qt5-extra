@@ -35,7 +35,7 @@ SRC_URI[sha256sum] = "c69bbfb477d23e83944099ff58e79866c754b548aeb873e66dace6f19a
 
 CXXFLAGS += "-isystem ${STAGING_INCDIR}/phonon4qt5/KDE"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/solid \
     ${datadir}/icons \

@@ -19,4 +19,4 @@ DEPENDS += " \
     vibe \
 "
 
-FILES_${PN} += "${OE_QMAKE_PATH_QML} ${datadir}"
+FILES:${PN} += "${OE_QMAKE_PATH_QML} ${datadir}"

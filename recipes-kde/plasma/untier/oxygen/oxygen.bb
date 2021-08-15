@@ -30,7 +30,7 @@ SRC_URI[sha256sum] = "fcdf1aafde0748e81b82410fbc4ddb01f15f7a57ec17ef17e05d80e833
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[settings] = "-DBUILD_OXYGEN_SETTINGS=ON,-DBUILD_OXYGEN_SETTINGS=OFF,kcmutils"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/icons \
     ${datadir}/kservices5 \
     ${datadir}/kstyle \

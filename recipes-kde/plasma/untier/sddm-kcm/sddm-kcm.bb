@@ -26,9 +26,9 @@ DEPENDS += " \
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "e4845375ded8d8b1279a340f8c9feed573c301cf1c2b7f9fd2b5288444c34022"
 
-RDEPENDS_${PN} = "sddm"
+RDEPENDS:${PN} = "sddm"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/knsrcfiles \
     ${datadir}/kservices5 \

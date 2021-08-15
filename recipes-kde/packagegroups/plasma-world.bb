@@ -62,7 +62,7 @@ UNTIER = " \
     systemsettings \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     ${OTHER} \
     ${TIER_1} \
     ${TIER_2} \

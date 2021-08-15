@@ -45,10 +45,10 @@ PACKAGES =+ " \
 
 FILES_SOLIBSDEV = ""
 
-FILES_${PN}-dev += "${libdir}/libastro.so ${libdir}/libmarblewidget-qt5.so"
-FILES_${PN}-qt = "${bindir}/${BPN}-qt"
+FILES:${PN}-dev += "${libdir}/libastro.so ${libdir}/libmarblewidget-qt5.so"
+FILES:${PN}-qt = "${bindir}/${BPN}-qt"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/icons \
     ${datadir}/k* \
@@ -58,6 +58,6 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
 "
 
-FILES_${PN}-designer-plugin += " \
+FILES:${PN}-designer-plugin += " \
     ${OE_QMAKE_PATH_PLUGINS}/designer \
 "

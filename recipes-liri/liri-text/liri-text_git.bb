@@ -17,7 +17,7 @@ PV = "0.5.0+git${SRCPV}"
 SRCREV = "53a995fae34e5bfd67182cd44f66a50fa81d5d4a"
 S = "${WORKDIR}/git"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/icons \
     ${datadir}/metainfo \
     ${datadir}/liri-text/language-specs \

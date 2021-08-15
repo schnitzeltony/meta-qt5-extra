@@ -17,7 +17,7 @@ DEPENDS += " \
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "edfd64d5f11de28a9d37244e3d744b57d0436b7ae0e4bc5a4ea625aa28cab450"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/libanalitza \
     ${OE_QMAKE_PATH_QML} \
 "

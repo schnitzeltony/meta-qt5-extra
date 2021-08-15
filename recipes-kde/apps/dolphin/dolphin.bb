@@ -42,7 +42,7 @@ EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 FILES_SOLIBSDEV = "${libdir}/libdolphin*${SOLIBSDEV}"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/k*5 \
     ${datadir}/kglobalaccel \

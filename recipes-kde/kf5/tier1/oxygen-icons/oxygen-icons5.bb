@@ -9,10 +9,10 @@ inherit kde-kf5 gtk-icon-cache
 SRC_URI[sha256sum] = "5490b90f39a7bd098380969ee89b3b3dc8f3c2f8b1ecb722a381e8bda960011a"
 PV = "${KF5_VERSION}"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/icons/oxygen \
 "
 
-RPROVIDES_${PN} += "oxygen-icons"
-RREPLACES_${PN} += "oxygen-icons"
-RCONFLICTS_${PN} += "oxygen-icons"
+RPROVIDES:${PN} += "oxygen-icons"
+RREPLACES:${PN} += "oxygen-icons"
+RCONFLICTS:${PN} += "oxygen-icons"

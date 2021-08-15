@@ -33,9 +33,9 @@ SRC_URI[sha256sum] = "8a5b5b212c0f08e2c5e9f0ee7f5d62b0adf6008b69d337cede3ca18b80
 
 FILES_SOLIBSDEV = ""
 
-RDEPENDS_${PN} += "pulseaudio-server perl"
+RDEPENDS:${PN} += "pulseaudio-server perl"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kpackage \
     ${datadir}/kconf_update \
     ${datadir}/kde4 \

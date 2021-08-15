@@ -14,11 +14,11 @@ S = "${WORKDIR}/git"
 
 DEPENDS += "qtbase"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     qtwebengine-qmlplugins \
     qtdeclarative-qmlplugins \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${OE_QMAKE_PATH_QML}/SlimeEngine \
 "

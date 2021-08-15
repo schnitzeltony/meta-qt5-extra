@@ -39,7 +39,7 @@ DEPENDS += " \
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "80b1fb5ba0a2482700d46ecfb3e915380c120c09edc276333fee997ff4330692"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \
     ${datadir}/ksysguard \

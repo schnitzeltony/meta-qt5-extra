@@ -14,7 +14,7 @@ DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "a211b9b900ced93f506936bfb1e28ec19aa52ebec4cb08e8a15e382114fc557c"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

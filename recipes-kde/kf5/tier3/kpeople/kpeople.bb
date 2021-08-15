@@ -20,7 +20,7 @@ DEPENDS += " \
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "77c0f36fb783ac17e63cbcacbb17e69750276bdba46e0524087eac6e4a7f8f52"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${OE_QMAKE_PATH_QML} \
 "

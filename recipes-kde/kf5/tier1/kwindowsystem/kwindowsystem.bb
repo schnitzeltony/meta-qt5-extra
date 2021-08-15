@@ -14,11 +14,11 @@ DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "cf81e7f318eab437d12e822f6e04331ec1c76d15df56bb792e4460758944caa5"
 
-do_configure_append() {
+do_configure:append() {
     # remove absolute paths from exported cmake files
     for f in `find ${B} -name '*Targets*.cmake'`; do
         sed -i 's:${RECIPE_SYSROOT}${prefix}:${_IMPORT_PREFIX}:g' $f
     done
 }
 
-FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}"
+FILES:${PN} += "${OE_QMAKE_PATH_PLUGINS}"

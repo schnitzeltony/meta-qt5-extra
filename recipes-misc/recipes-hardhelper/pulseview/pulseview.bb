@@ -27,4 +27,4 @@ SRCREV = "89b7b94a048ec53e82f38412a4b65cabb609f395"
 PV = "0.4.2+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-FILES_${PN} += "${datadir}/*"
+FILES:${PN} += "${datadir}/*"

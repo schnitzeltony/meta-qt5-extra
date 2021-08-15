@@ -50,7 +50,7 @@ DEPENDS += "\
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "779778724891e6f4228b02fd246c5948968d1562adae1708ac69cf8f548ee605"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/carddecks \
     ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_QML} \

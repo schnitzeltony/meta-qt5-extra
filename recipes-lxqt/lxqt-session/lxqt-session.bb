@@ -12,10 +12,10 @@ SRC_URI += "file://0001-do-not-check-for-xdg-udser-dirs-at-build-time-it-is-.pat
 SRCREV = "b50536c6c92f41fefa1ac0e4fd5bf7fbbae2f4c2"
 PV = "0.17.1"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/lxqt/*.conf \
     ${datadir}/xsessions \
     ${datadir}/kdm \
 "
 
-RDEPENDS_${PN} += "xdg-user-dirs"
+RDEPENDS:${PN} += "xdg-user-dirs"

@@ -18,7 +18,7 @@ SRCREV = "815fe610353ff8ad7e2f1121c368a74df8db5eb7"
 PV = "0.12.0"
 S = "${WORKDIR}/git"
 
-do_install_append() {
+do_install:append() {
     # mkspecs are installed at the wrong place. So as long as there are no
     # consumers building with qmake, delete mkspecs
     rm -rf ${D}${prefix}/mkspecs

@@ -17,11 +17,11 @@ EXTRA_OECMAKE += " \
 SRCREV = "6b8157ab2a6429fc1655422bffd0ff0171b58525"
 PV = "3.7.1"
 
-do_configure_append() {
+do_configure:append() {
     # remove absolute paths from exported cmake files
     for f in `find ${B} -name '*-targets.cmake'`; do
         sed -i 's:${RECIPE_SYSROOT}${prefix}:${_IMPORT_PREFIX}:g' $f
     done
 }
 
-FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/iconengines"
+FILES:${PN} += "${OE_QMAKE_PATH_PLUGINS}/iconengines"

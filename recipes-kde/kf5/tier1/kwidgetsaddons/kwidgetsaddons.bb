@@ -18,4 +18,4 @@ DEPENDS += "qttools"
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "778e63b0d2e7c8db472e40a95e2338c1270ac6222679a5023a170f35625dcef5"
 
-FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/designer"
+FILES:${PN} += "${OE_QMAKE_PATH_PLUGINS}/designer"

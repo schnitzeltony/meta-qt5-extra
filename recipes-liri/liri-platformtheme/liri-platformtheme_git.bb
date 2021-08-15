@@ -16,6 +16,6 @@ PV = "1.0.0+git${SRCPV}"
 SRCREV = "fa9bdf9f4efb494e3a5703f33c990013e4d5a99b"
 S = "${WORKDIR}/git"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

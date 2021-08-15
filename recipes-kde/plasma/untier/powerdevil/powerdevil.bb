@@ -32,7 +32,7 @@ DEPENDS += " \
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "d5d01e5017306aff215e6ba3be21c940b7771a599e92445f8526406fb63e829c"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/kconf_update \
     ${datadir}/dbus-1 \
@@ -41,4 +41,4 @@ FILES_${PN} += " \
     ${systemd_user_unitdir} \
 "
 
-RDEPENDS_${PN} += "upower"
+RDEPENDS:${PN} += "upower"

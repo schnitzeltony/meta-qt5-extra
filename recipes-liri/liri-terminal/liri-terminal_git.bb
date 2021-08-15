@@ -15,13 +15,13 @@ PV = "0.2.0+git${SRCPV}"
 SRCREV = "953ce625ba194dd00fd654597bbffb04433405db"
 S = "${WORKDIR}/git"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/metainfo \
     ${datadir}/${PN}/color-schemes \
     ${datadir}/${PN}/kb-layouts \
     ${OE_QMAKE_PATH_QML} \
 "
 
-RREPLACES_${PN} = "hawaii-terminal"
-RPROVIDES_${PN} = "hawaii-terminal"
-RCONFLICTS_${PN} = "hawaii-terminal"
+RREPLACES:${PN} = "hawaii-terminal"
+RPROVIDES:${PN} = "hawaii-terminal"
+RCONFLICTS:${PN} = "hawaii-terminal"

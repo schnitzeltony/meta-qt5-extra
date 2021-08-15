@@ -4,4 +4,4 @@ DEPENDS += "${BPN}-native"
 
 PACKAGES =+ "${PN}-bin"
 
-FILES_${PN}-bin = "${bindir}/k*"
+FILES:${PN}-bin = "${bindir}/k*"

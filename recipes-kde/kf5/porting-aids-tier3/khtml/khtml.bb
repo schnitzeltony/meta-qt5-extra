@@ -39,13 +39,13 @@ DEPENDS += " \
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "69af52a1dc40cd56213cb7d9675c17129f853611041c3d624afd93fe1cbd428e"
 
-do_compile_append() {
+do_compile:append() {
     # gperf-native sets absolut debug comments/links in header
     sed -i 's:${STAGING_DIR_NATIVE}::' ${B}/src/kentities-gperf.h
     sed -i 's:${STAGING_DIR_NATIVE}::' ${B}/src/doctypes.h
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

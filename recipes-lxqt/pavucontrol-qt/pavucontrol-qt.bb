@@ -9,4 +9,4 @@ DEPENDS += "glib-2.0 liblxqt pulseaudio"
 SRCREV = "0d3f3e56a4adcc46a264dcbeeaba2ed534b02ffa"
 PV = "0.17.0"
 
-RDEPENDS_${PN} += "pulseaudio-server"
+RDEPENDS:${PN} += "pulseaudio-server"

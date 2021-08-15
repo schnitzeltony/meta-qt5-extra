@@ -45,7 +45,7 @@ SRC_URI = " \
 SRC_URI[sha256sum] = "84c53686056d8f7485658004ca454eb275e35221307362e65daaac934a5c3b78"
 S = "${WORKDIR}/${BPN}-${PV}${PVEXT}"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/color \
     ${datadir}/color-schemes \
     ${datadir}/icons \

@@ -28,10 +28,10 @@ DEPENDS += "\
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "48603137bdedd40f4b473a6bbb32f07e1819603d67d34e3b24d994969b2ea470"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/k*5 \
     ${datadir}/icons \
 "
 
-RDEPENDS_${PN} += "translate-toolkit"
+RDEPENDS:${PN} += "translate-toolkit"

@@ -24,7 +24,7 @@ DEPENDS += "\
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "60f450776d785c8c402806c28abce208e8a8f951b0da81875b3e29de4a13e1af"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/icons \
     ${datadir}/kalgebramobile \
 "

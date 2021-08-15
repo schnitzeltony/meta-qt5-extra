@@ -15,7 +15,7 @@ EXTRA_OECMAKE += " \
     -DINSTALL_GRUBDIR=/boot/grub \
 "
 
-do_install_append() {
+do_install:append() {
     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-initramfs', '', 'rm -rf ${D}${datadir}/plymouth', d)}
 }
 
@@ -25,17 +25,17 @@ PACKAGES += " \
     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-initramfs', '${PN}-plymouth', '', d)} \
 "
 
-RDEPENDS_${PN}-plymouth += " \
+RDEPENDS:${PN}-plymouth += " \
     plymouth \
     plymouth-set-default-theme \
 "
 
-FILES_${PN} += "${datadir}/color-schemes"
-FILES_${PN}-grub += "/boot/grub/themes"
-FILES_${PN}-plymouth += "${datadir}/plymouth/themes"
-FILES_${PN}-sddm += "${datadir}/sddm/themes"
+FILES:${PN} += "${datadir}/color-schemes"
+FILES:${PN}-grub += "/boot/grub/themes"
+FILES:${PN}-plymouth += "${datadir}/plymouth/themes"
+FILES:${PN}-sddm += "${datadir}/sddm/themes"
 
 # there is no plymouth-native yet
-pkg_postinst_ontarget_${PN}-plymouth() {
+pkg_postinst_ontarget:${PN}-plymouth() {
     plymouth-set-default-theme -R lirios
 }

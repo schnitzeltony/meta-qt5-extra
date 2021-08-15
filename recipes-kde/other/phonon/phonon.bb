@@ -21,11 +21,11 @@ PACKAGECONFIG[designer-plugin] = "-DPHONON_BUILD_DESIGNER_PLUGIN=ON,-DPHONON_BUI
 PACKAGECONFIG[pulseaudio] = "-DCMAKE_DISABLE_FIND_PACKAGE_PULSEAUDIO=FALSE -DCMAKE_DISABLE_FIND_PACKAGE_GLIB2=FALSE, -DCMAKE_DISABLE_FIND_PACKAGE_PULSEAUDIO=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_GLIB2=TRUE,pulseaudio glib-2.0"
 
 PACKAGES =+ "${PN}-designer-plugin"
-FILES_${PN}-designer-plugin = "${OE_QMAKE_PATH_PLUGINS}/designer"
+FILES:${PN}-designer-plugin = "${OE_QMAKE_PATH_PLUGINS}/designer"
 
-FILES_${PN} += "${datadir}/dbus-1"
+FILES:${PN} += "${datadir}/dbus-1"
 
-FILES_${PN}-dev += " \
+FILES:${PN}-dev += " \
     ${datadir}/qt5/mkspecs \
     ${OE_QMAKE_PATH_ARCHDATA}/mkspecs \
     ${datadir}/phonon4qt5/buildsystem \

@@ -13,12 +13,12 @@ PV = "git${SRCPV}"
 S = "${WORKDIR}/git"
 
 DEPENDS += "qtbase qtquickcontrols2 qtsvg ffmpeg"
-RDEPENDS_${PN} += "qtquickcontrols2-qmlplugins"
+RDEPENDS:${PN} += "qtquickcontrols2-qmlplugins"
 
 PACKAGES += "${PN}-qmlplugins"
 
-FILES_${PN}-qmlplugins = "${libdir}/qml/QtAV/*"
+FILES:${PN}-qmlplugins = "${libdir}/qml/QtAV/*"
 
-FILES_${PN}-dev += "${libdir}/libQtAVWidgets.prl \
+FILES:${PN}-dev += "${libdir}/libQtAVWidgets.prl \
                     ${libdir}/libQtAV.prl \
                     ${libdir}/mkspecs/*"

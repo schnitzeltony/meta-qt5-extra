@@ -16,7 +16,7 @@ DEPENDS += " \
     qtsvg \
 "
 
-do_configure_prepend() {
+do_configure:prepend() {
     (cd ${S} && ./scripts/fetch_icons.sh)
 }
 
@@ -25,15 +25,15 @@ EXTRA_OECMAKE += " \
     -DFLUID_WITH_DOCUMENTATION=OFF \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${OE_QMAKE_PATH_QML} \
 "
-FILES_${PN}-dev += " \
+FILES:${PN}-dev += " \
     ${datadir}/icons \
     ${datadir}/metainfo \
     ${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     qtsvg-plugins \
 "

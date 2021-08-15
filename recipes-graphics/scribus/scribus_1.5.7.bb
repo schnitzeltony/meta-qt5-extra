@@ -18,7 +18,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}-devel/${PV}/${BPN}-${PV}.
 SRC_URI[sha256sum] = "318316b2cfc7a76191d3e0d3f8c2265147daea0570162028e243c292d826f8ce"
 
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/icons \
     ${datadir}/mime \
     ${datadir}/metainfo \

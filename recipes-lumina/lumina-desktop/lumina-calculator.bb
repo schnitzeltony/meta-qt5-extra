@@ -20,7 +20,7 @@ SRCREV = "31807e06a3a6bd194bad6b0fd204ca2d81cc3810"
 S = "${WORKDIR}/git/src-qt5"
 PV = "1.6.0"
 
-do_configure_prepend() {
+do_configure:prepend() {
     # change paths by sed instead of endles escapes in 'DEFINES+=..' below
     sed -i 's:L_ETCDIR:QString("${sysconfdir}"):' `find ${S} -name *.cpp`
     sed -i 's:L_SHAREDIR:QString("${datadir}"):' `find ${S} -name *.cpp`

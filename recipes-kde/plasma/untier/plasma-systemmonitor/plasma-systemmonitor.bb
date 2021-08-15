@@ -33,7 +33,7 @@ DEPENDS += " \
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "8b0d43e91d8ba368fed96d63b34aee7f401a9c0cc47533b363bca365a69c86be"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/ksysguard \
     ${datadir}/knsrcfiles \

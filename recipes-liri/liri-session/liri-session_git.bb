@@ -18,7 +18,7 @@ DEPENDS += " \
    liri-libliri \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/desktop-directories \
     ${datadir}/liri-session/systemd-user/autostart \
     ${datadir}/wayland-sessions \

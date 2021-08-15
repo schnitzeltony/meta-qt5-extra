@@ -48,7 +48,7 @@ SRC_URI += " \
 
 EXTRA_OECMAKE += "-DMLT_PREFIX=${prefix}"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/icons \
     ${datadir}/k*5 \
@@ -58,4 +58,4 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
-RRECOMMENDS_${PN} += "ffmpeg"
+RRECOMMENDS:${PN} += "ffmpeg"

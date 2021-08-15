@@ -33,7 +33,7 @@ DEPENDS += "\
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "7d792b7f97e6d5854d81b4098edefd62a8e5b309e471ab39ada679a52ecf9fac"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/color-schemes \
     ${datadir}/icons \
     ${datadir}/kconf_update \
@@ -48,4 +48,4 @@ FILES_${PN} += " \
     ${libdir}/kconf_update_bin \
 "
 
-RDEPENDS_${PN} += "milou"
+RDEPENDS:${PN} += "milou"

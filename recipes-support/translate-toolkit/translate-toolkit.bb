@@ -10,7 +10,7 @@ SRCREV = "d98ef03f11129fd2072c11474089a13030e93b7b"
 S = "${WORKDIR}/git"
 PV = "3.3.1"
 
-do_install_append() {
+do_install:append() {
     # if empty datadir -> delete
     rmdir --ignore-fail-on-non-empty ${D}${datadir}
 
@@ -26,4 +26,4 @@ do_install_append() {
     fi
 }
 
-RDEPENDS_${PN} += "bash python3-core"
+RDEPENDS:${PN} += "bash python3-core"

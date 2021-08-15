@@ -31,7 +31,7 @@ SRC_URI[sha256sum] = "3347c4efc2314ba5ca8b7b89495fe9d862a4e437d4abc025937e8cab8a
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \

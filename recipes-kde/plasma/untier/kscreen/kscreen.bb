@@ -31,7 +31,7 @@ DEPENDS += "\
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "27f8d52b52c3cee0b9def5bf2fc85916e29495b4b1e1d14dfd99f452ae3a7642"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*_kscreen \
     ${datadir}/kservices5 \
     ${datadir}/plasma \

@@ -32,7 +32,7 @@ DEPENDS += " \
     kidletime \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/icons \
     ${datadir}/k*5 \
     ${datadir}/knsrcfiles \
@@ -44,4 +44,4 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
 "
 
-RDEPENDS_${PN} += "python3-core kirigami"
+RDEPENDS:${PN} += "python3-core kirigami"

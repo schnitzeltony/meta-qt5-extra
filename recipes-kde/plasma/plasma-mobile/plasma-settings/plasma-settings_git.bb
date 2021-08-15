@@ -31,7 +31,7 @@ S = "${WORKDIR}/git"
 # Did not find version anywhere
 PV = "0.0.0+git${SRCPV}"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kservices5 \
     ${datadir}/kpackage \
     ${datadir}/dbus-1 \

@@ -26,6 +26,6 @@ SRCREV = "35d1865babf40b9df454810ca8cc09e77b0c349a"
 S = "${WORKDIR}/git"
 PV = "1.2.0+git${SRCPV}"
 
-FILES_${PN} += "${datadir}/icons"
+FILES:${PN} += "${datadir}/icons"
 
-RDEPENDS_${PN} += "perf"
+RDEPENDS:${PN} += "perf"

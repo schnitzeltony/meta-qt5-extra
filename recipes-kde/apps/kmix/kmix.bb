@@ -38,7 +38,7 @@ EXTRA_OECMAKE += "-DKMIX_KF5_BUILD=1"
 
 FILES_SOLIBSDEV = ""
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/config.kcfg \
     ${datadir}/plasma \

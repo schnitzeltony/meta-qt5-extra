@@ -36,7 +36,7 @@ SRC_URI[sha256sum] = "0b243bc8bb2cba4eebff55e7a01be5c7790da1fafd88d17bad808e5ffc
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kxmlgui5 \
     ${datadir}/icons \
     ${libdir}/libkdeinit5_kmenuedit.so \

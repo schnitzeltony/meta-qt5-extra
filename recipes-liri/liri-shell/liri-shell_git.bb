@@ -33,19 +33,19 @@ EXTRA_OECMAKE += " \
     -DLIRI_SHELL_DEVELOPMENT_BUILD=ON \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     qttools-tools \
     qtwayland-plugins \
     qtgraphicaleffects-qmlplugins \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${systemd_user_unitdir} \
     ${datadir}/wayland-sessions \
     ${datadir}/desktop-directories \
     ${OE_QMAKE_PATH_QML} \
 "
 
-RREPLACES_${PN} = "hawaii-shell"
-RPROVIDES_${PN} = "hawaii-shell"
-RCONFLICTS_${PN} = "hawaii-shell"
+RREPLACES:${PN} = "hawaii-shell"
+RPROVIDES:${PN} = "hawaii-shell"
+RCONFLICTS:${PN} = "hawaii-shell"

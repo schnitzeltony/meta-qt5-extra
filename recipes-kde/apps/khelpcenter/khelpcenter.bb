@@ -33,7 +33,7 @@ SRC_URI[sha256sum] = "bb188fc826edfe48ee2625295d5c5737c62da406ec594691b6e664b3b9
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/k*5 \
     ${datadir}/dbus-1 \
@@ -41,4 +41,4 @@ FILES_${PN} += " \
     ${libdir}/libkdeinit5_khelpcenter.so \
 "
 
-RDEPENDS_${PN} += "perl"
+RDEPENDS:${PN} += "perl"

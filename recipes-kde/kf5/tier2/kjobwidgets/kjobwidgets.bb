@@ -14,4 +14,4 @@ DEPENDS += "kcoreaddons kcoreaddons-native kwidgetsaddons \
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "e5a2bb5cd1b6e5f81ce8f5b4d5d94707b3c1acc015bae771368f1f550f688d3d"
 
-FILES_${PN} += "${datadir}/dbus-1"
+FILES:${PN} += "${datadir}/dbus-1"

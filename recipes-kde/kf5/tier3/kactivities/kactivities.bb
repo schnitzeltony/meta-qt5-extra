@@ -31,14 +31,14 @@ DEPENDS += " \
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "86b0909d486c5b5fc849bbf6dbdfff9deaf2f5764d3633e681e2d52d53ee3052"
 
-do_compile_prepend() {
+do_compile:prepend() {
     # Error: Could not locate service type file kservicetypes5/ "kfileitemactionplugin.desktop" , tried ...
     export XDG_DATA_HOME=${STAGING_DATADIR}
 }
 
-RDEPENDS_${PN} += "kactivitymanagerd"
+RDEPENDS:${PN} += "kactivitymanagerd"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${OE_QMAKE_PATH_QML}/org/kde \
 "

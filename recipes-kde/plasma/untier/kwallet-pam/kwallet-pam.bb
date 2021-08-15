@@ -20,6 +20,6 @@ SRC_URI += "file://0001-use-pkgconfig-to-find-libgcrypt.patch"
 
 EXTRA_OECMAKE += "-DCMAKE_INSTALL_LIBDIR=${base_libdir}"
 
-FILES_${PN} += "${base_libdir}/security"
+FILES:${PN} += "${base_libdir}/security"
 
-RDEPENDS_${PN} = "socat"
+RDEPENDS:${PN} = "socat"

@@ -21,10 +21,10 @@ PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "4c96159e2f0255e4cefbfb671ac37d489bb70031536f098f3bc5f70559a6d330"
 SRC_URI += "file://0001-hardcode-path-to-kconf_update.patch"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/k*5 \
     ${libdir}/libkdeinit5_kded5.so \
     ${systemd_user_unitdir} \
 "
-FILES_${PN}-dev = "${libdir}/cmake"
+FILES:${PN}-dev = "${libdir}/cmake"

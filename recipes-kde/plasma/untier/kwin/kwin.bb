@@ -64,9 +64,9 @@ PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "b02a1c4c1f85d11f1206d364ffdcf242ba658046cb80751f0d769e15151aa3f4"
 
 # kwin check libepoxy only -> egl pkgconfig is skipped
-CXXFLAGS_append_mx6 += " -DLINUX=1"
+CXXFLAGS:append_mx6 += " -DLINUX=1"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/dbus-1 \
     ${datadir}/kconf_update \
@@ -83,11 +83,11 @@ FILES_${PN} += " \
 # taken from bitbake.conf with lucky modification: all lt libraries end with s.so
 # only move them to -dev package
 FILES_SOLIBSDEV = "${base_libdir}/lib*${SOLIBSDEV} ${libdir}/lib*s${SOLIBSDEV}"
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${libdir}/*.so \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland", "xwayland", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "qtwayland", "",d)} \
     qtmultimedia \

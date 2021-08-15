@@ -58,11 +58,11 @@ SRC_URI[sha256sum] = "4af9f8a10e0c16006d97cf63439f91c05a04533ec6ee2ec0223dbfcc1d
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
-do_configure_append() {
+do_configure:append() {
     sed -i 's:${S}/smb/kdsoap-ws-discovery-client/src/kdwsdl2cpp:${STAGING_BINDIR_NATIVE}/kdwsdl2cpp:g' ${B}/build.ninja
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kio_bookmarks \
     ${datadir}/kio_info \ 
     ${datadir}/config.kcfg \
@@ -79,4 +79,4 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
-RDEPENDS_${PN} += "perl"
+RDEPENDS:${PN} += "perl"

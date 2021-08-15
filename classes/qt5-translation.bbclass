@@ -5,7 +5,7 @@ DEPENDS += "qttools-native"
 # default location
 QT_TRANSLATION_FILES ??= "${datadir}/*/translations/*.qm ${datadir}/*/translations/*/*.qm ${datadir}/*/translations/*/*/*.qm"
 
-FILES_${PN}-locale = "${datadir}/*/translations"
+FILES:${PN}-locale = "${datadir}/*/translations"
 
 python qt_do_split_locales() {
     import glob
@@ -53,16 +53,16 @@ python qt_do_split_locales() {
         files = ''
         for transvar in d.getVar('QT_TRANSLATION_FILES').split():
             files = '%s %s' % (files, transvar.replace('*.qm', '*_%s.qm' % l))
-        d.setVar('FILES_' + pkg, files )
-        d.setVar('RRECOMMENDS_' + pkg, '%svirtual-locale-%s' % (mlprefix, ln))
-        d.setVar('RPROVIDES_' + pkg, '%s-locale %s%s-translation' % (pn, mlprefix, ln))
-        d.setVar('SUMMARY_' + pkg, '%s - %s translations' % (summary, l))
-        d.setVar('DESCRIPTION_' + pkg, '%s  This package contains language translation files for the %s locale.' % (description, l))
+        d.setVar('FILES:' + pkg, files )
+        d.setVar('RRECOMMENDS:' + pkg, '%svirtual-locale-%s' % (mlprefix, ln))
+        d.setVar('RPROVIDES:' + pkg, '%s-locale %s%s-translation' % (pn, mlprefix, ln))
+        d.setVar('SUMMARY:' + pkg, '%s - %s translations' % (summary, l))
+        d.setVar('DESCRIPTION:' + pkg, '%s  This package contains language translation files for the %s locale.' % (description, l))
         if locale_section:
-            d.setVar('SECTION_' + pkg, locale_section)
+            d.setVar('SECTION:' + pkg, locale_section)
 
     d.setVar('PACKAGES', ' '.join(list(packages)))
 }
 
-PACKAGESPLITFUNCS_prepend = "qt_do_split_locales "
+PACKAGESPLITFUNCS:prepend = "qt_do_split_locales "
 

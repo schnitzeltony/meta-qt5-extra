@@ -19,11 +19,11 @@ DEPENDS += " \
     liri-fluid \
 "
 
-do_configure_prepend() {
+do_configure:prepend() {
     export PREFIX=${prefix}
 }
 
 # No links -> runtime dependency
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     slime-engine \
 "

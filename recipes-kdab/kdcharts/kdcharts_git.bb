@@ -12,7 +12,7 @@ DEPENDS += " \
     qtsvg \
 "
 
-do_install_append() {
+do_install:append() {
     # these have gone wild / qmake was always pain
     rm -r ${D}/usr/mkspecs
 }
@@ -22,4 +22,4 @@ SRCREV = "95547e8a2f6c362db1dd071a2df00b0e75e05da0"
 S = "${WORKDIR}/git"
 PV = "2.7.2"
 
-FILES_${PN}-dev += "${datadir}/mkspecs"
+FILES:${PN}-dev += "${datadir}/mkspecs"

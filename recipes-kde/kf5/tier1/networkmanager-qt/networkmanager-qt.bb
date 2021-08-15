@@ -14,7 +14,7 @@ DEPENDS += "networkmanager"
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "e740c5774758cd86188c2584bb5dbaefe0777cae536bd3b6fc360709c545a5e1"
 
-do_configure_append() {
+do_configure:append() {
     # remove absolute paths from exported cmake files
     for f in `find ${B} -name '*Targets*.cmake'`; do
         sed -i 's:${RECIPE_SYSROOT}${prefix}:${_IMPORT_PREFIX}:g' $f

@@ -61,7 +61,7 @@ SRC_URI[sha256sum] = "0f86bc3fe53f761c1e3e3f7544577a0c41433be8bff310cf2e729f76f4
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
-do_configure_append() {
+do_configure:append() {
     # although the name is missleading I still love cmake_extra_sanity.bbclass...
     sed -i \
         -e 's:${STAGING_DIR_NATIVE}::g' \
@@ -72,7 +72,7 @@ do_configure_append() {
 # Yeah nasty but...
 FILES_SOLIBSDEV = "${libdir}/libKDevC*so ${libdir}/libKDevPlatform*so"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kdev* \
     ${datadir}/k*5 \
     ${datadir}/knsrcfiles \
@@ -84,13 +84,13 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_QML} \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
     zsh \
 "
 
 # To give best user experience out of the box..
-RRECOMMENDS_${PN} += " \
+RRECOMMENDS:${PN} += " \
     packagegroup-qt5-toolchain-target \
     binutils \
     ccache \

@@ -39,7 +39,7 @@ SRC_URI[sha256sum] = "44e2e379ef8e3d09cc8ec4db5564dec3d42a48dfb690c4ae9438189cd4
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kservices5 \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${libdir}/libkdeinit5_kcmshell5.so \

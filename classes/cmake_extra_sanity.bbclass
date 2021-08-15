@@ -1,15 +1,15 @@
 inherit cmake_sysroot
 
-# do_install_append_class-cross does not work so hack
-do_install_prepend_class-native() {
+# do_install:append:class-cross does not work so hack
+do_install:prepend:class-native() {
     no_staging_check=true
 }
 
-do_install_prepend_class-nativesdk() {
+do_install:prepend:class-nativesdk() {
     no_staging_check=true
 }
 
-do_install_append() {
+do_install:append() {
     # avoid strange prefixing seen often
     old_dir=`pwd`
     cd ${D}

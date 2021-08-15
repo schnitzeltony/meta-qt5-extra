@@ -11,4 +11,4 @@ DEPENDS += "liblxqt"
 SRCREV = "b6958f7488f26f31013cdf78dfa5805bf0644446"
 PV = "0.17.0"
 
-FILES_${PN} += "${datadir}/lxqt"
+FILES:${PN} += "${datadir}/lxqt"

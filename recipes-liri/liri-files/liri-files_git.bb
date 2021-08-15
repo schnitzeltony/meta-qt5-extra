@@ -20,11 +20,11 @@ DEPENDS += " \
 
 EXTRA_OECMAKE += "-DQt5LinguistTools_DIR=${STAGING_LIBDIR_NATIVE}/cmake/Qt5LinguistTools"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/metainfo \
     ${OE_QMAKE_PATH_QML} \
 "
 
-RREPLACES_${PN} = "swordfish"
-RPROVIDES_${PN} = "swordfish"
-RCONFLICTS_${PN} = "swordfish"
+RREPLACES:${PN} = "swordfish"
+RPROVIDES:${PN} = "swordfish"
+RCONFLICTS:${PN} = "swordfish"

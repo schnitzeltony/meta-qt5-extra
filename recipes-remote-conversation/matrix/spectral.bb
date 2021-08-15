@@ -21,7 +21,7 @@ DEPENDS = " \
 
 inherit cmake_qt5_extra gtk-icon-cache
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/metainfo \
 "
 

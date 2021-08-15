@@ -17,11 +17,11 @@ PV = "${KF5_VERSION}"
 
 SRC_URI[sha256sum] = "598c9e245d2726ada15c50d51f38827116f25d7e966af0cdfbb3bca396e01716"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kdevappwizard \
     ${OE_QMAKE_PATH_QML} \
 "
 
-RPROVIDES_${PN} += "kirigami"
-RREPLACES_${PN} += "kirigami"
-RCONFLICTS_${PN} += "kirigami"
+RPROVIDES:${PN} += "kirigami"
+RREPLACES:${PN} += "kirigami"
+RCONFLICTS:${PN} += "kirigami"

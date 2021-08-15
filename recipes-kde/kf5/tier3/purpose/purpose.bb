@@ -22,7 +22,7 @@ DEPENDS += " \
     kirigami2 \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML}/org/kde/${BPN} \
 "

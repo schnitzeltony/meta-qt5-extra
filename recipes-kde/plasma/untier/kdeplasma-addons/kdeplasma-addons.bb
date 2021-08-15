@@ -43,7 +43,7 @@ DEPENDS += " \
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "607206ef5153602433413a34202075dbb518299db094b0ad3b50b20f70258eba"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/icons \
     ${datadir}/kdevappwizard \
     ${datadir}/knsrcfiles \

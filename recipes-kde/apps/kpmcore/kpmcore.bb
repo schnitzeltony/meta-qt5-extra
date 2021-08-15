@@ -26,7 +26,7 @@ DEPENDS += " \
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "cb9dd1002d489d6f2dcfdb44aa9581b0203d6386e874a34322de832014e58a03"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \

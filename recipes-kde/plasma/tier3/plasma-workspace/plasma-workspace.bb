@@ -54,7 +54,7 @@ SRC_URI += "file://0001-Fix-typo.patch"
 SRC_URI[sha256sum] = "af16b7151d87151a197b8fba41092f14895c0e64bfab05f562f831e18c6120ba"
 
 # REVISIT
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/dbus-1 \
     ${datadir}/desktop-directories \
@@ -86,7 +86,7 @@ FILES_SOLIBSDEV = " \
 
 
 # startkde/startplasmacompositor require:
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     kconfig-bin \
     kded \
     kinit \

@@ -1,1 +1,1 @@
-PACKAGECONFIG_append = " qt5"
+PACKAGECONFIG:append = " qt5"

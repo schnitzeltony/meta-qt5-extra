@@ -16,7 +16,7 @@ DEPENDS += "kcompletion kconfig kconfigwidgets ki18n kiconthemes kservice kwidge
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "d4e1213e5475ec2f58f51206ef0473e324f834c1735fc81e8e49399d5d983819"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
      ${OE_QMAKE_PATH_PLUGINS}/designer \
      ${datadir}/kservicetypes5 \
 "

@@ -50,9 +50,9 @@ SRC_URI[sha256sum] = "c8043d33023aae1087a8d35800575ee9df710f35ec996fb9fc7ecc8f35
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
 
-RDEPENDS_${PN} = "networkmanager"
+RDEPENDS:${PN} = "networkmanager"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/plasma \
     ${datadir}/kcm_networkmanagement/qml \

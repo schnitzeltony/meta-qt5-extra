@@ -24,7 +24,7 @@ DEPENDS += "\
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "e02374e49ac445969254e1b6f8edfeca478e36b7e00809c97e2f69ef33e2d8d3"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/icons \
     ${OE_QMAKE_PATH_PLUGINS} \

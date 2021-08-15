@@ -36,4 +36,4 @@ do_install() {
     install -m 0644 ${S}/src/ladspa.h ${D}${includedir}
 }
 
-FILES_${PN} += "${libdir}/ladspa"
+FILES:${PN} += "${libdir}/ladspa"

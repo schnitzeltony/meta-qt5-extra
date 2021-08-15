@@ -22,7 +22,7 @@ SRC_URI += " \
     file://0002-AvogadroLibsConfig.cmake-Find-include.patch \
 "
 
-do_configure_append() {
+do_configure:append() {
     # fix python executable path to not point to sysroot
     sed -i 's:pythonInterpreterPath =.*:pythonInterpreterPath = "${bindir}/python3";:g' ${B}/avogadro/qtgui/avogadropython.h
     # fix absolute sysroot library paths
@@ -36,11 +36,11 @@ do_configure_append() {
 
 EXTRA_OECMAKE += "-DENABLE_RPATH=OFF"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${libdir}/avogadro2/scripts \
 "
 
-FILES_${PN}-staticdev += " \
+FILES:${PN}-staticdev += " \
     ${libdir}/avogadro2/staticplugins \
     ${libdir}/avogadro2/*.a \
 "

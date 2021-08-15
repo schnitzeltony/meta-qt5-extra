@@ -11,7 +11,7 @@ DEPENDS += "qtsvg liblxqt libkscreen libxcursor libxi xf86-input-libinput"
 SRCREV = "435621e24a6e511d35309a8781c4cd853cb55225"
 PV = "0.17.1"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/icons \
     ${datadir}/lxqt/icons \
     ${datadir}/desktop-directories \

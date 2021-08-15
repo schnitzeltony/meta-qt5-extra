@@ -17,4 +17,4 @@ DEPENDS += " \
     qtdeclarative \
 "
 
-FILES_${PN} += "${OE_QMAKE_PATH_QML}/org/kde/${BPN}"
+FILES:${PN} += "${OE_QMAKE_PATH_QML}/org/kde/${BPN}"

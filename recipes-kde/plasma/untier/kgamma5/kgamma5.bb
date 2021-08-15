@@ -21,7 +21,7 @@ DEPENDS += " \
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "b4b59897426f941a2681aaf0b41b932c1da0e00efd9e7df8b919c730404cfd39"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kgamma \
     ${datadir}/kservices5 \
     ${OE_QMAKE_PATH_PLUGINS} \

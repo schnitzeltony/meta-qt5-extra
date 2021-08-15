@@ -44,7 +44,7 @@ SRC_URI[sha256sum] = "fa1fc1a4a4d84c1e568665d4c05cd00f71c5ba481dad7b6b8d83597a42
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/kconf_update \
     ${datadir}/config.kcfg \

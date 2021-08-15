@@ -11,6 +11,6 @@ SRC_URI += "file://0001-Temporary-workaround-gold-linker-errors.patch"
 
 PV = "${KF5_VERSION}"
 
-FILES_${PN} += "${datadir}/ECM"
+FILES:${PN} += "${datadir}/ECM"
 
 BBCLASSEXTEND = "native"

@@ -10,4 +10,4 @@ SRC_URI += "file://0001-finding-sed-does-not-work-and-is-not-neccessary.patch"
 SRCREV = "e2eb2f152f95ffd858d998f3432a2baff18f272f"
 PV = "0.16.1"
 
-FILES_${PN} += "${datadir}/icons"
+FILES:${PN} += "${datadir}/icons"

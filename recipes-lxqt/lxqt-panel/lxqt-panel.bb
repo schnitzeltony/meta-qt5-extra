@@ -29,7 +29,7 @@ PACKAGECONFIG[volume_pulse_plugin] = "-DVOLUME_USE_PULSEAUDIO=Yes,-DVOLUME_USE_P
 
 PACKAGECONFIG ??= "cpu_plugin dom mount_plugin networkmonitor_plugin sensor_plugin sysstat_plugin volume_alsa_plugin volume_pulse_plugin"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/lxqt/panel.conf \
     ${datadir}/lxqt/lxqt-panel/*.desktop \
     ${datadir}/desktop-directories \

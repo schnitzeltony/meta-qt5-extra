@@ -12,6 +12,6 @@ PV = "0.9.0+git${SRCPV}"
 SRCREV = "ddc3b049db412a89e91a37bd35e0435e76df7adc"
 S = "${WORKDIR}/git"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${OE_QMAKE_PATH_QML}/Liri \
 "

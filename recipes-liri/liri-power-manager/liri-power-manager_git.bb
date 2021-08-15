@@ -25,7 +25,7 @@ DEPENDS += " \
 
 EXTRA_OECMAKE += "-DINSTALL_SYSCONFDIR=${sysconfdir}"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/liri-settings \
     ${datadir}/liri-shell \
     ${OE_QMAKE_PATH_QML} \

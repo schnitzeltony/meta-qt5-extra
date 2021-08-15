@@ -43,7 +43,7 @@ PV = "0.26.6"
 SRC_URI = "https://download.kde.org/stable/okteta/${PV}/src/${BPN}-${PV}.tar.xz"
 SRC_URI[sha256sum] = "c569cd5b55503e46df1a5b5c9162b08888c426aa52c6f3f2f926c658bee0144c"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/k*5 \
     ${datadir}/mime \

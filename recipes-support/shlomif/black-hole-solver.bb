@@ -16,4 +16,4 @@ DEPENDS += " \
 
 # was: 'probably-redundant RPATH /usr/lib' - not exactly a bad breaker. Looked
 # into but could't find why this is thrown - so ignore for now.
-INSANE_SKIP_${PN} = "useless-rpaths"
+INSANE_SKIP:${PN} = "useless-rpaths"

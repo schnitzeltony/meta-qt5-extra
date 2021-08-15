@@ -13,7 +13,7 @@ DEPENDS += " \
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${PV}/${BPN}-${PV}.tar.bz2"
 SRC_URI[sha256sum] = "75aca4281da25fe0186b44c07772c5f0b4d1f2bba875c4667e7e6e9fcedb3cd9"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/mime \
     ${datadir}/icons \
 "

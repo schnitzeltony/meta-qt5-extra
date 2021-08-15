@@ -19,11 +19,11 @@ EXTRA_OECMAKE += " \
 # This is not the full truth but at least opkg terminates do_rootfs if there
 # are multiple RCONFLICTS. To workaround we add the triple below to lxqt base
 # library.
-RPROVIDES_${PN} += "lxqt-common"
-RREPLACES_${PN} += "lxqt-common"
-RCONFLICTS_${PN} += "lxqt-common"
+RPROVIDES:${PN} += "lxqt-common"
+RREPLACES:${PN} += "lxqt-common"
+RCONFLICTS:${PN} += "lxqt-common"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/polkit-1/ \
     ${datadir}/lxqt/power.conf \
 "

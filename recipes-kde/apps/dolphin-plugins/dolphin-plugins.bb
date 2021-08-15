@@ -20,7 +20,7 @@ DEPENDS += "\
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "9239c300cb7b27bb7810cedce11132bf9b0e4e0bcc1c1aba94b9cb8092d51d44"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/kservices5 \
     ${OE_QMAKE_PATH_PLUGINS} \

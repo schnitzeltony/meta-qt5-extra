@@ -34,7 +34,7 @@ EXTRA_OECMAKE += " \
     -DQML_INSTALL_DIR=${OE_QMAKE_PATH_QML} \
 "
 
-do_configure_append() {
+do_configure:append() {
     # fix sysroot path
     sed -i 's:${STAGING_DIR_HOST}.*${libdir}:${libdir}:g' ${B}/src/common/Constants.h
 }
@@ -45,7 +45,7 @@ install_pam() {
     install -m 644 ${WORKDIR}/sddm-autologin.pam ${D}${sysconfdir}/pam.d/sddm-autologin
 }
 
-do_install_append() {
+do_install:append() {
     install -d ${D}/${sysconfdir}/sddm.conf.d
     install -m 644 ${WORKDIR}/sddm.conf ${D}/${sysconfdir}/sddm.conf.d/00-default.conf
 
@@ -56,14 +56,14 @@ do_install_append() {
     ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'install_pam', '', d)}
 }
 
-FILES_${PN} += "${OE_QMAKE_PATH_QML}"
+FILES:${PN} += "${OE_QMAKE_PATH_QML}"
 
-SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+SYSTEMD_SERVICE:${PN} = "${BPN}.service"
 
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM_${PN} = "--system --home ${localstatedir}/lib/sddm --shell /bin/false --user-group --groups video sddm"
+USERADD_PARAM:${PN} = "--system --home ${localstatedir}/lib/sddm --shell /bin/false --user-group --groups video sddm"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
     packagegroup-core-x11-xserver \
     xinit \
@@ -76,7 +76,7 @@ RDEPENDS_${PN} += " \
     qtdeclarative-qmlplugins \
 "
 
-RRECOMMENDS_${PN += " \
+RRECOMMENDS:${PN += " \
     qtvirtualkeyboard-plugins \
     qtvirtualkeyboard-qmlplugins \
 "

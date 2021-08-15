@@ -30,7 +30,7 @@ DEPENDS += "\
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "6cfd49512080c84982574e36f85daeff1ae1287b7bae74cff46e4503d4cc70af"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/icons \
     ${datadir}/mime \

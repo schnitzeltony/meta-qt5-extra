@@ -31,7 +31,7 @@ SRC_URI[sha256sum] = "db87d0eb15a81117e31937078b095939e23c375fd939fe0ac1d4edec31
 
 FILES_SOLIBSDEV = ""
 
-FILES_${PN} += " \
+FILES:${PN} += " \
 	${datadir}/k*5 \
     ${datadir}/krunner \
     ${datadir}/dbus-1 \

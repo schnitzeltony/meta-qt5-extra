@@ -42,7 +42,7 @@ PACKAGECONFIG ?= " \
 
 PACKAGECONFIG[clang] = ",,clang,clang"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kxmlgui5 \
     ${datadir}/umbrello5 \
 "

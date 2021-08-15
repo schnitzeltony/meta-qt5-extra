@@ -11,4 +11,4 @@ SRC_URI = "git://github.com/rcsb/mmtf-cpp.git"
 SRCREV = "407bf8e541530579b1f2c3e7f7fa96bb06ef5be9"
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} += "msgpack-c"
+RDEPENDS:${PN} += "msgpack-c"

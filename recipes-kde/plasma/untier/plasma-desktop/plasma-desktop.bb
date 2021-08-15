@@ -55,7 +55,7 @@ SRC_URI += "file://0001-Ensure-xkb_base-is-not-empty-instead-of-checking-if-.pat
 
 FILES_SOLIBSDEV = "${libdir}/libkfont*${SOLIBSDEV}"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k* \
     ${datadir}/appdata \
     ${datadir}/config.kcfg \
@@ -72,7 +72,7 @@ FILES_${PN} += " \
     ${libdir}/kconf_update_bin \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     qtgraphicaleffects \
     qtquickcontrols-qmlplugins \
     gawk \

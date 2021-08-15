@@ -10,4 +10,4 @@ PV = "1.3.0+git${SRCPV}"
 SRCREV = "15ad06ccaf3c74a33a2b0f67438d218cd88cc8d2"
 S = "${WORKDIR}/git"
 
-FILES_${PN} += "${OE_QMAKE_PATH_QML}"
+FILES:${PN} += "${OE_QMAKE_PATH_QML}"

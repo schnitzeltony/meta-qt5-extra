@@ -20,4 +20,4 @@ EXTRA_QMAKEVARS_PRE += " \
     PLUGIN_INSTALL_PATH=${libdir}/${BPN} \
 "
 
-FILES_${PN} += "${datadir}"
+FILES:${PN} += "${datadir}"

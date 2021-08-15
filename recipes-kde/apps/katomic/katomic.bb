@@ -29,10 +29,10 @@ DEPENDS += "\
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "c1477c5a8c98c0fd5642316964e366616527ea97ffa475ddde36ce21c811d9b6"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kxmlgui5 \
     ${datadir}/kconf_update \
     ${datadir}/knsrcfiles \
 "
 
-RDEPENDS_${PN} += "perl"
+RDEPENDS:${PN} += "perl"

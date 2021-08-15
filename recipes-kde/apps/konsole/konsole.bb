@@ -45,7 +45,7 @@ SRC_URI[sha256sum] = "bcb1fe3af641de857e2b2991f2ccb8a1fb5d5b46ebef57869b271f4ffb
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/khotkeys \
     ${datadir}/knsrcfiles \

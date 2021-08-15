@@ -29,7 +29,7 @@ RRECCOMENDS_${PN} += "oxygen-fonts"
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "39faa8341e8f410dce907ec62f460f46dd1d2ace573ad96e47f3ade90ad7f94b"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/knotifications5 \
     ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_PLUGINS} \

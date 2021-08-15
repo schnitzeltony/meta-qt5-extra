@@ -25,7 +25,7 @@ DEPENDS += " \
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "05b7bdc184e7c10b1b293812827bec44a3d773a3eefffd91eb782f08b45abf96"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/kxmlgui5 \
     ${datadir}/dbus-1 \

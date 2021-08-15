@@ -36,7 +36,7 @@ DEPENDS += " \
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "5715ace40aaacb576d87674c032dc3b329c7e10bf1deb313f7825808a2b25a20"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/khotkeys \
     ${datadir}/knotifications5 \

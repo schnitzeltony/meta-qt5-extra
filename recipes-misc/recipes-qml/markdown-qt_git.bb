@@ -21,4 +21,4 @@ S = "${WORKDIR}/git"
 
 inherit cmake_qt5
 
-FILES_${PN} += "${libdir}/libmarkdown-qt"
+FILES:${PN} += "${libdir}/libmarkdown-qt"

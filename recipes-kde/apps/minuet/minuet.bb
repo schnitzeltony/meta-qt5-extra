@@ -23,10 +23,10 @@ DEPENDS += "\
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "ccfef561ac234cf44d444950f079b4c2f2df0a8e3319cd609e9edae62882b46e"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kxmlgui5 \
     ${datadir}/icons \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
-RDEPENDS_${PN} += "timidity++ qtquickcontrols2"
+RDEPENDS:${PN} += "timidity++ qtquickcontrols2"

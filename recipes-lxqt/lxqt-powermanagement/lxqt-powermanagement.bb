@@ -18,4 +18,4 @@ DEPENDS += " \
 SRCREV = "abdc5eead3502163115235d18a6d42c6d08b1ef2"
 PV = "0.17.1"
 
-FILES_${PN} += "${datadir}/icons"
+FILES:${PN} += "${datadir}/icons"

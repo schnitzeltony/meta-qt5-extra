@@ -15,5 +15,5 @@ DEPENDS = " \
 
 inherit cmake_qt5_extra
 
-FILES_${PN}-dev += "${datadir}/ndk-modules"
+FILES:${PN}-dev += "${datadir}/ndk-modules"
 

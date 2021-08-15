@@ -13,4 +13,4 @@ PV = "1.1.0+git${SRCPV}"
 SRCREV = "044fcc350bda67f9325f43d75e8fbfb74984ee11"
 S = "${WORKDIR}/git"
 
-FILES_${PN}-dev += "${datadir}/LiriCMakeShared"
+FILES:${PN}-dev += "${datadir}/LiriCMakeShared"

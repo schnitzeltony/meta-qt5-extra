@@ -27,7 +27,7 @@ SRC_URI[sha256sum] = "cf389a1c4db1c7da8b5b7ecec030e9c68df5d950c581d91f3931b7f6d2
 
 FILES_SOLIBSDEV = ""
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/kxmlgui5 \
     ${datadir}/kconf_update \

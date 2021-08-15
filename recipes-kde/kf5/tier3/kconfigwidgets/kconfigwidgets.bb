@@ -19,6 +19,6 @@ DEPENDS += "kauth kconfig kcodecs kguiaddons kwidgetsaddons kdoctools \
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "36ea5e2263776f988a9b2301f4605ccb4b3683afbe770c1896a5525e12711e9e"
 
-FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/designer"
+FILES:${PN} += "${OE_QMAKE_PATH_PLUGINS}/designer"
 
-RDEPENDS_${PN} += "perl"
+RDEPENDS:${PN} += "perl"

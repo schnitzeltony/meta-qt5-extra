@@ -1,5 +1,5 @@
-DEPENDS_prepend_class-nativesdk = "nativesdk-qtbase "
-DEPENDS_prepend_class-target = "qtbase "
+DEPENDS:prepend:class-nativesdk = "nativesdk-qtbase "
+DEPENDS:prepend:class-target = "qtbase "
 # Do not pin hard for extra-cmake-modules itself
 DEPENDS+= "extra-cmake-modules-native "
 
@@ -24,11 +24,11 @@ inherit cmake_qt5_extra python3native
 
 DEPENDS += "libxml2-native"
 
-do_compile_prepend() {
+do_compile:prepend() {
     export XDG_DATA_HOME=${STAGING_DATADIR}
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kf5 \
     ${datadir}/qlogging-categories5 \
     ${libdir}/plugins/kf5 \
@@ -45,9 +45,9 @@ EXTRA_OECMAKE += " \
     -DKDE_PATH_EXTERNAL_HOST_BINS=${STAGING_BINDIR_NATIVE} \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/appdata \
     ${datadir}/metainfo \
 "
 
-FILES_${PN}-dev += "${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs"
+FILES:${PN}-dev += "${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs"

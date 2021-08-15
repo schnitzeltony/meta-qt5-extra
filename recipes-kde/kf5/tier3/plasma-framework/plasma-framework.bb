@@ -52,7 +52,7 @@ PV = "${KF5_VERSION}"
 SRC_URI += "file://0001-Fix-EGL-link.patch"
 SRC_URI[sha256sum] = "19b5cc632a2e79c28caeea36fdf9e1cc47c1ee1d7c1dc3432378854ac0aa1532"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kdevappwizard \
     ${datadir}/dbus-1 \
     ${datadir}/k*5 \

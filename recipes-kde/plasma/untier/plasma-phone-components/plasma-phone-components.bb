@@ -28,7 +28,7 @@ inherit kde-plasma gettext
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "abbc3d5ddc82a19b8188772ed38534fa911d9119c1a3e48e2f62e4ddab3a7956"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/kwin \
     ${datadir}/metainfo \
@@ -40,7 +40,7 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     libqofono \
     qtvirtualkeyboard-plugins \
     qtvirtualkeyboard-qmlplugins \

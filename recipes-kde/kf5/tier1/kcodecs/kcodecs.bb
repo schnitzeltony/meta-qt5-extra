@@ -17,7 +17,7 @@ DEPENDS += "gperf-native"
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "233f7123b045562c8ea7862eb40c27e551f6b463f9ed4fce4583433601f9523a"
 
-do_compile_append() {
+do_compile:append() {
     # gperf-native sets absolut debug comments/links in header
     sed -i 's:${STAGING_DIR_NATIVE}::' ${B}/src/kentities.h
 }

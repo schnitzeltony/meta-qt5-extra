@@ -43,7 +43,7 @@ SRC_URI[sha256sum] = "b44ea77cf77d579e9ade0af98f9a27a02292bc1b7edff387a386ab7e9e
 
 FILES_SOLIBSDEV = ""
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kateproject \
     ${datadir}/k*5 \
     ${datadir}/plasma \

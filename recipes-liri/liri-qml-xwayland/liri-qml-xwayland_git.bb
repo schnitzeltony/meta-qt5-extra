@@ -17,4 +17,4 @@ DEPENDS += " \
     qtwayland \
 "
 
-FILES_${PN} += "${OE_QMAKE_PATH_QML}"
+FILES:${PN} += "${OE_QMAKE_PATH_QML}"

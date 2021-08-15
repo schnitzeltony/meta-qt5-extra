@@ -6,7 +6,7 @@ SRC_URI += " \
     file://0001-make-build-of-hunspell-optional.patch \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS}/kf5/sonnet \
 "
 
@@ -17,4 +17,4 @@ CMAKE_ALIGN_SYSROOT[1] = "KF5Sonnet, -s${_IMPORT_PREFIX}/bin, -s${KDE_PATH_EXTER
 PACKAGECONFIG ??= "hunspell"
 PACKAGECONFIG[hunspell] = "-DBUILD_HUNSPELL=ON,-DBUILD_HUNSPELL=OFF, hunspell"
 
-FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/designer"
+FILES:${PN} += "${OE_QMAKE_PATH_PLUGINS}/designer"

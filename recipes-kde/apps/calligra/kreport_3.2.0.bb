@@ -30,7 +30,7 @@ SRC_URI = " \
 "
 SRC_URI[sha256sum] = "22716d719654e8f887fe4d33654e252ddf3d3d818c44e15a8af0e6f2e7d6ccd7"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kservicetypes5 \
     ${datadir}/kreport3 \
     ${OE_QMAKE_PATH_PLUGINS} \

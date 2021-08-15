@@ -107,11 +107,11 @@ UNTIER = " \
 "
 
 # avoid performance sink
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     baloo-no-autostart \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     ${TIER_1} \
     ${TIER_2} \
     ${TIER_3} \

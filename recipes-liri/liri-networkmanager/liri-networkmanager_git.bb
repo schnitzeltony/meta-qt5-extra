@@ -19,7 +19,7 @@ DEPENDS += " \
     modemmanager-qt \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/liri-shell/indicators \
     ${datadir}/liri-settings/modules \
     ${OE_QMAKE_PATH_QML} \

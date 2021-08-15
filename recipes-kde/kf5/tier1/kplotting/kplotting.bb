@@ -12,4 +12,4 @@ SRC_URI[sha256sum] = "4ffd09a8c6b8713e02af4dfdc0bbc061d363c70448ef56b2cd4e4c768a
 
 DEPENDS += "qttools"
 
-FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/designer"
+FILES:${PN} += "${OE_QMAKE_PATH_PLUGINS}/designer"

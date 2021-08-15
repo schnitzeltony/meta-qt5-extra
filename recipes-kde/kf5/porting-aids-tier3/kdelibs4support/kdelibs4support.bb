@@ -36,20 +36,20 @@ DEPENDS += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras", "", d)} \
 "
 
-do_compile_prepend() {
+do_compile:prepend() {
     # Error: Could not locate service type file kservicetypes5/ "kdedmodule.desktop" , tried ...
     export XDG_DATA_HOME=${STAGING_DATADIR}
 }
 
-do_configure_append() {
+do_configure:append() {
     # fix KCONFIG_COMPILER_LOCATION
     sed -i 's:${STAGING_LIBDIR_NATIVE}:${libdir}:g' ${B}/src/config-kstandarddirs.h
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/dbus-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
-RDEPENDS_${PN} += "perl"
+RDEPENDS:${PN} += "perl"

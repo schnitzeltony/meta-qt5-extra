@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
 PACKAGECONFIG_FONTS = "fontconfig"
 
@@ -14,7 +14,7 @@ PACKAGECONFIG_GL_use-mainline-bsp = "${QT5_EXTRA_QTBASE_IMX_MAINLINE_GL} gbm kms
 # override QT5_EXTRA_QTBASE_IMX_MAINLINE_GL with 'gles2'
 QT5_EXTRA_QTBASE_IMX_MAINLINE_GL ??= ""
 
-PACKAGECONFIG_DISTRO_append = " \
+PACKAGECONFIG_DISTRO:append = " \
     sm \
     accessibility \
     sql-sqlite \

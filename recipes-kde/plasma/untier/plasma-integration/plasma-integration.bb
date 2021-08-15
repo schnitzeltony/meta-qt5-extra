@@ -28,9 +28,9 @@ DEPENDS += " \
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "e08b0c8030ef465d44de4f460d71970f15c7697c7d3095afa9d07b2d41a45467"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/kconf_update \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
-RDEPENDS_${PN} += "perl"
+RDEPENDS:${PN} += "perl"

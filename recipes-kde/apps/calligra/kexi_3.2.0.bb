@@ -45,16 +45,16 @@ SRC_URI = " \
 "
 SRC_URI[sha256sum] = "7a813f9ea815a09c1e733d0e7dc879c64eee85f075389e87e6aab99cf0c1c1ff"
 
-do_install_append() {
+do_install:append() {
     install -d "${D}/${datadir}/pixmaps"
     install ${S}/src/pics/icons/breeze/apps/48/kexi.svg ${D}/${datadir}/pixmaps/
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
-RDEPENDS_${PN} += "breeze-icons-binres"
+RDEPENDS:${PN} += "breeze-icons-binres"
 
 # REVISIT
 #-- The following RECOMMENDED packages have not been found:

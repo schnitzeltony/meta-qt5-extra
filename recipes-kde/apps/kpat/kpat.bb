@@ -32,7 +32,7 @@ SRC_URI[sha256sum] = "a612154477b5d7a6fbb7489f7b000c0eaf2bbdbcc6df16189e04535457
 
 FILES_SOLIBSDEV = ""
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/icons \
     ${datadir}/mime \

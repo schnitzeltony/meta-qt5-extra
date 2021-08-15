@@ -21,7 +21,7 @@ SRCREV = "cbd4db43f8908b874864280fdc03bf92569eebc1"
 S = "${WORKDIR}/git"
 PV = "3.1.1"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${datadir}/applications
     install -m 0644 ${WORKDIR}/openbabel-gui.desktop ${D}${datadir}/applications
 
@@ -29,4 +29,4 @@ do_install_append() {
     convert.im7 ${S}/src/GUI/babel.xpm -transparent white ${D}${datadir}/pixmaps/babel.png
 }
 
-FILES_${PN}-dev += "${libdir}/cmake"
+FILES:${PN}-dev += "${libdir}/cmake"

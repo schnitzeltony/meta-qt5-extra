@@ -24,7 +24,7 @@ DEPENDS += " \
 "
 
 # TBD split chrome/chromium/mozilla
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/krunner \
     ${libdir}/mozilla \

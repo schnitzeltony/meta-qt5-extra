@@ -12,4 +12,4 @@ S = "${WORKDIR}/git"
 SRCREV = "3b14415ff9862e6b79577fd4b9a097965001b270"
 PV = "0.1.5"
 
-FILES_${PN} += "${datadir}/desktop-directories"
+FILES:${PN} += "${datadir}/desktop-directories"

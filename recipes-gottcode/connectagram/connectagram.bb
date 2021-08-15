@@ -15,11 +15,11 @@ UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)\-src\.tar"
 
 EXTRA_QMAKEVARS_PRE += "PREFIX=${prefix}"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/metainfo \
 "
 
 # WIP: qt5-translation expects *.qm to work properly so pack word data in PN for now
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/connectagram/data \
 "

@@ -17,7 +17,7 @@ DEPENDS += " \
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "badd15c93c1af2c6ab7f156245186a2223a184523070c6614328486e186eedf7"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${datadir}/kservices5 \
 "

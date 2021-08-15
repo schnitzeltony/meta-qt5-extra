@@ -25,6 +25,6 @@ SRC_URI += " \
 "
 S = "${WORKDIR}/git"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
 "

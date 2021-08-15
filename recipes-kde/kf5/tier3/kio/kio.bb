@@ -47,12 +47,12 @@ DEPENDS += " \
     krb5 \
 "
 
-do_configure_append() {
+do_configure:append() {
     # fix sysroot path
     sed -i 's:${STAGING_BINDIR_NATIVE}:${bindir}:g' ${B}/src/ioslaves/help/config-help.h
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/k*5 \
     ${datadir}/polkit-1 \

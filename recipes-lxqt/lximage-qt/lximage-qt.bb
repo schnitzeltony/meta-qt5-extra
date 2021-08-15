@@ -11,4 +11,4 @@ DEPENDS += "qtx11extras qtsvg libfm-qt libexif libxfixes"
 SRCREV = "e57f2d002eb10e79aef5897cfbd388a1766ae6ee"
 PV = "0.17.0"
 
-FILES_${PN} += "${datadir}/icons"
+FILES:${PN} += "${datadir}/icons"

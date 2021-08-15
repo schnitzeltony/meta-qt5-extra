@@ -32,7 +32,7 @@ EXTRA_OECMAKE += " \
     -DJPEGLIB_RUN_RESULT__TRYRUN_OUTPUT=0 \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/icons \
     ${datadir}/solid \

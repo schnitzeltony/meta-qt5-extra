@@ -22,12 +22,12 @@ DEPENDS += " \
     xkeyboard-config \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/liri-settings/modules \
     ${OE_QMAKE_PATH_QML} \
 "
 
-RREPLACES_${PN} = "hawaii-system-preferences"
-RPROVIDES_${PN} = "hawaii-system-preferences"
-RCONFLICTS_${PN} = "hawaii-system-preferences"
+RREPLACES:${PN} = "hawaii-system-preferences"
+RPROVIDES:${PN} = "hawaii-system-preferences"
+RCONFLICTS:${PN} = "hawaii-system-preferences"

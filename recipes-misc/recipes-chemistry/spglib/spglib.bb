@@ -10,10 +10,10 @@ SRCREV = "e8118d854a4c11dbaa8d7b2c55d4a1e74ddcaaf7"
 S = "${WORKDIR}/git"
 PV = "1.16.1"
 
-do_configure_prepend() {
+do_configure:prepend() {
     touch ${S}/NEWS ${S}/README ${S}/AUTHORS
 }
 
-do_install_append() {
+do_install:append() {
     ln -sf libsymspg.so ${D}${libdir}/libspglib.so
 }

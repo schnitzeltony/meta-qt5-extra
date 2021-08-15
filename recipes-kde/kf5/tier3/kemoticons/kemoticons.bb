@@ -15,7 +15,7 @@ DEPENDS += "karchive kconfig kconfig-native kservice kcoreaddons kcoreaddons-nat
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "0733fe001a6257256326969e4e857e26883a03c2132794775d15f9d2f8a31141"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/emoticons \
     ${datadir}/k*5 \
     ${OE_QMAKE_PATH_PLUGINS} \

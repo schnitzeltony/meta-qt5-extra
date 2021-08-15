@@ -17,6 +17,6 @@ PV = "1.1.0+git${SRCPV}"
 SRCREV = "6a5de23f2e5162fbee39d16f938473ff970a2ec0"
 S = "${WORKDIR}/git"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${libdir}/plugins \
 "

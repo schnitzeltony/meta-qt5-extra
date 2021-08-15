@@ -11,8 +11,8 @@ PV = "0.10.0+git${SRCPV}"
 SRCREV = "c721e5b19467643df31cea4a78db132f5d3f851e"
 S = "${WORKDIR}/git"
 
-FILES_${PN} += "${datadir}"
+FILES:${PN} += "${datadir}"
 
-RREPLACES_${PN} = "hawaii-wallpapers"
-RPROVIDES_${PN} = "hawaii-wallpapers"
-RCONFLICTS_${PN} = "hawaii-wallpapers"
+RREPLACES:${PN} = "hawaii-wallpapers"
+RPROVIDES:${PN} = "hawaii-wallpapers"
+RCONFLICTS:${PN} = "hawaii-wallpapers"

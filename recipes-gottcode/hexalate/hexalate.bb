@@ -15,7 +15,7 @@ UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)\-src\.tar"
 
 EXTRA_QMAKEVARS_PRE += "PREFIX=${prefix}"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/metainfo \
     ${datadir}/icons \
 "

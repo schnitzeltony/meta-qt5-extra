@@ -29,7 +29,7 @@ DEPENDS += " \
     libksysguard \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/plasma \
     ${OE_QMAKE_PATH_PLUGINS} \

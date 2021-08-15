@@ -33,12 +33,12 @@ PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "328570e8f08fc2a92fb4ce67e57e53ecf4cc6b28a0507ba031e340748632ec44"
 SRC_URI += "file://kde.pam"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${sysconfdir}/pam.d
     install -m 644 ${WORKDIR}/kde.pam ${D}${sysconfdir}/pam.d/kde
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/kconf_update \
     ${datadir}/k*5 \
@@ -49,4 +49,4 @@ FILES_${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
 
-RDEPENDS_${PN} += "perl"
+RDEPENDS:${PN} += "perl"

@@ -19,7 +19,7 @@ QT_TRANSLATION_FILES = "${datadir}/Quotient/quaternion/translations/*.qm"
 
 inherit cmake_qt5_extra qt5-translation gtk-icon-cache
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/metainfo \
 "
 
