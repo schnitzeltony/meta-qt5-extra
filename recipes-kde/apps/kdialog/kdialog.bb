@@ -1,8 +1,7 @@
 SUMMARY = "Tool to show nice dialog boxes from shell scripts"
-LICENSE = "GPL-2.0-or-later & GFDL-1.3"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-    file://COPYING.DOC;md5=10b9de612d532fdeeb7fe8fcd1435cc6 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-apps gettext
@@ -21,6 +20,6 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "c01f85e383c11d65e55e83a25be39ee314f3bd9c5e3f02ba385f1c2dfa712db6"
+SRC_URI[sha256sum] = "d4af3cd41b34a4dc3f3ef23238f9791f1470ce5362c2edbf6354e6ce1b0471de"
 
 FILES:${PN} += "${datadir}/dbus-1"

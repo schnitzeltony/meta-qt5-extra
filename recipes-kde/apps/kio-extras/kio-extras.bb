@@ -54,12 +54,12 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "4af9f8a10e0c16006d97cf63439f91c05a04533ec6ee2ec0223dbfcc1d39d62d"
+SRC_URI[sha256sum] = "bd93d748c2883ff4cd64543516bbc90a66744db7b036075861e142d1a655486d"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 do_configure:append() {
-    sed -i 's:${S}/smb/kdsoap-ws-discovery-client/src/kdwsdl2cpp:${STAGING_BINDIR_NATIVE}/kdwsdl2cpp:g' ${B}/build.ninja
+    sed -i 's:smb/kdsoap-ws-discovery-client/src/kdwsdl2cpp:${STAGING_BINDIR_NATIVE}/kdwsdl2cpp:g' ${B}/build.ninja
 }
 
 FILES:${PN} += " \

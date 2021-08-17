@@ -19,7 +19,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "b4be933e232c9461bed4fe10c3facbaff41b50a02523e8c70218f809d722f0cc"
+SRC_URI[sha256sum] = "9ef1dc516900e3a4c3e7f382b3cd34df36dcbb4f089d494a28b30b5072a6c741"
 
 FILES:${PN} += " \
     ${datadir}/kservices5 \

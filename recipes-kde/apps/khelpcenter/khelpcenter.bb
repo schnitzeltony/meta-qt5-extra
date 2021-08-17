@@ -1,10 +1,13 @@
 SUMMARY = "Application to show KDE Applications' documentation"
-LICENSE = "GPL-2.0"
+LICENSE = "GFDL-1.2 & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=7108e5acd7ce861dee282297d7c2f38c \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9a4c4207e152ff95aa8539e9c1ed53e9 \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
 "
 
-inherit kde-apps gettext
+inherit kde-apps gettext mime-xdg
 
 DEPENDS += " \
     grantlee \
@@ -28,7 +31,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "bb188fc826edfe48ee2625295d5c5737c62da406ec594691b6e664b3b9ed2fb6"
+SRC_URI[sha256sum] = "b148f680334fff1cda93fd9ae11e8c9ff8ced4e1db7ea561be24947eb91a2e96"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

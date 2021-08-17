@@ -1,8 +1,8 @@
 SUMMARY = "Mathematical Function Plotter"
-LICENSE = "GPL-2.0 & GFDL-1.2"
+LICENSE = "GFDL-1.2 & GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=7974e16b472f00bbbadf2d006aa00c50 \
-    file://COPYING.DOC;md5=28d73eafa40ebd0ccdc6b37df8de10a3 \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9f58808219e9a42ff1228309d6f83dc6 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-apps gtk-icon-cache mime-xdg
@@ -23,7 +23,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "05b7bdc184e7c10b1b293812827bec44a3d773a3eefffd91eb782f08b45abf96"
+SRC_URI[sha256sum] = "db87a45f24d2f3d971d4abf9adf52be03fa1bdcda5284bcc02410f8ad79dfaeb"
 
 FILES:${PN} += " \
     ${datadir}/config.kcfg \

@@ -1,9 +1,17 @@
 SUMMARY = "KDE document viewer"
-LICENSE = "GPL-2.0 & GFDL-1.2 & LGPL-2.1"
+LICENSE = "BSD-2-Clause & BSD-3-Clause & GFDL-1.2 & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & GPL-3.0-or-later & LGPL-2.0-only & LGPL-2.0-or-later & MIT & X11"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=5a3169a2d39a757efd8b7aa66a69d97b \
-    file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-    file://COPYING.DOC;md5=d8855fca80aa0b428deafa405d0ea17a \
+    file://LICENSES/BSD-2-Clause.txt;md5=4e290b17e3e05732730de37b44abef90 \
+    file://LICENSES/BSD-3-Clause.txt;md5=f225922a2c12dfa5218fb70c49db3ea6 \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9f58808219e9a42ff1228309d6f83dc6 \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/GPL-3.0-or-later.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/LGPL-2.0-only.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/MIT.txt;md5=7dda4e90ded66ab88b86f76169f28663 \
+    file://LICENSES/X11.txt;md5=87f08485cf6ba3c63a00eda8ecba7f1d \
 "
 
 inherit kde-apps gtk-icon-cache mime-xdg
@@ -40,7 +48,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "fa1fc1a4a4d84c1e568665d4c05cd00f71c5ba481dad7b6b8d83597a428b5056"
+SRC_URI[sha256sum] = "dded73111fa78a9b7f544d6089de2cc0c48b1696c723ba76ab2dab8fd9c16a69"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
