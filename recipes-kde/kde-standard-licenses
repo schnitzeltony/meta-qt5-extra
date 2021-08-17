@@ -46,6 +46,8 @@ Copy & paste templates:
 
     file://LICENSES/Unicode-DFS-2016.txt;md5=3daac258519ec32945c80ae0f7ba88f4 \
 
+    file://LICENSES/X11.txt;md5=87f08485cf6ba3c63a00eda8ecba7f1d \
+
 [1] https://community.kde.org/Policies/Licensing_Policy
 
 To make things even more complicated license-/styleguide-crusaders do not
