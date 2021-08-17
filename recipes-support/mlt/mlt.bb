@@ -8,11 +8,11 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "git://github.com/mltframework/mlt.git"
-SRCREV = "902c4c2d82514e812b3129a0aa3146a89bb898ec"
-PV = "6.24.0"
+SRCREV = "6e5d8f54c1255dd37db5d7b8947b19f0737b5650"
+PV = "7.0.1"
 S = "${WORKDIR}/git"
 
-inherit autotools-brokensep pkgconfig
+inherit cmake_qt5
 
 DEPENDS += " \
     gtk+ \
@@ -23,24 +23,16 @@ DEPENDS += " \
     sox \
     libav \
     libsdl libsdl-image \
+    libsdl2 libsdl2-image \
     libexif \
     libsamplerate0 \
     fftw \
     jack \
     ladspa-sdk \
+    rubberband \
 "
 
-CLEANBROKEN = "1"
-
-CXXFLAGS += "--std=c++11"
-
-CONF_ACCEL ?= " \
-    --disable-mmx \
-    --disable-sse \
-    --disable-sse2 \
-"
-
-EXTRA_OECONF = " \
-    ${CONF_ACCEL} \
-    --enable-gpl \
+FILES:${PN} += " \
+    ${datadir}/mlt-7 \
+    ${libdir}/mlt-7 \
 "
