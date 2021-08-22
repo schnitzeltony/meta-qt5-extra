@@ -18,10 +18,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  3 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 98f8158..858a437 100644
+index 26412ba..46ff534 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -66,7 +66,8 @@ find_package(KF5 "${KF5_MIN_VERSION}" REQUIRED COMPONENTS
+@@ -69,7 +69,8 @@ find_package(KF5 "${KF5_MIN_VERSION}" REQUIRED COMPONENTS
  )
  
  find_package(Boost "${Boost_MIN_VERSION}" MODULE REQUIRED)
@@ -47,9 +47,9 @@ diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 index cecf522..1a5596b 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -237,7 +237,7 @@ PUBLIC
-     KF5::I18n
+@@ -244,7 +244,7 @@ PUBLIC
      Qt5::Xml
+     Boost::boost
      LibGcrypt::LibGcrypt
 -    LibGMP::LibGMP
 +    gmp
