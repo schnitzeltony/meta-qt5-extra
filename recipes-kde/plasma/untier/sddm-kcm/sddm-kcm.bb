@@ -24,7 +24,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "e4845375ded8d8b1279a340f8c9feed573c301cf1c2b7f9fd2b5288444c34022"
+SRC_URI[sha256sum] = "4669a40fe4380f65dfff509b00fe1dfd026507ae50fc5fa8daeea7b68c207798"
 
 RDEPENDS:${PN} = "sddm"
 
