@@ -50,7 +50,7 @@ DEPENDS += " \
 
 PV = "${KF5_VERSION}"
 SRC_URI += "file://0001-Fix-EGL-link.patch"
-SRC_URI[sha256sum] = "879b3a97ec1a43a7108a2469e5d23578f05b1afcd838b286576ca5a14fadf8ff"
+SRC_URI[sha256sum] = "304715e0261370a97bc15b8fc57f2d4b9145787ba133fbdd078308c031eeae9d"
 
 FILES:${PN} += " \
     ${datadir}/kdevappwizard \

@@ -12,6 +12,6 @@ DEPENDS += "kcoreaddons kcoreaddons-native kwidgetsaddons \
             ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "34232f1dc1d44bdd7ec55a303f8ad8bc2b71e02b517b307dd17de5b897b8f715"
+SRC_URI[sha256sum] = "6b18a885e9eaa221309272d19a7c88fcd21ed85a6f83ec44b3ea12277c0ba74a"
 
 FILES:${PN} += "${datadir}/dbus-1"

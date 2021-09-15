@@ -16,7 +16,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  2 files changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d99537c..a06d025 100644
+index 17bcfab..0e62df9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -30,6 +30,8 @@ option(INSTALL_INTERNAL_TOOLS "Install internal tools too." OFF)
@@ -26,7 +26,7 @@ index d99537c..a06d025 100644
 +# OE specific
 +set(OE_ROOT_PATH_PREFIX "" CACHE STRING "OE sysroot")
  # Dependencies
- set(REQUIRED_QT_VERSION 5.15.0)
+ set(REQUIRED_QT_VERSION 5.15.2)
  find_package(Qt5Core ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE)
 diff --git a/cmake/FindDocBookXSL.cmake b/cmake/FindDocBookXSL.cmake
 index 1cb222c..819da63 100644

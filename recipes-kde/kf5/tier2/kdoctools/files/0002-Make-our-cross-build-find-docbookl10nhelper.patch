@@ -9,15 +9,16 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  src/CMakeLists.txt | 12 ------------
  1 file changed, 12 deletions(-)
 
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index a615ca8..300772a 100644
+index 2523157..ed130f6 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -209,18 +209,6 @@ if(INSTALL_INTERNAL_TOOLS)
+@@ -210,18 +210,6 @@ if(INSTALL_INTERNAL_TOOLS)
      install(TARGETS docbookl10nhelper EXPORT KF5DocToolsToolsTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
  endif()
  

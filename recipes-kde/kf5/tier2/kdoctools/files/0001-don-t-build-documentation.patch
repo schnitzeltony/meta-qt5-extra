@@ -9,17 +9,18 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+
 ---
  CMakeLists.txt | 5 -----
  1 file changed, 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 56bc896..f6a2ee1 100644
+index 17bcfab..3e410ff 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -97,12 +97,7 @@ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5DocTools")
+@@ -96,12 +96,7 @@ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5DocTools")
  add_definitions(-DTRANSLATION_DOMAIN=\"kdoctools5\")
- add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
+ add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
  add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055000)
 -if (KF5I18n_FOUND)
 -    ki18n_install(po)

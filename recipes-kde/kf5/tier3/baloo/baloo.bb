@@ -32,7 +32,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "81b4459a77c7b75c3a0d8d70fba50ba122f02ed32945522ecc4a6b15c8a6914d"
+SRC_URI[sha256sum] = "47ce609d9eb17375c5b0bbe3fc5d0137b3fc6c097bd1d942399ad42ff7ffa97c"
 
 SRC_URI += " \
     file://baloo_file.desktop \

@@ -9,15 +9,16 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Inappropriate [config]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  KF5DocToolsMacros.cmake | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/KF5DocToolsMacros.cmake b/KF5DocToolsMacros.cmake
-index f9c0d07..0df144e 100644
+index 0250770..ec76429 100644
 --- a/KF5DocToolsMacros.cmake
 +++ b/KF5DocToolsMacros.cmake
-@@ -60,7 +60,7 @@
+@@ -61,7 +61,7 @@
  #
  
  set(KDOCTOOLS_SERIALIZE_TOOL "" CACHE STRING "Tool to serialize resource-intensive commands in parallel builds")
