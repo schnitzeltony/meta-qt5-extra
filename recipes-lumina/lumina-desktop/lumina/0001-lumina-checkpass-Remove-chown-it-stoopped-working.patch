@@ -1,0 +1,31 @@
+From 6cc40ae540d02e7cd3bc450aa523bb2c24c4e309 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 9 Oct 2021 20:51:51 +0200
+Subject: [PATCH] lumina-checkpass: Remove chown - it stoopped working
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate[Hack]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src-qt5/core/lumina-checkpass/lumina-checkpass.pro | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/src-qt5/core/lumina-checkpass/lumina-checkpass.pro b/src-qt5/core/lumina-checkpass/lumina-checkpass.pro
+index 981dcafa..7c4f9427 100644
+--- a/src-qt5/core/lumina-checkpass/lumina-checkpass.pro
++++ b/src-qt5/core/lumina-checkpass/lumina-checkpass.pro
+@@ -12,7 +12,4 @@ LIBS     += -lpam
+ 
+ SOURCES += main.c
+ 
+-perms.path = $$DESTDIR$${PREFIX}/sbin
+-perms.extra = "chmod 4555 $$DESTDIR$${PREFIX}/sbin/lumina-checkpass"
+-
+-INSTALLS += target perms
++INSTALLS += target
+-- 
+2.31.1
+

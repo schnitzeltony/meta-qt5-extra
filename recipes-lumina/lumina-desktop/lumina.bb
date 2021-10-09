@@ -17,16 +17,26 @@ DEPENDS += " \
     qtsvg \
 "
 
-SRC_URI = "git://github.com/lumina-desktop/lumina.git"
-SRCREV = "ee85f9b4254ee98a06d169d14fb3cbb37c74f098"
+SRC_URI = " \
+    git://github.com/lumina-desktop/lumina.git \
+    file://0001-lumina-checkpass-Remove-chown-it-stoopped-working.patch \
+"
+SRCREV = "6744cddd5de1f18c3713a68c85d740ae6d4a27de"
 S = "${WORKDIR}/git"
-PV = "1.6.0"
+PV = "1.6.1"
 
 do_configure:prepend() {
     # change paths by sed instead of endles escapes in 'DEFINES+=..' below
     sed -i 's:L_ETCDIR:QString("${sysconfdir}"):' `find ${S} -name *.cpp`
     sed -i 's:L_SHAREDIR:QString("${datadir}"):' `find ${S} -name *.cpp`
     sed -i 's:$${MAN_ZIP}:gzip -c:' `find ${S} -name *.pro`
+}
+
+do_install:append() {
+    # with 1.6.1 we see for unknown reasons:
+    # chmod: cannot access '/usr/sbin/lumina-checkpass': No such file or directory
+    # did not find better: patch out chmod and do here
+    chmod 4555 ${D}${prefix}/sbin/lumina-checkpass
 }
 
 # Override magic in src-qt5/OS-detect.pri to our paths
@@ -53,8 +63,11 @@ FILES:${PN} += " \
     ${datadir}/lumina-desktop/menu-scripts \
     ${datadir}/lumina-desktop/syntax_rules \
     ${datadir}/lumina-desktop/themes \
+    ${datadir}/lumina-desktop/screensavers \
     ${datadir}/lumina-desktop/fluxbox* \
     ${datadir}/lumina-desktop/globs2 \
+    ${datadir}/lumina-desktop/*.cfg \
+    ${datadir}/lumina-desktop/*.png \
     ${datadir}/lumina-desktop/*.ogg \
     ${datadir}/lumina-desktop/*.conf \
     ${datadir}/lumina-desktop/*.jpg \
