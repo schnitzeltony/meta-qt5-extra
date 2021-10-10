@@ -19,6 +19,7 @@ RDEPENDS:${PN} = " \
     libpwquality \
     libraw \
     libstatgrab \
+    lmdb \
     mlt \
     translate-toolkit \
     xapian-core \
