@@ -9,7 +9,7 @@ DEPENDS = " \
     spglib \
     libmsym \
     libarchive \
-    msgpack-c \
+    msgpack-cpp \
     mmtf-cpp \
 "
 
