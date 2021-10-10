@@ -3,17 +3,10 @@ HOMEPAGE = "https://atztogo.github.io/spglib/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5e13e4b13c9ea72dbc9fda34255d9371"
 
-inherit autotools
+inherit cmake
 
-SRC_URI = "git://github.com/atztogo/spglib.git"
-SRCREV = "e8118d854a4c11dbaa8d7b2c55d4a1e74ddcaaf7"
+SRC_URI = "git://github.com/spglib/spglib.git"
+SRCREV = "cc6e08b19b1548faae84c3aecf89beab4853b6d9"
 S = "${WORKDIR}/git"
-PV = "1.16.1"
+PV = "1.16.2"
 
-do_configure:prepend() {
-    touch ${S}/NEWS ${S}/README ${S}/AUTHORS
-}
-
-do_install:append() {
-    ln -sf libsymspg.so ${D}${libdir}/libspglib.so
-}
