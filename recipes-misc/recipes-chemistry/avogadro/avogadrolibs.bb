@@ -2,6 +2,7 @@ require ${BPN}.inc
 
 DEPENDS = " \
     ${BPN}-native \
+    qtsvg \
     glew \
     openbabel \
     libeigen \
@@ -37,6 +38,7 @@ do_configure:append() {
 EXTRA_OECMAKE += "-DENABLE_RPATH=OFF"
 
 FILES:${PN} += " \
+    ${datadir}/avogadro2 \
     ${libdir}/avogadro2/scripts \
 "
 
