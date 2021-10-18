@@ -1,7 +1,6 @@
 SUMMARY = "Add support for global workspace shortcuts"
-LICENSE = "LGPL-2.0 & LGPL-2.0+ & LGPL-2.1 & LGPL-3.0"
+LICENSE = "LGPL-2.0-or-later & LGPL-2.1-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
-    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
     file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
     file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
     file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
@@ -19,7 +18,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "92c17c821143d7314264446c9df7596dad29c51c79ab6596280103e8ba61c172"
+SRC_URI[sha256sum] = "502e7f16eed132837e87c469cbdda474cd0d396075e6c519557b526f70af66f2"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
