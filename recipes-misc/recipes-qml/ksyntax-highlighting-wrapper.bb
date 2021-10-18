@@ -12,4 +12,4 @@ SRCREV = "7f2f6d3d030cc0ed7beca43d3e7668a30f123ba1"
 PV = "0.2.0"
 S = "${WORKDIR}/git"
 
-inherit cmake_qt5
+inherit cmake_qt5 pkgconfig
