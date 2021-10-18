@@ -12,7 +12,7 @@ SRCREV = "3931d10330dfe01eb855805fdcb0d6da5c31b024"
 PV = "0.1.1+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit cmake_qt5
+inherit cmake_qt5 pkgconfig
 
 EXTRA_OECMAKE += " \
     -DBUILD_OBJECT_LIB=OFF \
