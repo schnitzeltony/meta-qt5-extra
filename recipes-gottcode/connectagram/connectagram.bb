@@ -3,7 +3,7 @@ HOMEPAGE = "https://gottcode.org/connectagram/"
 LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-inherit qmake5 qt5-translation gtk-icon-cache
+inherit qmake5 pkgconfig qt5-translation gtk-icon-cache
 
 DEPENDS = "qttools-native qtbase hicolor-icon-theme"
 
