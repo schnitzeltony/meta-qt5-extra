@@ -31,7 +31,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "c21e0f0df7a3cf07c93489e92832045bc0d1e17a20d14b46685a635c47e50868"
+SRC_URI[sha256sum] = "a21094de5445e662786ab7ce7274106f9bd8a25233de363eea73403ce62fcc05"
 
 FILES:${PN} += " \
     ${datadir}/bluedevilwizard \

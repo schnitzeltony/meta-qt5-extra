@@ -50,7 +50,8 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "49abcb19639a72eb5ffa916d5eca0a925d32a36e4a02658cc73ab479dea39965"
+SRC_URI += "file://0001-Fix-typo.patch"
+SRC_URI[sha256sum] = "f22e12dea303478d949f69b88fcf30787ef7f5d098be55595ec562aee4b13606"
 
 # REVISIT
 FILES:${PN} += " \

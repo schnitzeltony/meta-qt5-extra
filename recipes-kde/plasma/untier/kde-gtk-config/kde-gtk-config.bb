@@ -29,7 +29,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "4684ea82a3877573811d6761395f8bf3252d8c7118082c96a70c79d9f9ee11b3"
+SRC_URI[sha256sum] = "daf8ca2d5e3e3986a478238bcc6d22cc750e20ea37ce198e1f7ef1d88c971e6c"
 
 CFLAGS += "-isystem ${STAGING_INCDIR}/harfbuzz"
 CXXFLAGS += "-isystem ${STAGING_INCDIR}/harfbuzz"

@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 gtk-icon-cache
 
-SRC_URI[sha256sum] = "d50c6615f03e22fd1551137430fddcd38b6942aaf77570c765814e6baad8fd56"
+SRC_URI[sha256sum] = "a2acd0ae5fde26f4d9ac32c0e18ec48f99b881e91e35adfc75a0b01ab8e1f6d1"
 PV = "${KF5_VERSION}"
 
 FILES:${PN} += " \

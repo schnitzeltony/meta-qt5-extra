@@ -1,0 +1,31 @@
+From fb8ad2be861b49ce6c0f22c94617877253899522 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 12 Jun 2021 01:40:11 +0200
+Subject: [PATCH] Fix typo?
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Statue: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ kcms/lookandfeel/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kcms/lookandfeel/CMakeLists.txt b/kcms/lookandfeel/CMakeLists.txt
+index c13747a..9fa9a61 100644
+--- a/kcms/lookandfeel/CMakeLists.txt
++++ b/kcms/lookandfeel/CMakeLists.txt
+@@ -5,7 +5,7 @@ if(X11_Xcursor_FOUND)
+     set(HAVE_XCURSOR TRUE)
+ endif()
+ 
+-if(${Breeze_FOUND} AND ${BREEZE_WITH_KDECORATION})
++if(${breeze_FOUND} AND ${BREEZE_WITH_KDECORATION})
+     set(HAVE_BREEZE_DECO TRUE)
+ endif()
+ 
+-- 
+2.31.1
+

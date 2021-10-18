@@ -12,7 +12,7 @@ inherit kde-plasma
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras", "", d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "c64b87b80683acccc5a3beb8fe22bd80a6e8b224b8a55714d5160174ad4ef1e5"
+SRC_URI[sha256sum] = "5b4fcaebacc3a4cb62e599a796dca89a30c5ac10937ba3ef9a28998c84ca16e3"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
