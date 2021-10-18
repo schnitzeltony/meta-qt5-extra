@@ -19,6 +19,6 @@ SRCREV = "ea5c7f27918a86ee7cf6a9ef4b3b2a38e839c19a"
 PV = "0.1.1"
 S = "${WORKDIR}/git"
 
-inherit cmake_qt5
+inherit cmake_qt5 pkgconfig
 
 FILES:${PN} += "${libdir}/libmarkdown-qt"
