@@ -3,7 +3,7 @@ HOMEPAGE = "http://gottcode.org/gottet/"
 LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
-inherit qmake5 qt5-translation gtk-icon-cache
+inherit qmake5 pkgconfig qt5-translation gtk-icon-cache
 
 DEPENDS = "qttools-native qtbase hicolor-icon-theme"
 
