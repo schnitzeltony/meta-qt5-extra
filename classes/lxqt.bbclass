@@ -1,4 +1,4 @@
-inherit cmake_qt5_extra
+inherit cmake_qt5_extra pkgconfig
 
 HOMEPAGE = "http://lxqt.org/"
 
