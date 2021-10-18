@@ -7,7 +7,7 @@ SRCREV = "8d53ab042b30dfb3f3be7cd9803aa8a545ef1f53"
 PV = "0.15.5"
 S = "${WORKDIR}/git"
 
-inherit meson vala gobject-introspection features_check
+inherit meson vala gobject-introspection features_check pkgconfig
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
