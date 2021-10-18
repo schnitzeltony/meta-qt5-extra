@@ -6,22 +6,26 @@ Subject: [PATCH] Ensure xkb_base is not empty instead of checking if a file
 
 Upstream-Status: Pending
 ---
- ConfigureChecks.cmake | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ConfigureChecks.cmake | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/ConfigureChecks.cmake b/ConfigureChecks.cmake
-index c7ea746..bd34032 100644
+index f8272c4..e8522d3 100644
 --- a/ConfigureChecks.cmake
 +++ b/ConfigureChecks.cmake
-@@ -1,7 +1,7 @@
- set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH} )
+@@ -2,10 +2,10 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_P
  
  execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable=xkb_base xkeyboard-config OUTPUT_VARIABLE XKBDIR OUTPUT_STRIP_TRAILING_WHITESPACE)
--if (NOT EXISTS "${XKBDIR}")
-+if ("${XKBDIR}" STREQUAL "")
-     message(FATAL_ERROR "Couldn't find XKB location: .${XKBDIR}.")
+ if (CMAKE_CROSSCOMPILING)
+-    if (NOT EXISTS "${CMAKE_SYSROOT}/${XKBDIR}")
++    if ("${XKBDIR}" STREQUAL "")
+       message(FATAL_ERROR "Couldn't find XKB location in CMAKE_SYSROOT: \"${CMAKE_SYSROOT}/${XKBDIR}\"")
+     endif()
+-elseif(NOT EXISTS "${XKBDIR}")
++elseif ("${XKBDIR}" STREQUAL "")
+     message(FATAL_ERROR "Couldn't find XKB location: \"${XKBDIR}\".")
  endif()
  set(KWIN_BIN "kwin_x11" CACHE STRING "Name of the KWin binary")
 -- 
-2.1.4
+2.31.1
 

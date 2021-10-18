@@ -1,8 +1,14 @@
 SUMMARY = "OXYGEN"
-LICENSE = "GPL-2.0 & LGPL-2.1"
+LICENSE = "GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & GPL-3.0-or-later & LGPL-2.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-    file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/GPL-3.0-or-later.txt;md5=8da5784ab1c72e63ac74971f88658166 \
+    file://LICENSES/LGPL-2.0-only.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.1-only.txt;md5=147a320ed8b16b036829a0c71d424153 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=8d51f5b5fd447f7a1040c3dc9f0a8de6 \
 "
 
 inherit kde-plasma gettext
@@ -25,7 +31,7 @@ DEPENDS += " \
 
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "0c3bb29ce140b00e1c95a0a1cb39c662d935f7216e61810837097a39516ec43b"
+SRC_URI[sha256sum] = "6c04ed2e5eca4d0dd82034875cd159dfd149ca412032258055f6a848ecbfe09e"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[settings] = "-DBUILD_OXYGEN_SETTINGS=ON,-DBUILD_OXYGEN_SETTINGS=OFF,kcmutils"

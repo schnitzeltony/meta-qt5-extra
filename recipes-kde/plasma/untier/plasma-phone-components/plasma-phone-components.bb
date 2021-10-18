@@ -13,6 +13,7 @@ LIC_FILES_CHKSUM = " \
 DEPENDS += " \
     kpackage-native \
     kauth-native \
+    modemmanager-qt \
     gstreamer1.0 \
     qtdeclarative \
     telepathy-qt \
@@ -26,7 +27,7 @@ DEPENDS += " \
 inherit kde-plasma gettext
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "40669f5218ac04d7e1aa71ffecf2376a6de5e747da1d24adee37cbe6e7e35ad4"
+SRC_URI[sha256sum] = "9a8b818f4c23491defd43e32881607a810c2c74891ad05853b3db51daf3444f0"
 
 FILES:${PN} += " \
     ${datadir}/k*5 \

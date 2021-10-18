@@ -1,13 +1,19 @@
 SUMMARY = "KSE sysguard library"
-LICENSE = "GPL-2.0 & LGPL-2.1"
+LICENSE = "BSD-3-Clause & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=3d26203303a722dedc6bf909d95ba815 \
+    file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.1-only.txt;md5=147a320ed8b16b036829a0c71d424153 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=8d51f5b5fd447f7a1040c3dc9f0a8de6 \
 "
 
 inherit kde-plasma gettext
 
 DEPENDS += " \
+    libcap-native \
     qtwebengine \
     qtwebchannel \
     kauth-native \
@@ -31,13 +37,18 @@ DEPENDS += " \
     knewstuff \
     zlib \
     libnl \
-    libpcap \
     libcap \
+    libpcap \
+    lmsensors \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libxres", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "a522ab976baafa8c1b80cbfe6a4d7718aa8c8623f84294d25c5d43429dd472c2"
+SRC_URI[sha256sum] = "c379dc3e806085ec058e7633153d697ab8868aa6eac1f483931f75f2fcdd61eb"
+
+do_compile:append() {
+    sed -i 's:${STAGING_DIR_HOST}${prefix}:${_IMPORT_PREFIX}:g' ${B}/CMakeFiles/Export/lib/cmake/KSysGuard/KSysGuardLibraryTargets.cmake
+}
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \

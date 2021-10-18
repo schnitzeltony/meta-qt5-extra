@@ -1,9 +1,18 @@
 SUMMARY = "Plasma workspace, applications and applets"
-LICENSE = "GPL-2.0 & LGPL-2.1 & GFDL-1.2"
+LICENSE = "BSD-2-Clause & BSD-3-Clause & CC0-1.0 & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & LGPL-2.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-2.1-or-later & LGPL-3.0-only & MIT"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-    file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/BSD-2-Clause.txt;md5=4e290b17e3e05732730de37b44abef90 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/LGPL-2.0-only.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.1-only.txt;md5=147a320ed8b16b036829a0c71d424153 \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=147a320ed8b16b036829a0c71d424153 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=8d51f5b5fd447f7a1040c3dc9f0a8de6 \
+    file://LICENSES/MIT.txt;md5=4dd71a82d66fd9e3ca0cc65b8be370c0 \
 "
 
 REQUIRED_DISTRO_FEATURES = "x11"
@@ -50,8 +59,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI += "file://0001-Fix-typo.patch"
-SRC_URI[sha256sum] = "f22e12dea303478d949f69b88fcf30787ef7f5d098be55595ec562aee4b13606"
+SRC_URI[sha256sum] = "49abcb19639a72eb5ffa916d5eca0a925d32a36e4a02658cc73ab479dea39965"
 
 # REVISIT
 FILES:${PN} += " \

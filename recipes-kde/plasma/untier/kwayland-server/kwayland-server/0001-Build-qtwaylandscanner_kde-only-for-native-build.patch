@@ -15,10 +15,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  2 files changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 47ecfd4..7690823 100644
+index 31c5a91..ad6a0f0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -39,7 +39,8 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KWAYLANDSERVER
+@@ -45,7 +45,8 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KWAYLANDSERVER
                          SOVERSION 5)
  
  # Dependencies
@@ -28,7 +28,7 @@ index 47ecfd4..7690823 100644
  find_package(KF5Wayland ${KF5_MIN_VERSION} CONFIG REQUIRED)
  find_package(PlasmaWaylandProtocols CONFIG REQUIRED)
  
-@@ -71,9 +72,11 @@ add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
+@@ -77,9 +78,11 @@ add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
  if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
      ecm_install_po_files_as_qm(po)
  endif()
@@ -40,13 +40,14 @@ index 47ecfd4..7690823 100644
  if (BUILD_TESTING)
      add_subdirectory(autotests)
      add_subdirectory(tests)
-@@ -107,5 +110,6 @@ install(EXPORT KWaylandServerTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FI
+@@ -113,6 +116,7 @@ install(EXPORT KWaylandServerTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FI
  
  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kwaylandserver_version.h
          DESTINATION ${KDE_INSTALL_INCLUDEDIR} COMPONENT Devel )
 +endif()
  
- feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+ # add clang-format target for all our real source files
+ file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 index 93c174e..8d75147 100644
 --- a/src/CMakeLists.txt

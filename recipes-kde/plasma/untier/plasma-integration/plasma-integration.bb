@@ -1,7 +1,13 @@
 SUMMARY = "Qt Platform Theme integration plugins for the Plasma workspaces"
-LICENSE = "LGPL-3.0"
+LICENSE = "BSD-3-Clause & GPL-2.0-only & GPL-3.0-only & LGPL-2.0-only & LGPL-2.0-or-later & LGPL-2.1-or-later & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
-    file://COPYING.LGPL-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/LGPL-2.0-only.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=147a320ed8b16b036829a0c71d424153 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=8d51f5b5fd447f7a1040c3dc9f0a8de6 \
 "
 
 REQUIRED_DISTRO_FEATURES = "x11"
@@ -26,7 +32,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "28c743f1a911042dac1dd86ae615748b7b5422e8d4b47bff34d31cf4bdb6f270"
+SRC_URI[sha256sum] = "0930859552d8772f6a86ed723448d74609cfd559c55f7746ac33802cd33a7965"
 
 FILES:${PN} += " \
     ${datadir}/kconf_update \

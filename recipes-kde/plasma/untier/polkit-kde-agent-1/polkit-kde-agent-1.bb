@@ -1,7 +1,8 @@
 SUMMARY = "Daemon providing a polkit authentication UI for KDE"
-LICENSE = "GPL-2.0"
+LICENSE = "CC0-1.0 & GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
+    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-plasma gettext features_check
@@ -23,7 +24,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "60e3ea544b2b609351961fe7f299b79c9f8ff89b911b63490fa0d3afd5222ba8"
+SRC_URI[sha256sum] = "22d08e3989acf9ff92312b754c897d5323c6cf638e2fc12c22439924bce19cae"
 
 FILES:${PN} += " \
     ${datadir}/knotifications5 \

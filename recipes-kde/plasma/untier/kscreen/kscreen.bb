@@ -1,8 +1,10 @@
 SUMMARY = "KDE's screen management software"
-LICENSE = "GPL-2.0 & LGPL-2.1"
+LICENSE = "GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-    file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=147a320ed8b16b036829a0c71d424153 \
 "
 
 inherit kde-plasma gettext
@@ -29,7 +31,7 @@ DEPENDS += "\
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "6bfab1f10532599e16d1112e794626b105b4c80c41659665ffdf710bc29d1e60"
+SRC_URI[sha256sum] = "25ca9a2db37d7838462beb0b0bf3d21b89dea01a56e9b8b6df020ffcfe0cf83b"
 
 FILES:${PN} += " \
     ${datadir}/k*_kscreen \
