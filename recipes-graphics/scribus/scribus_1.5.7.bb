@@ -3,7 +3,7 @@ HOMEPAGE = "https://www.scribus.net/"
 LICENSE = "GPL-2.0-or-later & LGPL-2.0-or-later & BSD-3-Clause & MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=46d73026c0f1b3a4016bc06a677411ab"
 
-inherit cmake_qt5 cmake_extra_sanity python3native gtk-icon-cache mime mime-xdg
+inherit cmake_qt5 cmake_extra_sanity pkgconfig python3native gtk-icon-cache mime mime-xdg
 
 DEPENDS += " \
     qttools-native \
