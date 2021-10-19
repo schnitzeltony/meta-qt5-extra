@@ -11,7 +11,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "4d63ee0095e939602f9bf4759ae57953"
 SRC_URI[sha256sum] = "cc642e7fa74029373ca9b9fbc29adc4883f8b455130a78ad54746d6844a0396c"
 
-inherit qmake5 mime-xdg
+inherit qmake5 pkgconfig mime-xdg
 
 QMAKE_PROFILES = "${S}/qpdfview.pro"
 EXTRA_QMAKEVARS_PRE += " \
