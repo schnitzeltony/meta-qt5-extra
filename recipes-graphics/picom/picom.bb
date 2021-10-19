@@ -28,7 +28,7 @@ DEPENDS = " \
     uthash \
 "
 
-inherit meson features_check gtk-icon-cache
+inherit meson pkgconfig features_check gtk-icon-cache
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
