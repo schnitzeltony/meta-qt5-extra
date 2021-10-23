@@ -27,7 +27,7 @@ SRC_URI:append:class-native = " \
     file://0001-Build-qtwaylandscanner_kde-only-for-native-build.patch \
     file://0002-Avoid-traces-to-sysroot-to-avoid-false-fails-by-cmak.patch \
 "
-SRC_URI[sha256sum] = "3009d7249af74582afa89978d478eece3424e5ef225bdb6f40032e2a6471d671"
+SRC_URI[sha256sum] = "ebad1a6dc1bf246cab9ca8ba0a13edd578646cb333ce09303d79d78727a59d57"
 
 do_configure:append() {
     # adjust path to protocol sources in sysroot

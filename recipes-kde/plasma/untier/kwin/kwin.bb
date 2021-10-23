@@ -61,7 +61,7 @@ DEPENDS += " \
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "ba74f70648faa3c92c88e1b77916c6abd7fcad1af9e717a39dc9df278f1a551f"
+SRC_URI[sha256sum] = "5838d7ab84babc5bd3cb3df9f7e38fc01c98ba1bf584b6d43e4528dd03598b31"
 
 # kwin check libepoxy only -> egl pkgconfig is skipped
 CXXFLAGS:append_mx6 += " -DLINUX=1"

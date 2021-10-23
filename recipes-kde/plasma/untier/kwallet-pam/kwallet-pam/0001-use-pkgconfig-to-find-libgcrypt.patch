@@ -9,16 +9,17 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+
 ---
  CMakeLists.txt | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a54d9a1..5337bc2 100644
+index 8594d35..9c62522 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -12,7 +12,8 @@ include(KDEInstallDirs)
- include(KDEClangFormat)
+@@ -14,7 +14,8 @@ include(KDEClangFormat)
+ include(ECMConfiguredInstall)
  
  find_package(PAM REQUIRED)
 -find_package(LibGcrypt 1.5.0 REQUIRED)

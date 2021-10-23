@@ -14,7 +14,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "fcda0e8492c66b07e9ff4b2f30ec7f963a50c53e9d9fa3e7acd8b5c2e135ca94"
+SRC_URI[sha256sum] = "0a980893e7b928780ad9ff80b45e1c8706ce779e155fb43f664b0f3ea5086df9"
 
 FILES:${PN} += " \
     ${datadir}/plasma \

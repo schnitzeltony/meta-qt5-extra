@@ -44,7 +44,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "c379dc3e806085ec058e7633153d697ab8868aa6eac1f483931f75f2fcdd61eb"
+SRC_URI[sha256sum] = "083ddf436a9678e6e3d9c900d2c974586a313e58f60a32b7cb6600338ec78189"
 
 do_compile:append() {
     sed -i 's:${STAGING_DIR_HOST}${prefix}:${_IMPORT_PREFIX}:g' ${B}/CMakeFiles/Export/lib/cmake/KSysGuard/KSysGuardLibraryTargets.cmake
