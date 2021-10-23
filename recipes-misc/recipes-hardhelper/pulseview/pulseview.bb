@@ -17,7 +17,7 @@ PACKAGECONFIG[decode] = "-DENABLE_DECODE=TRUE,-DENABLE_DECODE=FALSE,libsigrokdec
 
 PACKAGECONFIG ??= "decode"
 
-inherit cmake_qt5 mime-xdg
+inherit cmake_qt5 pkgconfig mime-xdg
 
 SRC_URI = " \
     git://github.com/sigrokproject/pulseview.git \
