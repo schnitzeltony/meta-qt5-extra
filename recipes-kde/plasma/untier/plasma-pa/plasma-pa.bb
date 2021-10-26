@@ -29,7 +29,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "a79f1971a5acdeccb9e7363560b1828f35cac4faeb3c8036d8cdd1243565a57e"
+SRC_URI[sha256sum] = "564ff9f88fa223cd2fbcfb87effd6e93d4fd9be715c1c09149f4a071b783c315"
 
 FILES_SOLIBSDEV = ""
 

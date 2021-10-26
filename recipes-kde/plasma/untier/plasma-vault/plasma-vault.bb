@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gtk-icon-cache
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "c5abe2e90c29e2a76c4fd276ad2efd0a296da7ed641ca8f401e95d446a5b8c4f"
+SRC_URI[sha256sum] = "4e4300bdf38d340a1f7f79056143f9fe7c69bd0a65b593a969babbe1a7f53135"
 
 DEPENDS += " \
     kauth-native \

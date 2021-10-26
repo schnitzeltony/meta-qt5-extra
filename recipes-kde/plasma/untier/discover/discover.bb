@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gtk-icon-cache mime-xdg
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "44255c9b1a8df70a4c710396ccbdaf1725f93694a040d4197e4bf45285e6ee71"
+SRC_URI[sha256sum] = "9e0de4a567d3f05cffa2ed7158eedf2729623d4e74772859120d1e6670c6c014"
 
 DEPENDS += " \
     qtdeclarative \
