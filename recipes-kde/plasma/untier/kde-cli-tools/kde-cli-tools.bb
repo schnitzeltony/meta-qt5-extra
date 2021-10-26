@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
     file://LICENSES/LGPL-3.0-only.txt;md5=8d51f5b5fd447f7a1040c3dc9f0a8de6 \
 "
 
-inherit kde-plasma gettext
+inherit kde-plasma gettext mime-xdg
 
 DEPENDS += " \
     qtsvg \
