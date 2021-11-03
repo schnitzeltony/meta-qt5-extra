@@ -1,6 +1,6 @@
 LIRI_GIT_BRANCH ?= "develop"
 
-SRC_URI = "git://github.com/lirios/${@'${BPN}'.replace('liri-', '')}.git;protocol=git;branch=${LIRI_GIT_BRANCH}"
+SRC_URI = "git://github.com/lirios/${@'${BPN}'.replace('liri-', '')}.git;branch=${LIRI_GIT_BRANCH}"
 
 DEPENDS += " \
     qtwayland-native \
