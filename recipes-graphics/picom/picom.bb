@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/yshui/picom"
 LICENSE = "MPL-2.0 & MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a9a621b5a1b8f702c605093d657b550c"
 
-SRC_URI = "git://github.com/yshui/picom.git;branch=stable/8"
+SRC_URI = "git://github.com/yshui/picom.git;branch=stable/8;protocol=https"
 SRCREV = "dac85eac10082dfc3df463aaa74b811144e22122"
 PV = "8.2"
 S = "${WORKDIR}/git"

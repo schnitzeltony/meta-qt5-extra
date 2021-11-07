@@ -18,7 +18,7 @@ DEPENDS += " \
 "
 
 SRC_URI = " \
-    git://github.com/lumina-desktop/lumina.git \
+    git://github.com/lumina-desktop/lumina.git;branch=master;protocol=https \
     file://0001-lumina-checkpass-Remove-chown-it-stoopped-working.patch \
 "
 SRCREV = "6744cddd5de1f18c3713a68c85d740ae6d4a27de"

@@ -9,7 +9,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS = "qtbase qtx11extras"
 
-SRC_URI = "git://github.com/FedoraQt/adwaita-qt.git;branch=1.3"
+SRC_URI = "git://github.com/FedoraQt/adwaita-qt.git;branch=1.3;protocol=https"
 SRCREV = "906c4d8e63b5a6cd2c54511ca5d6062515a79c5f"
 PV = "1.3.1"
 S = "${WORKDIR}/git"

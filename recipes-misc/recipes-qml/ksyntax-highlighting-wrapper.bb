@@ -7,7 +7,7 @@ DEPENDS = " \
     syntax-highlighting \
 "
 
-SRC_URI = "git://github.com/schnitzeltony/ksyntax-highlighting-wrapper.git"
+SRC_URI = "git://github.com/schnitzeltony/ksyntax-highlighting-wrapper.git;branch=master;protocol=https"
 SRCREV = "7f2f6d3d030cc0ed7beca43d3e7668a30f123ba1"
 PV = "0.2.0"
 S = "${WORKDIR}/git"

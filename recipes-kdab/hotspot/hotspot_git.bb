@@ -21,7 +21,7 @@ DEPENDS += " \
     kio \
     solid \
 "
-SRC_URI = "gitsm://github.com/KDAB/hotspot.git"
+SRC_URI = "gitsm://github.com/KDAB/hotspot.git;protocol=https;branch=master"
 SRCREV = "35d1865babf40b9df454810ca8cc09e77b0c349a"
 S = "${WORKDIR}/git"
 PV = "1.2.0+git${SRCPV}"

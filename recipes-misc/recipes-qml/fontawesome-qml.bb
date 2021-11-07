@@ -8,7 +8,7 @@ DEPENDS = " \
     sortfilterproxymodel \
 "
 
-SRC_URI = "gitsm://github.com/schnitzeltony/fontawesome-qml.git"
+SRC_URI = "gitsm://github.com/schnitzeltony/fontawesome-qml.git;branch=master;protocol=https"
 SRCREV = "b4ed78971807db222644af2669d734e4dccc52dd"
 PV = "0.3.0"
 S = "${WORKDIR}/git"

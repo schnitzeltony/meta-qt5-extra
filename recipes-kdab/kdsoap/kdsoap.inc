@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit cmake_qt5
 
-SRC_URI = "git://github.com/KDAB/KDSoap.git;protocol=https"
+SRC_URI = "git://github.com/KDAB/KDSoap.git;protocol=https;branch=master"
 SRCREV = "fb0e905e242c2044fd25683a406eb6d369db052f"
 S = "${WORKDIR}/git"
 PV = "1.9.0"

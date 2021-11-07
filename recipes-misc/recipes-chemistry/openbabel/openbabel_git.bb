@@ -13,7 +13,7 @@ DEPENDS = " \
 "
 
 SRC_URI = " \
-    git://github.com/openbabel/openbabel.git \
+    git://github.com/openbabel/openbabel.git;branch=master;protocol=https \
     file://0001-Workaround-xdr-linker-error.patch \
     file://openbabel-gui.desktop \
 "

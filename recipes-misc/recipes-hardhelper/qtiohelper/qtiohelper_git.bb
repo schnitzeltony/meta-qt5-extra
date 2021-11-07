@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bd7b2c994af21d318bd2cd3b3f80c2d5"
 
 inherit cmake_qt5
 
-SRC_URI = "git://github.com/ZeraGmbH/qtiohelper.git"
+SRC_URI = "git://github.com/ZeraGmbH/qtiohelper.git;protocol=https;branch=master"
 
 DEPENDS += "qtbase qtserialport"
 

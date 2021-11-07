@@ -15,7 +15,7 @@ DEPENDS += " \
     qtsvg \
 "
 
-SRC_URI = "git://github.com/lumina-desktop/lumina-calculator.git"
+SRC_URI = "git://github.com/lumina-desktop/lumina-calculator.git;branch=master;protocol=https"
 SRCREV = "31807e06a3a6bd194bad6b0fd204ca2d81cc3810"
 S = "${WORKDIR}/git/src-qt5"
 PV = "1.6.0"

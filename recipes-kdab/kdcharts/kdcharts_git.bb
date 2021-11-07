@@ -17,7 +17,7 @@ do_install:append() {
     rm -r ${D}/usr/mkspecs
 }
 
-SRC_URI = "git://github.com/KDAB/KDChart.git"
+SRC_URI = "git://github.com/KDAB/KDChart.git;branch=master;protocol=https"
 SRCREV = "95547e8a2f6c362db1dd071a2df00b0e75e05da0"
 S = "${WORKDIR}/git"
 PV = "2.7.2"

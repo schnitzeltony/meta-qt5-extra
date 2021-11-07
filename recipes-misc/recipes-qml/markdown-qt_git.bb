@@ -14,7 +14,7 @@ DEPENDS = " \
     cmark \
 "
 
-SRC_URI = "gitsm://github.com/schnitzeltony/markdown-qt.git"
+SRC_URI = "gitsm://github.com/schnitzeltony/markdown-qt.git;branch=master;protocol=https"
 SRCREV = "ea5c7f27918a86ee7cf6a9ef4b3b2a38e839c19a"
 PV = "0.1.1"
 S = "${WORKDIR}/git"

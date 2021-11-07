@@ -17,7 +17,7 @@ PACKAGECONFIG[pam] = "-DENABLE_PAM=ON, -DENABLE_PAM=OFF, libpam"
 # Note: we should check default config changes by running sddm --example-config on target.
 # This is usually done during build but does not work for our cross environment
 SRC_URI = " \
-    git://github.com/sddm/${BPN}.git;branch=master \
+    git://github.com/sddm/${BPN}.git;branch=master;protocol=https \
     file://0001-fix-qml-install-dir.patch \
     file://0002-Workaround-missing-sessions.patch \
     file://sddm.pam \

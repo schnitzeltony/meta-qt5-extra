@@ -6,7 +6,7 @@ inherit autotools gettext
 
 DEPENDS = "glib-2.0-native intltool-native"
 
-SRC_URI = "git://github.com/lxde/${BPN}.git;branch=master"
+SRC_URI = "git://github.com/lxde/${BPN}.git;branch=master;protocol=https"
 S = "${WORKDIR}/git"
 
 SRCREV = "3b14415ff9862e6b79577fd4b9a097965001b270"

@@ -5,7 +5,7 @@ HOMEPAGE = "http://toolkit.translatehouse.org/"
 
 inherit setuptools3
 
-SRC_URI = "git://github.com/translate/translate.git"
+SRC_URI = "git://github.com/translate/translate.git;branch=master;protocol=https"
 SRCREV = "d98ef03f11129fd2072c11474089a13030e93b7b"
 S = "${WORKDIR}/git"
 PV = "3.3.1"

@@ -25,7 +25,7 @@ DEPENDS += "\
     kdelibs4support \
 "
 
-SRC_URI = "git://anongit.kde.org/${BPN}.git"
+SRC_URI = "git://anongit.kde.org/${BPN}.git;branch=master"
 SRCREV = "4975c9034593dfd164dd13e3459ad8594a61ded9"
 S = "${WORKDIR}/git"
 # Did not find version anywhere

@@ -7,7 +7,7 @@ DEPENDS = " \
     qtdeclarative \
 "
 
-SRC_URI = "git://github.com/schnitzeltony/SortFilterProxyModel.git"
+SRC_URI = "git://github.com/schnitzeltony/SortFilterProxyModel.git;branch=master;protocol=https"
 SRCREV = "3931d10330dfe01eb855805fdcb0d6da5c31b024"
 PV = "0.1.1+git${SRCPV}"
 S = "${WORKDIR}/git"

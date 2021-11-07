@@ -15,7 +15,7 @@ DEPENDS += " \
     poppler \
 "
 
-SRC_URI = "git://github.com/lumina-desktop/lumina-pdf.git"
+SRC_URI = "git://github.com/lumina-desktop/lumina-pdf.git;branch=master;protocol=https"
 SRCREV = "808a6a17a399b5c38801256985181d735b569e24"
 S = "${WORKDIR}/git/src-qt5"
 PV = "1.6.0"

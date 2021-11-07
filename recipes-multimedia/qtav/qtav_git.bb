@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://lgpl-2.1.txt;md5=4fbd65380cdd255951079008b364516c \
 
 inherit qmake5 mime-xdg
 
-SRC_URI = "git://github.com/wang-bin/QtAV.git;protocol=https"
+SRC_URI = "git://github.com/wang-bin/QtAV.git;protocol=https;branch=master"
 SRCREV = "74943ea8f34d1c45e2dcae9810e3e25f5d4161c0"
 PV = "git${SRCPV}"
 S = "${WORKDIR}/git"

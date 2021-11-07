@@ -12,7 +12,7 @@ DEPENDS += " \
     kdcharts \
 "
 
-SRC_URI = "git://github.com/KDAB/KDReports.git"
+SRC_URI = "git://github.com/KDAB/KDReports.git;branch=master;protocol=https"
 SRCREV = "47728293e7842140d36a7861cf4316f2c1cbd795"
 S = "${WORKDIR}/git"
 PV = "1.9.0"

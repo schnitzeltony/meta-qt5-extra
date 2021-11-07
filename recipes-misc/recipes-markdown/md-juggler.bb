@@ -8,7 +8,7 @@ DEPENDS = " \
     qtbase \
 "
 
-SRC_URI = "git://github.com/schnitzeltony/md-juggler.git"
+SRC_URI = "git://github.com/schnitzeltony/md-juggler.git;branch=master;protocol=https"
 SRCREV = "db9094b328863e301a0e691c7412befd84c17e7b"
 PV = "0.0.0+git${SRCPV}"
 S = "${WORKDIR}/git"

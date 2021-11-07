@@ -13,7 +13,7 @@ QT_TRANSLATION_FILES = "${datadir}/qt5keychain/translations/*.qm"
 
 inherit cmake_qt5_extra qt5-translation
 
-SRC_URI = "git://github.com/frankosterfeld/${BPN}.git"
+SRC_URI = "git://github.com/frankosterfeld/${BPN}.git;branch=master;protocol=https"
 SRCREV = "815fe610353ff8ad7e2f1121c368a74df8db5eb7"
 PV = "0.12.0"
 S = "${WORKDIR}/git"

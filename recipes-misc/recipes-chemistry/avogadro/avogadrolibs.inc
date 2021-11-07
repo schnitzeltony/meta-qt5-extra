@@ -7,6 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=68485d31f72dbb8611179b6c7515617b"
 inherit cmake_qt5 python3native
 
 PV = "1.95.1"
-SRC_URI = "git://github.com/OpenChemistry/avogadrolibs.git"
+SRC_URI = "git://github.com/OpenChemistry/avogadrolibs.git;branch=master;protocol=https"
 SRCREV = "11044b0bd7844a5241529e7f9c45ff6ed5ab22bf"
 S = "${WORKDIR}/git"

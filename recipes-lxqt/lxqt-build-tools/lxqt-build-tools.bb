@@ -9,7 +9,7 @@ do_configure:append() {
     sed -i 's:set(LXQT_ETC_XDG_DIR.*:set(LXQT_ETC_XDG_DIR        "${sysconfdir}/xdg"):' ${B}/install/LXQtConfigVars.cmake
 }
 
-SRC_URI = "git://github.com/lxde/${BPN}.git"
+SRC_URI = "git://github.com/lxde/${BPN}.git;branch=master;protocol=https"
 SRCREV = "42de723edf3e342e554b9e02345d32c86fec7691"
 PV = "0.9.0"
 S = "${WORKDIR}/git"
