@@ -10,6 +10,6 @@ do_configure:append() {
 }
 
 SRC_URI = "git://github.com/lxde/${BPN}.git;branch=master;protocol=https"
-SRCREV = "42de723edf3e342e554b9e02345d32c86fec7691"
-PV = "0.9.0"
+SRCREV = "a11ff29e32225194c0a0ccb554e39eb7c5322cde"
+PV = "0.10.0"
 S = "${WORKDIR}/git"
