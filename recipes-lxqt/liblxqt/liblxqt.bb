@@ -8,8 +8,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qttools libqtxdg kwindowsystem libxscrnsaver polkit-qt-1"
 
-SRCREV = "7e3b57ee87178ebe0bc892b1197987920b54fd18"
-PV = "0.17.0"
+SRCREV = "08fff58a6d4aa9740d533d16f06b382fb1aa5858"
+PV = "1.0.0"
 
 EXTRA_OECMAKE += " \
     -DCMAKE_INSTALL_DATAROOTDIR=share \
