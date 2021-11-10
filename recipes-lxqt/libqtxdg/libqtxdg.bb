@@ -14,8 +14,8 @@ EXTRA_OECMAKE += " \
     -DQTXDGX_ICONENGINEPLUGIN_INSTALL_PATH=${OE_QMAKE_PATH_PLUGINS}/iconengines \
 "
 
-SRCREV = "6b8157ab2a6429fc1655422bffd0ff0171b58525"
-PV = "3.7.1"
+SRCREV = "e5d49ed4d793c742d4aac358549e845cdf427174"
+PV = "3.8.0"
 
 do_configure:append() {
     # remove absolute paths from exported cmake files
@@ -24,4 +24,7 @@ do_configure:append() {
     done
 }
 
-FILES:${PN} += "${OE_QMAKE_PATH_PLUGINS}/iconengines"
+FILES:${PN} += " \
+    ${datadir}/lxqt \
+    ${OE_QMAKE_PATH_PLUGINS}/iconengines \
+"
