@@ -63,9 +63,6 @@ DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "ffba7dac42cbcab86392a9482f6b39f4bdc61ce153a236d9af1c4c3a521ef8ba"
 
-# kwin check libepoxy only -> egl pkgconfig is skipped
-CXXFLAGS:append_mx6 += " -DLINUX=1"
-
 FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/dbus-1 \
