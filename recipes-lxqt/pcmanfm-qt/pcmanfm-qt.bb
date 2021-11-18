@@ -8,8 +8,8 @@ inherit lxqt qt5-translation pkgconfig features_check mime-xdg
 
 DEPENDS += "libfm-qt"
 
-SRCREV = "8d4138c75f044c6d2a21cff83cd1006be5a18358"
-PV = "0.17.0"
+SRCREV = "227a775933c68acb093a9d836f8258bf2d5ac454"
+PV = "1.0.0"
 
 FILES:${PN} += " \
     ${datadir}/${BPN}/lxqt/settings.conf \
