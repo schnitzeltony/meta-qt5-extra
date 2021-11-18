@@ -25,7 +25,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "8e2d0576cefd57582c708360161af7fca286b58df1df9ee41f7f9307bcb22f7a"
+SRC_URI[sha256sum] = "04e7bd26c07a87d8fd3baa2792eac5b8a8f58b362dc4e7e272ddc4e735100f1a"
 
 EXTRA_OECMAKE += " \
     -DJPEGLIB_RUN_RESULT=true \
