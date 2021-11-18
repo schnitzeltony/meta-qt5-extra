@@ -15,8 +15,8 @@ DEPENDS += " \
     kwindowsystem \
 "
 
-SRCREV = "e1598971e17ec6a0b5ef125366ceab5f29a78d24"
-PV = "0.17.1"
+SRCREV = "5b887182ee32b0b26a003dd63ce8ecf8da09261a"
+PV = "1.0.0"
 
 PACKAGECONFIG[cpu_plugin] = "-DCPULOAD_PLUGIN=Yes,-DCPULOAD_PLUGIN=No, libstatgrab"
 PACKAGECONFIG[dom] = "-DDOM_PLUGIN=Yes,-DDOM_PLUGIN=No"
