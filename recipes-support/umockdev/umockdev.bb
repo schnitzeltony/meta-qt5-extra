@@ -11,6 +11,6 @@ inherit meson vala gobject-introspection features_check pkgconfig
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
-UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
+GIR_MESON_OPTION = ""
 
 DEPENDS += "glib-2.0 udev libgudev"
