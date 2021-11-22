@@ -11,7 +11,7 @@ inherit kde-kf5
 DEPENDS += "qtdeclarative"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "9fa942a16768bea53bbdaa6563ca0a7f04cee1820318e04c04abbdd6621e13ea"
+SRC_URI[sha256sum] = "3f8c0dbc2a8264e77a218a77893d9584b957dd7905de77e6eda0f9fb112ae509"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 

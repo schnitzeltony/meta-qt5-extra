@@ -1,6 +1,6 @@
 inherit kde-base
 
-KF5_VERSION = "5.87.0"
+KF5_VERSION = "5.88.0"
 
 def kde_verdir(v):
     return oe.utils.trim_version(v, 2)

@@ -12,7 +12,7 @@ inherit kde-kf5 pkgconfig
 DEPENDS += "networkmanager"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "bed4f9300adda630311721b50a5f306b55ac4ac720132675f0d955842aeb9a28"
+SRC_URI[sha256sum] = "8690c8922896e29a2b8c48a3312801bd25a164c0d5bb79f2ab0fc16eb2cf5281"
 
 do_configure:append() {
     # remove absolute paths from exported cmake files

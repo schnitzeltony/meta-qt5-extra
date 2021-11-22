@@ -25,6 +25,10 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "830583877f13dfd8c7fc512151ab23b7a34fa0a8229e144b1bff5b1a2253f90f"
+SRC_URI[sha256sum] = "f4822b18a9315eaf06b705b89538b28546cacf1938689d0a3d6d6974b9f90522"
 
-FILES:${PN} += "${datadir}/dbus-1 ${datadir}/kservicetypes5"
+FILES:${PN} += " \
+    ${datadir}/dbus-1 \
+    ${datadir}/kservicetypes5 \
+    ${OE_QMAKE_PATH_QML} \
+"

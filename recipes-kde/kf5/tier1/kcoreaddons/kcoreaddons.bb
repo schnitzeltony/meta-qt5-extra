@@ -9,5 +9,8 @@ CMAKE_ALIGN_SYSROOT[1] = "KF5CoreAddons, -s${_IMPORT_PREFIX}/bin, -s${KDE_PATH_E
 
 PACKAGES =+ "${PN}-bin"
 
-FILES:${PN} += "${datadir}/mime"
+FILES:${PN} += " \
+    ${datadir}/mime \
+    ${OE_QMAKE_PATH_PLUGINS} \
+"
 FILES:${PN}-bin = "${bindir}/desktoptojson"

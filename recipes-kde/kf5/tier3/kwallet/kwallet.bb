@@ -30,7 +30,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "59f13a6c9e0933e3e54c62a77717aa182be573f890a09e34369043e3208f58a8"
+SRC_URI[sha256sum] = "4ea69018f85f44472e77a76a6f5af180e60702f7e72a8e34f792d55729e255b8"
 SRC_URI += "file://0001-KF5WalletConfig.cmake.in-point-runtime-bindir-not-bu.patch"
 
 FILES:${PN} += "${datadir}"

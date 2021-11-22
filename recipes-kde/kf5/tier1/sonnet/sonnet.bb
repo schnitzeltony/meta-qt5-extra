@@ -8,6 +8,7 @@ SRC_URI += " \
 
 FILES:${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS}/kf5/sonnet \
+    ${OE_QMAKE_PATH_QML} \
 "
 
 EXTRA_OECMAKE += "-DKF5_HOST_TOOLING=${STAGING_DIR_NATIVE}"
