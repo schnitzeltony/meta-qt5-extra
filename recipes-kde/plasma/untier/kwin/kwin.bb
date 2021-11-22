@@ -61,7 +61,7 @@ DEPENDS += " \
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "ffba7dac42cbcab86392a9482f6b39f4bdc61ce153a236d9af1c4c3a521ef8ba"
+SRC_URI[sha256sum] = "7fb1daac298d1198f3c45b38d3b58219f72dbb7fcb11176478a9fd3cbedd8813"
 
 FILES:${PN} += " \
     ${datadir}/config.kcfg \

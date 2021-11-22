@@ -27,7 +27,7 @@ DEPENDS += " \
 inherit kde-plasma gettext
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "f3054b16cba9e2698aa0bd0fead91aac1c593528a8f250b843e69cb187eed3e5"
+SRC_URI[sha256sum] = "8cb4b26e6fb78f3f3ab1a8c0098d35d78a19de16a3c5a218dc6324903fc31ef1"
 
 FILES:${PN} += " \
     ${datadir}/k*5 \
