@@ -47,7 +47,7 @@ DEPENDS += " \
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11", "", d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "fb11f9ec45db2b7e609d7391b7a8f05f21a78eff28c8341e0bfa7dfef32bdf27"
+SRC_URI[sha256sum] = "4d2ddff4b11a900fb0098e347955a83d7a5613e927beaa81ed2c4f890be6707c"
 SRC_URI += "file://0001-fix-build-in-x11-less-environments.patch"
 
 FILES:${PN} += " \
