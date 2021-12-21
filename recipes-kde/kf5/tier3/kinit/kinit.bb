@@ -26,7 +26,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "106448c5b7f2859243cd22c2f04790de78707f6d2926682f3ea39ec4c0b650c2"
+SRC_URI[sha256sum] = "2967d19fc01c2a9cedd0036eccf17e6d21e7e8cfc16f171e992180edcfc78ad2"
 
 FILES:${PN} += "${datadir}/dbus-1 ${libdir}/libkdeinit5_klauncher.so"
 FILES:${PN}-dev = "${libdir}/cmake"

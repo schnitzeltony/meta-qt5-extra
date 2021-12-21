@@ -3,7 +3,7 @@ LICENSE = "BSD-2-Clause & BSD-3-Clause & CC0-1.0 & GPL-2.0 & GPL-2.0+ & LGPL-2.0
 LIC_FILES_CHKSUM = " \
     file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \
     file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
-    file://LICENSES/CC0-1.0.txt;md5=6fd064768b8d61c31ddd0540570fbd33 \
+    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
     file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
     file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
     file://LICENSES/GPL-3.0-only.txt;md5=1c76c4cc354acaac30ed4d5eefea7245 \
@@ -19,4 +19,4 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 mime
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "7af6221846d7552bb99c04c2fac2d9f9c247e6cdd13cb3e37e9694fa0b8f2c51"
+SRC_URI[sha256sum] = "e1d085786b6247e71f918b6d90ab8a4c09d37816ba296981858e8a8f3e3f426b"
