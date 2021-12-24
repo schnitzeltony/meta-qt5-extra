@@ -8,7 +8,7 @@ PACKAGECONFIG_FONTS = "fontconfig"
 # not using defaults. Yes it looks like an error but that should have been
 # fixed at meta-qt5.
 # see https://github.com/Freescale/meta-freescale/pull/379
-PACKAGECONFIG_GL_use-mainline-bsp = "${QT5_EXTRA_QTBASE_IMX_MAINLINE_GL} gbm kms"
+PACKAGECONFIG_GL:use-mainline-bsp = "${QT5_EXTRA_QTBASE_IMX_MAINLINE_GL} gbm kms"
 
 # If one does not need failing recipes mentioned above and wants gles:
 # override QT5_EXTRA_QTBASE_IMX_MAINLINE_GL with 'gles2'
