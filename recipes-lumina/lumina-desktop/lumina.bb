@@ -17,26 +17,16 @@ DEPENDS += " \
     qtsvg \
 "
 
-SRC_URI = " \
-    git://github.com/lumina-desktop/lumina.git;branch=master;protocol=https \
-    file://0001-lumina-checkpass-Remove-chown-it-stoopped-working.patch \
-"
-SRCREV = "6744cddd5de1f18c3713a68c85d740ae6d4a27de"
+SRC_URI = "git://github.com/lumina-desktop/lumina.git;branch=master;protocol=https"
+SRCREV = "92360ecb0f9ddb7109456abf3ea1fb9fe750d92a"
 S = "${WORKDIR}/git"
-PV = "1.6.1"
+PV = "1.6.2"
 
 do_configure:prepend() {
     # change paths by sed instead of endles escapes in 'DEFINES+=..' below
     sed -i 's:L_ETCDIR:QString("${sysconfdir}"):' `find ${S} -name *.cpp`
     sed -i 's:L_SHAREDIR:QString("${datadir}"):' `find ${S} -name *.cpp`
     sed -i 's:$${MAN_ZIP}:gzip -c:' `find ${S} -name *.pro`
-}
-
-do_install:append() {
-    # with 1.6.1 we see for unknown reasons:
-    # chmod: cannot access '/usr/sbin/lumina-checkpass': No such file or directory
-    # did not find better: patch out chmod and do here
-    chmod 4555 ${D}${prefix}/sbin/lumina-checkpass
 }
 
 # Override magic in src-qt5/OS-detect.pri to our paths
