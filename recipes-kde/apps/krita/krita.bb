@@ -36,13 +36,10 @@ DEPENDS += " \
     kcrash \
 "
 
-PV = "4.4.8"
+PV = "5.0.0"
 PVEXT = ""
-SRC_URI = " \
-    ${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.xz \
-    file://0001-Make-C++14-default.patch \
-"
-SRC_URI[sha256sum] = "45112bf9d59beaf70de1e221699711a66b617a680d07e59d037d3b93ae77f450"
+SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.xz"
+SRC_URI[sha256sum] = "f073e9605763479e72d774d45cb710a220c4cb1d3d182bcafe93153d16c87139"
 S = "${WORKDIR}/${BPN}-${PV}${PVEXT}"
 
 FILES:${PN} += " \
