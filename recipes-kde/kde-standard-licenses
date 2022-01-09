@@ -8,7 +8,10 @@ bitbake -k --runall populate_lic kde-world
 bitbake -c populate_lic <recipe-to-check>
 
 Copy & paste templates:
+    file://LICENSES/Apache-2.0.txt;md5=c846ebb396f8b174b10ded4771514fcc \
+
     file://LICENSES/Artistic-2.0.txt;md5=7f086b1df814d268c59965d8db41f13c \
+
     file://LICENSES/Bison-exception-2.2.txt;md5=fe1adebe74bce848e36673c70d09e755 \
 
     file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \

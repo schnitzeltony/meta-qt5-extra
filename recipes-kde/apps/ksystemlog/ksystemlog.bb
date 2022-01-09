@@ -1,7 +1,9 @@
 SUMMARY = "KDE SystemLog Application"
-LICENSE = "GPL-2.0"
+LICENSE = "BSD-3-Clause & CC0-1.0 & GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=5a3169a2d39a757efd8b7aa66a69d97b \
+    file://LICENSES/BSD-3-Clause.txt;md5=f225922a2c12dfa5218fb70c49db3ea6 \
+    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-apps gtk-icon-cache
@@ -22,6 +24,6 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "e6252c796519d29921d0b84733d8b3f2ad506f591a1eafd468ff2db7f7b640d4"
+SRC_URI[sha256sum] = "b414ef3a6bee078d576b7bc8c5b51c32b24817166f6dde68de5a0d56bc4b09e7"
 
 FILES:${PN} += "${datadir}/kxmlgui5"

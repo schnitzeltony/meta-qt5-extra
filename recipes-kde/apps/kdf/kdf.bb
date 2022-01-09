@@ -1,7 +1,8 @@
 SUMMARY = "KDiskFree displays the file devices' information"
-LICENSE = "GPL-2.0"
+LICENSE = "CC0-1.0 & GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
+    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-apps gtk-icon-cache
@@ -22,7 +23,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "f3281090bcd9efe5fc081faa5729debf4cde0c59148e101caa89553839653d18"
+SRC_URI[sha256sum] = "d1727d9d69ab0a609d018e9c1178d4cf41dd41fad09b873adb0675d2aebb2fa4"
 
 FILES:${PN} += " \
     ${datadir}/k*5 \

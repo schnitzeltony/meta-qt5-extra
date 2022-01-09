@@ -1,8 +1,12 @@
 SUMMARY = "Computer-aided translation"
-LICENSE = "GPL-2.0 & GFDL-1.2"
+LICENSE = "BSD-3-Clause & GFDL-1.2-or-later & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=7108e5acd7ce861dee282297d7c2f38c \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/GFDL-1.2-or-later.txt;md5=9f58808219e9a42ff1228309d6f83dc6 \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=147a320ed8b16b036829a0c71d424153 \
 "
 
 inherit kde-apps gtk-icon-cache mime-xdg
@@ -26,7 +30,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "ede7a0a978a35ed518984e76ce3e6135f428049f8c15492a8f60a5e655250854"
+SRC_URI[sha256sum] = "7f30f32c53b2682dd3664ffb0a9af131c1530e48666759c4c49b8496c0d53722"
 
 FILES:${PN} += " \
     ${datadir}/config.kcfg \

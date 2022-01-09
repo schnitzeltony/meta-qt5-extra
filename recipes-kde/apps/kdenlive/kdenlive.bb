@@ -1,7 +1,12 @@
 SUMMARY = "Kdenlive is an intuitive and powerful multi-track video editor"
-LICENSE = "GPL-2.0"
+LICENSE = "BSD-3-Clause & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & GPL-3.0-or-later & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=38adfe5a9f2953129da1774430b28adf \
+    file://LICENSES/BSD-3-Clause.txt;md5=f225922a2c12dfa5218fb70c49db3ea6 \
+    file://LICENSES/GPL-2.0-only.txt;md5=3d26203303a722dedc6bf909d95ba815 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=3d26203303a722dedc6bf909d95ba815 \
+    file://LICENSES/GPL-3.0-only.txt;md5=8da5784ab1c72e63ac74971f88658166 \
+    file://LICENSES/GPL-3.0-or-later.txt;md5=8da5784ab1c72e63ac74971f88658166 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=7b8fde44990707e743d3613054065137 \
 "
 
 inherit kde-apps gtk-icon-cache mime mime-xdg
@@ -41,7 +46,7 @@ DEPENDS += "\
 
 PV = "${KDE_APP_VERSION}"
 SRC_URI += "file://0001-CMakeLists.txt-make-MLT_PREFIX-configurable.patch"
-SRC_URI[sha256sum] = "0c78e01c10f4ab24c8ae49c675086ea3398b470ad72bb906db2204fe524c5a03"
+SRC_URI[sha256sum] = "dcd56718b2db687f9d4c63974a648c2b6641173d011362d2d9619442baef6fe4"
 
 EXTRA_OECMAKE += " \
     -DMLT_PREFIX=${prefix} \

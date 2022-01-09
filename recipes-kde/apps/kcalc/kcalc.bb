@@ -1,8 +1,9 @@
 SUMMARY = "KDE's calculator application"
-LICENSE = "GPL-2.0 & LGPL-2.1"
+LICENSE = "BSD-3-Clause & CC0-1.0 & GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
-    file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+    file://LICENSES/BSD-3-Clause.txt;md5=f225922a2c12dfa5218fb70c49db3ea6 \
+    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
 "
 
 inherit kde-apps gettext
@@ -23,7 +24,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "fbe857d47a75225d594787d94a76e6e291587b903171a263e52c11aea809e7b4"
+SRC_URI[sha256sum] = "d65e6c83cf623a96a07491ea074a3c4f8120dc914993c4609456436894ecf45c"
 
 FILES_SOLIBSDEV = ""
 

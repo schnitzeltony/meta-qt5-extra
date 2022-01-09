@@ -17,7 +17,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 0144610..f6b2105 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -71,7 +71,7 @@ if(WIN32)
+@@ -77,7 +77,7 @@ if(WIN32)
      find_package(DrMinGW)
      set(MLT_PREFIX "..")
  else()
@@ -25,7 +25,4 @@ index 0144610..f6b2105 100644
 +    set(MLT_PREFIX ${MLT_ROOT_DIR} CACHE STRING "mlt prefix")
  endif()
  
- if(KF5FileMetaData_FOUND)
--- 
-2.30.2
-
+ # macOS

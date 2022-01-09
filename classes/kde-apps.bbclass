@@ -1,6 +1,6 @@
 inherit kde-base
 
-KDE_APP_VERSION = "21.08.3"
+KDE_APP_VERSION = "21.12.1"
 
 SRC_URI = "${KDE_MIRROR}/stable/release-service/${PV}/src/${BPN}-${PV}.tar.xz"
 
