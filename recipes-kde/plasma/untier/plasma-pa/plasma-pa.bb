@@ -16,13 +16,11 @@ DEPENDS += " \
     pulseaudio \
     libcanberra \
     \
-    kcoreaddons \
-    kcoreaddons-native \
-    kconfig-native \
+    kdoctools-native kdoctools \
+    kcoreaddons-native kcoreaddons \
+    kconfig-native kconfig \
     kpackage-native \
     kdeclarative \
-    kdoctools \
-    kdoctools-native \
     kglobalaccel \
     ki18n \
     plasma-framework \

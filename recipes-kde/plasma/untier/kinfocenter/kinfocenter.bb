@@ -20,21 +20,18 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gettext
 
 DEPENDS += " \
+    kauth-native \
+    kpackage-native \
+    kdoctools-native kdoctools \
+    kcoreaddons-native kcoreaddons \
+    kconfig-native kconfig \
     pciutils \
     kcompletion \
-    kauth-native \
-    kconfig \
-    kconfig-native \
     kconfigwidgets \
-    kcoreaddons \
-    kcoreaddons-native \
     kdbusaddons \
-    kdoctools \
-    kdoctools-native \
     ki18n \
     kiconthemes \
     kcmutils \
-    kpackage-native \
     sonnet-native \
     kio \
     kservice \

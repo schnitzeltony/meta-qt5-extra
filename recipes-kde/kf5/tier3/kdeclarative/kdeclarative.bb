@@ -14,9 +14,22 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5
 
-DEPENDS += "qtdeclarative kconfig kconfig-native ki18n kiconthemes kio kwidgetsaddons \
-            kwindowsystem kglobalaccel kguiaddons kpackage libepoxy gettext-native \
-            kcoreaddons-native kauth-native kpackage-native"
+DEPENDS += " \
+    gettext-native \
+    kcoreaddons-native \
+    kauth-native \
+    kpackage-native kpackage \
+    kconfig-native kconfig \
+    libepoxy  \
+    qtdeclarative \
+    ki18n \
+    kiconthemes \
+    kio \
+    kwidgetsaddons \
+    kwindowsystem \
+    kglobalaccel \
+    kguiaddons \
+"
 
 SRC_URI += " \
     file://0001-kpackagelauncherqml-Add-include-of-QDebug.patch \

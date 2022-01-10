@@ -10,10 +10,8 @@ inherit kde-kf5 gettext
 DEPENDS += " \
     qtdeclarative \
     kauth-native \
-    kconfig \
-    kconfig-native \
-    kcoreaddons \
-    kcoreaddons-native \
+    kconfig-native kconfig \
+    kcoreaddons-native kcoreaddons \
     kpackage-native \
     ki18n \
     kio \

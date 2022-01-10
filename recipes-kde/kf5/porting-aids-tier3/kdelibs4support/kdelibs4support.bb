@@ -4,23 +4,22 @@ inherit gettext
 
 DEPENDS += " \
     ${BPN}-native \
-    kdoctools-native \
     kauth-native \
     sonnet-native \
+    kconfig-native kconfig \
+    kdoctools-native kdoctools \
+    kdesignerplugin-native kdesignerplugin \
+    networkmanager \
     qtsvg \
     qttools \
     kcompletion \
-    kconfig \
     kconfigwidgets \
     kcrash \
-    kdesignerplugin \
-    kdesignerplugin-native \
     kdbusaddons \
     kemoticons \
     kglobalaccel \
     kitemmodels \
     kinit \
-    kdoctools \
     kguiaddons \
     ki18n \
     kiconthemes \

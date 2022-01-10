@@ -9,8 +9,14 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5
 
-DEPENDS += "kconfigwidgets kconfig kiconthemes kxmlgui kconfig-native kcoreaddons-native \
-            kauth-native"
+DEPENDS += " \
+    kcoreaddons-native \
+    kauth-native \
+    kconfig-native kconfig \
+    kconfigwidgets \
+    kiconthemes \
+    kxmlgui  \
+"
 
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "7d9ac1b5e5b4f8102c434d7e7a503fcbce57be36db42975931aeaffe530c6ceb"

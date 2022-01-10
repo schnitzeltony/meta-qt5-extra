@@ -10,12 +10,11 @@ inherit kde-plasma features_check gettext
 
 DEPENDS += " \
     kauth-native \
-    kconfig-native \
     kcoreaddons-native \
-    kdoctools-native \
-    kdelibs4support \
-    kdoctools \
+    kconfig-native kconfig \
+    kdoctools-native kdoctools \
     virtual/libx11 \
+    kdelibs4support \
 "
 
 PV = "${PLASMA_VERSION}"

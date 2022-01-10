@@ -11,10 +11,9 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 gettext
 
 DEPENDS += " \
-    kconfig \
-    kconfig-native \
-    kcoreaddons \
-    kcoreaddons-native \
+    kauth-native \
+    kcoreaddons-native kcoreaddons \
+    kconfig-native kconfig \
     ki18n \
     kiconthemes \
     kio \
@@ -24,8 +23,6 @@ DEPENDS += " \
     ktextwidgets \
     kwidgetsaddons \
     kxmlgui \
-    kauth-native \
-    sonnet-native \
 "
 
 PV = "${KF5_VERSION}"

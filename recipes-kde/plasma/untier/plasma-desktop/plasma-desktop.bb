@@ -20,8 +20,8 @@ DEPENDS += " \
     kcoreaddons-native \
     kpackage-native \
     sonnet-native \
-    kdelibs4support-native \
-    kdoctools-native \
+    kdelibs4support-native kdelibs4support \
+    kdoctools-native kdoctools \
     kauth-native \
     kdesignerplugin-native \
     \
@@ -31,11 +31,9 @@ DEPENDS += " \
     qtdeclarative \
     \
     plasma-framework \
-    kdoctools \
     ki18n \
     kcmutils \
     knewstuff \
-    kdelibs4support \
     knotifyconfig \
     attica \
     kwallet \

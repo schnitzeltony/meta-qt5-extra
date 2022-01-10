@@ -7,17 +7,11 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gettext
 
 DEPENDS += " \
-    kcoreaddons \
-    kcoreaddons-native \
+    kcoreaddons-native kcoreaddons \
+    kdoctools-native kdoctools \
     ki18n \
     kwallet \
     kwidgetsaddons \
-    kdoctools-native \
-"
-
-# REVISIT optionals
-DEPENDS += " \
-    kdoctools \
 "
 
 PV = "${PLASMA_VERSION}"

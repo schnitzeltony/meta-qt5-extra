@@ -10,12 +10,12 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gettext
 
 DEPENDS += " \
-    kdoctools-native \
     sonnet-native \
     kpackage-native \
     kcoreaddons-native \
     kauth-native \
-    kconfig-native \
+    kconfig-native kconfig \
+    kdoctools-native kdoctools \
     kactivities \
     kactivities-stats \
     kirigami2 \
@@ -28,9 +28,7 @@ DEPENDS += " \
     kwindowsystem \
     kxmlgui \
     kdbusaddons \
-    kconfig \
     khtml \
-    kdoctools \
     plasma-workspace \
 "
 

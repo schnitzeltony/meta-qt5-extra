@@ -10,18 +10,16 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 gettext
 
 DEPENDS += " \
-    libcap \
+    libcap-native \
+    kcoreaddons-native \
+    kauth-native \
+    kconfig kconfig-native \
+    kdoctools kdoctools-native \
     kservice \
     kio \
     ki18n \
     kwindowsystem \
     kcrash \
-    kconfig \
-    kconfig-native \
-    kcoreaddons-native \
-    kauth-native \
-    kdoctools \
-    kdoctools-native \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11", "", d)} \
 "
 
@@ -30,3 +28,5 @@ SRC_URI[sha256sum] = "2a3858eeb80b044e884bdc77e110e7ecb34cdb91575c544a95502123a1
 
 FILES:${PN} += "${datadir}/dbus-1 ${libdir}/libkdeinit5_klauncher.so"
 FILES:${PN}-dev = "${libdir}/cmake"
+
+RDEPENDS_${PN} += "libcap-bin"

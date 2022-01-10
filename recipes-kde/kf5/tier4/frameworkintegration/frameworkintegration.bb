@@ -10,9 +10,9 @@ inherit kde-kf5 gettext
 
 DEPENDS += " \
     kauth-native \
-    kconfig \
-    kconfig-native \
     kcoreaddons-native \
+    kconfig-native kconfig \
+    kpackage-native kpackage \
     kconfigwidgets \
     ki18n \
     kiconthemes \
@@ -20,8 +20,6 @@ DEPENDS += " \
     knotifications \
     kwidgetsaddons \
     knewstuff \
-    kpackage \
-    kpackage-native \
 "
 
 RRECCOMENDS_${PN} += "oxygen-fonts"

@@ -13,13 +13,12 @@ inherit kde-kf5 gettext
 
 DEPENDS += " \
     kauth-native \
-    kconfig-native \
     kcoreaddons-native \
-    kpackage-native \
     sonnet-native \
+    kconfig-native kconfig \
+    kpackage-native kpackage \
     karchive \
     kcompletion \
-    kconfig \
     kcoreaddons \
     ki18n \
     kiconthemes \
@@ -29,7 +28,8 @@ DEPENDS += " \
     kwidgetsaddons \
     kxmlgui \
     attica \
-    kpackage \
+    kirigami2 \
+    syndication \
 "
 
 PV = "${KF5_VERSION}"

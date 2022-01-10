@@ -14,14 +14,13 @@ inherit kde-kf5 gettext
 
 DEPENDS += " \
     bison-native \
-    kconfig-native \
-    kdoctools-native \
+    kconfig-native kconfig \
+    kdoctools-native kdoctools \
     kcoreaddons-native \
     kconfig \
     kcrash \
     kdbusaddons \
     ki18n \
-    kdoctools \
 "
 
 PV = "${KF5_VERSION}"

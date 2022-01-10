@@ -24,22 +24,18 @@ DEPENDS += " \
     fontconfig \
     \
     kauth-native \
-    kconfig-native \
-    kcoreaddons-native \
-    kdoctools-native \
-    kpackage-native \
+    kconfig-native kconfig \
+    kdoctools-native kdoctools \
+    kcoreaddons-native kcoreaddons \
+    kpackage-native kpackage \
     sonnet-native \
     kactivities \
-    kconfig \
     kconfigwidgets \
-    kcoreaddons \
     kcrash \
-    kdoctools \
     kglobalaccel \
     ki18n \
     kinit \
     knotifications \
-    kpackage \
     kservice \
     plasma-framework \
     kwidgetsaddons \
