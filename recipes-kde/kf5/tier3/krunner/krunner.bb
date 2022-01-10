@@ -28,6 +28,7 @@ SRC_URI[sha256sum] = "f16546d24f307e7ca79948af8ad4c1a2a9483bb717db8c7c439b1c5168
 
 FILES:${PN} += " \
     ${datadir}/k*5 \
+    ${datadir}/kdevfiletemplates \
     ${datadir}/kdevappwizard \
     ${datadir}/dbus-1 \
     ${OE_QMAKE_PATH_QML}/org/kde \
