@@ -32,6 +32,7 @@ SRC_URI[sha256sum] = "56088115827ae406dcd383e3c3fdf408950f351887259e41965fe4b792
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 FILES:${PN} += " \
+    ${datadir}/kdevfiletemplates \
     ${datadir}/k*5 \
     ${datadir}/dbus-1 \
     ${datadir}/polkit-1 \
