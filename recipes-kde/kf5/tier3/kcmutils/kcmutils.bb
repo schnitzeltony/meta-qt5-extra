@@ -25,6 +25,6 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "15fe79b0d38bf5af298ede402f9c928ea7a05a5ddcdcf8c28a9e5b9a36ea497d"
+SRC_URI[sha256sum] = "b36300a5f400e082b800508292c2d6e5bdb033567cdc43c0dd947744e4c09911"
 
 FILES:${PN} += "${datadir}/kservicetypes5"

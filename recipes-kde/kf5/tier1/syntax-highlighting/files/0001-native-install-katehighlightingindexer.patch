@@ -14,11 +14,11 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/src/indexer/CMakeLists.txt b/src/indexer/CMakeLists.txt
-index 9fa26b2..89e549d 100644
+index 9aede60..42d50b6 100644
 --- a/src/indexer/CMakeLists.txt
 +++ b/src/indexer/CMakeLists.txt
-@@ -34,3 +34,5 @@ else()
-         target_link_libraries(katehighlightingindexer Qt5::Core)
+@@ -36,3 +36,5 @@ else()
+         target_link_libraries(katehighlightingindexer Qt${QT_MAJOR_VERSION}::Core)
      endif()
  endif()
 +

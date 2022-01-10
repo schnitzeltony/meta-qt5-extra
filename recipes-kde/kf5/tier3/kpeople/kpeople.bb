@@ -18,7 +18,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "be3cca0cdbc0ad4ae61d4a6d5080712ad802506b35f0fb5c7db79f4c4bf07989"
+SRC_URI[sha256sum] = "fc3938d53fe2badb91e8f93a34afaa50f40b3610062fb5901d36d955cc986298"
 
 FILES:${PN} += " \
     ${datadir}/k*5 \

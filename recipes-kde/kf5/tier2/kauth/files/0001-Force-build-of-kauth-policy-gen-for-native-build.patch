@@ -15,10 +15,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  2 files changed, 6 insertions(+), 12 deletions(-)
 
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 074c834..fcea92b 100644
+index a8407da..dbf4a8c 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -108,7 +108,7 @@ endif()
+@@ -122,7 +122,7 @@ endif()
  
  # Compile only if fake backend has not been selected
  
@@ -27,7 +27,7 @@ index 074c834..fcea92b 100644
      # KAUTH_POLICY_GEN_SRCS has been generated from ConfigureChecks.cmake
      add_executable(kauth-policy-gen ${KAUTH_POLICY_GEN_SRCS})
      add_executable(KF5::kauth-policy-gen ALIAS kauth-policy-gen)
-@@ -120,7 +120,7 @@ if (NOT "${KAUTH_BACKEND_NAME}" STREQUAL "FAKE")
+@@ -134,7 +134,7 @@ if (NOT "${KAUTH_BACKEND_NAME}" STREQUAL "FAKE")
      # KAUTH_POLICY_GEN_LIBRARIES has been generated from ConfigureChecks.cmake
      target_link_libraries( kauth-policy-gen PRIVATE ${KAUTH_POLICY_GEN_LIBRARIES} )
  
@@ -37,7 +37,7 @@ index 074c834..fcea92b 100644
  
  # KAuth backend plugin
 diff --git a/src/ConfigureChecks.cmake b/src/ConfigureChecks.cmake
-index ee9ec0c..f4443f6 100644
+index 545416f..1c4d77a 100644
 --- a/src/ConfigureChecks.cmake
 +++ b/src/ConfigureChecks.cmake
 @@ -127,16 +127,10 @@ set(KAUTH_POLICY_GEN_SRCS
@@ -47,20 +47,20 @@ index ee9ec0c..f4443f6 100644
 -if(KAUTH_BACKEND_NAME STREQUAL "OSX")
 -   set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
 -       backends/mac/kauth-policy-gen-mac.cpp)
--   set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES} ${CORE_FOUNDATION_LIBRARY} ${SECURITY_LIBRARY} Qt5::Core)
+-   set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES} ${CORE_FOUNDATION_LIBRARY} ${SECURITY_LIBRARY} Qt${QT_MAJOR_VERSION}::Core)
 -elseif(KAUTH_BACKEND_NAME STREQUAL "POLKITQT5-1")
 -  set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
 -      backends/polkit-1/kauth-policy-gen-polkit1.cpp)
 -  set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES}
--      Qt5::Core)
+-      Qt${QT_MAJOR_VERSION}::Core)
 -endif()
 +set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
 +    backends/polkit-1/kauth-policy-gen-polkit1.cpp)
 +set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES}
-+    Qt5::Core)
++    Qt${QT_MAJOR_VERSION}::Core)
  
  ########################
  # Helper backend probing
 -- 
-2.21.1
+2.31.1
 

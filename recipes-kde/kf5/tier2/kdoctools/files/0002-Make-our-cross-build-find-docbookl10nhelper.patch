@@ -15,10 +15,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 12 deletions(-)
 
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 2523157..ed130f6 100644
+index 7b07433..1fa68ad 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -210,18 +210,6 @@ if(INSTALL_INTERNAL_TOOLS)
+@@ -224,18 +224,6 @@ if(INSTALL_INTERNAL_TOOLS)
      install(TARGETS docbookl10nhelper EXPORT KF5DocToolsToolsTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
  endif()
  
