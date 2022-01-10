@@ -15,6 +15,7 @@ DEPENDS += "docbook-xml-dtd4 docbook-xsl-stylesheets liburi-perl-native"
 
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "1a74ff1d5ac8c0639ff8a3430f5226480844119010605f911ed7a2ca684d4ad0"
+SRC_URI += "file://0002-set-meinproc5-executable-so-that-it-can-be-found-for.patch"
 
 # allarch packages do only install into machine sysroot
 # for xml4

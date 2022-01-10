@@ -5,8 +5,7 @@ DEPENDS += "${BPN}-native gettext-native karchive ki18n libxslt libxml2"
 inherit cmake_lib
 
 SRC_URI += " \
-    file://0002-Make-our-cross-build-find-docbookl10nhelper.patch \
-	file://0003-set-meinproc5-executable-so-that-it-can-be-found-for.patch \
+    file://0003-Make-our-cross-build-find-docbookl10nhelper.patch \
     file://0004-Add-cmdline-param-to-help-find-xsl.patch \
 "
 
