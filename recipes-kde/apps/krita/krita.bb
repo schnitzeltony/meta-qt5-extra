@@ -36,10 +36,10 @@ DEPENDS += " \
     kcrash \
 "
 
-PV = "5.0.0"
+PV = "5.0.2"
 PVEXT = ""
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.xz"
-SRC_URI[sha256sum] = "f073e9605763479e72d774d45cb710a220c4cb1d3d182bcafe93153d16c87139"
+SRC_URI[sha256sum] = "634102e0bf0c03c0ec9dc4dd647d5f618c8f136cf79bd50136e6f012be6b4e63"
 S = "${WORKDIR}/${BPN}-${PV}${PVEXT}"
 
 FILES:${PN} += " \
