@@ -34,7 +34,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "e2c0c4b8a7936f85a741ce816aced38aa626ccfd89015a7bdb3d942d7cd7178f"
+SRC_URI[sha256sum] = "d9df24da53f2f12ca1f8cda62c9f3ab3a91132ab0e8ad87c0ccaabd99cf5c6a4"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \

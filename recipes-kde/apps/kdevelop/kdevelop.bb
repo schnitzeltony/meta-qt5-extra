@@ -1,12 +1,21 @@
 SUMMARY = "Cross-platform IDE for C, C++, Python, QML/JavaScript and PHP"
-LICENSE = "GPL-2.0 & GFDL-1.2 & LGPL-2.0"
+LICENSE = "BSD-2-Clause & BSD-3-Clause & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & GPL-3.0-or-later & LGPL-2.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-2.1-or-later & LGPL-3.0-only & MIT"
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=7974e16b472f00bbbadf2d006aa00c50 \
-    file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \
+    file://LICENSES/BSD-2-Clause.txt;md5=4e290b17e3e05732730de37b44abef90 \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/GPL-3.0-or-later.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/LGPL-2.0-only.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.1-only.txt;md5=147a320ed8b16b036829a0c71d424153 \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=147a320ed8b16b036829a0c71d424153 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=8d51f5b5fd447f7a1040c3dc9f0a8de6 \
+    file://LICENSES/MIT.txt;md5=4dd71a82d66fd9e3ca0cc65b8be370c0 \
 "
 
-inherit kde-base gettext pkgconfig gtk-icon-cache mime mime-xdg bash-completion
+inherit kde-apps gettext pkgconfig gtk-icon-cache mime mime-xdg bash-completion
 
 python() {
     if 'clang-layer' not in d.getVar('BBFILE_COLLECTIONS').split():
@@ -55,9 +64,8 @@ DEPENDS += " \
     threadweaver \
 "
 
-PV = "5.6.2"
-SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz"
-SRC_URI[sha256sum] = "0f86bc3fe53f761c1e3e3f7544577a0c41433be8bff310cf2e729f76f4363bf6"
+PV = "${KDE_APP_VERSION}"
+SRC_URI[sha256sum] = "ff39eb0db130c3bf337fa67744d2537e160f2ac92ce3ab26036631b9769f6f8e"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 

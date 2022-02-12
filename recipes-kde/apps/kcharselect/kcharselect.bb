@@ -19,4 +19,4 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "b58171b5eda54f9bef9bb82dcb24d40f833adf89e0efa470ab44d4a8a39a7983"
+SRC_URI[sha256sum] = "35e3a75380e335a811fc50ae6fa7e920968655e3aeeffbc12e54d0cc4fb4f3b3"

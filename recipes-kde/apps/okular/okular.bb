@@ -48,7 +48,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "04bd61cec2b794cce0f6381cf7c4db7778a8cefc5716d8a4bfd3efaafd212ba1"
+SRC_URI[sha256sum] = "69c39e8b5f9a1c24bfe57dc27a4073d3a72a3cbdd548e00e83fa8d33a1e70bcc"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
