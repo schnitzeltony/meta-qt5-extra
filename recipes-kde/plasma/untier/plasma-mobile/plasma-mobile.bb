@@ -1,4 +1,4 @@
-DESCRIPTION = "Plasma Phone Components"
+DESCRIPTION = "Plasma Mobile Phone Components"
 HOMEPAGE = "https://community.kde.org/Plasma/Mobile/Code"
 LICENSE = "GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
@@ -22,12 +22,13 @@ DEPENDS += " \
     kdbusaddons \
     knotifications \
     kwin \
+    networkmanager-qt \
 "
 
 inherit kde-plasma gettext
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "36bb23c9a9a81bdb604a553e2474a7b88866f6ed93a11644a3eaeccdfc1d8021"
+SRC_URI[sha256sum] = "6e0d3aeac4c50835b33d2200ab9829c6b4e42739306c50b333a995a5a225dbc2"
 
 FILES:${PN} += " \
     ${datadir}/k*5 \

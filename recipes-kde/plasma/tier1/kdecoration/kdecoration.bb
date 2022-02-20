@@ -8,8 +8,10 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gettext
 
 DEPENDS += " \
+    kcoreaddons-native \
+    kcoreaddons \
     ki18n \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "48982039397a7a58552d649cf8166dfc27b578cf2cb8c1b59b86785e124512cf"
+SRC_URI[sha256sum] = "92d9f47364c255cdf7cf39bd229f849b0092635386b3fa62a35f984c1bdde3e9"

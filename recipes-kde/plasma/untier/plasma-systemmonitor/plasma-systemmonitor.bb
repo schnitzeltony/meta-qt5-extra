@@ -31,11 +31,12 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "8e8600ea93124c9d14fe245fbcda47daa5d594c4274100c0d43929f9fa52dfea"
+SRC_URI[sha256sum] = "c0f2b38b4c015bc07d90ca5023d3d9cbe81d126b51fa4cde60a6081448981251"
 
 FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/ksysguard \
     ${datadir}/knsrcfiles \
+    ${datadir}/plasma \
     ${OE_QMAKE_PATH_QML} \
 "

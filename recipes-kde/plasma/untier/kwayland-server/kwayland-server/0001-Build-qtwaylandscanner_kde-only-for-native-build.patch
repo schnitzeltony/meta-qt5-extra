@@ -26,9 +26,9 @@ index 31c5a91..ad6a0f0 100644
 +find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core)
 +if(FALSE)
  find_package(KF5Wayland ${KF5_MIN_VERSION} CONFIG REQUIRED)
- find_package(PlasmaWaylandProtocols CONFIG REQUIRED)
+ find_package(PlasmaWaylandProtocols 1.6.0 CONFIG REQUIRED)
  
-@@ -77,9 +78,11 @@ add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
+@@ -75,9 +76,11 @@ add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
  if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
      ecm_install_po_files_as_qm(po)
  endif()
@@ -40,7 +40,7 @@ index 31c5a91..ad6a0f0 100644
  if (BUILD_TESTING)
      add_subdirectory(autotests)
      add_subdirectory(tests)
-@@ -113,6 +116,7 @@ install(EXPORT KWaylandServerTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FI
+@@ -111,6 +114,7 @@ install(EXPORT KWaylandServerTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FI
  
  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kwaylandserver_version.h
          DESTINATION ${KDE_INSTALL_INCLUDEDIR} COMPONENT Devel )

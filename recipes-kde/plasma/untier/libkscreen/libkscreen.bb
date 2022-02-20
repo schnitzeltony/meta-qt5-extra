@@ -11,13 +11,15 @@ inherit kde-plasma
 
 DEPENDS += " \
     qtwayland-native \
+    plasma-wayland-protocols \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "31d433323616bcfda3c0c11e5dcb15acb83a4973993a5aa82bc85cca4c7a8f23"
+SRC_URI[sha256sum] = "bd2791709d6c09711a9a58f4639cb1ab83df98237a2b6ba133f9b1a2690f29a5"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
+    ${systemd_user_unitdir} \
 "

@@ -55,7 +55,7 @@ UNTIER = " \
     plasma-nano \
     plasma-nm \
     plasma-pa \
-    plasma-phone-components \
+    plasma-mobile \
     plasma-systemmonitor \
     plasma-vault \
     plasma-workspace-wallpapers \

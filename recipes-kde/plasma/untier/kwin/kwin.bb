@@ -1,5 +1,5 @@
 SUMMARY = "KDE's window manager"
-LICENSE = "BSD-2-Clause & BSD-3-Clause & GPL-2.0 & GPL-2.0+ & GPL-3.0 & GPL-3.0+ & LGPL-2.0 & LGPL-2.0+ & LGPL-2.1 & LGPL-3.0"
+LICENSE = "BSD-2-Clause & BSD-3-Clause & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & GPL-3.0-or-later & LGPL-2.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \
     file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
@@ -22,12 +22,15 @@ DEPENDS += " \
     libinput \
     qtsensors \
     fontconfig \
+    lcms \
     \
+    ${BPN}-native \
     kauth-native \
     kconfig-native kconfig \
     kdoctools-native kdoctools \
     kcoreaddons-native kcoreaddons \
     kpackage-native kpackage \
+    breeze \
     sonnet-native \
     kactivities \
     kconfigwidgets \
@@ -51,13 +54,14 @@ DEPENDS += " \
     kdecoration \
     kscreenlocker \
     kwayland-server \
+    krunner \
 "
 
 # this condition matches always currently - it is kept in this way as a marker
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)}"
 
-PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "f749e7e9b753d1ed1ae9655ea3cdec7d13946c64c820d4c85be2c0f95ac55f01"
+require ${BPN}.inc
+SRC_URI += "file://0001-Remove-kwin-strip-effect-metadata-find-build-dance.patch"
 
 FILES:${PN} += " \
     ${datadir}/config.kcfg \
@@ -66,18 +70,12 @@ FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/knsrcfiles \
     ${datadir}/kpackage \
+    ${datadir}/krunner \
     ${datadir}/icons \
     ${systemd_user_unitdir} \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
     ${libdir}/kconf_update_bin \
-"
-
-# taken from bitbake.conf with lucky modification: all lt libraries end with s.so
-# only move them to -dev package
-FILES_SOLIBSDEV = "${base_libdir}/lib*${SOLIBSDEV} ${libdir}/lib*s${SOLIBSDEV}"
-FILES:${PN} += " \
-    ${libdir}/*.so \
 "
 
 RDEPENDS:${PN} += " \

@@ -27,6 +27,7 @@ DEPENDS += " \
     kdelibs4support-native \
     kdesignerplugin-native \
     kauth-native \
+    libqalculate \
     baloo \
     kdeclarative \
     plasma-framework \
@@ -59,7 +60,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "2ebee6ab2f10cabc350e0f75a0d8462ae0b7616a795d078f6bb5765396052575"
+SRC_URI[sha256sum] = "c79627fed9430c84502ed6917b91372423955ce5ce32abba409350de7b2d8f27"
 
 # REVISIT
 FILES:${PN} += " \
@@ -91,7 +92,7 @@ FILES_SOLIBSDEV = " \
     ${libdir}/libweather_ion${SOLIBSDEV} \
     ${libdir}/libkfontinst*${SOLIBSDEV} \
 "
-
+INSANE_SKIP:${PN} = "dev-so"
 
 # startkde/startplasmacompositor require:
 RDEPENDS:${PN} += " \

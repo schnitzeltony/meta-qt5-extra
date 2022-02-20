@@ -18,10 +18,12 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "f60730505b429a58401cf2350faafd3108514c9ad46dd7657a42af08c09e409e"
+SRC_URI[sha256sum] = "bd3b6ac25068af795a6da3d126ef248f510670e5f9e4982ddcac381ec239ff7f"
 
 FILES:${PN} += " \
     ${datadir}/kgamma \
     ${datadir}/kservices5 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
+
+INSANE_SKIP:${PN} = "dev-so"

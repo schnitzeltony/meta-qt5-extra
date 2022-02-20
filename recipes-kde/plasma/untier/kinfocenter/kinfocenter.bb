@@ -44,15 +44,16 @@ DEPENDS += " \
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11", "", d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "67ae1e26b98a3efdeab6a0741bef9948410da6bee63692189535def0de98f138"
-SRC_URI += "file://0001-fix-build-in-x11-less-environments.patch"
+SRC_URI[sha256sum] = "7959e24d98707cba2403caa68db3a6b20c23d6e5122e903233caf0656ce600c5"
 
+FILES_SOLIBSDEV = ""
 FILES:${PN} += " \
     ${datadir}/kcmusb \
     ${datadir}/desktop-directories \
     ${datadir}/k*5 \
     ${datadir}/kpackage \
     \
+    ${libdir}/libKInfoCenterInternal.so \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \
 "
