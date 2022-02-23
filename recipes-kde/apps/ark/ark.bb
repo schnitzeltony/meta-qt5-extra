@@ -12,10 +12,10 @@ inherit kde-apps gtk-icon-cache mime mime-xdg
 
 DEPENDS += "\
     libarchive \
+    libzip \
     karchive \
     kauth-native \
     kconfig-native \
-    kcoreaddons-native \
     kcrash \
     kdbusaddons \
     kdoctools-native \
