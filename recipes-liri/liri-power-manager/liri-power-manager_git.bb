@@ -10,6 +10,7 @@ PV = "0.9.0+git${SRCPV}"
 
 SRCREV = "794ef0dc8a139b62fad277699042232191487186"
 S = "${WORKDIR}/git"
+SRC_URI += "file://0001-batterywatcher-Fix-build-with-KF5-Solid-5.91.0.patch"
 
 DEPENDS += " \
     qtwayland \

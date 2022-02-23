@@ -1,0 +1,36 @@
+From d0e6772c6c4d909dfd9e612aa90b1ead5c62bdf3 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 23 Feb 2022 21:45:09 +0100
+Subject: [PATCH] batterywatcher: Fix build with KF5/Solid >= 5.91.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+| batterywatcher.cpp:27:10: fatal error: KF5/solid_version.h: No such file or directory
+|    27 | #include <KF5/solid_version.h>
+|       |          ^~~~~~~~~~~~~~~~~~~~~
+| compilation terminated.
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/daemon/batterywatcher.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/daemon/batterywatcher.cpp b/src/daemon/batterywatcher.cpp
+index 7e69a90..a587afb 100644
+--- a/src/daemon/batterywatcher.cpp
++++ b/src/daemon/batterywatcher.cpp
+@@ -24,7 +24,7 @@
+ #include <Solid/Device>
+ #include <Solid/DeviceNotifier>
+ #include <Solid/Battery>
+-#include <KF5/solid_version.h>
++#include <Solid/solid_version.h>
+ 
+ #include <LiriNotifications/Notification>
+ 
+-- 
+2.34.1
+
