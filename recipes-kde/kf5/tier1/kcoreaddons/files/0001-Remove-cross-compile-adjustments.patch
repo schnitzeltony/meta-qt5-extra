@@ -1,0 +1,34 @@
+From 0a27a78d3e2e0c15172a2f25abd3c2a1ec7aa0ac Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 22 Feb 2022 00:29:38 +0100
+Subject: [PATCH] Remove cross-compile adjustments
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+OE does not set CMAKE_SYSROOT
+
+Upstrem-Status: Inappropriate [OE-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ KF5CoreAddonsMacros.cmake | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/KF5CoreAddonsMacros.cmake b/KF5CoreAddonsMacros.cmake
+index 7e5ba2d..1ced58f 100644
+--- a/KF5CoreAddonsMacros.cmake
++++ b/KF5CoreAddonsMacros.cmake
+@@ -45,8 +45,7 @@ function(kcoreaddons_desktop_to_json target desktop)
+         _desktop_to_json_cmake28(${desktop} ${json} ${DESKTOP_TO_JSON_COMPAT_MODE})
+         return()
+     endif()
+-    kcoreaddons_desktop_to_json_crosscompilation_args(_crosscompile_args)
+-    set(command KF5::desktoptojson ${_crosscompile_args} -i ${desktop} -o ${json})
++    set(command KF5::desktoptojson -i ${desktop} -o ${json})
+     if(DESKTOP_TO_JSON_COMPAT_MODE)
+       list(APPEND command -c)
+     endif()
+-- 
+2.34.1
+

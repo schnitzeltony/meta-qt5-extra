@@ -12,7 +12,7 @@ inherit kde-kf5
 DEPENDS += "bison-native qtdeclarative"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "3782bee19dff9e24e60782a8a2f297b1049bd50eaac3a2e389b0194160251382"
+SRC_URI[sha256sum] = "4f561eaa048a6c0e35c3bb14b8bc1f637708afff689f464576bba2e7ab0293a8"
 
 FILES:${PN} += "${OE_QMAKE_PATH_QML}"
 

@@ -10,4 +10,4 @@ inherit kde-kf5-porting-aids gettext
 DEPENDS += "ki18n kio kcoreaddons-native kconfig-native kauth-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "8cb23dc539fef71395947183c7c70a7a4c028086f2e8389b647a5b4ce2e30257"
+SRC_URI[sha256sum] = "f0c2a92910283997c21c4f49b2bb074c1edede63706da89f965711cc8babdeae"

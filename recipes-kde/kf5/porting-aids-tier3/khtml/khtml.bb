@@ -37,7 +37,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "4a5664c874676c191c0c2bb9debe4611ad224e00f8a2b46bc793c2467a1a28ae"
+SRC_URI[sha256sum] = "a40056d988fd77bc4bd3749465ed5452701b7e4948e10dc67fb592925c98b3d1"
 
 do_compile:append() {
     # gperf-native sets absolut debug comments/links in header

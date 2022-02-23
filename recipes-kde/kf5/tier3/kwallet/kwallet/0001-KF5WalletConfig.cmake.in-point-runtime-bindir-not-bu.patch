@@ -10,12 +10,13 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+
 ---
  src/api/KWallet/KF5WalletConfig.cmake.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/api/KWallet/KF5WalletConfig.cmake.in b/src/api/KWallet/KF5WalletConfig.cmake.in
-index a472bc8..6425f6f 100644
+index 9b035c5..8209665 100644
 --- a/src/api/KWallet/KF5WalletConfig.cmake.in
 +++ b/src/api/KWallet/KF5WalletConfig.cmake.in
 @@ -1,7 +1,7 @@
@@ -26,7 +27,4 @@ index a472bc8..6425f6f 100644
 +set(KWALLETD_BIN_PATH "@CMAKE_INSTALL_FULL_BINDIR@/kwalletd5")
  
  include(CMakeFindDependencyMacro)
- find_dependency(Qt5Gui @REQUIRED_QT_VERSION@)
--- 
-2.21.0
-
+ find_dependency(Qt@QT_MAJOR_VERSION@Gui @REQUIRED_QT_VERSION@)

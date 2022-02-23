@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = " \
     file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
-inherit kde-kf5
+inherit kde-kf5 mime-xdg
 
 DEPENDS += " \
     qtwayland-native \
@@ -17,4 +17,4 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "9d2be477affaac6908e946b0c073d13f072a3254e8f2fe5d12d2f7c37c473455"
+SRC_URI[sha256sum] = "7e56c2d826973632ee90b091c50aac53feb88409f5d2ad76d1214452efa6c83e"

@@ -14,7 +14,7 @@ inherit kde-kf5 perlnative
 DEPENDS += "docbook-xml-dtd4 docbook-xsl-stylesheets liburi-perl-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "1a74ff1d5ac8c0639ff8a3430f5226480844119010605f911ed7a2ca684d4ad0"
+SRC_URI[sha256sum] = "7620010ddfaec988715be343af4e35f8bac75b5e14d1fa9d3bdbbe620925990a"
 SRC_URI += "file://0002-set-meinproc5-executable-so-that-it-can-be-found-for.patch"
 
 # allarch packages do only install into machine sysroot

@@ -15,7 +15,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  2 files changed, 6 insertions(+), 12 deletions(-)
 
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index a8407da..dbf4a8c 100644
+index 2676316..822c573 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -122,7 +122,7 @@ endif()
@@ -37,10 +37,10 @@ index a8407da..dbf4a8c 100644
  
  # KAuth backend plugin
 diff --git a/src/ConfigureChecks.cmake b/src/ConfigureChecks.cmake
-index 545416f..1c4d77a 100644
+index 49658f3..65ad31f 100644
 --- a/src/ConfigureChecks.cmake
 +++ b/src/ConfigureChecks.cmake
-@@ -127,16 +127,10 @@ set(KAUTH_POLICY_GEN_SRCS
+@@ -117,16 +117,10 @@ set(KAUTH_POLICY_GEN_SRCS
      policy-gen/policy-gen.cpp)
  set(KAUTH_POLICY_GEN_LIBRARIES)
  
@@ -48,7 +48,7 @@ index 545416f..1c4d77a 100644
 -   set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
 -       backends/mac/kauth-policy-gen-mac.cpp)
 -   set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES} ${CORE_FOUNDATION_LIBRARY} ${SECURITY_LIBRARY} Qt${QT_MAJOR_VERSION}::Core)
--elseif(KAUTH_BACKEND_NAME STREQUAL "POLKITQT5-1")
+-elseif(KAUTH_BACKEND_NAME STREQUAL "POLKITQT${QT_MAJOR_VERSION}-1")
 -  set(KAUTH_POLICY_GEN_SRCS ${KAUTH_POLICY_GEN_SRCS}
 -      backends/polkit-1/kauth-policy-gen-polkit1.cpp)
 -  set(KAUTH_POLICY_GEN_LIBRARIES ${KAUTH_POLICY_GEN_LIBRARIES}
@@ -62,5 +62,5 @@ index 545416f..1c4d77a 100644
  ########################
  # Helper backend probing
 -- 
-2.31.1
+2.34.1
 

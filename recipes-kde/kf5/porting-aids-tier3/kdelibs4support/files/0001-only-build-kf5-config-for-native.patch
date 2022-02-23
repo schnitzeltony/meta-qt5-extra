@@ -11,18 +11,18 @@ Upstream-Status: Inappropriate [cross-specific]
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 
 ---
- CMakeLists.txt                |  30 +----
- src/CMakeLists.txt            | 200 +---------------------------------
+ CMakeLists.txt                |  29 +----
+ src/CMakeLists.txt            | 202 +---------------------------------
  src/kdecore/kglobal.cpp       |  18 ---
  src/kdecore/klocale_kde.cpp   |   4 -
  src/kdecore/kstandarddirs.cpp |   1 -
- 5 files changed, 4 insertions(+), 249 deletions(-)
+ 5 files changed, 4 insertions(+), 250 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6452b2f..beebfab 100644
+index e215cd7..48fb6c0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -20,30 +20,11 @@ include(GenerateExportHeader)
+@@ -20,31 +20,11 @@ include(GenerateExportHeader)
  include(CMakeFindFrameworks)
  
  set(REQUIRED_QT_VERSION 5.15.2)
@@ -52,10 +52,11 @@ index 6452b2f..beebfab 100644
 -find_package(KF5XmlGui ${KF_DEP_VERSION} REQUIRED)
 -find_package(KF5DBusAddons ${KF_DEP_VERSION} REQUIRED)
 -find_package(KDED ${KF_DEP_VERSION} REQUIRED)
+-find_package(KF5Auth ${KF_DEP_VERSION} REQUIRED)
  
  if(WIN32)
      find_package(KDEWin REQUIRED)
-@@ -55,8 +36,6 @@ endif()
+@@ -56,8 +36,6 @@ endif()
  set(HAVE_X11 ${X11_FOUND})
  if (HAVE_X11)
    add_feature_info("X11 Session Management (libSM)" X11_SM_FOUND "Support for session management in KApplication")
@@ -64,7 +65,7 @@ index 6452b2f..beebfab 100644
  endif ()
  if (APPLE)
      cmake_find_frameworks(CoreFoundation)
-@@ -169,11 +148,8 @@ install(
+@@ -170,11 +148,8 @@ install(
  
  
  
@@ -77,7 +78,7 @@ index 6452b2f..beebfab 100644
  
  if (BUILD_TESTING)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index b249bd5..95fd86c 100644
+index c5abb2a..efc3724 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -1,6 +1,4 @@
@@ -95,16 +96,16 @@ index b249bd5..95fd86c 100644
  find_package(OpenSSL)
  set_package_properties(OpenSSL PROPERTIES DESCRIPTION "Support for secure network communications (SSL and TLS)"
                         URL "http://openssl.org"
-@@ -50,7 +49,7 @@ else()
+@@ -49,7 +48,7 @@ if(WIN32)
+ else()
     set(libkdelibs4support_SRCS solid/networking_unix.cpp)
  endif()
- 
 -
 +endif()
+ 
  set(libkdelibs4support_SRCS
      ${libkdelibs4support_SRCS}
-     kdecore/k4aboutdata.cpp
-@@ -58,39 +58,9 @@ set(libkdelibs4support_SRCS
+@@ -58,39 +57,9 @@ set(libkdelibs4support_SRCS
      kdecore/kcurrencycode.cpp
      kdecore/kdebug.cpp
      kdecore/kdebugdbusiface.cpp
@@ -144,10 +145,11 @@ index b249bd5..95fd86c 100644
      kdecore/kcalendarera.cpp
      kdecore/kcalendarsystem.cpp
      kdecore/kcalendarsystemcoptic.cpp
-@@ -115,95 +84,6 @@ set(libkdelibs4support_SRCS
+@@ -114,96 +83,6 @@ set(libkdelibs4support_SRCS
+     kdecore/ktzfiletimezone.cpp
      kdecore/klocale.cpp
      kdecore/klocale_kde.cpp
- 
+-
 -    kdeui/k3icon.cpp
 -    kdeui/k4style.cpp
 -    kdeui/kaction.cpp
@@ -240,7 +242,7 @@ index b249bd5..95fd86c 100644
  )
  
  set_source_files_properties( solid/org.freedesktop.PowerManagement.xml
-@@ -211,37 +91,6 @@ set_source_files_properties( solid/org.freedesktop.PowerManagement.xml
+@@ -211,37 +90,6 @@ set_source_files_properties( solid/org.freedesktop.PowerManagement.xml
                               solid/org.kde.Solid.PowerManagement.PolicyAgent.xml
                               PROPERTIES NO_NAMESPACE TRUE)
  
@@ -278,7 +280,7 @@ index b249bd5..95fd86c 100644
  if (APPLE)
      set(libkdelibs4support_SRCS ${libkdelibs4support_SRCS}
                              kdecore/klocale_mac.cpp
-@@ -266,10 +115,6 @@ configure_file(kdecore/config-date.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-da
+@@ -266,10 +114,6 @@ configure_file(kdecore/config-date.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-da
  configure_file(kdecore/config-localization.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-localization.h)
  
  
@@ -289,7 +291,7 @@ index b249bd5..95fd86c 100644
  check_function_exists(mmap HAVE_MMAP)
  check_symbol_exists(posix_madvise "sys/mman.h" HAVE_MADVISE)
  configure_file(config-kdelibs4support.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kdelibs4support.h )
-@@ -318,32 +163,12 @@ endif()
+@@ -318,33 +162,12 @@ endif()
  
  target_link_libraries(KF5KDELibs4Support
  PUBLIC
@@ -312,6 +314,7 @@ index b249bd5..95fd86c 100644
 -   KF5::UnitConversion
 -   KF5::TextWidgets
 -   KF5::Parts
+-   KF5::Auth
  PRIVATE
 -   KF5::UnitConversion
 -   KF5::GlobalAccel
@@ -322,7 +325,7 @@ index b249bd5..95fd86c 100644
     ${platformLinkLibraries}
  )
  
-@@ -371,27 +196,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
+@@ -372,27 +195,6 @@ set_target_properties(KF5KDELibs4Support PROPERTIES
  )
  
  
@@ -440,5 +443,5 @@ index 23064a9..c5fdc4b 100644
  #include <config-kstandarddirs.h>
  #include <config-kdelibs4support.h>
 -- 
-2.14.5
+2.34.1
 
