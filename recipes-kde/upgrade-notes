@@ -1,3 +1,7 @@
+QA:
+bitbake -k --runall package_qa kde-world
+
+LICENSE:
 Some of these people nobody likes did set rules [1] and now that they get bored
 they demand it's time to follow these.
 
@@ -6,6 +10,7 @@ This is the desperate attempt to handle their mess.
 Useful here:
 bitbake -k --runall populate_lic kde-world
 bitbake -c populate_lic <recipe-to-check>
+
 
 Copy & paste templates:
     file://LICENSES/Apache-2.0.txt;md5=c846ebb396f8b174b10ded4771514fcc \
