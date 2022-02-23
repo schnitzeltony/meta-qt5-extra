@@ -62,6 +62,10 @@ do_configure:append() {
     sed -i 's:smb/kdsoap-ws-discovery-client/src/kdwsdl2cpp:${STAGING_BINDIR_NATIVE}/kdwsdl2cpp:g' ${B}/build.ninja
 }
 
+do_install:prepend() {
+    sed -i 's:${STAGING_BINDIR_NATIVE}/gperf:gperf:' ${B}/man/request_gperf.h
+}
+
 FILES:${PN} += " \
     ${datadir}/kio_bookmarks \
     ${datadir}/kio_info \ 
