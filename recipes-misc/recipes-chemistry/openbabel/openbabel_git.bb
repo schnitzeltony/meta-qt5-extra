@@ -10,6 +10,7 @@ DEPENDS = " \
     libxml2 \
     zlib \
     libtirpc \
+    rapidjson \
 "
 
 SRC_URI = " \
@@ -20,6 +21,8 @@ SRC_URI = " \
 SRCREV = "cbd4db43f8908b874864280fdc03bf92569eebc1"
 S = "${WORKDIR}/git"
 PV = "3.1.1"
+
+EXTRA_OECMAKE += "-DOPENBABEL_USE_SYSTEM_RAPIDJSON=ON"
 
 do_install:append() {
     install -d ${D}${datadir}/applications
