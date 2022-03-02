@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "git://github.com/mltframework/mlt.git;branch=master;protocol=https"
-SRCREV = "6e5d8f54c1255dd37db5d7b8947b19f0737b5650"
-PV = "7.0.1"
+SRCREV = "255aa2452282bee3d7ec0c8320f9153f03d7e6c3"
+PV = "7.4.0"
 S = "${WORKDIR}/git"
 
 inherit cmake_qt5 pkgconfig
