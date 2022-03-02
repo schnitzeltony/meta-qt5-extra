@@ -10,4 +10,6 @@ S = "${WORKDIR}/random2-${PV}"
 
 inherit setuptools3
 
+PIP_INSTALL_PACKAGE = "random2"
+
 BBCLASSEXTEND = "native"
