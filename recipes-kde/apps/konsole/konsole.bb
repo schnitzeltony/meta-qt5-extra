@@ -1,5 +1,5 @@
 SUMMARY = "KDE's terminal emulator"
-LICENSE = "GPL-2.0 & GFDL-1.2 & LGPL-2.0"
+LICENSE = "GPL-2.0-only & GFDL-1.2 & LGPL-2.0-only"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=5c213a7de3f013310bd272cdb6eb7a24 \
     file://COPYING.DOC;md5=d8855fca80aa0b428deafa405d0ea17a \

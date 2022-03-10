@@ -1,5 +1,5 @@
 SUMMARY = "A QML webview wrapper to support both QtWebEngine and Oxide"
-LICENSE = "GPL-3.0"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = " \
 	file://LICENSE;md5=959bffe2993816eb32ec4bc1ec1d5875 \
 "

@@ -1,5 +1,5 @@
 SUMMARY = "KPat offers a selection of solitaire card games"
-LICENSE = "GPL-2.0 & GFDL-1.2"
+LICENSE = "GPL-2.0-only & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=dcd3ae65d2d4ac9f347f0614d3fd4794 \
     file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f \

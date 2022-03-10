@@ -1,5 +1,5 @@
 SUMMARY = "Library for managing partitions"
-LICENSE = "CC0-1.0 & CC-BY-SA-4.0 & GPL-3.0+ & MIT"
+LICENSE = "CC0-1.0 & CC-BY-SA-4.0 & GPL-3.0-or-later & MIT"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/CC0-1.0.txt;md5=6fd064768b8d61c31ddd0540570fbd33 \
     file://LICENSES/CC-BY-4.0.txt;md5=28bacf04b75cbad10cb7871e0b063188 \

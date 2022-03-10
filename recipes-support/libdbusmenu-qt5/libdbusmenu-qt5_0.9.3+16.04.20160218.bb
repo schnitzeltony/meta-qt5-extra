@@ -1,5 +1,5 @@
 SUMMARY = "A library that provides a Qt implementation of the DBusMenu spec"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=db979804f025cf55aabec7129cb671ed"
 DEPENDS = "qtbase dbus"
 

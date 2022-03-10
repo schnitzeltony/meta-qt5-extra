@@ -1,5 +1,5 @@
 SUMMARY = "KHTML"
-LICENSE = "GPL-3.0 & LGPL-2.1"
+LICENSE = "GPL-3.0-only & LGPL-2.1-only"
 LIC_FILES_CHKSUM = " \
     file://COPYING.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \

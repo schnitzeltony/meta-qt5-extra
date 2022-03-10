@@ -1,5 +1,5 @@
 SUMMARY = "Library for QtQuick apps with Material Design"
-LICENSE = "MPLv2"
+LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://LICENSE.MPL2;md5=815ca599c9df247a0c7f619bab123dad \
 "

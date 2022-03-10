@@ -1,5 +1,5 @@
 SUMMARY = "The Linux perf GUI for performance analysis"
-LICENSE = "GPLv2+ | KDAB-Commercial | KDAB-Commercial-US"
+LICENSE = "GPL-2.0-or-later | KDAB-Commercial | KDAB-Commercial-US"
 LIC_FILES_CHKSUM = " \
     file://LICENSE.txt;md5=50a9af6464b390664488e7af1cc5c148 \
     file://LICENSE.GPL.txt;md5=8b7a65584aeb92995bcb6066ed0f58f7 \

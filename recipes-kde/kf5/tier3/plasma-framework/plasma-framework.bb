@@ -1,5 +1,5 @@
 SUMMARY = "Plugin based UI runtime used to write primary user interfaces"
-LICENSE = "BSD-2-Clause & BSD-3-Clause & GPL-2.0 & GPL-2.0+ & GPL-2.0 & LGPL-2.0+ & LGPL-2.1 & LGPL-2.1+ & LGPL-3.0 & Qt-LGPL-exception-1.1"
+LICENSE = "BSD-2-Clause & BSD-3-Clause & GPL-2.0-only & GPL-2.0-or-later & GPL-2.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-2.1-or-later & LGPL-3.0-only & Qt-LGPL-exception-1.1"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \
     file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \

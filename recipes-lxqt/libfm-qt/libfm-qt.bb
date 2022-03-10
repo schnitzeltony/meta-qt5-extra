@@ -1,5 +1,5 @@
 SUMMARY = "Qt port of libfm - a library to build desktop file managers"
-LICENSE = "LGPL-2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=435ed639f84d4585d93824e7da3d85da"
 
 REQUIRED_DISTRO_FEATURES = "x11"

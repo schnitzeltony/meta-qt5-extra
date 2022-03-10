@@ -1,5 +1,5 @@
 SUMMARY = "A QtQuick module providing high-performance charts"
-LICENSE = "LGPL-2.1 & LGPL-3.0 & MIT"
+LICENSE = "LGPL-2.1-only & LGPL-3.0-only & MIT"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
     file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \

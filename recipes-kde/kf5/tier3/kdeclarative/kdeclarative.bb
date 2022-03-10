@@ -1,5 +1,5 @@
 SUMMARY = "Provides integration of QML and KDE Frameworks"
-LICENSE = "GPL-2.0 & GPL-2.0+ & GPL-3.0 & LGPL-2.0+ & LGPL-2.1 & LGPL-2.1+ & LGPL-3.0 & MIT & Qt-LGPL-exception-1.1"
+LICENSE = "GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-2.1-or-later & LGPL-3.0-only & MIT & Qt-LGPL-exception-1.1"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
     file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \

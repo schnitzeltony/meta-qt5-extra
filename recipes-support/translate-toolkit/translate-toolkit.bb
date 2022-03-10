@@ -1,5 +1,5 @@
 SUMMARY = "Tools to assist with translation and software localization"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=98efdc0d236de427ac1ff87d5108bd36"
 HOMEPAGE = "http://toolkit.translatehouse.org/"
 

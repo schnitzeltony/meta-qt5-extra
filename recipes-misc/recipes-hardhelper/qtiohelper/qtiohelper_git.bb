@@ -1,6 +1,6 @@
 SUMMARY = "A Qt5 library with input/output helpers"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bd7b2c994af21d318bd2cd3b3f80c2d5"
 
 inherit cmake_qt5

@@ -1,5 +1,5 @@
 SUMMARY = "Kwave is a sound editor for KDE"
-LICENSE = "GPL-2.0 & LGPL-2.0 & CC-BY-SA-3.0 & CC-BY-SA-4.0 & GFDL-1.2 & BSD-3-Clause"
+LICENSE = "GPL-2.0-only & LGPL-2.0-only & CC-BY-SA-3.0 & CC-BY-SA-4.0 & GFDL-1.2 & BSD-3-Clause"
 LIC_FILES_CHKSUM = " \
     file://LICENSES;md5=6e2b675654cdfe1069f93fcdb9ddec34 \
     file://GNU-LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \

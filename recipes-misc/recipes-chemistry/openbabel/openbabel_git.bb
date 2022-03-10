@@ -1,5 +1,5 @@
 SUMMARY = "The Open Source Chemistry Toolbox"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a41ad1c85f8bc03e14593891be09cf09"
 
 inherit cmake

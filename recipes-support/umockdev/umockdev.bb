@@ -1,5 +1,5 @@
 SUMMARY = "Mock hardware devices for creating unit tests and bug reporting"
-LICENSE = "LGPL-2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = "git://github.com/martinpitt/umockdev.git;branch=master;protocol=https"

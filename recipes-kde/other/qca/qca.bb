@@ -1,5 +1,5 @@
 SUMMARY = "QCA provides a straightforward and cross-platform crypto API"
-LICENSE = "LGPL-2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 
 inherit kde-base cmake_lib

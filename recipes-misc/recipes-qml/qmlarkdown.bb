@@ -1,5 +1,5 @@
 SUMMARY = "Simple WYSIWYG CommonMark(down) editor"
-LICENSE = "GPL-3.0"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5b4473596678d62d9d83096273422c8c"
 
 DEPENDS = " \

@@ -1,6 +1,6 @@
 DESCRIPTION = "Python 3 compatible Python 2 `random` Module"
 HOMEPAGE = "https://pypi.org/project/random2/"
-LICENSE = "PSFv2"
+LICENSE = "PSF-2.0"
 
 LIC_FILES_CHKSUM = "file://setup.py;beginline=13;endline=13;md5=7767ca95316ceeac60eda07a2f2245ca"
 

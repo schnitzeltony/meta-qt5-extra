@@ -1,6 +1,6 @@
 SUMMARY = "Kapow is a punch clock program to easily keep track of your hours"
 HOMEPAGE = "https://gottcode.org/kapow/"
-LICENSE = "GPL-3.0"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 inherit qmake5 pkgconfig qt5-translation gtk-icon-cache

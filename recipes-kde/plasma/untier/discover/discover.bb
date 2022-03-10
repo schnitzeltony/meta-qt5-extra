@@ -1,5 +1,5 @@
 SUMMARY = "KDE and Plasma resources management GUI"
-LICENSE = "BSD-3-Clause & GPL-2.0 & GPL-2.0+ & GPL-3.0 & LGPL-2.0+ & LGPL-2.1 & LGPL-3.0 & MIT"
+LICENSE = "BSD-3-Clause & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-3.0-only & MIT"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
     file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \

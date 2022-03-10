@@ -1,5 +1,5 @@
 SUMMARY = "KWayland provides a Qt-style Client and Server library wrapper for the Wayland libraries"
-LICENSE = "BSD-3-Clause & LGPL-2.1 & LGPL-2.1+ & LGPL-3.0 & MIT & MIT-CMU"
+LICENSE = "BSD-3-Clause & LGPL-2.1-only & LGPL-2.1-or-later & LGPL-3.0-only & MIT & MIT-CMU"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
     file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \

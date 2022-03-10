@@ -1,5 +1,5 @@
 SUMMARY = "Breeze icon theme"
-LICENSE = "LGPL-2.1 & LGPL-3.0"
+LICENSE = "LGPL-2.1-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
     file://COPYING-ICONS;md5=3e7f6a3da5801872be1084a978cfc0eb \
     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \

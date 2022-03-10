@@ -1,5 +1,5 @@
 SUMMARY = "Library to assist determining when holidays occur"
-LICENSE = "Bison-exception-2.2 & BSD-2-Clause & GPL-3.0+ & LGPL-2.0+"
+LICENSE = "Bison-exception-2.2 & BSD-2-Clause & GPL-3.0-or-later & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/Bison-exception-2.2.txt;md5=fe1adebe74bce848e36673c70d09e755 \
     file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \

@@ -1,5 +1,5 @@
 SUMMARY = "oxygen fonts"
-LICENSE = "GPL-3.0 & OFL-1.1"
+LICENSE = "GPL-3.0-only & OFL-1.1"
 LIC_FILES_CHKSUM = " \
     file://COPYING-GPL+FE.txt;md5=b10e10d276dbedbf992190166973213d \
     file://COPYING-OFL;md5=beca0db6d9408f45563228cba576a6fc \

@@ -1,5 +1,5 @@
 SUMMARY = "A Qt/Qml wrapper library for markdown libraries cmark and sundown"
-LICENSE = "GPL-3.0 & BSD-2-Clause & MIT & SUNDOWN"
+LICENSE = "GPL-3.0-only & BSD-2-Clause & MIT & SUNDOWN"
 LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=5b4473596678d62d9d83096273422c8c \
     file://LICENSE.cmarkdown-gfm;md5=81f9cae6293cc0345a9144b78152ab62 \

@@ -1,6 +1,6 @@
 SUMMARY = "Qt/C++ wrapper for ZIP/UNZIP package"
 HOMEPAGE = "https://github.com/stachenov/quazip"
-LICENSE = "LGPL-2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4c01c380a79ed7138aa9049e29df9c6a"
 
 DEPENDS = "qtbase zlib"

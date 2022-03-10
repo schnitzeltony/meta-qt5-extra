@@ -1,5 +1,5 @@
 SUMMARY = "Linux Audio Developer's Simple Plug-in API, examples and tools"
-LICENSE = "LGPLv2+"
+LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://doc/COPYING;md5=6fd75d9d2ba6776dcdc4d5257eeab3dd"
 
 DEPENDS += " \

@@ -1,6 +1,6 @@
 SUMMARY = "Qt library for generating printable and exportable reports"
 DESCRIPTION = "Qt library for generating printable and exportable reports from code and from XML descriptions"
-LICENSE = "(LGPL-2.1 | LGPL-3.0) & (GPL-2.0 | GPL-3.0 ) | KDAB-Commercial"
+LICENSE = "(LGPL-2.1-only | LGPL-3.0-only) & (GPL-2.0-only | GPL-3.0-only ) | KDAB-Commercial"
 LIC_FILES_CHKSUM = " \
     file://LICENSE.txt;md5=d988404a6396edf41e7f8cbb2db3c185 \
 "

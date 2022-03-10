@@ -1,5 +1,5 @@
 SUMMARY = "A KDE Software for Music Education"
-LICENSE = "GPL-2.0 & GFDL-1.3"
+LICENSE = "GPL-2.0-only & GFDL-1.3"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://COPYING.DOC;md5=10ce6fc3438e5c4c933bfb5db3b097ec \

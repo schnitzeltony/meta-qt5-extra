@@ -1,5 +1,5 @@
 SUMMARY = "Support for emoticons and emoticons themes"
-LICENSE = "CC-BY-SA-4.0 & GPL-2.0+ & LGPL-2.0 & LGPL-2.1+ & LGPL-3.0"
+LICENSE = "CC-BY-SA-4.0 & GPL-2.0-or-later & LGPL-2.0-only & LGPL-2.1-or-later & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/CC-BY-4.0.txt;md5=28bacf04b75cbad10cb7871e0b063188 \
     file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \

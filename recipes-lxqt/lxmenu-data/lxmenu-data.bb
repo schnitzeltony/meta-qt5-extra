@@ -1,5 +1,5 @@
 SUMMARY = "Desktop menu files for LXDE"
-LICENSE = "LGPL-2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0964c689fcf4c21c6797ea87408416b6"
 
 inherit autotools gettext

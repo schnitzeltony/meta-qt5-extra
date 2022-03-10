@@ -1,6 +1,6 @@
 SUMMARY = "Property editing framework with editor widget"
 HOMEPAGE = "https://community.kde.org/KProperty"
-LICENSE = "LGPL-2.0 & GFDL-1.2 & BSD-3-Clause"
+LICENSE = "LGPL-2.0-only & GFDL-1.2 & BSD-3-Clause"
 LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=3dcc9b0b0118292a0c5d1c18927ef176 \
     file://COPYING-CMAKE-SCRIPTS;md5=3775480a712fc46a69647678acb234cb \

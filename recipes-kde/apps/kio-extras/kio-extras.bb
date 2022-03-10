@@ -1,5 +1,5 @@
 SUMMARY = "Additional components to increase the functionality of KIO"
-LICENSE = "BSD-3-Clause & GPL-2.0 & GPL-2.0+ & GPL-3.0 & GPL-3.0+ & LGPL-2.0+ & MIT"
+LICENSE = "BSD-3-Clause & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & GPL-3.0-or-later & LGPL-2.0-or-later & MIT"
 
 LIC_FILES_CHKSUM = " \
     file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \

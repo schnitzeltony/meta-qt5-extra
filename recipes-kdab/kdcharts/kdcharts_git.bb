@@ -1,5 +1,5 @@
 SUMMARY = "A Qt tool for creating business and scientific charts"
-LICENSE = "GPLv2+ | KDAB-Commercial"
+LICENSE = "GPL-2.0-or-later | KDAB-Commercial"
 LIC_FILES_CHKSUM = " \
     file://LICENSE.txt;md5=d5e1956ab398a4ae39e2470a9abd4889 \
     file://LICENSE.GPL.txt;md5=6af452a21ffa624c438c2cde4423a893 \

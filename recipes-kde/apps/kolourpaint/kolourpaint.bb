@@ -1,5 +1,5 @@
 SUMMARY = "KolourPaint - Paint Program"
-LICENSE = "GPL-2.0 & GFDL-1.2 & LGPL-2.0 & MIT"
+LICENSE = "GPL-2.0-only & GFDL-1.2 & LGPL-2.0-only & MIT"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=7549f6da638b0246572ed9cf4275b860 \
     file://COPYING.DOC;md5=28d73eafa40ebd0ccdc6b37df8de10a3 \

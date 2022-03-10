@@ -1,5 +1,5 @@
 SUMMARY = "2D and 3D Graph Calculator"
-LICENSE = "GPL-2.0 & LGPL-2.0 & GFDL-1.2"
+LICENSE = "GPL-2.0-only & LGPL-2.0-only & GFDL-1.2"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
