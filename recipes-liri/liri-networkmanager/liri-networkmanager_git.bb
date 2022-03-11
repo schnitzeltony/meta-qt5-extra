@@ -8,7 +8,7 @@ inherit liri qt5-translation
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "bcd5806d237da97f5901dc6d29b68f57666e45f6"
+SRCREV = "e451da23d58391c6075f4143ab0d1b7d37ffd65b"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
@@ -20,7 +20,7 @@ DEPENDS += " \
 "
 
 FILES:${PN} += " \
-    ${datadir}/liri-shell/indicators \
+    ${datadir}/liri-shell \
     ${datadir}/liri-settings/modules \
     ${OE_QMAKE_PATH_QML} \
 "

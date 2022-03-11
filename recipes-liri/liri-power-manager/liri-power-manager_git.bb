@@ -8,7 +8,7 @@ inherit liri qt5-translation gsettings
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "794ef0dc8a139b62fad277699042232191487186"
+SRCREV = "82662ac5d44e51136300dc6817d95c34eda1ad3a"
 S = "${WORKDIR}/git"
 SRC_URI += "file://0001-batterywatcher-Fix-build-with-KF5-Solid-5.91.0.patch"
 

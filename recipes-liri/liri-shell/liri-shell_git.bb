@@ -10,7 +10,7 @@ inherit liri qt5-translation features_check gsettings
 REQUIRED_DISTRO_FEATURES = "wayland pam"
 
 PV = "0.9.0+git${SRCPV}"
-SRCREV = "463d1b5c033dce5d48a5cc38cfe00c9dbfbcac1c"
+SRCREV = "9171b3f84eb5e2c98e5353a77b9a5024eb68129f"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \

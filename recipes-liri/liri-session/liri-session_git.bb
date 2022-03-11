@@ -10,7 +10,7 @@ inherit liri gsettings
 PV = "0.1.0+git${SRCPV}"
 
 SRC_URI += "file://0001-menu-use-correct-install-variables.patch"
-SRCREV = "2840b1b218afd53f85e9422dd169949d2e06b2ca"
+SRCREV = "f26b173653c52b08b12a88f298e315ad3f8f4931"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
@@ -24,4 +24,5 @@ FILES:${PN} += " \
     ${datadir}/wayland-sessions \
     ${systemd_user_unitdir} \
     ${OE_QMAKE_PATH_PLUGINS} \
+    ${OE_QMAKE_PATH_QML} \
 "

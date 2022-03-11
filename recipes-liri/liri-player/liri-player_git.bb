@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = " \
 	file://LICENSE.GPLv3;md5=d32239bcb673463ab874e80d47fae504 \
 "
 
-inherit liri mime-xdg
+inherit liri mime-xdg gtk-icon-cache
 
 DEPENDS += " \
     qtquickcontrols2 \
@@ -12,7 +12,7 @@ DEPENDS += " \
     vlc \
 "
 
-SRCREV = "04d239f4504daa1ea161d27dab23f6b1b5238f9d"
+SRCREV = "3968ec527d2f3dce60260fb0449ba187b11e7985"
 S = "${WORKDIR}/git"
 PV = "0.0.0+git${SRCPV}"
 

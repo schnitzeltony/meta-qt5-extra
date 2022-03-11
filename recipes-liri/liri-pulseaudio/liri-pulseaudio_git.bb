@@ -10,7 +10,7 @@ REQUIRED_DISTRO_FEATURES = "pulseaudio"
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "d4f3b905ad6c4854c997dfc0afc6beccba64e669"
+SRCREV = "574d361fb904feffcef04625bbf520ded4b23483"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
@@ -21,5 +21,6 @@ DEPENDS += " \
 FILES:${PN} += " \
     ${datadir}/liri-shell/indicators \
     ${datadir}/liri-settings/modules \
+    ${datadir}/liri-shell \
     ${OE_QMAKE_PATH_QML} \
 "

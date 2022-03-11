@@ -19,10 +19,7 @@ DEPENDS += " \
 "
 
 PV = "0.0.0+git${SRCPV}"
-SRCREV = "127e9b5ce68902ad35bb8ce23be121d8b632e5eb"
-SRC_URI += " \
-    file://0001-qeglfskmsgbmscreen-remove-frame-recording-completely.patch \
-"
+SRCREV = "28334707a13a3f488e4302222c292123645b2333"
 S = "${WORKDIR}/git"
 
 FILES:${PN} += " \

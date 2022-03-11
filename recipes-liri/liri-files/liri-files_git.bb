@@ -8,7 +8,7 @@ inherit liri qt5-translation
 
 PV = "0.2.0+git${SRCPV}"
 
-SRCREV = "da7e8a98538837a5a35dda10b0609c7654bd8b3d"
+SRCREV = "e30965465f71f9bf45f495a913e452d7d9fe752c"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \

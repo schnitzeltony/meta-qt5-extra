@@ -10,7 +10,7 @@ REQUIRED_DISTRO_FEATURES = "wayland"
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "58fd88465544fa4b0ce206c5e369eec57c1dbfee"
+SRCREV = "ebf3b0114a0b6d433b41b379d74f4ff0b4e765ae"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \
@@ -27,7 +27,3 @@ FILES:${PN} += " \
     ${datadir}/liri-settings/modules \
     ${OE_QMAKE_PATH_QML} \
 "
-
-RREPLACES:${PN} = "hawaii-system-preferences"
-RPROVIDES:${PN} = "hawaii-system-preferences"
-RCONFLICTS:${PN} = "hawaii-system-preferences"

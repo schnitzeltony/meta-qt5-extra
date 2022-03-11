@@ -8,7 +8,7 @@ inherit liri
 
 PV = "0.9.0+git${SRCPV}"
 
-SRCREV = "57b73b4539d8559dd85d371004d3e9484405f4a0"
+SRCREV = "0b1e96b11655eacda5f2de326bc730174604aedc"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += " \

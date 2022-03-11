@@ -14,16 +14,16 @@ RDEPENDS:${PN} = " \
     liri-files \
     liri-fluid \
     liri-libliri \
-    liri-materialdecoration \
     liri-networkmanager \
-    liri-platformtheme \
     liri-player \
     liri-power-manager \
     ${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio", "liri-pulseaudio", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "liri-qml-xwayland", "",d)} \
     liri-qtaccountsservice \
+    liri-qtintegration \
     liri-qtgsettings \
     liri-qtudev \
+    liri-screencast \
     liri-screenshot \
     liri-session \
     liri-settings \
