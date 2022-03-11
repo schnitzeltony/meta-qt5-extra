@@ -17,15 +17,14 @@ PACKAGECONFIG[pam] = "-DENABLE_PAM=ON, -DENABLE_PAM=OFF, libpam"
 # Note: we should check default config changes by running sddm --example-config on target.
 # This is usually done during build but does not work for our cross environment
 SRC_URI = " \
-    git://github.com/sddm/${BPN}.git;branch=master;protocol=https \
-    file://0001-fix-qml-install-dir.patch \
-    file://0002-Workaround-missing-sessions.patch \
+    git://github.com/sddm/${BPN}.git;branch=develop;protocol=https \
+    file://0001-Workaround-missing-sessions.patch \
     file://sddm.pam \
     file://sddm-autologin.pam \
     file://sddm.conf \
 "
-SRCREV = "de41b8ea555f2e42ba47d83530ad654ca708cf85"
-PV = "0.18.1"
+SRCREV = "c257a40ba95f56b5f3830b923b1c56aa055cf8ea"
+PV = "0.19.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
