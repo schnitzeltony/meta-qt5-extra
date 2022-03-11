@@ -11,6 +11,7 @@ DEPENDS += " \
     qttools \
     qtdeclarative \
     qtwayland \
+    qtquickcontrols2 \
 "
 
 inherit cmake_qt5_extra pkgconfig
