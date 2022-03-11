@@ -18,6 +18,7 @@ DEPENDS += " \
 SRC_URI = " \
     ${KDE_MIRROR}/stable/${BPN}/src/${BPN}-${PV}.tar.xz \
     file://0001-Do-not-rely-on-python2.patch \
+    file://0001-Fix-build-with-newer-Qt.patch \
 "
 SRC_URI[sha256sum] = "8f8983bc8d143832dc14bc2003ba6af1af27688e477c0c791fd61445464f2069"
 
