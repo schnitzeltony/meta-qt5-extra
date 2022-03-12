@@ -15,6 +15,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-apps gettext mime
 
 DEPENDS += " \
+    libssh \
     qtsvg \
     qtwebengine \
     \
@@ -44,7 +45,6 @@ DEPENDS += " \
 "
 
 # REVISIT optionals
-# libssh \
 # openslp
 # openssh <-> dropbear
 DEPENDS += " \
@@ -60,10 +60,6 @@ EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 do_configure:append() {
     sed -i 's:smb/kdsoap-ws-discovery-client/src/kdwsdl2cpp:${STAGING_BINDIR_NATIVE}/kdwsdl2cpp:g' ${B}/build.ninja
-}
-
-do_install:prepend() {
-    sed -i 's:${STAGING_BINDIR_NATIVE}/gperf:gperf:' ${B}/man/request_gperf.h
 }
 
 FILES:${PN} += " \
