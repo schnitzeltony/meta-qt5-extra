@@ -19,5 +19,5 @@ LIC_FILES_CHKSUM = " \
 inherit kde-kf5 mime
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "dfe3da03260e0153f9f6ced1fc7464eaaf0ed1fb692fc6c2b2d968b629ad719b"
+SRC_URI[sha256sum] = "df5f718f324aa2b58191438c8aa5f7498a7997eff990d16ffbc9f19efd1a6667"
 SRC_URI += "file://0001-Remove-cross-compile-adjustments.patch"

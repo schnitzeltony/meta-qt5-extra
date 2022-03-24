@@ -7,7 +7,15 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5 gettext
 
-DEPENDS += "kcoreaddons kcoreaddons-native ki18n"
+DEPENDS += " \
+    kcoreaddons-native \
+    kcoreaddons \
+    ki18n \
+"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "0da072117ddcded5de1d9befd2c1cf0b471711607902d03cb57bcf384d9ac1fb"
+SRC_URI[sha256sum] = "cb1dac5f8f7ba059ef967a2cf3d1580a29a8d7b373ef67e82e0ac4f0285ee052"
+
+EXTRA_OECMAKE += "-DUTEMPTER_EXECUTABLE=${libexecdir}/utempter/utempter"
+
+RDEPENDS:${PN} += "libutempter"

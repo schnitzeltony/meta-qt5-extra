@@ -11,6 +11,6 @@ inherit kde-kf5
 DEPENDS += "kconfig kconfig-native kwidgetsaddons"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "2422485b10de631583b7e92e0778e5cf0c0ceec677bcd289cb7bc04c5441dfd0"
+SRC_URI[sha256sum] = "08f1525c6cee8babe399c941bb85d04be9dade0341d1d85c6beccd2e93dc7ceb"
 
 FILES:${PN} += "${OE_QMAKE_PATH_PLUGINS}/designer"
