@@ -31,7 +31,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "4b932f4cee0fda53c24df32fc5e81dbc4696e4a9cfddb9217a093a077524f61f"
+SRC_URI[sha256sum] = "e1bae79adf88ae980a41ff475260c4d6e9f0b04b1f88df44d2bd4ab217e53c26"
 
 CXXFLAGS += "-isystem ${STAGING_INCDIR}/phonon4qt5/KDE"
 

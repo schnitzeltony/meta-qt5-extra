@@ -21,7 +21,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "83f9c5ee7294153324ff0d23cf10a75fb05552c19a587a892ce908592e9e8aff"
+SRC_URI[sha256sum] = "ed97d2d4b58c8305cac04067988514442711447215d7e255816d92b918363d08"
 
 FILES:${PN} += " \
     ${datadir}/knotifications5 \

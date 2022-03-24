@@ -20,7 +20,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "cca4f6e7bb253d30425271778006602a3130a40a082bf2502c9d2aef21b9a64f"
+SRC_URI[sha256sum] = "a0ff3b4a44b938f7f336d4c2fbc302d8a55612b089ee954b2d98ec5f97ee3eec"
 
 FILES:${PN} += " \
     ${datadir}/icons \

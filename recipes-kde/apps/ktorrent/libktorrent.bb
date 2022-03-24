@@ -24,5 +24,5 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "6ef510f4920d818b5117a4dd7ccaa0c30752138c6ec1444706caf4e2f51a5319"
+SRC_URI[sha256sum] = "80cef9619c0ea9079f6ad351f9fdd81d363d40eeb32f4cef7a83e995a8322745"
 SRC_URI += "file://0001-Find-libgmp-with-pkgconfig.patch"

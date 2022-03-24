@@ -33,7 +33,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "85b551aabf2e3af7e82fcc37087beb1a61ae3bab3c9a6c07aea11ea946d57205"
+SRC_URI[sha256sum] = "62abb66938d883293b49f05905ee076934ae3a9f65bb3eeb5d94de57625cab1f"
 
 EXTRA_OECMAKE += "-DWITH_DOC=OFF"
 # Aagh: To select a soundcard we need to select another type - so keep oss in as dummy
