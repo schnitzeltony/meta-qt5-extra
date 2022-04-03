@@ -5,18 +5,6 @@ DEPENDS+= "extra-cmake-modules-native "
 
 KDE_MIRROR = "http://download.kde.org"
 
-MIRRORS += "\
-${KDE_MIRROR}	http://ftp-stud.fht-esslingen.de/Mirrors/ftp.kde.org/pub/kde \n \
-${KDE_MIRROR}	http://mirrors.mit.edu/kde \n \
-${KDE_MIRROR}	http://mirror.cc.columbia.edu/pub/software/kde \n \
-${KDE_MIRROR}	http://ftp.is.co.za/mirror/ftp.kde.org \n \
-${KDE_MIRROR}	http://mirror.squ.edu.om/kde \n \
-${KDE_MIRROR}	http://ftp.fi.muni.cz/pub/kde \n \
-${KDE_MIRROR}	http://mirrors.fe.up.pt/pub/kde \n \
-${KDE_MIRROR}	http://mirror.its.dal.ca/kde \n \
-${KDE_MIRROR}	http://kde.c3sl.ufpr.br \n \
-"
-
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/src/${BPN}-${PV}.tar.xz"
 
 # extra-cmake-modules cause dependent to check for python
