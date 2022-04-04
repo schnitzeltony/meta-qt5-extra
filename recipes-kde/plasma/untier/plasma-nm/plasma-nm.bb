@@ -50,7 +50,7 @@ DEPENDS += " \
 # MobileBroadbandProviderInfo
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "2cf64e94ed921546bc0be44f50e3490033a353bf3f0ad7a5a513ef5585fc3bfd"
+SRC_URI[sha256sum] = "086c28cfdaa6f4de785662ccd8123cd48b2a333fbaa2ca70b2a6d9dc3622ec2f"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

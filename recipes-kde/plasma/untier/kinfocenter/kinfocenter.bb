@@ -44,7 +44,7 @@ DEPENDS += " \
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11", "", d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "d2f5acb7a52434e6b539dc52d23cf09754e313411b32d169f36403ba0801e223"
+SRC_URI[sha256sum] = "dc5b84964de4b68e45300477039c656d622a9546340e997eb8249de6a532b838"
 
 FILES_SOLIBSDEV = ""
 FILES:${PN} += " \

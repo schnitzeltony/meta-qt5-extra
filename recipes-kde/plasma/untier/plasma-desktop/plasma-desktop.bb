@@ -57,7 +57,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "583e7ecfd2e2b766d645284cf13605851d96e2ad7cf2e657b4665aa3f3fd91d3"
+SRC_URI[sha256sum] = "b0e23046300e49acf93d9181d0c8dda2008a9a843a441af2528a91abc5c7d025"
 SRC_URI += "file://0001-Ensure-xkb_base-is-not-empty-instead-of-checking-if-.patch"
 
 FILES_SOLIBSDEV = "${libdir}/libkfont*${SOLIBSDEV}"
