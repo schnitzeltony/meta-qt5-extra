@@ -25,7 +25,7 @@ RDEPENDS:${PN} = " \
     kcharselect \
     kcolorchooser \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kdenlive", "",d)} \
-    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'clang-layer', 'kdevelop', '', d)} \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'clang-layer', 'clazy kdevelop', '', d)} \
     kdf \
     kdialog \
     kexi \

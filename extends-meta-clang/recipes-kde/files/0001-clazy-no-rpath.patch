@@ -1,0 +1,33 @@
+From ab4ef9168d79e5196f4b010bbab9368716509354 Mon Sep 17 00:00:00 2001
+From: "FeRD (Frank Dana)" <ferdnyc@gmail.com>
+Date: Sat, 1 May 2021 20:31:45 -0400
+Subject: [PATCH] clazy no rpath
+
+---
+ CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 46173fa..c893590 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -237,6 +237,7 @@ if (NOT CLAZY_BUILD_WITH_CLANG)
+   endif()
+ 
+   # rpath
++if(FALSE)  # Disable rpath
+   set(CMAKE_SKIP_BUILD_RPATH FALSE)
+   set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+   set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+@@ -245,6 +246,7 @@ if (NOT CLAZY_BUILD_WITH_CLANG)
+   if("${isSystemDir}" STREQUAL "-1")
+     set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+   endif("${isSystemDir}" STREQUAL "-1")
++endif()
+ 
+   # Build clazy-standalone
+   add_executable(clazy-standalone ${CLAZY_STANDALONE_SRCS})
+-- 
+2.30.2
+
+
