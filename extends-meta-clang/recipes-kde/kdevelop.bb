@@ -17,11 +17,6 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-apps gettext pkgconfig gtk-icon-cache mime mime-xdg bash-completion
 
-python() {
-    if 'clang-layer' not in d.getVar('BBFILE_COLLECTIONS').split():
-        raise bb.parse.SkipRecipe('Requires meta-clang to be present due to qttools-native - see extends-meta-qt5/qttools_git.bbappend.')
-}
-
 DEPENDS += " \
     kauth-native \
     kconfig-native \
