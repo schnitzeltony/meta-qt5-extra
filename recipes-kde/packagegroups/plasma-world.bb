@@ -39,6 +39,7 @@ UNTIER = " \
     kscreen \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kscreenlocker", "",d)} \
     ksshaskpass \
+    ksystemstats \
     kwallet-pam \
     kwayland-integration \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "kwin", "",d)} \

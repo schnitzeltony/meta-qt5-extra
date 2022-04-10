@@ -40,3 +40,5 @@ FILES:${PN} += " \
     ${datadir}/plasma \
     ${OE_QMAKE_PATH_QML} \
 "
+
+RDEPENDS:${PN} += "ksystemstats"
