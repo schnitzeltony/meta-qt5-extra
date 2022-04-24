@@ -6,5 +6,5 @@ inherit lxqt qt5-translation
 
 DEPENDS += "liblxqt libqtxdg kwindowsystem"
 
-SRCREV = "0fb3d53ae9812546db6cd1ea2c2911956bc1c9b6"
-PV = "1.0.0"
+SRCREV = "eeb0d87c64577ab0472bd2fa9c0d8baa8ce76866"
+PV = "1.1.0"
