@@ -11,8 +11,8 @@ DEPENDS += " \
     lxqt-config \
 "
 
-SRCREV = "d308c15f0eff4ba0025f49375bb03a075a631cc4"
-PV = "2.4.0"
+SRCREV = "efb4c2932fb6724b0d0762080e1e812be3127e02"
+PV = "2.5.0"
 
 FILES:${PN} += " \
     ${datadir}/icons \
