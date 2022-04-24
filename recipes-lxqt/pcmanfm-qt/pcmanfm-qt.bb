@@ -8,11 +8,9 @@ inherit lxqt qt5-translation pkgconfig features_check mime-xdg
 
 DEPENDS += "libfm-qt"
 
-SRCREV = "227a775933c68acb093a9d836f8258bf2d5ac454"
-PV = "1.0.0"
+SRCREV = "031f41d29f00264c7d42ad20946aa3c86b67fbfe"
+PV = "1.1.0"
 
-FILES:${PN} += " \
-    ${datadir}/${BPN}/lxqt/settings.conf \
-"
+FILES:${PN} += "${datadir}/${BPN}/lxqt/settings.conf"
 
 RRECOMMENDS:${PN} = "gvfs gvfsd-trash eject"
