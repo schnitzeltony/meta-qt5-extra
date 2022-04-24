@@ -8,5 +8,5 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qtscript libqtxdg lxqt-globalkeys menu-cache muparser"
 
-SRCREV = "6ae2da6650caee77c15da92297b62a933a8b9016"
-PV = "1.0.0"
+SRCREV = "6a96712ced7fa61e6d95e3466ae38cf5a9b43fb3"
+PV = "1.1.0"
