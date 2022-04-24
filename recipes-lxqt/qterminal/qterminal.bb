@@ -8,11 +8,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "qtermwidget qtx11extras"
 
-SRCREV = "d9e67906232c827a07c030ade1356db1a29fdc48"
-PV = "1.0.0"
+SRCREV = "a0d0ebac0f97bc155578e7cacccdfcdcce43b1fa"
+PV = "1.1.0"
 
 S = "${WORKDIR}/git"
 
-FILES:${PN} += " \
-    ${datadir}/appdata \
-"
+FILES:${PN} += "${datadir}/metainfo"
