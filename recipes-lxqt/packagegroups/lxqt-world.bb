@@ -36,6 +36,7 @@ RDEPENDS:${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qps", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qterminal", "",d)} \
     qtermwidget \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "screengrab", "",d)} \
 "
 
 RRECOMMENDS:${PN} = " \
