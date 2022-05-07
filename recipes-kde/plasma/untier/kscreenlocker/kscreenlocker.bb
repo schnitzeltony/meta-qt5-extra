@@ -30,7 +30,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "fb226273064422f9f73b6b091e26396349e0cfd53a88398b79fa2acd1540ecf7"
+SRC_URI[sha256sum] = "3270a1845c9fc694a50db38de4c27586d2f488152e1bcf88be0088d6799bf98e"
 SRC_URI += "file://kde.pam"
 
 do_install:append() {
