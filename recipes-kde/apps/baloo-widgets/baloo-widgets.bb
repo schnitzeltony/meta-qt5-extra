@@ -1,8 +1,13 @@
 SUMMARY = "Widgets for Baloo"
-LICENSE = "LGPL-2.0-only"
+LICENSE = "GPL-2.0-only & GPL-3.0-only & LGPL-2.0-only & LGPL-2.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-2.1-or-later & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
-    file://COPYING.README;md5=f5d7c5af660f94231a1d4e19501bce8f \
-    file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
+    file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
+    file://LICENSES/LGPL-2.0-only.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+    file://LICENSES/LGPL-2.1-only.txt;md5=147a320ed8b16b036829a0c71d424153 \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=147a320ed8b16b036829a0c71d424153 \
+    file://LICENSES/LGPL-3.0-only.txt;md5=8d51f5b5fd447f7a1040c3dc9f0a8de6 \
 "
 
 inherit kde-apps gettext
@@ -19,7 +24,7 @@ DEPENDS += "\
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "1b66aa05d60e6523a9458977f50fa5bed4a9e908c0813cd428b1abf57475cc31"
+SRC_URI[sha256sum] = "38a607564d81c9b577d06377d5c8b019fc3af7497a4de128cb4acc2a2de5f159"
 
 FILES:${PN} += " \
     ${datadir}/kservices5 \

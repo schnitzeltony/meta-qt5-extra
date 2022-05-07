@@ -46,7 +46,7 @@ DEPENDS += "\
 
 PV = "${KDE_APP_VERSION}"
 SRC_URI += "file://0001-CMakeLists.txt-make-MLT_PREFIX-configurable.patch"
-SRC_URI[sha256sum] = "7aa3fee6f2938664f2e35dae97a67ebfdedb6aec2bf4bbabfca5e7b1456c55c1"
+SRC_URI[sha256sum] = "66147b2f1a2cf6f05eda15e4cc3e9d9b126d2dbcc187ecc6d78dea2c7b2c6d79"
 
 EXTRA_OECMAKE += " \
     -DMLT_PREFIX=${prefix} \
