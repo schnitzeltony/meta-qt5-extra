@@ -12,5 +12,5 @@ LIC_FILES_CHKSUM = " \
 inherit kde-base
 
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${BP}.tar.xz"
-SRC_URI[sha256sum] = "b74ffac969ef067e47180e748a67a3a1816b7157ff4ea620ed4432f59b70f01f"
+SRC_URI[sha256sum] = "084e2685caa61d94c6fe86dce006b22474d7bb4b34c4cb96bd763b97e305fad6"
 
