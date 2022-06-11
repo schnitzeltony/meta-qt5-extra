@@ -12,7 +12,7 @@ inherit kde-kf5
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libxrender libxfixes libxfixes-native", "", d)}"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "97cb223a4d1a7487a3ed496e10ff5e8c320ea7458eb34cbe4ed114bc19ebe4a1"
+SRC_URI[sha256sum] = "52ebb7d4e9ac3f24fadfd5265ff8cc390efbccf6fa6d084e5a573c3b2aa43c78"
 
 do_configure:append() {
     # remove absolute paths from exported cmake files

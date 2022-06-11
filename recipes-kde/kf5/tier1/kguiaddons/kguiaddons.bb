@@ -13,8 +13,9 @@ inherit kde-kf5 mime-xdg
 DEPENDS += " \
     qtwayland-native \
     qtwayland \
+    plasma-wayland-protocols \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "qtx11extras", "", d)} \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "27f26392140bd1abcb86c154fd6fd87e50b2493787827b2b1cacaf76544af40a"
+SRC_URI[sha256sum] = "f23182a7268d37cbc32eaa77bdc9dddc6429a8eff912f57841f6d96c71973873"
