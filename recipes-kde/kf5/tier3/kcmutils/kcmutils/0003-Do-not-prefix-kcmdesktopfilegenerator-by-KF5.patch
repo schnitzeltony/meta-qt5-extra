@@ -1,0 +1,31 @@
+From 6167a8c140bc3e23ce4d3b310bc0f3193aeee821 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 3 Sep 2022 23:02:05 +0200
+Subject: [PATCH] Do not prefix kcmdesktopfilegenerator by KF5::
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ KF5KCMUtilsMacros.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/KF5KCMUtilsMacros.cmake b/KF5KCMUtilsMacros.cmake
+index 8787aa7..75bc980 100644
+--- a/KF5KCMUtilsMacros.cmake
++++ b/KF5KCMUtilsMacros.cmake
+@@ -142,7 +142,7 @@ function(kcmutils_generate_desktop_file kcm_target)
+     endif()
+ 
+     add_custom_target(${kcm_target}-kcm-desktop-gen
+-                    COMMAND KF5::kcmdesktopfilegenerator ${IN_FILE} ${OUT_FILE}
++                    COMMAND kcmdesktopfilegenerator ${IN_FILE} ${OUT_FILE}
+                     DEPENDS ${IN_FILE})
+     add_dependencies(${kcm_target} ${kcm_target}-kcm-desktop-gen)
+     if (NOT KCMUTILS_INTERNAL_TEST_MODE)
+-- 
+2.35.3
+

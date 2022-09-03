@@ -1,0 +1,32 @@
+From c95deccedbeef9a2d7666dc8284efd9c0ca24557 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 3 Sep 2022 16:48:01 +0200
+Subject: [PATCH] Let build system decide if tools are build only
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 35405b2..da11728 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -27,8 +27,7 @@ include(ECMDeprecationSettings)
+ include(KDEGitCommitHooks)
+ 
+ 
+-include(CMakeDependentOption)
+-cmake_dependent_option(TOOLS_ONLY "Only build the tools and not the rest of KCMUtils" OFF "NOT CMAKE_CROSSCOMPILING" ON)
++option(TOOLS_ONLY "Only build the tools and not the rest of KCMUtils" OFF)
+ if (TOOLS_ONLY)
+     find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} NO_MODULE REQUIRED Core)
+     add_subdirectory(tools)
+-- 
+2.35.3
+

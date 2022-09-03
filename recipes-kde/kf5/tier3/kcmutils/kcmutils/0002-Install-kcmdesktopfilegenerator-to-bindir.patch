@@ -1,0 +1,29 @@
+From 223ba7bd4ac4ca055e1bd1a524acb46884ceae91 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 3 Sep 2022 22:55:26 +0200
+Subject: [PATCH] Install kcmdesktopfilegenerator to bindir
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ tools/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/CMakeLists.txt b/tools/CMakeLists.txt
+index 22554b4..5123bfc 100644
+--- a/tools/CMakeLists.txt
++++ b/tools/CMakeLists.txt
+@@ -6,5 +6,5 @@ add_executable(KF5::kcmdesktopfilegenerator ALIAS kcmdesktopfilegenerator )
+ target_link_libraries(kcmdesktopfilegenerator Qt::Core)
+ 
+ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5KCMUtils")
+-install(TARGETS kcmdesktopfilegenerator EXPORT KF5KCMUtilsToolingTargets DESTINATION ${KDE_INSTALL_LIBEXECDIR_KF})
++install(TARGETS kcmdesktopfilegenerator EXPORT KF5KCMUtilsToolingTargets DESTINATION ${CMAKE_INSTALL_BINDIR})
+ install(EXPORT KF5KCMUtilsToolingTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5KCMUtilsToolingTargets.cmake NAMESPACE KF5::)
+-- 
+2.35.3
+
