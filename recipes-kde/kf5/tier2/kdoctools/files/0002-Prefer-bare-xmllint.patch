@@ -1,0 +1,45 @@
+From ea6eef2c8a33d783a39ab02942a2027448718344 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 3 Sep 2022 00:06:58 +0200
+Subject: [PATCH] Prefer bare xmllint
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Since oe-core
+commit 8159b47e7ddddaca57ade2ecf24d8ff9a0abf26a
+Author: Ross Burton <ross.burton@arm.com>
+Date:   Tue Aug 23 16:37:30 2022 +0100
+
+    libxml2: wrap xmllint to use the correct XML catalogues
+
+we fail building doctools.
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/meinproc.cpp | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/src/meinproc.cpp b/src/meinproc.cpp
+index 930c77f..4e15c35 100644
+--- a/src/meinproc.cpp
++++ b/src/meinproc.cpp
+@@ -113,7 +113,12 @@ int main(int argc, char **argv)
+         QByteArray catalogs = lst.join(" ").toLocal8Bit();
+         QString exe;
+ #if defined(XMLLINT)
+-        exe = QStringLiteral(XMLLINT);
++        // OE-CORE's wrapped xmllint does not work here. Check for
++        // unwrapped (created by create_wrapper) and prefer that
++        exe = QStringLiteral(XMLLINT) + QStringLiteral(".real");
++        if (!QFileInfo(exe).isExecutable()) {
++            exe = QStringLiteral(XMLLINT);
++        }
+ #endif
+         if (!QFileInfo(exe).isExecutable()) {
+             exe = QStandardPaths::findExecutable(QStringLiteral("xmllint"));
+-- 
+2.35.3
+

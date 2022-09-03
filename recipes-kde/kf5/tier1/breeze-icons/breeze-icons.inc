@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit kde-kf5
 
-SRC_URI[sha256sum] = "3e0b3fd2374dba82ca304c066938345f25b0eb85dca7169267c84f62bfb3a3bb"
+SRC_URI[sha256sum] = "6eae442282779802c348e91080132d52b0229288cc8793b2aaa6f906e39171a3"
 SRC_URI += "file://0001-Force-build-of-Qt-binary-resource-files.patch"
 
 PV = "${KF5_VERSION}"

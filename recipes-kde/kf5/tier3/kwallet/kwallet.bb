@@ -13,6 +13,7 @@ inherit kde-kf5
 DEPENDS += " \
     libgcrypt \
     gpgme \
+    qca \
     kconfig \
     kconfig-native \
     kcoreaddons \
@@ -30,7 +31,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "01366b42754ee7543b67fe57deb39bc2a772923eda3e6ea70a59f8ef955e2a32"
+SRC_URI[sha256sum] = "ab9b78b0c6aba461de6247974b7e60239cd2a52a1c2c6d67b92e466c7597d821"
 SRC_URI += "file://0001-KF5WalletConfig.cmake.in-point-runtime-bindir-not-bu.patch"
 
 FILES:${PN} += "${datadir}"

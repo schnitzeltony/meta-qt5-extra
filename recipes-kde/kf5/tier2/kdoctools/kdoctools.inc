@@ -8,22 +8,17 @@ LIC_FILES_CHKSUM = " \
     file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
-inherit kde-kf5 perlnative
+inherit kde-kf5 perlnative gettext
 
-# allarch recipes
-DEPENDS += "docbook-xml-dtd4 docbook-xsl-stylesheets liburi-perl-native"
+DEPENDS += " \
+    liburi-perl-native \
+    libxml2-native \
+"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "f54e61ffe8c5e634e7d6e341020b63346d40b524d4a22565c86b9147033cd2f4"
-SRC_URI += "file://0002-set-meinproc5-executable-so-that-it-can-be-found-for.patch"
+SRC_URI[sha256sum] = "61ac72b2d338cddc6da57b9097287303117e0d49ccd1c717f69f38ac01150af6"
 
-# allarch packages do only install into machine sysroot
-# for xml4
-OECMAKE_EXTRA_ROOT_PATH = "${STAGING_DIR}/${MACHINE}"
-# for xsl (we have to hardcode /usr - ${prefix} is aligned by native.bbclase
 EXTRA_OECMAKE += " \
-    -DOE_ROOT_PATH_PREFIX=${STAGING_DIR}/${MACHINE}/usr \
-    -DCMAKE_AR:FILEPATH=${AR} \
     -DINSTALL_INTERNAL_TOOLS=ON \
 "
 

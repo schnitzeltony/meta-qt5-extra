@@ -14,7 +14,7 @@ DEPENDS += " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "569a60318b54cca6a5c5fb1e182556010d2f4c052961b125ad852ffa015746ca"
+SRC_URI[sha256sum] = "87c5a63d9d2984fa9ab439d89e5d6f51744185a3e3f5e33b5d84cc18e8280ac4"
 
 EXTRA_OECMAKE += "-DUTEMPTER_EXECUTABLE=${libexecdir}/utempter/utempter"
 

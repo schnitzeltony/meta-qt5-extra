@@ -15,13 +15,13 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  1 file changed, 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 17bcfab..3e410ff 100644
+index a12d99a..75b9c86 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -96,12 +96,7 @@ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5DocTools")
- add_definitions(-DTRANSLATION_DOMAIN=\"kdoctools5\")
- add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
- add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055000)
+@@ -100,12 +100,7 @@ ecm_set_disabled_deprecation_versions(
+     KF 5.95
+ )
+ 
 -if (KF5I18n_FOUND)
 -    ki18n_install(po)
 -    kdoctools_install(po)
@@ -32,5 +32,5 @@ index 17bcfab..3e410ff 100644
  if (BUILD_TESTING)
      add_subdirectory(autotests)
 -- 
-2.30.2
+2.35.3
 

@@ -1,7 +1,5 @@
 require ${BPN}.inc
 
-inherit gettext
-
 DEPENDS += " \
     ${BPN}-native \
     kauth-native \

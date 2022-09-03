@@ -1,12 +1,21 @@
 require ${BPN}.inc
 
-DEPENDS += "${BPN}-native gettext-native karchive ki18n libxslt libxml2"
+DEPENDS += " \
+    ${BPN}-native \
+    docbook-xml-dtd4 \
+    docbook-xsl-stylesheets \
+    libxslt \
+    libxml2 \
+    karchive \
+    ki18n \
+"
 
 inherit cmake_lib
 
-SRC_URI += " \
-    file://0003-Make-our-cross-build-find-docbookl10nhelper.patch \
-    file://0004-Add-cmdline-param-to-help-find-xsl.patch \
+EXTRA_OECMAKE = " \
+    -DMEINPROC5_EXECUTABLE=${STAGING_DIR_NATIVE}/${bindir}/meinproc5 \
+    -DDOCBOOKL10NHELPER_EXECUTABLE=${STAGING_DIR_NATIVE}/${bindir}/docbookl10nhelper \
+    -DCHECKXML5_EXECUTABLE=${STAGING_DIR_NATIVE}/${bindir}/checkXML5 \
 "
 
 do_configure:append() {

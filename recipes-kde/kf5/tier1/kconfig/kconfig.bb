@@ -1,6 +1,9 @@
 require ${BPN}.inc
 
-DEPENDS += "${BPN}-native"
+DEPENDS += " \
+    ${BPN}-native \
+    qtdeclarative \
+"
 
 PACKAGES =+ "${PN}-bin"
 
