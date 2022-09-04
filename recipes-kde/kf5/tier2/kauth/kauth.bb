@@ -1,16 +1,38 @@
-require ${BPN}.inc
+SUMMARY = "Abstraction to system policy and authentication features"
+LICENSE = "BSD-3-Clause & LGPL-2.0-or-later & LGPL-2.1-or-later"
+LIC_FILES_CHKSUM = " \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
+"
 
-inherit cmake_lib features_check
+inherit kde-kf5 cmake_lib features_check
 
-DEPENDS += "${BPN}-native kcoreaddons polkit-qt-1"
+REQUIRED_DISTRO_FEATURES:class-target = "polkit"
 
-REQUIRED_DISTRO_FEATURES = "polkit"
-EXTRA_OECMAKE += "-DKAUTH_BACKEND_NAME=POLKITQT5-1"
+PV = "${KF5_VERSION}"
+SRC_URI[sha256sum] = "d74dc553b3628657241d6e7129b17a38e5fd3b26b21de000390382c871ca42f5"
+
+DEPENDS += "kcoreaddons"
+DEPENDS:append:class-target = " \
+    ${BPN}-native \
+    polkit-qt-1 \
+"
+
+EXTRA_OECMAKE += " \
+    -DAUTOTESTS=OFF \
+    -DKAUTH_BACKEND_NAME=POLKITQT5-1 \
+"
+EXTRA_OECMAKE:append:class-native = " -DKAUTH_BUILD_CODEGENERATOR_ONLY=ON"
+EXTRA_OECMAKE:append:class-target = " -DKAUTH_BUILD_CODEGENERATOR_ONLY=OFF"
 
 # executables
 CMAKE_ALIGN_SYSROOT[1] = "KF5Auth, -s${_IMPORT_PREFIX}/libexec/kauth/kauth-policy-gen, -s${KDE_PATH_EXTERNAL_HOST_LIBEXECS}/kauth/kauth-policy-gen"
+CMAKE_ALIGN_SYSROOT:class-native[1] = "ignore"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
+
+BBCLASSEXTEND = "native"
