@@ -5,7 +5,7 @@ DEPENDS += " \
     kauth-native \
     sonnet-native \
     kconfig-native kconfig \
-    kdoctools-native kdoctools \
+    kdoctools-native \
     kdesignerplugin-native kdesignerplugin \
     networkmanager \
     qtsvg \
