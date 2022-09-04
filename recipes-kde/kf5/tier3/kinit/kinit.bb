@@ -14,7 +14,7 @@ DEPENDS += " \
     kcoreaddons-native \
     kauth-native \
     kconfig kconfig-native \
-    kdoctools kdoctools-native \
+    kdoctools-native \
     kservice \
     kio \
     ki18n \
