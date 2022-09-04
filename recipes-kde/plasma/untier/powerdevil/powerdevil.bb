@@ -11,7 +11,6 @@ DEPENDS += " \
     kauth-native \
     kconfig-native \
     kcoreaddons-native \
-    kdelibs4support-native \
     kdesignerplugin-native \
     kdoctools-native \
     bluez-qt \
@@ -24,13 +23,12 @@ DEPENDS += " \
     kio \
     knotifyconfig \
     kscreen \
-    kdelibs4support \
     plasma-workspace \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libxcb qtx11extras", "", d)} \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "964ca1b876005595c361add1eab5fa80c8d63da12c1201bdcd234914c6cc23f3"
+SRC_URI[sha256sum] = "bd378ddcb5972bafae8a07c5116d0c2fa60bedb7516d007dbd86f5546297f6db"
 
 FILES:${PN} += " \
     ${datadir}/k*5 \

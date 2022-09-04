@@ -1,3 +1,0 @@
-PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "f35e15254cebeb8afc5eae1c694a603e04097fe3e7e0033a5f5fc255835eaf82"
-

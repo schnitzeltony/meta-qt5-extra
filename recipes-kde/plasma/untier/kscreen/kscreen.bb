@@ -17,6 +17,7 @@ DEPENDS += "\
     kconfig-native \
     kcoreaddons-native \
     kpackage-native \
+    kcmutils-native \
     kdbusaddons \
     kconfig \
     kconfigwidgets \
@@ -31,7 +32,7 @@ DEPENDS += "\
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "d9c351ad25783596aae466e305ad80de48ff3094a219ec6ffe08c7870ea3b5bc"
+SRC_URI[sha256sum] = "ee2208e9a7bbb519da10a6dbb2f3f06693f28ee102290de5ea0af1680af657f2"
 
 FILES:${PN} += " \
     ${datadir}/k*_kscreen \

@@ -19,19 +19,21 @@ inherit kde-plasma features_check gettext
 
 DEPENDS += " \
     qtwayland-native \
+    kauth-native \
+    kconfig-native kconfig \
+    kdoctools-native \
+    kcoreaddons-native kcoreaddons \
+    kpackage-native kpackage \
+    kcmutils-native \
+    sonnet-native \
+    \
+    libxcvt \
     libinput \
     qtsensors \
     fontconfig \
     lcms \
     \
-    ${BPN}-native \
-    kauth-native \
-    kconfig-native kconfig \
-    kdoctools-native kdoctools \
-    kcoreaddons-native kcoreaddons \
-    kpackage-native kpackage \
     breeze \
-    sonnet-native \
     kactivities \
     kconfigwidgets \
     kcrash \
@@ -53,15 +55,20 @@ DEPENDS += " \
     kxmlgui \
     kdecoration \
     kscreenlocker \
-    kwayland-server \
     krunner \
 "
 
 # this condition matches always currently - it is kept in this way as a marker
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)}"
 
-require ${BPN}.inc
-SRC_URI += "file://0001-Remove-kwin-strip-effect-metadata-find-build-dance.patch"
+PV = "${PLASMA_VERSION}"
+SRC_URI[sha256sum] = "e8a6121c000bdf4ade742ebd9b981485ef0481d99b3e1f8d2ae7bcd1e0e1507d"
+
+# native tools
+EXTRA_OECMAKE += " \
+    -DKF5_HOST_TOOLING=${STAGING_LIBDIR_NATIVE}/cmake \
+    -DCMAKE_SYSROOT=${STAGING_DIR_NATIVE} \
+"
 
 FILES:${PN} += " \
     ${datadir}/config.kcfg \

@@ -17,13 +17,11 @@ DEPENDS += "\
     kcoreaddons-native \
     sonnet-native \
     kpackage-native \
-    kdelibs4support-native \
     kdesignerplugin-native \
     kglobalaccel \
     ki18n \
     kio \
     kxmlgui \
-    kdelibs4support \
     kdbusaddons \
     kcmutils \
     plasma-framework \
@@ -33,7 +31,7 @@ DEPENDS += "\
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "7a2307b4ca1dca1b240a59ea4bbbceb48b1f6759c9ce3bb36b3cab7274f6a71a"
+SRC_URI[sha256sum] = "be8f86f37e75b49e8d5f4a902ee1c4796b380d04a621e8cb24972cc926677142"
 
 FILES:${PN} += " \
     ${datadir}/kservices5 \

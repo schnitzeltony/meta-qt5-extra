@@ -13,11 +13,11 @@ DEPENDS += " \
     kconfig-native \
     kpackage-native \
     sonnet-native \
+    kcmutils-native \
     plasma-framework \
     kcmutils \
     kdeclarative \
     kidletime \
-    kdelibs4support \
     kcrash \
     kglobalaccel \
     layer-shell-qt \
@@ -30,7 +30,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "3270a1845c9fc694a50db38de4c27586d2f488152e1bcf88be0088d6799bf98e"
+SRC_URI[sha256sum] = "7dd3d20b38c156b676c5c84f2422491f28cbb7825de21ae37dbd77ec779bdb7d"
 SRC_URI += "file://kde.pam"
 
 do_install:append() {

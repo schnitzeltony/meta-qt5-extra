@@ -24,7 +24,6 @@ DEPENDS += " \
     kpackage-native \
     kdoctools-native \
     sonnet-native \
-    kdelibs4support-native \
     kdesignerplugin-native \
     kauth-native \
     libqalculate \
@@ -45,7 +44,6 @@ DEPENDS += " \
     kdeclarative \
     ktextwidgets \
     ktexteditor \
-    kdelibs4support \
     kxmlrpcclient \
     kcrash \
     prison \
@@ -60,7 +58,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "b9912691e0becfa0839dbf7750ea24729b72bad0216bef27584f9faf882064f6"
+SRC_URI[sha256sum] = "9c3e7fc1945549723b771b90aba65d50078d39d683b5df091a33f79f8dae89ab"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 

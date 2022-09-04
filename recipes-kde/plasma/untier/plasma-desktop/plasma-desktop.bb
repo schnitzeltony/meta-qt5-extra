@@ -20,7 +20,6 @@ DEPENDS += " \
     kcoreaddons-native \
     kpackage-native \
     sonnet-native \
-    kdelibs4support-native kdelibs4support \
     kdoctools-native kdoctools \
     kauth-native \
     kdesignerplugin-native \
@@ -57,7 +56,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "af58796c43a7eb909d4c6782e899e428c9b569a9ab92eb34ba7391c763002c46"
+SRC_URI[sha256sum] = "d5cd0aa72bb2af652cd56be82aa996bdec7f43da1af49af10996072b026172ca"
 SRC_URI += "file://0001-Ensure-xkb_base-is-not-empty-instead-of-checking-if-.patch"
 
 FILES_SOLIBSDEV = "${libdir}/libkfont*${SOLIBSDEV}"

@@ -17,7 +17,9 @@ LIC_FILES_CHKSUM = " \
     file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
-inherit kde-plasma gettext
+inherit kde-plasma gettext features_check
+
+REQUIRED_DISTRO_FEATURES = "polkit"
 
 DEPENDS += " \
     kauth-native \
@@ -25,6 +27,7 @@ DEPENDS += " \
     kdoctools-native kdoctools \
     kcoreaddons-native kcoreaddons \
     kconfig-native kconfig \
+    kcmutils-native \
     pciutils \
     kcompletion \
     kconfigwidgets \
@@ -44,10 +47,12 @@ DEPENDS += " \
 DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11", "", d)}"
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "c1d241c05ebc578633512bf304b7e5bf461c7e63e45285913e212786eac14b30"
+SRC_URI[sha256sum] = "a2ad2f4f841d14ae2ed03bd4798ed10f08388337a5f08367248f3ef8b0ee425b"
 
 FILES_SOLIBSDEV = ""
 FILES:${PN} += " \
+    ${datadir}/polkit-1 \
+    ${datadir}/dbus-1 \
     ${datadir}/kcmusb \
     ${datadir}/desktop-directories \
     ${datadir}/k*5 \

@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gtk-icon-cache mime-xdg
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "93571e5ee5af1e348b93eea1d657c20387b543225037200cab557aef62fa48a1"
+SRC_URI[sha256sum] = "e6fdb23e58be839ca2192ebbdaebed2846e723e6036e216a709437c44e969a94"
 
 DEPENDS += " \
     qtdeclarative \
@@ -22,6 +22,7 @@ DEPENDS += " \
     kauth-native \
     kconfig-native \
     kcoreaddons-native \
+    kcmutils-native \
     kpackage-native \
     attica \
     kitemmodels \

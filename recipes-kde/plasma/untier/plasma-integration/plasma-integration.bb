@@ -15,24 +15,25 @@ REQUIRED_DISTRO_FEATURES = "x11"
 inherit kde-plasma features_check gettext pkgconfig
 
 DEPENDS += " \
+    qtwayland-native \
+    kauth-native \
+    kcoreaddons-native \
+    kcmutils-native \
+    libxcb \
+    libxcursor \
     qtquickcontrols2 \
     breeze \
-    kauth-native \
     kconfig \
     kconfig-native \
     kconfigwidgets \
-    kcoreaddons-native \
     ki18n \
     kio \
     knotifications \
     kwidgetsaddons \
-    \
-    libxcb \
-    libxcursor \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "cd4490e1e23276bd4f7827ec1c6a3dee6703b8065bd5b4f3fad8112b53eadf7a"
+SRC_URI[sha256sum] = "71cdda800b3d8e07aae86d9a34077a7d4972fc359ce5421d8e6efd2bc4b96cb1"
 
 FILES:${PN} += " \
     ${datadir}/kconf_update \

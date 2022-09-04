@@ -21,6 +21,7 @@ DEPENDS += " \
     kconfig-native \
     kcoreaddons-native \
     kpackage-native \
+    kcmutils-native \
     karchive \
     kdeclarative \
     kholidays \
@@ -41,7 +42,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "3db52bc3c594d92deea3cfcb3112b4fa6ce328b7481acaa79187dab274e5e80e"
+SRC_URI[sha256sum] = "8081719c6446b28e1b9b7bd8f5558caba73d5c8fff514569ed8ea17432aef5d1"
 
 FILES:${PN} += " \
     ${datadir}/icons \
@@ -50,6 +51,7 @@ FILES:${PN} += " \
     ${datadir}/k*5 \
     ${datadir}/kwin \
     ${datadir}/plasma \
+    ${datadir}/kdevfiletemplates \
     \
     ${OE_QMAKE_PATH_PLUGINS} \
     ${OE_QMAKE_PATH_QML} \

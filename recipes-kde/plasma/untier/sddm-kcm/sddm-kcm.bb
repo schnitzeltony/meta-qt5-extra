@@ -13,6 +13,7 @@ DEPENDS += " \
     kconfig-native \
     kcoreaddons-native \
     kpackage-native \
+    kcmutils-native \
     kcoreaddons \
     ki18n \
     kxmlgui \
@@ -24,7 +25,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "cf9262036c4b3c149663335ab7b3770705924554e227e924dee3c4cfae83e597"
+SRC_URI[sha256sum] = "87f616f8b45c163973f9a18c8f8f4a4ff3426fc6ee0ea3f2321129b88d4c1fbf"
 
 RDEPENDS:${PN} = "sddm"
 

@@ -14,7 +14,6 @@ DEPENDS += " \
     kcoreaddons-native \
     kdoctools-native \
     kdesignerplugin-native \
-    kdelibs4support-native \
     sonnet-native \
     ki18n \
     kxmlgui \
@@ -22,7 +21,6 @@ DEPENDS += " \
     kiconthemes \
     kio \
     sonnet \
-    kdelibs4support \
 "
 
 # REVISIT optionals
@@ -31,7 +29,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "78a776a8cd6db98334335b68011ac887f9b27bb52cb4d0b504d14aafe032340a"
+SRC_URI[sha256sum] = "47fc9d5b17052613c568d38addc2d92e62408417381ed8d4b6482ca625a175f8"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

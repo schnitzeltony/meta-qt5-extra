@@ -16,6 +16,7 @@ DEPENDS += "\
     ki18n \
     kcoreaddons \
     kcoreaddons-native \
+    kcmutils-native \
     kguiaddons \
     kconfig \
     kconfig-native \
@@ -31,7 +32,7 @@ DEPENDS += "\
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "8525a6b50da5523c3d21c1223e0f2b8ad4a2d147e48e5d128e1c6ee06baaf0a3"
+SRC_URI[sha256sum] = "77e914e9d87d1c8191a360ebd586ef115be56600a685f1c54e81a27f80dc8053"
 
 FILES:${PN} += " \
     ${datadir}/color-schemes \
