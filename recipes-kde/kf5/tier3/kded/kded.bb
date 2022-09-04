@@ -9,7 +9,7 @@ inherit kde-kf5
 
 DEPENDS += " \
     kconfig-native kconfig \
-    kdoctools-native kdoctools \
+    kdoctools-native \
     kcoreaddons-native kcoreaddons \
     kcrash \
     kdbusaddons \
