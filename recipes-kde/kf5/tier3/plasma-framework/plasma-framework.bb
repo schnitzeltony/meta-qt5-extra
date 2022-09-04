@@ -19,7 +19,7 @@ DEPENDS += " \
     gzip-native \
     kauth-native \
     kcoreaddons-native kcoreaddons \
-    kdoctools-native kdoctools \
+    kdoctools-native \
     kconfig-native kconfig \
     kpackage-native kpackage \
     virtual/egl \
