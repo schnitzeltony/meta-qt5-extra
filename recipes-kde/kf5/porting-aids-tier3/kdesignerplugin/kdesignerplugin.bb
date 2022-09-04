@@ -2,22 +2,14 @@ require ${BPN}.inc
 
 inherit cmake_lib gettext
 
-# required
 DEPENDS += " \
 	${BPN}-native \
-"
-
-DEPENDS += " \
+    kauth-native \
+    sonnet-native \
+    kdoctools-native \
     qttools \
     kcoreaddons \
     kconfig \
-    kdoctools \
-"
-
-# optional -> TBD packageconfig
-DEPENDS += " \
-    kauth-native \
-    sonnet-native \
     kcompletion \
     kconfigwidgets \
     kiconthemes \
