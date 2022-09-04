@@ -15,7 +15,7 @@ inherit kde-kf5 gettext
 DEPENDS += " \
     bison-native \
     kconfig-native kconfig \
-    kdoctools-native kdoctools \
+    kdoctools-native \
     kcoreaddons-native \
     kconfig \
     kcrash \
