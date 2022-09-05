@@ -13,11 +13,13 @@ LIC_FILES_CHKSUM = " \
     file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
 "
 
-REQUIRED_DISTRO_FEATURES = "x11"
+REQUIRED_DISTRO_FEATURES:class-target = "x11"
 
 inherit kde-plasma features_check gettext
 
-DEPENDS += " \
+DEPENDS:remove:class-native = "kwayland-native"
+DEPENDS:append:class-target = " \
+    ${BPN}-native \
     qtwayland-native \
     kauth-native \
     kconfig-native kconfig \
@@ -59,16 +61,24 @@ DEPENDS += " \
 "
 
 # this condition matches always currently - it is kept in this way as a marker
-DEPENDS += "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)}"
+DEPENDS:append:class-target = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)}"
 
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "e8a6121c000bdf4ade742ebd9b981485ef0481d99b3e1f8d2ae7bcd1e0e1507d"
 
-# native tools
-EXTRA_OECMAKE += " \
+OECMAKE_SOURCEPATH:class-native = "${S}/src/wayland/tools"
+
+# native tools pointers
+EXTRA_OECMAKE:append:class-target = " \
     -DKF5_HOST_TOOLING=${STAGING_LIBDIR_NATIVE}/cmake \
     -DCMAKE_SYSROOT=${STAGING_DIR_NATIVE} \
+    -DQTWAYLANDSCANNER_KDE_EXECUTABLE=${STAGING_LIBDIR_NATIVE}/qtwaylandscanner_kde \
 "
+
+do_install:class-native() {
+    install -d ${D}${bindir}
+    install -m 755 ${B}/qtwaylandscanner_kde ${D}${bindir}/$destname
+}
 
 FILES:${PN} += " \
     ${datadir}/config.kcfg \
@@ -85,10 +95,12 @@ FILES:${PN} += " \
     ${libdir}/kconf_update_bin \
 "
 
-RDEPENDS:${PN} += " \
+RDEPENDS:${PN}:class-target += " \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland", "xwayland", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "qtwayland", "",d)} \
     qtmultimedia \
     qtvirtualkeyboard-qmlplugins \
     perl \
 "
+
+BBCLASSEXTEND = "native"
