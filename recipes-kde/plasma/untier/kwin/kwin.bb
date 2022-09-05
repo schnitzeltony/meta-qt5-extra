@@ -15,6 +15,25 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES:class-target = "x11"
 
+# Bad hack to circumvent odd behavior on kwin build and to make
+# cmake_extra_sanity.bbclass happy:
+# * Files created by qtwaylandscanner have a comment with full path containing
+#   sysroot
+# * qtwaylandscanner is run twice: during compile and install
+#
+# => we need a very specific sequence of appends:
+# 1. build
+# 2. adjust
+# 3. check by cmake_extra_sanity.bbclass
+inherit cmake_qt5
+do_install:append:class-target() {
+    cd ${B}/src/wayland
+    # Adjust comments to make cmake_extra_sanity.bbclass happy
+    for wayland_source in `grep -rl '// source file is ${STAGING_DIR_HOST}'`; do
+        sed -i 's:// source file is ${STAGING_DIR_HOST}:// source file is :g' "$wayland_source"
+    done
+}
+
 inherit kde-plasma features_check gettext
 
 DEPENDS:remove:class-native = "kwayland-native"
@@ -72,7 +91,7 @@ OECMAKE_SOURCEPATH:class-native = "${S}/src/wayland/tools"
 EXTRA_OECMAKE:append:class-target = " \
     -DKF5_HOST_TOOLING=${STAGING_LIBDIR_NATIVE}/cmake \
     -DCMAKE_SYSROOT=${STAGING_DIR_NATIVE} \
-    -DQTWAYLANDSCANNER_KDE_EXECUTABLE=${STAGING_LIBDIR_NATIVE}/qtwaylandscanner_kde \
+    -DQTWAYLANDSCANNER_KDE_EXECUTABLE=${STAGING_BINDIR_NATIVE}/qtwaylandscanner_kde \
 "
 
 do_install:class-native() {
