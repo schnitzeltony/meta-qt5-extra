@@ -22,7 +22,7 @@ do_install:append() {
     # TBD: -> oe-core (1st part - genarated sources - should work with autotools too)
     if [ x = x$no_staging_check ] ; then
         error=
-        # check for genarated sources
+        # check for generated sources
         for f in `find ${B} -name '*.h' -o -name '*.cpp'` ; do
             if grep -q 'recipe-sysroot' $f ; then
                 bbwarn "$f contains links to build sysroot!"
@@ -40,7 +40,7 @@ do_install:append() {
         done
 
         if [ x != x$error ] ; then
-            bbfatal "One or more files contain links to build host sysroot ${STAGING_DIR}"
+            bbfatal "One or more files contain links to build host sysroot ${STAGING_DIR_HOST}(-native)"
         fi
     fi
 }
