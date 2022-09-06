@@ -17,6 +17,7 @@ DEPENDS += " \
     kauth-native \
     kconfig-native \
     kcoreaddons-native \
+    kcmutils-native \
     kbookmarks \
     kcodecs \
     kcompletion \

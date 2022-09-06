@@ -14,6 +14,7 @@ DEPENDS += " \
     kcoreaddons-native \
     kauth-native \
     kdoctools-native \
+    kcmutils-native \
     libktorrent \
     knotifyconfig \
     kcmutils \
@@ -21,7 +22,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "f359d69fd8fd9125b2738d72c55a2ee286556b5c1fd25a0c8fdda1ffda08d8b2"
+SRC_URI[sha256sum] = "3d8347e9ed6655087707b44e9ba719ef3c75bf71f96625180f56f34d24beeca4"
 
 FILES:${PN} += " \
     ${datadir}/knotifications5 \

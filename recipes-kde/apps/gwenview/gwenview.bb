@@ -22,10 +22,11 @@ DEPENDS += " \
     kfilemetadata \
     baloo \
     libkdcraw \
+    kimageannotator \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "f99a8f6eb7c7e2ba8b3f434512a2050cf64e032c48830c3ad80dbbb6d5e9cc4a"
+SRC_URI[sha256sum] = "447d1e8a0c19476fc2879a4e406d7d6af79b59f9e2c7aad28f70d484789ff716"
 
 EXTRA_OECMAKE += " \
     -DJPEGLIB_RUN_RESULT=true \

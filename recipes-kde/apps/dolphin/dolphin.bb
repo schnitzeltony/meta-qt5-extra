@@ -12,10 +12,10 @@ DEPENDS += " \
     kconfig-native \
     kcoreaddons-native \
     kdoctools-native \
+    kcmutils-native \
     sonnet-native \
     \
     kinit \
-    kcmutils \
     knewstuff \
     ki18n \
     kdbusaddons \
@@ -36,7 +36,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "9cf51ac21ffc3d12a919e99cca80f3bb14741eed2a3af54b4499332ccd979a7b"
+SRC_URI[sha256sum] = "03458f878b70d82f0a55396bb0bfe7409be867e77d31fb42b310888bd1f16682"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
@@ -45,6 +45,7 @@ FILES_SOLIBSDEV = "${libdir}/libdolphin*${SOLIBSDEV}"
 FILES:${PN} += " \
     ${datadir}/config.kcfg \
     ${datadir}/k*5 \
+    ${datadir}/kconf_update \
     ${datadir}/kglobalaccel \
     ${datadir}/knsrcfiles \
     ${datadir}/dbus-1 \

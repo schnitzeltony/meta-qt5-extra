@@ -24,10 +24,12 @@ DEPENDS += " \
     kdoctools-native \
     sonnet-native \
     libkexiv2 \
+    qtspeech \
     qca \
     tiff \
     kpty \
     poppler \
+    libzip \
     kactivities \
     karchive \
     kbookmarks \
@@ -48,7 +50,7 @@ DEPENDS += " \
 "
 
 PV = "${KDE_APP_VERSION}"
-SRC_URI[sha256sum] = "cee20b2df2828728e9208406c9dec7a96b33a10eaac7b26c35788009e077163f"
+SRC_URI[sha256sum] = "72c0385cfa489043e9ac0318961fee1ee3360684aaf56b6693639d514df45fb7"
 
 EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
