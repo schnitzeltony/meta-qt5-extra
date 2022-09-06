@@ -1,0 +1,50 @@
+From 22a05780aa392cd5e01dda6ffde1da28b5639ac9 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 6 Sep 2022 22:43:19 +0200
+Subject: [PATCH] Add missing include of <ctime> to fix build with glibc 2.36
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+| include/openbabel/obutil.h:65:14: error: 'clock' was not declared in this scope
+|    65 |       start= clock();
+|       |              ^~~~~
+| include/openbabel/obutil.h:40:1: note: 'clock' is defined in header '<ctime>'; did you forget to '#include <ctime>'?
+|    39 | #include <math.h>
+|   +++ |+#include <ctime>
+|    40 |
+| include/openbabel/obutil.h: In member function 'double OpenBabel::OBStopwatch::Lap()':
+| include/openbabel/obutil.h:70:13: error: 'clock' was not declared in this scope
+|    70 |       stop= clock();
+|       |             ^~~~~
+| include/openbabel/obutil.h:70:13: note: 'clock' is defined in header '<ctime>'; did you forget to '#include <ctime>'?
+| include/openbabel/obutil.h:71:40: error: 'CLOCKS_PER_SEC' was not declared in this scope
+|    71 |       return((stop - start) / (double) CLOCKS_PER_SEC);
+|       |                                        ^~~~~~~~~~~~~~
+| include/openbabel/obutil.h:71:40: note: the macro 'CLOCKS_PER_SEC' had not yet been defined
+
+Upstream-Status: Submitted [https://github.com/openbabel/openbabel/pull/2533]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ include/openbabel/obutil.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/include/openbabel/obutil.h b/include/openbabel/obutil.h
+index cc65e40a1..35c38d466 100644
+--- a/include/openbabel/obutil.h
++++ b/include/openbabel/obutil.h
+@@ -36,6 +36,10 @@ GNU General Public License for more details.
+ #endif
+ #endif
+ 
++#if HAVE_CLOCK_T
++#include <ctime>
++#endif
++
+ #include <math.h>
+ 
+ #ifndef M_PI
+-- 
+2.35.3
+

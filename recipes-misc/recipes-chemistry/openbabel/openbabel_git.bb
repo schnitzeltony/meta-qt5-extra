@@ -16,6 +16,7 @@ DEPENDS = " \
 SRC_URI = " \
     git://github.com/openbabel/openbabel.git;branch=master;protocol=https \
     file://0001-Workaround-xdr-linker-error.patch \
+    file://0002-Add-missing-include-of-ctime-to-fix-build-with-glibc.patch \
     file://openbabel-gui.desktop \
 "
 SRCREV = "cbd4db43f8908b874864280fdc03bf92569eebc1"
