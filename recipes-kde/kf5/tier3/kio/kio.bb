@@ -52,6 +52,8 @@ do_configure:append() {
     sed -i 's:${STAGING_BINDIR_NATIVE}:${bindir}:g' ${B}/src/ioslaves/help/config-help.h
 }
 
+INSANE_SKIP:${PN} = "dev-so"
+
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/k*5 \
