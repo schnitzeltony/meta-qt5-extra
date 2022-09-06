@@ -13,16 +13,18 @@ LIC_FILES_CHKSUM = " \
 DEPENDS += " \
     kpackage-native \
     kauth-native \
+    kcmutils-native \
     modemmanager-qt \
     gstreamer1.0 \
     qtdeclarative \
     telepathy-qt \
     kpeople \
-    plasma-framework \
     kdbusaddons \
     knotifications \
     kwin \
     networkmanager-qt \
+    plasma-framework \
+    plasma-workspace \
 "
 
 inherit kde-plasma gettext
@@ -32,6 +34,7 @@ SRC_URI[sha256sum] = "9eff8803d26b8e57f180b1a146bea3cf165fc65cb823fd6448610c4965
 
 FILES:${PN} += " \
     ${datadir}/k*5 \
+    ${datadir}/kpackage \
     ${datadir}/kwin \
     ${datadir}/metainfo \
     ${datadir}/plasma \
