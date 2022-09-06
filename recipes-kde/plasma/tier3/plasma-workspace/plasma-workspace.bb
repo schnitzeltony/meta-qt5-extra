@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-inherit kde-plasma features_check gettext gtk-icon-cache mime-xdg
+inherit kde-plasma features_check gettext gtk-icon-cache mime-xdg qmake5_paths
 
 DEPENDS += " \
     qtwayland-native \
@@ -25,6 +25,7 @@ DEPENDS += " \
     kdoctools-native \
     sonnet-native \
     kdesignerplugin-native \
+    kcmutils-native \
     kauth-native \
     libqalculate \
     baloo \
@@ -39,7 +40,6 @@ DEPENDS += " \
     kdesu \
     knewstuff \
     kwallet \
-    kcmutils \
     kidletime \
     kdeclarative \
     ktextwidgets \
@@ -50,6 +50,8 @@ DEPENDS += " \
     networkmanager-qt \
     libksysguard \
     libkscreen \
+    kunitconversion \
+    kded \
     kwin \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 libsm libxcb", "", d)} \
     zlib \
@@ -59,8 +61,12 @@ DEPENDS += " \
 
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "9c3e7fc1945549723b771b90aba65d50078d39d683b5df091a33f79f8dae89ab"
+SRC_URI += "file://0001-Make-qdbus-bindir-configurable.patch"
 
-EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
+EXTRA_OECMAKE += " \
+    -DBUILD_TESTING=OFF \
+    -DQtBinariesDir=${OE_QMAKE_PATH_QT_BINS} \
+"
 
 # REVISIT
 FILES:${PN} += " \

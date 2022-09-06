@@ -1,0 +1,31 @@
+From a359c07e78aff12fe3809ce67c2618be74916989 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 6 Sep 2022 21:43:48 +0200
+Subject: [PATCH] Make qdbus bindir configurable
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e5fff43..fa63a1a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -233,7 +233,7 @@ endif()
+ add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
+ 
+ # locate qdbus in the Qt path because not every distro makes a symlink at /usr/bin/qdbus
+-ecm_query_qt(QtBinariesDir QT_INSTALL_BINS)
++set(QtBinariesDir "/usr/bin" CACHE STRING "Target bindir for qdbus")
+ 
+ option(PLASMA_WAYLAND_DEFAULT_SESSION "Use Wayland session by default for Plasma" FALSE)
+ 
+-- 
+2.35.3
+
