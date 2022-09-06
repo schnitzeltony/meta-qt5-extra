@@ -23,6 +23,8 @@ DEPENDS += " \
     kdoctools-native kdoctools \
     kauth-native \
     kdesignerplugin-native \
+    kcmutils-native \
+    kdelibs4support-native \
     \
     libcanberra \
     \
@@ -32,6 +34,7 @@ DEPENDS += " \
     plasma-framework \
     ki18n \
     kcmutils \
+    kdelibs4support \
     knewstuff \
     knotifyconfig \
     attica \
@@ -57,7 +60,6 @@ DEPENDS += " \
 
 PV = "${PLASMA_VERSION}"
 SRC_URI[sha256sum] = "d5cd0aa72bb2af652cd56be82aa996bdec7f43da1af49af10996072b026172ca"
-SRC_URI += "file://0001-Ensure-xkb_base-is-not-empty-instead-of-checking-if-.patch"
 
 FILES_SOLIBSDEV = "${libdir}/libkfont*${SOLIBSDEV}"
 
