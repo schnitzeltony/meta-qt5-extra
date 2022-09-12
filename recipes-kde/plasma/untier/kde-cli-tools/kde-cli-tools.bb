@@ -23,6 +23,7 @@ DEPENDS += " \
     kdoctools-native \
     kcoreaddons-native \
     kpackage-native \
+    kcmutils-native \
     kactivities \
     kiconthemes \
     ki18n \
