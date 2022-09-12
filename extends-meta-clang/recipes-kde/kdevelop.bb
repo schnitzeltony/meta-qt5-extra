@@ -25,6 +25,7 @@ DEPENDS += " \
     kdoctools-native \
     ki18n-native \
     kpackage-native \
+    kcmutils-native \
     shared-mime-info-native \
     \
     qtbase \
