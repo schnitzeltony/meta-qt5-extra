@@ -15,6 +15,7 @@ DEPENDS += " \
     kdoctools-native \
     kauth-native \
     kconfig-native \
+    kcmutils-native \
     sonnet-native \
     kwallet \
     kservice \
