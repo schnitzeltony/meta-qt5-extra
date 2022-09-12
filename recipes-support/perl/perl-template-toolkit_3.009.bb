@@ -14,4 +14,10 @@ S = "${WORKDIR}/Template-Toolkit-${PV}"
 
 inherit cpan
 
+do_install:append() {
+    for file in ttree tpage; do
+        sed -i 's:${STAGING_BINDIR_NATIVE}:${bindir_native}:g' ${D}${bindir}/$file
+    done
+}
+
 BBCLASSEXTEND = "native"
