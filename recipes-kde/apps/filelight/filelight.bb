@@ -14,6 +14,9 @@ DEPENDS += "\
     kcoreaddons-native \
     kdoctools-native \
     sonnet-native \
+    kpackage-native \
+    qtquickcontrols2 \
+    kdeclarative \
     kio \
     kparts \
     solid \
