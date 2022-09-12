@@ -27,12 +27,14 @@ do_configure:append() {
     # fix python executable path to not point to sysroot
     sed -i 's:pythonInterpreterPath =.*:pythonInterpreterPath = "${bindir}/python3";:g' ${B}/avogadro/qtgui/avogadropython.h
     # fix absolute sysroot library paths
-    sed -i \
-        -e 's:${STAGING_LIBDIR}/libGLEW.so:GLEW:g' \
-        -e 's:${STAGING_LIBDIR}/libGL.so:GL:g' \
-        -e 's:${STAGING_LIBDIR}/libGLU.so:GLU:g' \
-        -e 's:${STAGING_LIBDIR}/libarchive.so:archive:g' \
-        ${B}/CMakeFiles/Export/lib/cmake/avogadrolibs/AvogadroLibsTargets.cmake
+    for cmakefile in `find ${B}/CMakeFiles -name AvogadroLibsTargets.cmake`; do
+        sed -i \
+            -e 's:${STAGING_LIBDIR}/libGLEW.so:GLEW:g' \
+            -e 's:${STAGING_LIBDIR}/libGL.so:GL:g' \
+            -e 's:${STAGING_LIBDIR}/libGLU.so:GLU:g' \
+            -e 's:${STAGING_LIBDIR}/libarchive.so:archive:g' \
+            "$cmakefile"
+    done
 }
 
 EXTRA_OECMAKE += "-DENABLE_RPATH=OFF"
