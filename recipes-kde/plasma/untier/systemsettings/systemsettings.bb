@@ -14,13 +14,13 @@ DEPENDS += " \
     kpackage-native \
     kcoreaddons-native \
     kauth-native \
+    kcmutils-native kcmutils \
     kconfig-native kconfig \
     kdoctools-native kdoctools \
     kactivities \
     kactivities-stats \
     kirigami2 \
     kitemviews \
-    kcmutils \
     ki18n \
     kio \
     kservice \
