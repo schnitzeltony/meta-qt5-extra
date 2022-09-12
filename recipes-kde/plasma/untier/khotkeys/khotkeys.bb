@@ -18,6 +18,8 @@ DEPENDS += "\
     sonnet-native \
     kpackage-native \
     kdesignerplugin-native \
+    kcmutils-native \
+    kdelibs4support \
     kglobalaccel \
     ki18n \
     kio \
