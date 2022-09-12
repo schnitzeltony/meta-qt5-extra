@@ -13,6 +13,7 @@ DEPENDS += "\
     kconfigwidgets \
     kcoreaddons-native \
     kdoctools-native \
+    kcmutils-native \
     ki18n \
     kiconthemes \
     kio \
