@@ -1,0 +1,29 @@
+From a674c42d51c4b1f3818e939d6b275e35e74d6802 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 9 Oct 2022 16:19:09 +0200
+Subject: [PATCH] Use native 'branch'
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ Makefile.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index b73f301..e24040a 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -85,7 +85,7 @@ $(DESTDIR)$(LIBDIR):
+ @MK_PKGCONFIG@	$(INSTALL_DIR) $(DESTDIR)$(PKGDIR)
+ 
+ version.o: version.c VERSION branch
+-	$(BUILD) -DBRANCH=`./branch` -DVERSION=\"`cat VERSION`\" -c version.c
++	$(BUILD) -DBRANCH=`branch` -DVERSION=\"`cat VERSION`\" -c version.c
+ 
+ VERSION:
+ 	@true
+-- 
+2.35.3
+

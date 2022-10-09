@@ -1,0 +1,30 @@
+From 830a839db0786cfb627c8531e4f41d1823b0cc60 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 9 Oct 2022 15:46:25 +0200
+Subject: [PATCH] Do not run ldconfig
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ configure.inc | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/configure.inc b/configure.inc
+index fd0c9ba..a5520da 100755
+--- a/configure.inc
++++ b/configure.inc
+@@ -1500,9 +1500,6 @@ files)  echo "\$FULLNAME" "\$LIBNAME" "\$LIBNAME.\$MAJOR"
+ install)$PROG_INSTALL -c \$FULLNAME "\$1"
+ 	$PROG_LN_S -f \$FULLNAME \$1/\$LIBNAME.\$MAJOR
+ 	$PROG_LN_S -f \$FULLNAME \$1/\$LIBNAME
+-EOF
+-    test "$LDCONFIG" && echo '	'$LDCONFIG '"$1"' >> librarian.sh
+-    cat >> librarian.sh << EOF
+ 	;;
+ esac
+ EOF
+-- 
+2.35.3
+

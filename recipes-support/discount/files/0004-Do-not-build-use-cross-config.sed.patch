@@ -1,0 +1,30 @@
+From dfdc4e9f37ed077d5ab0a098568b81c37f11d3f2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 9 Oct 2022 16:04:17 +0200
+Subject: [PATCH] Do not build/use cross config.sed
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ configure.inc | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/configure.inc b/configure.inc
+index fb462d4..b55c9f1 100755
+--- a/configure.inc
++++ b/configure.inc
+@@ -1785,8 +1785,7 @@ AC_SUB() {
+ 
+     echo "target=$_target, rest=$*"
+     
+-    __ac_config_sed
+-    ./config.sed "$_target" "$*" >> "$__cwd"/config.sub
++    config.sed "$_target" "$*" >> "$__cwd"/config.sub
+ }
+ #
+ # AC_TEXT writes arbitrary text into config.h
+-- 
+2.35.3
+

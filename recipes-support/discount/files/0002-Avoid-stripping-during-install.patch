@@ -1,0 +1,29 @@
+From ca994b375cb6cd8857fb824162d508320af94711 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 9 Oct 2022 15:58:53 +0200
+Subject: [PATCH] Avoid stripping during install
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ configure.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.inc b/configure.inc
+index a5520da..fb462d4 100755
+--- a/configure.inc
++++ b/configure.inc
+@@ -1603,7 +1603,7 @@ AC_PROG_INSTALL () {
+     rm -f ngc$$ ngc$$.c
+ 
+     AC_SUB 'INSTALL' "$PROG_INSTALL"
+-    AC_SUB 'INSTALL_PROGRAM' "$PROG_INSTALL $_strip -m 755"
++    AC_SUB 'INSTALL_PROGRAM' "$PROG_INSTALL -m 755"
+     AC_SUB 'INSTALL_DATA' "$PROG_INSTALL -m 444"
+ 
+     # finally build a little directory installer
+-- 
+2.35.3
+
