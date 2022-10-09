@@ -11,6 +11,3 @@ PV = "0.40"
 SRC_URI[sha256sum] = "3449d64b0cf71578b2c7e3ddc048d4af3661f44a83941ea074a7813f3a59ffa3"
 
 inherit autotools pkgconfig
-
-DEPENDS += " \
-"
