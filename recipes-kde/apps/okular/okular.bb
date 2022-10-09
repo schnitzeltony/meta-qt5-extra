@@ -47,12 +47,18 @@ DEPENDS += " \
     kwallet \
     khtml \
     kwindowsystem \
+    libspectre \
+    chmlib \
+    discount \
 "
 
 PV = "${KDE_APP_VERSION}"
 SRC_URI[sha256sum] = "72c0385cfa489043e9ac0318961fee1ee3360684aaf56b6693639d514df45fb7"
 
-EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
+EXTRA_OECMAKE += " \
+    -DBUILD_TESTING=OFF \
+    -DFORCE_NOT_REQUIRED_DEPENDENCIES="DjVuLibre;EPub;QMobipocket;" \
+"
 
 FILES:${PN} += " \
     ${datadir}/k*5 \
