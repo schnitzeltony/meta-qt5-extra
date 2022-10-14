@@ -18,10 +18,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  3 files changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 26412ba..46ff534 100644
+index f476a50..38bd10f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -69,7 +69,8 @@ find_package(KF5 "${KF5_MIN_VERSION}" REQUIRED COMPONENTS
+@@ -70,7 +70,8 @@ find_package(KF5 "${KF5_MIN_VERSION}" REQUIRED COMPONENTS
  )
  
  find_package(Boost "${Boost_MIN_VERSION}" MODULE REQUIRED)
@@ -29,7 +29,7 @@ index 26412ba..46ff534 100644
 +find_package(PkgConfig REQUIRED)
 +pkg_check_modules(LibGMP REQUIRED gmp>=${LibGMP_MIN_VERSION})
  find_package(LibGcrypt "${LibGcrypt_MIN_VERSION}" REQUIRED)
- find_package(Qca-qt5 CONFIG REQUIRED)
+ find_package(Qca-qt${QT_MAJOR_VERSION} CONFIG REQUIRED)
  
 diff --git a/KF5TorrentConfig.cmake.in b/KF5TorrentConfig.cmake.in
 index d40dc0b..b593917 100644
@@ -44,11 +44,11 @@ index d40dc0b..b593917 100644
  
  include("${CMAKE_CURRENT_LIST_DIR}/KF5TorrentTargets.cmake")
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index cecf522..1a5596b 100644
+index ac4f5ec..166e6e5 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -244,7 +244,7 @@ PUBLIC
-     Qt5::Xml
+     Qt::Xml
      Boost::boost
      LibGcrypt::LibGcrypt
 -    LibGMP::LibGMP
