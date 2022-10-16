@@ -1,0 +1,38 @@
+From 8a6fcb7bf1529726fee997427cecdb33517182ac Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 16 Oct 2022 17:27:36 +0200
+Subject: [PATCH] create_hash_table: Log basename only to make QA happy
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ src/kjs/create_hash_table | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/kjs/create_hash_table b/src/kjs/create_hash_table
+index 467e70d..b8aab64 100644
+--- a/src/kjs/create_hash_table
++++ b/src/kjs/create_hash_table
+@@ -24,6 +24,7 @@
+ #
+ 
+ use strict;
++use File::Basename;
+ 
+ my $file = $ARGV[0];
+ shift;
+@@ -218,7 +219,8 @@ sub hashValue($) {
+ sub output() {
+   if (!$banner) {
+     $banner = 1;
+-    print "/* Automatically generated from $file using kjs's create_hash_table. DO NOT EDIT ! */\n";
++    my $base_file = basename($file);
++    print "/* Automatically generated from $base_file using kjs's create_hash_table. DO NOT EDIT ! */\n";
+   }
+ 
+   my $nameEntries = "${name}Entries";
+-- 
+2.35.3
+

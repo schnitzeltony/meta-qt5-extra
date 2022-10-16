@@ -6,7 +6,10 @@ inherit kde-kf5-porting-aids perlnative
 
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "0e59e1d757819943d76e1df8af3f2cbf586b0104aafa8ee7b8b4ea82987bdcf8"
-SRC_URI += "file://0001-create_hash_table-avoid-polution-of-files-with-build.patch"
+SRC_URI += " \
+    file://0001-create_hash_table-avoid-polution-of-files-with-build.patch \
+    file://0002-create_hash_table-Log-basename-only-to-make-QA-happy.patch \
+"
 
 DEPENDS += " \
     kdoctools-native \
