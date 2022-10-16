@@ -1,0 +1,32 @@
+From 8d24407d84b5a46af7ac4c43ce5796cdfff829fa Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 16 Oct 2022 15:28:45 +0200
+Subject: [PATCH] ECMGenerateHeaders.cmake: Write relative paths to reduce QA
+ warnings
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ modules/ECMGenerateHeaders.cmake | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/modules/ECMGenerateHeaders.cmake b/modules/ECMGenerateHeaders.cmake
+index 86f35ad..3561744 100644
+--- a/modules/ECMGenerateHeaders.cmake
++++ b/modules/ECMGenerateHeaders.cmake
+@@ -197,7 +197,9 @@ function(ECM_GENERATE_HEADERS camelcase_forwarding_headers_var)
+                 endif()
+                 set(REGULAR_HEADER_NAME ${EGH_OUTPUT_DIR}/${originalprefix}${originalclassname}.${EGH_HEADER_EXTENSION})
+                 if (NOT EXISTS ${REGULAR_HEADER_NAME})
+-                    file(WRITE ${REGULAR_HEADER_NAME} "#include \"${_actualheader}\"\n")
++                    cmake_path(RELATIVE_PATH _actualheader BASE_DIRECTORY ${REGULAR_HEADER_NAME}
++                                                OUTPUT_VARIABLE _actualheader_rel)
++                    file(WRITE ${REGULAR_HEADER_NAME} "#include \"${_actualheader_rel}\"\n")
+                 endif()
+             endif()
+         endforeach()
+-- 
+2.35.3
+
