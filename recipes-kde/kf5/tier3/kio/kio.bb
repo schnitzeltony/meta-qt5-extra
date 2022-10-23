@@ -52,7 +52,7 @@ EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
 
 do_configure:append() {
     # fix sysroot path
-    sed -i 's:${STAGING_BINDIR_NATIVE}:${bindir}:g' ${B}/src/ioslaves/help/config-help.h
+    sed -i 's:${STAGING_BINDIR_NATIVE}:${bindir}:g' ${B}/src/kioworkers/help/config-help.h
 }
 
 INSANE_SKIP:${PN} = "dev-so"
