@@ -13,7 +13,6 @@ DEPENDS += " \
     kcoreaddons-native kcoreaddons \
     kcrash \
     kdbusaddons \
-    kinit \
     kservice \
 "
 

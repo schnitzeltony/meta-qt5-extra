@@ -18,20 +18,21 @@ inherit kde-kf5 gettext mime-xdg
 
 DEPENDS += " \
     qttools-native \
-    karchive \
-    kcodecs \
     kconfig-native \
     kcoreaddons-native \
-    kdbusaddons \
     kdoctools-native \
+    kauth-native \
+    sonnet-native \
+    karchive \
+    kcodecs \
+    kdbusaddons \
     ki18n \
     knotifications \
     kservice \
     solid \
     kxmlgui \
     kwallet \
-    kauth-native \
-    sonnet-native \
+    kded \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11", "", d)} \
 "
 
