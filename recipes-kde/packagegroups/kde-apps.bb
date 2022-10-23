@@ -38,6 +38,7 @@ RDEPENDS:${PN} = " \
     kmplot \
     kolourpaint \
     konsole \
+    krdc \
     krita \
     ksystemlog \
     ktorrent \
