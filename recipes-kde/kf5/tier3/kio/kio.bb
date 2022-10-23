@@ -63,5 +63,6 @@ FILES:${PN} += " \
     ${datadir}/polkit-1 \
     ${datadir}/kdevfiletemplates \
     ${datadir}/kconf_update \
+    ${datadir}/kdevappwizard \
     ${OE_QMAKE_PATH_PLUGINS} \
 "
