@@ -11,7 +11,7 @@ inherit kde-kf5 cmake_lib features_check
 REQUIRED_DISTRO_FEATURES:class-target = "polkit"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "d74dc553b3628657241d6e7129b17a38e5fd3b26b21de000390382c871ca42f5"
+SRC_URI[sha256sum] = "36ba733733c8600b2b8ba7736dc78c3c4e817aa91c7bc91407b69d4be01bbf93"
 
 DEPENDS += "kcoreaddons"
 DEPENDS:append:class-target = " \

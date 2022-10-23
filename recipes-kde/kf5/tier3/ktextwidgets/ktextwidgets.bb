@@ -14,7 +14,7 @@ DEPENDS += "kcompletion kconfig kconfigwidgets ki18n kiconthemes kservice kwidge
             gettext-native sonnet-native"
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "bd42fb15833fcfb4f739999d525b27b55c16eec8e5dec8a6ec2d7a1b9c288acf"
+SRC_URI[sha256sum] = "31e8dff053f866f0972febd7f78b680e8a015d0e17cef4e2dfdc446892b469a8"
 
 FILES:${PN} += " \
      ${OE_QMAKE_PATH_PLUGINS}/designer \

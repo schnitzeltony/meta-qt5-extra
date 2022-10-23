@@ -18,10 +18,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 4e097e5..c531bfb 100644
+index ad3ad81..ba5e9dc 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -16,7 +16,7 @@ if(APPLE)
+@@ -29,7 +29,7 @@ if(APPLE)
      target_link_libraries(kded5 "-framework CoreFoundation")
  endif()
  target_compile_definitions(kded5 PRIVATE
@@ -29,7 +29,4 @@ index 4e097e5..c531bfb 100644
 +    KCONF_UPDATE_EXE="${CMAKE_INSTALL_FULL_LIBEXECDIR}/kconf_update>"
  )
  
- install(TARGETS kded5 ${KF5_INSTALL_TARGETS_DEFAULT_ARGS} )
--- 
-2.21.0
-
+ install(TARGETS kded5 ${KF_INSTALL_TARGETS_DEFAULT_ARGS} )

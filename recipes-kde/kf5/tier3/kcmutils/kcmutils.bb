@@ -25,10 +25,9 @@ DEPENDS:class-target = " \
 "
 
 PV = "${KF5_VERSION}"
-SRC_URI[sha256sum] = "ad1907b5347a907cfa2ff0ef37432d4f1f6b6abbaac2866b75a590b8926a5a75"
-SRC_URI += "file://0001-Let-build-system-decide-if-tools-are-build-only.patch"
-SRC_URI:append:class-native = " file://0002-Install-kcmdesktopfilegenerator-to-bindir.patch"
-SRC_URI:append:class-target = " file://0003-Do-not-prefix-kcmdesktopfilegenerator-by-KF5.patch"
+SRC_URI[sha256sum] = "757bcd8ea8ca1882612fdb4d4537e1932cfd23150f59931910e70b253bfa4ad2"
+SRC_URI:append:class-native = " file://0001-Install-kcmdesktopfilegenerator-to-bindir.patch"
+SRC_URI:append:class-target = " file://0002-Do-not-prefix-kcmdesktopfilegenerator-by-KF5.patch"
 
 EXTRA_OECMAKE:append:class-native = " -DTOOLS_ONLY=ON"
 EXTRA_OECMAKE:append:class-target = " -DTOOLS_ONLY=OFF"
