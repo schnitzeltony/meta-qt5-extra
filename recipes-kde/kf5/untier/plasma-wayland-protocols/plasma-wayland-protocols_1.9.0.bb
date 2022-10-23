@@ -1,10 +1,9 @@
 SUMMARY = "Plasma-specific protocols for Wayland"
-LICENSE = "BSD-3-Clause & LGPL-2.1-only & LGPL-2.1-or-later & LGPL-3.0-only & MIT & MIT-CMU"
+LICENSE = "BSD-3-Clause & CC0-1.0 & LGPL-2.1-only & MIT & MIT-CMU"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
-    file://LICENSES/LGPL-2.1-only.txt;md5=fabba2a3bfeb22a6483d44e9ae824d3f \
+    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
     file://LICENSES/LGPL-2.1-or-later.txt;md5=2a4f4fd2128ea2f65047ee63fbca9f68 \
-    file://LICENSES/LGPL-3.0-only.txt;md5=c51d3eef3be114124d11349ca0d7e117 \
     file://LICENSES/MIT.txt;md5=38aa75cf4c4c87f018227d5ec9638d75 \
     file://LICENSES/MIT-CMU.txt;md5=b6936b5be2ab721140d9bf57c37b0b92 \
 "
@@ -12,5 +11,5 @@ LIC_FILES_CHKSUM = " \
 inherit kde-base
 
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${BP}.tar.xz"
-SRC_URI[sha256sum] = "084e2685caa61d94c6fe86dce006b22474d7bb4b34c4cb96bd763b97e305fad6"
+SRC_URI[sha256sum] = "a4275b9a854716fa5ed9c2ba2d697df2b0749fc45a28ad965e68d0aa36c5d4c8"
 
