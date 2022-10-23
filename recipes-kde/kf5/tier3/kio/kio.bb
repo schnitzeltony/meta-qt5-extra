@@ -47,6 +47,8 @@ DEPENDS += " \
     krb5 \
 "
 
+EXTRA_OECMAKE += "-DBUILD_TESTING=OFF"
+
 do_configure:append() {
     # fix sysroot path
     sed -i 's:${STAGING_BINDIR_NATIVE}:${bindir}:g' ${B}/src/ioslaves/help/config-help.h
