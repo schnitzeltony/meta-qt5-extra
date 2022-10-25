@@ -13,25 +13,27 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gettext mime mime-xdg
 
 DEPENDS += " \
+    shared-mime-info-native \
     kauth-native \
     kcoreaddons \
     kcoreaddons-native \
+    kdoctools-native \
+    kpackage-native \
+    kcmutils-native \
     kwidgetsaddons \
     kdbusaddons \
     knotifications \
     kwindowsystem \
     kiconthemes \
-    kpackage-native \
     plasma-framework \
     ki18n \
     kio \
     bluez-qt \
     kded \
-    shared-mime-info-native \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "04d99e9a47946e3d75a7dce59a0bf87525b7e7f5cc29673daea163fe62b5cfb3"
+SRC_URI[sha256sum] = "c4505b13c8ccdd2527a89a9bf700fcd23bfe57e19d32a5f0f1777f07b039f268"
 
 FILES:${PN} += " \
     ${datadir}/bluedevilwizard \

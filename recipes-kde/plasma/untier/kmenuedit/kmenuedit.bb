@@ -1,7 +1,7 @@
 SUMMARY = "KMENUEDIT"
-LICENSE = "GFDL-1.2+ & GPL-2.0-only & GPL-2.0-or-later"
+LICENSE = "CC0-1.0 & GPL-2.0-only & GPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
-    file://LICENSES/GFDL-1.2-or-later.txt;md5=9f58808219e9a42ff1228309d6f83dc6 \
+    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
     file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
     file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
 "
@@ -29,7 +29,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "47fc9d5b17052613c568d38addc2d92e62408417381ed8d4b6482ca625a175f8"
+SRC_URI[sha256sum] = "38371f47bdfef7566ce25cd482e1d105396d47a0d1faf8d29783881b0d583af6"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

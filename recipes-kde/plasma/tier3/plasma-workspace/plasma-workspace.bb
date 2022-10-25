@@ -60,7 +60,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "9c3e7fc1945549723b771b90aba65d50078d39d683b5df091a33f79f8dae89ab"
+SRC_URI[sha256sum] = "dc0709d9e99784e46e921b2b5e213b919887512ac1d8e0be46f77f8ba00a8f66"
 SRC_URI += "file://0001-Make-qdbus-bindir-configurable.patch"
 
 EXTRA_OECMAKE += " \

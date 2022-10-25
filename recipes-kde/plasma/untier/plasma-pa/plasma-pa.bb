@@ -20,6 +20,8 @@ DEPENDS += " \
     kcoreaddons-native kcoreaddons \
     kconfig-native kconfig \
     kpackage-native \
+    kauth-native \
+    kcmutils-native \
     kdeclarative \
     kglobalaccel \
     ki18n \
@@ -27,7 +29,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "9592759fb1ab8b1456bd62c6329091da26da731fb05318829b424a23d094226d"
+SRC_URI[sha256sum] = "8af4f1f4e8d0b3b2e40e6b4feca93930fecbb1da44702cd9a2a632a341a4fb42"
 
 FILES_SOLIBSDEV = ""
 

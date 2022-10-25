@@ -1,8 +1,7 @@
 SUMMARY = "Tools based on KDE Frameworks 5 to better interact with the system"
-LICENSE = "Artistic-2.0 & GFDL-1.2+ & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & LGPL-2.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-3.0-only"
+LICENSE = "Artistic-2.0 & GPL-2.0-only & GPL-2.0-or-later & GPL-3.0-only & LGPL-2.0-only & LGPL-2.0-or-later & LGPL-2.1-only & LGPL-3.0-only"
 LIC_FILES_CHKSUM = " \
     file://LICENSES/Artistic-2.0.txt;md5=7f086b1df814d268c59965d8db41f13c \
-    file://LICENSES/GFDL-1.2-or-later.txt;md5=9f58808219e9a42ff1228309d6f83dc6 \
     file://LICENSES/GPL-2.0-only.txt;md5=9e2385fe012386d34dcc5c9863070881 \
     file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
     file://LICENSES/GPL-3.0-only.txt;md5=49fc03046e56a282c0c743b5d3a55b7c \
@@ -34,7 +33,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "1d59d504e9ee9d903ad3b0a4457dc8c0e03612b441f04d9984e1208e53dde602"
+SRC_URI[sha256sum] = "5a66087e2d0e49e760c9b832a59a9b410c5da497e993cb6a16734af44efc0d58"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""

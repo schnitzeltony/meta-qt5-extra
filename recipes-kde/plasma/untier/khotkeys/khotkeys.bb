@@ -1,10 +1,10 @@
 SUMMARY = "KHOTKEYS"
-LICENSE = "GPL-2.0-only & GPL-2.0-or-later & GPL-2.0-only & GPL-2.0-or-later"
+LICENSE = "CC0-1.0 & GPL-2.0-only & LGPL-2.0-only & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = " \
+    file://LICENSES/CC0-1.0.txt;md5=65d3616852dbf7b1a6d4b53b00626032 \
     file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
-    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
-    file://LICENSES/GPL-2.0-only.txt;md5=93e64b4a83c7e441e48bbdeeea05c977 \
-    file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
+    file://LICENSES/LGPL-2.0-only.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=6d2d9952d88b50a51a5c73dc431d06c7 \
 "
 
 REQUIRED_DISTRO_FEATURES = "x11"
@@ -33,7 +33,7 @@ DEPENDS += "\
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "be8f86f37e75b49e8d5f4a902ee1c4796b380d04a621e8cb24972cc926677142"
+SRC_URI[sha256sum] = "f6c118dafd6aa600e3803a5f3e8c0022abdf45383cf34a644b2fc495e5caf27a"
 
 FILES:${PN} += " \
     ${datadir}/kservices5 \

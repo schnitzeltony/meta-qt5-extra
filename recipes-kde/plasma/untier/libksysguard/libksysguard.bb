@@ -44,7 +44,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "0601944d5dcfab6aaf6abd50219574feaf19b6728cf8c980c4553f35618df7cf"
+SRC_URI[sha256sum] = "1775e1b0321b3486554a1bb49b6aa836608fb40361e3242c9281e81dac6a1fa0"
 
 do_compile:append() {
     for cmakefile in `find ${B}/CMakeFiles/Export -name KSysGuardLibraryTargets.cmake`; do

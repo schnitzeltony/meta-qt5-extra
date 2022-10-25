@@ -14,16 +14,18 @@ inherit kde-plasma gettext
 
 DEPENDS += " \
     kauth-native \
+    kcmutils-native \
+    kconfig-native \
+    kcoreaddons-native \
+    kpackage-native \
+    sonnet-native \
     ki18n \
     kwindowsystem \
-    kconfig-native \
     kservice \
     kcompletion \
     kwidgetsaddons \
     kio \
     kcoreaddons \
-    kcoreaddons-native \
-    kpackage-native \
     kwallet \
     kitemviews \
     kitemmodels \
@@ -38,7 +40,6 @@ DEPENDS += " \
     kinit \
     modemmanager-qt \
     networkmanager-qt \
-    sonnet-native \
     qca \
     \
     networkmanager \
@@ -50,7 +51,7 @@ DEPENDS += " \
 # MobileBroadbandProviderInfo
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "62621220cdd030098fa4c90a613cd279f8be29d21ff27d45792fcf7ac529f790"
+SRC_URI[sha256sum] = "519876cdebdc0f1c45368e02c102297591192b49186926299ba0b61f1d6ab8ff"
 
 # do not move so-libs to -dev package
 FILES_SOLIBSDEV = ""
