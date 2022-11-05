@@ -34,13 +34,19 @@ DEPENDS += " \
     kwindowsystem \
     kio \
     kcrash \
+    libmypaint \
 "
 
-PV = "5.0.8"
+PV = "5.1.2"
 PVEXT = ""
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.xz"
-SRC_URI[sha256sum] = "4c221a3c7bbbb8d3297ffe9032c8946cbd835623f22b27f08f617aaa4e496083"
+SRC_URI[sha256sum] = "037792632e7c48a781be893869751cebc1b67d6cb4e569fb09071b7e8c9f8a2c"
 S = "${WORKDIR}/${BPN}-${PV}${PVEXT}"
+
+EXTRA_OECMAKE += " \
+   -DTIFF_CAN_WRITE_PSD_TAGS_EXITCODE=0 \
+   -DTIFF_CAN_WRITE_PSD_TAGS_EXITCODE__TRYRUN_OUTPUT=0 \
+"
 
 FILES:${PN} += " \
     ${datadir}/color \
