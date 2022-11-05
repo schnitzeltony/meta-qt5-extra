@@ -19,27 +19,35 @@ Upstream-Status: Pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- src/meinproc.cpp | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ src/meinproc.cpp | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/src/meinproc.cpp b/src/meinproc.cpp
-index 930c77f..4e15c35 100644
+index 930c77f..b7f0830 100644
 --- a/src/meinproc.cpp
 +++ b/src/meinproc.cpp
-@@ -113,7 +113,12 @@ int main(int argc, char **argv)
-         QByteArray catalogs = lst.join(" ").toLocal8Bit();
-         QString exe;
+@@ -115,9 +115,9 @@ int main(int argc, char **argv)
  #if defined(XMLLINT)
--        exe = QStringLiteral(XMLLINT);
+         exe = QStringLiteral(XMLLINT);
+ #endif
+-        if (!QFileInfo(exe).isExecutable()) {
+-            exe = QStandardPaths::findExecutable(QStringLiteral("xmllint"));
+-        }
 +        // OE-CORE's wrapped xmllint does not work here. Check for
 +        // unwrapped (created by create_wrapper) and prefer that
-+        exe = QStringLiteral(XMLLINT) + QStringLiteral(".real");
-+        if (!QFileInfo(exe).isExecutable()) {
-+            exe = QStringLiteral(XMLLINT);
-+        }
- #endif
-         if (!QFileInfo(exe).isExecutable()) {
-             exe = QStandardPaths::findExecutable(QStringLiteral("xmllint"));
++        exe = QStandardPaths::findExecutable(QStringLiteral("xmllint.real"));
+ 
+         CheckResult cr = check(checkFilename, exe, catalogs);
+         switch (cr) {
+@@ -126,7 +126,7 @@ int main(int argc, char **argv)
+         case CheckNoXmllint:
+             DIE("Could not find xmllint");
+         case CheckNoOut:
+-            DIE("`xmllint --noout` outputted text");
++            DIE(exe + " --noout outputted text / catalogs:" + catalogs);
+         }
+     }
+ 
 -- 
-2.35.3
+2.37.3
 
