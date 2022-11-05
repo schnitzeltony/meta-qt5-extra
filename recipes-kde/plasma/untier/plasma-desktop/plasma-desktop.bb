@@ -17,6 +17,8 @@ LIC_FILES_CHKSUM = " \
 inherit kde-plasma gettext mime-xdg
 
 DEPENDS += " \
+    wayland-native \
+    qtwayland-native \
     kcoreaddons-native \
     kpackage-native \
     sonnet-native \
@@ -59,7 +61,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "5e69fc5279d353b830316621e90b46596581910eb59eb65d826354888f732a36"
+SRC_URI[sha256sum] = "7f4cfe291f3c41b5d046a196c787854ba368c40020019171d5e26a2d1635c201"
 
 FILES_SOLIBSDEV = "${libdir}/libkfont*${SOLIBSDEV}"
 

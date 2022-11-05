@@ -84,8 +84,8 @@ DEPENDS:append:class-target = " \
 # this condition matches always currently - it is kept in this way as a marker
 DEPENDS:append:class-target = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "virtual/libx11 qtx11extras libepoxy xcb-util-cursor", "",d)}"
 
-PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "c3acc4b7ada4191780ea64f03ed9fa249a0c17af0040c0fc29d6bd6aeb8f7fa3"
+PV = "${PLASMA_VERSION}.1"
+SRC_URI[sha256sum] = "7c9e921226f85c8f8e835b8bf63ae67da800d6921ba148618e570bf4825f3364"
 
 OECMAKE_SOURCEPATH:class-native = "${S}/src/wayland/tools"
 

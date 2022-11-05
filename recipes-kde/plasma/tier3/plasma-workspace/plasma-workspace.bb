@@ -22,7 +22,6 @@ inherit kde-plasma features_check gettext gtk-icon-cache mime-xdg qmake5_paths
 DEPENDS += " \
     qtwayland-native \
     kpackage-native \
-    kdoctools-native \
     sonnet-native \
     kdesignerplugin-native \
     kcmutils-native \
@@ -60,9 +59,13 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "dc0709d9e99784e46e921b2b5e213b919887512ac1d8e0be46f77f8ba00a8f66"
-SRC_URI += "file://0001-Make-qdbus-bindir-configurable.patch"
+SRC_URI[sha256sum] = "32e9dfe066d49adcc5ae326aa12c3e072ed84c67db98bdb12dcd93c4912cf84b"
+SRC_URI += " \
+    file://0001-Make-qdbus-bindir-configurable.patch \
+    file://0002-Force-not-to-use-kdoctools-we-are-still-in-troble-wi.patch \
+"
 
+# TODO?   -DINSTALL_SDDM_WAYLAND_SESSION=ON
 EXTRA_OECMAKE += " \
     -DBUILD_TESTING=OFF \
     -DQtBinariesDir=${OE_QMAKE_PATH_QT_BINS} \

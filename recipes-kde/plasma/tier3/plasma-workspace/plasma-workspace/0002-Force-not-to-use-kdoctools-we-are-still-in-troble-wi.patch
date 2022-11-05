@@ -1,0 +1,41 @@
+From 6ca8818563733c5ffa6fde5186a1257729582ff7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 5 Nov 2022 21:05:24 +0100
+Subject: [PATCH] Force not to use kdoctools - we are still in troble with
+ xmllint
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [oe-specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ CMakeLists.txt | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f41e514..40119b8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -344,7 +344,7 @@ set(QtBinariesDir "/usr/bin" CACHE STRING "Target bindir for qdbus")
+ 
+ option(PLASMA_WAYLAND_DEFAULT_SESSION "Use Wayland session by default for Plasma" FALSE)
+ 
+-if(KF5DocTools_FOUND)
++if(FALSE)
+   add_subdirectory(doc)
+ endif()
+ add_subdirectory(libkworkspace)
+@@ -411,7 +411,4 @@ file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
+ kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
+ kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+ 
+-  find_package(KF5DocTools CONFIG)
+-  if(KF5DocTools_FOUND)
+-    kdoctools_install(po)
+-  endif()
++
+-- 
+2.37.3
+

@@ -13,6 +13,7 @@ DEPENDS += " \
     kcoreaddons-native \
     kdesignerplugin-native \
     kdoctools-native \
+    kcmutils-native \
     bluez-qt \
     kactivities \
     kidletime \
@@ -28,7 +29,7 @@ DEPENDS += " \
 "
 
 PV = "${PLASMA_VERSION}"
-SRC_URI[sha256sum] = "946c47e589d5f0a30a85ef2abbb4bc34c432dc26916c6301430350902160a563"
+SRC_URI[sha256sum] = "a48c550f6e6605d94310343c3b79d1c913a006ab76f1b6641515131bd3437900"
 
 FILES:${PN} += " \
     ${datadir}/k*5 \
