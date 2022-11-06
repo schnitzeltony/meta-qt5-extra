@@ -40,9 +40,9 @@ DEPENDS += " \
 # After 17.2.3 okteta left KDE application release cycle and continued
 # with 0.25.0. To avoid package version going backwards set epoch;
 PE = "1"
-PV = "0.26.6"
+PV = "0.26.9"
 SRC_URI = "https://download.kde.org/stable/okteta/${PV}/src/${BPN}-${PV}.tar.xz"
-SRC_URI[sha256sum] = "c569cd5b55503e46df1a5b5c9162b08888c426aa52c6f3f2f926c658bee0144c"
+SRC_URI[sha256sum] = "16854c4d4e94838219ae3115a42ba385fda5c87dc6c9865ac90d3774f8d05ffb"
 
 FILES:${PN} += " \
     ${datadir}/config.kcfg \
