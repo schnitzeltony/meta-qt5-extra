@@ -1,0 +1,39 @@
+From d1dcf8bc3196754f5a0993475d940e14c6e893ed Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 6 Nov 2022 14:04:45 +0100
+Subject: [PATCH] qtplugins/CMakeLists.txt: Remove full path from inlcudes
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ avogadro/qtplugins/CMakeLists.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/avogadro/qtplugins/CMakeLists.txt b/avogadro/qtplugins/CMakeLists.txt
+index f36c8520..cd96a7f5 100644
+--- a/avogadro/qtplugins/CMakeLists.txt
++++ b/avogadro/qtplugins/CMakeLists.txt
+@@ -43,7 +43,7 @@ function(avogadro_plugin name description type header pluginClass sources)
+   unset(PluginIncludes)
+   foreach(_header ${header})
+     set(PluginIncludes
+-      "${PluginIncludes}#include \"${CMAKE_CURRENT_SOURCE_DIR}/${_header}\"\n")
++      "${PluginIncludes}#include \"${_header}\"\n")
+   endforeach()
+   set(PluginName "${name}")
+   set(PluginDescription "${description}")
+@@ -73,6 +73,7 @@ function(avogadro_plugin name description type header pluginClass sources)
+     ${name}Plugin.cpp
+   )
+   target_link_libraries(${name} PRIVATE AvogadroCore AvogadroQtGui)
++  target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+ 
+   if("${_plugin_object}" STREQUAL "STATIC")
+     set_target_properties(${name} PROPERTIES COMPILE_DEFINITIONS
+-- 
+2.38.1
+

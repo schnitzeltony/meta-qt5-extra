@@ -21,6 +21,7 @@ REQUIRED_DISTRO_FEATURES = "opengl"
 SRC_URI += " \
     file://0001-Avoid-RPATH-if-not-configured.patch \
     file://0002-AvogadroLibsConfig.cmake-Find-include.patch \
+    file://0003-qtplugins-CMakeLists.txt-Remove-full-path-from-inlcu.patch \
 "
 
 do_configure:append() {
