@@ -49,6 +49,7 @@ RDEPENDS:${PN} = " \
     lokalize \
     marble \
     minuet \
+    neochat \
     okteta \
     okular \
     partitionmanager \

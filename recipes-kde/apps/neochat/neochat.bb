@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = " \
 "
 
 DEPENDS += " \
+    kcoreaddons-native kcoreaddons \
+    cmark \
     qtdeclarative \
     qtquickcontrols2 \
     qtmultimedia \
@@ -16,15 +18,20 @@ DEPENDS += " \
     kirigami2 \
     ki18n \
     knotifications \
-    kcoreaddons \
+    qqc2-desktop-style \
     kdbusaddons \
+    kitemmodels \
+    kquickimageeditor \
     qtkeychain \
     libquotient \
-    cmark \
 "
 
-inherit kde-base gettext
+inherit kde-base gettext gtk-icon-cache mime-xdg
 
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}.tar.xz"
-SRC_URI[sha256sum] = "f432b780368335674aa019043090c921e0abc7f06c4097153bcaa79754ed141f"
-PV = "1.0.1"
+SRC_URI[sha256sum] = "8ee4b5f61db7d43c902115e0be01f2b587100183b382596473922e9a42749de6"
+PV = "1.2.0"
+
+FILES:${PN} += " \
+    ${datadir}/knotifications5 \
+"
