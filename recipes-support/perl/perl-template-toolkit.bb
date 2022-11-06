@@ -7,8 +7,9 @@ LIC_FILES_CHKSUM = " \
     file://${COMMON_LICENSE_DIR}/GPL-1.0-only;md5=e9e36a9de734199567a4d769498f743d \
 " 
 
+PV = "3.010"
 SRC_URI = "https://cpan.metacpan.org/authors/id/A/AT/ATOOMIC/Template-Toolkit-${PV}.tar.gz"
-SRC_URI[sha256sum] = "d6ad23bbf637a59b5dfd1ac006460dfcb185982e4852cde77150fbd085f1f5b6"
+SRC_URI[sha256sum] = "f4b65e93364088aa850887820652e467b0bce1493760fd3690268520b37d82cc"
 
 S = "${WORKDIR}/Template-Toolkit-${PV}"
 
