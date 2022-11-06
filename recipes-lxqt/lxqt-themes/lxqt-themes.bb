@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=435ed639f84d4585d93824e7da3d85da"
 
 inherit lxqt pkgconfig gtk-icon-cache
 
-SRCREV = "b00f6a8593af128846b9a4fcf7404c94f5887a52"
-PV = "1.1.0"
+SRCREV = "e8d0c1f34a0656c7502e8280439652a06639f63d"
+PV = "1.2.0"
 
 FILES:${PN} += " \
     ${datadir}/lxqt \
