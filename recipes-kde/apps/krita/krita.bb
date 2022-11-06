@@ -37,10 +37,10 @@ DEPENDS += " \
     libmypaint \
 "
 
-PV = "5.1.2"
+PV = "5.1.3"
 PVEXT = ""
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${PV}/${BPN}-${PV}${PVEXT}.tar.xz"
-SRC_URI[sha256sum] = "037792632e7c48a781be893869751cebc1b67d6cb4e569fb09071b7e8c9f8a2c"
+SRC_URI[sha256sum] = "896e6455baf1110b3572340e164fc80651bbc72f7149c2276fafcc08ac94d8cc"
 S = "${WORKDIR}/${BPN}-${PV}${PVEXT}"
 
 EXTRA_OECMAKE += " \
