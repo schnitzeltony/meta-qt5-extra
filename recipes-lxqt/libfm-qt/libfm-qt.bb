@@ -15,8 +15,8 @@ do_configure:append() {
     done
 }
 
-SRCREV = "b929719d615c8e3e67a73fd7a7d9b7c8362513ea"
-PV = "1.1.0"
+SRCREV = "92a1f30fcc0cd3254f78e7e469da7b99278cd696"
+PV = "1.2.0"
 
 FILES:${PN} += " \
     ${datadir}/mime \
