@@ -8,6 +8,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "liblxqt"
 
+SRC_URI += "file://0001-config-CMakeLists.txt-Use-relative-path-to-include-m.patch"
 SRCREV = "218fc2068dbcf08387465f4409d11525c2f683bf"
 PV = "1.2.0"
 
