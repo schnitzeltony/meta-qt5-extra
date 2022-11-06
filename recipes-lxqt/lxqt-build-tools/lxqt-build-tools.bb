@@ -13,3 +13,5 @@ SRC_URI = "git://github.com/lxde/${BPN}.git;branch=master;protocol=https"
 SRCREV = "bc7e872ed3a544efaa68f7820926975bf8d469d6"
 PV = "0.12.0"
 S = "${WORKDIR}/git"
+
+BBCLASSEXTEND = "native"

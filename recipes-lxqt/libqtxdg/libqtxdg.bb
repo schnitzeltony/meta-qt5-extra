@@ -28,3 +28,8 @@ FILES:${PN} += " \
     ${datadir}/lxqt \
     ${OE_QMAKE_PATH_PLUGINS}/iconengines \
 "
+
+BBCLASSEXTEND = "native"
+
+do_sysroot_cmake_sanity:class-native() {
+}
