@@ -4,10 +4,10 @@ LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
 SRC_URI = "git://github.com/steveire/grantlee.git;branch=master;protocol=https"
-SRCREV = "b6454a97c9db3275f1a147a4dde1a02894dfbba0"
+SRCREV = "1f2fead003c7804ad79eddb1ebf685dab8f00180"
 S = "${WORKDIR}/git"
 
-PV = "5.2.0"
+PV = "5.3.0"
 
 inherit cmake_qt5 pkgconfig
 
