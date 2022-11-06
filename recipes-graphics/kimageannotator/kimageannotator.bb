@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3000208d539ec061b899bce1d9ce9404"
 
 SRC_URI = "git://github.com/ksnip/kImageAnnotator.git;branch=master;protocol=https"
 SRCREV = "6651dc09ccbf277359669141669ccc9e6a9f2cc2"
-PV = "0.2.0"
+PV = "0.6.0"
 S = "${WORKDIR}/git"
 
 DEPENDS = " \
