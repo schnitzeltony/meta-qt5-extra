@@ -1,6 +1,10 @@
 SUMMARY = "PolicyKit Qt wrapper"
-LICENSE = "LGPL-2.1-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=7dbc59dc445b2261c4fb2f9466e3446a"
+LICENSE = "BSD-3-Clause & GPL-2.0-or-later & LGPL-2.0-or-later"
+LIC_FILES_CHKSUM = " \
+    file://LICENSES/BSD-3-Clause.txt;md5=954f4d71a37096249f837652a7f586c0 \
+    file://LICENSES/GPL-2.0-or-later.txt;md5=9e2385fe012386d34dcc5c9863070881 \
+    file://LICENSES/LGPL-2.0-or-later.txt;md5=da48810c4ddf8e49efa031294a26b98c \
+"
 
 inherit kde-base cmake_lib features_check
 
@@ -8,8 +12,9 @@ REQUIRED_DISTRO_FEATURES = "polkit"
 
 DEPENDS += "polkit glib-2.0"
 
+PV = "0.114.0"
 SRC_URI = "${KDE_MIRROR}/stable/${BPN}/${BPN}-${PV}.tar.xz"
-SRC_URI[sha256sum] = "5b866a2954ef10ffb66156e2fe8ad0321b5528a8df2e4a91b02f5041ce5563a7"
+SRC_URI[sha256sum] = "2eb0f22445888295ffa2bfbc0c3693847a0f973bb6b0c3e4cce0218be7e3907e"
 
 CMAKE_ALIGN_SYSROOT[1] = "PolkitQt5-1, -S${libdir}, -s${OE_QMAKE_PATH_HOST_LIBS}/"
 CMAKE_ALIGN_SYSROOT[2] = "PolkitQt5-1, -s${POLKITQT-1_LIB_DIR}, -s${OE_QMAKE_PATH_HOST_LIBS}"
