@@ -6,5 +6,5 @@ inherit lxqt qt5-translation pkgconfig
 
 DEPENDS += "liblxqt"
 
-SRCREV = "a4650a5b3d4f60406ef62e215b8b003c45d21f77"
-PV = "1.1.0"
+SRCREV = "64ec40132c40e9bc1b24e542f52de9b110c9c341"
+PV = "1.2.0"
