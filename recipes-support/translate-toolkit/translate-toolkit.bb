@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=98efdc0d236de427ac1ff87d5108bd36"
 HOMEPAGE = "http://toolkit.translatehouse.org/"
 
 inherit setuptools3 pypi
-PV = "3.6.0"
-SRC_URI[sha256sum] = "dfdb19383920948e5bc1dafacb994ee07f8d6ecc053cd6e2b4c545ce0430ddff"
+PV = "3.7.4"
+SRC_URI[sha256sum] = "5a8259ca6f735ba5068e80180256203a58ad11900faef3cd5e29dcae7a3fa312"
 
 do_install:append() {
     # ${D}${PYTHON_SITEPACKAGES_DIR}${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR} -> ${D}${PYTHON_SITEPACKAGES_DIR}
