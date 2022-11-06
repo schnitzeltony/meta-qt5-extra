@@ -1,8 +1,8 @@
 SUMMARY = "A Qt tool for creating business and scientific charts"
-LICENSE = "GPL-2.0-or-later | KDAB-Commercial"
+LICENSE = "BSD-3-Clause & MIT"
 LIC_FILES_CHKSUM = " \
-    file://LICENSE.txt;md5=d5e1956ab398a4ae39e2470a9abd4889 \
-    file://LICENSE.GPL.txt;md5=6af452a21ffa624c438c2cde4423a893 \
+    file://LICENSES/BSD-3-Clause.txt;md5=f225922a2c12dfa5218fb70c49db3ea6 \
+    file://LICENSES/MIT.txt;md5=7dda4e90ded66ab88b86f76169f28663 \
 "
 
 inherit cmake_qt5_extra
@@ -18,8 +18,8 @@ do_install:append() {
 }
 
 SRC_URI = "git://github.com/KDAB/KDChart.git;branch=master;protocol=https"
-SRCREV = "95547e8a2f6c362db1dd071a2df00b0e75e05da0"
+SRCREV = "aa9de13376a5e9f4c8802091776584614db8677e"
 S = "${WORKDIR}/git"
-PV = "2.7.2"
+PV = "3.0.0"
 
 FILES:${PN}-dev += "${datadir}/mkspecs"
