@@ -13,7 +13,7 @@ DEPENDS += " \
     libfm-qt \
 "
 
-SRCREV = "53208fb3b3c325cc2be6ff4989cd59c142db7f15"
-PV = "0.6.0"
+SRCREV = "3e4480f3684e393efe5207276447d19fb6e753a3"
+PV = "0.7.0"
 
 FILES:${PN} += "${datadir}/icons"
