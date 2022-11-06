@@ -3,7 +3,7 @@ HOMEPAGE = "http://timidity.sourceforge.net"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-PV = "2.14.0"
+PV = "2.15.0"
 
 UPSTREAM_PN = "TiMidity++"
 
@@ -12,7 +12,6 @@ SRC_URI = " \
     file://0003-timidity-readmidi-zero-division-fix.patch \
     file://0004-timidity-resample-frac-overflow-fix.patch \
 "
-SRC_URI[md5sum] = "27927182d62ba24abbf447a9e9919c53"
-SRC_URI[sha256sum] = "abf0c8367959e85c9e635b8fbd5183fc27bd380e0ef5e45de4158784538c86fc"
+SRC_URI[sha256sum] = "9eaf4fadb0e19eb8e35cd4ac16142d604c589e43d0e8798237333697e6381d39"
 
 S = "${WORKDIR}/${UPSTREAM_PN}-${PV}"
