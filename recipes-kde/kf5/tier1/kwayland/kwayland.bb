@@ -15,6 +15,7 @@ DEPENDS += " \
     qtwayland-native \
     qtwayland \
     plasma-wayland-protocols \
+    wayland-protocols \
 "
 
 PV = "${KF5_VERSION}"
