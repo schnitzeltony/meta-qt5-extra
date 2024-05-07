@@ -13,7 +13,8 @@ DEPENDS += " \
     kwindowsystem \
 "
 
-SRC_URI += "file://0001-do-not-check-for-xdg-udser-dirs-at-build-time-it-is-.patch"
+SRC_URI += "file://0001-do-not-check-for-xdg-udser-dirs-at-build-time-it-is-.patch \
+            file://reaper-build-run-on-systems-with-procps-ng-4.0.0.patch"
 SRCREV = "55aa4bba19814ff678e6693e8b9c423455e8eccc"
 PV = "1.2.0"
 
