@@ -11,8 +11,8 @@ DEPENDS += " \
     kwindowsystem \
 "
 
-SRCREV = "52076892af53faa13a26ec4faa56969208309b5f"
-PV = "2.5.0"
+SRCREV = "cf87a18af0d27128771f9f41e6650a1e1c2c022c"
+PV = "2.6.0"
 
 FILES:${PN} += "${datadir}/metainfo"
 
