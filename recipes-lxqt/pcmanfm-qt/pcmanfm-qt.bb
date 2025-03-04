@@ -11,6 +11,7 @@ DEPENDS += "libfm-qt"
 SRCREV = "699befb0cc47063b548888faab6a38383847439e"
 PV = "1.4.0"
 
-FILES:${PN} += "${datadir}/${BPN}/lxqt/settings.conf"
+FILES:${PN} += "${datadir}/${BPN}/lxqt/settings.conf \
+                ${datadir}/icons/hicolor/scalable/apps/pcmanfm-qt.svg"
 
 RRECOMMENDS:${PN} = "gvfs gvfsd-trash eject"
