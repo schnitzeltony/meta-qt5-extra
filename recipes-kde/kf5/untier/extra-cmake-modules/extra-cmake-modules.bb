@@ -11,7 +11,7 @@ inherit kde-kf5
 
 DEPENDS = "qttools-native"
 
-SRC_URI[sha256sum] = "01818aa606628db57129f6e22dbae3532464220802d085c6e0689d032e87807e"
+SRC_URI[sha256sum] = "8c4c561310db587d390a6c84afc97e1addbaddd73b9d7a4c7309c5da9b9bc8f2"
 SRC_URI:append:class-native = " file://0001-ECMGenerateHeaders.cmake-Write-relative-paths-to-red.patch"
 PV = "${KF5_VERSION}"
 

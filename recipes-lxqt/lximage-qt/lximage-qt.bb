@@ -8,8 +8,8 @@ inherit lxqt qt5-translation pkgconfig features_check gtk-icon-cache mime mime-x
 
 DEPENDS += "qtx11extras qtsvg libfm-qt libexif libxfixes"
 
-SRCREV = "cc9ca82f9c53303ec2e4ff7d7e2b6a65e69d2585"
-PV = "1.2.0"
+SRCREV = "1dc81f60412b9b584e0adf025373a78cc99500aa"
+PV = "1.4.0"
 
 FILES:${PN} += " \
     ${datadir}/icons \

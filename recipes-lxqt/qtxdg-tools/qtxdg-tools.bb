@@ -8,7 +8,7 @@ DEPENDS += " \
     libqtxdg \
 "
 
-SRCREV = "8bf7a47ca014fc404cfda971e92fdf0c0ca50dd6"
-PV = "3.10.0"
+SRCREV = "bff8e86b229566ba671514a7e170c618a8f881ad"
+PV = "3.12.0"
 
 BBCLASSEXTEND = "native"

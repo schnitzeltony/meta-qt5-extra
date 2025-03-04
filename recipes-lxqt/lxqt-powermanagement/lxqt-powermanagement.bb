@@ -15,7 +15,7 @@ DEPENDS += " \
     lxqt-globalkeys \
 "
 
-SRCREV = "66e1b47285f71cda2e651eee8b963a18282a0f7b"
-PV = "1.2.0"
+SRCREV = "4be64a7f09ad4b96721d1a996085319c375179e4"
+PV = "1.4.0"
 
 FILES:${PN} += "${datadir}/icons"
