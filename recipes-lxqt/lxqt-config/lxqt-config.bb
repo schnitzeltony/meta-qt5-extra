@@ -6,7 +6,7 @@ inherit lxqt qt5-translation features_check gtk-icon-cache
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "qtsvg liblxqt libkscreen libxcursor libxi xf86-input-libinput"
+DEPENDS += "qtsvg liblxqt libkscreen libxcursor libxi xf86-input-libinput lxqt-menu-data"
 
 SRCREV = "cb833337089718a5e0a5addcb9f610929edb39e2"
 PV = "1.4.0"
