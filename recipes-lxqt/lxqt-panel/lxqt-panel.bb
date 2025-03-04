@@ -34,4 +34,5 @@ FILES:${PN} += " \
     ${datadir}/lxqt/panel.conf \
     ${datadir}/lxqt/lxqt-panel/*.desktop \
     ${datadir}/desktop-directories \
+    ${datadir}/lxqt/panel/qeyes-types \
 "
