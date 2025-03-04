@@ -16,4 +16,5 @@ PV = "2.8.0"
 
 FILES:${PN} += " \
     ${datadir}/icons \
+    ${datadir}/metainfo/org.lxqt.Qps.appdata.xml \
 "
