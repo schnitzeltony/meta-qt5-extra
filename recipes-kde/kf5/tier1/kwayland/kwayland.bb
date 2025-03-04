@@ -18,5 +18,7 @@ DEPENDS += " \
     wayland-protocols \
 "
 
+EXTRA_OECMAKE += " -DEXCLUDE_DEPRECATED_BEFORE_AND_AT=${KF5_VERSION}"
+
 PV = "${KF5_VERSION}"
 SRC_URI[sha256sum] = "39c1866ed2a15235bf9df02881ed2e8cd805d50d696bcdc9fe157e54b52def63"
