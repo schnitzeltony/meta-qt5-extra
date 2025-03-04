@@ -15,3 +15,8 @@ EXTRA_OECMAKE += " \
     -DUSE_QT5=On \
     -DWITH_DOC=OFF \
 "
+
+# QA Issue: File /usr/src/debug/libdbusmenu-qt5/0.9.3+16.04.20160218/src/dbusmenuadaptor.h in package libdbusmenu-qt5-src contains reference to TMPDIR [buildpaths]
+do_install:prepend() {
+    sed -i -e "s#${S}#${prefix}/src/debug/#g" ${B}/src/dbusmenuadaptor.h
+}
