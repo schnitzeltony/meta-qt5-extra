@@ -14,7 +14,7 @@ DEPENDS += " \
 "
 
 SRC_URI += "file://0001-do-not-check-for-xdg-udser-dirs-at-build-time-it-is-.patch \
-            file://reaper-build-run-on-systems-with-procps-ng-4.0.0.patch"
+            file://adopt-api-changes-for-procps-ng.patch"
 SRCREV = "b7c4029438091cecff0fe01ac0cb54b2f405ef80"
 PV = "1.4.0"
 
