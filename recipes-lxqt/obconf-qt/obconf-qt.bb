@@ -6,8 +6,7 @@ inherit lxqt qt5-translation pkgconfig
 
 DEPENDS += "qtx11extras openbox"
 
-SRC_URI += "file://0001-finding-sed-does-not-work-and-is-not-neccessary.patch \
-            file://Fix-invalid-conversion-from-xmlError.patch"
+SRC_URI += "file://0001-finding-sed-does-not-work-and-is-not-neccessary.patch"
 SRCREV = "1f42940f7a557bf20e772b7ac6c3e15a04013a95"
 PV = "0.16.4"
 
