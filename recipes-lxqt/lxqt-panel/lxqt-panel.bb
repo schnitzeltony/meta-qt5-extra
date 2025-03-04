@@ -13,6 +13,7 @@ DEPENDS += " \
     libdbusmenu-qt5 \
     menu-cache \
     kwindowsystem \
+    lxqt-menu-data \
 "
 
 SRCREV = "1f87ef45ec0ba766d149337ff41fd38cfe93b1ee"

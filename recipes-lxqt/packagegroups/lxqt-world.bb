@@ -13,7 +13,7 @@ RDEPENDS:${PN} = " \
     libqtxdg \
     libsysstat \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lximage-qt", "",d)} \
-    lxmenu-data \
+    lxqt-menu-data \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-about", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-admin", "",d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "lxqt-archiver", "",d)} \
