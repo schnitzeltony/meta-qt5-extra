@@ -1,3 +1,5 @@
+Upstream-Status: Pending
+
 From 3e03b06f27c3e4471f6f2ea25e5cca61b59ff131 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Fri, 7 May 2021 13:20:03 +0200
@@ -16,8 +18,8 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index a219f31..848acf9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -36,8 +36,6 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-     pkg_search_module(PROCPS REQUIRED libprocps)
+@@ -42,8 +42,6 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+     endif()
  endif()
  
 -# Please don't move, must be after lxqt
