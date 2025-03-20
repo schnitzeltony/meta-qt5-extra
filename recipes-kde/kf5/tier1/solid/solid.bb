@@ -16,9 +16,9 @@ SRC_URI[sha256sum] = "7057825d5de721858af9be698a7114cd45e33bee7c06006a8ec68c05bf
 
 do_install:prepend() {
     # Remove references to buildmachine paths
-    sed -i -e "s:${S}:${prefix}:g" ${B}/src/solid/predicate_parser.h
-    sed -i -e "s:${S}:${prefix}:g" ${B}/src/solid/predicate_parser.c
-    sed -i -e "s:${B}:${prefix}:g" ${B}/src/solid/predicate_lexer.c
+    sed -i -e "s:${WORKDIR}::g" ${B}/src/solid/predicate_lexer.c
+    sed -i -e "s:${WORKDIR}::g" ${B}/src/solid/predicate_parser.h
+    sed -i -e "s:${WORKDIR}::g" ${B}/src/solid/predicate_parser.c
 }
 
 
