@@ -14,7 +14,7 @@ The current approach is wrong in many ways:
   environment: There is no PATH variable set by systemd. So for session files
   without path: Do not perform further checks / just trust for now.
   
-Upstream-Sttaus: Pending
+Upstream-Status: Pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
