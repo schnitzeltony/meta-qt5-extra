@@ -1,7 +1,7 @@
 DEPENDS:prepend:class-nativesdk = "nativesdk-qtbase "
 DEPENDS:prepend:class-target = "qtbase "
 # Do not pin hard for extra-cmake-modules itself
-DEPENDS+= "extra-cmake-modules-native "
+DEPENDS += "extra-cmake-modules-native "
 
 KDE_MIRROR = "http://download.kde.org"
 

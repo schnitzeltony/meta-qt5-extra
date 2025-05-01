@@ -12,4 +12,4 @@ DEPENDS += "qtbase qtserialport"
 PV = "0.4.0+git${SRCPV}"
 SRCREV = "5c28d4765ce7de57702f4f529fed7da80b82e8d8"
 
-S="${WORKDIR}/git"
+S = "${WORKDIR}/git"
